@@ -1,0 +1,1 @@
+UPDATE messages SET reading = 0 WHERE id = 1

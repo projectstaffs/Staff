@@ -1,0 +1,18 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 33121,
+            "driver": "MySQL",
+            "name": "some",
+            "database": "my_diplom_db",
+            "username": "diplom_user",
+            "password": "password"
+        }
+    ]
+}
