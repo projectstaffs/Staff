@@ -64,6 +64,20 @@ use App\Http\Controllers\forms\KeeperjoboptionController;
 use App\Http\Controllers\forms\KeeperpreferenceController;
 use App\Http\Controllers\forms\KeepertypeworkController;
 
+use App\Http\Controllers\client\ClientBabyController;
+use App\Http\Controllers\client\ClientBabyagegroupController;
+use App\Http\Controllers\client\ClientBabydutieController;
+use App\Http\Controllers\client\ClientBabyjoboptionController;
+
+use App\Http\Controllers\client\ClientNurseController;
+use App\Http\Controllers\client\ClientNursedutieController;
+use App\Http\Controllers\client\ClientNursejoboptionController;
+
+use App\Http\Controllers\client\ClientKeeperController;
+use App\Http\Controllers\client\ClientKeeperdutieController;
+use App\Http\Controllers\client\ClientKeeperjoboptionController;
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -133,6 +147,19 @@ function ($router) {
         Route::resource('/keeperjoboption', KeeperjoboptionController::class);
         Route::resource('/keeperpreference', KeeperpreferenceController::class);
         Route::resource('/keepertypework', KeepertypeworkController::class);
+
+        Route::resource('/clientagegroup', ClientBabyagegroupController::class);
+        Route::resource('/clientjoboption', ClientBabyjoboptionController::class);
+        Route::resource('/clientdutie', ClientBabydutieController::class);
+        Route::resource('/clientbaby', ClientBabyController::class);
+
+        Route::resource('/clientnursejoboption', ClientNursejoboptionController::class);
+        Route::resource('/clientnursedutie', ClientNursedutieController::class);
+        Route::resource('/clientnurse', ClientNurseController::class);
+
+        Route::resource('/clientkeeperjoboption', ClientKeeperjoboptionController::class);
+        Route::resource('/clientkeeperdutie', ClientKeeperdutieController::class);
+        Route::resource('/clientkeeper', ClientKeeperController::class);
     });    
 });
 

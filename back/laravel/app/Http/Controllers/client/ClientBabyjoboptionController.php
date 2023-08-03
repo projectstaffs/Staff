@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\client;
+use Illuminate\Routing\Controller;
 
 use Illuminate\Http\Request;
+use App\Models\client\Client_joboption;
 
 class ClientBabyjoboptionController extends Controller
 {
@@ -27,7 +29,14 @@ class ClientBabyjoboptionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        for($i = 0; $i < $request[1]; ++$i) {
+            $formJoboption = new Client_joboption([
+                'form_id' => $request[0][$i]["form_id"],
+                'joboption_id' => $request[0][$i]["joboption_id"]
+            ]);                    
+            $formJoboption->save();
+        }        
+        return $request[1];
     }
 
     /**
@@ -59,6 +68,7 @@ class ClientBabyjoboptionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Client_joboption::where('form_id', '=', $id)->delete();
+        return response()->json('Удаление прошло успешно.');
     }
 }

@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\client;
+use Illuminate\Routing\Controller;
 
 use Illuminate\Http\Request;
+use App\Models\client\Client_agegroup;
 
 class ClientBabyagegroupController extends Controller
 {
@@ -27,7 +29,14 @@ class ClientBabyagegroupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        for($i = 0; $i < $request[1]; ++$i) {
+            $formAgegroup = new Client_agegroup([
+                'form_id' => $request[0][$i]["form_id"],
+                'agegroup_id' => $request[0][$i]["agegroup_id"]
+            ]);                    
+            $formAgegroup->save();
+        }        
+        return $request[1];
     }
 
     /**
@@ -59,6 +68,7 @@ class ClientBabyagegroupController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Client_agegroup::where('form_id', '=', $id)->delete();
+        return response()->json('Удаление прошло успешно.');
     }
 }

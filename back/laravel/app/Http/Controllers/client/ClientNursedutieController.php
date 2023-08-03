@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\client;
+use Illuminate\Routing\Controller;
 
 use Illuminate\Http\Request;
+use App\Models\client\Client_nursedutie;
 
 class ClientNursedutieController extends Controller
 {
@@ -27,7 +29,14 @@ class ClientNursedutieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        for($i = 0; $i < $request[1]; ++$i) {
+            $formDutie = new Client_nursedutie([
+                'form_id' => $request[0][$i]["form_id"],
+                'nursedutie_id' => $request[0][$i]["nursedutie_id"]
+            ]);                    
+            $formDutie->save();
+        }        
+        return $request[1];
     }
 
     /**
@@ -59,6 +68,7 @@ class ClientNursedutieController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Client_nursedutie::where('form_id', '=', $id)->delete();
+        return response()->json('Удаление прошло успешно.');
     }
 }

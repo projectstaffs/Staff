@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\client;
+use Illuminate\Routing\Controller;
 
 use Illuminate\Http\Request;
+use App\Models\forms\Client_nursejoboption;
 
 class ClientNursejoboptionController extends Controller
 {
@@ -27,7 +29,14 @@ class ClientNursejoboptionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        for($i = 0; $i < $request[1]; ++$i) {
+            $formEducation = new Client_nursejoboption([
+                'form_id' => $request[0][$i]["form_id"],
+                'nursejoboption_id' => $request[0][$i]["nursejoboption_id"]
+            ]);                    
+            $formEducation->save();
+        }        
+        return $request[1];
     }
 
     /**
@@ -59,6 +68,7 @@ class ClientNursejoboptionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Client_nursejoboption::where('form_id', '=', $id)->delete();
+        return response()->json('Удаление прошло успешно.');
     }
 }

@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\client;
+use Illuminate\Routing\Controller;
 
 use Illuminate\Http\Request;
+use App\Models\client\Client_keeperdutie;
 
 class ClientKeeperdutieController extends Controller
 {
@@ -27,7 +29,14 @@ class ClientKeeperdutieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        for($i = 0; $i < $request[1]; ++$i) {
+            $formDutie = new Client_keeperdutie([
+                'form_id' => $request[0][$i]["form_id"],
+                'keeperdutie_id' => $request[0][$i]["keeperdutie_id"]
+            ]);                    
+            $formDutie->save();
+        }        
+        return $request[1];
     }
 
     /**
@@ -59,6 +68,7 @@ class ClientKeeperdutieController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Client_keeperdutie::where('form_id', '=', $id)->delete();
+        return response()->json('Удаление прошло успешно.');
     }
 }
