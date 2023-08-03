@@ -12,7 +12,7 @@ export const useCredentialStore = defineStore('credential', {
         DELETE_CREDENTIAL(data){                       
             api.post('api/auth/credential/' + data, {_method: 'DELETE'})
                 .then((res) => {
-                    this.GET_CREDENTIALS();
+                    this.GET_CREDENTIALS(localStorage.userID);
                 })
                 .catch(error => { console.log(error); })
         },
@@ -35,7 +35,7 @@ export const useCredentialStore = defineStore('credential', {
         CREATE_CREDENTIAL(data){            
             api.post('api/auth/credential', data)
                 .then((res) => {                    
-                    this.GET_CREDENTIALS();
+                    this.GET_CREDENTIALS(localStorage.userID);
                 })
                 .catch(error => { console.log(error); })
         },

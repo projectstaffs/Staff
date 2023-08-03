@@ -1,50 +1,50 @@
 <template> 
     <div @click.prevent="back" class="category_change_btn">Назад</div>
     <div class="category_title">Анкета для домработницы:</div>   
-    <form v-if="!keeper" @submit.prevent="createForm" class="login_form">   
+    <form v-if="!Keeper.keeper" @submit.prevent="createForm" class="login_form">   
         <div>Опишите Ваш опыт работы:</div>
         <textarea v-model="anketa.keeper_exp" required class="login_form_item" placeholder="about"></textarea>
         <div>Укажите свой опыт работы:</div>
         <select v-model="anketa.experience_id" class="category_form_title">
-            <option v-for="option in experiences" :value="option.id">
+            <option v-for="option in Store.experiences" :value="option.id">
                 {{ option.title }}                
             </option>
         </select>
         <div>Укажите количество рекомендаций:</div>
         <select v-model="anketa.recommendation_id" class="category_form_title">
-            <option v-for="option in recommendations" :value="option.id">
+            <option v-for="option in Store.recommendations" :value="option.id">
                 {{ option.title }}                
             </option>
         </select>
         <div>Какую работу вы ищите:</div>
-        <div v-for="post in housekeepertypeofworks" :key="post.id" class="language_item">
+        <div v-for="post in Store.housekeepertypeofworks" :key="post.id" class="language_item">
             <input type="checkbox" v-bind:value="post.id" v-model="anketatypeworks">
             {{ post.title }}                                    
         </div>
         <div>Приемлемые варианты работы:</div>
-        <div v-for="post in joboptions" :key="post.id" class="language_item">
+        <div v-for="post in Store.joboptions" :key="post.id" class="language_item">
             <input type="checkbox" v-bind:value="post.id" v-model="anketajoboptions">
             {{ post.title }}                                    
         </div>
         <div>Укажите период работы:</div>
         <select v-model="anketa.workperiod_id" class="category_form_title">
-            <option v-for="option in workperiods" :value="option.id">
+            <option v-for="option in Store.workperiods" :value="option.id">
                 {{ option.title }}                
             </option>
         </select>
         <div>Укажите занятость:</div>
         <select v-model="anketa.employment_id" class="category_form_title">
-            <option v-for="option in employments" :value="option.id">
+            <option v-for="option in Store.employments" :value="option.id">
                 {{ option.title }}                
             </option>
         </select>
         <div>Вы предпочитаете:</div>
-        <div v-for="post in housekeeperpreferences" :key="post.id" class="language_item">
+        <div v-for="post in Store.housekeeperpreferences" :key="post.id" class="language_item">
             <input type="checkbox" v-bind:value="post.id" v-model="anketarpreferences">
             {{ post.title }}                                    
         </div>
         <div>Какие обязанности вы готовы выполнять:</div>
-        <div v-for="post in housekeeperduties" :key="post.id" class="language_item">
+        <div v-for="post in Store.housekeeperduties" :key="post.id" class="language_item">
             <input type="checkbox" v-bind:value="post.id" v-model="anketaduties">
             {{ post.title }}                                    
         </div>
@@ -74,13 +74,13 @@
         </select>      
         <div>Ожидаемая почасовая оплата:</div>
         <select v-model="anketa.hourpay_id" class="category_form_title">
-            <option v-for="option in hourlypayments" :value="option.id">
+            <option v-for="option in Store.hourlypayments" :value="option.id">
                 {{ option.title }}                
             </option>
         </select> 
         <div>Ожидаемая помесячная оплата:</div>
         <select v-model="anketa.monthpay_id" class="category_form_title">
-            <option v-for="option in monthlypayments" :value="option.id">
+            <option v-for="option in Store.monthlypayments" :value="option.id">
                 {{ option.title }}                
             </option>
         </select> 
@@ -89,13 +89,14 @@
                 
         <button type="submit" class="login_form_btn">Добавить анкету</button>
     </form> 
-    <div>{{ keeper }}</div> 
-    <span v-if="keeper" class="category_change_btn" @click.prevent="change_keeper()">Изменить анкету</span>
-    <span v-if="keeper" class="category_change_btn red" @click.prevent="delete_keeper()">Удалить анкету</span>
+    <div>{{ Keeper.keeper }}</div> 
+    <span v-if="Keeper.keeper" class="category_change_btn" @click.prevent="change_keeper()">Изменить анкету</span>
+    <span v-if="Keeper.keeper" class="category_change_btn red" @click.prevent="delete_keeper()">Удалить анкету</span>
 </template>
 
 <script>
-import {mapActions, mapState} from 'vuex';
+import { useForm_HousekeeperStore } from '../../../stores/form_housekeeper';
+import { useDataStore } from '../../../stores/variables';
 export default {
     name: "Housekeeper",
     data() {
@@ -111,43 +112,33 @@ export default {
             ],            
         }
     },
+    setup() {
+        const Keeper = useForm_HousekeeperStore();
+        const Store = useDataStore();
+        return { Store, Keeper };
+    },
     methods: {
-        ...mapActions([
-            'GET_TOKEN', 'GET_USER', 'GET_KEEPER', 'CREATE_KEEPER', 'DELETE_KEEPER',
-            'GET_EXPERIENCES', 'GET_RECOMMENDATIONS', 'GET_HOUSEKEEPERTYPEOFWORKS',             
-            'GET_JOBOPTIONS', 'GET_WORKPERIODS', 'GET_EMPLOYMENTS', 'GET_HOUSEKEEPERPREFERENCES',
-            'GET_HOUSEKEEPERDUTIES', 'GET_HOURLYPAYMENTS', 'GET_MONTHLYPAYMENTS',  
-        ]),
         back() {
             this.$router.push({name: "Account"})
         },        
         createForm() {
-            this.anketa.user_id = this.user.id;
+            this.anketa.user_id = localStorage.userID;
             this.anketa.confirmed = true;
-            this.CREATE_KEEPER([this.anketa, this.anketajoboptions, this.anketarpreferences, this.anketaduties, this.anketatypeworks]);
+            this.Keeper.CREATE_KEEPER([this.anketa, this.anketajoboptions, this.anketarpreferences, this.anketaduties, this.anketatypeworks]);
         },
         change_keeper() {
             this.$router.push({name: "Change-housekeeper"})
         },
         delete_keeper() {
-            this.DELETE_KEEPER([this.keeper.user_id, this.keeper.id]);
+            this.Keeper.DELETE_KEEPER([this.Keeper.keeper.user_id, this.Keeper.keeper.id]);
         }
     },
     mounted() {
-        this.GET_TOKEN(); this.GET_USER(); this.GET_KEEPER(this.user.id);
-        //if(!this.nurse){
-            this.GET_EXPERIENCES(); this.GET_RECOMMENDATIONS(); this.GET_HOUSEKEEPERTYPEOFWORKS();
-            this.GET_JOBOPTIONS(); this.GET_WORKPERIODS(); this.GET_EMPLOYMENTS();
-            this.GET_HOUSEKEEPERPREFERENCES(); this.GET_HOUSEKEEPERDUTIES();        
-             this.GET_HOURLYPAYMENTS(); this.GET_MONTHLYPAYMENTS();
-        //}                              
-    },
-    computed: {
-        ...mapState([
-            'user', 'experiences', 'recommendations', 'housekeepertypeofworks',
-            'joboptions', 'workperiods', 'employments', 'housekeeperpreferences',
-            'housekeeperduties', 'hourlypayments', 'monthlypayments', 'keeper' 
-        ])
+        this.Keeper.GET_KEEPER(localStorage.userID);        
+        this.Store.GET_EXPERIENCES(); this.Store.GET_RECOMMENDATIONS(); this.Store.GET_HOUSEKEEPERTYPEOFWORKS();
+        this.Store.GET_JOBOPTIONS(); this.Store.GET_WORKPERIODS(); this.Store.GET_EMPLOYMENTS();
+        this.Store.GET_HOUSEKEEPERPREFERENCES(); this.Store.GET_HOUSEKEEPERDUTIES();        
+        this.Store.GET_HOURLYPAYMENTS(); this.Store.GET_MONTHLYPAYMENTS();                                      
     },
 }
 </script>
