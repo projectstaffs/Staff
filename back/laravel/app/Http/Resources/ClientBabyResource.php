@@ -5,21 +5,15 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-use App\Models\forms\Baby;
-use App\Models\forms\UserLanguages;
-use App\Http\Resources\UserLanguagesResource;
-use App\Models\forms\FormAgegroup;
-use App\Http\Resources\FormAgegroupResource;
-use App\Models\forms\FormEducation;
-use App\Http\Resources\FormEducationResource;
-use App\Models\forms\FormTypework;
-use App\Http\Resources\FormTypeworkResource;
-use App\Models\forms\FormJoboption;
-use App\Http\Resources\FormJoboptionResource;
-use App\Models\forms\FormDutie;
-use App\Http\Resources\FormDutieResource;
+use App\Models\client\Client_baby;
+use App\Models\client\Client_agegroup;
+use App\Http\Resources\ClientAgegroupResource;
+use App\Models\client\Client_joboption;
+use App\Http\Resources\ClientJoboptionResource;
+use App\Models\client\Client_dutie;
+use App\Http\Resources\ClientDutieResource;
 
-class BabyResource extends JsonResource
+class ClientBabyResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -28,20 +22,15 @@ class BabyResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $lang = UserLanguages::where('user_id', $this->user_id)->get(); 
-        $agegroup = FormAgegroup::where('form_id', $this->id)->get(); 
-        $education = FormEducation::where('form_id', $this->id)->get(); 
-        $typework = FormTypework::where('form_id', $this->id)->get(); 
-        $joboption = FormJoboption::where('form_id', $this->id)->get(); 
-        $dutie = FormDutie::where('form_id', $this->id)->get(); 
-          
+        $agegroup = Client_agegroup::where('form_id', $this->id)->get();
+        $joboption = Client_joboption::where('form_id', $this->id)->get(); 
+        $dutie = Client_dutie::where('form_id', $this->id)->get();
+
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,
-            'baby_exp' => $this->baby_exp,
-            'experience' => $this->get_experience->title,
-            'recommendation' => $this->get_recommendation->title,            
-            'education_about' => $this->education_about,
+            'confirmed' => $this->confirmed,
+
             'workperiod' => $this->get_workperiod->title,
             'employment' => $this->get_employment->title,
             'childrencount' => $this->get_childrencount->title,
@@ -50,7 +39,7 @@ class BabyResource extends JsonResource
             'monthpay' => $this->get_monthpay->title,            
             //'additional' => Baby::where('user_id', $this->user_id)->value('additional'),  
             'additional' => $this->additional,          
-            'confirmed' => $this->confirmed,
+            
 
             'Languages' => UserLanguagesResource::collection($lang),
             'Agegroups' => FormAgegroupResource::collection($agegroup),
