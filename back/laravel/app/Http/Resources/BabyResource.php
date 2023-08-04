@@ -48,8 +48,8 @@ class BabyResource extends JsonResource
             'children_invalid' => $this->children_invalid,
             'hourpay' => $this->get_hourpay->title,
             'monthpay' => $this->get_monthpay->title,            
-            //'additional' => Baby::where('user_id', $this->user_id)->value('additional'),  
-            'additional' => $this->additional,          
+            //'additional' => Baby::where('user_id', $this->user_id)->value('additional'),
+            'additional' => $this->value('additional'),         
             'confirmed' => $this->confirmed,
 
             'Languages' => UserLanguagesResource::collection($lang),

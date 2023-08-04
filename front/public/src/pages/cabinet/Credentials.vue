@@ -15,7 +15,7 @@
     <ul>                
         <li v-for="post in Credential.credentials" :key="post.id" class="category_item">
             {{ post.full_name }} {{ post.phone }} {{ post.email }} {{ post.content }}
-            <span class="category_change_btn" @click.prevent="change_credential(post.id, post.full_name, post.phone, post.email, post.content)">Изменить рекомендацию</span>
+            <span class="category_change_btn" @click.prevent="change_credential(post)">Изменить рекомендацию</span>
             <span class="category_change_btn red" @click.prevent="delete_credential(post.id)">Удалить рекомендацию</span>                
         </li>   
     </ul>    
@@ -27,8 +27,7 @@ import { useCredentialStore } from '../../stores/credential';
         name: 'Credentials',
         data() {
             return {
-                credential: {},
-                fix_credential: {},                
+                credential: {},                
             }
         },
         setup() {
@@ -41,14 +40,9 @@ import { useCredentialStore } from '../../stores/credential';
                 this.Credential.CREATE_CREDENTIAL(this.credential);
                 this.credential.full_name = ''; this.credential.phone = ''; this.credential.email = ''; this.credential.content = '';
             },
-            change_credential(id, full_name, phone, email, content) {
-                this.fix_credential.id = id;
-                this.fix_credential.full_name = full_name;
-                this.fix_credential.phone = phone;
-                this.fix_credential.email = email;
-                this.fix_credential.content = content;
-                this.fix_credential.user_id = localStorage.userID;                
-                this.Credential.GET_CREDENTIAL(this.fix_credential);
+            change_credential(post) {                
+                post.user_id = localStorage.userID;                
+                this.Credential.GET_CREDENTIAL(post);
                 this.$router.push({name: "Change-credential"})                
             },
             delete_credential(id) {                

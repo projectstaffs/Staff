@@ -16,7 +16,7 @@ class ClientBabyController extends Controller
     {
         $baby = Client_baby::where('user_id', $request["data"])->first();
         if($baby) { return new ClientBabyResource($baby); }
-        else { return null; }
+        else { return null; }        
     }
 
     /**

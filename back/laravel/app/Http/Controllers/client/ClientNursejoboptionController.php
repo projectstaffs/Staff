@@ -4,7 +4,7 @@ namespace App\Http\Controllers\client;
 use Illuminate\Routing\Controller;
 
 use Illuminate\Http\Request;
-use App\Models\forms\Client_nursejoboption;
+use App\Models\client\Client_nursejoboption;
 
 class ClientNursejoboptionController extends Controller
 {

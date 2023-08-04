@@ -185,17 +185,7 @@ export default {
             } else {                
                 this.User.user.is_babysitting = this.is_babysitting;
                 this.User.user.is_nurse = this.is_nurse;
-                this.User.user.is_housekeeper = this.is_housekeeper;
-
-                this.User.user.country = this.User.user.country_id;
-                this.User.user.smoking = this.User.user.smoking_id;
-                this.User.user.citizen = this.User.user.citizen_id;
-                this.User.user.criminal = this.User.user.criminal_id;
-                this.User.user.moving = this.User.user.moving_id;
-                this.User.user.alcohol = this.User.user.alcohol_id;
-                this.User.user.status = this.User.user.status_id;
-                this.User.user.religion = this.User.user.religion_id;
-                this.User.user.city = this.User.user.city_id;                
+                this.User.user.is_housekeeper = this.is_housekeeper;                
                 
                 this.User.UPDATE_USER(this.User.user);                           
             }                       
@@ -203,9 +193,7 @@ export default {
         change_ClientUser() {
             if(this.User.user.password !== this.User.user.password_confirm) {
                 console.log('wrong confirm');
-            } else {
-                this.User.user.country = this.User.user.country_id;                
-                this.User.user.city = this.User.user.city_id;               
+            } else {               
                 this.User.UPDATE_USER(this.User.user);                           
             }                       
         }

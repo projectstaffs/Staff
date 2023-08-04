@@ -1,1 +1,1 @@
-UPDATE messages SET reading = 0 WHERE id = 1
+DELETE FROM client_nurses WHERE id = 2;

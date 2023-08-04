@@ -99,15 +99,15 @@ class UserController extends Controller
         $user->is_nurse = $request['is_nurse']; 
         $user->is_housekeeper = $request['is_housekeeper'];         
         
-        $user->smoking = $request['smoking']; 
-        $user->country = $request['country']; 
-        $user->citizen = $request['citizen']; 
-        $user->criminal = $request['criminal']; 
-        $user->moving = $request['moving']; 
-        $user->alcohol = $request['alcohol']; 
-        $user->status = $request['status']; 
-        $user->religion = $request['religion']; 
-        $user->city = $request['city'];       
+        $user->smoking = $request['smoking_id']; 
+        $user->country = $request['country_id']; 
+        $user->citizen = $request['citizen_id']; 
+        $user->criminal = $request['criminal_id']; 
+        $user->moving = $request['moving_id']; 
+        $user->alcohol = $request['alcohol_id']; 
+        $user->status = $request['status_id']; 
+        $user->religion = $request['religion_id']; 
+        $user->city = $request['city_id'];       
 
         $user->save();
         $temp = new UserResource($user);

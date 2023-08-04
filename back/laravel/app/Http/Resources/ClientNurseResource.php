@@ -20,8 +20,8 @@ class ClientNurseResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $joboption = Client_keeperjoboption::where('form_id', $this->id)->get(); 
-        $dutie = Client_keeperdutie::where('form_id', $this->id)->get();
+        $joboption = Client_nursejoboption::where('form_id', $this->id)->get(); 
+        $dutie = Client_nursedutie::where('form_id', $this->id)->get();
 
         return [
             'id' => $this->id,
