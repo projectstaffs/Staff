@@ -5,7 +5,7 @@ use Illuminate\Routing\Controller;
 
 use Illuminate\Http\Request;
 use App\Models\forms\Keeper;
-use App\Http\Resources\KeeperResource;
+use App\Http\Resources\forms\KeeperResource;
 
 class KeeperController extends Controller
 {

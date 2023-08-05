@@ -5,7 +5,7 @@ use Illuminate\Routing\Controller;
 
 use Illuminate\Http\Request;
 use App\Models\forms\Nurse;
-use App\Http\Resources\NurseResource;
+use App\Http\Resources\forms\NurseResource;
 
 class NurseController extends Controller
 {

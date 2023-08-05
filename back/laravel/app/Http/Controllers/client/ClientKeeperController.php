@@ -5,7 +5,7 @@ use Illuminate\Routing\Controller;
 
 use Illuminate\Http\Request;
 use App\Models\client\Client_keeper;
-use App\Http\Resources\ClientKeeperResource;
+use App\Http\Resources\client\ClientKeeperResource;
 
 class ClientKeeperController extends Controller
 {

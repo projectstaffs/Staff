@@ -5,7 +5,7 @@ use Illuminate\Routing\Controller;
 
 use Illuminate\Http\Request;
 use App\Models\forms\Baby;
-use App\Http\Resources\BabyResource;
+use App\Http\Resources\forms\BabyResource;
 
 class BabyController extends Controller
 {

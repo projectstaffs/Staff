@@ -5,7 +5,7 @@ use Illuminate\Routing\Controller;
 
 use Illuminate\Http\Request;
 use App\Models\client\Client_nurse;
-use App\Http\Resources\ClientNurseResource;
+use App\Http\Resources\client\ClientNurseResource;
 
 class ClientNurseController extends Controller
 {

@@ -4,9 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Models\forms\UserLanguages;
 use App\Models\user\Image;
-use App\Http\Resources\UserLanguagesResource;
 
 class UserResource extends JsonResource
 {
