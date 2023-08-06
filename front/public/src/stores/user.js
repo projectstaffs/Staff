@@ -40,7 +40,13 @@ export const useUserStore = defineStore('user', {
                     localStorage.removeItem('user');                
                     localStorage.removeItem('user_image');
                     localStorage.removeItem('admin_id');
-                    localStorage.removeItem('userID');                     
+                    localStorage.removeItem('userID');
+                    localStorage.removeItem('clientBabyitem');  
+                    localStorage.removeItem('clientNurseitem');
+                    localStorage.removeItem('clientKeeperitem');
+                    localStorage.removeItem('workerBabyitem');
+                    localStorage.removeItem('workerNurseitem');
+                    localStorage.removeItem('workerKeeperitem');                   
                     
                     this.user = {};                    
                     router.push({name: "Login"});                    
