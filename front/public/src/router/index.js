@@ -8,7 +8,79 @@ const router = createRouter({
             name: 'Home', 
             meta: {layout: 'User'},     
             component: () => import('../pages/user/Home.vue')
-        },        
+        },
+        {
+            name: 'ClientBabyAll',
+            path: '/c_baby',
+            meta: {layout: 'User'},            
+            component: () =>import('../pages/views/client/ClientBabyAll.vue')
+        },
+        {
+            name: 'ClientBabyItem',
+            path: '/c_babyitem',
+            meta: {layout: 'User'},            
+            component: () =>import('../pages/views/client/ClientBabyItem.vue')
+        },
+        {
+            name: 'ClientNurseAll',
+            path: '/c_nurse',
+            meta: {layout: 'User'},            
+            component: () =>import('../pages/views/client/ClientNurseAll.vue')
+        },
+        {
+            name: 'ClientNurseItem',
+            path: '/c_nurseitem',
+            meta: {layout: 'User'},            
+            component: () =>import('../pages/views/client/ClientNurseItem.vue')
+        },
+        {
+            name: 'ClientKeeperAll',
+            path: '/c_keeper',
+            meta: {layout: 'User'},            
+            component: () =>import('../pages/views/client/ClientKeeperAll.vue')
+        },
+        {
+            name: 'ClientKeeperItem',
+            path: '/c_keeperitem',
+            meta: {layout: 'User'},            
+            component: () =>import('../pages/views/client/ClientKeeperItem.vue')
+        },
+        {
+            name: 'BabyAll',
+            path: '/w_baby',
+            meta: {layout: 'User'},            
+            component: () =>import('../pages/views/worker/BabyAll.vue')
+        },
+        {
+            name: 'BabyItem',
+            path: '/w_babyitem',
+            meta: {layout: 'User'},            
+            component: () =>import('../pages/views/worker/BabyItem.vue')
+        },
+        {
+            name: 'NurseAll',
+            path: '/w_nurse',
+            meta: {layout: 'User'},            
+            component: () =>import('../pages/views/worker/NurseAll.vue')
+        },
+        {
+            name: 'NurseItem',
+            path: '/w_nurseitem',
+            meta: {layout: 'User'},            
+            component: () =>import('../pages/views/worker/NurseItem.vue')
+        },
+        {
+            name: 'KeeperAll',
+            path: '/w_keeper',
+            meta: {layout: 'User'},            
+            component: () =>import('../pages/views/worker/KeeperAll.vue')
+        },
+        {
+            name: 'KeeperItem',
+            path: '/w_keeperitem',
+            meta: {layout: 'User'},            
+            component: () =>import('../pages/views/worker/KeeperItem.vue')
+        },
         {
             name: 'Login',
             path: '/login',

@@ -41,6 +41,7 @@ use App\Http\Controllers\user\ImageController;
 use App\Http\Controllers\forms\CredentialController;
 use App\Http\Controllers\message\MessageController;
 use App\Http\Controllers\HelpController;
+use App\Http\Controllers\ViewsController;
 
 use App\Http\Controllers\forms\FormAgegroupController;
 use App\Http\Controllers\forms\FormDutieController;
@@ -96,7 +97,14 @@ function ($router) {
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::post('me', [AuthController::class, 'me']);
 
-    Route::group(['middleware' => 'jwt.auth'], function(){        
+    Route::group(['middleware' => 'jwt.auth'], function(){
+        Route::get('/w_baby', [ViewsController::class, 'getBaby']);
+        Route::get('/w_nurse', [ViewsController::class, 'getNurse']);
+        Route::get('/w_keeper', [ViewsController::class, 'getKeeper']);
+        Route::get('/c_baby', [ViewsController::class, 'getClientBaby']);
+        Route::get('/c_nurse', [ViewsController::class, 'getClientNurse']);
+        Route::get('/c_keeper', [ViewsController::class, 'getClientKeeper']);
+
         Route::get('/admin', [HelpController::class, 'getAdmin']);
         Route::get('/message_in', [HelpController::class, 'getMessage_in']);
         Route::resource('/message', MessageController::class); //message out

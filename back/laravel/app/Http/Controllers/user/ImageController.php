@@ -44,7 +44,7 @@ class ImageController extends Controller
                     'user_id' => $request['user_id'],
                     'preview_url' => url('/storage/images/' . $previewName)                    
                 ]);
-                \Intervention\Image\Facades\Image::make($image)->fit(100, 100)->save(storage_path('app/public/images/' . $previewName));                
+                //\Intervention\Image\Facades\Image::make($image)->fit(100, 100)->save(storage_path('app/public/images/' . $previewName));                
             }
         }       
 

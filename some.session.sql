@@ -1,1 +1,1 @@
-DELETE FROM client_nurses WHERE id = 2;
+DELETE FROM images;
