@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Models\user\Image;
@@ -14,10 +15,17 @@ class UserResource extends JsonResource
      * @return array<string, mixed>
      */
     public function toArray(Request $request): array
-    {      
-        $image = null;
-        $photo = Image::select('preview_url')->where('user_id', $this->id)->first();
-        if($photo){$image = $photo["preview_url"];}else {$image = '';}
+    {
+        if(!Cache::has('images')) { Cache::put('images', Image::all()); }
+        $Image = Cache::get('images');
+        $image = '';
+        foreach ($Image as $item) {
+            if($item->user_id == $this->id) {
+                $image = $item->preview_url;
+                break;
+            }                           
+        }
+        
         if($this->role == "Исполнитель") {
             return [
                 'id' => $this->id,

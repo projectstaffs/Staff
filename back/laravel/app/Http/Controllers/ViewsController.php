@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use App\Models\forms\Baby;
 use App\Http\Resources\views\WorkBabyResource;
 use App\Models\forms\Nurse;
@@ -20,34 +21,46 @@ use App\Http\Resources\views\ClientKeeperResource;
 class ViewsController extends Controller
 {
     public function getBaby ()
-    {        
-        $baby = Baby::orderBy('created_at', 'desc')->get();
-        return WorkBabyResource::collection($baby);        
+    { 
+        if(!Cache::has('babies')) { Cache::put('babies', Baby::all()); }
+        $getItems = Cache::get('babies');       
+        //$baby = Baby::orderBy('created_at', 'desc')->get();
+        return WorkBabyResource::collection($getItems);               
     }
     public function getNurse ()
-    {        
-        $nurse = Nurse::orderBy('created_at', 'desc')->get();
-        return WorkNurseResource::collection($nurse);        
+    { 
+        if(!Cache::has('nurses')) { Cache::put('nurses', Nurse::all()); }
+        $getItems = Cache::get('nurses');       
+        //$nurse = Nurse::orderBy('created_at', 'desc')->get();
+        return WorkNurseResource::collection($getItems);        
     }
     public function getKeeper ()
-    {        
-        $keeper = Keeper::orderBy('created_at', 'desc')->get();
-        return WorkKeeperResource::collection($keeper);        
+    { 
+        if(!Cache::has('keepers')) { Cache::put('keepers', Keeper::all()); }
+        $getItems = Cache::get('keepers');       
+        //$keeper = Keeper::orderBy('created_at', 'desc')->get();
+        return WorkKeeperResource::collection($getItems);        
     }
 
     public function getClientBaby ()
-    {  
-        $client_baby = Client_baby::orderBy('created_at', 'desc')->get();
-        return ClientBabyResource::collection($client_baby);        
+    { 
+        if(!Cache::has('client_babies')) { Cache::put('client_babies', Client_baby::all()); }
+        $getItems = Cache::get('client_babies'); 
+        //$client_baby = Client_baby::orderBy('created_at', 'desc')->get();
+        return ClientBabyResource::collection($getItems);        
     }
     public function getClientNurse ()
-    {  
-        $client_nurse = Client_nurse::orderBy('created_at', 'desc')->get();
-        return ClientNurseResource::collection($client_nurse);        
+    { 
+        if(!Cache::has('client_nurses')) { Cache::put('client_nurses', Client_nurse::all()); }
+        $getItems = Cache::get('client_nurses'); 
+        //$client_nurse = Client_nurse::orderBy('created_at', 'desc')->get();
+        return ClientNurseResource::collection($getItems);        
     }
     public function getClientKeeper ()
-    {  
-        $client_keeper = Client_keeper::orderBy('created_at', 'desc')->get();
-        return ClientKeeperResource::collection($client_keeper);        
+    { 
+        if(!Cache::has('client_keepers')) { Cache::put('client_keepers', Client_keeper::all()); }
+        $getItems = Cache::get('client_keepers');  
+        //$client_keeper = Client_keeper::orderBy('created_at', 'desc')->get();
+        return ClientKeeperResource::collection($getItems);        
     }
 }

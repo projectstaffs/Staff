@@ -17,7 +17,7 @@ export const useViewsStore = defineStore('views', {
     actions: {
         GET_CLIENTBABY(){   
             api.get('api/auth/c_baby')
-                .then(res => {                                    
+                .then(res => {
                     this.clientBaby = res.data;
                 })
                 .catch(error => { console.log(error); })

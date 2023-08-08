@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\client;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Models\data\BabysittingDutie;
@@ -15,10 +16,15 @@ class ClientDutieResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $title = BabysittingDutie::where('id', $this->dutie_id)->value('title');
-        return [
-            'id' => $this->dutie_id,
-            'title' => $title            
-        ];
+        if(!Cache::has('babysittingduties')) { Cache::put('babysittingduties', BabysittingDutie::all()); }
+        $Babysittingdutie = Cache::get('babysittingduties');        
+        foreach ($Babysittingdutie as $item) {
+            if($item->id == $this->dutie_id) {
+                return [
+                    'id' => $this->dutie_id,
+                    'title' => $item->title            
+                ];                
+            }                           
+        }
     }
 }

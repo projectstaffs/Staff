@@ -13,8 +13,8 @@ export const useUserStore = defineStore('user', {
     actions: {        
         GET_ADMINID(){            
             api.get('api/auth/admin')
-                .then((res) => {                 
-                    localStorage.admin_id = res.data.id;                                      
+                .then((res) => {                
+                    localStorage.admin_id = res.data;                                      
                 })
                 .catch(error => { console.log(error); })
         },        

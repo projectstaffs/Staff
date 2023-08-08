@@ -47,21 +47,106 @@ use App\Models\client\Client_nurse;
 use App\Models\client\Client_nursedutie;
 use App\Models\client\Client_nursejoboption;
 
+use App\Models\data\AgeGroup;
+use App\Models\data\Alcohol;
+use App\Models\data\BabysittingDutie;
+use App\Models\data\Children;
+use App\Models\data\City;
+
+use App\Models\data\Country;
+use App\Models\data\Criminal;
+use App\Models\data\Diagnose;
+use App\Models\data\Education;
+use App\Models\data\Employment;
+
+use App\Models\data\Experience;
+use App\Models\data\HourlyPayment;
+use App\Models\data\HousekeeperDutie;
+use App\Models\data\HousekeeperPreference;
+use App\Models\data\HousekeeperTypeOfWork;
+
+use App\Models\data\JobOption;
+use App\Models\data\Language;
+use App\Models\data\MonthlyPayment;
+use App\Models\data\Moving;
+use App\Models\data\NurseDutie;
+
+use App\Models\data\NurseTypeOfWork;
+use App\Models\data\NursingSkill;
+use App\Models\data\Recommendation;
+use App\Models\data\Religion;
+use App\Models\data\Schedule;
+
+use App\Models\data\Smoking;
+use App\Models\data\Status;
+use App\Models\data\TypeOfWork;
+use App\Models\data\WorkLocation;
+use App\Models\data\WorkPeriod;
+
 class HelpController extends Controller
 {
     public function getAdmin ()
     {
-        //$admin = User::where('role', 'Администратор')->value('id')->first();
-        $admin = User::select('id')->where('role', 'Администратор')->first();
-        return $admin;
+        if(!Cache::has('users')) { Cache::put('users', User::all()); }
+        $getItems = Cache::get('users'); 
+
+        foreach ($getItems as $item) {
+            if($item->role = 'Администратор') {
+                return $item->id;
+            }                           
+        }        
     }
     public function getMessage_in (Request $request)
     {
-        $messages = Message::where('recipient', $request["data"])->get();            
+        if(!Cache::has('messages')) { Cache::put('messages', Message::all()); }
+        $getItems = Cache::get('messages');
+        $messages = array();
+
+        foreach ($getItems as $item) {
+            if($item->recipient == $request["data"]) {
+                array_push($messages, $item);
+            }                           
+        }
         return $messages;
     }
     public function redisAll ()
     {
+        Cache::put('smokings', Smoking::all());
+        Cache::put('statuses', Status::all());
+        Cache::put('typeofworks', TypeOfWork::all());
+        Cache::put('workLocations', WorkLocation::all());
+        Cache::put('workperiods', WorkPeriod::all());
+
+        Cache::put('nursetypeofworks', NurseTypeOfWork::all());
+        Cache::put('nursingskills', NursingSkill::all());
+        Cache::put('recommendations', Recommendation::all());
+        Cache::put('religions', Religion::all());
+        Cache::put('schedules', Schedule::all());
+
+        Cache::put('joboptions', JobOption::all());
+        Cache::put('languages', Language::all());
+        Cache::put('monthlypayments', MonthlyPayment::all());
+        Cache::put('movings', Moving::all());
+        Cache::put('nurseduties', NurseDutie::all());
+
+        Cache::put('experiences', Experience::all());
+        Cache::put('hourlypayments', HourlyPayment::all());
+        Cache::put('housekeeperduties', HousekeeperDutie::all());
+        Cache::put('housekeeperpreferences', HousekeeperPreference::all());
+        Cache::put('housekeepertypeofworks', HousekeeperTypeOfWork::all());
+
+        Cache::put('countries', Country::all());
+        Cache::put('criminals', Criminal::all());
+        Cache::put('diagnoses', Diagnose::all());
+        Cache::put('educations', Education::all());
+        Cache::put('employments', Employment::all());
+
+        Cache::put('agegroups', AgeGroup::all());
+        Cache::put('alcohols', Alcohol::all());
+        Cache::put('babysittingduties', BabysittingDutie::all());
+        Cache::put('childrens', Children::all());
+        Cache::put('cities', City::all());
+
         Cache::put('client_nurses', Client_nurse::all());
         Cache::put('client_nurseduties', Client_nursedutie::all());
         Cache::put('client_nursejoboptions', Client_nursejoboption::all());

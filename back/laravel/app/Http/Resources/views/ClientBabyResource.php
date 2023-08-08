@@ -4,6 +4,7 @@ namespace App\Http\Resources\views;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Cache;
 
 use App\Models\client\Client_baby;
 use App\Models\client\Client_agegroup;
@@ -24,11 +25,44 @@ class ClientBabyResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $user = new UserResource(User::where('id', $this->user_id)->first());
-        $agegroup = Client_agegroup::where('form_id', $this->id)->get();
-        $joboption = Client_joboption::where('form_id', $this->id)->get(); 
-        $dutie = Client_dutie::where('form_id', $this->id)->get();
+        if(!Cache::has('users')) { Cache::put('users', User::all()); }
+        $Users = Cache::get('users');
+        $user = null;
+        foreach ($Users as $item) {
+            if($item->id == $this->user_id) {
+                $user = $item;
+                break;
+            }                           
+        }
+        $USER = new UserResource($user);
 
+        if(!Cache::has('client_agegroups')) { Cache::put('client_agegroups', Client_agegroup::all()); }
+        $Agegroup = Cache::get('client_agegroups');
+        $agegroup = array();
+        foreach ($Agegroup as $item) {
+            if($item->form_id == $this->id) {
+                array_push($agegroup, $item);
+            }                           
+        }
+        
+        if(!Cache::has('client_joboptions')) { Cache::put('client_joboptions', Client_joboption::all()); }
+        $Joboption = Cache::get('client_joboptions');
+        $joboption = array();
+        foreach ($Joboption as $item) {
+            if($item->form_id == $this->id) {
+                array_push($joboption, $item);
+            }                           
+        } 
+        
+        if(!Cache::has('client_duties')) { Cache::put('client_duties', Client_dutie::all()); }
+        $Dutie = Cache::get('client_duties');
+        $dutie = array();
+        foreach ($Dutie as $item) {
+            if($item->form_id == $this->id) {
+                array_push($dutie, $item);
+            }                           
+        }
+        
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,
@@ -46,7 +80,7 @@ class ClientBabyResource extends JsonResource
             'Agegroups' => ClientAgegroupResource::collection($agegroup),            
             'Joboptions' => ClientJoboptionResource::collection($joboption),
             'Duties' => ClientDutieResource::collection($dutie),
-            'User' => $user,
+            'User' => $USER,
             
             'workperiod_id' => $this->workperiod_id,
             'employment_id' => $this->employment_id,

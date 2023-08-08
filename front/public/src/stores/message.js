@@ -20,7 +20,7 @@ export const useMessageStore = defineStore('message', {
         },
         GET_MESSAGES_IN(data){
             api.get('api/auth/message_in', {params: {data}})
-                .then(res => {                                    
+                .then(res => {
                     this.messages_in = res.data;
                     for (let index = 0; index < res.data.length; index++) {
                         if(res.data[index].reading==0){
