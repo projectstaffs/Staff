@@ -2,7 +2,7 @@
     <div v-for="post in Views.clientBaby" :key="post.id">
         <div>{{ post }}</div>
         <span class="category_change_btn" @click.prevent="showItem(post)">Подробная анкета</span>
-    </div>
+    </div>    
 </template>
 
 <script>

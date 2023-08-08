@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import api from "../assets/api";
+import axios from 'axios';
 
 export const useViewsStore = defineStore('views', {
     state: () => {

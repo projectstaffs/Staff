@@ -182,5 +182,3 @@ Route::resource('/status', StatusController::class);
 Route::resource('/religion', ReligionController::class);
 
 Route::get('/redis', [HelpController::class, 'redisAll']);
-Route::get('/r_show', [HelpController::class, 'redisShow']);
-Route::get('/redis/{id}', [HelpController::class, 'RedisOne']);

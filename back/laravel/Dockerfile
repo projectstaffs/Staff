@@ -13,6 +13,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Установка дополнительных расширений PHP для Redis
 RUN pecl install redis && docker-php-ext-enable redis
 
+# Установка библиотеки ImageMagick
+RUN pecl install imagick && docker-php-ext-enable imagick
 
 # Открываем порт для доступа к приложению
 EXPOSE 8000
