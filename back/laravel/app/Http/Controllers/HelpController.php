@@ -161,12 +161,13 @@ class HelpController extends Controller
         Cache::put('client_joboptions', Client_joboption::all());
 
         Cache::put('nurses', Nurse::all());
+        Cache::put('formdiagnoses', FormDiagnose::all());
         Cache::put('formnurseduties', FormNursedutie::all());
         Cache::put('formnurseeducations', FormNurseeducation::all());
         Cache::put('formnursejoboptions', FormNursejoboption::all());
         Cache::put('formnurseskills', FormNurseskill::all());
         Cache::put('formnursetypeworks', FormNursetypework::all());
-        Cache::put('formnurseworklocation', FormNurseworklocation::all());
+        Cache::put('formnurseworklocations', FormNurseworklocation::all());
 
         Cache::put('keepers', Keeper::all());
         Cache::put('formkeeperduties', FormKeeperdutie::all());
@@ -176,8 +177,7 @@ class HelpController extends Controller
 
         Cache::put('formtypeworks', FormTypework::all());
         Cache::put('userlanguages', UserLanguages::all());
-        Cache::put('formagegroups', FormAgegroup::all());
-        Cache::put('formdiagnoses', FormDiagnose::all());
+        Cache::put('formagegroups', FormAgegroup::all());        
         Cache::put('formduties', FormDutie::all());
         Cache::put('formeducations', FormEducation::all());
         Cache::put('formjoboptions', FormJoboption::all());

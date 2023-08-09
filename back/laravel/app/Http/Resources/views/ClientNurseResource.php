@@ -4,6 +4,7 @@ namespace App\Http\Resources\views;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Cache;
 
 use App\Models\client\Client_nurse;
 use App\Models\client\Client_nursejoboption;
@@ -22,10 +23,35 @@ class ClientNurseResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $user = new UserResource(User::where('id', $this->user_id)->first());
-        $joboption = Client_nursejoboption::where('form_id', $this->id)->get(); 
-        $dutie = Client_nursedutie::where('form_id', $this->id)->get();
-
+        if(!Cache::has('users')) { Cache::put('users', User::all()); }
+        $Users = Cache::get('users');
+        $user = null;
+        foreach ($Users as $item) {
+            if($item->id == $this->user_id) {
+                $user = $item;
+                break;
+            }                           
+        }
+        $USER = new UserResource($user);
+        
+        if(!Cache::has('client_nursejoboptions')) { Cache::put('client_nursejoboptions', Client_nursejoboption::all()); }
+        $Joboption = Cache::get('client_nursejoboptions');
+        $joboption = array();
+        foreach ($Joboption as $item) {
+            if($item->form_id == $this->id) {
+                array_push($joboption, $item);
+            }                           
+        } 
+        
+        if(!Cache::has('client_nurseduties')) { Cache::put('client_nurseduties', Client_nursedutie::all()); }
+        $Dutie = Cache::get('client_nurseduties');
+        $dutie = array();
+        foreach ($Dutie as $item) {
+            if($item->form_id == $this->id) {
+                array_push($dutie, $item);
+            }                           
+        }
+        
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,
@@ -41,7 +67,7 @@ class ClientNurseResource extends JsonResource
             
             'Joboptions' => ClientNursejoboptionResource::collection($joboption),
             'Duties' => ClientNursedutieResource::collection($dutie),
-            'User' => $user,
+            'User' => $USER,
             
             'workperiod_id' => $this->workperiod_id,
             'employment_id' => $this->employment_id,

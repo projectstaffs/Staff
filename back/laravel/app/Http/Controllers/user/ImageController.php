@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\user;
 use Illuminate\Routing\Controller;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use App\Models\user\Image;
 use Carbon\Carbon;
@@ -46,6 +47,7 @@ class ImageController extends Controller
                 ]);
                 //\Intervention\Image\Facades\Image::make($image)->fit(100, 100)->save(storage_path('app/public/images/' . $previewName));                
             }
+            Cache::put('images', Image::all());
         }       
 
         return $res;
@@ -87,6 +89,7 @@ class ImageController extends Controller
             Storage::disk('public')->delete($row2);
         }
         Image::where('user_id', '=', $id)->delete();
+        Cache::put('images', Image::all());
         return response()->json('Картинки успешно удалены.');
     }
 }

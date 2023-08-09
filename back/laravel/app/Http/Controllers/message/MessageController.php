@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\message;
 use Illuminate\Routing\Controller;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use App\Models\message\Message;
 
@@ -12,8 +13,15 @@ class MessageController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request)
-    {          
-        $messages = Message::where('sender', $request["data"])->get();          
+    { 
+        if(!Cache::has('messages')) { Cache::put('messages', Message::all()); }
+        $Message = Cache::get('messages');
+        $messages = array();
+        foreach ($Message as $item) {
+            if($item->sender == $request["data"]) {
+                array_push($messages, $item);
+            }                           
+        }
         return $messages;        
     }
 
@@ -44,7 +52,8 @@ class MessageController extends Controller
             'time' => $request->time,
             'reading' => $request->reading                        
         ]);                
-        $message->save();                
+        $message->save(); 
+        Cache::put('messages', Message::all());               
         return $message;
     }
 
@@ -70,11 +79,10 @@ class MessageController extends Controller
     public function update(Request $request, string $id)
     {
         $message = Message::find($id);
-        //$desk->update($request->all());
         $message->reading = $request->input('reading');
-
         $message->save();
 
+        Cache::put('messages', Message::all());
         return response()->json($message);
     }
 

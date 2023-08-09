@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\forms;
 use Illuminate\Routing\Controller;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use App\Models\forms\Nurse;
 use App\Http\Resources\forms\NurseResource;
@@ -14,11 +15,18 @@ class NurseController extends Controller
      */
     public function index(Request $request)
     {
-        $nurse = Nurse::where('user_id', $request["data"])->first();
-        if($nurse) { 
-            return new NurseResource($nurse); 
-            //return $nurse;
+        if(!Cache::has('nurses')) { Cache::put('nurses', Nurse::all()); }
+        $Nurse = Cache::get('nurses');
+        $nurse = null;
+        foreach ($Nurse as $item) {
+            if($item->user_id == $request["data"]) {
+                $nurse = $item;
+                break;
+            }                           
         }
+
+        //$nurse = Nurse::where('user_id', $request["data"])->first();
+        if($nurse) { return new NurseResource($nurse);}
         else { return null; }        
     }
 
@@ -50,6 +58,7 @@ class NurseController extends Controller
         ]);                
         $nurse->save();
 
+        Cache::put('nurses', Nurse::all());
         return $nurse;
     }
 
@@ -86,6 +95,7 @@ class NurseController extends Controller
         $nurse->additional = $request['additional'];
         $nurse->save(); 
 
+        Cache::put('nurses', Nurse::all());
         return $nurse;
     }
 
@@ -95,6 +105,7 @@ class NurseController extends Controller
     public function destroy(string $id)
     {
         Nurse::where('user_id', '=', $id)->delete();
+        Cache::put('nurses', Nurse::all());
         return response()->json('Удаление анкеты прошло успешно.');
     }
 }

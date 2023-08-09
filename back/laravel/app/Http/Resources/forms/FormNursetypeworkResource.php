@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\forms;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Models\data\NurseTypeOfWork;
@@ -15,10 +16,15 @@ class FormNursetypeworkResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $title = NurseTypeOfWork::where('id', $this->nursetypework_id)->value('title');
-        return [
-            'id' => $this->nursetypework_id,
-            'title' => $title            
-        ];
+        if(!Cache::has('nursetypeofworks')) { Cache::put('nursetypeofworks', NurseTypeOfWork::all()); }
+        $NurseTypeOfWork = Cache::get('nursetypeofworks');        
+        foreach ($NurseTypeOfWork as $item) {
+            if($item->id == $this->nursetypework_id) {
+                return [
+                    'id' => $this->nursetypework_id,
+                    'title' => $item->title            
+                ];                
+            }                           
+        }
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\forms;
 use Illuminate\Routing\Controller;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use App\Models\forms\FormDutie;
 
@@ -35,7 +36,8 @@ class FormDutieController extends Controller
                 'dutie_id' => $request[0][$i]["dutie_id"]
             ]);                    
             $formDutie->save();
-        }        
+        } 
+        Cache::put('formduties', FormDutie::all());       
         return $request[1];
     }
 
@@ -69,6 +71,7 @@ class FormDutieController extends Controller
     public function destroy(string $id)
     {
         FormDutie::where('form_id', '=', $id)->delete();
+        Cache::put('formduties', FormDutie::all());
         return response()->json('Удаление прошло успешно.');
     }
 }

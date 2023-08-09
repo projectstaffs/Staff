@@ -4,6 +4,7 @@ namespace App\Http\Resources\views;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Cache;
 
 use App\Models\forms\Keeper;
 use App\Models\forms\FormKeeperdutie;
@@ -26,12 +27,53 @@ class WorkKeeperResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $user = new UserResource(User::where('id', $this->user_id)->first());
-        $joboption = FormKeeperjoboption::where('form_id', $this->id)->get();
-        $typework = FormKeepertypework::where('form_id', $this->id)->get();         
-        $dutie = FormKeeperdutie::where('form_id', $this->id)->get();        
-        $preference = FormKeeperpreference::where('form_id', $this->id)->get();        
+        if(!Cache::has('users')) { Cache::put('users', User::all()); }
+        $Users = Cache::get('users');
+        $user = null;
+        foreach ($Users as $item) {
+            if($item->id == $this->user_id) {
+                $user = $item;
+                break;
+            }                           
+        }
+        $USER = new UserResource($user);
 
+        if(!Cache::has('formkeeperjoboptions')) { Cache::put('formkeeperjoboptions', FormKeeperjoboption::all()); }
+        $FormKeeperjoboption = Cache::get('formkeeperjoboptions');
+        $joboption = array();
+        foreach ($FormKeeperjoboption as $item) {
+            if($item->form_id == $this->id) {
+                array_push($joboption, $item);
+            }                           
+        }
+
+        if(!Cache::has('formkeepertypeworks')) { Cache::put('formkeepertypeworks', FormKeepertypework::all()); }
+        $FormKeepertypework = Cache::get('formkeepertypeworks');
+        $typework = array();
+        foreach ($FormKeepertypework as $item) {
+            if($item->form_id == $this->id) {
+                array_push($typework, $item);
+            }                           
+        }
+
+        if(!Cache::has('formkeeperduties')) { Cache::put('formkeeperduties', FormKeeperdutie::all()); }
+        $FormKeeperdutie = Cache::get('formkeeperduties');
+        $dutie = array();
+        foreach ($FormKeeperdutie as $item) {
+            if($item->form_id == $this->id) {
+                array_push($dutie, $item);
+            }                           
+        }
+
+        if(!Cache::has('formkeeperpreferences')) { Cache::put('formkeeperpreferences', FormKeeperpreference::all()); }
+        $FormKeeperpreference = Cache::get('formkeeperpreferences');
+        $preference = array();
+        foreach ($FormKeeperpreference as $item) {
+            if($item->form_id == $this->id) {
+                array_push($preference, $item);
+            }                           
+        }
+        
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,
@@ -56,7 +98,7 @@ class WorkKeeperResource extends JsonResource
             'Typeworks' => KeepertypeworkResource::collection($typework),
             'Duties' => KeeperdutieResource::collection($dutie),
             'Preferences' => KeeperpreferenceResource::collection($preference),
-            'User' => $user,                        
+            'User' => $USER,                        
             
             'experience_id' => $this->experience_id,
             'recommendation_id' => $this->recommendation_id,

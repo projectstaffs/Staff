@@ -4,6 +4,7 @@ namespace App\Http\Resources\views;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Cache;
 
 use App\Models\forms\Nurse;
 use App\Models\forms\FormNurseeducation;
@@ -32,15 +33,80 @@ class WorkNurseResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $user = new UserResource(User::where('id', $this->user_id)->first());
-        $education = FormNurseeducation::where('form_id', $this->id)->get(); 
-        $joboption = FormNursejoboption::where('form_id', $this->id)->get();
-        $typework = FormNursetypework::where('form_id', $this->id)->get();         
-        $dutie = FormNursedutie::where('form_id', $this->id)->get();        
-        $diagnose = FormDiagnose::where('form_id', $this->id)->get();
-        $skill = FormNurseskill::where('form_id', $this->id)->get();         
-        $worklocation = FormNurseworklocation::where('form_id', $this->id)->get();
+        if(!Cache::has('users')) { Cache::put('users', User::all()); }
+        $Users = Cache::get('users');
+        $user = null;
+        foreach ($Users as $item) {
+            if($item->id == $this->user_id) {
+                $user = $item;
+                break;
+            }                           
+        }
+        $USER = new UserResource($user);
 
+        if(!Cache::has('formnurseeducations')) { Cache::put('formnurseeducations', FormNurseeducation::all()); }
+        $FormNurseeducation = Cache::get('formnurseeducations');
+        $education = array();
+        foreach ($FormNurseeducation as $item) {
+            if($item->form_id == $this->id) {
+                array_push($education, $item);
+            }                           
+        }
+
+        if(!Cache::has('formnursejoboptions')) { Cache::put('formnursejoboptions', FormNursejoboption::all()); }
+        $FormNursejoboption = Cache::get('formnursejoboptions');
+        $joboption = array();
+        foreach ($FormNursejoboption as $item) {
+            if($item->form_id == $this->id) {
+                array_push($joboption, $item);
+            }                           
+        }
+
+        if(!Cache::has('formnursetypeworks')) { Cache::put('formnursetypeworks', FormNursetypework::all()); }
+        $FormNurseeducation = Cache::get('formnursetypeworks');
+        $typework = array();
+        foreach ($FormNurseeducation as $item) {
+            if($item->form_id == $this->id) {
+                array_push($typework, $item);
+            }                           
+        }
+
+        if(!Cache::has('formnurseduties')) { Cache::put('formnurseduties', FormNursedutie::all()); }
+        $FormNursedutie = Cache::get('formnurseduties');
+        $dutie = array();
+        foreach ($FormNursedutie as $item) {
+            if($item->form_id == $this->id) {
+                array_push($dutie, $item);
+            }                           
+        }
+
+        if(!Cache::has('formdiagnoses')) { Cache::put('formdiagnoses', FormDiagnose::all()); }
+        $FormDiagnose = Cache::get('formdiagnoses');
+        $diagnose = array();
+        foreach ($FormDiagnose as $item) {
+            if($item->form_id == $this->id) {
+                array_push($diagnose, $item);
+            }                           
+        }
+
+        if(!Cache::has('formnurseskills')) { Cache::put('formnurseskills', FormNurseskill::all()); }
+        $FormNurseskill = Cache::get('formnurseskills');
+        $skill = array();
+        foreach ($FormNurseskill as $item) {
+            if($item->form_id == $this->id) {
+                array_push($skill, $item);
+            }                           
+        }
+
+        if(!Cache::has('formnurseworklocations')) { Cache::put('formnurseworklocations', FormNurseworklocation::all()); }
+        $FormNurseworklocation = Cache::get('formnurseworklocations');
+        $worklocation = array();
+        foreach ($FormNurseworklocation as $item) {
+            if($item->form_id == $this->id) {
+                array_push($worklocation, $item);
+            }                           
+        }
+        
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,
@@ -63,7 +129,7 @@ class WorkNurseResource extends JsonResource
             'Diagnoses' => FormDiagnoseResource::collection($diagnose),
             'Skills' => FormNurseskillResource::collection($skill),
             'Worklocations' => FormNurseworklocationkResource::collection($worklocation),
-            'User' => $user,            
+            'User' => $USER,            
             
             'experience_id' => $this->experience_id,
             'recommendation_id' => $this->recommendation_id,

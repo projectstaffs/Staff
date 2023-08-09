@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\forms;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\forms\FormDiagnose;
@@ -35,7 +36,8 @@ class FormDiagnoseController extends Controller
                 'diagnose_id' => $request[0][$i]["diagnose_id"]
             ]);                    
             $formDutie->save();
-        }        
+        } 
+        Cache::put('formdiagnoses', FormDiagnose::all());       
         return $request[1];
     }
 
@@ -69,6 +71,7 @@ class FormDiagnoseController extends Controller
     public function destroy(string $id)
     {
         FormDiagnose::where('form_id', '=', $id)->delete();
+        Cache::put('formdiagnoses', FormDiagnose::all());
         return response()->json('Удаление прошло успешно.');
     }
 }

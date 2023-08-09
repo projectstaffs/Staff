@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\forms;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\forms\FormNurseskill;
@@ -35,7 +36,8 @@ class FormNurseskillController extends Controller
                 'nurseskill_id' => $request[0][$i]["nurseskill_id"]
             ]);                    
             $formDutie->save();
-        }        
+        } 
+        Cache::put('formnurseskills', FormNurseskill::all());       
         return $request[1];
     }
 
@@ -69,6 +71,7 @@ class FormNurseskillController extends Controller
     public function destroy(string $id)
     {
         FormNurseskill::where('form_id', '=', $id)->delete();
+        Cache::put('formnurseskills', FormNurseskill::all());
         return response()->json('Удаление прошло успешно.');
     }
 }

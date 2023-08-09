@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\forms;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Models\data\JobOption;
@@ -15,10 +16,15 @@ class FormJoboptionResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $title = JobOption::where('id', $this->joboption_id)->value('title');
-        return [
-            'id' => $this->joboption_id,
-            'title' => $title            
-        ];
+        if(!Cache::has('joboptions')) { Cache::put('joboptions', JobOption::all()); }
+        $JobOption = Cache::get('joboptions');        
+        foreach ($JobOption as $item) {
+            if($item->id == $this->joboption_id) {
+                return [
+                    'id' => $this->joboption_id,
+                    'title' => $item->title            
+                ];                
+            }                           
+        }
     }
 }

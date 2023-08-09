@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\forms;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\forms\FormJoboption;
@@ -35,7 +36,8 @@ class FormJoboptionController extends Controller
                 'joboption_id' => $request[0][$i]["joboption_id"]
             ]);                    
             $formJoboption->save();
-        }        
+        }  
+        Cache::put('formjoboptions', FormJoboption::all());      
         return $request[1];
     }
 
@@ -69,6 +71,7 @@ class FormJoboptionController extends Controller
     public function destroy(string $id)
     {
         FormJoboption::where('form_id', '=', $id)->delete();
+        Cache::put('formjoboptions', FormJoboption::all());
         return response()->json('Удаление прошло успешно.');
     }
 }

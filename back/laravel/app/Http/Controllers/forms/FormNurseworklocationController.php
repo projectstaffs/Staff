@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\forms;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\forms\FormNurseworklocation;
@@ -35,7 +36,8 @@ class FormNurseworklocationController extends Controller
                 'nurseworklocation_id' => $request[0][$i]["nurseworklocation_id"]
             ]);                    
             $formDutie->save();
-        }        
+        } 
+        Cache::put('formnurseworklocations', FormNurseworklocation::all());       
         return $request[1];
     }
 
@@ -69,6 +71,7 @@ class FormNurseworklocationController extends Controller
     public function destroy(string $id)
     {
         FormNurseworklocation::where('form_id', '=', $id)->delete();
+        Cache::put('formnurseworklocations', FormNurseworklocation::all());
         return response()->json('Удаление прошло успешно.');
     }
 }

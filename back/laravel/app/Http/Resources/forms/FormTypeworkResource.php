@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\forms;
 
+use Illuminate\Support\Facades\Cache;                                           
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Models\data\TypeOfWork;
@@ -15,10 +16,15 @@ class FormTypeworkResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $title = TypeOfWork::where('id', $this->typework_id)->value('title');
-        return [
-            'id' => $this->typework_id,
-            'title' => $title            
-        ];
+        if(!Cache::has('typeofworks')) { Cache::put('typeofworks', TypeOfWork::all()); }
+        $TypeOfWork = Cache::get('typeofworks');        
+        foreach ($TypeOfWork as $item) {
+            if($item->id == $this->typework_id) {
+                return [
+                    'id' => $this->typework_id,
+                    'title' => $item->title            
+                ];                
+            }                           
+        }
     }
 }

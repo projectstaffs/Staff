@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\forms;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Models\data\Diagnose;
@@ -15,10 +16,15 @@ class FormDiagnoseResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $title = Diagnose::where('id', $this->diagnose_id)->value('title');
-        return [
-            'id' => $this->diagnose_id,
-            'title' => $title            
-        ];
+        if(!Cache::has('diagnoses')) { Cache::put('diagnoses', Diagnose::all()); }
+        $Diagnose = Cache::get('diagnoses');        
+        foreach ($Diagnose as $item) {
+            if($item->id == $this->diagnose_id) {
+                return [
+                    'id' => $this->diagnose_id,
+                    'title' => $item->title            
+                ];                
+            }                           
+        }
     }
 }

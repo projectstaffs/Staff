@@ -4,6 +4,7 @@ namespace App\Http\Resources\views;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Cache;
 
 use App\Models\client\Client_keeper;
 use App\Models\client\Client_keeperjoboption;
@@ -22,10 +23,35 @@ class ClientKeeperResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $user = new UserResource(User::where('id', $this->user_id)->first());
-        $joboption = Client_keeperjoboption::where('form_id', $this->id)->get(); 
-        $dutie = Client_keeperdutie::where('form_id', $this->id)->get();
-
+        if(!Cache::has('users')) { Cache::put('users', User::all()); }
+        $Users = Cache::get('users');
+        $user = null;
+        foreach ($Users as $item) {
+            if($item->id == $this->user_id) {
+                $user = $item;
+                break;
+            }                           
+        }
+        $USER = new UserResource($user);
+        
+        if(!Cache::has('client_keeperjoboptions')) { Cache::put('client_keeperjoboptions', Client_keeperjoboption::all()); }
+        $Joboption = Cache::get('client_keeperjoboptions');
+        $joboption = array();
+        foreach ($Joboption as $item) {
+            if($item->form_id == $this->id) {
+                array_push($joboption, $item);
+            }                           
+        } 
+        
+        if(!Cache::has('client_keeperduties')) { Cache::put('client_keeperduties', Client_keeperdutie::all()); }
+        $Dutie = Cache::get('client_keeperduties');
+        $dutie = array();
+        foreach ($Dutie as $item) {
+            if($item->form_id == $this->id) {
+                array_push($dutie, $item);
+            }                           
+        }
+        
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,
@@ -41,7 +67,7 @@ class ClientKeeperResource extends JsonResource
             
             'Joboptions' => ClientKeeperjoboptionResource::collection($joboption),
             'Duties' => ClientKeeperdutieResource::collection($dutie),
-            'User' => $user,
+            'User' => $USER,
             
             'workperiod_id' => $this->workperiod_id,
             'employment_id' => $this->employment_id,

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\forms;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Models\data\HousekeeperTypeOfWork;
@@ -15,10 +16,15 @@ class KeepertypeworkResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $title = HousekeeperTypeOfWork::where('id', $this->keepertypework_id)->value('title');
-        return [
-            'id' => $this->keepertypework_id,
-            'title' => $title            
-        ];
+        if(!Cache::has('housekeepertypeofworks')) { Cache::put('housekeepertypeofworks', HousekeeperTypeOfWork::all()); }
+        $HousekeeperTypeOfWork = Cache::get('housekeepertypeofworks');        
+        foreach ($HousekeeperTypeOfWork as $item) {
+            if($item->id == $this->keepertypework_id) {
+                return [
+                    'id' => $this->keepertypework_id,
+                    'title' => $item->title            
+                ];                
+            }                           
+        }
     }
 }

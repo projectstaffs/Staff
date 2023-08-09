@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\forms;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\forms\FormNursejoboption;
@@ -35,7 +36,8 @@ class FormNursejoboptionController extends Controller
                 'nursejoboption_id' => $request[0][$i]["nursejoboption_id"]
             ]);                    
             $formEducation->save();
-        }        
+        }    
+        Cache::put('formnursejoboptions', FormNursejoboption::all());    
         return $request[1];
     }
 
@@ -69,6 +71,7 @@ class FormNursejoboptionController extends Controller
     public function destroy(string $id)
     {
         FormNursejoboption::where('form_id', '=', $id)->delete();
+        Cache::put('formnursejoboptions', FormNursejoboption::all());
         return response()->json('Удаление прошло успешно.');
     }
 }

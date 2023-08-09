@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\forms;
 use Illuminate\Routing\Controller;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use App\Models\forms\Baby;
 use App\Http\Resources\forms\BabyResource;
@@ -14,7 +15,17 @@ class BabyController extends Controller
      */
     public function index(Request $request)
     {
-        $baby = Baby::where('user_id', $request["data"])->first();
+        if(!Cache::has('babies')) { Cache::put('babies', Baby::all()); }
+        $Baby = Cache::get('babies');
+        $baby = null;
+        foreach ($Baby as $item) {
+            if($item->user_id == $request["data"]) {
+                $baby = $item;
+                break;
+            }                           
+        }
+
+        //$baby = Baby::where('user_id', $request["data"])->first();
         if($baby) { return new BabyResource($baby); }
         else { return null; }        
     }
@@ -49,6 +60,7 @@ class BabyController extends Controller
         ]);                
         $baby->save();
 
+        Cache::put('babies', Baby::all());
         return $baby;        
     }
 
@@ -87,6 +99,7 @@ class BabyController extends Controller
         $baby->additional = $request['additional'];
         $baby->save(); 
 
+        Cache::put('babies', Baby::all());
         return $baby;        
     }
 
@@ -96,6 +109,7 @@ class BabyController extends Controller
     public function destroy(string $id)
     {
         Baby::where('user_id', '=', $id)->delete();
+        Cache::put('babies', Baby::all());
         return response()->json('Удаление анкеты прошло успешно.');
     }
 }

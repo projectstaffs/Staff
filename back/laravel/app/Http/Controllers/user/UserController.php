@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\user;
 use Illuminate\Routing\Controller;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -15,7 +16,20 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::where('role', '!=', 'Администратор')->get();
+        if(!Cache::has('users')) { Cache::put('users', User::all()); }
+        $Users = Cache::get('users');
+
+        return $Users;
+        /*$users = array();
+        $count = 0;
+        foreach ($Users as $item) {
+            if($item->role == "Администратор") {
+                //array_push($users, $item);
+                unset($Users[$count]);
+                // возможно $count--;               
+            }
+            $count++;                           
+        }*/
     }
 
     /**
@@ -29,8 +43,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)    {  
-        
+    public function store(Request $request)    {
         $request->password = Hash::make($request->password);
 
         $user = User::where('email', $request->email)->first();
@@ -49,7 +62,8 @@ class UserController extends Controller
         $user->save();
         $token = auth()->tokenById($user->id);
         
-        $temp = new UserResource($user);        
+        $temp = new UserResource($user);
+        Cache::put('users', User::all());        
         return response(['access_token' => $token, 'user' => $temp]);        
     }
 
@@ -111,6 +125,7 @@ class UserController extends Controller
 
         $user->save();
         $temp = new UserResource($user);
+        Cache::put('users', User::all());
         return $temp;
     }
 

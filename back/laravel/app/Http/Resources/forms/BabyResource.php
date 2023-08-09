@@ -4,6 +4,7 @@ namespace App\Http\Resources\forms;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Cache;
 
 use App\Models\forms\Baby;
 use App\Models\forms\UserLanguages;
@@ -28,13 +29,60 @@ class BabyResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $lang = UserLanguages::where('user_id', $this->user_id)->get(); 
-        $agegroup = FormAgegroup::where('form_id', $this->id)->get(); 
-        $education = FormEducation::where('form_id', $this->id)->get(); 
-        $typework = FormTypework::where('form_id', $this->id)->get(); 
-        $joboption = FormJoboption::where('form_id', $this->id)->get(); 
-        $dutie = FormDutie::where('form_id', $this->id)->get(); 
-          
+        if(!Cache::has('userlanguages')) { Cache::put('userlanguages', UserLanguages::all()); }
+        $Userlanguages = Cache::get('userlanguages');
+        $lang = array();
+        foreach ($Userlanguages as $item) {
+            if($item->user_id == $this->user_id) {
+                array_push($lang, $item);
+            }                           
+        }
+
+        if(!Cache::has('formagegroups')) { Cache::put('formagegroups', FormAgegroup::all()); }
+        $FormAgegroup = Cache::get('formagegroups');
+        $agegroup = array();
+        foreach ($FormAgegroup as $item) {
+            if($item->form_id == $this->id) {
+                array_push($agegroup, $item);
+            }                           
+        }
+
+        if(!Cache::has('formeducations')) { Cache::put('formeducations', FormEducation::all()); }
+        $FormEducation = Cache::get('formeducations');
+        $education = array();
+        foreach ($FormEducation as $item) {
+            if($item->form_id == $this->id) {
+                array_push($education, $item);
+            }                           
+        }
+
+        if(!Cache::has('formtypeworks')) { Cache::put('formtypeworks', FormTypework::all()); }
+        $FormTypework = Cache::get('formtypeworks');
+        $typework = array();
+        foreach ($FormTypework as $item) {
+            if($item->form_id == $this->id) {
+                array_push($typework, $item);
+            }                           
+        }
+
+        if(!Cache::has('formjoboptions')) { Cache::put('formjoboptions', FormJoboption::all()); }
+        $FormJoboption = Cache::get('formjoboptions');
+        $joboption = array();
+        foreach ($FormJoboption as $item) {
+            if($item->form_id == $this->id) {
+                array_push($joboption, $item);
+            }                           
+        }
+
+        if(!Cache::has('formduties')) { Cache::put('formduties', FormDutie::all()); }
+        $FormDutie = Cache::get('formduties');
+        $dutie = array();
+        foreach ($FormDutie as $item) {
+            if($item->form_id == $this->id) {
+                array_push($dutie, $item);
+            }                           
+        }
+        
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,
