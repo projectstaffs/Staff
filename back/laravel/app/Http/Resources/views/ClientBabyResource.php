@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Resources\views;
 
 use Illuminate\Http\Request;
@@ -15,6 +14,8 @@ use App\Models\client\Client_dutie;
 use App\Http\Resources\client\ClientDutieResource;
 use App\Models\User;
 use App\Http\Resources\UserResource;
+
+use App\Models\data\Children;
 
 class ClientBabyResource extends JsonResource
 {
@@ -61,21 +62,23 @@ class ClientBabyResource extends JsonResource
             if($item->form_id == $this->id) {
                 array_push($dutie, $item);
             }                           
-        }
+        }        
         
-        return [
+        return [            
             'id' => $this->id,
             'user_id' => $this->user_id,
             'confirmed' => $this->confirmed,
             'title' => $this->title,
             'title_about' => $this->title_about,
-            'childrencount' => $this->get_childrencount->title,
-            'workperiod' => $this->get_workperiod->title,
-            'employment' => $this->get_employment->title,
-            'drive' => $this->drive,
-            'agents' => $this->agents,
-            'hourpay' => $this->get_hourpay->title,
-            'monthpay' => $this->get_monthpay->title,
+            
+            //'childrencount' => $this->get_childrencount->title,
+            'childrencount' => Children::where('id', $this->childrencount_id)->value('title'),
+            //'workperiod' => $this->get_workperiod->title,
+            //'employment' => $this->get_employment->title,
+            //'drive' => $this->drive,
+            //'agents' => $this->agents,
+            //'hourpay' => $this->get_hourpay->title,
+            //'monthpay' => $this->get_monthpay->title,
 
             'Agegroups' => ClientAgegroupResource::collection($agegroup),            
             'Joboptions' => ClientJoboptionResource::collection($joboption),

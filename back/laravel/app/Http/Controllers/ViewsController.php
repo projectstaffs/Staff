@@ -43,13 +43,13 @@ class ViewsController extends Controller
     { 
         if(!Cache::has('client_babies')) { Cache::put('client_babies', Client_baby::all()); }
         $getItems = Cache::get('client_babies');
-        return ClientBabyResource::collection($getItems);        
+        return ClientBabyResource::collection($getItems);             
     }
     public function getClientNurse ()
     { 
         if(!Cache::has('client_nurses')) { Cache::put('client_nurses', Client_nurse::all()); }
         $getItems = Cache::get('client_nurses');
-        return ClientNurseResource::collection($getItems);        
+        return ClientNurseResource::collection($getItems);
     }
     public function getClientKeeper ()
     { 
