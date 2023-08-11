@@ -22,6 +22,12 @@ use App\Http\Resources\forms\FormDutieResource;
 use App\Models\User;
 use App\Http\Resources\UserResource;
 
+use App\Models\data\Children;
+use App\Models\data\WorkPeriod;
+use App\Models\data\Employment;
+use App\Models\data\MonthlyPayment;
+use App\Models\data\HourlyPayment;
+
 class WorkBabyResource extends JsonResource
 {
     /**
