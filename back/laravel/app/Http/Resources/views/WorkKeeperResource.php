@@ -18,6 +18,13 @@ use App\Http\Resources\forms\KeepertypeworkResource;
 use App\Models\User;
 use App\Http\Resources\UserResource;
 
+use App\Models\data\WorkPeriod;
+use App\Models\data\Employment;
+use App\Models\data\MonthlyPayment;
+use App\Models\data\HourlyPayment;
+use App\Models\data\Recommendation;
+use App\Models\data\Experience;
+
 class WorkKeeperResource extends JsonResource
 {
     /**
@@ -73,23 +80,83 @@ class WorkKeeperResource extends JsonResource
                 array_push($preference, $item);
             }                           
         }
+
+        if(!Cache::has('workperiods')) { Cache::put('workperiods', WorkPeriod::all()); }
+        $WorkPeriod = Cache::get('workperiods');
+        $workPeriod = '';
+        foreach ($WorkPeriod as $item) {
+            if($item->id == $this->workPeriod_id) {
+                $workPeriod = $item->title;                
+                break;
+            }                           
+        }
+
+        if(!Cache::has('employments')) { Cache::put('employments', Employment::all()); }
+        $Employment = Cache::get('employments');
+        $employment = '';
+        foreach ($Employment as $item) {
+            if($item->id == $this->employment_id) {
+                $employment = $item->title;                
+                break;
+            }                           
+        }
+
+        if(!Cache::has('hourlypayments')) { Cache::put('hourlypayments', HourlyPayment::all()); }
+        $HourlyPayment = Cache::get('hourlypayments');
+        $hourpay = '';
+        foreach ($HourlyPayment as $item) {
+            if($item->id == $this->hourpay_id) {
+                $hourpay = $item->title;                
+                break;
+            }                           
+        }
+
+        if(!Cache::has('monthlypayments')) { Cache::put('monthlypayments', MonthlyPayment::all()); }
+        $MonthlyPayment = Cache::get('monthlypayments');
+        $monthpay = '';
+        foreach ($MonthlyPayment as $item) {
+            if($item->id == $this->monthpay_id) {
+                $monthpay = $item->title;                
+                break;
+            }                           
+        }
+
+        if(!Cache::has('recommendations')) { Cache::put('recommendations', Recommendation::all()); }
+        $Recommendation = Cache::get('recommendations');
+        $recommendation = '';
+        foreach ($Recommendation as $item) {
+            if($item->id == $this->recommendation_id) {
+                $recommendation = $item->title;                
+                break;
+            }                           
+        }
+
+        if(!Cache::has('experiences')) { Cache::put('experiences', Experience::all()); }
+        $Experience = Cache::get('experiences');
+        $experience = '';
+        foreach ($Experience as $item) {
+            if($item->id == $this->experience_id) {
+                $experience = $item->title;                
+                break;
+            }                           
+        }
         
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,
             'keeper_exp' => $this->keeper_exp,
-            'experience' => $this->get_experience->title,
-            'recommendation' => $this->get_recommendation->title,           
-            'workperiod' => $this->get_workperiod->title,
-            'employment' => $this->get_employment->title,            
+            'experience' => $experience,
+            'recommendation' => $recommendation,           
+            'workperiod' => $workPeriod,
+            'employment' => $employment,            
             
             'technique' => $this->technique,
             'material' => $this->material,
             'baby_keeper' => $this->baby_keeper,
             'nurse_keeper' => $this->nurse_keeper,
 
-            'hourpay' => $this->get_hourpay->title,
-            'monthpay' => $this->get_monthpay->title,            
+            'hourpay' => $hourpay,
+            'monthpay' => $monthpay,           
             //'additional' => Baby::where('user_id', $this->user_id)->value('additional'),
             'additional' => $this->value('additional'),                      
             'confirmed' => $this->confirmed,            

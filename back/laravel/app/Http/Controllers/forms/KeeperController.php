@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\forms;
 use Illuminate\Routing\Controller;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use App\Models\forms\Keeper;
 use App\Http\Resources\forms\KeeperResource;
@@ -14,10 +15,17 @@ class KeeperController extends Controller
      */
     public function index(Request $request)
     {
-        $keeper = Keeper::where('user_id', $request["data"])->first();
-        if($keeper) { 
-            return new KeeperResource($keeper);            
+        if(!Cache::has('keepers')) { Cache::put('keepers', Keeper::all()); }
+        $Keeper = Cache::get('keepers');
+        $keeper = null;
+        foreach ($Keeper as $item) {
+            if($item->user_id == $request["data"]) {
+                $keeper = $item;
+                break;
+            }                           
         }
+        //$keeper = Keeper::where('user_id', $request["data"])->first();
+        if($keeper) { return new KeeperResource($keeper); }
         else { return null; }
     }
 
@@ -52,6 +60,7 @@ class KeeperController extends Controller
         ]);                
         $keeper->save();
 
+        Cache::put('keepers', Keeper::all());
         return $keeper;
     }
 
@@ -93,6 +102,7 @@ class KeeperController extends Controller
         $keeper->additional = $request['additional'];
         $keeper->save(); 
 
+        Cache::put('keepers', Keeper::all());
         return $keeper;
     }
 
@@ -102,6 +112,7 @@ class KeeperController extends Controller
     public function destroy(string $id)
     {
         Keeper::where('user_id', '=', $id)->delete();
+        Cache::put('keepers', Keeper::all());
         return response()->json('Удаление анкеты прошло успешно.');
     }
 }
