@@ -63,6 +63,7 @@
 <script>
 import { useClient_NurseStore } from '../../../stores/client_nurse';
 import { useDataStore } from '../../../stores/variables';
+import { useUserStore } from '../../../stores/user';
 export default {
     name: "Client_urse",
     data() {
@@ -79,7 +80,8 @@ export default {
     setup() {
         const Nurse = useClient_NurseStore();
         const Store = useDataStore();
-        return { Store, Nurse };
+        const User = useUserStore();
+        return { Store, Nurse, User };
     },
     methods: {
         back() {

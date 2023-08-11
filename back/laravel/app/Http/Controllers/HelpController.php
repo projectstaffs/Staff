@@ -111,7 +111,7 @@ class HelpController extends Controller
     }
     public function redisAll ()
     {
-        /*Cache::put('smokings', Smoking::all());
+        Cache::put('smokings', Smoking::all());
         Cache::put('statuses', Status::all());
         Cache::put('typeofworks', TypeOfWork::all());
         Cache::put('workLocations', WorkLocation::all());
@@ -186,9 +186,7 @@ class HelpController extends Controller
         Cache::put('credentials', Credential::all());
         Cache::put('users', User::all()); 
         Cache::put('images', Image::all());
-        Cache::put('messages', Message::all());
-        */
-        return "Some12";
+        Cache::put('messages', Message::all());        
     }
     
     public function redisShow ()

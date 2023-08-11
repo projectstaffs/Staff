@@ -96,6 +96,7 @@
 <script>
 import { useForm_BabyStore } from '../../../stores/form_baby';
 import { useDataStore } from '../../../stores/variables';
+import { useUserStore } from '../../../stores/user';
 export default {
     name: "Change-babysitting",
     data() {
@@ -109,7 +110,8 @@ export default {
     setup() {
         const Baby = useForm_BabyStore();
         const Store = useDataStore();
-        return { Store, Baby };
+        const User = useUserStore();
+        return { Store, Baby, User };
     },
     methods: {
         back() {
@@ -121,6 +123,7 @@ export default {
         },                
     },
     mounted() {
+        this.User.GET_TOKEN();
         this.Baby.GET_BABY(localStorage.userID);   
         this.Store.GET_LANGUAGES(); this.Store.GET_EXPERIENCES(); this.Store.GET_RECOMMENDATIONS(); this.Store.GET_EDUCATIONS(); this.Store.GET_TYPEOFWORKS();
         this.Store.GET_JOBOPTIONS(); this.Store.GET_WORKPERIODS(); this.Store.GET_EMPLOYMENTS(); this.Store.GET_CHILDRENS(); this.Store.GET_BABYSITTINGDUTIES();

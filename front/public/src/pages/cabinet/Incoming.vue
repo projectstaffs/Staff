@@ -10,11 +10,13 @@
 
 <script>
 import { useMessageStore } from '../../stores/message';
+import { useUserStore } from '../../stores/user';
 export default {
     name: "Incoming",    
     setup() {        
         const Message = useMessageStore();
-        return { Message };
+        const User = useUserStore();
+        return { Message, User };
     },
     methods: {
         back() {
@@ -22,6 +24,7 @@ export default {
         },                
     },
     mounted() {
+        this.User.GET_TOKEN();
         this.Message.GET_MESSAGES_IN(localStorage.userID);                   
     },
 }

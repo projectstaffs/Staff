@@ -40,7 +40,8 @@ export default {
             }                                                                        
         },
     },
-    mounted() {        
+    mounted() { 
+        this.User.GET_TOKEN();       
         this.dropzone = new Dropzone(this.$refs.dropzone, {
             url: "/api/photo",
             autoProcessQueue: false,

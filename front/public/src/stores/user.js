@@ -7,10 +7,14 @@ export const useUserStore = defineStore('user', {
     state: () => {
         return {                        
             user: {},
-            users: {},                     
+            users: {}, 
+            token: '',                    
         }
     },
-    actions: {        
+    actions: {  
+        GET_TOKEN(){
+            this.token = localStorage.access_token;
+        },      
         GET_ADMINID(){            
             api.get('api/auth/admin')
                 .then((res) => {                
@@ -48,7 +52,8 @@ export const useUserStore = defineStore('user', {
                     localStorage.removeItem('workerNurseitem');
                     localStorage.removeItem('workerKeeperitem');                   
                     
-                    this.user = {};                    
+                    this.user = {}; 
+                    this.token = '';                   
                     router.push({name: "Login"});                    
                 })
                 .catch(error => { console.log(error); })
@@ -64,6 +69,7 @@ export const useUserStore = defineStore('user', {
                     localStorage.user_image = res.data[1].original.image;
                     localStorage.userID = res.data[1].original.id;
 
+                    this.token = res.data[0].original.access_token;
                     this.user = res.data[1].original;
                     router.push({name: "Account"});                    
                 })
@@ -89,9 +95,11 @@ export const useUserStore = defineStore('user', {
             axios.post('api/user', data)
                 .then((res) => {                
                     localStorage.access_token = res.data.access_token;
-                    localStorage.user = JSON.stringify(res.data.user);                
-                    this.user = res.data.user;
-                    localStorage.userID = res.data.user.id;                    
+                    localStorage.user = JSON.stringify(res.data.user);
+                    localStorage.userID = res.data.user.id;
+
+                    this.token = res.data.access_token;
+                    this.user = res.data.user;                    
                     router.push({name: "Account"});                   
                 })
                 .catch(error => { console.log(error); })

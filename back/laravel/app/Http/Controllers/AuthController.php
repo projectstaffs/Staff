@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\UserResource;
 
 class AuthController extends Controller
@@ -32,8 +31,7 @@ class AuthController extends Controller
         if (!$token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized, please try again'], 401);
         }
-        $temp = new UserResource(auth()->user());
-        //return [$this->respondWithToken($token), response()->json(auth()->user())]; 
+        $temp = new UserResource(auth()->user());         
         return [$this->respondWithToken($token), response()->json($temp)];       
     }
 

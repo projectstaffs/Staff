@@ -29,7 +29,7 @@ class ViewsController extends Controller
     public function getNurse ()
     { 
         if(!Cache::has('nurses')) { Cache::put('nurses', Nurse::all()); }
-        $getItems = Cache::get('nurses'); // fgdf
+        $getItems = Cache::get('nurses'); 
         return WorkNurseResource::collection($getItems);        
     }
     public function getKeeper ()

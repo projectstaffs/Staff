@@ -6,11 +6,13 @@
 
 <script>
 import { useViewsStore } from '../../../stores/views';
+import { useUserStore } from '../../../stores/user';
 export default {
     name: 'ClientKeeperItem',
     setup() {
         const Views = useViewsStore();
-        return { Views };
+        const User = useUserStore();
+        return { Views, User };
     },
     methods: {
         back() {
@@ -18,6 +20,7 @@ export default {
         },
     },
     mounted() {
+        this.User.GET_TOKEN();
         this.Views.GET_CLIENTKEEPER_ITEM();
     },
 }

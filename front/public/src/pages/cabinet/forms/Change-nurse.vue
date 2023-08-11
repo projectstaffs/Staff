@@ -87,12 +87,14 @@
 <script>
 import { useForm_NurseStore } from '../../../stores/form_nurse';
 import { useDataStore } from '../../../stores/variables';
+import { useUserStore } from '../../../stores/user';
 export default {
     name: "Change-nurse", 
     setup() {
         const Nurse = useForm_NurseStore();
         const Store = useDataStore();
-        return { Store, Nurse };
+        const User = useUserStore();
+        return { Store, Nurse, User };
     },   
     methods: {
         back() {
@@ -104,6 +106,7 @@ export default {
         },               
     },
     mounted() {
+        this.User.GET_TOKEN();
         this.Nurse.GET_NURSE(localStorage.userID);
         this.Store.GET_NURSINGSKILLS(); this.Store.GET_DIAGNOSES(); this.Store.GET_EXPERIENCES(); this.Store.GET_RECOMMENDATIONS(); this.Store.GET_EDUCATIONS(); 
         this.Store.GET_NURSETYPEOFWORKS(); this.Store.GET_JOBOPTIONS(); this.Store.GET_WORKPERIODS(); this.Store.GET_EMPLOYMENTS(); this.Store.GET_WORKLOCATIONS();

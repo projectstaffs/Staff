@@ -53,7 +53,8 @@ export default {
             this.$router.push({name: "Sent"})
         },
     },
-    mounted() {                   
+    mounted() {  
+        this.User.GET_TOKEN();                 
         this.User.GET_USER();        
         this.Message.GET_COUNTMESSAGE_USER(localStorage.userID);                
     },

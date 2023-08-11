@@ -14,18 +14,23 @@
 </template>
 
 <script>
+import { useUserStore } from '../../stores/user';
 import { useCredentialStore } from '../../stores/credential';
 export default {
     name: 'Change-credential',
     setup() {
-            const Credential = useCredentialStore();            
-            return { Credential };
+            const Credential = useCredentialStore(); 
+            const User = useUserStore();           
+            return { Credential, User };
         },
     methods: {        
         changeCredential() {            
             this.Credential.CHANGE_CREDENTIAL(this.Credential.credential);
             this.$router.push({name: "Credentials"})
         }
+    },
+    mounted() {
+        this.User.GET_TOKEN();
     },
 }
 </script>

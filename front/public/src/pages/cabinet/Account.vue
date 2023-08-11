@@ -49,7 +49,8 @@ export default {
             this.$router.push({name: "Client_keeper"})
         },       
     },    
-    mounted() {                       
+    mounted() {           
+        this.User.GET_TOKEN();            
         this.photo = localStorage.user_image; 
         this.User.GET_ADMINID();  
     },

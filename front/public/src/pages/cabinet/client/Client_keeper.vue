@@ -63,6 +63,7 @@
 <script>
 import { useClient_KeeperStore } from '../../../stores/client_keeper';
 import { useDataStore } from '../../../stores/variables';
+import { useUserStore } from '../../../stores/user';
 export default {
     name: "Client_keeper",
     data() {
@@ -79,7 +80,8 @@ export default {
     setup() {
         const Keeper = useClient_KeeperStore();
         const Store = useDataStore();
-        return { Store, Keeper };
+        const User = useUserStore();
+        return { Store, Keeper, User };
     },
     methods: {
         back() {
@@ -98,6 +100,7 @@ export default {
         }
     },
     mounted() {
+        this.User.GET_TOKEN();
         this.Keeper.GET_KEEPER(localStorage.userID);
         this.Store.GET_JOBOPTIONS(); this.Store.GET_WORKPERIODS(); 
         this.Store.GET_HOUSEKEEPERDUTIES(); this.Store.GET_EMPLOYMENTS();       

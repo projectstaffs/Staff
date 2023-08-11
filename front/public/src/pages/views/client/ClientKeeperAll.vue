@@ -7,11 +7,13 @@
 
 <script>
 import { useViewsStore } from '../../../stores/views';
+import { useUserStore } from '../../../stores/user';
 export default {
     name: 'ClientBabyAll',
     setup() {
         const Views = useViewsStore();
-        return { Views };
+        const User = useUserStore();
+        return { Views, User };
     },
     methods: {
         showItem(item) {            
@@ -21,6 +23,7 @@ export default {
         }
     },
     mounted() {
+        this.User.GET_TOKEN();
         this.Views.GET_CLIENTKEEPER();
     },
 }

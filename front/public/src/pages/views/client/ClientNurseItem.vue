@@ -6,11 +6,13 @@
 
 <script>
 import { useViewsStore } from '../../../stores/views';
+import { useUserStore } from '../../../stores/user';
 export default {
     name: 'ClientNurseItem',
     setup() {
         const Views = useViewsStore();
-        return { Views };
+        const User = useUserStore();
+        return { Views, User };
     },
     methods: {
         back() {
@@ -19,6 +21,7 @@ export default {
     },
     mounted() {
         this.Views.GET_CLIENTNURSE_ITEM();
+        this.User.GET_TOKEN();
     },
 }
 </script>

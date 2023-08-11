@@ -23,6 +23,7 @@
 
 <script>
 import { useCredentialStore } from '../../stores/credential';
+import { useUserStore } from '../../stores/user';   
     export default {
         name: 'Credentials',
         data() {
@@ -31,8 +32,9 @@ import { useCredentialStore } from '../../stores/credential';
             }
         },
         setup() {
-            const Credential = useCredentialStore();            
-            return { Credential };
+            const Credential = useCredentialStore();  
+            const User = useUserStore();          
+            return { Credential, User };
         },
         methods: {
             createCredential() {
@@ -50,6 +52,7 @@ import { useCredentialStore } from '../../stores/credential';
             } 
         },
         mounted() {
+            this.User.GET_TOKEN();
             this.Credential.GET_CREDENTIALS(localStorage.userID);                                  
         },
     }

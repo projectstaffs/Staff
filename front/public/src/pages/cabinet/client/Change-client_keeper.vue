@@ -60,6 +60,7 @@
 <script>
 import { useClient_KeeperStore } from '../../../stores/client_keeper';
 import { useDataStore } from '../../../stores/variables';
+import { useUserStore } from '../../../stores/user';
 export default {
     name: "Change-client_keeper",
     data() {
@@ -73,7 +74,8 @@ export default {
     setup() {
         const Keeper = useClient_KeeperStore();
         const Store = useDataStore();
-        return { Store, Keeper };
+        const User = useUserStore();
+        return { Store, Keeper, User };
     },
     methods: {
         back() {

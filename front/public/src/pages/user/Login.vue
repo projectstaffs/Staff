@@ -28,6 +28,9 @@ export default {
         register() {
             this.$router.push({name: "Register-menu"})
         },
+    },
+    mounted() {
+        this.User.GET_TOKEN();
     },    
 }
 </script>

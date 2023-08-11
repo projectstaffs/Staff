@@ -60,6 +60,7 @@
 <script>
 import { useClient_NurseStore } from '../../../stores/client_nurse';
 import { useDataStore } from '../../../stores/variables';
+import { useUserStore } from '../../../stores/user';
 export default {
     name: "Change-client_nurse",
     data() {
@@ -73,7 +74,8 @@ export default {
     setup() {
         const Nurse = useClient_NurseStore();
         const Store = useDataStore();
-        return { Store, Nurse };
+        const User = useUserStore();
+        return { Store, Nurse, User };
     },
     methods: {
         back() {
@@ -85,6 +87,7 @@ export default {
         },
     },
     mounted() {
+        this.User.GET_TOKEN();
         this.Nurse.GET_NURSE(localStorage.userID);
         this.Store.GET_JOBOPTIONS(); this.Store.GET_WORKPERIODS(); 
         this.Store.GET_EMPLOYMENTS(); this.Store.GET_NURSEDUTIES();

@@ -97,6 +97,7 @@
 <script>
 import { useForm_HousekeeperStore } from '../../../stores/form_housekeeper';
 import { useDataStore } from '../../../stores/variables';
+import { useUserStore } from '../../../stores/user';
 export default {
     name: "Housekeeper",
     data() {
@@ -115,7 +116,8 @@ export default {
     setup() {
         const Keeper = useForm_HousekeeperStore();
         const Store = useDataStore();
-        return { Store, Keeper };
+        const User = useUserStore();
+        return { Store, Keeper, User };
     },
     methods: {
         back() {
@@ -134,6 +136,7 @@ export default {
         }
     },
     mounted() {
+        this.User.GET_TOKEN();
         this.Keeper.GET_KEEPER(localStorage.userID);        
         this.Store.GET_EXPERIENCES(); this.Store.GET_RECOMMENDATIONS(); this.Store.GET_HOUSEKEEPERTYPEOFWORKS();
         this.Store.GET_JOBOPTIONS(); this.Store.GET_WORKPERIODS(); this.Store.GET_EMPLOYMENTS();

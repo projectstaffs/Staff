@@ -60,7 +60,8 @@ export default {
             }                       
         }
     },
-    mounted() {            
+    mounted() { 
+        this.User.GET_TOKEN();           
         this.Store.GET_COUNTRYS(); this.Store.GET_CITYS();                              
     },    
 }

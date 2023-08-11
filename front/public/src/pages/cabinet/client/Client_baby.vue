@@ -75,6 +75,7 @@
 <script>
 import { useClient_BabyStore } from '../../../stores/client_baby';
 import { useDataStore } from '../../../stores/variables';
+import { useUserStore } from '../../../stores/user';
 export default {
     name: "Client_baby",
     data() {
@@ -92,7 +93,8 @@ export default {
     setup() {
         const Baby = useClient_BabyStore();
         const Store = useDataStore();
-        return { Store, Baby };
+        const User = useUserStore();
+        return { Store, Baby, User };
     },
     methods: {
         back() {
@@ -111,6 +113,7 @@ export default {
         }
     },
     mounted() {
+        this.User.GET_TOKEN();
         this.Baby.GET_BABY(localStorage.userID);
         this.Store.GET_JOBOPTIONS(); this.Store.GET_WORKPERIODS(); this.Store.GET_EMPLOYMENTS(); this.Store.GET_CHILDRENS(); this.Store.GET_BABYSITTINGDUTIES();
         this.Store.GET_HOURLYPAYMENTS(); this.Store.GET_MONTHLYPAYMENTS(); this.Store.GET_AGEGROUPS();                              

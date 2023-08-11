@@ -157,6 +157,7 @@ export default {
     },
     mounted() {      
         this.user.is_babysitting = false; this.user.is_nurse = false; this.user.is_housekeeper = false;
+        this.User.GET_TOKEN();
         this.Store.GET_COUNTRYS(); 
         this.Store.GET_CITYS(); 
         this.Store.GET_CRIMINALS();

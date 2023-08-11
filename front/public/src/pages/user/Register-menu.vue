@@ -6,8 +6,13 @@
 </template>
 
 <script>
+import { useUserStore } from '../../stores/user';
 export default {
     name: "Register-menu",
+    setup() {
+        const User = useUserStore();
+        return { User };
+    }, 
     methods: {
         employer() {
             this.$router.push({name: "Register-employer"});
@@ -15,6 +20,9 @@ export default {
         executor() {
             this.$router.push({name: "Register"});
         }
-    }
+    },
+    mounted() {
+        this.User.GET_TOKEN();
+    },
 }
 </script>
