@@ -186,7 +186,7 @@ class HelpController extends Controller
         Cache::put('credentials', Credential::all());
         Cache::put('users', User::all()); 
         Cache::put('images', Image::all());
-        Cache::put('messages', Message::all());        
+        Cache::put('messages', Message::all());               
     }
 
     public function RedisOne ($id)
