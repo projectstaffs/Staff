@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\client;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\client\Client_joboption;
@@ -35,7 +36,8 @@ class ClientBabyjoboptionController extends Controller
                 'joboption_id' => $request[0][$i]["joboption_id"]
             ]);                    
             $formJoboption->save();
-        }        
+        }   
+        Cache::put('client_joboptions', Client_joboption::all());      
         return $request[1];
     }
 
@@ -69,6 +71,7 @@ class ClientBabyjoboptionController extends Controller
     public function destroy(string $id)
     {
         Client_joboption::where('form_id', '=', $id)->delete();
+        Cache::put('client_joboptions', Client_joboption::all());
         return response()->json('Удаление прошло успешно.');
     }
 }

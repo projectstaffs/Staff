@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\data;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\data\HourlyPayment;
@@ -13,7 +14,10 @@ class HourlyPaymentController extends Controller
      */
     public function index()
     {
-        return HourlyPayment::orderBy('created_at', 'desc')->get();
+        if(!Cache::has('hourlypayments')) { Cache::put('hourlypayments', HourlyPayment::all()); }
+        $getItems = Cache::get('hourlypayments');
+        return $getItems;
+        //return HourlyPayment::orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -32,8 +36,9 @@ class HourlyPaymentController extends Controller
         $hourlyPayment = new HourlyPayment([
             'title' => $request->title
         ]);
-                
-        $hourlyPayment->save();        
+        $hourlyPayment->save();  
+        
+        Cache::put('hourlypayments', HourlyPayment::all());
         return response()->json('The hourlyPayment successfully added');
     }
 
@@ -59,9 +64,10 @@ class HourlyPaymentController extends Controller
     public function update(Request $request, string $id)
     {
         $hourlyPayment = HourlyPayment::find($id);
-        $hourlyPayment->title = $request['title'];       
-
+        $hourlyPayment->title = $request['title'];
         $hourlyPayment->save();
+
+        Cache::put('hourlypayments', HourlyPayment::all());
         return response()->json(["The hourlyPayment successfully updated"]);
     }
 
@@ -73,6 +79,7 @@ class HourlyPaymentController extends Controller
         $hourlyPayment = HourlyPayment::find($id);
         $hourlyPayment->delete();        
 
+        Cache::put('hourlypayments', HourlyPayment::all());
         return response()->json('The hourlyPayment successfully deleted');
     }
 }

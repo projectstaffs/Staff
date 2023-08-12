@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\data;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\data\Status;
@@ -13,7 +14,10 @@ class StatusController extends Controller
      */
     public function index()
     {
-        return Status::orderBy('created_at', 'desc')->get();
+        if(!Cache::has('statuses')) { Cache::put('statuses', Status::all()); }
+        $getItems = Cache::get('statuses');
+        return $getItems;
+        //return Status::orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -32,8 +36,9 @@ class StatusController extends Controller
         $status = new Status([
             'title' => $request->title
         ]);
-                
-        $status->save();        
+        $status->save();
+        
+        Cache::put('statuses', Status::all());
         return response()->json('The status successfully added');
     }
 
@@ -59,9 +64,10 @@ class StatusController extends Controller
     public function update(Request $request, string $id)
     {
         $status = Status::find($id);
-        $status->title = $request['title'];       
-
+        $status->title = $request['title'];
         $status->save();
+
+        Cache::put('statuses', Status::all());
         return response()->json(["The status successfully updated"]);
     }
 
@@ -73,6 +79,7 @@ class StatusController extends Controller
         $status = Status::find($id);
         $status->delete();        
 
+        Cache::put('statuses', Status::all());
         return response()->json('The status successfully deleted');
     }
 }

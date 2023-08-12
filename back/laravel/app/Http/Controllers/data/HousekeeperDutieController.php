@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\data;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\data\HousekeeperDutie;
@@ -13,7 +14,10 @@ class HousekeeperDutieController extends Controller
      */
     public function index()
     {
-        return HousekeeperDutie::orderBy('created_at', 'desc')->get();
+        if(!Cache::has('housekeeperduties')) { Cache::put('housekeeperduties', HousekeeperDutie::all()); }
+        $getItems = Cache::get('housekeeperduties');
+        return $getItems;
+        //return HousekeeperDutie::orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -32,8 +36,9 @@ class HousekeeperDutieController extends Controller
         $housekeeperDutie = new HousekeeperDutie([
             'title' => $request->title
         ]);
-                
-        $housekeeperDutie->save();        
+        $housekeeperDutie->save();  
+        
+        Cache::put('housekeeperduties', HousekeeperDutie::all());
         return response()->json('The housekeeperDutie successfully added');
     }
 
@@ -59,9 +64,10 @@ class HousekeeperDutieController extends Controller
     public function update(Request $request, string $id)
     {
         $housekeeperDutie = HousekeeperDutie::find($id);
-        $housekeeperDutie->title = $request['title'];       
-
+        $housekeeperDutie->title = $request['title'];
         $housekeeperDutie->save();
+
+        Cache::put('housekeeperduties', HousekeeperDutie::all());
         return response()->json(["The housekeeperDutie successfully updated"]);
     }
 
@@ -73,6 +79,7 @@ class HousekeeperDutieController extends Controller
         $housekeeperDutie = HousekeeperDutie::find($id);
         $housekeeperDutie->delete();        
 
+        Cache::put('housekeeperduties', HousekeeperDutie::all());
         return response()->json('The housekeeperDutie successfully deleted');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\data;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\data\NursingSkill;
@@ -13,7 +14,10 @@ class NursingSkillController extends Controller
      */
     public function index()
     {
-        return NursingSkill::orderBy('created_at', 'desc')->get();
+        if(!Cache::has('nursingskills')) { Cache::put('nursingskills', NursingSkill::all()); }
+        $getItems = Cache::get('nursingskills');
+        return $getItems;
+        //return NursingSkill::orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -32,8 +36,9 @@ class NursingSkillController extends Controller
         $nursingSkill = new NursingSkill([
             'title' => $request->title
         ]);
-                
-        $nursingSkill->save();        
+        $nursingSkill->save(); 
+        
+        Cache::put('nursingskills', NursingSkill::all());
         return response()->json('The nursingSkill successfully added');
     }
 
@@ -59,9 +64,10 @@ class NursingSkillController extends Controller
     public function update(Request $request, string $id)
     {
         $nursingSkill = NursingSkill::find($id);
-        $nursingSkill->title = $request['title'];       
-
+        $nursingSkill->title = $request['title'];
         $nursingSkill->save();
+
+        Cache::put('nursingskills', NursingSkill::all());
         return response()->json(["The nursingSkill successfully updated"]);
     }
 
@@ -73,6 +79,7 @@ class NursingSkillController extends Controller
         $nursingSkill = NursingSkill::find($id);
         $nursingSkill->delete();        
 
+        Cache::put('nursingskills', NursingSkill::all());
         return response()->json('The nursingSkill successfully deleted');
     }
 }

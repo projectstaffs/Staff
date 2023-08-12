@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\data;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\data\Children;
@@ -13,7 +14,10 @@ class ChildrenController extends Controller
      */
     public function index()
     {
-        return Children::orderBy('created_at', 'desc')->get();
+        if(!Cache::has('childrens')) { Cache::put('childrens', Children::all()); }
+        $getItems = Cache::get('childrens');
+        return $getItems;
+        //return Children::orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -32,8 +36,9 @@ class ChildrenController extends Controller
         $children = new Children([
             'title' => $request->title
         ]);
-                
-        $children->save();        
+        $children->save();  
+        
+        Cache::put('childrens', Children::all());
         return response()->json('The children successfully added');
     }
 
@@ -59,9 +64,10 @@ class ChildrenController extends Controller
     public function update(Request $request, string $id)
     {
         $children = Children::find($id);
-        $children->title = $request['title'];       
-
+        $children->title = $request['title'];
         $children->save();
+
+        Cache::put('childrens', Children::all());
         return response()->json(["The children successfully updated"]);
     }
 
@@ -73,6 +79,7 @@ class ChildrenController extends Controller
         $children = Children::find($id);
         $children->delete();        
 
+        Cache::put('childrens', Children::all());
         return response()->json('The children successfully deleted');
     }
 }

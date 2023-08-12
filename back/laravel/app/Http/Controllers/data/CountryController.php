@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\data;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\data\Country;
@@ -13,7 +14,10 @@ class CountryController extends Controller
      */
     public function index()
     {
-        return Country::orderBy('created_at', 'desc')->get();
+        if(!Cache::has('countries')) { Cache::put('countries', Country::all()); }
+        $getItems = Cache::get('countries');
+        return $getItems;
+        //return Country::orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -32,8 +36,9 @@ class CountryController extends Controller
         $country = new Country([
             'title' => $request->title
         ]);
-                
-        $country->save();        
+        $country->save(); 
+        
+        Cache::put('countries', Country::all());
         return response()->json('The country successfully added');
     }
 
@@ -59,9 +64,10 @@ class CountryController extends Controller
     public function update(Request $request, string $id)
     {
         $country = Country::find($id);
-        $country->title = $request['title'];       
-
+        $country->title = $request['title'];
         $country->save();
+
+        Cache::put('countries', Country::all());
         return response()->json(["The country successfully updated"]);
     }
 
@@ -73,6 +79,7 @@ class CountryController extends Controller
         $country = Country::find($id);
         $country->delete();        
 
+        Cache::put('countries', Country::all());
         return response()->json('The country successfully deleted');
     }
 }

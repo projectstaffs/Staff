@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\data;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\data\Experience;
@@ -13,7 +14,10 @@ class ExperienceController extends Controller
      */
     public function index()
     {
-        return Experience::orderBy('created_at', 'desc')->get();
+        if(!Cache::has('experiences')) { Cache::put('experiences', Experience::all()); }
+        $getItems = Cache::get('experiences');
+        return $getItems;
+        //return Experience::orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -32,8 +36,9 @@ class ExperienceController extends Controller
         $experience = new Experience([
             'title' => $request->title
         ]);
-                
-        $experience->save();        
+        $experience->save();  
+        
+        Cache::put('experiences', Experience::all());
         return response()->json('The experience successfully added');
     }
 
@@ -59,9 +64,10 @@ class ExperienceController extends Controller
     public function update(Request $request, string $id)
     {
         $experience = Experience::find($id);
-        $experience->title = $request['title'];       
-
+        $experience->title = $request['title'];
         $experience->save();
+
+        Cache::put('experiences', Experience::all());
         return response()->json(["The experience successfully updated"]);
     }
 
@@ -73,6 +79,7 @@ class ExperienceController extends Controller
         $experience = Experience::find($id);
         $experience->delete();        
 
+        Cache::put('experiences', Experience::all());
         return response()->json('The experience successfully deleted');
     }
 }

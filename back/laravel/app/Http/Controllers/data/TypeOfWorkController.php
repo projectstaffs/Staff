@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\data;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\data\TypeOfWork;
@@ -13,7 +14,10 @@ class TypeOfWorkController extends Controller
      */
     public function index()
     {
-        return TypeOfWork::orderBy('created_at', 'desc')->get();
+        if(!Cache::has('typeofworks')) { Cache::put('typeofworks', TypeOfWork::all()); }
+        $getItems = Cache::get('typeofworks');
+        return $getItems;
+        //return TypeOfWork::orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -32,8 +36,9 @@ class TypeOfWorkController extends Controller
         $typeOfWork = new TypeOfWork([
             'title' => $request->title
         ]);
-                
-        $typeOfWork->save();        
+        $typeOfWork->save(); 
+        
+        Cache::put('typeofworks', TypeOfWork::all());
         return response()->json('The typeOfWork successfully added');
     }
 
@@ -59,9 +64,10 @@ class TypeOfWorkController extends Controller
     public function update(Request $request, string $id)
     {
         $typeOfWork = TypeOfWork::find($id);
-        $typeOfWork->title = $request['title'];       
-
+        $typeOfWork->title = $request['title'];
         $typeOfWork->save();
+
+        Cache::put('typeofworks', TypeOfWork::all());
         return response()->json(["The typeOfWork successfully updated"]);
     }
 
@@ -73,6 +79,7 @@ class TypeOfWorkController extends Controller
         $typeOfWork = TypeOfWork::find($id);
         $typeOfWork->delete();        
 
+        Cache::put('typeofworks', TypeOfWork::all());
         return response()->json('The typeOfWork successfully deleted');
     }
 }

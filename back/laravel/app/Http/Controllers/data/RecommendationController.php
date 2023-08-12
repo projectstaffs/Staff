@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\data;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\data\Recommendation;
@@ -13,7 +14,10 @@ class RecommendationController extends Controller
      */
     public function index()
     {
-        return Recommendation::orderBy('created_at', 'desc')->get();
+        if(!Cache::has('recommendations')) { Cache::put('recommendations', Recommendation::all()); }
+        $getItems = Cache::get('recommendations');
+        return $getItems;
+        //return Recommendation::orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -32,8 +36,9 @@ class RecommendationController extends Controller
         $recommendation = new Recommendation([
             'title' => $request->title
         ]);
-                
-        $recommendation->save();        
+        $recommendation->save();  
+        
+        Cache::put('recommendations', Recommendation::all());
         return response()->json('The recommendation successfully added');
     }
 
@@ -59,9 +64,10 @@ class RecommendationController extends Controller
     public function update(Request $request, string $id)
     {
         $recommendation = Recommendation::find($id);
-        $recommendation->title = $request['title'];       
-
+        $recommendation->title = $request['title'];
         $recommendation->save();
+
+        Cache::put('recommendations', Recommendation::all());
         return response()->json(["The recommendation successfully updated"]);
     }
 
@@ -73,6 +79,7 @@ class RecommendationController extends Controller
         $recommendation = Recommendation::find($id);
         $recommendation->delete();        
 
+        Cache::put('recommendations', Recommendation::all());
         return response()->json('The recommendation successfully deleted');
     }
 }

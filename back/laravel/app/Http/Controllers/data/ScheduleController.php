@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\data;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\data\Schedule;
@@ -13,7 +14,10 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        return Schedule::orderBy('created_at', 'desc')->get();
+        if(!Cache::has('schedules')) { Cache::put('schedules', Schedule::all()); }
+        $getItems = Cache::get('schedules');
+        return $getItems;
+        //return Schedule::orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -32,8 +36,9 @@ class ScheduleController extends Controller
         $schedule = new Schedule([
             'title' => $request->title
         ]);
-                
-        $schedule->save();        
+        $schedule->save();
+        
+        Cache::put('schedules', Schedule::all());
         return response()->json('The schedule successfully added');
     }
 
@@ -59,9 +64,10 @@ class ScheduleController extends Controller
     public function update(Request $request, string $id)
     {
         $schedule = Schedule::find($id);
-        $schedule->title = $request['title'];       
-
+        $schedule->title = $request['title'];
         $schedule->save();
+
+        Cache::put('schedules', Schedule::all());
         return response()->json(["The schedule successfully updated"]);
     }
 
@@ -73,6 +79,7 @@ class ScheduleController extends Controller
         $schedule = Schedule::find($id);
         $schedule->delete();        
 
+        Cache::put('schedules', Schedule::all());
         return response()->json('The schedule successfully deleted');
     }
 }

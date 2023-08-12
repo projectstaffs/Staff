@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\data;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\data\Education;
@@ -13,7 +14,10 @@ class EducationController extends Controller
      */
     public function index()
     {
-        return Education::orderBy('created_at', 'desc')->get();
+        if(!Cache::has('educations')) { Cache::put('educations', Education::all()); }
+        $getItems = Cache::get('educations');
+        return $getItems;
+        //return Education::orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -32,8 +36,9 @@ class EducationController extends Controller
         $education = new Education([
             'title' => $request->title
         ]);
-                
-        $education->save();        
+        $education->save(); 
+        
+        Cache::put('educations', Education::all());
         return response()->json('The education successfully added');
     }
 
@@ -59,9 +64,10 @@ class EducationController extends Controller
     public function update(Request $request, string $id)
     {
         $education = Education::find($id);
-        $education->title = $request['title'];       
-
+        $education->title = $request['title'];
         $education->save();
+
+        Cache::put('educations', Education::all());
         return response()->json(["The education successfully updated"]);
     }
 
@@ -73,6 +79,7 @@ class EducationController extends Controller
         $education = Education::find($id);
         $education->delete();        
 
+        Cache::put('educations', Education::all());
         return response()->json('The education successfully deleted');
     }
 }

@@ -188,17 +188,6 @@ class HelpController extends Controller
         Cache::put('images', Image::all());
         Cache::put('messages', Message::all());        
     }
-    
-    public function redisShow ()
-    {  
-        $getUsers = Cache::get('users');
-        
-        foreach ($getUsers as $user) {
-            if($user->name = 'Дима') {
-                return $user;
-            }                           
-        }        
-    }
 
     public function RedisOne ($id)
     { 

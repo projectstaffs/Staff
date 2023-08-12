@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\data;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\data\Diagnose;
@@ -13,7 +14,10 @@ class DiagnoseController extends Controller
      */
     public function index()
     {
-        return Diagnose::orderBy('created_at', 'desc')->get();
+        if(!Cache::has('diagnoses')) { Cache::put('diagnoses', Diagnose::all()); }
+        $getItems = Cache::get('diagnoses');
+        return $getItems;
+        //return Diagnose::orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -32,8 +36,9 @@ class DiagnoseController extends Controller
         $diagnose = new Diagnose([
             'title' => $request->title
         ]);
-                
-        $diagnose->save();        
+        $diagnose->save(); 
+        
+        Cache::put('diagnoses', Diagnose::all());
         return response()->json('The diagnose successfully added');
     }
 
@@ -59,9 +64,10 @@ class DiagnoseController extends Controller
     public function update(Request $request, string $id)
     {
         $diagnose = Diagnose::find($id);
-        $diagnose->title = $request['title'];       
-
+        $diagnose->title = $request['title'];
         $diagnose->save();
+
+        Cache::put('diagnoses', Diagnose::all());
         return response()->json(["The diagnose successfully updated"]);
     }
 
@@ -73,6 +79,7 @@ class DiagnoseController extends Controller
         $diagnose = Diagnose::find($id);
         $diagnose->delete();        
 
+        Cache::put('diagnoses', Diagnose::all());
         return response()->json('The diagnose successfully deleted');
     }
 }

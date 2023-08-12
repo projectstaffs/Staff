@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\client;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\client\Client_dutie;
@@ -35,7 +36,8 @@ class ClientBabydutieController extends Controller
                 'dutie_id' => $request[0][$i]["dutie_id"]
             ]);                    
             $formDutie->save();
-        }        
+        }   
+        Cache::put('client_duties', Client_dutie::all());     
         return $request[1];
     }
 
@@ -69,6 +71,7 @@ class ClientBabydutieController extends Controller
     public function destroy(string $id)
     {
         Client_dutie::where('form_id', '=', $id)->delete();
+        Cache::put('client_duties', Client_dutie::all());
         return response()->json('Удаление прошло успешно.');
     }
 }

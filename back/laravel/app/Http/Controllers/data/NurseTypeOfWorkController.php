@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\data;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\data\NurseTypeOfWork;
@@ -13,7 +14,10 @@ class NurseTypeOfWorkController extends Controller
      */
     public function index()
     {
-        return NurseTypeOfWork::orderBy('created_at', 'desc')->get();
+        if(!Cache::has('nursetypeofworks')) { Cache::put('nursetypeofworks', NurseTypeOfWork::all()); }
+        $getItems = Cache::get('nursetypeofworks');
+        return $getItems;
+        //return NurseTypeOfWork::orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -32,8 +36,9 @@ class NurseTypeOfWorkController extends Controller
         $nurseTypeOfWork = new NurseTypeOfWork([
             'title' => $request->title
         ]);
-                
-        $nurseTypeOfWork->save();        
+        $nurseTypeOfWork->save();   
+        
+        Cache::put('nursetypeofworks', NurseTypeOfWork::all());
         return response()->json('The nurseTypeOfWork successfully added');
     }
 
@@ -59,9 +64,10 @@ class NurseTypeOfWorkController extends Controller
     public function update(Request $request, string $id)
     {
         $nurseTypeOfWork = NurseTypeOfWork::find($id);
-        $nurseTypeOfWork->title = $request['title'];       
-
+        $nurseTypeOfWork->title = $request['title'];
         $nurseTypeOfWork->save();
+
+        Cache::put('nursetypeofworks', NurseTypeOfWork::all());
         return response()->json(["The nurseTypeOfWork successfully updated"]);
     }
 
@@ -73,6 +79,7 @@ class NurseTypeOfWorkController extends Controller
         $nurseTypeOfWork = NurseTypeOfWork::find($id);
         $nurseTypeOfWork->delete();        
 
+        Cache::put('nursetypeofworks', NurseTypeOfWork::all());
         return response()->json('The nurseTypeOfWork successfully deleted');
     }
 }

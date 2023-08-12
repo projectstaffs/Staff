@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\client;
 use Illuminate\Routing\Controller;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use App\Models\client\Client_baby;
 use App\Http\Resources\client\ClientBabyResource;
@@ -14,8 +15,18 @@ class ClientBabyController extends Controller
      */
     public function index(Request $request)
     {
-        $baby = Client_baby::where('user_id', $request["data"])->first();
-        if($baby) { return new ClientBabyResource($baby); }
+        if(!Cache::has('client_babies')) { Cache::put('client_babies', Client_baby::all()); }
+        $Client_baby = Cache::get('client_babies');
+        $client_baby = null;
+        foreach ($Client_baby as $item) {
+            if($item->user_id == $request["data"]) {
+                $client_baby = $item;
+                break;
+            }                           
+        }
+        
+        //$baby = Client_baby::where('user_id', $request["data"])->first();
+        if($client_baby) { return new ClientBabyResource($client_baby); }
         else { return null; }        
     }
 
@@ -47,6 +58,7 @@ class ClientBabyController extends Controller
         ]);                
         $baby->save();
 
+        Cache::put('client_babies', Client_baby::all());
         return $baby;
     }
 
@@ -83,6 +95,7 @@ class ClientBabyController extends Controller
         $baby->monthpay_id = $request['monthpay_id'];
         $baby->save(); 
 
+        Cache::put('client_babies', Client_baby::all());
         return $baby;
     }
 
@@ -92,6 +105,7 @@ class ClientBabyController extends Controller
     public function destroy(string $id)
     {
         Client_baby::where('user_id', '=', $id)->delete();
+        Cache::put('client_babies', Client_baby::all());
         return response()->json('Удаление анкеты прошло успешно.');
     }
 }

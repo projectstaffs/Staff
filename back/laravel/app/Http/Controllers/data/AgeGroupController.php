@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\data;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\data\AgeGroup;
@@ -13,7 +14,10 @@ class AgeGroupController extends Controller
      */
     public function index()
     {
-        return AgeGroup::orderBy('created_at', 'desc')->get();
+        if(!Cache::has('agegroups')) { Cache::put('agegroups', AgeGroup::all()); }
+        $getItems = Cache::get('agegroups');
+        return $getItems;
+        //return AgeGroup::orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -31,9 +35,10 @@ class AgeGroupController extends Controller
     {
         $agegroup = new AgeGroup([
             'title' => $request->title
-        ]);
-                
-        $agegroup->save();        
+        ]);                
+        $agegroup->save();  
+
+        Cache::put('agegroups', AgeGroup::all());
         return response()->json('The agegroup successfully added');
     }
 
@@ -59,9 +64,10 @@ class AgeGroupController extends Controller
     public function update(Request $request, string $id)
     {
         $agegroup = AgeGroup::find($id);
-        $agegroup->title = $request['title'];       
-
+        $agegroup->title = $request['title'];
         $agegroup->save();
+
+        Cache::put('agegroups', AgeGroup::all());
         return response()->json(["The agegroup successfully updated"]);
     }
 
@@ -73,6 +79,7 @@ class AgeGroupController extends Controller
         $agegroup = AgeGroup::find($id);
         $agegroup->delete();        
 
+        Cache::put('agegroups', AgeGroup::all());
         return response()->json('The agegroup successfully deleted');
     }
 }

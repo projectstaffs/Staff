@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\data;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\data\Criminal;
@@ -13,7 +14,10 @@ class CriminalController extends Controller
      */
     public function index()
     {
-        return Criminal::orderBy('created_at', 'desc')->get();
+        if(!Cache::has('criminals')) { Cache::put('criminals', Criminal::all()); }
+        $getItems = Cache::get('criminals');
+        return $getItems;
+        //return Criminal::orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -32,8 +36,9 @@ class CriminalController extends Controller
         $criminal = new Criminal([
             'title' => $request->title
         ]);
-                
-        $criminal->save();        
+        $criminal->save(); 
+        
+        Cache::put('criminals', Criminal::all());
         return response()->json('The criminal successfully added');
     }
 
@@ -59,9 +64,10 @@ class CriminalController extends Controller
     public function update(Request $request, string $id)
     {
         $criminal = Criminal::find($id);
-        $criminal->title = $request['title'];       
-
+        $criminal->title = $request['title'];
         $criminal->save();
+
+        Cache::put('criminals', Criminal::all());
         return response()->json(["The criminal successfully updated"]);
     }
 
@@ -73,6 +79,7 @@ class CriminalController extends Controller
         $criminal = Criminal::find($id);
         $criminal->delete();        
 
+        Cache::put('criminals', Criminal::all());
         return response()->json('The criminal successfully deleted');
     }
 }

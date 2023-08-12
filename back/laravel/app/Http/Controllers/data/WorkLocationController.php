@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\data;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\data\WorkLocation;
@@ -13,7 +14,10 @@ class WorkLocationController extends Controller
      */
     public function index()
     {
-        return WorkLocation::orderBy('created_at', 'desc')->get();
+        if(!Cache::has('workLocations')) { Cache::put('workLocations', WorkLocation::all()); }
+        $getItems = Cache::get('workLocations');
+        return $getItems;
+        //return WorkLocation::orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -32,8 +36,9 @@ class WorkLocationController extends Controller
         $workLocation = new WorkLocation([
             'title' => $request->title
         ]);
-                
-        $workLocation->save();        
+        $workLocation->save(); 
+        
+        Cache::put('workLocations', WorkLocation::all());
         return response()->json('The workLocation successfully added');
     }
 
@@ -59,9 +64,10 @@ class WorkLocationController extends Controller
     public function update(Request $request, string $id)
     {
         $workLocation = WorkLocation::find($id);
-        $workLocation->title = $request['title'];       
-
+        $workLocation->title = $request['title'];
         $workLocation->save();
+
+        Cache::put('workLocations', WorkLocation::all());
         return response()->json(["The workLocation successfully updated"]);
     }
 
@@ -73,6 +79,7 @@ class WorkLocationController extends Controller
         $workLocation = WorkLocation::find($id);
         $workLocation->delete();        
 
+        Cache::put('workLocations', WorkLocation::all());
         return response()->json('The workLocation successfully deleted');
     }
 }

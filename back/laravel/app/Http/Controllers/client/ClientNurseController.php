@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\client;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\client\Client_nurse;
@@ -14,8 +15,18 @@ class ClientNurseController extends Controller
      */
     public function index(Request $request)
     {
-        $nurse = Client_nurse::where('user_id', $request["data"])->first();
-        if($nurse) { return new ClientNurseResource($nurse); }
+        if(!Cache::has('client_nurses')) { Cache::put('client_nurses', Client_nurse::all()); }
+        $Client_nurse = Cache::get('client_nurses');
+        $client_nurse = null;
+        foreach ($Client_nurse as $item) {
+            if($item->user_id == $request["data"]) {
+                $client_nurse = $item;
+                break;
+            }                           
+        }        
+        
+        //$nurse = Client_nurse::where('user_id', $request["data"])->first();
+        if($client_nurse) { return new ClientNurseResource($client_nurse); }
         else { return null; }
     }
 
@@ -46,6 +57,7 @@ class ClientNurseController extends Controller
         ]);                
         $nurse->save();
 
+        Cache::put('client_nurses', Client_nurse::all());
         return $nurse;
     }
 
@@ -81,6 +93,7 @@ class ClientNurseController extends Controller
         $nurse->monthpay_id = $request['monthpay_id'];
         $nurse->save(); 
 
+        Cache::put('client_nurses', Client_nurse::all());
         return $nurse;
     }
 
@@ -90,6 +103,7 @@ class ClientNurseController extends Controller
     public function destroy(string $id)
     {
         Client_nurse::where('user_id', '=', $id)->delete();
+        Cache::put('client_nurses', Client_nurse::all());
         return response()->json('Удаление анкеты прошло успешно.');
     }
 }

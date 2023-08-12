@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\data;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\data\HousekeeperPreference;
@@ -13,7 +14,10 @@ class HousekeeperPreferenceController extends Controller
      */
     public function index()
     {
-        return HousekeeperPreference::orderBy('created_at', 'desc')->get();
+        if(!Cache::has('housekeeperpreferences')) { Cache::put('housekeeperpreferences', HousekeeperPreference::all()); }
+        $getItems = Cache::get('housekeeperpreferences');
+        return $getItems;
+        //return HousekeeperPreference::orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -32,8 +36,9 @@ class HousekeeperPreferenceController extends Controller
         $housekeeperPreference = new HousekeeperPreference([
             'title' => $request->title
         ]);
-                
-        $housekeeperPreference->save();        
+        $housekeeperPreference->save();   
+        
+        Cache::put('housekeeperpreferences', HousekeeperPreference::all());
         return response()->json('The housekeeperPreference successfully added');
     }
 
@@ -59,9 +64,10 @@ class HousekeeperPreferenceController extends Controller
     public function update(Request $request, string $id)
     {
         $housekeeperPreference = HousekeeperPreference::find($id);
-        $housekeeperPreference->title = $request['title'];       
-
+        $housekeeperPreference->title = $request['title'];
         $housekeeperPreference->save();
+
+        Cache::put('housekeeperpreferences', HousekeeperPreference::all());
         return response()->json(["The housekeeperPreference successfully updated"]);
     }
 
@@ -73,6 +79,7 @@ class HousekeeperPreferenceController extends Controller
         $housekeeperPreference = HousekeeperPreference::find($id);
         $housekeeperPreference->delete();        
 
+        Cache::put('housekeeperpreferences', HousekeeperPreference::all());
         return response()->json('The housekeeperPreference successfully deleted');
     }
 }

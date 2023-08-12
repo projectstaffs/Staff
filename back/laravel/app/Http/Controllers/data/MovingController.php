@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\data;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\data\Moving;
@@ -13,7 +14,10 @@ class MovingController extends Controller
      */
     public function index()
     {
-        return Moving::orderBy('created_at', 'desc')->get();
+        if(!Cache::has('movings')) { Cache::put('movings', Moving::all()); }
+        $getItems = Cache::get('movings');
+        return $getItems;
+        //return Moving::orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -32,8 +36,9 @@ class MovingController extends Controller
         $moving = new Moving([
             'title' => $request->title
         ]);
-                
-        $moving->save();        
+        $moving->save(); 
+        
+        Cache::put('movings', Moving::all());
         return response()->json('The moving successfully added');
     }
 
@@ -59,9 +64,10 @@ class MovingController extends Controller
     public function update(Request $request, string $id)
     {
         $moving = Moving::find($id);
-        $moving->title = $request['title'];       
-
+        $moving->title = $request['title'];
         $moving->save();
+
+        Cache::put('movings', Moving::all());
         return response()->json(["The moving successfully updated"]);
     }
 
@@ -73,6 +79,7 @@ class MovingController extends Controller
         $moving = Moving::find($id);
         $moving->delete();        
 
+        Cache::put('movings', Moving::all());
         return response()->json('The moving successfully deleted');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\client;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\client\Client_keeperjoboption;
@@ -35,7 +36,8 @@ class ClientKeeperjoboptionController extends Controller
                 'keeperjoboption_id' => $request[0][$i]["keeperjoboption_id"]
             ]);                    
             $formDutie->save();
-        }        
+        }    
+        Cache::put('client_keeperjoboptions', Client_keeperjoboption::all());     
         return $request[1];
     }
 
@@ -69,6 +71,7 @@ class ClientKeeperjoboptionController extends Controller
     public function destroy(string $id)
     {
         Client_keeperjoboption::where('form_id', '=', $id)->delete();
+        Cache::put('client_keeperjoboptions', Client_keeperjoboption::all());
         return response()->json('Удаление прошло успешно.');
     }
 }

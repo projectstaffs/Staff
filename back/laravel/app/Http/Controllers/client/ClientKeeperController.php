@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\client;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\client\Client_keeper;
@@ -14,8 +15,18 @@ class ClientKeeperController extends Controller
      */
     public function index(Request $request)
     {
-        $keeper = Client_keeper::where('user_id', $request["data"])->first();
-        if($keeper) { return new ClientKeeperResource($keeper); }
+        if(!Cache::has('client_keepers')) { Cache::put('client_keepers', Client_keeper::all()); }
+        $Client_keeper = Cache::get('client_keepers');
+        $client_keeper = null;
+        foreach ($Client_keeper as $item) {
+            if($item->user_id == $request["data"]) {
+                $client_keeper = $item;
+                break;
+            }                           
+        }
+
+        //$keeper = Client_keeper::where('user_id', $request["data"])->first();
+        if($client_keeper) { return new ClientKeeperResource($client_keeper); }
         else { return null; }
     }
 
@@ -46,6 +57,7 @@ class ClientKeeperController extends Controller
         ]);                
         $keeper->save();
 
+        Cache::put('client_keepers', Client_keeper::all());
         return $keeper;
     }
 
@@ -81,6 +93,7 @@ class ClientKeeperController extends Controller
         $keeper->monthpay_id = $request['monthpay_id'];
         $keeper->save(); 
 
+        Cache::put('client_keepers', Client_keeper::all());
         return $keeper;
     }
 
@@ -90,6 +103,7 @@ class ClientKeeperController extends Controller
     public function destroy(string $id)
     {
         Client_keeper::where('user_id', '=', $id)->delete();
+        Cache::put('client_keepers', Client_keeper::all());
         return response()->json('Удаление анкеты прошло успешно.');
     }
 }

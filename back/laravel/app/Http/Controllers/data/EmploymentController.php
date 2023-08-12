@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\data;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\data\Employment;
@@ -13,7 +14,10 @@ class EmploymentController extends Controller
      */
     public function index()
     {
-        return Employment::orderBy('created_at', 'desc')->get();
+        if(!Cache::has('employments')) { Cache::put('employments', Employment::all()); }
+        $getItems = Cache::get('employments');
+        return $getItems;
+        //return Employment::orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -32,8 +36,9 @@ class EmploymentController extends Controller
         $employment = new Employment([
             'title' => $request->title
         ]);
-                
-        $employment->save();        
+        $employment->save();  
+        
+        Cache::put('employments', Employment::all());
         return response()->json('The employment successfully added');
     }
 
@@ -59,9 +64,10 @@ class EmploymentController extends Controller
     public function update(Request $request, string $id)
     {
         $employment = Employment::find($id);
-        $employment->title = $request['title'];       
-
+        $employment->title = $request['title'];
         $employment->save();
+
+        Cache::put('employments', Employment::all());
         return response()->json(["The employment successfully updated"]);
     }
 
@@ -73,6 +79,7 @@ class EmploymentController extends Controller
         $employment = Employment::find($id);
         $employment->delete();        
 
+        Cache::put('employments', Employment::all());
         return response()->json('The employment successfully deleted');
     }
 }

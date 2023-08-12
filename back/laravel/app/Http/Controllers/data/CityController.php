@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\data;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\data\City;
@@ -13,7 +14,10 @@ class CityController extends Controller
      */
     public function index()
     {
-        return City::orderBy('created_at', 'desc')->get();
+        if(!Cache::has('cities')) { Cache::put('cities', City::all()); }
+        $getItems = Cache::get('cities');
+        return $getItems;
+        //return City::orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -31,9 +35,10 @@ class CityController extends Controller
     {
         $city = new City([
             'title' => $request->title
-        ]);
-                
-        $city->save();        
+        ]);        
+        $city->save(); 
+        
+        Cache::put('cities', City::all());
         return response()->json('The city successfully added');
     }
 
@@ -59,11 +64,11 @@ class CityController extends Controller
     public function update(Request $request, string $id)
     {
         $city = City::find($id);
-        $city->title = $request['title'];       
-
+        $city->title = $request['title'];
         $city->save();
+
+        Cache::put('cities', City::all());
         return response()->json(["The city successfully updated"]);
-        //return $request;
     }
 
     /**
@@ -74,6 +79,7 @@ class CityController extends Controller
         $city = City::find($id);
         $city->delete();        
 
+        Cache::put('cities', City::all());
         return response()->json('The city successfully deleted');
     }
 }

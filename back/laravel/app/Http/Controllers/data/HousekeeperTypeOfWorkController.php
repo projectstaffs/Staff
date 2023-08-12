@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\data;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\data\HousekeeperTypeOfWork;
@@ -13,7 +14,10 @@ class HousekeeperTypeOfWorkController extends Controller
      */
     public function index()
     {
-        return HousekeeperTypeOfWork::orderBy('created_at', 'desc')->get();
+        if(!Cache::has('housekeepertypeofworks')) { Cache::put('housekeepertypeofworks', HousekeeperTypeOfWork::all()); }
+        $getItems = Cache::get('housekeepertypeofworks');
+        return $getItems;
+        //return HousekeeperTypeOfWork::orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -32,8 +36,9 @@ class HousekeeperTypeOfWorkController extends Controller
         $housekeeperTypeOfWork = new HousekeeperTypeOfWork([
             'title' => $request->title
         ]);
-                
-        $housekeeperTypeOfWork->save();        
+        $housekeeperTypeOfWork->save(); 
+        
+        Cache::put('housekeepertypeofworks', HousekeeperTypeOfWork::all());
         return response()->json('The housekeeperTypeOfWork successfully added');
     }
 
@@ -59,9 +64,10 @@ class HousekeeperTypeOfWorkController extends Controller
     public function update(Request $request, string $id)
     {
         $housekeeperTypeOfWork = HousekeeperTypeOfWork::find($id);
-        $housekeeperTypeOfWork->title = $request['title'];       
-
+        $housekeeperTypeOfWork->title = $request['title'];
         $housekeeperTypeOfWork->save();
+        
+        Cache::put('housekeepertypeofworks', HousekeeperTypeOfWork::all());
         return response()->json(["The housekeeperTypeOfWork successfully updated"]);
     }
 
@@ -73,6 +79,7 @@ class HousekeeperTypeOfWorkController extends Controller
         $housekeeperTypeOfWork = HousekeeperTypeOfWork::find($id);
         $housekeeperTypeOfWork->delete();        
 
+        Cache::put('housekeepertypeofworks', HousekeeperTypeOfWork::all());
         return response()->json('The housekeeperTypeOfWork successfully deleted');
     }
 }

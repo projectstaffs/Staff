@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\data;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\data\MonthlyPayment;
@@ -13,7 +14,10 @@ class MonthlyPaymentController extends Controller
      */
     public function index()
     {
-        return MonthlyPayment::orderBy('created_at', 'desc')->get();
+        if(!Cache::has('monthlypayments')) { Cache::put('monthlypayments', MonthlyPayment::all()); }
+        $getItems = Cache::get('monthlypayments');
+        return $getItems;
+        //return MonthlyPayment::orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -32,8 +36,9 @@ class MonthlyPaymentController extends Controller
         $monthlyPayment = new MonthlyPayment([
             'title' => $request->title
         ]);
-                
-        $monthlyPayment->save();        
+        $monthlyPayment->save(); 
+        
+        Cache::put('monthlypayments', MonthlyPayment::all());
         return response()->json('The monthlyPayment successfully added');
     }
 
@@ -59,9 +64,10 @@ class MonthlyPaymentController extends Controller
     public function update(Request $request, string $id)
     {
         $monthlyPayment = MonthlyPayment::find($id);
-        $monthlyPayment->title = $request['title'];       
-
+        $monthlyPayment->title = $request['title'];
         $monthlyPayment->save();
+
+        Cache::put('monthlypayments', MonthlyPayment::all());
         return response()->json(["The monthlyPayment successfully updated"]);
     }
 
@@ -73,6 +79,7 @@ class MonthlyPaymentController extends Controller
         $monthlyPayment = MonthlyPayment::find($id);
         $monthlyPayment->delete();        
 
+        Cache::put('monthlypayments', MonthlyPayment::all());
         return response()->json('The monthlyPayment successfully deleted');
     }
 }

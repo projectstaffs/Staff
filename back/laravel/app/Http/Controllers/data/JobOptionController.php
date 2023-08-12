@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\data;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\data\JobOption;
@@ -13,7 +14,10 @@ class JobOptionController extends Controller
      */
     public function index()
     {
-        return JobOption::orderBy('created_at', 'desc')->get();
+        if(!Cache::has('joboptions')) { Cache::put('joboptions', JobOption::all()); }
+        $getItems = Cache::get('joboptions');
+        return $getItems;
+        //return JobOption::orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -32,8 +36,9 @@ class JobOptionController extends Controller
         $jobOption = new JobOption([
             'title' => $request->title
         ]);
-                
-        $jobOption->save();        
+        $jobOption->save(); 
+        
+        Cache::put('joboptions', JobOption::all());
         return response()->json('The jobOption successfully added');
     }
 
@@ -59,9 +64,10 @@ class JobOptionController extends Controller
     public function update(Request $request, string $id)
     {
         $jobOption = JobOption::find($id);
-        $jobOption->title = $request['title'];       
-
+        $jobOption->title = $request['title'];
         $jobOption->save();
+
+        Cache::put('joboptions', JobOption::all());
         return response()->json(["The jobOption successfully updated"]);
     }
 
@@ -73,6 +79,7 @@ class JobOptionController extends Controller
         $jobOption = JobOption::find($id);
         $jobOption->delete();        
 
+        Cache::put('joboptions', JobOption::all());
         return response()->json('The jobOption successfully deleted');
     }
 }

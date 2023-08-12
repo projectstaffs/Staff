@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\data;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\data\NurseDutie;
@@ -13,7 +14,10 @@ class NurseDutieController extends Controller
      */
     public function index()
     {
-        return NurseDutie::orderBy('created_at', 'desc')->get();
+        if(!Cache::has('nurseduties')) { Cache::put('nurseduties', NurseDutie::all()); }
+        $getItems = Cache::get('nurseduties');
+        return $getItems;
+        //return NurseDutie::orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -32,8 +36,9 @@ class NurseDutieController extends Controller
         $nurseDutie = new NurseDutie([
             'title' => $request->title
         ]);
-                
-        $nurseDutie->save();        
+        $nurseDutie->save(); 
+        
+        Cache::put('nurseduties', NurseDutie::all());
         return response()->json('The nurseDutie successfully added');
     }
 
@@ -59,9 +64,10 @@ class NurseDutieController extends Controller
     public function update(Request $request, string $id)
     {
         $nurseDutie = NurseDutie::find($id);
-        $nurseDutie->title = $request['title'];       
-
+        $nurseDutie->title = $request['title'];
         $nurseDutie->save();
+
+        Cache::put('nurseduties', NurseDutie::all());
         return response()->json(["The nurseDutie successfully updated"]);
     }
 
@@ -73,6 +79,7 @@ class NurseDutieController extends Controller
         $nurseDutie = NurseDutie::find($id);
         $nurseDutie->delete();        
 
+        Cache::put('nurseduties', NurseDutie::all());
         return response()->json('The nurseDutie successfully deleted');
     }
 }

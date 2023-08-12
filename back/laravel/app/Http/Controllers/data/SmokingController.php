@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\data;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\data\Smoking;
@@ -13,7 +14,10 @@ class SmokingController extends Controller
      */
     public function index()
     {
-        return Smoking::orderBy('created_at', 'desc')->get();
+        if(!Cache::has('smokings')) { Cache::put('smokings', Smoking::all()); }
+        $getItems = Cache::get('smokings');
+        return $getItems;
+        //return Smoking::orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -32,8 +36,9 @@ class SmokingController extends Controller
         $smoking = new Smoking([
             'title' => $request->title
         ]);
-                
-        $smoking->save();        
+        $smoking->save(); 
+        
+        Cache::put('smokings', Smoking::all());
         return response()->json('The smoking successfully added');
     }
 
@@ -59,9 +64,10 @@ class SmokingController extends Controller
     public function update(Request $request, string $id)
     {
         $smoking = Smoking::find($id);
-        $smoking->title = $request['title'];       
-
+        $smoking->title = $request['title'];
         $smoking->save();
+
+        Cache::put('smokings', Smoking::all());
         return response()->json(["The smoking successfully updated"]);
     }
 
@@ -73,6 +79,7 @@ class SmokingController extends Controller
         $smoking = Smoking::find($id);
         $smoking->delete();        
 
+        Cache::put('smokings', Smoking::all());
         return response()->json('The smoking successfully deleted');
     }
 }

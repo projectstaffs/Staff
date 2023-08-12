@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\data;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\data\WorkPeriod;
@@ -13,7 +14,10 @@ class WorkPeriodController extends Controller
      */
     public function index()
     {
-        return WorkPeriod::orderBy('created_at', 'desc')->get();
+        if(!Cache::has('workperiods')) { Cache::put('workperiods', WorkPeriod::all()); }
+        $getItems = Cache::get('workperiods');
+        return $getItems;
+        //return WorkPeriod::orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -32,8 +36,9 @@ class WorkPeriodController extends Controller
         $workPeriod = new WorkPeriod([
             'title' => $request->title
         ]);
-                
-        $workPeriod->save();        
+        $workPeriod->save();
+        
+        Cache::put('workperiods', WorkPeriod::all());
         return response()->json('The workPeriod successfully added');
     }
 
@@ -59,9 +64,10 @@ class WorkPeriodController extends Controller
     public function update(Request $request, string $id)
     {
         $workPeriod = WorkPeriod::find($id);
-        $workPeriod->title = $request['title'];       
-
+        $workPeriod->title = $request['title'];
         $workPeriod->save();
+
+        Cache::put('workperiods', WorkPeriod::all());
         return response()->json(["The workPeriod successfully updated"]);
     }
 
@@ -73,6 +79,7 @@ class WorkPeriodController extends Controller
         $workPeriod = WorkPeriod::find($id);
         $workPeriod->delete();        
 
+        Cache::put('workperiods', WorkPeriod::all());
         return response()->json('The workPeriod successfully deleted');
     }
 }

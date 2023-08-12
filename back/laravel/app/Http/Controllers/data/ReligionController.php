@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\data;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\data\Religion;
@@ -13,7 +14,10 @@ class ReligionController extends Controller
      */
     public function index()
     {
-        return Religion::orderBy('created_at', 'desc')->get();
+        if(!Cache::has('religions')) { Cache::put('religions', Religion::all()); }
+        $getItems = Cache::get('religions');
+        return $getItems;
+        //return Religion::orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -32,8 +36,9 @@ class ReligionController extends Controller
         $religion = new Religion([
             'title' => $request->title
         ]);
-                
-        $religion->save();        
+        $religion->save(); 
+        
+        Cache::put('religions', Religion::all());
         return response()->json('The religion successfully added');
     }
 
@@ -59,9 +64,10 @@ class ReligionController extends Controller
     public function update(Request $request, string $id)
     {
         $religion = Religion::find($id);
-        $religion->title = $request['title'];       
-
+        $religion->title = $request['title']; 
         $religion->save();
+
+        Cache::put('religions', Religion::all());
         return response()->json(["The religion successfully updated"]);
     }
 
@@ -73,6 +79,7 @@ class ReligionController extends Controller
         $religion = Religion::find($id);
         $religion->delete();        
 
+        Cache::put('religions', Religion::all());
         return response()->json('The religion successfully deleted');
     }
 }

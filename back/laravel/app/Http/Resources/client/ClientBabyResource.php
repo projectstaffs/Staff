@@ -4,6 +4,7 @@ namespace App\Http\Resources\client;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Cache;
 
 use App\Models\client\Client_baby;
 use App\Models\client\Client_agegroup;
@@ -12,6 +13,12 @@ use App\Models\client\Client_joboption;
 use App\Http\Resources\client\ClientJoboptionResource;
 use App\Models\client\Client_dutie;
 use App\Http\Resources\client\ClientDutieResource;
+
+use App\Models\data\Children;
+use App\Models\data\WorkPeriod;
+use App\Models\data\Employment;
+use App\Models\data\MonthlyPayment;
+use App\Models\data\HourlyPayment;
 
 class ClientBabyResource extends JsonResource
 {
@@ -22,9 +29,82 @@ class ClientBabyResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $agegroup = Client_agegroup::where('form_id', $this->id)->get();
-        $joboption = Client_joboption::where('form_id', $this->id)->get(); 
-        $dutie = Client_dutie::where('form_id', $this->id)->get();
+        if(!Cache::has('client_agegroups')) { Cache::put('client_agegroups', Client_agegroup::all()); }
+        $Client_agegroup = Cache::get('client_agegroups');
+        $agegroup = array();
+        foreach ($Client_agegroup as $item) {
+            if($item->form_id == $this->id) {
+                array_push($agegroup, $item);
+            }                           
+        }
+
+        if(!Cache::has('client_joboptions')) { Cache::put('client_joboptions', Client_joboption::all()); }
+        $Client_joboption = Cache::get('client_joboptions');
+        $joboption = array();
+        foreach ($Client_joboption as $item) {
+            if($item->form_id == $this->id) {
+                array_push($joboption, $item);
+            }                           
+        }
+
+        if(!Cache::has('client_duties')) { Cache::put('client_duties', Client_dutie::all()); }
+        $Client_dutie = Cache::get('client_duties');
+        $dutie = array();
+        foreach ($Client_dutie as $item) {
+            if($item->form_id == $this->id) {
+                array_push($dutie, $item);
+            }                           
+        }
+
+        if(!Cache::has('childrens')) { Cache::put('childrens', Children::all()); }
+        $Children = Cache::get('childrens');
+        $children = '';
+        foreach ($Children as $item) {
+            if($item->id == $this->childrencount_id) {
+                $children = $item->title;                
+                break;
+            }                           
+        }
+
+        if(!Cache::has('workperiods')) { Cache::put('workperiods', WorkPeriod::all()); }
+        $WorkPeriod = Cache::get('workperiods');
+        $workPeriod = '';
+        foreach ($WorkPeriod as $item) {
+            if($item->id == $this->workperiod_id) {
+                $workPeriod = $item->title;                
+                break;
+            }                           
+        }
+
+        if(!Cache::has('employments')) { Cache::put('employments', Employment::all()); }
+        $Employment = Cache::get('employments');
+        $employment = '';
+        foreach ($Employment as $item) {
+            if($item->id == $this->employment_id) {
+                $employment = $item->title;                
+                break;
+            }                           
+        }
+
+        if(!Cache::has('hourlypayments')) { Cache::put('hourlypayments', HourlyPayment::all()); }
+        $HourlyPayment = Cache::get('hourlypayments');
+        $hourpay = '';
+        foreach ($HourlyPayment as $item) {
+            if($item->id == $this->hourpay_id) {
+                $hourpay = $item->title;                
+                break;
+            }                           
+        }
+
+        if(!Cache::has('monthlypayments')) { Cache::put('monthlypayments', MonthlyPayment::all()); }
+        $MonthlyPayment = Cache::get('monthlypayments');
+        $monthpay = '';
+        foreach ($MonthlyPayment as $item) {
+            if($item->id == $this->monthpay_id) {
+                $monthpay = $item->title;                
+                break;
+            }                           
+        }
 
         return [
             'id' => $this->id,
@@ -32,13 +112,13 @@ class ClientBabyResource extends JsonResource
             'confirmed' => $this->confirmed,
             'title' => $this->title,
             'title_about' => $this->title_about,
-            'childrencount' => $this->get_childrencount->title,
-            'workperiod' => $this->get_workperiod->title,
-            'employment' => $this->get_employment->title,
+            'workperiod' => $workPeriod,
+            'employment' => $employment,
+            'childrencount' => $children,
             'drive' => $this->drive,
             'agents' => $this->agents,
-            'hourpay' => $this->get_hourpay->title,
-            'monthpay' => $this->get_monthpay->title,
+            'hourpay' => $hourpay,
+            'monthpay' => $monthpay,
 
             'Agegroups' => ClientAgegroupResource::collection($agegroup),            
             'Joboptions' => ClientJoboptionResource::collection($joboption),

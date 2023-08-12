@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\data;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\data\BabysittingDutie;
@@ -13,7 +14,10 @@ class BabysittingDutieController extends Controller
      */
     public function index()
     {
-        return BabysittingDutie::orderBy('created_at', 'desc')->get();
+        if(!Cache::has('babysittingduties')) { Cache::put('babysittingduties', BabysittingDutie::all()); }
+        $getItems = Cache::get('babysittingduties');
+        return $getItems;
+        //return BabysittingDutie::orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -32,8 +36,9 @@ class BabysittingDutieController extends Controller
         $babysittingDutie = new BabysittingDutie([
             'title' => $request->title
         ]);
-                
-        $babysittingDutie->save();        
+        $babysittingDutie->save();  
+        
+        Cache::get('babysittingduties');
         return response()->json('The babysittingDutie successfully added');
     }
 
@@ -59,9 +64,10 @@ class BabysittingDutieController extends Controller
     public function update(Request $request, string $id)
     {
         $babysittingDutie = BabysittingDutie::find($id);
-        $babysittingDutie->title = $request['title'];       
-
+        $babysittingDutie->title = $request['title'];
         $babysittingDutie->save();
+
+        Cache::get('babysittingduties');
         return response()->json(["The babysittingDutie successfully updated"]);
     }
 
@@ -73,6 +79,7 @@ class BabysittingDutieController extends Controller
         $babysittingDutie = BabysittingDutie::find($id);
         $babysittingDutie->delete();        
 
+        Cache::get('babysittingduties');
         return response()->json('The babysittingDutie successfully deleted');
     }
 }

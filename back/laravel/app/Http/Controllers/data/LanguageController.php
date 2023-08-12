@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\data;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\data\Language;
@@ -13,7 +14,10 @@ class LanguageController extends Controller
      */
     public function index()
     {
-        return Language::orderBy('created_at', 'desc')->get();
+        if(!Cache::has('languages')) { Cache::put('languages', Language::all()); }
+        $getItems = Cache::get('languages');
+        return $getItems;
+        //return Language::orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -32,8 +36,9 @@ class LanguageController extends Controller
         $language = new Language([
             'title' => $request->title
         ]);
-                
-        $language->save();        
+        $language->save(); 
+        
+        Cache::put('languages', Language::all());
         return response()->json('The language successfully added');
     }
 
@@ -59,9 +64,10 @@ class LanguageController extends Controller
     public function update(Request $request, string $id)
     {
         $language = Language::find($id);
-        $language->title = $request['title'];       
-
+        $language->title = $request['title'];
         $language->save();
+
+        Cache::put('languages', Language::all());
         return response()->json(["The language successfully updated"]);
     }
 
@@ -73,6 +79,7 @@ class LanguageController extends Controller
         $language = Language::find($id);
         $language->delete();        
 
+        Cache::put('languages', Language::all());
         return response()->json('The language successfully deleted');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\data;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
 use App\Models\data\Alcohol;
@@ -13,7 +14,10 @@ class AlcoholController extends Controller
      */
     public function index()
     {
-        return Alcohol::orderBy('created_at', 'desc')->get();
+        if(!Cache::has('alcohols')) { Cache::put('alcohols', Alcohol::all()); }
+        $getItems = Cache::get('alcohols');
+        return $getItems;
+        //return Alcohol::orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -32,8 +36,9 @@ class AlcoholController extends Controller
         $alcohol = new Alcohol([
             'title' => $request->title
         ]);
-                
-        $alcohol->save();        
+        $alcohol->save(); 
+        
+        Cache::put('alcohols', Alcohol::all());
         return response()->json('The alcohol successfully added');
     }
 
@@ -59,9 +64,10 @@ class AlcoholController extends Controller
     public function update(Request $request, string $id)
     {
         $alcohol = Alcohol::find($id);
-        $alcohol->title = $request['title'];       
-
+        $alcohol->title = $request['title'];
         $alcohol->save();
+
+        Cache::put('alcohols', Alcohol::all());
         return response()->json(["The alcohol successfully updated"]);
     }
 
@@ -73,6 +79,7 @@ class AlcoholController extends Controller
         $alcohol = Alcohol::find($id);
         $alcohol->delete();        
 
+        Cache::put('alcohols', Alcohol::all());
         return response()->json('The alcohol successfully deleted');
     }
 }

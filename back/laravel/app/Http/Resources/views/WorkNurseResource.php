@@ -118,7 +118,7 @@ class WorkNurseResource extends JsonResource
         $WorkPeriod = Cache::get('workperiods');
         $workPeriod = '';
         foreach ($WorkPeriod as $item) {
-            if($item->id == $this->workPeriod_id) {
+            if($item->id == $this->workperiod_id) {
                 $workPeriod = $item->title;                
                 break;
             }                           
