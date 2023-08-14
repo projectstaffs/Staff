@@ -40,7 +40,7 @@ class ImageController extends Controller
         if($request['images']) {            
             foreach ($request['images'] as $image) {
                 $name = md5(Carbon::now() . '_' . $image->getClientOriginalName()) . '.' . $image->getClientOriginalExtension();                
-                $previewName = 'prev_' . $name;
+                $previewName = 'images/prev_' . $name;
                 $path = Storage::disk('minio')->putFileAs('/images', $image, $name);
 
                 $s3Config = [
@@ -52,50 +52,24 @@ class ImageController extends Controller
                     ],
                     'endpoint' => 'http://storage.minio:9000', // Адрес сервера MinIO
                     'use_path_style_endpoint' => true,
-                ];
-        
-                // Создаем клиент S3 (MinIO)
-                $s3Client = new S3Client($s3Config);
-        
-                // Получаем загруженное изображение из запроса
-                //$uploadedImage = $request->file('image');
-        
-                // Создаем экземпляр класса Imagine
+                ];        
+                $s3Client = new S3Client($s3Config);        
                 $imagine = new Imagine();
-        
-                // Открываем загруженное изображение
-                $image2 = $imagine->open($image);
-        
-                // Изменяем размер изображения (например, до 800x600)
-                $newSize = new Box(100, 100);
-                $resizedImage = $image2->resize($newSize);
-        
-                // Получаем байтовые данные измененного изображения
-                $imageData = $resizedImage->get('jpg', ['jpeg_quality' => 90]);
-        
-                // Имя вашего хранилища (бакета) в MinIO
-                $bucketName = 'storage';
-        
-                // Путь и имя файла в хранилище MinIO
-                $objectName = 'images/' . $previewName;
-        
-                // Загружаем байтовые данные в хранилище MinIO (S3)
+                $image2 = $imagine->open($image)->resize(new Box(100, 100));
+                $imageData = $image2->get('jpg', ['jpeg_quality' => 90]);
                 $result = $s3Client->putObject([
-                    'Bucket' => $bucketName,
-                    'Key' => $objectName,
+                    'Bucket' => 'storage',
+                    'Key' => $previewName,
                     'Body' => $imageData,
                     'ContentType' => 'image/jpeg',
                 ]);
-                
-                //$imagine = new Imagine();
-                //$imagine->open($image)->resize(new Box(50, 50))->save('http://storage.minio:9000/storage/images/' . $previewName);
-                //$preview_path = Storage::disk('minio')->putFileAs('/images', $image, $previewName);
+
                 $res = Image::create([
                     'user_id' => $request['user_id'],
                     'path' => $path,
                     'url' => url('http://localhost:9000/storage/' . $path),
-                    'preview_path' => 'some',
-                    'preview_url' => url('some')                    
+                    'preview_path' => $previewName,
+                    'preview_url' => url('http://localhost:9000/storage/' . $previewName)                    
                 ]);
             }
             Cache::put('images', Image::all());
@@ -135,7 +109,7 @@ class ImageController extends Controller
         $images = Image::where('user_id', '=', $id)->get();
         foreach ($images as $image) {
             Storage::disk('minio')->delete($image->path);
-            //Storage::disk('minio')->delete($image->preview_path);
+            Storage::disk('minio')->delete($image->preview_path);
         }
         Image::where('user_id', '=', $id)->delete();
         Cache::put('images', Image::all());
