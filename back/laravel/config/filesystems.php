@@ -65,7 +65,6 @@ return [
             'bucket' => env('MINIO_BUCKET'),
             'use_path_style_endpoint' => true,
         ],
-
     ],
 
     /*

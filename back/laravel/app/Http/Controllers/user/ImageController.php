@@ -9,6 +9,9 @@ use App\Models\user\Image;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
+use Imagine\Image\Box;
+use Imagine\Imagick\Imagine;
+
 class ImageController extends Controller
 {
     /**
@@ -31,21 +34,24 @@ class ImageController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {        
+    {
         $res = null;
         if($request['images']) {            
             foreach ($request['images'] as $image) {
-                $name = md5(Carbon::now() . '_' . $image->getClientOriginalName()) . '.' . $image->getClientOriginalExtension();
-                $path = Storage::disk('minio')->putFileAs('/images', $image, $name);
+                $name = md5(Carbon::now() . '_' . $image->getClientOriginalName()) . '.' . $image->getClientOriginalExtension();                
                 //$previewName = 'prev_' . $name;
-                $res = Image::create([
-                    'path' => $path,
-                    'url' => url('http://localhost:9000/storage/' . $path),                                        
-                    'user_id' => $request['user_id'],
-                    'preview_url' => 'some'                    
-                ]);
-                //\Intervention\Image\Facades\Image::make($image)->fit(100, 100)->save(storage_path('app/public/images/' . $previewName));  
+                $path = Storage::disk('minio')->putFileAs('/images', $image, $name);
                 
+                //$imagine = new Imagine();
+                //$imagine->open($image)->resize(new Box(50, 50))->save('http://storage.minio:9000/storage/images/' . $previewName);
+                //$preview_path = Storage::disk('minio')->putFileAs('/images', $image, $previewName);
+                $res = Image::create([
+                    'user_id' => $request['user_id'],
+                    'path' => $path,
+                    'url' => url('http://localhost:9000/storage/' . $path),
+                    'preview_path' => 'some',
+                    'preview_url' => url('some')                    
+                ]);
             }
             Cache::put('images', Image::all());
         }
@@ -84,9 +90,7 @@ class ImageController extends Controller
         $images = Image::where('user_id', '=', $id)->get();
         foreach ($images as $image) {
             Storage::disk('minio')->delete($image->path);
-            //Storage::disk('public')->delete($image->path);
-            //$str2=strpos($image->preview_url, "images"); $row2=substr($image->preview_url, $str2);
-            //Storage::disk('public')->delete($row2);
+            //Storage::disk('minio')->delete($image->preview_path);
         }
         Image::where('user_id', '=', $id)->delete();
         Cache::put('images', Image::all());
