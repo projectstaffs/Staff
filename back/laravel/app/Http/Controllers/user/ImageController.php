@@ -36,20 +36,19 @@ class ImageController extends Controller
         if($request['images']) {            
             foreach ($request['images'] as $image) {
                 $name = md5(Carbon::now() . '_' . $image->getClientOriginalName()) . '.' . $image->getClientOriginalExtension();
-                $filePath = Storage::disk('public')->putFileAs('/images', $image, $name);
-                $previewName = 'prev_' . $name;                
-
+                $path = Storage::disk('minio')->putFileAs('/images', $image, $name);
+                //$previewName = 'prev_' . $name;
                 $res = Image::create([
-                    'path' => $filePath,
-                    'url' => url('/storage/' . $filePath),                                        
+                    'path' => $path,
+                    'url' => url('http://localhost:9000/storage/' . $path),                                        
                     'user_id' => $request['user_id'],
-                    'preview_url' => url('/storage/images/' . $previewName)                    
+                    'preview_url' => 'some'                    
                 ]);
-                \Intervention\Image\Facades\Image::make($image)->fit(100, 100)->save(storage_path('app/public/images/' . $previewName));                
+                //\Intervention\Image\Facades\Image::make($image)->fit(100, 100)->save(storage_path('app/public/images/' . $previewName));  
+                
             }
             Cache::put('images', Image::all());
-        }       
-
+        }
         return $res;
     }
 
@@ -84,9 +83,10 @@ class ImageController extends Controller
     {
         $images = Image::where('user_id', '=', $id)->get();
         foreach ($images as $image) {
-            Storage::disk('public')->delete($image->path);
-            $str2=strpos($image->preview_url, "images"); $row2=substr($image->preview_url, $str2);
-            Storage::disk('public')->delete($row2);
+            Storage::disk('minio')->delete($image->path);
+            //Storage::disk('public')->delete($image->path);
+            //$str2=strpos($image->preview_url, "images"); $row2=substr($image->preview_url, $str2);
+            //Storage::disk('public')->delete($row2);
         }
         Image::where('user_id', '=', $id)->delete();
         Cache::put('images', Image::all());

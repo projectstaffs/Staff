@@ -9,7 +9,7 @@
         <div @click.prevent="client_babysitting" class="admin_sidebar_item">Вакансия для няни </div>
         <div @click.prevent="client_nurse" class="admin_sidebar_item">Вакансия для сиделки </div>
         <div @click.prevent="client_housekeeper" class="admin_sidebar_item">Вакансия для домработницы </div>
-    </div>    
+    </div>
     
     <div v-if="!photo">Добавьте изображение</div>
     <img v-else :src="photo" alt="">    

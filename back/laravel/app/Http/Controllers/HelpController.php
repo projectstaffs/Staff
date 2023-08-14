@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 // For Redis
@@ -83,6 +83,8 @@ use App\Models\data\TypeOfWork;
 use App\Models\data\WorkLocation;
 use App\Models\data\WorkPeriod;
 
+use Aws\S3\S3Client;
+
 class HelpController extends Controller
 {
     public function getAdmin ()
@@ -109,6 +111,88 @@ class HelpController extends Controller
         }
         return $messages;
     }
+
+    public function minio() {
+        /*$s3 = new S3Client([
+            'version' => 'latest',
+            'region' => 'us-east-1', // Замените на ваш регион
+            'endpoint' => 'http://storage.minio:9000', // Замените на вашу конечную точку MinIO
+            'use_path_style_endpoint' => true,
+            'credentials' => [
+                'key' => 'G3W2jWFTn7CfKWsXHEu8',
+                'secret' => 'SUhaDLsntGomofDtBwTDZGDjnoRLJUTcB4mlToxI',
+            ],
+        ]);
+        
+        try {
+            $result = $s3->listBuckets();
+            // Всё в порядке, подключение работает
+            return $result;
+        } catch (\Exception $e) {
+            // Возникли проблемы с подключением            
+            return $e->getMessage();
+        }*/
+
+        // Создайте клиента MinIO
+        /*$s3 = new S3Client([
+            'version' => 'latest',
+            'region' => 'us-east-1', // Замените на ваш регион
+            'endpoint' => 'http://storage.minio:9000', // Замените на вашу конечную точку MinIO
+            'use_path_style_endpoint' => true,
+            'credentials' => [
+                'key' => 'G3W2jWFTn7CfKWsXHEu8',
+                'secret' => 'SUhaDLsntGomofDtBwTDZGDjnoRLJUTcB4mlToxI',
+            ],
+        ]);
+        
+        try {
+            $bucketName = 'storage';
+            $objectKey = 'some/test.txt'; // Путь к вашему файлу внутри ведра
+        
+            // Получите содержимое объекта (файла)
+            $result = $s3->getObject([
+                'Bucket' => $bucketName,
+                'Key' => $objectKey,
+            ]);
+        
+            // Выведите содержимое файла
+            echo $result['Body'];
+        } catch (\Exception $e) {
+            // Возникли проблемы с получением файла
+            echo $e->getMessage();
+        }*/
+
+        $s3 = new S3Client([
+            'version' => 'latest',
+            'region' => 'us-east-1', // Замените на ваш регион
+            'endpoint' => 'http://storage.minio:9000', // Замените на вашу конечную точку MinIO
+            'use_path_style_endpoint' => true,
+            'credentials' => [
+                'key' => 'G3W2jWFTn7CfKWsXHEu8',
+                'secret' => 'SUhaDLsntGomofDtBwTDZGDjnoRLJUTcB4mlToxI',
+            ],
+        ]);
+        
+        try {
+            $bucketName = 'storage';
+            $objectKey = 'some/myfile.txt'; // Путь, по которому вы хотите сохранить файл
+        
+            // Загрузите файл в ведро
+            $result = $s3->putObject([
+                'Bucket' => $bucketName,
+                'Key' => $objectKey,
+                'Body' => 'Hello, MinIO!', // Замените это содержимое на ваш файл
+            ]);
+        
+            // Выведите результат загрузки файла
+            echo 'File uploaded successfully: ' . $result['ObjectURL'];
+        } catch (\Exception $e) {
+            // Возникли проблемы с загрузкой файла
+            echo $e->getMessage();
+        }
+        
+    }
+
     public function redisAll ()
     {
         Cache::put('smokings', Smoking::all());

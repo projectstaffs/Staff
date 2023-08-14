@@ -182,3 +182,4 @@ Route::resource('/status', StatusController::class);
 Route::resource('/religion', ReligionController::class);
 
 Route::get('/redis', [HelpController::class, 'redisAll']);
+Route::get('/minio', [HelpController::class, 'minio']);

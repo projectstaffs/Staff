@@ -24,8 +24,9 @@ export const useUserStore = defineStore('user', {
         },        
         CREATE_PHOTO(data){            
             api.post('api/auth/photo', data)
-                .then((res) => {                                   
-                    localStorage.user_image = res.data.preview_url;                    
+                .then((res) => {   
+                    //console.log(res);                                
+                    localStorage.user_image = res.data.url;
                     router.push({name: "Account"});                 
                 })
                 .catch(error => { console.log(error); })
