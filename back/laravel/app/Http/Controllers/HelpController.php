@@ -170,7 +170,7 @@ class HelpController extends Controller
             'credentials' => [
                 'key' => 'G3W2jWFTn7CfKWsXHEu8',
                 'secret' => 'SUhaDLsntGomofDtBwTDZGDjnoRLJUTcB4mlToxI',
-            ],
+            ],            
         ]);
         
         try {
