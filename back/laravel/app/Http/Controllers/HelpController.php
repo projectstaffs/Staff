@@ -125,27 +125,6 @@ class HelpController extends Controller
         ]);
         
         try {
-            $result = $s3->listBuckets();
-            // Всё в порядке, подключение работает
-            return $result;
-        } catch (\Exception $e) {
-            // Возникли проблемы с подключением            
-            return $e->getMessage();
-        }*/
-
-        // Создайте клиента MinIO
-        /*$s3 = new S3Client([
-            'version' => 'latest',
-            'region' => 'us-east-1', // Замените на ваш регион
-            'endpoint' => 'http://storage.minio:9000', // Замените на вашу конечную точку MinIO
-            'use_path_style_endpoint' => true,
-            'credentials' => [
-                'key' => 'G3W2jWFTn7CfKWsXHEu8',
-                'secret' => 'SUhaDLsntGomofDtBwTDZGDjnoRLJUTcB4mlToxI',
-            ],
-        ]);
-        
-        try {
             $bucketName = 'storage';
             $objectKey = 'some/test.txt'; // Путь к вашему файлу внутри ведра
         
