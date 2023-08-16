@@ -10,13 +10,14 @@
         <div @click.prevent="client_nurse" class="admin_sidebar_item">Вакансия для сиделки </div>
         <div @click.prevent="client_housekeeper" class="admin_sidebar_item">Вакансия для домработницы </div>
     </div>
-    
+    <div> {{Socket.message}} </div>
     <div v-if="!photo">Добавьте изображение</div>
     <img v-else :src="photo" alt="">    
 </template>
 
 <script>
 import { useUserStore } from '../../stores/user';
+import { useSocketStore } from '../../stores/socket';
 export default {
     name: "Account",
     data() {
@@ -26,7 +27,8 @@ export default {
     },  
     setup() {
         const User = useUserStore();
-        return { User };
+        const Socket = useSocketStore();
+        return { User, Socket };
     }, 
     methods: {        
         babysitting() {
@@ -52,7 +54,8 @@ export default {
     mounted() {           
         this.User.GET_TOKEN();            
         this.photo = localStorage.user_image; 
-        this.User.GET_ADMINID();  
+        this.User.GET_ADMINID();
+        this.Socket.connect();  
     },
 }
 </script>

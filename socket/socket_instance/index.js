@@ -48,10 +48,9 @@ const io = new Server();
  */
 io.use((socket, next) => {
 
-    const token = socket.handshake.auth.token;
+    /*const token = socket.handshake.auth.token;
     console.debug('MiddleWare: ' + token);
     // Мы можем по JWT ключу получить id пользователя
-
     try {
         const decodedToken = jwt.verify(token, JWT_SECRET, { algorithms: [JWT_ALGO] });
         console.debug('Расшифрованный токен:', decodedToken);
@@ -59,7 +58,7 @@ io.use((socket, next) => {
         socket.join('userId_' + userId); // Присоединяем его в персональную комнату
     } catch (err) {
         console.error('Ошибка расшифровки токена:', err.message);
-    }
+    }*/
 
 
     next(); // Идем дальше
@@ -70,7 +69,7 @@ Promise.all([pubClient.connect(), subClient.connect()]).then(() => {
     io.adapter(createAdapter(pubClient, subClient));
 
     io.on('connection', (socket) => {
-        socket.emit('socket.myNameIs', SERVER_NAME);
+        socket.emit('test', SERVER_NAME);
         console.debug('connection: ' + socket.handshake.address);
 
         socket.on('disconnect', data => {
