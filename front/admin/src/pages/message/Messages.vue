@@ -14,12 +14,14 @@
 <script>
 import { useUserStore } from '../../stores/user';
 import { useMessageStore } from '../../stores/message';
+import { useSocketStore } from '../../stores/socket';
 export default {
     name: "Messages",
     setup() {
         const User = useUserStore();
         const Message = useMessageStore();
-        return { User, Message };
+        const Socket = useSocketStore();
+        return { User, Message, Socket };
     }, 
     methods: {
         incoming() {
@@ -35,6 +37,7 @@ export default {
     },
     mounted() {         
         this.User.GET_USERS(); this.Message.GET_COUNTMESSAGE(localStorage.userID);                                                                
+        this.Socket.connect(); 
     },
 }
 </script>

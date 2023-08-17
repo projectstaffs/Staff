@@ -60,7 +60,6 @@ io.use((socket, next) => {
         console.error('Ошибка расшифровки токена:', err.message);
     }*/
 
-
     next(); // Идем дальше
 });
 
@@ -69,7 +68,7 @@ Promise.all([pubClient.connect(), subClient.connect()]).then(() => {
     io.adapter(createAdapter(pubClient, subClient));
 
     io.on('connection', (socket) => {
-        socket.emit('test', SERVER_NAME);
+        //socket.emit('test', SERVER_NAME);
         console.debug('connection: ' + socket.handshake.address);
 
         socket.on('disconnect', data => {
@@ -81,9 +80,9 @@ Promise.all([pubClient.connect(), subClient.connect()]).then(() => {
 });
 
 // Пинг сервера - для всех (пустое бессмысленное сообщение)
-setInterval(() =>{
+/*setInterval(() =>{
     io.emit('ping', Date.now())
-}, 30000)
+}, 30000)*/
 
 
 // setInterval(() =>{

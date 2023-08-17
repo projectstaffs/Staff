@@ -11,11 +11,13 @@
 
 <script>
 import { useMessageStore } from '../../stores/message'
+import { useSocketStore } from '../../stores/socket';
 export default {
     name: "Msg-received",
     setup() {        
         const Message = useMessageStore();
-        return { Message };
+        const Socket = useSocketStore();
+        return { Message, Socket };
     },
     methods: {
         back() {
@@ -23,7 +25,8 @@ export default {
         },
     },
     mounted() {                     
-        this.Message.GET_MSG_IN(localStorage.userID);                   
+        this.Message.GET_MSG_IN(localStorage.userID); 
+        this.Socket.connect();                  
     },
 }
 </script>

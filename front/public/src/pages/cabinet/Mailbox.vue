@@ -27,18 +27,20 @@
 <script>
 import { useUserStore } from '../../stores/user';
 import { useMessageStore } from '../../stores/message';
+import { useSocketStore } from '../../stores/socket';
 export default {
     name: "Mailbox",
     setup() {
         const User = useUserStore();
         const Message = useMessageStore();
-        return { User, Message };
+        const Socket = useSocketStore();
+        return { User, Message, Socket };
     },   
     methods: {
         sentMessage() {
             this.User.user.reading = 0
             this.User.user.sender = this.User.user.id
-            this.User.user.recipient = localStorage.admin_id          
+            this.User.user.recipient = localStorage.admin_id
             this.User.user.time = new Date().toLocaleTimeString('en-US', {
                 hour12: false, hour: 'numeric', minute: 'numeric'
             });
@@ -56,7 +58,8 @@ export default {
     mounted() {  
         this.User.GET_TOKEN();                 
         this.User.GET_USER();        
-        this.Message.GET_COUNTMESSAGE_USER(localStorage.userID);                
+        this.Message.GET_COUNTMESSAGE_USER(localStorage.userID); 
+        this.Socket.connect();               
     },
 }
 </script>

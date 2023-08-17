@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use App\Models\message\Message;
 
-use SocketIO;
+use App\Services\MySocket;
 
 class MessageController extends Controller
 {
@@ -56,11 +56,8 @@ class MessageController extends Controller
         ]);                
         $message->save();
 
-        $redis = new \Redis(); // Using the Redis extension provided client
-        $redis->connect(env('REDIS_SOCKET_HOST', 'redis.socket'), env('REDIS_SOCKET_PORT', 6379));
-        $emitter = new SocketIO\Emitter($redis);
-        $emitter->emit('test', 'Some text');
-        
+        $socket = new MySocket();
+        $socket->sendMessage($message->recipient);
         Cache::put('messages', Message::all());               
         return $message;
     }

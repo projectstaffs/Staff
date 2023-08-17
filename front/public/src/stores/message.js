@@ -24,7 +24,7 @@ export const useMessageStore = defineStore('message', {
                     this.messages_in = res.data;
                     for (let index = 0; index < res.data.length; index++) {
                         if(res.data[index].reading==0){
-                            api.post('http://localhost/api/auth/message/' + res.data[index].id, { _method: 'PUT', reading: 1 })                    
+                            api.post('api/auth/message/' + res.data[index].id, { _method: 'PUT', reading: 1 })                    
                             .catch(error => { console.log(error); })
                         }
                     }

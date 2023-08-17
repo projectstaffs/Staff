@@ -18,8 +18,8 @@ export const useSocketStore = defineStore('socket', {
                 //toast.success('Connect to: ' + data)
                 if(data == localStorage.userID) {
                     const Message = useMessageStore();
-                    Message.GET_COUNTMESSAGE_USER(localStorage.userID);
-                    Message.GET_MESSAGES_IN(localStorage.userID);
+                    Message.GET_COUNTMESSAGE(localStorage.userID);
+                    Message.GET_MSG_IN(localStorage.userID);
                 }
             })
         }
