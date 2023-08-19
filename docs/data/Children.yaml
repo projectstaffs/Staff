@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+  title: Children API
+  version: 1.0.0
+tags:
+  - name: children
+    description: Endpoints related to children resources
+paths:
+  /children:
+    get:
+      summary: Get a list of children
+      tags:
+        - children
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  title: Example Child 1
+                - id: 2
+                  title: Example Child 2
+    post:
+      summary: Add a new child
+      tags:
+        - children
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The child successfully added
+        '422':
+          description: Unprocessable Entity
+  /children/{id}:
+    get:
+      summary: Get a child by ID
+      tags:
+        - children
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                id: 1
+                title: Example Child 1
+        '422':
+          description: Unprocessable Entity
+    put:
+      summary: Update a child by ID
+      tags:
+        - children
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The child successfully updated
+        '422':
+          description: Unprocessable Entity
+    delete:
+      summary: Delete a child by ID
+      tags:
+        - children
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The child successfully deleted
+        '422':
+          description: Unprocessable Entity

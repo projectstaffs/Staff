@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+  title: Experience API
+  version: 1.0.0
+tags:
+  - name: experience
+    description: Endpoints related to experience resources
+paths:
+  /experience:
+    get:
+      summary: Get a list of experience
+      tags:
+        - experience
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  title: Example Experience 1
+                - id: 2
+                  title: Example Experience 2
+    post:
+      summary: Add a new experience
+      tags:
+        - experience
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The experience successfully added
+        '422':
+          description: Unprocessable Entity
+  /experience/{id}:
+    get:
+      summary: Get an experience by ID
+      tags:
+        - experience
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                id: 1
+                title: Example Experience 1
+        '422':
+          description: Unprocessable Entity
+    put:
+      summary: Update an experience by ID
+      tags:
+        - experience
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The experience successfully updated
+        '422':
+          description: Unprocessable Entity
+    delete:
+      summary: Delete an experience by ID
+      tags:
+        - experience
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The experience successfully deleted
+        '422':
+          description: Unprocessable Entity

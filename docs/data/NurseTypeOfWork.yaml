@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+  title: Nurse Type of Work API
+  version: 1.0.0
+tags:
+  - name: nursetypeofwork
+    description: Endpoints related to nurse type of work resources
+paths:
+  /nursetypeofwork:
+    get:
+      summary: Get a list of nurse types of work
+      tags:
+        - nursetypeofwork
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  title: Example Nurse Type of Work 1
+                - id: 2
+                  title: Example Nurse Type of Work 2
+    post:
+      summary: Add a new nurse type of work
+      tags:
+        - nursetypeofwork
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The nurseTypeOfWork successfully added
+        '422':
+          description: Unprocessable Entity
+  /nursetypeofwork/{id}:
+    get:
+      summary: Get a nurse type of work by ID
+      tags:
+        - nursetypeofwork
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                id: 1
+                title: Example Nurse Type of Work 1
+        '422':
+          description: Unprocessable Entity
+    put:
+      summary: Update a nurse type of work by ID
+      tags:
+        - nursetypeofwork
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The nurseTypeOfWork successfully updated
+        '422':
+          description: Unprocessable Entity
+    delete:
+      summary: Delete a nurse type of work by ID
+      tags:
+        - nursetypeofwork
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The nurseTypeOfWork successfully deleted
+        '422':
+          description: Unprocessable Entity

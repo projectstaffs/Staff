@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+  title: Nurse Dutie API
+  version: 1.0.0
+tags:
+  - name: nursedutie
+    description: Endpoints related to nurse duty resources
+paths:
+  /nursedutie:
+    get:
+      summary: Get a list of nurse duties
+      tags:
+        - nursedutie
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  title: Example Nurse Duty 1
+                - id: 2
+                  title: Example Nurse Duty 2
+    post:
+      summary: Add a new nurse duty
+      tags:
+        - nursedutie
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The nurseDutie successfully added
+        '422':
+          description: Unprocessable Entity
+  /nursedutie/{id}:
+    get:
+      summary: Get a nurse duty by ID
+      tags:
+        - nursedutie
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                id: 1
+                title: Example Nurse Duty 1
+        '422':
+          description: Unprocessable Entity
+    put:
+      summary: Update a nurse duty by ID
+      tags:
+        - nursedutie
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The nurseDutie successfully updated
+        '422':
+          description: Unprocessable Entity
+    delete:
+      summary: Delete a nurse duty by ID
+      tags:
+        - nursedutie
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The nurseDutie successfully deleted
+        '422':
+          description: Unprocessable Entity

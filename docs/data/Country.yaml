@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+  title: Country API
+  version: 1.0.0
+tags:
+  - name: country
+    description: Endpoints related to country resources
+paths:
+  /country:
+    get:
+      summary: Get a list of country
+      tags:
+        - country
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  title: Example Country 1
+                - id: 2
+                  title: Example Country 2
+    post:
+      summary: Add a new country
+      tags:
+        - country
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The country successfully added
+        '422':
+          description: Unprocessable Entity
+  /country/{id}:
+    get:
+      summary: Get a country by ID
+      tags:
+        - country
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                id: 1
+                title: Example Country 1
+        '422':
+          description: Unprocessable Entity
+    put:
+      summary: Update a country by ID
+      tags:
+        - country
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The country successfully updated
+        '422':
+          description: Unprocessable Entity
+    delete:
+      summary: Delete a country by ID
+      tags:
+        - country
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The country successfully deleted
+        '422':
+          description: Unprocessable Entity

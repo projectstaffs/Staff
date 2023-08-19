@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+  title: TypeOfWork API
+  version: 1.0.0
+tags:
+  - name: typeofwork
+    description: Endpoints related to type of work resources
+paths:
+  /typeofwork:
+    get:
+      summary: Get a list of types of work
+      tags:
+        - typeofwork
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  title: Example Type of Work 1
+                - id: 2
+                  title: Example Type of Work 2
+    post:
+      summary: Add a new type of work
+      tags:
+        - typeofwork
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The typeOfWork successfully added
+        '422':
+          description: Unprocessable Entity
+  /typeofwork/{id}:
+    get:
+      summary: Get a type of work by ID
+      tags:
+        - typeofwork
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                id: 1
+                title: Example Type of Work 1
+        '422':
+          description: Unprocessable Entity
+    put:
+      summary: Update a type of work by ID
+      tags:
+        - typeofwork
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The typeOfWork successfully updated
+        '422':
+          description: Unprocessable Entity
+    delete:
+      summary: Delete a type of work by ID
+      tags:
+        - typeofwork
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The typeOfWork successfully deleted
+        '422':
+          description: Unprocessable Entity

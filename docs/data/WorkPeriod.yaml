@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+  title: WorkPeriod API
+  version: 1.0.0
+tags:
+  - name: workperiod
+    description: Endpoints related to work period resources
+paths:
+  /workperiod:
+    get:
+      summary: Get a list of work periods
+      tags:
+        - workperiod
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  title: Example Work Period 1
+                - id: 2
+                  title: Example Work Period 2
+    post:
+      summary: Add a new work period
+      tags:
+        - workperiod
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The workPeriod successfully added
+        '422':
+          description: Unprocessable Entity
+  /workperiod/{id}:
+    get:
+      summary: Get a work period by ID
+      tags:
+        - workperiod
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                id: 1
+                title: Example Work Period 1
+        '422':
+          description: Unprocessable Entity
+    put:
+      summary: Update a work period by ID
+      tags:
+        - workperiod
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The workPeriod successfully updated
+        '422':
+          description: Unprocessable Entity
+    delete:
+      summary: Delete a work period by ID
+      tags:
+        - workperiod
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The workPeriod successfully deleted
+        '422':
+          description: Unprocessable Entity

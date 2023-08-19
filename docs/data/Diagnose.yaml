@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+  title: Diagnose API
+  version: 1.0.0
+tags:
+  - name: diagnose
+    description: Endpoints related to diagnose resources
+paths:
+  /diagnose:
+    get:
+      summary: Get a list of diagnose
+      tags:
+        - diagnose
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  title: Example Diagnose 1
+                - id: 2
+                  title: Example Diagnose 2
+    post:
+      summary: Add a new diagnose
+      tags:
+        - diagnose
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The diagnose successfully added
+        '422':
+          description: Unprocessable Entity
+  /diagnose/{id}:
+    get:
+      summary: Get a diagnose by ID
+      tags:
+        - diagnose
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                id: 1
+                title: Example Diagnose 1
+        '422':
+          description: Unprocessable Entity
+    put:
+      summary: Update a diagnose by ID
+      tags:
+        - diagnose
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The diagnose successfully updated
+        '422':
+          description: Unprocessable Entity
+    delete:
+      summary: Delete a diagnose by ID
+      tags:
+        - diagnose
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The diagnose successfully deleted
+        '422':
+          description: Unprocessable Entity

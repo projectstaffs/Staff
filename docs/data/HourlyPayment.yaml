@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+  title: Hourly Payment API
+  version: 1.0.0
+tags:
+  - name: hourlypayment
+    description: Endpoints related to hourly payment resources
+paths:
+  /hourlypayment:
+    get:
+      summary: Get a list of hourly payments
+      tags:
+        - hourlypayment
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  title: Example Hourly Payment 1
+                - id: 2
+                  title: Example Hourly Payment 2
+    post:
+      summary: Add a new hourly payment
+      tags:
+        - hourlypayment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The hourly payment successfully added
+        '422':
+          description: Unprocessable Entity
+  /hourlypayment/{id}:
+    get:
+      summary: Get an hourly payment by ID
+      tags:
+        - hourlypayment
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                id: 1
+                title: Example Hourly Payment 1
+        '422':
+          description: Unprocessable Entity
+    put:
+      summary: Update an hourly payment by ID
+      tags:
+        - hourlypayment
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The hourly payment successfully updated
+        '422':
+          description: Unprocessable Entity
+    delete:
+      summary: Delete an hourly payment by ID
+      tags:
+        - hourlypayment
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The hourly payment successfully deleted
+        '422':
+          description: Unprocessable Entity

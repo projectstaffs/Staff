@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+  title: Education API
+  version: 1.0.0
+tags:
+  - name: education
+    description: Endpoints related to education resources
+paths:
+  /education:
+    get:
+      summary: Get a list of education
+      tags:
+        - education
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  title: Example Education 1
+                - id: 2
+                  title: Example Education 2
+    post:
+      summary: Add a new education
+      tags:
+        - education
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The education successfully added
+        '422':
+          description: Unprocessable Entity
+  /education/{id}:
+    get:
+      summary: Get an education by ID
+      tags:
+        - education
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                id: 1
+                title: Example Education 1
+        '422':
+          description: Unprocessable Entity
+    put:
+      summary: Update an education by ID
+      tags:
+        - education
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The education successfully updated
+        '422':
+          description: Unprocessable Entity
+    delete:
+      summary: Delete an education by ID
+      tags:
+        - education
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The education successfully deleted
+        '422':
+          description: Unprocessable Entity

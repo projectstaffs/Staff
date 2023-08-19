@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+  title: City API
+  version: 1.0.0
+tags:
+  - name: city
+    description: Endpoints related to city resources
+paths:
+  /city:
+    get:
+      summary: Get a list of city
+      tags:
+        - city
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  title: Example City 1
+                - id: 2
+                  title: Example City 2
+    post:
+      summary: Add a new city
+      tags:
+        - city
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The city successfully added
+        '422':
+          description: Unprocessable Entity
+  /city/{id}:
+    get:
+      summary: Get a city by ID
+      tags:
+        - city
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                id: 1
+                title: Example City 1
+        '422':
+          description: Unprocessable Entity
+    put:
+      summary: Update a city by ID
+      tags:
+        - city
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The city successfully updated
+        '422':
+          description: Unprocessable Entity
+    delete:
+      summary: Delete a city by ID
+      tags:
+        - city
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The city successfully deleted
+        '422':
+          description: Unprocessable Entity

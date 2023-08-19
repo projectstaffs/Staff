@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+  title: AgeGroup API
+  version: 1.0.0
+tags:
+  - name: agegroup
+    description: Endpoints related to age group resources
+paths:
+  /agegroup:
+    get:
+      summary: Get a list of age groups
+      tags:
+        - agegroup
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  title: Example Age Group 1
+                - id: 2
+                  title: Example Age Group 2
+    post:
+      summary: Add a new age group
+      tags:
+        - agegroup
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The age group successfully added
+        '422':
+          description: Unprocessable Entity
+  /agegroup/{id}:
+    get:
+      summary: Get an age group by ID
+      tags:
+        - agegroup
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                id: 1
+                title: Example Age Group 1
+        '422':
+          description: Unprocessable Entity
+    put:
+      summary: Update an age group by ID
+      tags:
+        - agegroup
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The age group successfully updated
+        '422':
+          description: Unprocessable Entity
+    delete:
+      summary: Delete an age group by ID
+      tags:
+        - agegroup
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The age group successfully deleted
+        '422':
+          description: Unprocessable Entity

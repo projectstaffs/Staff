@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+  title: Language API
+  version: 1.0.0
+tags:
+  - name: language
+    description: Endpoints related to language resources
+paths:
+  /language:
+    get:
+      summary: Get a list of language
+      tags:
+        - language
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  title: Example Language 1
+                - id: 2
+                  title: Example Language 2
+    post:
+      summary: Add a new language
+      tags:
+        - language
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The language successfully added
+        '422':
+          description: Unprocessable Entity
+  /language/{id}:
+    get:
+      summary: Get a language by ID
+      tags:
+        - language
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                id: 1
+                title: Example Language 1
+        '422':
+          description: Unprocessable Entity
+    put:
+      summary: Update a language by ID
+      tags:
+        - language
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The language successfully updated
+        '422':
+          description: Unprocessable Entity
+    delete:
+      summary: Delete a language by ID
+      tags:
+        - language
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The language successfully deleted
+        '422':
+          description: Unprocessable Entity

@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+  title: BabysittingDutie API
+  version: 1.0.0
+tags:
+  - name: babysittingdutie
+    description: Endpoints related to babysitting duty resources
+paths:
+  /babysittingdutie:
+    get:
+      summary: Get a list of babysitting duties
+      tags:
+        - babysittingdutie
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  title: Example Babysitting Duty 1
+                - id: 2
+                  title: Example Babysitting Duty 2
+    post:
+      summary: Add a new babysitting duty
+      tags:
+        - babysittingdutie
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The babysitting duty successfully added
+        '422':
+          description: Unprocessable Entity
+  /babysittingdutie/{id}:
+    get:
+      summary: Get a babysitting duty by ID
+      tags:
+        - babysittingdutie
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                id: 1
+                title: Example Babysitting Duty 1
+        '422':
+          description: Unprocessable Entity
+    put:
+      summary: Update a babysitting duty by ID
+      tags:
+        - babysittingdutie
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The babysitting duty successfully updated
+        '422':
+          description: Unprocessable Entity
+    delete:
+      summary: Delete a babysitting duty by ID
+      tags:
+        - babysittingdutie
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The babysitting duty successfully deleted
+        '422':
+          description: Unprocessable Entity

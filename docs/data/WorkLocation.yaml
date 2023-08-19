@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+  title: WorkLocation API
+  version: 1.0.0
+tags:
+  - name: worklocation
+    description: Endpoints related to work location resources
+paths:
+  /worklocation:
+    get:
+      summary: Get a list of work locations
+      tags:
+        - worklocation
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  title: Example Work Location 1
+                - id: 2
+                  title: Example Work Location 2
+    post:
+      summary: Add a new work location
+      tags:
+        - worklocation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The workLocation successfully added
+        '422':
+          description: Unprocessable Entity
+  /worklocation/{id}:
+    get:
+      summary: Get a work location by ID
+      tags:
+        - worklocation
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                id: 1
+                title: Example Work Location 1
+        '422':
+          description: Unprocessable Entity
+    put:
+      summary: Update a work location by ID
+      tags:
+        - worklocation
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The workLocation successfully updated
+        '422':
+          description: Unprocessable Entity
+    delete:
+      summary: Delete a work location by ID
+      tags:
+        - worklocation
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The workLocation successfully deleted
+        '422':
+          description: Unprocessable Entity

@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+  title: Monthly Payment API
+  version: 1.0.0
+tags:
+  - name: monthlypayment
+    description: Endpoints related to monthly payment resources
+paths:
+  /monthlypayment:
+    get:
+      summary: Get a list of monthly payments
+      tags:
+        - monthlypayment
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  title: Example Monthly Payment 1
+                - id: 2
+                  title: Example Monthly Payment 2
+    post:
+      summary: Add a new monthly payment
+      tags:
+        - monthlypayment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The monthlyPayment successfully added
+        '422':
+          description: Unprocessable Entity
+  /monthlypayment/{id}:
+    get:
+      summary: Get a monthly payment by ID
+      tags:
+        - monthlypayment
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                id: 1
+                title: Example Monthly Payment 1
+        '422':
+          description: Unprocessable Entity
+    put:
+      summary: Update a monthly payment by ID
+      tags:
+        - monthlypayment
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The monthlyPayment successfully updated
+        '422':
+          description: Unprocessable Entity
+    delete:
+      summary: Delete a monthly payment by ID
+      tags:
+        - monthlypayment
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The monthlyPayment successfully deleted
+        '422':
+          description: Unprocessable Entity

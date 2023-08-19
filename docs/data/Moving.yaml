@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+  title: Moving API
+  version: 1.0.0
+tags:
+  - name: moving
+    description: Endpoints related to moving resources
+paths:
+  /moving:
+    get:
+      summary: Get a list of moving options
+      tags:
+        - moving
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  title: Example Moving Option 1
+                - id: 2
+                  title: Example Moving Option 2
+    post:
+      summary: Add a new moving option
+      tags:
+        - moving
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The moving successfully added
+        '422':
+          description: Unprocessable Entity
+  /moving/{id}:
+    get:
+      summary: Get a moving option by ID
+      tags:
+        - moving
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                id: 1
+                title: Example Moving Option 1
+        '422':
+          description: Unprocessable Entity
+    put:
+      summary: Update a moving option by ID
+      tags:
+        - moving
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The moving successfully updated
+        '422':
+          description: Unprocessable Entity
+    delete:
+      summary: Delete a moving option by ID
+      tags:
+        - moving
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The moving successfully deleted
+        '422':
+          description: Unprocessable Entity

@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+  title: Housekeeper Dutie API
+  version: 1.0.0
+tags:
+  - name: housekeeperdutie
+    description: Endpoints related to housekeeper duty resources
+paths:
+  /housekeeperdutie:
+    get:
+      summary: Get a list of housekeeper duties
+      tags:
+        - housekeeperdutie
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  title: Example Housekeeper Dutie 1
+                - id: 2
+                  title: Example Housekeeper Dutie 2
+    post:
+      summary: Add a new housekeeper duty
+      tags:
+        - housekeeperdutie
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The housekeeper duty successfully added
+        '422':
+          description: Unprocessable Entity
+  /housekeeperdutie/{id}:
+    get:
+      summary: Get a housekeeper duty by ID
+      tags:
+        - housekeeperdutie
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                id: 1
+                title: Example Housekeeper Dutie 1
+        '422':
+          description: Unprocessable Entity
+    put:
+      summary: Update a housekeeper duty by ID
+      tags:
+        - housekeeperdutie
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The housekeeper duty successfully updated
+        '422':
+          description: Unprocessable Entity
+    delete:
+      summary: Delete a housekeeper duty by ID
+      tags:
+        - housekeeperdutie
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The housekeeper duty successfully deleted
+        '422':
+          description: Unprocessable Entity

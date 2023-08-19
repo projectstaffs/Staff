@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+  title: Status API
+  version: 1.0.0
+tags:
+  - name: status
+    description: Endpoints related to status resources
+paths:
+  /status:
+    get:
+      summary: Get a list of status
+      tags:
+        - status
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  title: Example Status 1
+                - id: 2
+                  title: Example Status 2
+    post:
+      summary: Add a new status
+      tags:
+        - status
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The status successfully added
+        '422':
+          description: Unprocessable Entity
+  /status/{id}:
+    get:
+      summary: Get a status by ID
+      tags:
+        - status
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                id: 1
+                title: Example Status 1
+        '422':
+          description: Unprocessable Entity
+    put:
+      summary: Update a status by ID
+      tags:
+        - status
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The status successfully updated
+        '422':
+          description: Unprocessable Entity
+    delete:
+      summary: Delete a status by ID
+      tags:
+        - status
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The status successfully deleted
+        '422':
+          description: Unprocessable Entity

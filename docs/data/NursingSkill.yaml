@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+  title: Nursing Skill API
+  version: 1.0.0
+tags:
+  - name: nursingskill
+    description: Endpoints related to nursing skill resources
+paths:
+  /nursingskill:
+    get:
+      summary: Get a list of nursing skills
+      tags:
+        - nursingskill
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  title: Example Nursing Skill 1
+                - id: 2
+                  title: Example Nursing Skill 2
+    post:
+      summary: Add a new nursing skill
+      tags:
+        - nursingskill
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The nursingSkill successfully added
+        '422':
+          description: Unprocessable Entity
+  /nursingskill/{id}:
+    get:
+      summary: Get a nursing skill by ID
+      tags:
+        - nursingskill
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                id: 1
+                title: Example Nursing Skill 1
+        '422':
+          description: Unprocessable Entity
+    put:
+      summary: Update a nursing skill by ID
+      tags:
+        - nursingskill
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The nursingSkill successfully updated
+        '422':
+          description: Unprocessable Entity
+    delete:
+      summary: Delete a nursing skill by ID
+      tags:
+        - nursingskill
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The nursingSkill successfully deleted
+        '422':
+          description: Unprocessable Entity

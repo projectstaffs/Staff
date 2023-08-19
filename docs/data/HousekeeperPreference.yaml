@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+  title: Housekeeper Preference API
+  version: 1.0.0
+tags:
+  - name: housekeeperpreference
+    description: Endpoints related to housekeeper preference resources
+paths:
+  /housekeeperpreference:
+    get:
+      summary: Get a list of housekeeper preferences
+      tags:
+        - housekeeperpreference
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  title: Example Housekeeper Preference 1
+                - id: 2
+                  title: Example Housekeeper Preference 2
+    post:
+      summary: Add a new housekeeper preference
+      tags:
+        - housekeeperpreference
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The housekeeper preference successfully added
+        '422':
+          description: Unprocessable Entity
+  /housekeeperpreference/{id}:
+    get:
+      summary: Get a housekeeper preference by ID
+      tags:
+        - housekeeperpreference
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                id: 1
+                title: Example Housekeeper Preference 1
+        '422':
+          description: Unprocessable Entity
+    put:
+      summary: Update a housekeeper preference by ID
+      tags:
+        - housekeeperpreference
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The housekeeper preference successfully updated
+        '422':
+          description: Unprocessable Entity
+    delete:
+      summary: Delete a housekeeper preference by ID
+      tags:
+        - housekeeperpreference
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The housekeeper preference successfully deleted
+        '422':
+          description: Unprocessable Entity

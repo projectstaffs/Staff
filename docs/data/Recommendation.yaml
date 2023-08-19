@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+  title: Recommendation API
+  version: 1.0.0
+tags:
+  - name: recommendation
+    description: Endpoints related to recommendation resources
+paths:
+  /recommendation:
+    get:
+      summary: Get a list of recommendation
+      tags:
+        - recommendation
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  title: Example Recommendation 1
+                - id: 2
+                  title: Example Recommendation 2
+    post:
+      summary: Add a new recommendation
+      tags:
+        - recommendation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The recommendation successfully added
+        '422':
+          description: Unprocessable Entity
+  /recommendation/{id}:
+    get:
+      summary: Get a recommendation by ID
+      tags:
+        - recommendation
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                id: 1
+                title: Example Recommendation 1
+        '422':
+          description: Unprocessable Entity
+    put:
+      summary: Update a recommendation by ID
+      tags:
+        - recommendation
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The recommendation successfully updated
+        '422':
+          description: Unprocessable Entity
+    delete:
+      summary: Delete a recommendation by ID
+      tags:
+        - recommendation
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: The recommendation successfully deleted
+        '422':
+          description: Unprocessable Entity
