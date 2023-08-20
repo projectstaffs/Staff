@@ -4,6 +4,10 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
+use App\Models\data\HousekeeperDutie;
+
+use Illuminate\Support\Facades\Mail;
+use App\Mail\UserMail;
 
 class RedisCommand extends Command
 {
@@ -25,7 +29,17 @@ class RedisCommand extends Command
      * Execute the console command.
      */
     public function handle()
-    {        
+    {
+        Mail::to('aleksander13@ukr.net')->send(new UserMail());
+
+        /*$before = microtime(true);        
+        $test = Cache::get('housekeeperduties');
+        $after = microtime(true);
+        dd($after - $before);*/
+
+        //Cache::put('housekeeperduties', HousekeeperDutie::all());
+        //$test = HousekeeperDutie::all();
+
         /*Cache::put('mygame', 'gothic'); 
         $str = Cache::get('mygame');
         Cache::put('mygame', 'gothicnew');
