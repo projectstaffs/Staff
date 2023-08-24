@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\UserResource;
+use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
@@ -43,13 +44,8 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)    {
-        $request->password = Hash::make($request->password);
-
-        $user = User::where('email', $request->email)->first();
-        if ($user) {
-            return response(['message' => 'Пользователь с таким email уже существует'], 403);
-        }        
+    public function store(UserRequest $request) {        
+        $request->password = Hash::make($request->password);        
         
         $user = new User([
             'name' => $request->name,

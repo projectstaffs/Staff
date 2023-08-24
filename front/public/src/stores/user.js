@@ -8,7 +8,9 @@ export const useUserStore = defineStore('user', {
         return {                        
             user: {},
             users: {}, 
-            token: '',                    
+            token: '',
+            login_error: '',
+            register_error: {}                    
         }
     },
     actions: {  
@@ -64,7 +66,8 @@ export const useUserStore = defineStore('user', {
         },
         LOGIN_USER(data){                                                 
             axios.post('api/auth/login', data)
-                .then((res) => {                
+                .then((res) => { 
+                    this.login_error = '';               
                     localStorage.access_token = res.data[0].original.access_token;
                     localStorage.user = JSON.stringify(res.data[1].original);               
                     localStorage.user_image = res.data[1].original.image;
@@ -74,7 +77,10 @@ export const useUserStore = defineStore('user', {
                     this.user = res.data[1].original;
                     router.push({name: "Account"});                    
                 })
-                .catch(error => { console.log(error); })
+                .catch(error => { 
+                    this.login_error = error.response.data.error;
+                    //console.log(error.response.data.error); 
+                })
         },
         GET_USERS(){       
             axios.get('api/user/')
@@ -94,7 +100,8 @@ export const useUserStore = defineStore('user', {
         },
         CREATE_USER(data){                                     
             axios.post('api/user', data)
-                .then((res) => {                
+                .then((res) => { 
+                    this.register_error = {}               
                     localStorage.access_token = res.data.access_token;
                     localStorage.user = JSON.stringify(res.data.user);
                     localStorage.userID = res.data.user.id;
@@ -103,7 +110,10 @@ export const useUserStore = defineStore('user', {
                     this.user = res.data.user;                    
                     router.push({name: "Account"});                   
                 })
-                .catch(error => { console.log(error); })
+                .catch(error => { 
+                    console.log(error);
+                    this.register_error = error.response.data.errors;  
+                })
         },        
     },
 })

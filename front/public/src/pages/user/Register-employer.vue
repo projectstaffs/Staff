@@ -28,9 +28,10 @@
         <div>Укажите свой пароль:</div>
         <input v-model="user.password" required class="login_form_item" type="password" placeholder="password">
         <div>Подтвердите свой пароль:</div>
-        <input v-model="user.password_confirm" required class="login_form_item" type="password" placeholder="confirm password">
+        <input v-model="user.password_confirmation" required class="login_form_item" type="password" placeholder="confirm password">
         <button type="submit" class="login_form_btn">register</button>
     </form>
+    <div class="register_error" v-for="item in User.register_error" :key="item">{{ item[0] }}</div>
 </template>
 
 <script>
@@ -50,14 +51,9 @@ export default {
     },
     methods: {        
         register() {
-            if(this.user.password !== this.user.password_confirm) {
-                console.log('wrong confirm');
-            } else {
-                this.user.role = "Наниматель"; 
-                this.user.confirmed = true; 
-                               
-                this.User.CREATE_USER(this.user); 
-            }                       
+            this.user.role = "Наниматель"; 
+            this.user.confirmed = true;
+            this.User.CREATE_USER(this.user);                       
         }
     },
     mounted() { 
@@ -66,3 +62,9 @@ export default {
     },    
 }
 </script>
+
+<style>
+.register_error {
+    text-align: center;
+}
+</style>

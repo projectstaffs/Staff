@@ -116,7 +116,7 @@
         <div>Укажите свой пароль:</div>
         <input v-model="user.password" required class="login_form_item" type="password" placeholder="password">
         <div>Подтвердите свой пароль:</div>
-        <input v-model="user.password_confirm" required class="login_form_item" type="password" placeholder="confirm password">
+        <input v-model="user.password_confirmation" required class="login_form_item" type="password" placeholder="confirm password">
         <button type="submit" class="login_form_btn">register</button>
     </form>
 </template>
@@ -146,13 +146,9 @@ export default {
     }, 
     methods: {        
         register() {
-            if(this.user.password !== this.user.password_confirm) {
-                console.log('wrong confirm');
-            } else {
-                this.user.role = "Исполнитель"; 
-                this.user.confirmed = true;                                
-                this.User.CREATE_USER(this.user); 
-            }                       
+            this.user.role = "Исполнитель"; 
+            this.user.confirmed = true;                                
+            this.User.CREATE_USER(this.user);                                    
         }
     },
     mounted() {      

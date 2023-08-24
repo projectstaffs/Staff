@@ -1,5 +1,6 @@
 <template>
     <div class="login_title"> login page </div>
+    <div class="login_error">{{ User.login_error }}</div>
     <form @submit.prevent="login" class="login_form">        
         <input v-model="new_user.email" required class="login_form_item" type="email" placeholder="email">
         <input v-model="new_user.password" required class="login_form_item" type="password" placeholder="password">
@@ -34,4 +35,10 @@ export default {
     },    
 }
 </script>
+
+<style>
+.login_error {
+    text-align: center;
+}
+</style>
 
