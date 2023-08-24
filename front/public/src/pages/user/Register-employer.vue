@@ -31,7 +31,10 @@
         <input v-model="user.password_confirmation" required class="login_form_item" type="password" placeholder="confirm password">
         <button type="submit" class="login_form_btn">register</button>
     </form>
-    <div class="register_error" v-for="item in User.register_error" :key="item">{{ item[0] }}</div>
+
+    <div class="register_error" v-for="item in User.register_error" :key="item">
+        {{ item[0] }}
+    </div>
 </template>
 
 <script>
@@ -58,13 +61,8 @@ export default {
     },
     mounted() { 
         this.User.GET_TOKEN();           
-        this.Store.GET_COUNTRYS(); this.Store.GET_CITYS();                              
+        this.Store.GET_COUNTRYS(); this.Store.GET_CITYS(); 
+        this.User.register_error = null;                             
     },    
 }
 </script>
-
-<style>
-.register_error {
-    text-align: center;
-}
-</style>

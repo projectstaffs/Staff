@@ -10,7 +10,7 @@ export const useUserStore = defineStore('user', {
             users: {}, 
             token: '',
             login_error: '',
-            register_error: {}                    
+            register_error: null                    
         }
     },
     actions: {  
@@ -101,7 +101,7 @@ export const useUserStore = defineStore('user', {
         CREATE_USER(data){                                     
             axios.post('api/user', data)
                 .then((res) => { 
-                    this.register_error = {}               
+                    this.register_error = null;               
                     localStorage.access_token = res.data.access_token;
                     localStorage.user = JSON.stringify(res.data.user);
                     localStorage.userID = res.data.user.id;

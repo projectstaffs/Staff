@@ -14,6 +14,9 @@ ul {
     margin: 0;
 }
 
+.register_error {
+    text-align: center;
+}
 .language_item {
     display: inline-block;
 }

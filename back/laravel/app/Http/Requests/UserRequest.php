@@ -25,7 +25,7 @@ class UserRequest extends FormRequest
             return [
                 'name' => 'required|string',
                 'email' => 'required|email|string|unique:users',
-                'password' => 'required|string|required_with:password_confirmation|same:password_confirmation|min:3',
+                'password' => 'required|string|confirmed|min:3',
                 'password_confirmation' => 'required|string',
                 'role' => 'required|string',
                 'confirmed' => 'required|boolean',
@@ -89,6 +89,19 @@ class UserRequest extends FormRequest
             'password.min' => 'Пароль должен состоять как минимум из 3 символов.',
 
             'gender.required' => 'Укажите свой пол.',
+            'right_work.required' => 'Укажите право работать на территории Украины.',
+            'drive.required' => 'Укажите наличие водительского удостоверения.',
+            'night_work.required' => 'Укажите согласие работать в ночное время.',
+            'animal_work.required' => 'Укажите готовы ли вы работать в доме с домашними животными.',
+            'swimming.required' => 'Укажите умеете ли вы плавать.',
+
+            'citizen.required' => 'Укажите гражданство(страна).',
+            'criminal.required' => 'Укажите наличие справки из полиции об отсутствии судимости.',
+            'moving.required' => 'Укажите согласны ли вы на переезд.',
+            'smoking.required' => 'Укажите отношение к курению.',
+            'alcohol.required' => 'Укажите отношение к алкоголю.',
+            'status.required' => 'Укажите семейное положение.',
+            'religion.required' => 'Укажите свою религию.'
         ];
     }
 }
