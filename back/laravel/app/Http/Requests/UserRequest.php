@@ -31,8 +31,8 @@ class UserRequest extends FormRequest
                 'confirmed' => 'required|boolean',
                 'surname' => 'required|string',
                 'patronymic' => 'required|string',
-                'phone' => 'required|numeric|digits:10',
-                'additional_phone' => 'required|numeric|digits:10',
+                'phone' => 'required|numeric|digits:9',
+                'additional_phone' => 'required|numeric|digits:9',
                 
                 'gender' => 'required|string',
                 'age' => 'required|date',
@@ -67,8 +67,8 @@ class UserRequest extends FormRequest
                 'confirmed' => 'required|boolean',
                 'surname' => 'required|string',
                 'patronymic' => 'required|string',
-                'phone' => 'required|numeric|digits:10',
-                'additional_phone' => 'required|numeric|digits:10',               
+                'phone' => 'required|numeric|digits:9',
+                'additional_phone' => 'required|numeric|digits:9',               
                 
                 'country' => 'required|numeric',
                 'city' => 'required|numeric'                
@@ -79,9 +79,9 @@ class UserRequest extends FormRequest
     public function messages() {
         return [
             'phone.numeric' => 'Номер телефона должен быть числом.',
-            'phone.digits' => 'Номер телефона должен содержать 10 цифр.', 
+            'phone.digits' => 'Номер телефона должен содержать 9 цифр.', 
             'additional_phone.numeric' => 'Дополнительный номер телефона должен быть числом.',
-            'additional_phone.digits' => 'Дополнительный номер телефона должен содержать 10 цифр.',
+            'additional_phone.digits' => 'Дополнительный номер телефона должен содержать 9 цифр.',
             'email.unique' => 'Адрес электронной почты должен быть уникальным.', 
             'country.required' => 'Укажите страну проживания.',
             'city.required' => 'Укажите свой город.',
