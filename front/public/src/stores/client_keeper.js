@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import api from "../assets/api";
+import router from "../router";
 
 export const useClient_KeeperStore = defineStore('client_keeper', {    
     state: () => {
@@ -44,6 +45,7 @@ export const useClient_KeeperStore = defineStore('client_keeper', {
                         keeperdutie = {};                                                               
                     })                  
                     this.CREATE_FORMKEEPERDUTIE([result_keeperdutie, result_keeperdutie.length]);                        
+                    router.push({name: "Client_keeper"});
                 })
                 .catch(error => { console.log(error); })
         },

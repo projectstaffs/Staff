@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use App\Models\client\Client_keeper;
 use App\Http\Resources\client\ClientKeeperResource;
+use App\Http\Requests\client\KeeperRequest;
 
 class ClientKeeperController extends Controller
 {
@@ -41,7 +42,7 @@ class ClientKeeperController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(KeeperRequest $request)
     {
         $keeper = new Client_keeper([
             'user_id' => $request->user_id,
@@ -80,7 +81,7 @@ class ClientKeeperController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(KeeperRequest $request, string $id)
     {
         $keeper = Client_keeper::find($id);       
         $keeper->title = $request['title'];

@@ -54,7 +54,15 @@
         </select>                  
                 
         <button type="submit" class="login_form_btn">Добавить анкету</button>
-    </form> 
+    </form>
+
+    <div class="register_error" v-for="item in errors" :key="item">
+        {{ item }}
+    </div>
+    <div class="register_error" v-for="item in User.global_error" :key="item">
+        {{ item[0] }}
+    </div>
+
     <div>{{ Nurse.nurse }}</div> 
     <span v-if="Nurse.nurse" class="category_change_btn" @click.prevent="change_nurse()">Изменить анкету</span>
     <span v-if="Nurse.nurse" class="category_change_btn red" @click.prevent="delete_nurse()">Удалить анкету</span>
@@ -74,7 +82,8 @@ export default {
             work: [
                 { value: 'Да' },
                 { value: 'Нет' }
-            ],            
+            ],
+            errors: null            
         }
     },
     setup() {
@@ -88,9 +97,16 @@ export default {
             this.$router.push({name: "Account"})
         },        
         createForm() {
-            this.anketa.user_id = localStorage.userID;
-            this.anketa.confirmed = true;
-            this.Nurse.CREATE_NURSE([this.anketa, this.anketajoboptions, this.anketaduties]);
+            if((this.anketajoboptions.length == 0) || (this.anketaduties.length == 0)) {
+                this.errors = [];
+                if(this.anketajoboptions.length == 0) {this.errors.push('Укажите приемлемые варианты работы.');}
+                if(this.anketaduties.length == 0) {this.errors.push('Укажите обязанности для сиделки.');}                
+            } else {
+                this.errors = null; this.User.global_error = null;
+                this.anketa.user_id = localStorage.userID;
+                this.anketa.confirmed = true;
+                this.Nurse.CREATE_NURSE([this.anketa, this.anketajoboptions, this.anketaduties]);
+            }            
         },
         change_nurse() {
             this.$router.push({name: "Change-client_nurse"})
@@ -103,6 +119,7 @@ export default {
         this.Nurse.GET_NURSE(localStorage.userID);
         this.Store.GET_JOBOPTIONS(); this.Store.GET_WORKPERIODS(); this.Store.GET_EMPLOYMENTS(); 
         this.Store.GET_NURSEDUTIES(); this.Store.GET_HOURLYPAYMENTS(); this.Store.GET_MONTHLYPAYMENTS();                                      
+        this.User.global_error = null; this.errors = null; 
     },
 }
 </script>

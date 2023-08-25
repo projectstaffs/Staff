@@ -55,6 +55,13 @@
 
         <button type="submit" class="login_form_btn">Изменить вакансию</button>
     </form> 
+
+    <div class="register_error" v-for="item in errors" :key="item">
+        {{ item }}
+    </div>
+    <div class="register_error" v-for="item in User.global_error" :key="item">
+        {{ item[0] }}
+    </div>
 </template>
 
 <script>
@@ -69,6 +76,7 @@ export default {
                 { value: 'Да' },
                 { value: 'Нет' }
             ],
+            errors: null
         }
     },
     setup() {
@@ -81,9 +89,15 @@ export default {
         back() {
             this.$router.push({name: "Client_keeper"})
         },        
-        changeForm() {            
-            this.Keeper.CHANGE_KEEPER([this.Keeper.keeper, this.Keeper.keeper_options.anketajoboptions, this.Keeper.keeper_options.anketaduties]);
-            this.$router.push({name: "Client_keeper"})
+        changeForm() {  
+            if((this.Keeper.keeper_options.anketajoboptions.length == 0) || (this.Keeper.keeper_options.anketaduties.length == 0)) {
+                this.errors = [];
+                if(this.Keeper.keeper_options.anketajoboptions.length == 0) {this.errors.push('Укажите приемлемые варианты работы.');}
+                if(this.Keeper.keeper_options.anketaduties == 0) {this.errors.push('Укажите обязанности для домработницы.');}
+            } else {
+                this.errors = null; this.User.global_error = null;
+                this.Keeper.CHANGE_KEEPER([this.Keeper.keeper, this.Keeper.keeper_options.anketajoboptions, this.Keeper.keeper_options.anketaduties]);
+            }
         },
     },
     mounted() {
@@ -91,6 +105,7 @@ export default {
         this.Store.GET_JOBOPTIONS(); this.Store.GET_WORKPERIODS(); 
         this.Store.GET_EMPLOYMENTS(); this.Store.GET_HOUSEKEEPERDUTIES();
         this.Store.GET_HOURLYPAYMENTS(); this.Store.GET_MONTHLYPAYMENTS();                               
+        this.User.global_error = null; this.errors = null;
     },
 }
 </script>

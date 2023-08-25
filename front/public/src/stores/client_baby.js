@@ -59,7 +59,8 @@ export const useClient_BabyStore = defineStore('client_baby', {
                         result_agegroup.push(agegroup);
                         agegroup = {};                                                               
                     })                  
-                    this.CREATE_FORMAGEGROUP([result_agegroup, result_agegroup.length]);                    
+                    this.CREATE_FORMAGEGROUP([result_agegroup, result_agegroup.length]);
+                    router.push({name: "Client_baby"});                    
                 })
                 .catch(error => { console.log(error); })
         },
@@ -97,7 +98,6 @@ export const useClient_BabyStore = defineStore('client_baby', {
                     this.CREATE_FORMAGEGROUP([result_agegroup, result_agegroup.length]);
     
                     this.GET_BABY(data[0].user_id);
-                    //router.push({name: "Account"});
                 })
                 .catch(error => { 
                     console.log(error);                     

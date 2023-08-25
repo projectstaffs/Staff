@@ -11,7 +11,7 @@ class KeeperRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,27 @@ class KeeperRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'user_id' => 'required|numeric',
+            'confirmed' => 'required|boolean',
+            'title' => 'required|string',
+            'title_about' => 'required',
+            'workperiod_id' => 'required|numeric',
+            'employment_id' => 'required|numeric',
+            'drive' => 'required|string',
+            'agents' => 'required|string',
+            'hourpay_id' => 'required|numeric',
+            'monthpay_id' => 'required|numeric'
+        ];
+    }
+
+    public function messages() {
+        return [
+            'workperiod_id.required' => 'Укажите период работы.',
+            'employment_id.required' => 'Укажите занятость.',
+            'drive.required' => 'Укажите наличие у работника водительского удостоверения.',
+            'agents.required' => 'Укажите позволять ли компаниям и агентствам связываться с Вами по данной вакансии.',
+            'hourpay_id.required' => 'Укажите ожидаемую почасовую оплату.',
+            'monthpay_id.required' => 'Укажите ожидаемую помесячную оплату.'
         ];
     }
 }

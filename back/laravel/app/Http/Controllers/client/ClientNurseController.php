@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use App\Models\client\Client_nurse;
 use App\Http\Resources\client\ClientNurseResource;
+use App\Http\Requests\client\NurseRequest;
 
 class ClientNurseController extends Controller
 {
@@ -23,9 +24,8 @@ class ClientNurseController extends Controller
                 $client_nurse = $item;
                 break;
             }                           
-        }        
-        
-        //$nurse = Client_nurse::where('user_id', $request["data"])->first();
+        }
+
         if($client_nurse) { return new ClientNurseResource($client_nurse); }
         else { return null; }
     }
@@ -41,7 +41,7 @@ class ClientNurseController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(NurseRequest $request)
     {
         $nurse = new Client_nurse([
             'user_id' => $request->user_id,
@@ -80,7 +80,7 @@ class ClientNurseController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(NurseRequest $request, string $id)
     {
         $nurse = Client_nurse::find($id);       
         $nurse->title = $request['title'];

@@ -55,6 +55,14 @@
                 
         <button type="submit" class="login_form_btn">Добавить анкету</button>
     </form> 
+
+    <div class="register_error" v-for="item in errors" :key="item">
+        {{ item }}
+    </div>
+    <div class="register_error" v-for="item in User.global_error" :key="item">
+        {{ item[0] }}
+    </div>
+
     <div>{{ Keeper.keeper }}</div> 
     <span v-if="Keeper.keeper" class="category_change_btn" @click.prevent="change_keeper()">Изменить анкету</span>
     <span v-if="Keeper.keeper" class="category_change_btn red" @click.prevent="delete_keeper()">Удалить анкету</span>
@@ -74,7 +82,8 @@ export default {
             work: [
                 { value: 'Да' },
                 { value: 'Нет' }
-            ],            
+            ],  
+            errors: null          
         }
     },
     setup() {
@@ -88,9 +97,17 @@ export default {
             this.$router.push({name: "Account"})
         },        
         createForm() {
-            this.anketa.user_id = localStorage.userID;
+            if((this.anketajoboptions.length == 0) || (this.anketaduties.length == 0)) {
+                this.errors = [];
+                if(this.anketajoboptions.length == 0) {this.errors.push('Укажите приемлемые варианты работы.');}
+                if(this.anketaduties.length == 0) {this.errors.push('Укажите обязанности для домработницы.');}                
+            } else {
+                this.errors = null; this.User.global_error = null;
+                this.anketa.user_id = localStorage.userID;
             this.anketa.confirmed = true;
             this.Keeper.CREATE_KEEPER([this.anketa, this.anketajoboptions, this.anketaduties,]);
+            }
+            
         },
         change_keeper() {
             this.$router.push({name: "Change-client_keeper"})
@@ -105,6 +122,7 @@ export default {
         this.Store.GET_JOBOPTIONS(); this.Store.GET_WORKPERIODS(); 
         this.Store.GET_HOUSEKEEPERDUTIES(); this.Store.GET_EMPLOYMENTS();       
         this.Store.GET_HOURLYPAYMENTS(); this.Store.GET_MONTHLYPAYMENTS();                                      
+        this.User.global_error = null; this.errors = null;
     },
 }
 </script>

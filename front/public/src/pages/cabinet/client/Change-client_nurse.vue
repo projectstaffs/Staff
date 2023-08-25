@@ -54,7 +54,14 @@
         </select> 
 
         <button type="submit" class="login_form_btn">Изменить вакансию</button>
-    </form> 
+    </form>
+    
+    <div class="register_error" v-for="item in errors" :key="item">
+        {{ item }}
+    </div>
+    <div class="register_error" v-for="item in User.global_error" :key="item">
+        {{ item[0] }}
+    </div>
 </template>
 
 <script>
@@ -69,6 +76,7 @@ export default {
                 { value: 'Да' },
                 { value: 'Нет' }
             ],
+            errors: null
         }
     },
     setup() {
@@ -81,9 +89,15 @@ export default {
         back() {
             this.$router.push({name: "Client_nurse"})
         },        
-        changeForm() {            
-            this.Nurse.CHANGE_NURSE([this.Nurse.nurse, this.Nurse.nurse_options.anketajoboptions, this.Nurse.nurse_options.anketaduties]);
-            this.$router.push({name: "Client_nurse"})
+        changeForm() {  
+            if((this.Nurse.nurse_options.anketajoboptions.length == 0) || (this.Nurse.nurse_options.anketaduties.length == 0)) {
+                this.errors = [];
+                if(this.Nurse.nurse_options.anketajoboptions.length == 0) {this.errors.push('Укажите приемлемые варианты работы.');}
+                if(this.Nurse.nurse_options.anketaduties == 0) {this.errors.push('Укажите обязанности для сиделки.');}
+            } else {
+                this.errors = null; this.User.global_error = null;
+                this.Nurse.CHANGE_NURSE([this.Nurse.nurse, this.Nurse.nurse_options.anketajoboptions, this.Nurse.nurse_options.anketaduties]);
+            }
         },
     },
     mounted() {
@@ -92,6 +106,7 @@ export default {
         this.Store.GET_JOBOPTIONS(); this.Store.GET_WORKPERIODS(); 
         this.Store.GET_EMPLOYMENTS(); this.Store.GET_NURSEDUTIES();
         this.Store.GET_HOURLYPAYMENTS(); this.Store.GET_MONTHLYPAYMENTS();                               
+        this.User.global_error = null; this.errors = null;
     },
 }
 </script>
