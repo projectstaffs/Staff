@@ -10,7 +10,8 @@ export const useUserStore = defineStore('user', {
             users: {}, 
             token: '',
             login_error: '',
-            register_error: null                    
+            register_error: null,
+            global_error: null                     
         }
     },
     actions: {  
@@ -89,16 +90,20 @@ export const useUserStore = defineStore('user', {
                 })
                 .catch(error => { console.log(error); })
         },
-        UPDATE_USER(data){  
+        UPDATE_USER(data){ 
             axios.put('api/user/' + data.id, data)
-                .then((res) => {        
+                .then((res) => {    
+                    this.register_error = null;    
                     localStorage.user = JSON.stringify(res.data.data);
                     this.user = res.data.data;
                     router.push({name: "Account"});                   
                 })
-                .catch(error => { console.log(error); })
+                .catch(error => { 
+                    //console.log(error);
+                    this.register_error = error.response.data.errors; 
+                })
         },
-        CREATE_USER(data){                                     
+        CREATE_USER(data){                                    
             axios.post('api/user', data)
                 .then((res) => { 
                     this.register_error = null;               
@@ -111,7 +116,7 @@ export const useUserStore = defineStore('user', {
                     router.push({name: "Account"});                   
                 })
                 .catch(error => { 
-                    console.log(error);
+                    //console.log(error);
                     this.register_error = error.response.data.errors;  
                 })
         },        

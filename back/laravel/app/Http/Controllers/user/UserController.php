@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\UserupdateRequest;
 
 class UserController extends Controller
 {
@@ -82,7 +83,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UserupdateRequest $request, string $id)
     {
         $request['password'] = Hash::make($request['password']);
         $user = User::find($id);      

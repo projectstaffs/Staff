@@ -116,7 +116,7 @@
         <div>Укажите свой пароль:</div>
         <input v-model="User.user.password" required class="login_form_item" type="password" placeholder="password">
         <div>Подтвердите свой пароль:</div>
-        <input v-model="User.user.password_confirm" required class="login_form_item" type="password" placeholder="confirm password">
+        <input v-model="User.user.password_confirmation" required class="login_form_item" type="password" placeholder="confirm password">
         <button type="submit" class="login_form_btn">Изменить данные</button>
     </form>
 
@@ -148,9 +148,13 @@
         <div>Укажите свой пароль:</div>
         <input v-model="User.user.password" required class="login_form_item" type="password" placeholder="password">
         <div>Подтвердите свой пароль:</div>
-        <input v-model="User.user.password_confirm" required class="login_form_item" type="password" placeholder="confirm password">
+        <input v-model="User.user.password_confirmation" required class="login_form_item" type="password" placeholder="confirm password">
         <button type="submit" class="login_form_btn">Изменить данные</button>
     </form>
+
+    <div class="register_error" v-for="item in User.register_error" :key="item">
+        {{ item[0] }}
+    </div>
 </template>
 
 <script>
@@ -179,23 +183,15 @@ export default {
         return { User, Store };
     },
     methods: {
-        change_User() {
-            if(this.User.user.password !== this.User.user.password_confirm) {
-                console.log('wrong confirm');
-            } else {                
-                this.User.user.is_babysitting = this.is_babysitting;
-                this.User.user.is_nurse = this.is_nurse;
-                this.User.user.is_housekeeper = this.is_housekeeper;                
-                
-                this.User.UPDATE_USER(this.User.user);                           
-            }                       
+        change_User() {                
+            this.User.user.is_babysitting = this.is_babysitting;
+            this.User.user.is_nurse = this.is_nurse;
+            this.User.user.is_housekeeper = this.is_housekeeper;                
+            
+            this.User.UPDATE_USER(this.User.user);
         },
-        change_ClientUser() {
-            if(this.User.user.password !== this.User.user.password_confirm) {
-                console.log('wrong confirm');
-            } else {               
-                this.User.UPDATE_USER(this.User.user);                           
-            }                       
+        change_ClientUser() {              
+            this.User.UPDATE_USER(this.User.user);
         }
     },
     mounted() {    
@@ -211,7 +207,8 @@ export default {
         this.Store.GET_RELIGIONS();
         if(this.User.user.is_babysitting === 1 || this.User.user.is_babysitting === true) {this.is_babysitting = true;}
         if(this.User.user.is_nurse === 1 || this.User.user.is_nurse === true) {this.is_nurse = true;}
-        if(this.User.user.is_housekeeper === 1 || this.User.user.is_housekeeper === true) {this.is_housekeeper = true;}                         
+        if(this.User.user.is_housekeeper === 1 || this.User.user.is_housekeeper === true) {this.is_housekeeper = true;}
+        this.User.register_error = null;                         
     },
 }
 </script>

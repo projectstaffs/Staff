@@ -1,5 +1,6 @@
 import axios from "axios";
 import router from "../router";
+import { useUserStore } from '../stores/user';
 
 const api = axios.create();
 
@@ -23,6 +24,11 @@ api.interceptors.response.use({}, error => {
 
             return api.request(error.config);
         })
+    }
+
+    if(error.response.status === 422) {
+        const User = useUserStore();
+        User.global_error = error.response.data.errors;
     }
 
     if(error.response.status === 401){

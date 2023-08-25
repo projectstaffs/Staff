@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use App\Models\client\Client_baby;
 use App\Http\Resources\client\ClientBabyResource;
+use App\Http\Requests\client\BabyRequest;
 
 class ClientBabyController extends Controller
 {
@@ -24,8 +25,7 @@ class ClientBabyController extends Controller
                 break;
             }                           
         }
-        
-        //$baby = Client_baby::where('user_id', $request["data"])->first();
+
         if($client_baby) { return new ClientBabyResource($client_baby); }
         else { return null; }        
     }
@@ -41,9 +41,9 @@ class ClientBabyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BabyRequest $request)
     {
-        $baby = new Client_baby([
+         $baby = new Client_baby([
             'user_id' => $request->user_id,
             'confirmed' => $request->confirmed,
             'title' => $request->title,
@@ -81,7 +81,7 @@ class ClientBabyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(BabyRequest $request, string $id)
     {
         $baby = Client_baby::find($id);       
         $baby->title = $request['title'];

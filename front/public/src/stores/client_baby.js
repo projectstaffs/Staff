@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import api from "../assets/api";
+import router from "../router";
 
 export const useClient_BabyStore = defineStore('client_baby', {
     state: () => {
@@ -63,7 +64,7 @@ export const useClient_BabyStore = defineStore('client_baby', {
                 .catch(error => { console.log(error); })
         },
         CREATE_BABY(data){                    
-            api.post('api/auth/clientbaby', data[0])
+            api.post('api/auth/clientbaby', data[0])            
                 .then((res) => {
                     let joboption = {};
                     let result_joboption = [];
@@ -96,12 +97,15 @@ export const useClient_BabyStore = defineStore('client_baby', {
                     this.CREATE_FORMAGEGROUP([result_agegroup, result_agegroup.length]);
     
                     this.GET_BABY(data[0].user_id);
+                    //router.push({name: "Account"});
                 })
-                .catch(error => { console.log(error); })
+                .catch(error => { 
+                    console.log(error);                     
+                })
         },
         GET_BABY(data){ 
             api.get('api/auth/clientbaby', {params: {data}})
-                .then((res) => {                    
+                .then((res) => {                                        
                     this.baby = res.data.data; 
                     let temp = [];
                     for (let i = 0; i < res.data.data.Agegroups.length; i++) {            
