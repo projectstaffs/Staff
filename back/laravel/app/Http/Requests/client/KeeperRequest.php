@@ -37,6 +37,8 @@ class KeeperRequest extends FormRequest
 
     public function messages() {
         return [
+            'title.required' => 'Укажите Заголовок вакансии.',
+            'title_about.required' => 'Опишите вакансию.',
             'workperiod_id.required' => 'Укажите период работы.',
             'employment_id.required' => 'Укажите занятость.',
             'drive.required' => 'Укажите наличие у работника водительского удостоверения.',

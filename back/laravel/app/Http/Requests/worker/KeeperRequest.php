@@ -41,6 +41,7 @@ class KeeperRequest extends FormRequest
 
     public function messages() {
         return [
+            'keeper_exp.required' => 'Опишите Ваш опыт работы.',
             'experience_id.required' => 'Укажите свой опыт работы по дому.',
             'recommendation_id.required' => 'Укажите количество рекомендаций.',
             'workperiod_id.required' => 'Укажите период работы.',

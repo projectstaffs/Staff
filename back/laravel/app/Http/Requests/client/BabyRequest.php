@@ -38,6 +38,8 @@ class BabyRequest extends FormRequest
 
     public function messages() {
         return [
+            'title.required' => 'Укажите Заголовок вакансии.',
+            'title_about.required' => 'Опишите вакансию.',
             'childrencount_id.required' => 'Укажите количество детей.',
             'workperiod_id.required' => 'Укажите период работы.',
             'employment_id.required' => 'Укажите занятость.',

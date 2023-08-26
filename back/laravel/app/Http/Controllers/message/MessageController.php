@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\message\Message;
 
 use App\Services\MySocket;
+use App\Http\Requests\MessageRequest;
 
 class MessageController extends Controller
 {
@@ -38,7 +39,7 @@ class MessageController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(MessageRequest $request)
     {       
         $message = new Message([
             'sender' => $request->sender,

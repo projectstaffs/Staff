@@ -78,17 +78,24 @@ class UserupdateRequest extends FormRequest
 
     public function messages() {
         return [
+            'name.required' => 'Укажите свое имя.',
+            'surname.required' => 'Укажите свою фамилию.',
+            'patronymic.required' => 'Укажите свое отчество.',
+            'about.required' => 'Напишите немного о себе.',
             'phone.numeric' => 'Номер телефона должен быть числом.',
             'phone.digits' => 'Номер телефона должен содержать 9 цифр.', 
             'additional_phone.numeric' => 'Дополнительный номер телефона должен быть числом.',
             'additional_phone.digits' => 'Дополнительный номер телефона должен содержать 9 цифр.',
+            'email.required' => 'Укажите свой email.',
             'email.unique' => 'Адрес электронной почты должен быть уникальным.', 
             'country_id.required' => 'Укажите страну проживания.',
             'city_id.required' => 'Укажите свой город.',
             'password.confirmed' => 'Подтверждение пароля указано не корректно.',           
             'password.min' => 'Пароль должен состоять как минимум из 3 символов.',
+            'password.required' => 'Укажите свой пароль.',
 
             'gender.required' => 'Укажите свой пол.',
+            'age.required' => 'Укажите дату своего рождения.',
             'right_work.required' => 'Укажите право работать на территории Украины.',
             'drive.required' => 'Укажите наличие водительского удостоверения.',
             'night_work.required' => 'Укажите согласие работать в ночное время.',

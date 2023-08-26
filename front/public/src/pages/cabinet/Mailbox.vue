@@ -34,7 +34,7 @@ export default {
             });
             
             this.Message.CREATE_MESSAGE(this.User.user);
-            this.$router.push({name: "Sent"});            
+            this.$router.push({name: "Sent"}); // Доделать            
         },
         incoming() {
             this.$router.push({name: "Incoming"})

@@ -38,6 +38,8 @@ class NurseRequest extends FormRequest
 
     public function messages() {
         return [
+            'nurse_exp.required' => 'Опишите Ваш опыт работы с пристарелыми.',
+            'education_about.required' => 'Подробно опишите полученноое Вами образование.',
             'experience_id.required' => 'Укажите свой опыт работы с пристарелыми.',
             'recommendation_id.required' => 'Укажите количество рекомендаций.',
             'workperiod_id.required' => 'Укажите период работы.',

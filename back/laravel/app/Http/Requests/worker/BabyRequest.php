@@ -40,6 +40,8 @@ class BabyRequest extends FormRequest
 
     public function messages() {
         return [
+            'baby_exp.required' => 'Опишите Ваш опыт работы с детьми.',
+            'education_about.required' => 'Подробно опишите полученноое Вами образование.',
             'experience_id.required' => 'Укажите свой опыт работы с детьми.',
             'recommendation_id.required' => 'Укажите количество рекомендаций.',
             'workperiod_id.required' => 'Укажите период работы.',
