@@ -24,7 +24,7 @@ class KeeperRequest extends FormRequest
         return [
             'user_id' => 'required|numeric',
             'confirmed' => 'required|boolean',
-            'keeper_exp' => 'required',
+            'keeper_exp' => 'required|string',
             'experience_id' => 'required|numeric',
             'recommendation_id' => 'required|numeric',
             'workperiod_id' => 'required|numeric',           

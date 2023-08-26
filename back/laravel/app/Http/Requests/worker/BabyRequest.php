@@ -24,10 +24,10 @@ class BabyRequest extends FormRequest
         return [
             'user_id' => 'required|numeric',
             'confirmed' => 'required|boolean',
-            'baby_exp' => 'required',
+            'baby_exp' => 'required|string',
             'experience_id' => 'required|numeric',
             'recommendation_id' => 'required|numeric',
-            'education_about' => 'required',
+            'education_about' => 'required|string',
             'workperiod_id' => 'required|numeric',
             'childrencount_id' => 'required|numeric',            
             'employment_id' => 'required|numeric',

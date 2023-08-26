@@ -25,7 +25,7 @@ class BabyRequest extends FormRequest
             'user_id' => 'required|numeric',
             'confirmed' => 'required|boolean',
             'title' => 'required|string',
-            'title_about' => 'required',
+            'title_about' => 'required|string',
             'childrencount_id' => 'required|numeric',
             'workperiod_id' => 'required|numeric',
             'employment_id' => 'required|numeric',

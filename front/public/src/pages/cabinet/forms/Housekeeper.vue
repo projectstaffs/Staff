@@ -2,7 +2,7 @@
     <div @click.prevent="back" class="category_change_btn">Назад</div>
     <div class="category_title">Анкета для домработницы:</div>   
     <form v-if="!Keeper.keeper" @submit.prevent="createForm" class="login_form">   
-        <div>Опишите Ваш опыт работы:</div>
+        <div>Опишите Ваш опыт работы:</div>        
         <textarea v-model="anketa.keeper_exp" required class="login_form_item" placeholder="about"></textarea>
         <div>Укажите свой опыт работы:</div>
         <select v-model="anketa.experience_id" class="category_form_title">

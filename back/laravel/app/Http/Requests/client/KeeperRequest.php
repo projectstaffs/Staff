@@ -25,7 +25,7 @@ class KeeperRequest extends FormRequest
             'user_id' => 'required|numeric',
             'confirmed' => 'required|boolean',
             'title' => 'required|string',
-            'title_about' => 'required',
+            'title_about' => 'required|string',
             'workperiod_id' => 'required|numeric',
             'employment_id' => 'required|numeric',
             'drive' => 'required|string',

@@ -3,7 +3,7 @@
     <div class="category_title">Изменение анкеты для домработницы:</div>   
     <form @submit.prevent="changeForm" class="login_form">   
         <div>Измените Ваш опыт работы:</div>
-        <textarea v-model="Keeper.keeper.keeper_exp" required class="login_form_item" placeholder="about"></textarea>
+        <textarea v-model="Keeper.keeper.keeper_exp" class="login_form_item" placeholder="about"></textarea>
         <div>Измените свой опыт работы:</div>
         <select v-model="Keeper.keeper.experience_id" class="category_form_title">
             <option v-for="option in Store.experiences" :value="option.id">
