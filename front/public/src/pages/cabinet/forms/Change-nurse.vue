@@ -81,7 +81,14 @@
         <textarea v-model="Nurse.nurse.additional" required class="login_form_item" placeholder="about"></textarea>          
                 
         <button type="submit" class="login_form_btn">Изменить анкету</button>
-    </form>    
+    </form> 
+    
+    <div class="register_error" v-for="item in errors" :key="item">
+        {{ item }}
+    </div>
+    <div class="register_error" v-for="item in User.global_error" :key="item">
+        {{ item[0] }}
+    </div>
 </template>
 
 <script>
@@ -89,7 +96,12 @@ import { useForm_NurseStore } from '../../../stores/form_nurse';
 import { useDataStore } from '../../../stores/variables';
 import { useUserStore } from '../../../stores/user';
 export default {
-    name: "Change-nurse", 
+    name: "Change-nurse",
+    data() {
+        return {
+            errors: null
+        }
+    }, 
     setup() {
         const Nurse = useForm_NurseStore();
         const Store = useDataStore();
@@ -100,9 +112,20 @@ export default {
         back() {
             this.$router.push({name: "Nurse"})
         },        
-        changeForm() {            
-            this.Nurse.CHANGE_NURSE([this.Nurse.nurse, this.Nurse.nurse_options.anketaeducations, this.Nurse.nurse_options.anketajoboptions, this.Nurse.nurse_options.anketadiagnoses, this.Nurse.nurse_options.anketaduties, this.Nurse.nurse_options.anketaskills, this.Nurse.nurse_options.anketatypeworks, this.Nurse.nurse_options.anketaworklocations]);
-            this.$router.push({name: "Nurse"})            
+        changeForm() { 
+            if((this.Nurse.nurse_options.anketaworklocations.length == 0) || (this.Nurse.nurse_options.anketaskills.length == 0) || (this.Nurse.nurse_options.anketaduties.length == 0) || (this.Nurse.nurse_options.anketadiagnoses.length == 0) || (this.Nurse.nurse_options.anketajoboptions.length == 0) || (this.Nurse.nurse_options.anketaeducations.length == 0) || (this.Nurse.nurse_options.anketatypeworks.length == 0)) {
+                this.errors = [];
+                if(this.Nurse.nurse_options.anketaeducations.length == 0) {this.errors.push('Укажите Ваше образование.');}
+                if(this.Nurse.nurse_options.anketajoboptions.length == 0) {this.errors.push('Укажите приемлемые варианты работы.');}
+                if(this.Nurse.nurse_options.anketadiagnoses.length == 0) {this.errors.push('Отметьте диагнозы пациентов, с которыми вам приходилось работать.');}
+                if(this.Nurse.nurse_options.anketaduties.length == 0) {this.errors.push('Укажите обязанности для сиделки.');}
+                if(this.Nurse.nurse_options.anketaskills.length == 0) {this.errors.push('Отметьте умения и навыки, которыми вы владеете в работе с престарелыми.');}
+                if(this.Nurse.nurse_options.anketatypeworks.length == 0) {this.errors.push('Укажите какую работу вы ищите.');}
+                if(this.Nurse.nurse_options.anketaworklocations.length == 0) {this.errors.push('Укажите где Вы предпочитаете работать.');}
+            } else {
+                this.errors = null; this.User.global_error = null;
+                this.Nurse.CHANGE_NURSE([this.Nurse.nurse, this.Nurse.nurse_options.anketaeducations, this.Nurse.nurse_options.anketajoboptions, this.Nurse.nurse_options.anketadiagnoses, this.Nurse.nurse_options.anketaduties, this.Nurse.nurse_options.anketaskills, this.Nurse.nurse_options.anketatypeworks, this.Nurse.nurse_options.anketaworklocations]);
+            }
         },               
     },
     mounted() {
@@ -111,6 +134,7 @@ export default {
         this.Store.GET_NURSINGSKILLS(); this.Store.GET_DIAGNOSES(); this.Store.GET_EXPERIENCES(); this.Store.GET_RECOMMENDATIONS(); this.Store.GET_EDUCATIONS(); 
         this.Store.GET_NURSETYPEOFWORKS(); this.Store.GET_JOBOPTIONS(); this.Store.GET_WORKPERIODS(); this.Store.GET_EMPLOYMENTS(); this.Store.GET_WORKLOCATIONS();
         this.Store.GET_NURSEDUTIES(); this.Store.GET_HOURLYPAYMENTS(); this.Store.GET_MONTHLYPAYMENTS();                               
+        this.User.global_error = null; this.errors = null;
     },
 }
 </script>

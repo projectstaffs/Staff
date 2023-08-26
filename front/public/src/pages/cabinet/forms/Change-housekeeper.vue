@@ -54,19 +54,19 @@
                 {{ option.value }}                
             </option>
         </select>
-        <div>Можете ли вы обеспечить собственную технику для уборки:</div>
+        <div>Можете ли вы обеспечить собственные средства для уборки:</div>
         <select v-model="Keeper.keeper.material" class="category_form_title">
             <option v-for="option in work" :value="option.value">
                 {{ option.value }}                
             </option>
         </select>
-        <div>Можете ли вы обеспечить собственную технику для уборки:</div>
+        <div>Можете ли вы присматривать за детьми:</div>
         <select v-model="Keeper.keeper.baby_keeper" class="category_form_title">
             <option v-for="option in work" :value="option.value">
                 {{ option.value }}                
             </option>
         </select>
-        <div>Можете ли вы обеспечить собственную технику для уборки:</div>
+        <div>Можете ли вы присматривать за пристарелыми:</div>
         <select v-model="Keeper.keeper.nurse_keeper" class="category_form_title">
             <option v-for="option in work" :value="option.value">
                 {{ option.value }}                
@@ -89,6 +89,13 @@
                 
         <button type="submit" class="login_form_btn">Изменить анкету</button>
     </form>
+
+    <div class="register_error" v-for="item in errors" :key="item">
+        {{ item }}
+    </div>
+    <div class="register_error" v-for="item in User.global_error" :key="item">
+        {{ item[0] }}
+    </div>
 </template>
 
 <script>
@@ -102,7 +109,8 @@ export default {
             work: [
                 { value: 'Да' },
                 { value: 'Нет' }
-            ],            
+            ],
+            errors: null            
         }
     },
     setup() {
@@ -115,9 +123,17 @@ export default {
         back() {
             this.$router.push({name: "Housekeeper"})
         },        
-        changeForm() {            
-            this.Keeper.CHANGE_KEEPER([this.Keeper.keeper, this.Keeper.keeper_options.anketajoboptions, this.Keeper.keeper_options.anketarpreferences, this.Keeper.keeper_options.anketaduties, this.Keeper.keeper_options.anketatypeworks]);
-            this.$router.push({name: "Housekeeper"})
+        changeForm() { 
+            if((this.Keeper.keeper_options.anketajoboptions.length == 0) || (this.Keeper.keeper_options.anketarpreferences.length == 0) || (this.Keeper.keeper_options.anketaduties.length == 0) || (this.Keeper.keeper_options.anketatypeworks.length == 0)) {
+                this.errors = [];
+                if(this.Keeper.keeper_options.anketajoboptions.length == 0) {this.errors.push('Укажите приемлемые варианты работы.');}
+                if(this.Keeper.keeper_options.anketarpreferences.length == 0) {this.errors.push('Укажите что Вы предпочитаете.');}
+                if(this.Keeper.keeper_options.anketaduties.length == 0) {this.errors.push('Укажите обязанности для домработницы.');}
+                if(this.Keeper.keeper_options.anketatypeworks.length == 0) {this.errors.push('Укажите какую работу вы ищите.');}
+            } else {
+                this.errors = null; this.User.global_error = null;
+                this.Keeper.CHANGE_KEEPER([this.Keeper.keeper, this.Keeper.keeper_options.anketajoboptions, this.Keeper.keeper_options.anketarpreferences, this.Keeper.keeper_options.anketaduties, this.Keeper.keeper_options.anketatypeworks]);
+            }
         }
     },
     mounted() {
@@ -127,6 +143,7 @@ export default {
         this.Store.GET_JOBOPTIONS(); this.Store.GET_WORKPERIODS(); this.Store.GET_EMPLOYMENTS();
         this.Store.GET_HOUSEKEEPERPREFERENCES(); this.Store.GET_HOUSEKEEPERDUTIES();        
         this.Store.GET_HOURLYPAYMENTS(); this.Store.GET_MONTHLYPAYMENTS();                                     
+        this.User.global_error = null; this.errors = null;
     },
 }
 </script>

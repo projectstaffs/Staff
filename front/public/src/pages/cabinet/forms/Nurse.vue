@@ -55,7 +55,7 @@
                 {{ option.title }}                
             </option>
         </select>
-        <div>Где Вы предпочитаете работать :</div>
+        <div>Где Вы предпочитаете работать:</div>
         <div v-for="post in Store.worklocations" :key="post.id" class="language_item">
             <input type="checkbox" v-bind:value="post.id" v-model="anketaworklocations">
             {{ post.title }}                                    
@@ -82,6 +82,14 @@
                 
         <button type="submit" class="login_form_btn">Добавить анкету</button>
     </form> 
+
+    <div class="register_error" v-for="item in errors" :key="item">
+        {{ item }}
+    </div>
+    <div class="register_error" v-for="item in User.global_error" :key="item">
+        {{ item[0] }}
+    </div>
+
     <div>{{ Nurse.nurse }}</div> 
     <span v-if="Nurse.nurse" class="category_change_btn" @click.prevent="change_nurse()">Изменить анкету</span>
     <span v-if="Nurse.nurse" class="category_change_btn red" @click.prevent="delete_nurse()">Удалить анкету</span>
@@ -102,7 +110,8 @@ export default {
             anketatypeworks:[],
             anketajoboptions: [],
             anketaduties: [],
-            anketaworklocations: [],            
+            anketaworklocations: [],
+            errors: null            
         }
     },
     setup() {
@@ -116,9 +125,21 @@ export default {
             this.$router.push({name: "Account"})
         },        
         createForm() {
-            this.anketa.user_id = localStorage.userID;
-            this.anketa.confirmed = true;
-            this.Nurse.CREATE_NURSE([this.anketa, this.anketaeducations, this.anketajoboptions, this.anketadiagnoses, this.anketaduties, this.anketaskills, this.anketatypeworks, this.anketaworklocations]);
+            if((this.anketaworklocations.length == 0) || (this.anketaskills.length == 0) || (this.anketaduties.length == 0) || (this.anketadiagnoses.length == 0) || (this.anketajoboptions.length == 0) || (this.anketaeducations.length == 0) || (this.anketatypeworks.length == 0)) {
+                this.errors = [];
+                if(this.anketaeducations.length == 0) {this.errors.push('Укажите Ваше образование.');}
+                if(this.anketajoboptions.length == 0) {this.errors.push('Укажите приемлемые варианты работы.');}
+                if(this.anketadiagnoses.length == 0) {this.errors.push('Отметьте диагнозы пациентов, с которыми вам приходилось работать.');}
+                if(this.anketaduties.length == 0) {this.errors.push('Укажите обязанности для сиделки.');}
+                if(this.anketaskills.length == 0) {this.errors.push('Отметьте умения и навыки, которыми вы владеете в работе с престарелыми.');}
+                if(this.anketatypeworks.length == 0) {this.errors.push('Укажите какую работу вы ищите.');}
+                if(this.anketaworklocations.length == 0) {this.errors.push('Укажите где Вы предпочитаете работать.');}
+            } else {
+                this.errors = null; this.User.global_error = null;
+                this.anketa.user_id = localStorage.userID;
+                this.anketa.confirmed = true;
+                this.Nurse.CREATE_NURSE([this.anketa, this.anketaeducations, this.anketajoboptions, this.anketadiagnoses, this.anketaduties, this.anketaskills, this.anketatypeworks, this.anketaworklocations]);
+            }            
         },
         change_nurse() {
             this.$router.push({name: "Change-nurse"})
@@ -133,6 +154,7 @@ export default {
         this.Store.GET_NURSINGSKILLS(); this.Store.GET_DIAGNOSES(); this.Store.GET_EXPERIENCES(); this.Store.GET_RECOMMENDATIONS(); this.Store.GET_EDUCATIONS(); 
         this.Store.GET_NURSETYPEOFWORKS(); this.Store.GET_JOBOPTIONS(); this.Store.GET_WORKPERIODS(); this.Store.GET_EMPLOYMENTS(); this.Store.GET_WORKLOCATIONS();
         this.Store.GET_NURSEDUTIES(); this.Store.GET_HOURLYPAYMENTS(); this.Store.GET_MONTHLYPAYMENTS();                                      
+        this.User.global_error = null; this.errors = null;
     },
 }
 </script>

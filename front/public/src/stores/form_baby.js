@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import api from "../assets/api";
+import router from "../router";
 
 export const useForm_BabyStore = defineStore('form_baby', {
     state: () => {
@@ -94,6 +95,7 @@ export const useForm_BabyStore = defineStore('form_baby', {
                         agegroup = {};                                                               
                     })                  
                     this.CREATE_FORMAGEGROUP([result_agegroup, result_agegroup.length]);                    
+                    router.push({name: "Babysitting"});
                 })
                 .catch(error => { console.log(error); })
         },

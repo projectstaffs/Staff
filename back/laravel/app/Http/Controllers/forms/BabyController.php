@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use App\Models\forms\Baby;
 use App\Http\Resources\forms\BabyResource;
+use App\Http\Requests\worker\BabyRequest;
 
 class BabyController extends Controller
 {
@@ -41,7 +42,7 @@ class BabyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BabyRequest $request)
     {
         $baby = new Baby([
             'user_id' => $request->user_id,
@@ -83,7 +84,7 @@ class BabyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(BabyRequest $request, string $id)
     {        
         $baby = Baby::find($id);       
         $baby->baby_exp = $request['baby_exp'];

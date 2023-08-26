@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use App\Models\forms\Keeper;
 use App\Http\Resources\forms\KeeperResource;
+use App\Http\Requests\worker\KeeperRequest;
 
 class KeeperController extends Controller
 {
@@ -40,7 +41,7 @@ class KeeperController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(KeeperRequest $request)
     {
         $keeper = new Keeper([
             'user_id' => $request->user_id,
@@ -83,7 +84,7 @@ class KeeperController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(KeeperRequest $request, string $id)
     {
         $keeper = Keeper::find($id);       
         $keeper->keeper_exp = $request['keeper_exp'];

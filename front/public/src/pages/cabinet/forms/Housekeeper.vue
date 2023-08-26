@@ -54,19 +54,19 @@
                 {{ option.value }}                
             </option>
         </select>
-        <div>Можете ли вы обеспечить собственную технику для уборки:</div>
+        <div>Можете ли вы обеспечить собственные средства для уборки:</div>
         <select v-model="anketa.material" class="category_form_title">
             <option v-for="option in work" :value="option.value">
                 {{ option.value }}                
             </option>
         </select>
-        <div>Можете ли вы обеспечить собственную технику для уборки:</div>
+        <div>Можете ли вы присматривать за детьми:</div>
         <select v-model="anketa.baby_keeper" class="category_form_title">
             <option v-for="option in work" :value="option.value">
                 {{ option.value }}                
             </option>
         </select>
-        <div>Можете ли вы обеспечить собственную технику для уборки:</div>
+        <div>Можете ли вы присматривать за пристарелыми:</div>
         <select v-model="anketa.nurse_keeper" class="category_form_title">
             <option v-for="option in work" :value="option.value">
                 {{ option.value }}                
@@ -89,6 +89,14 @@
                 
         <button type="submit" class="login_form_btn">Добавить анкету</button>
     </form> 
+
+    <div class="register_error" v-for="item in errors" :key="item">
+        {{ item }}
+    </div>
+    <div class="register_error" v-for="item in User.global_error" :key="item">
+        {{ item[0] }}
+    </div>
+
     <div>{{ Keeper.keeper }}</div> 
     <span v-if="Keeper.keeper" class="category_change_btn" @click.prevent="change_keeper()">Изменить анкету</span>
     <span v-if="Keeper.keeper" class="category_change_btn red" @click.prevent="delete_keeper()">Удалить анкету</span>
@@ -110,7 +118,8 @@ export default {
             work: [
                 { value: 'Да' },
                 { value: 'Нет' }
-            ],            
+            ],
+            errors: null             
         }
     },
     setup() {
@@ -124,9 +133,18 @@ export default {
             this.$router.push({name: "Account"})
         },        
         createForm() {
-            this.anketa.user_id = localStorage.userID;
-            this.anketa.confirmed = true;
-            this.Keeper.CREATE_KEEPER([this.anketa, this.anketajoboptions, this.anketarpreferences, this.anketaduties, this.anketatypeworks]);
+            if((this.anketajoboptions.length == 0) || (this.anketarpreferences.length == 0) || (this.anketaduties.length == 0) || (this.anketatypeworks.length == 0)) {
+                this.errors = [];
+                if(this.anketajoboptions.length == 0) {this.errors.push('Укажите приемлемые варианты работы.');}
+                if(this.anketarpreferences.length == 0) {this.errors.push('Укажите что Вы предпочитаете.');}
+                if(this.anketaduties.length == 0) {this.errors.push('Укажите обязанности для домработницы.');}
+                if(this.anketatypeworks.length == 0) {this.errors.push('Укажите какую работу вы ищите.');}
+            } else {
+                this.errors = null; this.User.global_error = null;
+                this.anketa.user_id = localStorage.userID;
+                this.anketa.confirmed = true;
+                this.Keeper.CREATE_KEEPER([this.anketa, this.anketajoboptions, this.anketarpreferences, this.anketaduties, this.anketatypeworks]);
+            }
         },
         change_keeper() {
             this.$router.push({name: "Change-housekeeper"})
@@ -142,6 +160,7 @@ export default {
         this.Store.GET_JOBOPTIONS(); this.Store.GET_WORKPERIODS(); this.Store.GET_EMPLOYMENTS();
         this.Store.GET_HOUSEKEEPERPREFERENCES(); this.Store.GET_HOUSEKEEPERDUTIES();        
         this.Store.GET_HOURLYPAYMENTS(); this.Store.GET_MONTHLYPAYMENTS();                                      
+        this.User.global_error = null; this.errors = null;
     },
 }
 </script>

@@ -90,7 +90,12 @@
         <button type="submit" class="login_form_btn">Изменить анкету</button>
     </form>
 
-    <div> {{ Baby.baby }} </div>
+    <div class="register_error" v-for="item in errors" :key="item">
+        {{ item }}
+    </div>
+    <div class="register_error" v-for="item in User.global_error" :key="item">
+        {{ item[0] }}
+    </div>
 </template>
 
 <script>
@@ -105,6 +110,7 @@ export default {
                 { value: 'Да' },
                 { value: 'Нет' }
             ],
+            errors: null
         }
     },
     setup() {
@@ -117,9 +123,19 @@ export default {
         back() {
             this.$router.push({name: "Babysitting"})
         },
-        changeForm() {            
-            this.Baby.CHANGE_BABY([this.Baby.baby, this.Baby.baby_options.anketalanguages, this.Baby.baby_options.anketaeducations, this.Baby.baby_options.anketatypeworks, this.Baby.baby_options.anketajoboptions, this.Baby.baby_options.anketaduties, this.Baby.baby_options.anketaagegroups]);
-            this.$router.push({name: "Babysitting"})
+        changeForm() {  
+            if((this.Baby.baby_options.anketatypeworks.length == 0) || (this.Baby.baby_options.anketaeducations.length == 0) || (this.Baby.baby_options.anketalanguages.length == 0) || (this.Baby.baby_options.anketajoboptions.length == 0) || (this.Baby.baby_options.anketaduties.length == 0) || (this.Baby.baby_options.anketaagegroups.length == 0)) {
+                this.errors = [];
+                if(this.Baby.baby_options.anketalanguages.length == 0) {this.errors.push('Укажите знание иностранных языков.');}
+                if(this.Baby.baby_options.anketaeducations.length == 0) {this.errors.push('Укажите Ваше образование.');}
+                if(this.Baby.baby_options.anketatypeworks.length == 0) {this.errors.push('Укажите какую работу вы ищите.');}
+                if(this.Baby.baby_options.anketajoboptions.length == 0) {this.errors.push('Укажите приемлемые варианты работы.');}
+                if(this.Baby.baby_options.anketaduties == 0) {this.errors.push('Укажите обязанности для няни.');}
+                if(this.Baby.baby_options.anketaagegroups.length == 0) {this.errors.push('Укажите опыт работы с детьми по возрастным группам.');}
+            } else {
+                this.errors = null; this.User.global_error = null;
+                this.Baby.CHANGE_BABY([this.Baby.baby, this.Baby.baby_options.anketalanguages, this.Baby.baby_options.anketaeducations, this.Baby.baby_options.anketatypeworks, this.Baby.baby_options.anketajoboptions, this.Baby.baby_options.anketaduties, this.Baby.baby_options.anketaagegroups]);
+            }
         },                
     },
     mounted() {
@@ -128,6 +144,7 @@ export default {
         this.Store.GET_LANGUAGES(); this.Store.GET_EXPERIENCES(); this.Store.GET_RECOMMENDATIONS(); this.Store.GET_EDUCATIONS(); this.Store.GET_TYPEOFWORKS();
         this.Store.GET_JOBOPTIONS(); this.Store.GET_WORKPERIODS(); this.Store.GET_EMPLOYMENTS(); this.Store.GET_CHILDRENS(); this.Store.GET_BABYSITTINGDUTIES();
         this.Store.GET_HOURLYPAYMENTS(); this.Store.GET_MONTHLYPAYMENTS(); this.Store.GET_AGEGROUPS();                            
+        this.User.global_error = null; this.errors = null;
     },
 }
 </script>

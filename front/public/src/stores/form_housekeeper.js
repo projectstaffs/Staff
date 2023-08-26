@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import api from "../assets/api";
+import router from "../router";
 
 export const useForm_HousekeeperStore = defineStore('form_housekeeper', {    
     state: () => {
@@ -68,6 +69,7 @@ export const useForm_HousekeeperStore = defineStore('form_housekeeper', {
                         keepertypework = {};                                                               
                     })                  
                     this.CREATE_FORMKEEPERTYPEWORK([result_keepertypework, result_keepertypework.length]);                    
+                    router.push({name: "Housekeeper"});
                 })
                 .catch(error => { console.log(error); })
         },

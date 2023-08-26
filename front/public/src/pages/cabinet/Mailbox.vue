@@ -1,18 +1,6 @@
 <template>
     <div> mail box </div>
-    <form @submit.prevent="sentMessage" class="login_form">     
-        <div>Укажите свое имя:</div>
-        <input v-model="User.user.name" required class="login_form_item" type="text" placeholder="имя">        
-        <div>Укажите свою фамилию:</div>
-        <input v-model="User.user.surname" required class="login_form_item" type="text" placeholder="фамилия">
-        <div>Укажите свой телефон:</div>
-        <input v-model="User.user.phone" required class="login_form_item" type="tel" placeholder="телефон">        
-        <div>Укажите свой email:</div>
-        <input v-model="User.user.email" required class="login_form_item" type="email" placeholder="email">
-        <div>Укажите свой город:</div>
-        <input v-model="User.user.city" required class="login_form_item" type="text" placeholder="город"> 
-        <div>Укажите свою страну:</div>
-        <input v-model="User.user.country" required class="login_form_item" type="text" placeholder="страна">      
+    <form @submit.prevent="sentMessage" class="login_form">
         <div>Укажите тему сообщения:</div>
         <input v-model="User.user.title" required class="login_form_item" type="text" placeholder="тема">
         <div>Напишите текст сообщения:</div>        

@@ -88,7 +88,14 @@
         <textarea v-model="anketa.additional" required class="login_form_item" placeholder="about"></textarea>          
                 
         <button type="submit" class="login_form_btn">Добавить анкету</button>
-    </form>    
+    </form> 
+    
+    <div class="register_error" v-for="item in errors" :key="item">
+        {{ item }}
+    </div>
+    <div class="register_error" v-for="item in User.global_error" :key="item">
+        {{ item[0] }}
+    </div>
     
     <div>{{ Baby.baby }}</div> 
     <span v-if="Baby.baby" class="category_change_btn" @click.prevent="change_baby()">Изменить анкету</span>
@@ -114,6 +121,7 @@ export default {
                 { value: 'Да' },
                 { value: 'Нет' }
             ],
+            errors: null
         }
     },
     setup() {
@@ -127,9 +135,20 @@ export default {
             this.$router.push({name: "Account"})
         },        
         createForm() {
-            this.anketa.user_id = localStorage.userID;
-            this.anketa.confirmed = true;
-            this.Baby.CREATE_BABY([this.anketa, this.anketalanguages, this.anketaeducations, this.anketatypeworks, this.anketajoboptions, this.anketaduties, this.anketaagegroups]);
+            if((this.anketatypeworks.length == 0) || (this.anketaeducations.length == 0) || (this.anketalanguages.length == 0) || (this.anketajoboptions.length == 0) || (this.anketaduties.length == 0) || (this.anketaagegroups.length == 0)) {
+                this.errors = [];
+                if(this.anketalanguages.length == 0) {this.errors.push('Укажите знание иностранных языков.');}
+                if(this.anketaeducations.length == 0) {this.errors.push('Укажите Ваше образование.');}
+                if(this.anketatypeworks.length == 0) {this.errors.push('Укажите какую работу вы ищите.');}
+                if(this.anketajoboptions.length == 0) {this.errors.push('Укажите приемлемые варианты работы.');}
+                if(this.anketaduties.length == 0) {this.errors.push('Укажите обязанности для няни.');}
+                if(this.anketaagegroups.length == 0) {this.errors.push('Укажите опыт работы с детьми по возрастным группам.');}
+            } else {
+                this.errors = null; this.User.global_error = null;
+                this.anketa.user_id = localStorage.userID;
+                this.anketa.confirmed = true;
+                this.Baby.CREATE_BABY([this.anketa, this.anketalanguages, this.anketaeducations, this.anketatypeworks, this.anketajoboptions, this.anketaduties, this.anketaagegroups]);
+            }
         },
         change_baby() {
             this.$router.push({name: "Change-babysitting"});
@@ -144,6 +163,7 @@ export default {
         this.Store.GET_LANGUAGES(); this.Store.GET_EXPERIENCES(); this.Store.GET_RECOMMENDATIONS(); this.Store.GET_EDUCATIONS(); this.Store.GET_TYPEOFWORKS();
         this.Store.GET_JOBOPTIONS(); this.Store.GET_WORKPERIODS(); this.Store.GET_EMPLOYMENTS(); this.Store.GET_CHILDRENS(); this.Store.GET_BABYSITTINGDUTIES();
         this.Store.GET_HOURLYPAYMENTS(); this.Store.GET_MONTHLYPAYMENTS(); this.Store.GET_AGEGROUPS();                              
+        this.User.global_error = null; this.errors = null;
     },
 }
 </script>

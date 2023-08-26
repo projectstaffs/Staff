@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import api from "../assets/api";
+import router from "../router";
 
 export const useForm_NurseStore = defineStore('form_nurse', {    
     state: () => {
@@ -105,6 +106,7 @@ export const useForm_NurseStore = defineStore('form_nurse', {
                         worklocation = {};                                                               
                     })                  
                     this.CREATE_FORMNURSEWORKLOCATION([result_worklocation, result_worklocation.length]);                    
+                    router.push({name: "Nurse"});
                 })
                 .catch(error => { console.log(error); })
         },

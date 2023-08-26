@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use App\Models\forms\Nurse;
 use App\Http\Resources\forms\NurseResource;
+use App\Http\Requests\worker\NurseRequest;
 
 class NurseController extends Controller
 {
@@ -41,7 +42,7 @@ class NurseController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(NurseRequest $request)
     {
         $nurse = new Nurse([
             'user_id' => $request->user_id,
@@ -81,7 +82,7 @@ class NurseController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(NurseRequest $request, string $id)
     {
         $nurse = Nurse::find($id);       
         $nurse->nurse_exp = $request['nurse_exp'];
