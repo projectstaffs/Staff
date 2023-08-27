@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import api from "../assets/api";
+import router from "../router";
 
 export const useMessageStore = defineStore('message', {
     state: () => {
@@ -47,6 +48,7 @@ export const useMessageStore = defineStore('message', {
         CREATE_MESSAGE(data){            
             api.post('api/auth/message', data)
                 .then((res) => {
+                    router.push({name: "Sent"}); 
                 })
                 .catch(error => { console.log(error); })
         },

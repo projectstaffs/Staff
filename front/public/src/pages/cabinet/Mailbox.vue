@@ -7,6 +7,10 @@
         <textarea v-model="User.user.content" required class="login_form_item" placeholder="about"></textarea>        
         <button type="submit" class="login_form_btn">Отправить сообщение</button>
     </form>
+
+    <div class="register_error" v-for="item in User.global_error" :key="item">
+        {{ item[0] }}
+    </div>
     
     <div @click.prevent="incoming" class="admin_sidebar_item">Входящие {{ Message.countmessage }}</div>
     <div @click.prevent="sent" class="admin_sidebar_item">Отправленные</div>
@@ -26,6 +30,7 @@ export default {
     },   
     methods: {
         sentMessage() {
+            this.User.global_error = null;
             this.User.user.reading = 0
             this.User.user.sender = this.User.user.id
             this.User.user.recipient = localStorage.admin_id
@@ -33,8 +38,7 @@ export default {
                 hour12: false, hour: 'numeric', minute: 'numeric'
             });
             
-            this.Message.CREATE_MESSAGE(this.User.user);
-            this.$router.push({name: "Sent"}); // Доделать            
+            this.Message.CREATE_MESSAGE(this.User.user);            
         },
         incoming() {
             this.$router.push({name: "Incoming"})
@@ -47,7 +51,8 @@ export default {
         this.User.GET_TOKEN();                 
         this.User.GET_USER();        
         this.Message.GET_COUNTMESSAGE_USER(localStorage.userID); 
-        this.Socket.connect();               
+        this.Socket.connect();
+        this.User.global_error = null;               
     },
 }
 </script>
