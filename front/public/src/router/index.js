@@ -88,6 +88,12 @@ const router = createRouter({
             component: () =>import('../pages/user/Login.vue')
         },
         {
+            name: 'Forgot',
+            path: '/forgot',
+            meta: {layout: 'User'},            
+            component: () =>import('../pages/user/Forgot.vue')
+        },
+        {
             name: 'Register-menu',
             path: '/register_menu', 
             meta: {layout: 'User'},           
@@ -243,7 +249,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {    
     if(!localStorage.access_token){
-        if(to.name === 'Login' || to.name === 'Register' || to.name === 'Register-menu' || to.name === 'Register-employer' || to.name === 'Home'){
+        if(to.name === 'Forgot' || to.name === 'Login' || to.name === 'Register' || to.name === 'Register-menu' || to.name === 'Register-employer' || to.name === 'Home'){
             return next()
         } else {
             return next({
@@ -252,7 +258,7 @@ router.beforeEach((to, from, next) => {
         }
     }    
 
-    if((to.name === 'Login' || to.name === 'Register'|| to.name === 'Register-menu' || to.name === 'Register-employer') && localStorage.access_token){
+    if((to.name === 'Forgot' || to.name === 'Login' || to.name === 'Register'|| to.name === 'Register-menu' || to.name === 'Register-employer') && localStorage.access_token){
         return next({
             name: 'Home'
         })

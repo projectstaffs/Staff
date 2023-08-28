@@ -10,6 +10,7 @@ export const useUserStore = defineStore('user', {
             users: {}, 
             token: '',
             login_error: '',
+            forgot_error: '',
             register_error: null,
             global_error: null                     
         }
@@ -63,6 +64,9 @@ export const useUserStore = defineStore('user', {
                 .catch(error => { console.log(error); })
         },
         GET_USER(){                                     
+            this.user = JSON.parse(localStorage.user);
+        },
+        FORGOT_PASSWORD(){ // доделать                                     
             this.user = JSON.parse(localStorage.user);
         },
         LOGIN_USER(data){                                                 

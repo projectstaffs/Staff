@@ -1,12 +1,14 @@
 <template>
     <div class="login_title"> login page </div>
-    <div class="login_error">{{ User.login_error }}</div>
     <form @submit.prevent="login" class="login_form">        
         <input v-model="new_user.email" required class="login_form_item" type="email" placeholder="email">
         <input v-model="new_user.password" required class="login_form_item" type="password" placeholder="password">
         <button type="submit" class="login_form_btn">login</button>        
         <div @click.prevent="register" class="user_btn">Зарегистрироваться</div>
-    </form>    
+        <div @click.prevent="forgot" class="user_btn">Забыл пароль</div>
+    </form> 
+    
+    <div class="register_error">{{ User.login_error }}</div>
 </template>
 
 <script>
@@ -29,16 +31,12 @@ export default {
         register() {
             this.$router.push({name: "Register-menu"})
         },
+        forgot() {
+            this.$router.push({name: "Forgot"})
+        },
     },
     mounted() {
         this.User.GET_TOKEN();
     },    
 }
 </script>
-
-<style>
-.login_error {
-    text-align: center;
-}
-</style>
-
