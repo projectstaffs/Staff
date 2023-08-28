@@ -4,7 +4,9 @@
             Добавьте изображение...
         </div>                                            
         <button class="category_form_btn" type="submit" > Сохранить изображение </button>        
-    </form>        
+    </form>
+    
+    <div class="register_error">{{ image_error }}</div>
 </template>
 
 <script>
@@ -15,6 +17,7 @@ export default {
     data() {
         return {
             dropzone: {},
+            image_error: ''
         }
     },
     setup() {
@@ -25,7 +28,8 @@ export default {
         createPhoto(){                
             const data = new FormData()
             const files = this.dropzone.getAcceptedFiles()
-            if(files.length > 0) {
+            if(files.length === 1) {
+                this.image_error = '';
                 files.forEach(file => {
                     data.append('images[]', file);
                     this.dropzone.removeFile(file);                
@@ -35,8 +39,10 @@ export default {
                     this.User.DELETE_PHOTO(localStorage.userID);                
                 }                
                 this.User.CREATE_PHOTO(data);                                               
+            } else if(files.length === 0) {
+                this.image_error = 'Добавьте фото.';
             } else {
-                console.log('Добавьте фото');
+                this.image_error = 'Добавьте только одно фото.';
             }                                                                        
         },
     },
@@ -46,8 +52,9 @@ export default {
             url: "/api/photo",
             autoProcessQueue: false,
             addRemoveLinks: true,
-            maxFiles: 1
-        })         
+            //maxFiles: 1
+        });
+        this.image_error = '';         
     },
 }
 </script>

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\UserupdateRequest;
+use App\Jobs\UsergreetingJob;
 
 class UserController extends Controller
 {
@@ -45,7 +46,8 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(UserRequest $request) {        
+    public function store(UserRequest $request) {
+        $temp_password = $request->password;        
         $request->password = Hash::make($request->password);        
         
         $user = new User([
@@ -60,7 +62,8 @@ class UserController extends Controller
         $token = auth()->tokenById($user->id);
         
         $temp = new UserResource($user);
-        Cache::put('users', User::all());        
+        Cache::put('users', User::all()); 
+        UsergreetingJob::dispatch($user->name, $user->email, $temp_password);       
         return response(['access_token' => $token, 'user' => $temp]);        
     }
 
