@@ -181,5 +181,6 @@ Route::resource('/alcohol', AlcoholController::class);
 Route::resource('/status', StatusController::class);
 Route::resource('/religion', ReligionController::class);
 
-Route::get('/redis', [HelpController::class, 'redisAll']);
-Route::get('/minio', [HelpController::class, 'minio']);
+Route::post('/forgot_password', [HelpController::class, 'forgotPassword']);
+//Route::get('/redis', [HelpController::class, 'redisAll']);
+//Route::get('/minio', [HelpController::class, 'minio']);

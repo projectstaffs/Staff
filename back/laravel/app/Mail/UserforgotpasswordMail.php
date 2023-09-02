@@ -13,12 +13,18 @@ class UserforgotpasswordMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $name;
+    public $email;
+    public $password;
+
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($name, $email, $password)
     {
-        //
+        $this->name = $name;
+        $this->email = $email;
+        $this->password = $password;
     }
 
     /**
@@ -27,7 +33,7 @@ class UserforgotpasswordMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Userforgotpassword Mail',
+            subject: 'Письмо от сайта Babysitting',
         );
     }
 

@@ -85,6 +85,10 @@ use App\Models\data\WorkPeriod;
 
 use Aws\S3\S3Client;
 
+use App\Jobs\UserforgotpasswordJob;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+
 class HelpController extends Controller
 {
     public function getAdmin ()
@@ -98,6 +102,7 @@ class HelpController extends Controller
             }                           
         }        
     }
+
     public function getMessage_in (Request $request)
     {
         if(!Cache::has('messages')) { Cache::put('messages', Message::all()); }
@@ -110,6 +115,22 @@ class HelpController extends Controller
             }                           
         }
         return $messages;
+    }
+
+    public function forgotPassword (Request $request)
+    {
+        $user = User::where('email', $request->email)->first();
+        if ($user) {
+            $password = Str::random(5);
+            $user->password = Hash::make($password);
+            $user->save();
+
+            Cache::put('users', User::all());
+            UserforgotpasswordJob::dispatch($user->name, $user->email, $password);
+            return 'Пароль успешно изменен.';
+        } else {
+            return response()->json(['error' => 'Нет пользователя с такой электронной почтой.'], 401);
+        }        
     }
 
     public function minio() {

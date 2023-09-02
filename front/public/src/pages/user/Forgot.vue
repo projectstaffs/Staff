@@ -1,10 +1,10 @@
 <template>
     <div class="login_title"> Восстановление пароля </div>    
     <form @submit.prevent="forgot" class="login_form">        
-        <input v-model="email" required class="login_form_item" type="email" placeholder="email">
-        <button type="submit" class="login_form_btn">login</button>
-    </form>
-    <div @click.prevent="remember" class="user_btn">Вспомнил пароль.</div> 
+        <input v-model="user.email" required class="login_form_item" type="email" placeholder="email">
+        <button type="submit" class="login_form_btn">Восстановить пароль</button>
+        <div @click.prevent="remember" class="user_btn">Вспомнил пароль.</div> 
+    </form>    
     
     <div class="register_error">{{ User.forgot_error }}</div>
 </template>
@@ -15,7 +15,7 @@ export default {
     name: "Forgot",
     data() {
         return {
-            email: ''
+            user: {}
         }
     },
     setup() {
@@ -24,7 +24,7 @@ export default {
     },
     methods: {        
         forgot() {
-            this.User.LOGIN_USER(this.new_user);            
+            this.User.FORGOT_PASSWORD(this.user);            
         },
         remember() {
             this.$router.push({name: "Login"})
@@ -32,6 +32,7 @@ export default {
     },
     mounted() {
         this.User.GET_TOKEN();
+        this.User.forgot_error = '';
     },    
 }
 </script>
