@@ -1,6 +1,8 @@
 <template>
     <div v-for="post in Views.workerBaby" :key="post.id">
-        <div>{{ post }}</div>
+        <div class="anketa">
+            {{ post }}
+        </div>
         <span class="category_change_btn" @click.prevent="showItem(post)">Подробная анкета</span>
     </div>    
 </template>

@@ -11,7 +11,7 @@
 
 <script>
 import { useUserStore } from '../../stores/user';
-import Dropzone from 'dropzone'
+import Dropzone from 'dropzone';
 export default {
     name: "Myphoto",
     data() {
@@ -31,14 +31,16 @@ export default {
             if(files.length === 1) {
                 this.image_error = '';
                 files.forEach(file => {
-                    data.append('images[]', file);
-                    this.dropzone.removeFile(file);                
+                    if(file.size < 900000) {
+                        data.append('images[]', file);
+                        this.dropzone.removeFile(file);                        
+                    } else { this.image_error = 'Размер изображения не должен привышать 0,9мб.'; }                                    
                 })
-                data.append('user_id', localStorage.userID);
-                if(localStorage.user_image) {
-                    this.User.DELETE_PHOTO(localStorage.userID);                
-                }                
-                this.User.CREATE_PHOTO(data);                                               
+                if(this.image_error === '') {
+                    data.append('user_id', localStorage.userID);
+                    if(localStorage.user_image) { this.User.DELETE_PHOTO(localStorage.userID); }                
+                    this.User.CREATE_PHOTO(data);
+                }                                                               
             } else if(files.length === 0) {
                 this.image_error = 'Добавьте фото.';
             } else {
