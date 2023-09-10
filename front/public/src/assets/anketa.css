@@ -1,5 +1,92 @@
 .anketa {
-    max-width: 800px;
-    margin: 0 auto;
+    display: flex;
+    max-width: 1200px;
+    margin: 15px auto;
     padding: 0 15px;
+}
+
+.anketa_img img {
+    width: 200px;
+    height: 200px;
+}
+
+.anketaitem_img img {
+    width: 150px;
+    height: 150px;
+}
+
+.anketa_content {
+    width: 100%;
+    margin-left: 15px;
+}
+
+.anketa_content_name {
+    font-size: 20px;
+    font-weight: bold;
+    color: blue;
+}
+
+.anketa_content_age {
+    margin: 5px 0px;
+}
+
+.anketa_content_typeworks {
+    display: flex;
+    margin: 5px 0px;
+}
+
+.anketa_content_employment {
+    margin: 5px 0px; 
+}
+
+.anketa_content_phone {
+    margin: 5px 0px; 
+}
+
+.anketa_content_payment {
+    margin-bottom: 5px;
+}
+
+.anketa_content_name:hover {
+    cursor: pointer;
+}
+
+.anketa_content_about {
+    margin: 20px 0px;
+}
+
+.anketa_content_more {
+    display: flex;
+    justify-content: space-between;
+}
+
+.anketa_title {
+    text-align: center;
+    color: chocolate;
+    margin-top: 35px;
+}
+
+.anketa_inform {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.anketa_inform_item {
+    width: 50%;
+    margin-bottom: 10px;
+}
+
+.anketa_experience {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.anketa_agegroup {
+    margin-bottom: 10px;
+}
+
+.anketa_education {
+    margin-bottom: 10px;
 }

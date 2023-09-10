@@ -15,6 +15,7 @@ use App\Models\data\Smoking;
 use App\Models\data\Status;
 use App\Models\data\Religion;
 use App\Models\data\Alcohol;
+use Carbon\Carbon;
 
 class UserResource extends JsonResource
 {
@@ -24,7 +25,11 @@ class UserResource extends JsonResource
      * @return array<string, mixed>
      */
     public function toArray(Request $request): array
-    {
+    {        
+        $birthdate = Carbon::createFromFormat('Y-m-d', $this->age);
+        $currentDate = Carbon::now();
+        $current_age = $currentDate->diffInYears($birthdate);
+
         if(!Cache::has('countries')) { Cache::put('countries', Country::all()); }
         $Country = Cache::get('countries');
         $country = '';
@@ -56,8 +61,8 @@ class UserResource extends JsonResource
         }
         
         if($this->role == "Исполнитель") {
-            if(!Cache::has('cities')) { Cache::put('cities', City::all()); }
-            $Citizen = Cache::get('cities');
+            if(!Cache::has('countries')) { Cache::put('countries', Country::all()); }
+            $Citizen = Cache::get('countries');
             $citizen = '';
             foreach ($Citizen as $item) {
                 if($item->id == $this->citizen) {
@@ -140,6 +145,7 @@ class UserResource extends JsonResource
                 'additional_phone' => $this->additional_phone,
                 'gender' => $this->gender,
                 'age' => $this->age,
+                'current_age' => $current_age,
                 'right_work' => $this->right_work,
                 'drive' => $this->drive,
                 'night_work' => $this->night_work,

@@ -5,12 +5,12 @@ import axios from 'axios';
 export const useViewsStore = defineStore('views', {
     state: () => {
         return {
-            clientBaby: {}, clientBabyitem: {},
-            clientNurse: {}, clientNurseitem: {},
-            clientKeeper: {}, clientKeeperitem: {},
-            workerBaby: {}, workerBabyitem: {},
-            workerNurse: {}, workerNurseitem: {},
-            workerKeeper: {}, workerKeeperitem: {},
+            clientBaby: {}, clientBabyitem: {}, clientBabyitemUser: {},
+            clientNurse: {}, clientNurseitem: {}, clientNurseitemUser: {},
+            clientKeeper: {}, clientKeeperitem: {}, clientKeeperitemUser: {},
+            workerBaby: {}, workerBabyitem: {}, workerBabyitemUser: {},
+            workerNurse: {}, workerNurseitem: {}, workerNurseitemUser: {},
+            workerKeeper: {}, workerKeeperitem: {}, workerKeeperitemUser: {},
         }
     },
 
@@ -24,6 +24,7 @@ export const useViewsStore = defineStore('views', {
         },
         GET_CLIENTBABY_ITEM(){   
             this.clientBabyitem = JSON.parse(localStorage.clientBabyitem);
+            this.clientBabyitemUser = JSON.parse(localStorage.clientBabyitemUser);
         },
         GET_CLIENTNURSE(){   
             api.get('api/auth/c_nurse')
@@ -34,6 +35,7 @@ export const useViewsStore = defineStore('views', {
         },
         GET_CLIENTNURSE_ITEM(){   
             this.clientNurseitem = JSON.parse(localStorage.clientNurseitem);
+            this.clientNurseitemUser = JSON.parse(localStorage.clientNurseitemUser);
         },
         GET_CLIENTKEEPER(){   
             api.get('api/auth/c_keeper')
@@ -44,6 +46,7 @@ export const useViewsStore = defineStore('views', {
         },
         GET_CLIENTKEEPER_ITEM(){   
             this.clientKeeperitem = JSON.parse(localStorage.clientKeeperitem);
+            this.clientKeeperitemUser = JSON.parse(localStorage.clientKeeperitemUser);
         },
 
         GET_WORKERBABY(){   
@@ -55,6 +58,7 @@ export const useViewsStore = defineStore('views', {
         },
         GET_WORKERBABY_ITEM(){   
             this.workerBabyitem = JSON.parse(localStorage.workerBabyitem);
+            this.workerBabyitemUser = JSON.parse(localStorage.workerBabyitemUser);
         },
         GET_WORKERNURSE(){   
             api.get('api/auth/w_nurse')
@@ -65,6 +69,7 @@ export const useViewsStore = defineStore('views', {
         },
         GET_WORKERNURSE_ITEM(){   
             this.workerNurseitem = JSON.parse(localStorage.workerNurseitem);
+            this.workerNurseitemUser = JSON.parse(localStorage.workerNurseitemUser);
         },
         GET_WORKERKEEPER(){   
             api.get('api/auth/w_keeper')
@@ -75,6 +80,7 @@ export const useViewsStore = defineStore('views', {
         },
         GET_WORKERKEEPER_ITEM(){   
             this.workerKeeperitem = JSON.parse(localStorage.workerKeeperitem);
+            this.workerKeeperitemUser = JSON.parse(localStorage.workerKeeperitemUser);
         },
     }
 })

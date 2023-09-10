@@ -50,12 +50,12 @@ export const useUserStore = defineStore('user', {
                     localStorage.removeItem('user_image');
                     localStorage.removeItem('admin_id');
                     localStorage.removeItem('userID');
-                    localStorage.removeItem('clientBabyitem');  
-                    localStorage.removeItem('clientNurseitem');
-                    localStorage.removeItem('clientKeeperitem');
-                    localStorage.removeItem('workerBabyitem');
-                    localStorage.removeItem('workerNurseitem');
-                    localStorage.removeItem('workerKeeperitem');                   
+                    localStorage.removeItem('clientBabyitem'); localStorage.removeItem('clientBabyitemUser'); 
+                    localStorage.removeItem('clientNurseitem'); localStorage.removeItem('clientNurseitemUser');
+                    localStorage.removeItem('clientKeeperitem'); localStorage.removeItem('clientKeeperitemUser');
+                    localStorage.removeItem('workerBabyitem'); localStorage.removeItem('workerBabyitemUser');
+                    localStorage.removeItem('workerNurseitem'); localStorage.removeItem('workerNurseitemUser');
+                    localStorage.removeItem('workerKeeperitem'); localStorage.removeItem('workerKeeperitemUser');                  
                     
                     this.user = {}; 
                     this.token = '';                   

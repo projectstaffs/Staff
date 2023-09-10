@@ -10,7 +10,7 @@ html, body {
 .dz-success-mark, .dz-error-mark {
     display: none;
 }
-ul {
+ul, p {
     margin: 0;
 }
 
