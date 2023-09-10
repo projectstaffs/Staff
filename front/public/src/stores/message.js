@@ -7,7 +7,8 @@ export const useMessageStore = defineStore('message', {
         return {
             countmessage: 0,
             messages_out: {}, 
-            messages_in: {}
+            messages_in: {},
+            success: ''
         }
     },
 
@@ -32,6 +33,13 @@ export const useMessageStore = defineStore('message', {
                 })
                 .catch(error => { console.log(error); })
         },
+        GET_MESSAGES_INSOCKET(data){
+            api.get('api/auth/message_in', {params: {data}})
+                .then(res => {
+                    this.messages_in = res.data;                    
+                })
+                .catch(error => { console.log(error); })
+        },
         GET_COUNTMESSAGE_USER(data){
             api.get('api/auth/message_in', {params: {data}})
                 .then(res => {                                    
@@ -49,6 +57,13 @@ export const useMessageStore = defineStore('message', {
             api.post('api/auth/message', data)
                 .then((res) => {
                     router.push({name: "Sent"}); 
+                })
+                .catch(error => { console.log(error); })
+        },
+        CREATE_MESSAGE_USER(data){            
+            api.post('api/auth/message', data)
+                .then((res) => {
+                    this.success = 'Сообщение успешно отправлено!';
                 })
                 .catch(error => { console.log(error); })
         },

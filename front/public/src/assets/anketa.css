@@ -90,3 +90,12 @@
 .anketa_education {
     margin-bottom: 10px;
 }
+
+.anketa_msg_title {
+    text-align: center;
+}
+
+.msg_success {
+    text-align: center;
+    color: green;
+}

@@ -49,10 +49,18 @@ export default {
     },
     mounted() {  
         this.User.GET_TOKEN();                 
-        this.User.GET_USER();        
-        this.Message.GET_COUNTMESSAGE_USER(localStorage.userID); 
+        this.User.GET_USER();
         this.Socket.connect();
         this.User.global_error = null;               
+    },
+    beforeRouteEnter(to, from, next) {
+        const Message = useMessageStore();        
+        if(from.name === 'Incoming') {
+            Message.countmessage = 0;
+        } else {
+            Message.GET_COUNTMESSAGE_USER(localStorage.userID);
+        }
+        next();        
     },
 }
 </script>

@@ -27,8 +27,13 @@ export default {
     },
     mounted() {
         this.User.GET_TOKEN();
-        this.Message.GET_MESSAGES_IN(localStorage.userID); 
+        this.Message.GET_MESSAGES_INSOCKET(localStorage.userID);
+        //this.Message.GET_MESSAGES_IN(localStorage.userID);        
         this.Socket.connect();                   
+    },
+    beforeRouteLeave(to, from, next) {        
+        this.Message.GET_MESSAGES_IN(localStorage.userID);
+        next();
     },
 }
 </script>

@@ -25,11 +25,7 @@ class UserResource extends JsonResource
      * @return array<string, mixed>
      */
     public function toArray(Request $request): array
-    {        
-        $birthdate = Carbon::createFromFormat('Y-m-d', $this->age);
-        $currentDate = Carbon::now();
-        $current_age = $currentDate->diffInYears($birthdate);
-
+    {
         if(!Cache::has('countries')) { Cache::put('countries', Country::all()); }
         $Country = Cache::get('countries');
         $country = '';
@@ -61,6 +57,10 @@ class UserResource extends JsonResource
         }
         
         if($this->role == "Исполнитель") {
+            $birthdate = Carbon::createFromFormat('Y-m-d', $this->age);
+            $currentDate = Carbon::now();
+            $current_age = $currentDate->diffInYears($birthdate);
+
             if(!Cache::has('countries')) { Cache::put('countries', Country::all()); }
             $Citizen = Cache::get('countries');
             $citizen = '';
