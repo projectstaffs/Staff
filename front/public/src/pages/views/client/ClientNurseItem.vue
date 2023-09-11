@@ -1,27 +1,100 @@
 <template> 
     <div @click.prevent="back()" class="category_change_btn">Назад</div>   
-    <div>{{ Views.clientNurseitem }}</div>    
-    <div>{{ Views.clientNurseitem.User }}</div>   
+    <div class="anketa">
+        <div class="anketaitem_img"> <img :src="Views.clientNurseitemUser.image" alt="photo"> </div>
+        <div class="anketa_content">
+            <div class="anketa_content_name">
+                {{ Views.clientNurseitem.title }} 
+            </div>
+            <div class="anketa_content_age">
+                <b>Имя работодателя:</b> {{ Views.clientNurseitemUser.name }} {{ Views.clientNurseitemUser.patronymic }} {{ Views.clientNurseitemUser.surname }}
+            </div>
+            <div class="anketa_content_typeworks">
+                <b>Место работы: </b> {{ Views.clientNurseitemUser.city }}                    
+            </div>
+            <div class="anketa_content_phone">
+                <b>Телефон:</b> {{ Views.clientNurseitemUser.phone_number }}
+            </div>
+
+            <h2 class="anketa_title client">Отправить сообщение работодателю</h2>
+            <div class="anketa_msg_title">Кому: {{ Views.clientNurseitemUser.name }}</div>
+            <form @submit.prevent="sentMessage" class="login_form">                
+                <div>Укажите тему сообщения:</div>
+                <input v-model="User.user.title" required class="login_form_item" type="text" placeholder="тема">
+                <div>Напишите текст сообщения:</div>        
+                <textarea v-model="User.user.content" required class="login_form_item" placeholder="about"></textarea>        
+                <button type="submit" class="login_form_btn">Отправить сообщение</button>
+            </form>
+
+            <div class="register_error" v-for="item in User.global_error" :key="item"> {{ item[0] }} </div>
+            <div class="msg_success">{{ Message.success }}</div>
+
+            <h2 class="anketa_title">Описание работы</h2>
+            <p class="anketa_client_about">{{ Views.clientNurseitem.title_about }}</p>
+                        
+            <div class="anketa_inform">
+                <div class="anketa_inform_item">
+                    <b>Занятость:</b> <br> 
+                    <span v-for="work in Views.clientNurseitem.Joboptions" :key="work.id"> {{ work.title }},&nbsp; </span>
+                    {{ Views.clientNurseitem.employment }}
+                </div>
+                <div class="anketa_inform_item">
+                    <b>Заработная плата:</b> <br> 
+                    {{ Views.clientNurseitem.monthpay }}
+                </div>
+                <div class="anketa_inform_item">
+                    <b>Работа на срок:</b> <br> 
+                    {{ Views.clientNurseitem.workperiod }}
+                </div>
+                <div class="anketa_inform_item">
+                    <b>Наличие водительского удостоверения:</b> <br> {{ Views.clientNurseitem.drive }}
+                </div>
+                <div class="anketa_inform_item">
+                    <b>Готовность выполнять следующие обязанности:</b> <br> 
+                    <span v-for="work in Views.clientNurseitem.Duties" :key="work.id"> {{ work.title }},&nbsp; </span>
+                </div>                
+            </div>            
+        </div>
+    </div>
+    <div>{{ Views.clientNurseitem }}</div>   
 </template>
 
 <script>
 import { useViewsStore } from '../../../stores/views';
 import { useUserStore } from '../../../stores/user';
+import { useMessageStore } from '../../../stores/message';
 export default {
     name: 'ClientNurseItem',
     setup() {
         const Views = useViewsStore();
         const User = useUserStore();
-        return { Views, User };
+        const Message = useMessageStore();
+        return { Views, User, Message };
     },
     methods: {
         back() {
             this.$router.push({name: "ClientNurseAll"})
         },
+        sentMessage() {
+            this.Message.success = '';
+            this.User.global_error = null;
+            this.User.user.reading = 0
+            this.User.user.sender = this.User.user.id
+            this.User.user.recipient = this.Views.clientNurseitemUser.id;
+            this.User.user.time = new Date().toLocaleTimeString('en-US', {
+                hour12: false, hour: 'numeric', minute: 'numeric'
+            });
+            
+            this.Message.CREATE_MESSAGE_USER(this.User.user);
+            this.User.user.title = ''; this.User.user.content = '';           
+        },
     },
     mounted() {
         this.Views.GET_CLIENTNURSE_ITEM();
         this.User.GET_TOKEN();
+        this.User.GET_USER();
+        this.User.global_error = null;
+        this.Message.success = '';
     },
 }
 </script>
