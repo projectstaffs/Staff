@@ -63,7 +63,50 @@
         {{ item[0] }}
     </div>
 
-    <div>{{ Nurse.nurse }}</div> 
+    <div v-if="Nurse.nurse" class="anketa">
+        <div v-if="User.user.image" class="anketaitem_img"> <img :src="User.user.image" alt="photo"> </div>
+        <div class="anketa_content">
+            <div class="anketa_content_name">
+                {{ Nurse.nurse.title }} 
+            </div>
+            <div class="anketa_content_age">
+                <b>Имя работодателя:</b> {{ User.user.name }} {{ User.user.patronymic }} {{ User.user.surname }}
+            </div>
+            <div class="anketa_content_typeworks">
+                <b>Место работы: </b> {{ User.user.city }}                    
+            </div>
+            <div class="anketa_content_phone">
+                <b>Телефон:</b> {{ User.user.phone_number }}
+            </div>
+
+            <h2 class="anketa_title">Описание работы</h2>
+            <p class="anketa_client_about">{{ Nurse.nurse.title_about }}</p>
+                        
+            <div class="anketa_inform">
+                <div class="anketa_inform_item">
+                    <b>Занятость:</b> <br> 
+                    <span v-for="work in Nurse.nurse.Joboptions" :key="work.id"> {{ work.title }},&nbsp; </span>
+                    {{ Nurse.nurse.employment }}
+                </div>
+                <div class="anketa_inform_item">
+                    <b>Заработная плата:</b> <br> 
+                    {{ Nurse.nurse.monthpay }}
+                </div>
+                <div class="anketa_inform_item">
+                    <b>Работа на срок:</b> <br> 
+                    {{ Nurse.nurse.workperiod }}
+                </div>
+                <div class="anketa_inform_item">
+                    <b>Наличие водительского удостоверения:</b> <br> {{ Nurse.nurse.drive }}
+                </div>
+                <div class="anketa_inform_item">
+                    <b>Готовность выполнять следующие обязанности:</b> <br> 
+                    <span v-for="work in Nurse.nurse.Duties" :key="work.id"> {{ work.title }},&nbsp; </span>
+                </div>                
+            </div>            
+        </div>
+    </div>
+
     <span v-if="Nurse.nurse" class="category_change_btn" @click.prevent="change_nurse()">Изменить анкету</span>
     <span v-if="Nurse.nurse" class="category_change_btn red" @click.prevent="delete_nurse()">Удалить анкету</span>
 </template>
@@ -116,6 +159,8 @@ export default {
         }
     },
     mounted() {
+        this.User.GET_TOKEN();
+        this.User.GET_USER();
         this.Nurse.GET_NURSE(localStorage.userID);
         this.Store.GET_JOBOPTIONS(); this.Store.GET_WORKPERIODS(); this.Store.GET_EMPLOYMENTS(); 
         this.Store.GET_NURSEDUTIES(); this.Store.GET_HOURLYPAYMENTS(); this.Store.GET_MONTHLYPAYMENTS();                                      

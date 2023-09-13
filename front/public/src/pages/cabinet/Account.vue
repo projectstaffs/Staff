@@ -1,8 +1,8 @@
 <template>
     <div v-if="User.user.role === 'Исполнитель'">
-        <div @click.prevent="babysitting" class="admin_sidebar_item">Анкета для няни </div>
-        <div @click.prevent="nurse" class="admin_sidebar_item">Анкета для сиделки </div>
-        <div @click.prevent="housekeeper" class="admin_sidebar_item">Анкета для домработницы </div>
+        <div v-if="(User.user.is_babysitting === 1) || (User.user.is_babysitting === true)" @click.prevent="babysitting" class="admin_sidebar_item">Анкета для няни </div>
+        <div v-if="User.user.is_nurse === 1 || (User.user.is_nurse === true)" @click.prevent="nurse" class="admin_sidebar_item">Анкета для сиделки </div>
+        <div v-if="User.user.is_housekeeper === 1 || (User.user.is_housekeeper === true)" @click.prevent="housekeeper" class="admin_sidebar_item">Анкета для домработницы </div>
     </div> 
     
     <div v-if="User.user.role === 'Наниматель'">
@@ -52,7 +52,8 @@ export default {
     mounted() {           
         this.User.GET_TOKEN();            
         this.photo = localStorage.user_image; 
-        this.User.GET_ADMINID();          
+        this.User.GET_ADMINID();  
+        this.User.GET_USER();        
     },
 }
 </script>

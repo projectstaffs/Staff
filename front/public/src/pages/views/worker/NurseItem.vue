@@ -1,7 +1,7 @@
 <template>    
     <div @click.prevent="back()" class="category_change_btn">Назад</div>
     <div class="anketa">
-        <div class="anketaitem_img"> <img :src="Views.workerNurseitemUser.image" alt="photo"> </div>
+        <div v-if="Views.workerNurseitemUser.image" class="anketaitem_img"> <img :src="Views.workerNurseitemUser.image" alt="photo"> </div>
         <div class="anketa_content">
             <div class="anketa_content_name">
                 {{ Views.workerNurseitemUser.name }} {{ Views.workerNurseitemUser.patronymic }} {{ Views.workerNurseitemUser.surname }}

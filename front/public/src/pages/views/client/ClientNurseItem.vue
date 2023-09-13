@@ -1,7 +1,7 @@
 <template> 
     <div @click.prevent="back()" class="category_change_btn">Назад</div>   
     <div class="anketa">
-        <div class="anketaitem_img"> <img :src="Views.clientNurseitemUser.image" alt="photo"> </div>
+        <div v-if="Views.clientNurseitemUser.image" class="anketaitem_img"> <img :src="Views.clientNurseitemUser.image" alt="photo"> </div>
         <div class="anketa_content">
             <div class="anketa_content_name">
                 {{ Views.clientNurseitem.title }} 
@@ -55,8 +55,7 @@
                 </div>                
             </div>            
         </div>
-    </div>
-    <div>{{ Views.clientNurseitem }}</div>   
+    </div>   
 </template>
 
 <script>

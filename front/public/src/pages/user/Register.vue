@@ -13,9 +13,9 @@
         <div>Укажите свою фамилию:</div>
         <input v-model="user.surname" required class="login_form_item" type="text" placeholder="фамилия">
         <div>Укажите свой телефон:</div>
-        <input v-model="user.phone" required class="login_form_item" type="tel" placeholder="телефон">
+        <div> +380 <input v-model="user.phone" required class="login_form_item" type="tel" placeholder="телефон"> </div>
         <div>Укажите свой дополнительный телефон:</div>
-        <input v-model="user.additional_phone" required class="login_form_item" type="tel" placeholder="телефон">
+        <div> +380 <input v-model="user.additional_phone" required class="login_form_item" type="tel" placeholder="телефон"> </div>
         <div>Укажите свой email:</div>
         <input v-model="user.email" required class="login_form_item" type="email" placeholder="email">        
         <div>Укажите свой пол:</div>

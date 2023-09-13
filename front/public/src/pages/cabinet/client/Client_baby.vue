@@ -73,8 +73,58 @@
     <div class="register_error" v-for="item in User.global_error" :key="item">
         {{ item[0] }}
     </div>
-    
-    <div>{{ Baby.baby }}</div> 
+
+    <div v-if="Baby.baby" class="anketa">
+        <div v-if="User.user.image" class="anketaitem_img"> <img :src="User.user.image" alt="photo"> </div>
+        <div class="anketa_content">
+            <div class="anketa_content_name">
+                {{ Baby.baby.title }} 
+            </div>
+            <div class="anketa_content_age">
+                <b>Имя работодателя:</b> {{ User.user.name }} {{ User.user.patronymic }} {{ User.user.surname }}
+            </div>
+            <div class="anketa_content_typeworks">
+                <b>Место работы: </b> {{ User.user.city }}                    
+            </div>
+            <div class="anketa_content_phone">
+                <b>Телефон:</b> {{ User.user.phone_number }}
+            </div>
+
+            <h2 class="anketa_title">Описание работы</h2>
+            <p class="anketa_client_about">{{ Baby.baby.title_about }}</p>
+            
+            <div class="anketa_content_phone">
+                <b>Количество детей: </b> {{ Baby.baby.childrencount }}
+            </div>
+            <div class="anketa_content_phone">
+                <b>Возраст детей: </b> <span v-for="age in Baby.baby.Agegroups" :key="age.id"> {{ age.title }},&nbsp; </span>
+            </div>
+            
+            <div class="anketa_inform">
+                <div class="anketa_inform_item">
+                    <b>Занятость:</b> <br> 
+                    <span v-for="work in Baby.baby.Joboptions" :key="work.id"> {{ work.title }},&nbsp; </span>
+                    {{ Baby.baby.employment }}
+                </div>
+                <div class="anketa_inform_item">
+                    <b>Заработная плата:</b> <br> 
+                    {{ Baby.baby.monthpay }}
+                </div>
+                <div class="anketa_inform_item">
+                    <b>Работа на срок:</b> <br> 
+                    {{ Baby.baby.workperiod }}
+                </div>
+                <div class="anketa_inform_item">
+                    <b>Наличие водительского удостоверения:</b> <br> {{ Baby.baby.drive }}
+                </div>
+                <div class="anketa_inform_item">
+                    <b>Готовность выполнять следующие обязанности:</b> <br> 
+                    <span v-for="work in Baby.baby.Duties" :key="work.id"> {{ work.title }},&nbsp; </span>
+                </div>                
+            </div>            
+        </div>
+    </div>
+     
     <span v-if="Baby.baby" class="category_change_btn" @click.prevent="change_baby()">Изменить анкету</span>
     <span v-if="Baby.baby" class="category_change_btn red" @click.prevent="delete_baby()">Удалить анкету</span>
 </template>
@@ -130,6 +180,7 @@ export default {
     },
     mounted() {
         this.User.GET_TOKEN();
+        this.User.GET_USER();
         this.Baby.GET_BABY(localStorage.userID);
         this.Store.GET_JOBOPTIONS(); this.Store.GET_WORKPERIODS(); this.Store.GET_EMPLOYMENTS(); this.Store.GET_CHILDRENS(); this.Store.GET_BABYSITTINGDUTIES();
         this.Store.GET_HOURLYPAYMENTS(); this.Store.GET_MONTHLYPAYMENTS(); this.Store.GET_AGEGROUPS(); 

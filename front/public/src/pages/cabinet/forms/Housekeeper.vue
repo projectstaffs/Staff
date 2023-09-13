@@ -97,7 +97,111 @@
         {{ item[0] }}
     </div>
 
-    <div>{{ Keeper.keeper }}</div> 
+    <div v-if="Keeper.keeper" class="anketa">
+        <div v-if="User.user.image" class="anketaitem_img"> <img :src="User.user.image" alt="photo"> </div>
+        <div class="anketa_content">
+            <div class="anketa_content_name">
+                {{ User.user.name }} {{ User.user.patronymic }} {{ User.user.surname }}
+            </div>
+            <div class="anketa_content_age">
+                Возраст(лет): {{ User.user.current_age }} &nbsp;&nbsp;•&nbsp;&nbsp; Опыт работы: {{ Keeper.keeper.experience }} &nbsp;&nbsp;•&nbsp;&nbsp; {{ User.user.city }}
+            </div>
+            <div class="anketa_content_typeworks">
+                <b>Предоставляю услуги:&nbsp;</b> <div v-for="work in Keeper.keeper.Typeworks" :key="work.id" class="anketa_content_typeworks_item"> {{ work.title }},&nbsp; </div>                    
+            </div>
+            <div class="anketa_content_employment">
+                <b>Занятость:</b> {{ Keeper.keeper.employment }}
+            </div>
+            <div class="anketa_content_phone">
+                <b>Телефон:</b> {{ User.user.phone_number }}
+            </div>
+
+            <h2 class="anketa_title">Обо мне</h2>
+            <p>{{ User.user.about }}</p>
+            <p>{{ Keeper.keeper.keeper_exp }}</p>            
+            <div class="anketa_inform">
+                <div class="anketa_inform_item">
+                    <b>Гражданство:</b> <br> {{ User.user.citizen }}
+                </div>
+                <div class="anketa_inform_item">
+                    <b>Наличие водительского удостоверения:</b> <br> {{ User.user.drive }}
+                </div>
+                <div class="anketa_inform_item">
+                    <b>Право работать на территории Украины?:</b> <br> {{ User.user.right_work }}
+                </div>
+                <div class="anketa_inform_item">
+                    <b>Справка об отсутствии судимости:</b> <br> {{ User.user.criminal }}
+                </div>
+                <div class="anketa_inform_item">
+                    <b>Умение плавать:</b> <br> {{ User.user.swimming }}
+                </div>
+                <div class="anketa_inform_item">
+                    <b>Семейное положение:</b> <br> {{ User.user.status }}
+                </div>
+                <div class="anketa_inform_item">
+                    <b>Религия:</b> <br> {{ User.user.religion }}
+                </div>
+                <div class="anketa_inform_item">
+                    <b>Курение:</b> <br> {{ User.user.smoking }}
+                </div>
+                <div class="anketa_inform_item">
+                    <b>Готовность работать в доме с домашними животными:</b> <br> {{ User.user.animal_work }}
+                </div>
+            </div>
+            
+            <h2 class="anketa_title">Опыт работы</h2>
+            <div class="anketa_experience">
+                Опыт работы: {{ Keeper.keeper.experience }}, Рекомендации с прежних мест работы: {{ Keeper.keeper.recommendation }}
+            </div>
+            <p>{{ Keeper.keeper.additional }}</p>
+
+            <h2 class="anketa_title">Предпочтения по желаемой должности</h2>
+            <div class="anketa_inform">
+                <div class="anketa_inform_item">
+                    <b>Должность:</b> <br> 
+                    <span v-for="work in Keeper.keeper.Typeworks" :key="work.id"> {{ work.title }},&nbsp; </span>
+                </div>
+                <div class="anketa_inform_item">
+                    <b>Место работы:</b> <br> 
+                    <span v-for="work in Keeper.keeper.Preferences" :key="work.id"> {{ work.title }},&nbsp; </span>
+                </div>
+                <div class="anketa_inform_item">
+                    <b>Желаемая зарплата:</b> <br> 
+                    {{ Keeper.keeper.monthpay }}
+                </div>
+                <div class="anketa_inform_item">
+                    <b>Приемлемые варианты работы:</b> <br> 
+                    <span v-for="work in Keeper.keeper.Joboptions" :key="work.id"> {{ work.title }},&nbsp; </span>
+                    {{ Keeper.keeper.employment }}
+                </div>
+                <div class="anketa_inform_item">
+                    <b>Обязанности по присмотру за детьми:</b> <br> 
+                    {{ Keeper.keeper.baby_keeper }}
+                </div>
+                <div class="anketa_inform_item">
+                    <b>Обязанности по уходу за престарелыми/больными:</b> <br> 
+                    {{ Keeper.keeper.nurse_keeper }}
+                </div>
+                <div class="anketa_inform_item">
+                    <b>Работа на срок:</b> <br> 
+                    {{ Keeper.keeper.workperiod }}
+                </div>
+                <div class="anketa_inform_item">
+                    <b>Можете ли вы обеспечить собственную технику для уборки (пылесос, др.)?:</b> <br> 
+                    {{ Keeper.keeper.technique }}
+                </div>
+                <div class="anketa_inform_item">
+                    <b>Можете ли вы обеспечить собственные средства для уборки (моющие, чистящие, др.)?:</b> <br> 
+                    {{ Keeper.keeper.material }}
+                </div>                
+                <div class="anketa_inform_item">
+                    <b>Работы по дому:</b> <br> 
+                    <span v-for="work in Keeper.keeper.Duties" :key="work.id"> {{ work.title }},&nbsp; </span>
+                </div>
+            </div>
+        </div>
+    </div>
+     
     <span v-if="Keeper.keeper" class="category_change_btn" @click.prevent="change_keeper()">Изменить анкету</span>
     <span v-if="Keeper.keeper" class="category_change_btn red" @click.prevent="delete_keeper()">Удалить анкету</span>
 </template>
@@ -155,6 +259,7 @@ export default {
     },
     mounted() {
         this.User.GET_TOKEN();
+        this.User.GET_USER();
         this.Keeper.GET_KEEPER(localStorage.userID);        
         this.Store.GET_EXPERIENCES(); this.Store.GET_RECOMMENDATIONS(); this.Store.GET_HOUSEKEEPERTYPEOFWORKS();
         this.Store.GET_JOBOPTIONS(); this.Store.GET_WORKPERIODS(); this.Store.GET_EMPLOYMENTS();

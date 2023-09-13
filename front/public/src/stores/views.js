@@ -18,7 +18,7 @@ export const useViewsStore = defineStore('views', {
         GET_CLIENTBABY(){   
             api.get('api/auth/c_baby')
                 .then(res => {
-                    this.clientBaby = res.data;
+                    this.clientBaby = res.data.data;
                 })
                 .catch(error => { console.log(error); })
         },
@@ -29,7 +29,7 @@ export const useViewsStore = defineStore('views', {
         GET_CLIENTNURSE(){   
             api.get('api/auth/c_nurse')
                 .then(res => {                                    
-                    this.clientNurse = res.data;
+                    this.clientNurse = res.data.data;
                 })
                 .catch(error => { console.log(error); })
         },
@@ -40,7 +40,7 @@ export const useViewsStore = defineStore('views', {
         GET_CLIENTKEEPER(){   
             api.get('api/auth/c_keeper')
                 .then(res => {                                    
-                    this.clientKeeper = res.data;
+                    this.clientKeeper = res.data.data;
                 })
                 .catch(error => { console.log(error); })
         },
@@ -52,7 +52,7 @@ export const useViewsStore = defineStore('views', {
         GET_WORKERBABY(){   
             api.get('api/auth/w_baby')
                 .then(res => {                                    
-                    this.workerBaby = res.data;
+                    this.workerBaby = res.data.data;
                 })
                 .catch(error => { console.log(error); })
         },
@@ -63,7 +63,7 @@ export const useViewsStore = defineStore('views', {
         GET_WORKERNURSE(){   
             api.get('api/auth/w_nurse')
                 .then(res => {                                    
-                    this.workerNurse = res.data;
+                    this.workerNurse = res.data.data;
                 })
                 .catch(error => { console.log(error); })
         },
@@ -74,7 +74,7 @@ export const useViewsStore = defineStore('views', {
         GET_WORKERKEEPER(){   
             api.get('api/auth/w_keeper')
                 .then(res => {                                    
-                    this.workerKeeper = res.data;
+                    this.workerKeeper = res.data.data;
                 })
                 .catch(error => { console.log(error); })
         },
