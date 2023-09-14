@@ -94,6 +94,8 @@ class UserupdateRequest extends FormRequest
             'password.min' => 'Пароль должен состоять как минимум из 3 символов.',
             'password.required' => 'Укажите свой пароль.',
 
+            'phone.required' => 'Укажите свой номер телефона.',
+            'additional_phone.required' => 'Укажите свой дополнительный номер телефона.',
             'gender.required' => 'Укажите свой пол.',
             'age.required' => 'Укажите дату своего рождения.',
             'right_work.required' => 'Укажите право работать на территории Украины.',

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\forms;
 use Illuminate\Routing\Controller;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use App\Models\forms\Credential;
+use App\Http\Requests\worker\CredentialRequest;
 
 class CredentialController extends Controller
 {
@@ -13,9 +15,17 @@ class CredentialController extends Controller
      */
     public function index(Request $request)
     {
-        $credentials = Credential::where('user_id', $request["data"])->get();          
-        return $credentials; 
-        //return Credential::orderBy('created_at', 'desc')->get();
+        if(!Cache::has('credentials')) { Cache::put('credentials', Credential::all()); }
+        $Credentials = Cache::get('credentials');
+        $credentials = array();
+        foreach ($Credentials as $item) {
+            if($item->user_id == $request["data"]) {
+                array_push($credentials, $item);
+            }                           
+        }
+
+        if($credentials) { return $credentials; }
+        else { return null; }
     }
 
     /**
@@ -29,7 +39,7 @@ class CredentialController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CredentialRequest $request)
     {
         $credential = new Credential([
             'full_name' => $request->full_name,
@@ -37,9 +47,10 @@ class CredentialController extends Controller
             'email' => $request->email,
             'content' => $request->content,
             'user_id' => $request->user_id,
-        ]);
-                
-        $credential->save();        
+        ]);                
+        $credential->save(); 
+        
+        Cache::put('credentials', Credential::all());
         return response()->json('The credential successfully added');
     }
 
@@ -62,15 +73,16 @@ class CredentialController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CredentialRequest $request, string $id)
     {
         $credential = Credential::find($id);
         $credential->full_name = $request['full_name'];
         $credential->phone = $request['phone'];
         $credential->email = $request['email'];
-        $credential->content = $request['content'];       
-
+        $credential->content = $request['content'];
         $credential->save();
+
+        Cache::put('credentials', Credential::all());
         return response()->json(["The credential successfully updated"]);
     }
 
@@ -82,6 +94,7 @@ class CredentialController extends Controller
         $credential = Credential::find($id);
         $credential->delete();        
 
+        Cache::put('credentials', Credential::all());
         return response()->json('The credential successfully deleted');
     }
 }

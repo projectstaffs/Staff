@@ -30,6 +30,7 @@ use App\Models\data\MonthlyPayment;
 use App\Models\data\HourlyPayment;
 use App\Models\data\Recommendation;
 use App\Models\data\Experience;
+use App\Models\forms\Credential;
 
 class WorkNurseResource extends JsonResource
 {
@@ -50,6 +51,15 @@ class WorkNurseResource extends JsonResource
             }                           
         }
         $USER = new UserResource($user);
+
+        if(!Cache::has('credentials')) { Cache::put('credentials', Credential::all()); }
+        $Credentials = Cache::get('credentials');
+        $credentials = array();
+        foreach ($Credentials as $item) {
+            if($item->user_id == $this->user_id) {
+                array_push($credentials, $item);
+            }                           
+        }
 
         if(!Cache::has('formnurseeducations')) { Cache::put('formnurseeducations', FormNurseeducation::all()); }
         $FormNurseeducation = Cache::get('formnurseeducations');
@@ -196,6 +206,7 @@ class WorkNurseResource extends JsonResource
             'Diagnoses' => FormDiagnoseResource::collection($diagnose),
             'Skills' => FormNurseskillResource::collection($skill),
             'Worklocations' => FormNurseworklocationkResource::collection($worklocation),
+            'Credentials' => $credentials,
             'User' => $USER,            
             
             'experience_id' => $this->experience_id,

@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import api from "../assets/api";
+import router from "../router";
 
 export const useCredentialStore = defineStore('credential', {    
     state: () => {
@@ -19,6 +20,7 @@ export const useCredentialStore = defineStore('credential', {
         CHANGE_CREDENTIAL( data){                       
             api.put('api/auth/credential/' + data.id, data)
                 .then((res) => {
+                    router.push({name: "Credentials"})
                 })
                 .catch(error => { console.log(error); })
         },

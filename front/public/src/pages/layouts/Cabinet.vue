@@ -4,8 +4,8 @@
             <div class="cabinet_sidebar_title">{{ User.user.name }}</div>
             <div @click.prevent="account" class="admin_sidebar_item">Учетная запись</div>
             <div @click.prevent="mailbox" class="admin_sidebar_item">Почтовый ящик</div> 
-            <!-- <div @click.prevent="vacancies" class="admin_sidebar_item">Мои вакансии</div>
-            <div v-if="User.user.role === 'Исполнитель'" @click.prevent="credentials" class="admin_sidebar_item">Мои рекомендации</div> -->
+            <div @click.prevent="vacancies" class="admin_sidebar_item">Отзывы</div>
+            <div v-if="User.user.role === 'Исполнитель'" @click.prevent="credentials" class="admin_sidebar_item">Мои рекомендации</div>
             <div @click.prevent="edit" class="admin_sidebar_item">Редактировать профиль</div>
             <div @click.prevent="myphoto" class="admin_sidebar_item">Моя фотография</div>
             <div @click.prevent="logout" class="admin_sidebar_item">Выйти</div>

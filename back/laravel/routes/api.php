@@ -40,6 +40,7 @@ use App\Http\Controllers\forms\UserLanguagesController;
 use App\Http\Controllers\user\ImageController;
 use App\Http\Controllers\forms\CredentialController;
 use App\Http\Controllers\message\MessageController;
+use App\Http\Controllers\message\ReviewController;
 use App\Http\Controllers\HelpController;
 use App\Http\Controllers\ViewsController;
 
@@ -108,6 +109,7 @@ function ($router) {
         Route::get('/admin', [HelpController::class, 'getAdmin']);
         Route::get('/message_in', [HelpController::class, 'getMessage_in']);
         Route::resource('/message', MessageController::class); //message out
+        Route::resource('/review', ReviewController::class);
         Route::resource('/credential', CredentialController::class);
         Route::resource('/photo', ImageController::class);
         Route::resource('/language', LanguageController::class);

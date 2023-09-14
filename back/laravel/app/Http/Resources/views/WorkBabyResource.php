@@ -29,6 +29,7 @@ use App\Models\data\MonthlyPayment;
 use App\Models\data\HourlyPayment;
 use App\Models\data\Recommendation;
 use App\Models\data\Experience;
+use App\Models\forms\Credential;
 
 class WorkBabyResource extends JsonResource
 {
@@ -49,6 +50,15 @@ class WorkBabyResource extends JsonResource
             }                           
         }
         $USER = new UserResource($user);
+
+        if(!Cache::has('credentials')) { Cache::put('credentials', Credential::all()); }
+        $Credentials = Cache::get('credentials');
+        $credentials = array();
+        foreach ($Credentials as $item) {
+            if($item->user_id == $this->user_id) {
+                array_push($credentials, $item);
+            }                           
+        }
 
         if(!Cache::has('userlanguages')) { Cache::put('userlanguages', UserLanguages::all()); }
         $Userlanguages = Cache::get('userlanguages');
@@ -193,6 +203,7 @@ class WorkBabyResource extends JsonResource
 
             'Languages' => UserLanguagesResource::collection($lang),
             'Agegroups' => FormAgegroupResource::collection($agegroup),
+            'Credentials' => $credentials,            
             'Educations' => FormEducationResource::collection($education),
             'Typeworks' => FormTypeworkResource::collection($typework),
             'Joboptions' => FormJoboptionResource::collection($joboption),

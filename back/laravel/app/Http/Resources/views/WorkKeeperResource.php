@@ -24,6 +24,7 @@ use App\Models\data\MonthlyPayment;
 use App\Models\data\HourlyPayment;
 use App\Models\data\Recommendation;
 use App\Models\data\Experience;
+use App\Models\forms\Credential;
 
 class WorkKeeperResource extends JsonResource
 {
@@ -44,6 +45,15 @@ class WorkKeeperResource extends JsonResource
             }                           
         }
         $USER = new UserResource($user);
+
+        if(!Cache::has('credentials')) { Cache::put('credentials', Credential::all()); }
+        $Credentials = Cache::get('credentials');
+        $credentials = array();
+        foreach ($Credentials as $item) {
+            if($item->user_id == $this->user_id) {
+                array_push($credentials, $item);
+            }                           
+        }
 
         if(!Cache::has('formkeeperjoboptions')) { Cache::put('formkeeperjoboptions', FormKeeperjoboption::all()); }
         $FormKeeperjoboption = Cache::get('formkeeperjoboptions');
@@ -165,6 +175,7 @@ class WorkKeeperResource extends JsonResource
             'Typeworks' => KeepertypeworkResource::collection($typework),
             'Duties' => KeeperdutieResource::collection($dutie),
             'Preferences' => KeeperpreferenceResource::collection($preference),
+            'Credentials' => $credentials,
             'User' => $USER,                        
             
             'experience_id' => $this->experience_id,

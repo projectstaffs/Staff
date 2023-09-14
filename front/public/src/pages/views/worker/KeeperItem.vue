@@ -54,7 +54,13 @@
             
             <h2 class="anketa_title">Опыт работы</h2>
             <div class="anketa_experience">
-                Опыт работы: {{ Views.workerKeeperitem.experience }}, Рекомендации с прежних мест работы: {{ Views.workerKeeperitem.recommendation }}
+                Опыт работы: {{ Views.workerKeeperitem.experience }}
+            </div>
+            <div class="anketa_agegroup">
+                <b>Рекомендации с прежних мест работы: {{ Views.workerKeeperitem.recommendation }}:</b> <br> 
+                <span v-for="credential in Views.workerKeeperitem.Credentials" :key="credential.id"> 
+                    <div>- {{ credential.full_name }}, {{ credential.email }}, {{ credential.phone }}, {{ credential.content }}; </div> 
+                </span>
             </div>
             <p>{{ Views.workerKeeperitem.additional }}</p>
 

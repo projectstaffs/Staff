@@ -59,11 +59,17 @@
             
             <h2 class="anketa_title">Опыт работы и Образование</h2>
             <div class="anketa_experience">
-                Опыт работы: {{ Views.workerBabyitem.experience }}, Рекомендации с прежних мест работы: {{ Views.workerBabyitem.recommendation }}
+                Опыт работы: {{ Views.workerBabyitem.experience }} 
             </div>
             <div class="anketa_agegroup">
                 <b>Опыт работы с детьми следующих возрастных групп:</b> <br> 
                 <span v-for="agegroup in Views.workerBabyitem.Agegroups" :key="agegroup.id"> {{ agegroup.title }},&nbsp; </span>
+            </div>
+            <div class="anketa_agegroup">
+                <b>Рекомендации с прежних мест работы: {{ Views.workerBabyitem.recommendation }}:</b> <br> 
+                <span v-for="credential in Views.workerBabyitem.Credentials" :key="credential.id"> 
+                    <div>- {{ credential.full_name }}, {{ credential.email }}, {{ credential.phone }}, {{ credential.content }}; </div> 
+                </span>
             </div>
             <div class="anketa_education">
                 <b>Образование / курсы:</b> <br> 
