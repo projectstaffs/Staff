@@ -26,23 +26,6 @@ class ViewsController extends Controller
         $getItems = Cache::get('babies');
         return WorkBabyResource::collection($getItems);               
     }
-    public function getSearchBaby (Request $request)
-    {
-        if(!Cache::has('babies')) { Cache::put('babies', Baby::all()); }
-        $getItems = Cache::get('babies');
-        $Baby = WorkBabyResource::collection($getItems);
-
-        $result = array();
-        $temp = null;
-        foreach ($Baby as $item) {
-            //if($item->user_id == $this->user_id) {
-            //    array_push($result, $item);
-            //} 
-            $temp = $item->User;
-            
-        }
-        return $temp->id;              
-    }
     public function getNurse ()
     { 
         if(!Cache::has('nurses')) { Cache::put('nurses', Nurse::all()); }

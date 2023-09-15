@@ -11,6 +11,7 @@ export const useViewsStore = defineStore('views', {
             workerBaby: {}, workerBabyitem: {}, workerBabyitemUser: {},
             workerNurse: {}, workerNurseitem: {}, workerNurseitemUser: {},
             workerKeeper: {}, workerKeeperitem: {}, workerKeeperitemUser: {},
+            currentWBPage: 1
         }
     },
 
@@ -60,12 +61,23 @@ export const useViewsStore = defineStore('views', {
             this.workerBabyitem = JSON.parse(localStorage.workerBabyitem);
             this.workerBabyitemUser = JSON.parse(localStorage.workerBabyitemUser);
         },
-        SEARCH_WORKERBABY(data){
-            api.post('api/auth/w_baby_search', data)
+        SEARCH_WORKERBABY(data){            
+            api.get('api/auth/w_baby')
                 .then(res => {
-                    console.log(res);
+                    let result = [];
+                    res.data.data.forEach((item) => { 
+                        let count = 0;
+                        if(item.User.city_id === data.city) { count++; } 
+                        if(item.employment_id === data.employment) { count++; }
+                        item.Typeworks.forEach((el) => {
+                            if(el.id === data.typeofwork) {count++;}
+                        })                             
+                        if(count === 3) { result.push(item); }                                                               
+                    })        
+                    this.workerBaby = result;
+                    this.currentWBPage = 1;
                 })
-                .catch(error => { console.log(error); })
+                .catch(error => { console.log(error); })    
         },
 
         GET_WORKERNURSE(){   

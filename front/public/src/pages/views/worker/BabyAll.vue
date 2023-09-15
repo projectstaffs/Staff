@@ -1,22 +1,25 @@
 <template>
-    <form class="search" @submit.prevent="search">
-        <select v-model="searchData.typeofwork">
-            <option v-for="option in Store.typeofworks" :value="option.id">
-                {{ option.title }}                
-            </option>
-        </select>    
-        <select v-model="searchData.employment">
-            <option v-for="option in Store.employments" :value="option.id">
-                {{ option.title }}                
-            </option>
-        </select>    
-        <select v-model="searchData.city">
-            <option v-for="option in Store.citys" :value="option.id">
-                {{ option.title }}                
-            </option>
-        </select>
-        <button type="submit" class="login_form_btn">Найти</button>
-    </form>    
+    <div class="search_block">
+        <form class="search" @submit.prevent="search">
+            <select v-model="searchData.typeofwork">
+                <option v-for="option in Store.typeofworks" :value="option.id">
+                    {{ option.title }}                
+                </option>
+            </select>    
+            <select v-model="searchData.employment">
+                <option v-for="option in Store.employments" :value="option.id">
+                    {{ option.title }}                
+                </option>
+            </select>    
+            <select v-model="searchData.city">
+                <option v-for="option in Store.citys" :value="option.id">
+                    {{ option.title }}                
+                </option>
+            </select>
+            <button type="submit" class="login_form_btn">Найти</button>
+        </form>
+        <button @click.prevent="clear" class="login_form_btn">Сбросить</button>
+    </div>        
 
     <div v-for="post in displayedPosts" :key="post.id">        
         <div class="anketa">
@@ -43,9 +46,9 @@
     </div>
 
     <div v-if="totalPages > 1" class="pagination">
-        <button class="pagination_btn" @click="prevPage" :disabled="currentPage === 1">Назад</button>
-        <span>{{ currentPage }}</span>
-        <button class="pagination_btn" @click="nextPage" :disabled="currentPage === totalPages">Вперед</button>
+        <button class="pagination_btn" @click="prevPage" :disabled="Views.currentWBPage === 1">Назад</button>
+        <span>{{ Views.currentWBPage }}</span>
+        <button class="pagination_btn" @click="nextPage" :disabled="Views.currentWBPage === totalPages">Вперед</button>
     </div>    
 </template>
 
@@ -59,7 +62,6 @@ export default {
         return {
             searchData: {},
             itemsPerPage: 3, // Количество постов на странице
-            currentPage: 1, // Текущая страница
         }
     },
     setup() {
@@ -70,7 +72,13 @@ export default {
     },
     methods: {
         search() {
-            this.Views.SEARCH_WORKERBABY(this.searchData);
+            if((this.searchData.typeofwork > 0) && (this.searchData.employment > 0) && (this.searchData.city > 0)) {
+                this.Views.SEARCH_WORKERBABY(this.searchData);
+            } else {console.log('error');}
+            
+        },
+        clear() {
+            this.Views.GET_WORKERBABY();
         },
         showItem(item) {            
             this.Views.workerBabyitemUser = item.User;
@@ -81,16 +89,16 @@ export default {
             this.$router.push({name: "BabyItem"});            
         },
         nextPage() {
-            if (this.currentPage < this.totalPages) { this.currentPage++; }
+            if (this.Views.currentWBPage < this.totalPages) { this.Views.currentWBPage++; }
         },
         prevPage() {
-            if (this.currentPage > 1) { this.currentPage--; }
+            if (this.Views.currentWBPage > 1) { this.Views.currentWBPage--; }
         },
     },
     computed: {
         displayedPosts() {
             const keys = Object.keys(this.Views.workerBaby);
-            const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+            const startIndex = (this.Views.currentWBPage - 1) * this.itemsPerPage;
             const endIndex = startIndex + this.itemsPerPage;
             return keys.slice(startIndex, endIndex).map(key => this.Views.workerBaby[key]);
         },
@@ -101,12 +109,10 @@ export default {
     mounted() {
         this.Store.GET_TYPEOFWORKS(); this.Store.GET_EMPLOYMENTS(); this.Store.GET_CITYS();
         this.User.GET_TOKEN();        
-        this.Views.GET_WORKERBABY();
-        setTimeout(() => {
-            this.searchData.typeofwork = this.Store.typeofworks[0].id;
-            this.searchData.employment = this.Store.employments[0].id;
-            this.searchData.city = this.Store.citys[0].id;
-        }, 500);                
+        this.Views.GET_WORKERBABY();        
+        this.searchData.typeofwork = 7;
+        this.searchData.employment = 1;
+        this.searchData.city = 6;                
     },
 }
 </script>

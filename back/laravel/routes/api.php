@@ -99,8 +99,7 @@ function ($router) {
     Route::post('me', [AuthController::class, 'me']);
 
     Route::group(['middleware' => 'jwt.auth'], function(){
-        Route::get('/w_baby', [ViewsController::class, 'getBaby']);
-        Route::post('/w_baby_search', [ViewsController::class, 'getSearchBaby']);
+        Route::get('/w_baby', [ViewsController::class, 'getBaby']);        
         Route::get('/w_nurse', [ViewsController::class, 'getNurse']);
         Route::get('/w_keeper', [ViewsController::class, 'getKeeper']);
         Route::get('/c_baby', [ViewsController::class, 'getClientBaby']);
