@@ -37,6 +37,15 @@ class BabyResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        if(!Cache::has('babies')) { Cache::put('babies', Baby::all()); }
+        $Baby = Cache::get('babies');
+        $additional = '';
+        foreach ($Baby as $item) {
+            if($item->user_id == $this->user_id) {
+                $additional = $item->additional;
+            }                           
+        }
+
         if(!Cache::has('userlanguages')) { Cache::put('userlanguages', UserLanguages::all()); }
         $Userlanguages = Cache::get('userlanguages');
         $lang = array();
@@ -175,7 +184,7 @@ class BabyResource extends JsonResource
             'hourpay' => $hourpay,
             'monthpay' => $monthpay,            
             //'additional' => Baby::where('user_id', $this->user_id)->value('additional'),
-            'additional' => $this->value('additional'),         
+            'additional' => $additional,         
             'confirmed' => $this->confirmed,
 
             'Languages' => UserLanguagesResource::collection($lang),

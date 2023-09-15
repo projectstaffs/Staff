@@ -98,7 +98,7 @@
     </div>
 
     <div v-if="Keeper.keeper" class="anketa">
-        <div v-if="User.user.image" class="anketaitem_img"> <img :src="User.user.image" alt="photo"> </div>
+        <div v-if="photo" class="anketaitem_img"> <img :src="photo" alt="photo"> </div>
         <div class="anketa_content">
             <div class="anketa_content_name">
                 {{ User.user.name }} {{ User.user.patronymic }} {{ User.user.surname }}
@@ -223,7 +223,8 @@ export default {
                 { value: 'Да' },
                 { value: 'Нет' }
             ],
-            errors: null             
+            errors: null,
+            photo: ''             
         }
     },
     setup() {
@@ -266,6 +267,7 @@ export default {
         this.Store.GET_HOUSEKEEPERPREFERENCES(); this.Store.GET_HOUSEKEEPERDUTIES();        
         this.Store.GET_HOURLYPAYMENTS(); this.Store.GET_MONTHLYPAYMENTS();                                      
         this.User.global_error = null; this.errors = null;
+        this.photo = localStorage.user_image;
     },
 }
 </script>

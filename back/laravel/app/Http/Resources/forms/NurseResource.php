@@ -38,6 +38,15 @@ class NurseResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        if(!Cache::has('nurses')) { Cache::put('nurses', Nurse::all()); }
+        $Nurse = Cache::get('nurses');
+        $additional = '';
+        foreach ($Nurse as $item) {
+            if($item->user_id == $this->user_id) {
+                $additional = $item->additional;
+            }                           
+        }
+
         if(!Cache::has('formnurseeducations')) { Cache::put('formnurseeducations', FormNurseeducation::all()); }
         $FormNurseeducation = Cache::get('formnurseeducations');
         $education = array();
@@ -173,7 +182,7 @@ class NurseResource extends JsonResource
             'hourpay' => $hourpay,
             'monthpay' => $monthpay,           
             //'additional' => Baby::where('user_id', $this->user_id)->value('additional'),
-            'additional' => $this->value('additional'),                       
+            'additional' => $additional,                       
             'confirmed' => $this->confirmed,
             
             'Educations' => FormNurseeducationResource::collection($education),            

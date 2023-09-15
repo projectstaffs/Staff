@@ -31,7 +31,16 @@ class KeeperResource extends JsonResource
      * @return array<string, mixed>
      */
     public function toArray(Request $request): array
-    {         
+    {
+        if(!Cache::has('keepers')) { Cache::put('keepers', Keeper::all()); }
+        $Keeper = Cache::get('keepers');
+        $additional = '';
+        foreach ($Keeper as $item) {
+            if($item->user_id == $this->user_id) {
+                $additional = $item->additional;
+            }                           
+        }
+
         if(!Cache::has('formkeeperjoboptions')) { Cache::put('formkeeperjoboptions', FormKeeperjoboption::all()); }
         $FormKeeperjoboption = Cache::get('formkeeperjoboptions');
         $joboption = array();
@@ -144,8 +153,8 @@ class KeeperResource extends JsonResource
 
             'hourpay' => $hourpay,
             'monthpay' => $monthpay,            
-            //'additional' => Baby::where('user_id', $this->user_id)->value('additional'),
-            'additional' => $this->value('additional'),                      
+            //'additional' => Keeper::where('user_id', $this->user_id)->value('additional'),
+            'additional' => $additional,                      
             'confirmed' => $this->confirmed,            
                         
             'Joboptions' => KeeperjoboptionResource::collection($joboption),

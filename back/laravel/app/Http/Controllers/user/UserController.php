@@ -63,7 +63,7 @@ class UserController extends Controller
         
         $temp = new UserResource($user);
         Cache::put('users', User::all()); 
-        UsergreetingJob::dispatch($user->name, $user->email, $temp_password);       
+        //UsergreetingJob::dispatch($user->name, $user->email, $temp_password);       
         return response(['access_token' => $token, 'user' => $temp]);        
     }
 

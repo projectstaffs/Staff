@@ -91,7 +91,7 @@
     </div>
 
     <div v-if="Nurse.nurse" class="anketa">
-        <div v-if="User.user.image" class="anketaitem_img"> <img :src="User.user.image" alt="photo"> </div>
+        <div v-if="photo" class="anketaitem_img"> <img :src="photo" alt="photo"> </div>
         <div class="anketa_content">
             <div class="anketa_content_name">
                 {{ User.user.name }} {{ User.user.patronymic }} {{ User.user.surname }}
@@ -218,7 +218,8 @@ export default {
             anketajoboptions: [],
             anketaduties: [],
             anketaworklocations: [],
-            errors: null            
+            errors: null,
+            photo: ''            
         }
     },
     setup() {
@@ -263,6 +264,7 @@ export default {
         this.Store.GET_NURSETYPEOFWORKS(); this.Store.GET_JOBOPTIONS(); this.Store.GET_WORKPERIODS(); this.Store.GET_EMPLOYMENTS(); this.Store.GET_WORKLOCATIONS();
         this.Store.GET_NURSEDUTIES(); this.Store.GET_HOURLYPAYMENTS(); this.Store.GET_MONTHLYPAYMENTS();                                      
         this.User.global_error = null; this.errors = null;
+        this.photo = localStorage.user_image;
     },
 }
 </script>

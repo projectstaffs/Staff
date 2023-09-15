@@ -12,7 +12,7 @@
     </div>
     
     <div v-if="!photo">Добавьте изображение</div>
-    <img v-else :src="photo" alt="">    
+    <img class="account_img" v-else :src="photo" alt="">    
 </template>
 
 <script>
@@ -57,3 +57,10 @@ export default {
     },
 }
 </script>
+
+<style>
+.account_img {
+    width: 400px;
+    height: 400px;
+}
+</style>

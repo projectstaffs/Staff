@@ -75,7 +75,7 @@
     </div>
 
     <div v-if="Baby.baby" class="anketa">
-        <div v-if="User.user.image" class="anketaitem_img"> <img :src="User.user.image" alt="photo"> </div>
+        <div v-if="photo" class="anketaitem_img"> <img :src="photo" alt="photo"> </div>
         <div class="anketa_content">
             <div class="anketa_content_name">
                 {{ Baby.baby.title }} 
@@ -145,7 +145,8 @@ export default {
                 { value: 'Да' },
                 { value: 'Нет' }
             ],
-            errors: null
+            errors: null,
+            photo: ''
         }
     },
     setup() {
@@ -184,7 +185,8 @@ export default {
         this.Baby.GET_BABY(localStorage.userID);
         this.Store.GET_JOBOPTIONS(); this.Store.GET_WORKPERIODS(); this.Store.GET_EMPLOYMENTS(); this.Store.GET_CHILDRENS(); this.Store.GET_BABYSITTINGDUTIES();
         this.Store.GET_HOURLYPAYMENTS(); this.Store.GET_MONTHLYPAYMENTS(); this.Store.GET_AGEGROUPS(); 
-        this.User.global_error = null; this.errors = null;                               
+        this.User.global_error = null; this.errors = null; 
+        this.photo = localStorage.user_image;                              
     },
 }
 </script>
