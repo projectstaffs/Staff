@@ -60,6 +60,14 @@ export const useViewsStore = defineStore('views', {
             this.workerBabyitem = JSON.parse(localStorage.workerBabyitem);
             this.workerBabyitemUser = JSON.parse(localStorage.workerBabyitemUser);
         },
+        SEARCH_WORKERBABY(data){
+            api.post('api/auth/w_baby_search', data)
+                .then(res => {
+                    console.log(res);
+                })
+                .catch(error => { console.log(error); })
+        },
+
         GET_WORKERNURSE(){   
             api.get('api/auth/w_nurse')
                 .then(res => {                                    

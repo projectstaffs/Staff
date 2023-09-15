@@ -88,7 +88,7 @@ export const useUserStore = defineStore('user', {
 
                     this.token = res.data[0].original.access_token;
                     this.user = res.data[1].original;
-                    router.push({name: "Account"});                    
+                    router.push({name: "Home"});                    
                 })
                 .catch(error => { 
                     this.login_error = error.response.data.error;
@@ -125,7 +125,7 @@ export const useUserStore = defineStore('user', {
 
                     this.token = res.data.access_token;
                     this.user = res.data.user;                    
-                    router.push({name: "Account"});                   
+                    router.push({name: "Home"});                   
                 })
                 .catch(error => { 
                     //console.log(error);

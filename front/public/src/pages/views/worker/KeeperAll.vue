@@ -1,5 +1,5 @@
 <template>
-    <div v-for="post in Views.workerKeeper" :key="post.id">
+    <div v-for="post in displayedPosts" :key="post.id">
         <div class="anketa">
             <div v-if="post.User.image" class="anketa_img"> <img :src="post.User.image" alt="photo"> </div>
             <div class="anketa_content">
@@ -21,7 +21,12 @@
                 </div>
             </div>
         </div>       
-    </div>    
+    </div> 
+    <div v-if="totalPages > 1" class="pagination">
+        <button class="pagination_btn" @click="prevPage" :disabled="currentPage === 1">Назад</button>
+        <span>{{ currentPage }}</span>
+        <button class="pagination_btn" @click="nextPage" :disabled="currentPage === totalPages">Вперед</button>
+    </div>   
 </template>
 
 <script>
@@ -29,6 +34,12 @@ import { useViewsStore } from '../../../stores/views';
 import { useUserStore } from '../../../stores/user';
 export default {
     name: 'KeeperAll',
+    data() {
+        return {
+            itemsPerPage: 3, // Количество постов на странице
+            currentPage: 1, // Текущая страница
+        }
+    },
     setup() {
         const Views = useViewsStore();
         const User = useUserStore();
@@ -42,7 +53,24 @@ export default {
             this.Views.workerKeeperitem = item;
             localStorage.workerKeeperitem = JSON.stringify(item);
             this.$router.push({name: "KeeperItem"});
-        }
+        },
+        nextPage() {
+            if (this.currentPage < this.totalPages) { this.currentPage++; }
+        },
+        prevPage() {
+            if (this.currentPage > 1) { this.currentPage--; }
+        },
+    },
+    computed: {
+        displayedPosts() {
+            const keys = Object.keys(this.Views.workerKeeper);
+            const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+            const endIndex = startIndex + this.itemsPerPage;
+            return keys.slice(startIndex, endIndex).map(key => this.Views.workerKeeper[key]);
+        },
+        totalPages() {
+            return Math.ceil(this.Views.workerKeeper.length / this.itemsPerPage);
+        },
     },
     mounted() {
         this.User.GET_TOKEN();

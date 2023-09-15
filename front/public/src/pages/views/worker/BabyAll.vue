@@ -1,5 +1,24 @@
 <template>
-    <div v-for="post in Views.workerBaby" :key="post.id">
+    <form class="search" @submit.prevent="search">
+        <select v-model="searchData.typeofwork">
+            <option v-for="option in Store.typeofworks" :value="option.id">
+                {{ option.title }}                
+            </option>
+        </select>    
+        <select v-model="searchData.employment">
+            <option v-for="option in Store.employments" :value="option.id">
+                {{ option.title }}                
+            </option>
+        </select>    
+        <select v-model="searchData.city">
+            <option v-for="option in Store.citys" :value="option.id">
+                {{ option.title }}                
+            </option>
+        </select>
+        <button type="submit" class="login_form_btn">Найти</button>
+    </form>    
+
+    <div v-for="post in displayedPosts" :key="post.id">        
         <div class="anketa">
             <div v-if="post.User.image" class="anketa_img"> <img :src="post.User.image" alt="photo"> </div>
             <div class="anketa_content">
@@ -21,20 +40,38 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div v-if="totalPages > 1" class="pagination">
+        <button class="pagination_btn" @click="prevPage" :disabled="currentPage === 1">Назад</button>
+        <span>{{ currentPage }}</span>
+        <button class="pagination_btn" @click="nextPage" :disabled="currentPage === totalPages">Вперед</button>
     </div>    
 </template>
 
 <script>
 import { useViewsStore } from '../../../stores/views';
 import { useUserStore } from '../../../stores/user';
+import { useDataStore } from '../../../stores/variables';
 export default {
     name: 'BabyAll',
+    data() {
+        return {
+            searchData: {},
+            itemsPerPage: 3, // Количество постов на странице
+            currentPage: 1, // Текущая страница
+        }
+    },
     setup() {
         const Views = useViewsStore();
         const User = useUserStore();
-        return { Views, User };
+        const Store = useDataStore();
+        return { Views, User, Store };
     },
     methods: {
+        search() {
+            this.Views.SEARCH_WORKERBABY(this.searchData);
+        },
         showItem(item) {            
             this.Views.workerBabyitemUser = item.User;
             localStorage.workerBabyitemUser = JSON.stringify(item.User);
@@ -42,11 +79,34 @@ export default {
             this.Views.workerBabyitem = item;
             localStorage.workerBabyitem = JSON.stringify(item);            
             this.$router.push({name: "BabyItem"});            
-        }
+        },
+        nextPage() {
+            if (this.currentPage < this.totalPages) { this.currentPage++; }
+        },
+        prevPage() {
+            if (this.currentPage > 1) { this.currentPage--; }
+        },
+    },
+    computed: {
+        displayedPosts() {
+            const keys = Object.keys(this.Views.workerBaby);
+            const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+            const endIndex = startIndex + this.itemsPerPage;
+            return keys.slice(startIndex, endIndex).map(key => this.Views.workerBaby[key]);
+        },
+        totalPages() {
+            return Math.ceil(this.Views.workerBaby.length / this.itemsPerPage);
+        },
     },
     mounted() {
-        this.User.GET_TOKEN();
+        this.Store.GET_TYPEOFWORKS(); this.Store.GET_EMPLOYMENTS(); this.Store.GET_CITYS();
+        this.User.GET_TOKEN();        
         this.Views.GET_WORKERBABY();
+        setTimeout(() => {
+            this.searchData.typeofwork = this.Store.typeofworks[0].id;
+            this.searchData.employment = this.Store.employments[0].id;
+            this.searchData.city = this.Store.citys[0].id;
+        }, 500);                
     },
 }
 </script>
