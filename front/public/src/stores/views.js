@@ -11,7 +11,8 @@ export const useViewsStore = defineStore('views', {
             workerBaby: {}, workerBabyitem: {}, workerBabyitemUser: {},
             workerNurse: {}, workerNurseitem: {}, workerNurseitemUser: {},
             workerKeeper: {}, workerKeeperitem: {}, workerKeeperitemUser: {},
-            currentWBPage: 1
+            currentWBPage: 1, currentWNPage: 1, currentWKPage: 1,
+            currentCBPage: 1, currentCNPage: 1, currentCKPage: 1,
         }
     },
 
@@ -27,6 +28,25 @@ export const useViewsStore = defineStore('views', {
             this.clientBabyitem = JSON.parse(localStorage.clientBabyitem);
             this.clientBabyitemUser = JSON.parse(localStorage.clientBabyitemUser);
         },
+        SEARCH_CLIENTBABY(data){            
+            api.get('api/auth/c_baby')
+                .then(res => {
+                    let result = [];
+                    res.data.data.forEach((item) => { 
+                        let count = 0;
+                        if(item.User.city_id === data.city) { count++; } 
+                        if(item.employment_id === data.employment) { count++; }
+                        item.Joboptions.forEach((el) => {
+                            if(el.id === data.joboption) {count++;}
+                        })                             
+                        if(count === 3) { result.push(item); }                                                               
+                    })        
+                    this.clientBaby = result;
+                    this.currentCBPage = 1;
+                })
+                .catch(error => { console.log(error); })    
+        },
+
         GET_CLIENTNURSE(){   
             api.get('api/auth/c_nurse')
                 .then(res => {                                    
@@ -38,6 +58,25 @@ export const useViewsStore = defineStore('views', {
             this.clientNurseitem = JSON.parse(localStorage.clientNurseitem);
             this.clientNurseitemUser = JSON.parse(localStorage.clientNurseitemUser);
         },
+        SEARCH_CLIENTNURSE(data){            
+            api.get('api/auth/c_nurse')
+                .then(res => {
+                    let result = [];
+                    res.data.data.forEach((item) => { 
+                        let count = 0;
+                        if(item.User.city_id === data.city) { count++; } 
+                        if(item.employment_id === data.employment) { count++; }
+                        item.Joboptions.forEach((el) => {
+                            if(el.id === data.joboption) {count++;}
+                        })                             
+                        if(count === 3) { result.push(item); }                                                               
+                    })        
+                    this.clientNurse = result;
+                    this.currentCNPage = 1;
+                })
+                .catch(error => { console.log(error); })    
+        },
+        
         GET_CLIENTKEEPER(){   
             api.get('api/auth/c_keeper')
                 .then(res => {                                    
@@ -48,6 +87,24 @@ export const useViewsStore = defineStore('views', {
         GET_CLIENTKEEPER_ITEM(){   
             this.clientKeeperitem = JSON.parse(localStorage.clientKeeperitem);
             this.clientKeeperitemUser = JSON.parse(localStorage.clientKeeperitemUser);
+        },
+        SEARCH_CLIENTKEEPER(data){            
+            api.get('api/auth/c_keeper')
+                .then(res => {
+                    let result = [];
+                    res.data.data.forEach((item) => { 
+                        let count = 0;
+                        if(item.User.city_id === data.city) { count++; } 
+                        if(item.employment_id === data.employment) { count++; }
+                        item.Joboptions.forEach((el) => {
+                            if(el.id === data.joboption) {count++;}
+                        })                             
+                        if(count === 3) { result.push(item); }                                                               
+                    })        
+                    this.clientKeeper = result;
+                    this.currentCKPage = 1;
+                })
+                .catch(error => { console.log(error); })    
         },
 
         GET_WORKERBABY(){   
@@ -91,6 +148,25 @@ export const useViewsStore = defineStore('views', {
             this.workerNurseitem = JSON.parse(localStorage.workerNurseitem);
             this.workerNurseitemUser = JSON.parse(localStorage.workerNurseitemUser);
         },
+        SEARCH_WORKERNURSE(data){            
+            api.get('api/auth/w_nurse')
+                .then(res => {
+                    let result = [];
+                    res.data.data.forEach((item) => { 
+                        let count = 0;
+                        if(item.User.city_id === data.city) { count++; } 
+                        if(item.employment_id === data.employment) { count++; }
+                        item.Typeworks.forEach((el) => {
+                            if(el.id === data.typeofwork) {count++;}
+                        })                             
+                        if(count === 3) { result.push(item); }                                                               
+                    })        
+                    this.workerNurse = result;
+                    this.currentWNPage = 1;
+                })
+                .catch(error => { console.log(error); })    
+        },
+
         GET_WORKERKEEPER(){   
             api.get('api/auth/w_keeper')
                 .then(res => {                                    
@@ -101,6 +177,24 @@ export const useViewsStore = defineStore('views', {
         GET_WORKERKEEPER_ITEM(){   
             this.workerKeeperitem = JSON.parse(localStorage.workerKeeperitem);
             this.workerKeeperitemUser = JSON.parse(localStorage.workerKeeperitemUser);
+        },
+        SEARCH_WORKERKEEPER(data){            
+            api.get('api/auth/w_keeper')
+                .then(res => {
+                    let result = [];
+                    res.data.data.forEach((item) => { 
+                        let count = 0;
+                        if(item.User.city_id === data.city) { count++; } 
+                        if(item.employment_id === data.employment) { count++; }
+                        item.Typeworks.forEach((el) => {
+                            if(el.id === data.typeofwork) {count++;}
+                        })                             
+                        if(count === 3) { result.push(item); }                                                               
+                    })        
+                    this.workerKeeper = result;
+                    this.currentWKPage = 1;
+                })
+                .catch(error => { console.log(error); })    
         },
     }
 })

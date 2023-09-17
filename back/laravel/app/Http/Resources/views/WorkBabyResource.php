@@ -51,6 +51,15 @@ class WorkBabyResource extends JsonResource
         }
         $USER = new UserResource($user);
 
+        if(!Cache::has('babies')) { Cache::put('babies', Baby::all()); }
+        $Baby = Cache::get('babies');
+        $additional = '';
+        foreach ($Baby as $item) {
+            if($item->user_id == $this->user_id) {
+                $additional = $item->additional;
+            }                           
+        }
+
         if(!Cache::has('credentials')) { Cache::put('credentials', Credential::all()); }
         $Credentials = Cache::get('credentials');
         $credentials = array();
@@ -196,9 +205,8 @@ class WorkBabyResource extends JsonResource
             'childrencount' => $children,
             'children_invalid' => $this->children_invalid,
             'hourpay' => $hourpay,
-            'monthpay' => $monthpay,            
-            //'additional' => Baby::where('user_id', $this->user_id)->value('additional'),
-            'additional' => $this->value('additional'),         
+            'monthpay' => $monthpay,
+            'additional' => $additional,         
             'confirmed' => $this->confirmed,
 
             'Languages' => UserLanguagesResource::collection($lang),

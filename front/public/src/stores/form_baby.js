@@ -168,8 +168,7 @@ export const useForm_BabyStore = defineStore('form_baby', {
         },
         GET_BABY(data){ 
             api.get('api/auth/baby', {params: {data}})
-                .then((res) => {                                    
-                    //commit('SET_BABY', res.data.data);
+                .then((res) => {
                     this.baby = res.data.data; 
                     let temp = [];
                     for (let i = 0; i < res.data.data.Agegroups.length; i++) {            

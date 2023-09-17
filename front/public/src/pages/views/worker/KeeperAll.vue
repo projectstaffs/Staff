@@ -1,4 +1,6 @@
 <template>
+    
+
     <div v-for="post in displayedPosts" :key="post.id">
         <div class="anketa">
             <div v-if="post.User.image" class="anketa_img"> <img :src="post.User.image" alt="photo"> </div>
@@ -21,7 +23,8 @@
                 </div>
             </div>
         </div>       
-    </div> 
+    </div>
+
     <div v-if="totalPages > 1" class="pagination">
         <button class="pagination_btn" @click="prevPage" :disabled="currentPage === 1">Назад</button>
         <span>{{ currentPage }}</span>

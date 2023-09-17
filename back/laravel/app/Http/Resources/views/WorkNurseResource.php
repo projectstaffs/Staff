@@ -52,6 +52,15 @@ class WorkNurseResource extends JsonResource
         }
         $USER = new UserResource($user);
 
+        if(!Cache::has('nurses')) { Cache::put('nurses', Nurse::all()); }
+        $Nurse = Cache::get('nurses');
+        $additional = '';
+        foreach ($Nurse as $item) {
+            if($item->user_id == $this->user_id) {
+                $additional = $item->additional;
+            }                           
+        }
+
         if(!Cache::has('credentials')) { Cache::put('credentials', Credential::all()); }
         $Credentials = Cache::get('credentials');
         $credentials = array();
@@ -196,7 +205,7 @@ class WorkNurseResource extends JsonResource
             'hourpay' => $hourpay,
             'monthpay' => $monthpay,            
             //'additional' => Baby::where('user_id', $this->user_id)->value('additional'),
-            'additional' => $this->value('additional'),                       
+            'additional' => $additional,                       
             'confirmed' => $this->confirmed,
             
             'Educations' => FormNurseeducationResource::collection($education),            

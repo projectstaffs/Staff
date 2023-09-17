@@ -46,6 +46,15 @@ class WorkKeeperResource extends JsonResource
         }
         $USER = new UserResource($user);
 
+        if(!Cache::has('keepers')) { Cache::put('keepers', Keeper::all()); }
+        $Keeper = Cache::get('keepers');
+        $additional = '';
+        foreach ($Keeper as $item) {
+            if($item->user_id == $this->user_id) {
+                $additional = $item->additional;
+            }                           
+        }
+
         if(!Cache::has('credentials')) { Cache::put('credentials', Credential::all()); }
         $Credentials = Cache::get('credentials');
         $credentials = array();
@@ -166,9 +175,8 @@ class WorkKeeperResource extends JsonResource
             'nurse_keeper' => $this->nurse_keeper,
 
             'hourpay' => $hourpay,
-            'monthpay' => $monthpay,           
-            //'additional' => Baby::where('user_id', $this->user_id)->value('additional'),
-            'additional' => $this->value('additional'),                      
+            'monthpay' => $monthpay,
+            'additional' => $additional,                      
             'confirmed' => $this->confirmed,            
                         
             'Joboptions' => KeeperjoboptionResource::collection($joboption),

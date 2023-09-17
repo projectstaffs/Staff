@@ -1,4 +1,26 @@
 <template>
+    <div class="search_block">
+        <form class="search" @submit.prevent="search">
+            <select v-model="searchData.typeofwork">
+                <option v-for="option in Store.nursetypeofworks" :value="option.id">
+                    {{ option.title }}                
+                </option>
+            </select>    
+            <select v-model="searchData.employment">
+                <option v-for="option in Store.employments" :value="option.id">
+                    {{ option.title }}                
+                </option>
+            </select>    
+            <select v-model="searchData.city">
+                <option v-for="option in Store.citys" :value="option.id">
+                    {{ option.title }}                
+                </option>
+            </select>
+            <button type="submit" class="login_form_btn">Найти</button>
+        </form>
+        <button @click.prevent="clear" class="login_form_btn">Сбросить</button>
+    </div>
+
     <div v-for="post in displayedPosts" :key="post.id">
         <div class="anketa">
             <div v-if="post.User.image" class="anketa_img"> <img :src="post.User.image" alt="photo"> </div>
@@ -23,29 +45,37 @@
         </div>        
     </div> 
     <div v-if="totalPages > 1" class="pagination">
-        <button class="pagination_btn" @click="prevPage" :disabled="currentPage === 1">Назад</button>
-        <span>{{ currentPage }}</span>
-        <button class="pagination_btn" @click="nextPage" :disabled="currentPage === totalPages">Вперед</button>
+        <button class="pagination_btn" @click="prevPage" :disabled="Views.currentWNPage === 1">Назад</button>
+        <span>{{ Views.currentWNPage }}</span>
+        <button class="pagination_btn" @click="nextPage" :disabled="Views.currentWNPage === totalPages">Вперед</button>
     </div>   
 </template>
 
 <script>
 import { useViewsStore } from '../../../stores/views';
 import { useUserStore } from '../../../stores/user';
+import { useDataStore } from '../../../stores/variables';
 export default {
     name: 'NurseAll',
     data() {
         return {
+            searchData: {},
             itemsPerPage: 3, // Количество постов на странице
-            currentPage: 1, // Текущая страница
         }
     },
     setup() {
         const Views = useViewsStore();
         const User = useUserStore();
-        return { Views, User };
+        const Store = useDataStore();
+        return { Views, User, Store };
     },
     methods: {
+        search() {            
+            this.Views.SEARCH_WORKERNURSE(this.searchData);
+        },
+        clear() {
+            this.Views.GET_WORKERNURSE();
+        },
         showItem(item) { 
             this.Views.workerNurseitemUser = item.User;
             localStorage.workerNurseitemUser = JSON.stringify(item.User);           
@@ -55,16 +85,16 @@ export default {
             this.$router.push({name: "NurseItem"});
         },        
         nextPage() {
-            if (this.currentPage < this.totalPages) { this.currentPage++; }
+            if (this.Views.currentWNPage < this.totalPages) { this.Views.currentWNPage++; }
         },
         prevPage() {
-            if (this.currentPage > 1) { this.currentPage--; }
+            if (this.Views.currentWNPage > 1) { this.Views.currentWNPage--; }
         },
     },
     computed: {
         displayedPosts() {
             const keys = Object.keys(this.Views.workerNurse);
-            const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+            const startIndex = (this.Views.currentWNPage - 1) * this.itemsPerPage;
             const endIndex = startIndex + this.itemsPerPage;
             return keys.slice(startIndex, endIndex).map(key => this.Views.workerNurse[key]);
         },
@@ -73,8 +103,12 @@ export default {
         },
     },
     mounted() {
+        this.Store.GET_NURSETYPEOFWORKS(); this.Store.GET_EMPLOYMENTS(); this.Store.GET_CITYS();
         this.User.GET_TOKEN();
         this.Views.GET_WORKERNURSE();
+        this.searchData.typeofwork = 4;
+        this.searchData.employment = 1;
+        this.searchData.city = 6;
     },
 }
 </script>
