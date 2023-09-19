@@ -97,6 +97,10 @@ class MessageController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $message = Message::find($id);
+        $message->delete();        
+
+        Cache::put('messages', Message::all());
+        return response()->json('The message successfully deleted');
     }
 }

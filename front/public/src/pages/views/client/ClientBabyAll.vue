@@ -1,4 +1,26 @@
 <template>
+    <div class="search_block">
+        <form class="search" @submit.prevent="search">
+            <select v-model="searchData.joboption">
+                <option v-for="option in Store.joboptions" :value="option.id">
+                    {{ option.title }}                
+                </option>
+            </select>    
+            <select v-model="searchData.employment">
+                <option v-for="option in Store.employments" :value="option.id">
+                    {{ option.title }}                
+                </option>
+            </select>    
+            <select v-model="searchData.city">
+                <option v-for="option in Store.citys" :value="option.id">
+                    {{ option.title }}                
+                </option>
+            </select>
+            <button type="submit" class="login_form_btn">Найти</button>
+        </form>
+        <button @click.prevent="clear" class="login_form_btn">Сбросить</button>
+    </div>
+
     <div v-for="post in displayedPosts" :key="post.id">
         <div class="anketa">
             <div v-if="post.User.image" class="anketa_img"> <img :src="post.User.image" alt=""> </div>
@@ -18,30 +40,39 @@
             </div>
         </div>        
     </div> 
+
     <div v-if="totalPages > 1" class="pagination">
-        <button class="pagination_btn" @click="prevPage" :disabled="currentPage === 1">Назад</button>
-        <span>{{ currentPage }}</span>
-        <button class="pagination_btn" @click="nextPage" :disabled="currentPage === totalPages">Вперед</button>
+        <button class="pagination_btn" @click="prevPage" :disabled="Views.currentCBPage === 1">Назад</button>
+        <span>{{ Views.currentCBPage }}</span>
+        <button class="pagination_btn" @click="nextPage" :disabled="Views.currentCBPage === totalPages">Вперед</button>
     </div>   
 </template>
 
 <script>
 import { useViewsStore } from '../../../stores/views';
 import { useUserStore } from '../../../stores/user';
+import { useDataStore } from '../../../stores/variables';
 export default {
     name: 'ClientBabyAll',
     data() {
         return {
             itemsPerPage: 3, // Количество постов на странице
-            currentPage: 1, // Текущая страница
+            searchData: {},
         }
     },
     setup() {
         const Views = useViewsStore();
         const User = useUserStore();
-        return { Views, User };
+        const Store = useDataStore();
+        return { Views, User, Store };
     },
     methods: {
+        search() {
+            this.Views.SEARCH_CLIENTBABY(this.searchData);
+        },
+        clear() {
+            this.Views.GET_CLIENTBABY();
+        },
         showItem(item) {  
             this.Views.clientBabyitemUser = item.User;
             localStorage.clientBabyitemUser = JSON.stringify(item.User);
@@ -51,16 +82,16 @@ export default {
             this.$router.push({name: "ClientBabyItem"});
         },
         nextPage() {
-            if (this.currentPage < this.totalPages) { this.currentPage++; }
+            if (this.Views.currentCBPage < this.totalPages) { this.Views.currentCBPage++; }
         },
         prevPage() {
-            if (this.currentPage > 1) { this.currentPage--; }
+            if (this.Views.currentCBPage > 1) { this.Views.currentCBPage--; }
         },
     },
     computed: {
         displayedPosts() {
             const keys = Object.keys(this.Views.clientBaby);
-            const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+            const startIndex = (this.Views.currentCBPage - 1) * this.itemsPerPage;
             const endIndex = startIndex + this.itemsPerPage;
             return keys.slice(startIndex, endIndex).map(key => this.Views.clientBaby[key]);
         },
@@ -69,8 +100,12 @@ export default {
         },
     },
     mounted() {
+        this.Store.GET_JOBOPTIONS(); this.Store.GET_EMPLOYMENTS(); this.Store.GET_CITYS();
         this.User.GET_TOKEN();
         this.Views.GET_CLIENTBABY();
+        this.searchData.joboption = 3;
+        this.searchData.employment = 1;
+        this.searchData.city = 6;
     },
 }
 </script>

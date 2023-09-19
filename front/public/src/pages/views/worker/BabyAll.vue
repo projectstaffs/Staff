@@ -72,8 +72,6 @@ export default {
     },
     methods: {
         search() {
-            //if((this.searchData.typeofwork > 0) && (this.searchData.employment > 0) && (this.searchData.city > 0)) {
-            //} else {console.log('error');}
             this.Views.SEARCH_WORKERBABY(this.searchData);
         },
         clear() {

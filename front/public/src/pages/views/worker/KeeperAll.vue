@@ -1,5 +1,25 @@
 <template>
-    
+    <div class="search_block">
+        <form class="search" @submit.prevent="search">
+            <select v-model="searchData.typeofwork">
+                <option v-for="option in Store.housekeepertypeofworks" :value="option.id">
+                    {{ option.title }}                
+                </option>
+            </select>    
+            <select v-model="searchData.employment">
+                <option v-for="option in Store.employments" :value="option.id">
+                    {{ option.title }}                
+                </option>
+            </select>    
+            <select v-model="searchData.city">
+                <option v-for="option in Store.citys" :value="option.id">
+                    {{ option.title }}                
+                </option>
+            </select>
+            <button type="submit" class="login_form_btn">Найти</button>
+        </form>
+        <button @click.prevent="clear" class="login_form_btn">Сбросить</button>
+    </div>
 
     <div v-for="post in displayedPosts" :key="post.id">
         <div class="anketa">
@@ -26,29 +46,37 @@
     </div>
 
     <div v-if="totalPages > 1" class="pagination">
-        <button class="pagination_btn" @click="prevPage" :disabled="currentPage === 1">Назад</button>
-        <span>{{ currentPage }}</span>
-        <button class="pagination_btn" @click="nextPage" :disabled="currentPage === totalPages">Вперед</button>
+        <button class="pagination_btn" @click="prevPage" :disabled="Views.currentWKPage === 1">Назад</button>
+        <span>{{ Views.currentWKPage }}</span>
+        <button class="pagination_btn" @click="nextPage" :disabled="Views.currentWKPage === totalPages">Вперед</button>
     </div>   
 </template>
 
 <script>
 import { useViewsStore } from '../../../stores/views';
 import { useUserStore } from '../../../stores/user';
+import { useDataStore } from '../../../stores/variables';
 export default {
     name: 'KeeperAll',
     data() {
         return {
             itemsPerPage: 3, // Количество постов на странице
-            currentPage: 1, // Текущая страница
+            searchData: {},
         }
     },
     setup() {
         const Views = useViewsStore();
         const User = useUserStore();
-        return { Views, User };
+        const Store = useDataStore();
+        return { Views, User, Store };
     },
     methods: {
+        search() {            
+            this.Views.SEARCH_WORKERKEEPER(this.searchData);
+        },
+        clear() {
+            this.Views.GET_WORKERKEEPER();
+        },
         showItem(item) {
             this.Views.workerKeeperitemUser = item.User;
             localStorage.workerKeeperitemUser = JSON.stringify(item.User); 
@@ -58,16 +86,16 @@ export default {
             this.$router.push({name: "KeeperItem"});
         },
         nextPage() {
-            if (this.currentPage < this.totalPages) { this.currentPage++; }
+            if (this.Views.currentWKPage < this.totalPages) { this.Views.currentWKPage++; }
         },
         prevPage() {
-            if (this.currentPage > 1) { this.currentPage--; }
+            if (this.Views.currentWKPage > 1) { this.Views.currentWKPage--; }
         },
     },
     computed: {
         displayedPosts() {
             const keys = Object.keys(this.Views.workerKeeper);
-            const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+            const startIndex = (this.Views.currentWKPage - 1) * this.itemsPerPage;
             const endIndex = startIndex + this.itemsPerPage;
             return keys.slice(startIndex, endIndex).map(key => this.Views.workerKeeper[key]);
         },
@@ -76,8 +104,12 @@ export default {
         },
     },
     mounted() {
+        this.Store.GET_HOUSEKEEPERTYPEOFWORKS(); this.Store.GET_EMPLOYMENTS(); this.Store.GET_CITYS();
         this.User.GET_TOKEN();
         this.Views.GET_WORKERKEEPER();
+        this.searchData.typeofwork = 5;
+        this.searchData.employment = 1;
+        this.searchData.city = 6;
     },
 }
 </script>

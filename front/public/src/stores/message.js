@@ -67,13 +67,20 @@ export const useMessageStore = defineStore('message', {
                 })
                 .catch(error => { console.log(error); })
         },
-        DELETE_MESSAGE({dispatch}, data){  // надо сделать                     
-            return api.post('api/auth/message/' + data, {_method: 'DELETE'})
+        
+        DELETE_MESSAGE_OUT(data){                     
+            api.post('api/auth/message/' + data, {_method: 'DELETE'})
                 .then((res) => {
-                    dispatch('GET_MESSAGES');                  
-                    return res;
+                    this.GET_MESSAGES_OUT(localStorage.userID);
                 })
-                .catch(error => { console.log(error); return error; })
+                .catch(error => { console.log(error); })
+        },
+        DELETE_MESSAGE_IN(data){                     
+            api.post('api/auth/message/' + data, {_method: 'DELETE'})
+                .then((res) => {
+                    this.GET_MESSAGES_IN(localStorage.userID);
+                })
+                .catch(error => { console.log(error); })
         },
     }
 })

@@ -18,6 +18,9 @@
             <div class="anketa_content_phone">
                 <b>Телефон:</b> {{ Views.workerNurseitemUser.phone_number }}
             </div>
+            <div class="anketa_content_phone">
+                <b>Электронная почта:</b> {{ Views.workerNurseitemUser.email }}
+            </div>
 
             <h2 class="anketa_title">Обо мне</h2>
             <p>{{ Views.workerNurseitemUser.about }}</p>

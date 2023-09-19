@@ -15,6 +15,9 @@
             <div class="anketa_content_phone">
                 <b>Телефон:</b> {{ Views.clientBabyitemUser.phone_number }}
             </div>
+            <div class="anketa_content_phone">
+                <b>Электронная почта:</b> {{ Views.clientBabyitemUser.email }}
+            </div>
 
             <h2 class="anketa_title client">Отправить сообщение работодателю</h2>
             <div class="anketa_msg_title">Кому: {{ Views.clientBabyitemUser.name }}</div>
