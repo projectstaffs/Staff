@@ -167,6 +167,8 @@ export default {
         this.User.GET_USER();
         this.User.global_error = null;
         this.Message.success = '';
+        let watch = {}; watch.user_id = localStorage.userID; watch.anketa_id = this.Views.workerNurseitem.id;
+        this.Views.ADD_WORKERNURSE(watch);
     },
 }
 </script>

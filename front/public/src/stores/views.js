@@ -192,6 +192,32 @@ export const useViewsStore = defineStore('views', {
                 })
                 .catch(error => { console.log(error); })    
         },
+        ADD_WORKERNURSE(data){   
+            api.post('api/auth/w_w_nurse', data)
+                .then(res => {                                    
+                    console.log(res.data);
+                })
+                .catch(error => { console.log(error); })
+        },
+        WATCH_WORKERNURSE(data){
+            api.get('api/auth/w_nurse')
+                .then(ankets => {
+                    let result = [];
+                    api.get('api/auth/w_w_nurse', {params: {data}})
+                        .then(watch => {
+                            ankets.data.data.forEach((itemAnketa) => {                                
+                                watch.data.forEach((el) => {
+                                    if(el.anketa_id === itemAnketa.id) { result.push(itemAnketa); }
+                                })
+                            })
+                            this.workerNurse = result;
+                            this.currentWNPage = 1;
+                        })
+                        .catch(error => { console.log(error); })
+                })
+                .catch(error => { console.log(error); })   
+                
+        },
 
         GET_WORKERKEEPER(){   
             api.get('api/auth/w_keeper')

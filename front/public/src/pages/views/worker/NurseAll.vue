@@ -1,5 +1,6 @@
 <template>
     <div class="search_block">
+        <button @click.prevent="watch" class="login_form_btn">Просмотренные</button>
         <form class="search" @submit.prevent="search">
             <select v-model="searchData.typeofwork">
                 <option v-for="option in Store.nursetypeofworks" :value="option.id">
@@ -70,6 +71,9 @@ export default {
         return { Views, User, Store };
     },
     methods: {
+        watch() {
+            this.Views.WATCH_WORKERNURSE(localStorage.userID);
+        },
         search() {            
             this.Views.SEARCH_WORKERNURSE(this.searchData);
         },
