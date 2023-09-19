@@ -168,7 +168,9 @@ export default {
         this.Views.GET_WORKERBABY_ITEM(); 
         this.User.GET_USER();
         this.User.global_error = null;
-        this.Message.success = '';               
+        this.Message.success = '';
+        let watch = {}; watch.user_id = localStorage.userID; watch.anketa_id = this.Views.workerBabyitem.id;
+        this.Views.ADD_WORKERBABY(watch);              
     },
 }
 </script>

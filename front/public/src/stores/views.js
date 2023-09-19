@@ -136,6 +136,32 @@ export const useViewsStore = defineStore('views', {
                 })
                 .catch(error => { console.log(error); })    
         },
+        ADD_WORKERBABY(data){   
+            api.post('api/auth/w_w_baby', data)
+                .then(res => {                                    
+                    console.log(res.data);
+                })
+                .catch(error => { console.log(error); })
+        },
+        WATCH_WORKERBABY(data){
+            api.get('api/auth/w_baby')
+                .then(ankets => {
+                    let result = [];
+                    api.get('api/auth/w_w_baby', {params: {data}})
+                        .then(watch => {
+                            ankets.data.data.forEach((itemAnketa) => {                                
+                                watch.data.forEach((el) => {
+                                    if(el.anketa_id === itemAnketa.id) { result.push(itemAnketa); }
+                                })
+                            })
+                            this.workerBaby = result;
+                            this.currentWBPage = 1;
+                        })
+                        .catch(error => { console.log(error); })
+                })
+                .catch(error => { console.log(error); })   
+                
+        },
 
         GET_WORKERNURSE(){   
             api.get('api/auth/w_nurse')

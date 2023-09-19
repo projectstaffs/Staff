@@ -79,6 +79,12 @@ use App\Http\Controllers\client\ClientKeeperController;
 use App\Http\Controllers\client\ClientKeeperdutieController;
 use App\Http\Controllers\client\ClientKeeperjoboptionController;
 
+use App\Http\Controllers\watch\WatchWorkerBabyController;
+use App\Http\Controllers\watch\WatchWorkerNurseController;
+use App\Http\Controllers\watch\WatchWorkerKeeperController;
+use App\Http\Controllers\watch\WatchClientBabyController;
+use App\Http\Controllers\watch\WatchClientNurseController;
+use App\Http\Controllers\watch\WatchClientKeeperController;
 
 /*
 |--------------------------------------------------------------------------
@@ -99,6 +105,13 @@ function ($router) {
     Route::post('me', [AuthController::class, 'me']);
 
     Route::group(['middleware' => 'jwt.auth'], function(){
+        Route::resource('/w_w_baby', WatchWorkerBabyController::class);
+        Route::resource('/w_w_nurse', WatchWorkerNurseController::class);
+        Route::resource('/w_w_keeper', WatchWorkerKeeperController::class);
+        Route::resource('/w_c_baby', WatchClientBabyController::class);
+        Route::resource('/w_c_nurse', WatchClientNurseController::class);
+        Route::resource('/w_c_keeper', WatchClientKeeperController::class);
+
         Route::get('/w_baby', [ViewsController::class, 'getBaby']);        
         Route::get('/w_nurse', [ViewsController::class, 'getNurse']);
         Route::get('/w_keeper', [ViewsController::class, 'getKeeper']);
