@@ -109,10 +109,18 @@ export default {
     mounted() {
         this.Store.GET_NURSETYPEOFWORKS(); this.Store.GET_EMPLOYMENTS(); this.Store.GET_CITYS();
         this.User.GET_TOKEN();
-        this.Views.GET_WORKERNURSE();
+        //this.Views.GET_WORKERNURSE();
         this.searchData.typeofwork = 4;
         this.searchData.employment = 1;
         this.searchData.city = 6;
+    },
+    beforeRouteEnter(to, from, next) { 
+        const Views = useViewsStore();       
+        if(from.name === 'NurseItem') {            
+            const isEmpty = Object.keys(Views.workerNurse).length === 0;
+            if (isEmpty) { Views.GET_WORKERNURSE(); }                        
+        } else { Views.GET_WORKERNURSE(); }
+        next();        
     },
 }
 </script>

@@ -110,10 +110,18 @@ export default {
     mounted() {
         this.Store.GET_TYPEOFWORKS(); this.Store.GET_EMPLOYMENTS(); this.Store.GET_CITYS();
         this.User.GET_TOKEN();        
-        this.Views.GET_WORKERBABY();        
+        //this.Views.GET_WORKERBABY();        
         this.searchData.typeofwork = 7;
         this.searchData.employment = 1;
         this.searchData.city = 6;                
+    },
+    beforeRouteEnter(to, from, next) { 
+        const Views = useViewsStore();       
+        if(from.name === 'BabyItem') {            
+            const isEmpty = Object.keys(Views.workerBaby).length === 0;
+            if (isEmpty) { Views.GET_WORKERBABY(); }                        
+        } else { Views.GET_WORKERBABY(); }
+        next();        
     },
 }
 </script>

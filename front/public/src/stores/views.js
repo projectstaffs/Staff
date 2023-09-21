@@ -46,6 +46,32 @@ export const useViewsStore = defineStore('views', {
                 })
                 .catch(error => { console.log(error); })    
         },
+        ADD_CLIENTBABY(data){   
+            api.post('api/auth/w_c_baby', data)
+                .then(res => {                                    
+                    console.log(res.data);
+                })
+                .catch(error => { console.log(error); })
+        },
+        WATCH_CLIENTBABY(data){
+            api.get('api/auth/c_baby')
+                .then(ankets => {
+                    let result = [];
+                    api.get('api/auth/w_c_baby', {params: {data}})
+                        .then(watch => {
+                            ankets.data.data.forEach((itemAnketa) => {                                
+                                watch.data.forEach((el) => {
+                                    if(el.anketa_id === itemAnketa.id) { result.push(itemAnketa); }
+                                })
+                            })
+                            this.clientBaby = result;
+                            this.currentCBPage = 1;
+                        })
+                        .catch(error => { console.log(error); })
+                })
+                .catch(error => { console.log(error); })   
+                
+        },
 
         GET_CLIENTNURSE(){   
             api.get('api/auth/c_nurse')
@@ -76,6 +102,32 @@ export const useViewsStore = defineStore('views', {
                 })
                 .catch(error => { console.log(error); })    
         },
+        ADD_CLIENTNURSE(data){   
+            api.post('api/auth/w_c_nurse', data)
+                .then(res => {                                    
+                    console.log(res.data);
+                })
+                .catch(error => { console.log(error); })
+        },
+        WATCH_CLIENTNURSE(data){
+            api.get('api/auth/c_nurse')
+                .then(ankets => {
+                    let result = [];
+                    api.get('api/auth/w_c_nurse', {params: {data}})
+                        .then(watch => {
+                            ankets.data.data.forEach((itemAnketa) => {                                
+                                watch.data.forEach((el) => {
+                                    if(el.anketa_id === itemAnketa.id) { result.push(itemAnketa); }
+                                })
+                            })
+                            this.clientNurse = result;
+                            this.currentCNPage = 1;
+                        })
+                        .catch(error => { console.log(error); })
+                })
+                .catch(error => { console.log(error); })   
+                
+        },
         
         GET_CLIENTKEEPER(){   
             api.get('api/auth/c_keeper')
@@ -105,6 +157,32 @@ export const useViewsStore = defineStore('views', {
                     this.currentCKPage = 1;
                 })
                 .catch(error => { console.log(error); })    
+        },
+        ADD_CLIENTKEEPER(data){   
+            api.post('api/auth/w_c_keeper', data)
+                .then(res => {                                    
+                    console.log(res.data);
+                })
+                .catch(error => { console.log(error); })
+        },
+        WATCH_CLIENTKEEPER(data){
+            api.get('api/auth/c_keeper')
+                .then(ankets => {
+                    let result = [];
+                    api.get('api/auth/w_c_keeper', {params: {data}})
+                        .then(watch => {
+                            ankets.data.data.forEach((itemAnketa) => {                                
+                                watch.data.forEach((el) => {
+                                    if(el.anketa_id === itemAnketa.id) { result.push(itemAnketa); }
+                                })
+                            })
+                            this.clientKeeper = result;
+                            this.currentCKPage = 1;
+                        })
+                        .catch(error => { console.log(error); })
+                })
+                .catch(error => { console.log(error); })   
+                
         },
 
         GET_WORKERBABY(){   
@@ -247,6 +325,32 @@ export const useViewsStore = defineStore('views', {
                     this.currentWKPage = 1;
                 })
                 .catch(error => { console.log(error); })    
+        },
+        ADD_WORKERKEEPER(data){   
+            api.post('api/auth/w_w_keeper', data)
+                .then(res => {                                    
+                    console.log(res.data);
+                })
+                .catch(error => { console.log(error); })
+        },
+        WATCH_WORKERKEEPER(data){
+            api.get('api/auth/w_keeper')
+                .then(ankets => {
+                    let result = [];
+                    api.get('api/auth/w_w_keeper', {params: {data}})
+                        .then(watch => {
+                            ankets.data.data.forEach((itemAnketa) => {                                
+                                watch.data.forEach((el) => {
+                                    if(el.anketa_id === itemAnketa.id) { result.push(itemAnketa); }
+                                })
+                            })
+                            this.workerKeeper = result;
+                            this.currentWKPage = 1;
+                        })
+                        .catch(error => { console.log(error); })
+                })
+                .catch(error => { console.log(error); })   
+                
         },
     }
 })

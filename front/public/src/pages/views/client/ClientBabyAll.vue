@@ -1,5 +1,6 @@
 <template>
     <div class="search_block">
+        <button @click.prevent="watch" class="login_form_btn">Просмотренные</button>
         <form class="search" @submit.prevent="search">
             <select v-model="searchData.joboption">
                 <option v-for="option in Store.joboptions" :value="option.id">
@@ -67,6 +68,9 @@ export default {
         return { Views, User, Store };
     },
     methods: {
+        watch() {
+            this.Views.WATCH_CLIENTBABY(localStorage.userID);
+        },
         search() {
             this.Views.SEARCH_CLIENTBABY(this.searchData);
         },
@@ -102,10 +106,19 @@ export default {
     mounted() {
         this.Store.GET_JOBOPTIONS(); this.Store.GET_EMPLOYMENTS(); this.Store.GET_CITYS();
         this.User.GET_TOKEN();
-        this.Views.GET_CLIENTBABY();
+        if(localStorage.wbCheck === 'wbSearch') {}
+        //this.Views.GET_CLIENTBABY();
         this.searchData.joboption = 3;
         this.searchData.employment = 1;
         this.searchData.city = 6;
+    },
+    beforeRouteEnter(to, from, next) { 
+        const Views = useViewsStore();       
+        if(from.name === 'ClientBabyItem') {            
+            const isEmpty = Object.keys(Views.clientBaby).length === 0;
+            if (isEmpty) { Views.GET_CLIENTBABY(); }                        
+        } else { Views.GET_CLIENTBABY(); }
+        next();        
     },
 }
 </script>

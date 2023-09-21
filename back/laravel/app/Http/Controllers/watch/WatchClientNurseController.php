@@ -2,17 +2,28 @@
 
 namespace App\Http\Controllers\watch;
 
+use Illuminate\Support\Facades\Cache;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\watch\WatchClientNurse;
 
 class WatchClientNurseController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if(!Cache::has('watchclientnurses')) { Cache::put('watchclientnurses', WatchClientNurse::all()); }
+        $getItems = Cache::get('watchclientnurses');
+        $myWatch = array();
+        foreach ($getItems as $item) {
+            if($item->user_id == $request["data"]) {
+                array_push($myWatch, $item);
+            }                          
+        }
+        
+        return $myWatch;
     }
 
     /**
@@ -28,7 +39,31 @@ class WatchClientNurseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(!Cache::has('watchclientnurses')) { Cache::put('watchclientnurses', WatchClientNurse::all()); }
+        $getItems = Cache::get('watchclientnurses');        
+        $myWatch = array();
+        foreach ($getItems as $item) {
+            if(($item->user_id == $request["user_id"]) && ($item->anketa_id == $request["anketa_id"])) {
+                return 'Уже есть такая анкета.';
+            }
+            if($item->user_id == $request["user_id"]) {
+                array_push($myWatch, $item);
+            }                          
+        }
+        $count = count($myWatch);
+        if($count == 4) {
+            $elem = WatchClientNurse::find($myWatch[0]->id);
+            $elem->delete();
+        }
+
+        $watchClientNurse = new WatchClientNurse([
+            'user_id' => $request["user_id"],
+            'anketa_id' => $request["anketa_id"]
+        ]);                    
+        $watchClientNurse->save();
+
+        Cache::put('watchclientnurses', WatchClientNurse::all());
+        return 'Анкета добавлена в просмотренные.';
     }
 
     /**

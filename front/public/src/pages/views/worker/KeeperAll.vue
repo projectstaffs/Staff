@@ -1,5 +1,6 @@
 <template>
     <div class="search_block">
+        <button @click.prevent="watch" class="login_form_btn">Просмотренные</button>
         <form class="search" @submit.prevent="search">
             <select v-model="searchData.typeofwork">
                 <option v-for="option in Store.housekeepertypeofworks" :value="option.id">
@@ -71,6 +72,9 @@ export default {
         return { Views, User, Store };
     },
     methods: {
+        watch() {
+            this.Views.WATCH_WORKERKEEPER(localStorage.userID);
+        },
         search() {            
             this.Views.SEARCH_WORKERKEEPER(this.searchData);
         },
@@ -106,10 +110,18 @@ export default {
     mounted() {
         this.Store.GET_HOUSEKEEPERTYPEOFWORKS(); this.Store.GET_EMPLOYMENTS(); this.Store.GET_CITYS();
         this.User.GET_TOKEN();
-        this.Views.GET_WORKERKEEPER();
+        //this.Views.GET_WORKERKEEPER();
         this.searchData.typeofwork = 5;
         this.searchData.employment = 1;
         this.searchData.city = 6;
+    },
+    beforeRouteEnter(to, from, next) { 
+        const Views = useViewsStore();       
+        if(from.name === 'KeeperItem') {            
+            const isEmpty = Object.keys(Views.workerKeeper).length === 0;
+            if (isEmpty) { Views.GET_WORKERKEEPER(); }                        
+        } else { Views.GET_WORKERKEEPER(); }
+        next();        
     },
 }
 </script>

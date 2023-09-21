@@ -1,5 +1,6 @@
-<template>
+<template>    
     <div class="search_block">
+        <button @click.prevent="watch" class="login_form_btn">Просмотренные</button>
         <form class="search" @submit.prevent="search">
             <select v-model="searchData.joboption">
                 <option v-for="option in Store.joboptions" :value="option.id">
@@ -53,7 +54,7 @@ import { useViewsStore } from '../../../stores/views';
 import { useUserStore } from '../../../stores/user';
 import { useDataStore } from '../../../stores/variables';
 export default {
-    name: 'ClientBabyAll',
+    name: 'ClientNurseAll',
     data() {
         return {
             itemsPerPage: 3, // Количество постов на странице
@@ -67,6 +68,9 @@ export default {
         return { Views, User, Store };
     },
     methods: {
+        watch() {
+            this.Views.WATCH_CLIENTNURSE(localStorage.userID);
+        },
         search() {
             this.Views.SEARCH_CLIENTNURSE(this.searchData);
         },
@@ -102,10 +106,18 @@ export default {
     mounted() {
         this.Store.GET_JOBOPTIONS(); this.Store.GET_EMPLOYMENTS(); this.Store.GET_CITYS();
         this.User.GET_TOKEN();
-        this.Views.GET_CLIENTNURSE();
+        //this.Views.GET_CLIENTNURSE();
         this.searchData.joboption = 3;
         this.searchData.employment = 1;
         this.searchData.city = 6;
+    },
+    beforeRouteEnter(to, from, next) { 
+        const Views = useViewsStore();       
+        if(from.name === 'ClientNurseItem') {            
+            const isEmpty = Object.keys(Views.clientNurse).length === 0;
+            if (isEmpty) { Views.GET_CLIENTNURSE(); }                        
+        } else { Views.GET_CLIENTNURSE(); }
+        next();        
     },
 }
 </script>
