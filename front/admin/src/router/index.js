@@ -8,7 +8,13 @@ const router = createRouter({
             path: '/', 
             meta: {layout: 'User'},           
             component: () =>import('../pages/Login.vue')                       
-        },     
+        },  
+        {
+            name: 'Reviews',
+            path: '/reviews', 
+            meta: {layout: 'Menu'},           
+            component: () =>import('../pages/message/Reviews.vue')                       
+        },   
         {
             name: 'Add-message',
             path: '/add-message', 

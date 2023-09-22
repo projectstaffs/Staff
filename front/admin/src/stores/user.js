@@ -10,7 +10,10 @@ export const useUserStore = defineStore('user', {
             users: {},                     
         }
     },
-    actions: {        
+    actions: {  
+        GET_TOKEN(){
+            this.token = localStorage.access_token;
+        },      
         CREATE_PHOTO(data){            
             api.post('http://localhost/api/auth/photo', data)
                 .then((res) => {                                   

@@ -31,6 +31,13 @@ export const useMessageStore = defineStore('message', {
                 })                
                 .catch(error => { console.log(error); })
         },
+        GET_MSG_INSOCKET(data){  
+            api.get('http://localhost/api/auth/message_in', {params: {data}})
+                .then(res => {                                    
+                    this.messages_in = res.data;                    
+                })                
+                .catch(error => { console.log(error); })
+        },
         GET_COUNTMESSAGE(data){             
             api.get('http://localhost/api/auth/message_in', {params: {data}})
                 .then(res => {                                    
@@ -49,10 +56,17 @@ export const useMessageStore = defineStore('message', {
                 })
                 .catch(error => { console.log(error); })
         },
-        DELETE_MESSAGE(data){  // надо сделать                     
+        DELETE_MESSAGE_OUT(data){                       
             api.post('http://localhost/api/auth/message/' + data, {_method: 'DELETE'})
                 .then((res) => {
-                    //dispatch('GET_MESSAGES');
+                    this.GET_MSG_OUT(localStorage.userID);
+                })
+                .catch(error => { console.log(error); })
+        },
+        DELETE_MESSAGE_IN(data){                       
+            api.post('http://localhost/api/auth/message/' + data, {_method: 'DELETE'})
+                .then((res) => {
+                    this.GET_MSG_IN(localStorage.userID);
                 })
                 .catch(error => { console.log(error); })
         },

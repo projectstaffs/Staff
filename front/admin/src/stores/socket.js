@@ -19,7 +19,7 @@ export const useSocketStore = defineStore('socket', {
                 if(data == localStorage.userID) {
                     const Message = useMessageStore();
                     Message.GET_COUNTMESSAGE(localStorage.userID);
-                    Message.GET_MSG_IN(localStorage.userID);
+                    Message.GET_MSG_INSOCKET(localStorage.userID);
                 }
             })
         }

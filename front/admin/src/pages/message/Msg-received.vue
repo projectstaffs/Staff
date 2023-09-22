@@ -3,7 +3,7 @@
     <div>received</div>    
     <ul>                
         <li v-for="post in Message.messages_in" :key="post.id" class="category_item">
-            {{ post.name }} {{ post.surname }} {{ post.title }} {{ post.content }}                                      
+            {{ post.name }} {{ post.surname }} {{ post.title }} {{ post.content }} <span class="category_change_btn red" @click.prevent="delete_message(post.id)">Удалить сообщение</span>                                     
         </li>   
     </ul>
     
@@ -23,10 +23,17 @@ export default {
         back() {
             this.$router.push({name: "Messages"})
         },
+        delete_message(id) {
+            this.Message.DELETE_MESSAGE_IN(id);
+        }
     },
     mounted() {                     
-        this.Message.GET_MSG_IN(localStorage.userID); 
+        this.Message.GET_MSG_INSOCKET(localStorage.userID); 
         this.Socket.connect();                  
+    },
+    beforeRouteLeave(to, from, next) {        
+        this.Message.GET_MSG_IN(localStorage.userID);
+        next();
     },
 }
 </script>

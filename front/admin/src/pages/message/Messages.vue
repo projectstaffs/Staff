@@ -35,9 +35,19 @@ export default {
             this.$router.push({name: "Add-message"})
         }
     },
-    mounted() {         
-        this.User.GET_USERS(); this.Message.GET_COUNTMESSAGE(localStorage.userID);                                                                
+    mounted() {       
+        this.User.GET_TOKEN();  
+        this.User.GET_USERS(); 
         this.Socket.connect(); 
+    },
+    beforeRouteEnter(to, from, next) {
+        const Message = useMessageStore();        
+        if(from.name === 'Msg-received') {
+            Message.countmessage = 0;
+        } else {
+            Message.GET_COUNTMESSAGE(localStorage.userID);
+        }
+        next();        
     },
 }
 </script>

@@ -3,6 +3,7 @@
         <div class="admin_sidebar">   
             <div class="admin_sidebar_title">Главная</div>      
             <div @click.prevent="message" class="admin_sidebar_item">Почтовый ящик</div>
+            <div @click.prevent="review" class="admin_sidebar_item">Отзывы</div>
             <div @click.prevent="users" class="admin_sidebar_item">Пользователи</div> 
             <div @click.prevent="children" class="admin_sidebar_item">Количество детей</div>      
             <div @click.prevent="languages" class="admin_sidebar_item">Родной язык</div>
@@ -45,7 +46,10 @@
 <script>
 export default {
     name: "Menu",
-    methods: {        
+    methods: {  
+        review() {
+            this.$router.push({name: "Reviews"})
+        },      
         message() {
             this.$router.push({name: "Messages"})
         },         
