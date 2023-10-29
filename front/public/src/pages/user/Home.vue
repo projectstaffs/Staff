@@ -4,7 +4,8 @@
     <ul>                
         <li v-for="post in Review.reviews" :key="post.id" class="category_item">
             {{ post.name }} {{ post.surname }} {{ post.city }} {{ post.content }}                
-        </li>   
+        </li> 
+          
     </ul>
 </template>
 
