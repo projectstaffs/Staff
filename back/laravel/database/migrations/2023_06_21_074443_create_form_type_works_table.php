@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('form_nurseworklocations', function (Blueprint $table) {
+        Schema::create('form_type_works', function (Blueprint $table) {
             $table->id();
             $table->integer('form_id');
-            $table->integer('nurseworklocation_id');
+            $table->integer('typework_id');
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('form_nurseworklocations');
+        Schema::dropIfExists('form_type_works');
     }
 };

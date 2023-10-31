@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models\Database\Eloquent\Factories\HasFactoryata;
+namespace App\Models\Data;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class HousekeeperTypeOfWork extends Model
+class HouseKeeperTypeOfWork extends Model
 {
     use HasFactory;
     protected $fillable = ['title'];

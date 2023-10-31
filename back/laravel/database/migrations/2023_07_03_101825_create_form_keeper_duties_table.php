@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('form_keeperjoboptions', function (Blueprint $table) {
+        Schema::create('form_keeper_duties', function (Blueprint $table) {
             $table->id();
             $table->integer('form_id');
-            $table->integer('keeperjoboption_id');
+            $table->integer('keeperdutie_id');
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('form_keeperjoboptions');
+        Schema::dropIfExists('form_keeper_duties');
     }
 };

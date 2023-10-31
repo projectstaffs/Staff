@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Cache;
 
 use App\Models\Client\ClientNurse;
 use App\Models\Client\ClientNurseJobOption;
-use App\Http\Resources\Client\ClientNursejobOptionResource;
+use App\Http\Resources\Client\ClientNurseJobOptionResource;
 use App\Models\Client\ClientNurseDutie;
 use App\Http\Resources\Client\ClientNurseDutieResource;
 use App\Models\User;

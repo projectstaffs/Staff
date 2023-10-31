@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('form_nursejoboptions', function (Blueprint $table) {
+        Schema::create('house_keeper_type_of_works', function (Blueprint $table) {
             $table->id();
-            $table->integer('form_id');
-            $table->integer('nursejoboption_id');
+            $table->string('title');
             $table->timestamps();
         });
     }
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('form_nursejoboptions');
+        Schema::dropIfExists('house_keeper_type_of_works');
     }
 };

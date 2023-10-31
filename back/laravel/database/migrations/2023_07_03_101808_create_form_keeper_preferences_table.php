@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('client_nursejoboptions', function (Blueprint $table) {
+        Schema::create('form_keeper_preferences', function (Blueprint $table) {
             $table->id();
             $table->integer('form_id');
-            $table->integer('nursejoboption_id');
+            $table->integer('keeperpreference_id');
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('client_nursejoboptions');
+        Schema::dropIfExists('form_keeper_preferences');
     }
 };
