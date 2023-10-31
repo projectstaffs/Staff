@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Resources\Forms;
+namespace App\Http\Resources\Forms\Keeper;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Models\Data\BabysittingDutie;
+use App\Models\Data\JobOption;
 
-class FormDutieResource extends JsonResource
+class KeeperjoboptionResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,12 +16,12 @@ class FormDutieResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        if(!Cache::has('babysittingduties')) { Cache::put('babysittingduties', BabysittingDutie::all()); }
-        $BabysittingDutie = Cache::get('babysittingduties');        
-        foreach ($BabysittingDutie as $item) {
-            if($item->id == $this->dutie_id) {
+        if(!Cache::has('joboptions')) { Cache::put('joboptions', JobOption::all()); }
+        $JobOption = Cache::get('joboptions');        
+        foreach ($JobOption as $item) {
+            if($item->id == $this->keeperjoboption_id) {
                 return [
-                    'id' => $this->dutie_id,
+                    'id' => $this->keeperjoboption_id,
                     'title' => $item->title            
                 ];                
             }                           

@@ -6,7 +6,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use App\Models\Forms\Nurse;
-use App\Http\Resources\Forms\NurseResource;
+use App\Http\Resources\Forms\Nurse\NurseResource;
 use App\Http\Requests\Worker\NurseRequest;
 
 class NurseController extends Controller

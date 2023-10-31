@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Resources\Forms;
+namespace App\Http\Resources\Forms\Baby;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Models\Data\Education;
+use App\Models\Data\JobOption;
 
-class FormNurseeducationResource extends JsonResource
+class FormJoboptionResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,12 +16,12 @@ class FormNurseeducationResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        if(!Cache::has('educations')) { Cache::put('educations', Education::all()); }
-        $Education = Cache::get('educations');        
-        foreach ($Education as $item) {
-            if($item->id == $this->nurseeducation_id) {
+        if(!Cache::has('joboptions')) { Cache::put('joboptions', JobOption::all()); }
+        $JobOption = Cache::get('joboptions');        
+        foreach ($JobOption as $item) {
+            if($item->id == $this->joboption_id) {
                 return [
-                    'id' => $this->nurseeducation_id,
+                    'id' => $this->joboption_id,
                     'title' => $item->title            
                 ];                
             }                           

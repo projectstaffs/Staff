@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\Forms;
+namespace App\Http\Resources\Forms\Keeper;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;

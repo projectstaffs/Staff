@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Resources\Forms;
+namespace App\Http\Resources\Forms\Nurse;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Models\Data\AgeGroup;
+use App\Models\Data\NursingSkill;
 
-class FormAgegroupResource extends JsonResource
+class FormNurseskillResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,12 +16,12 @@ class FormAgegroupResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        if(!Cache::has('agegroups')) { Cache::put('agegroups', AgeGroup::all()); }
-        $AgeGroup = Cache::get('agegroups');        
-        foreach ($AgeGroup as $item) {
-            if($item->id == $this->agegroup_id) {
+        if(!Cache::has('nursingskills')) { Cache::put('nursingskills', NursingSkill::all()); }
+        $NursingSkill = Cache::get('nursingskills');        
+        foreach ($NursingSkill as $item) {
+            if($item->id == $this->nurseskill_id) {
                 return [
-                    'id' => $this->agegroup_id,
+                    'id' => $this->nurseskill_id,
                     'title' => $item->title            
                 ];                
             }                           

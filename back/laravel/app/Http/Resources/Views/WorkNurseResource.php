@@ -8,19 +8,19 @@ use Illuminate\Support\Facades\Cache;
 
 use App\Models\Forms\Nurse;
 use App\Models\Forms\FormNurseEducation;
-use App\Http\Resources\Forms\FormNurseEducationResource;
+use App\Http\Resources\Forms\Nurse\FormNurseEducationResource;
 use App\Models\Forms\FormNurseJobOption;
-use App\Http\Resources\Forms\FormNurseJobOptionResource;
+use App\Http\Resources\Forms\Nurse\FormNurseJobOptionResource;
 use App\Models\Forms\FormDiagnose;
-use App\Http\Resources\Forms\FormDiagnoseResource;
+use App\Http\Resources\Forms\Nurse\FormDiagnoseResource;
 use App\Models\Forms\FormNurseDutie;
-use App\Http\Resources\Forms\FormNurseDutieResource;
+use App\Http\Resources\Forms\Nurse\FormNurseDutieResource;
 use App\Models\Forms\FormNurseSkill;
-use App\Http\Resources\Forms\FormNurseSkillResource;
+use App\Http\Resources\Forms\Nurse\FormNurseSkillResource;
 use App\Models\Forms\FormNurseTypeWork;
-use App\Http\Resources\Forms\FormNurseTypeWorkResource;
+use App\Http\Resources\Forms\Nurse\FormNurseTypeWorkResource;
 use App\Models\Forms\FormNurseWorkLocation;
-use App\Http\Resources\Forms\FormNurseWorkLocationkResource;
+use App\Http\Resources\Forms\Nurse\FormNurseWorkLocationkResource;
 use App\Models\User;
 use App\Http\Resources\UserResource;
 

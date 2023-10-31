@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\Forms;
+namespace App\Http\Resources\Forms\Keeper;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -8,13 +8,13 @@ use Illuminate\Support\Facades\Cache;
 
 use App\Models\Forms\Keeper;
 use App\Models\Forms\FormKeeperDutie;
-use App\Http\Resources\Forms\KeeperDutieResource;
+use App\Http\Resources\Forms\Keeper\KeeperDutieResource;
 use App\Models\Forms\FormKeeperJobOption;
-use App\Http\Resources\Forms\KeeperJobOptionResource;
+use App\Http\Resources\Forms\Keeper\KeeperJobOptionResource;
 use App\Models\Forms\FormKeeperPreference;
-use App\Http\Resources\Forms\KeeperPreferenceResource;
+use App\Http\Resources\Forms\Keeper\KeeperPreferenceResource;
 use App\Models\Forms\FormKeeperTypeWork;
-use App\Http\Resources\Forms\KeeperTypeWorkResource;
+use App\Http\Resources\Forms\Keeper\KeeperTypeWorkResource;
 
 use App\Models\Data\WorkPeriod;
 use App\Models\Data\Employment;

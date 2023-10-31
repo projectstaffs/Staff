@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\Forms;
+namespace App\Http\Resources\Forms\Baby;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -8,17 +8,17 @@ use Illuminate\Support\Facades\Cache;
 
 use App\Models\Forms\Baby;
 use App\Models\Forms\UserLanguages;
-use App\Http\Resources\Forms\UserLanguagesResource;
+use App\Http\Resources\Forms\Baby\UserLanguagesResource;
 use App\Models\Forms\FormAgeGroup;
-use App\Http\Resources\Forms\FormAgeGroupResource;
+use App\Http\Resources\Forms\Baby\FormAgeGroupResource;
 use App\Models\Forms\FormEducation;
-use App\Http\Resources\Forms\FormEducationResource;
+use App\Http\Resources\Forms\Baby\FormEducationResource;
 use App\Models\Forms\FormTypeWork;
-use App\Http\Resources\Forms\FormTypeWorkResource;
+use App\Http\Resources\Forms\Baby\FormTypeWorkResource;
 use App\Models\Forms\FormJobOption;
-use App\Http\Resources\Forms\FormJobOptionResource;
+use App\Http\Resources\Forms\Baby\FormJobOptionResource;
 use App\Models\Forms\FormDutie;
-use App\Http\Resources\Forms\FormDutieResource;
+use App\Http\Resources\Forms\Baby\FormDutieResource;
 
 use App\Models\Data\Children;
 use App\Models\Data\WorkPeriod;

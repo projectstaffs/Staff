@@ -6,7 +6,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use App\Models\Forms\Baby;
-use App\Http\Resources\Forms\BabyResource;
+use App\Http\Resources\Forms\Baby\BabyResource;
 use App\Http\Requests\Worker\BabyRequest;
 
 class BabyController extends Controller
