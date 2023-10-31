@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('client_joboptions', function (Blueprint $table) {
+        Schema::create('client_job_options', function (Blueprint $table) {
             $table->id();
             $table->integer('form_id');
             $table->integer('joboption_id');
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('client_joboptions');
+        Schema::dropIfExists('client_job_options');
     }
 };
