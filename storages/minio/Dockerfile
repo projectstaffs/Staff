@@ -1,9 +1,11 @@
 FROM minio/minio:latest
 
-# Установка утилиты mc
-RUN curl -LO https://dl.min.io/client/mc/release/linux-amd64/mc && \
-    chmod +x mc && \
-    mv mc /usr/bin/mc
+
+# Установка утилиты mc Мы удалили
+#RUN curl -LO https://dl.min.io/client/mc/release/linux-amd64/mc && \
+#    chmod +x mc && \
+#    mv mc /usr/bin/mc
+
 
 # скопировать файл настройки хранилища
 COPY ./app-init.sh /tmp/app-init.sh
