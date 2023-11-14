@@ -27,14 +27,14 @@ export default {
     mounted() {
         this.User.GET_TOKEN();
         this.Review.GET_REVIEWS();
-        this.Views.GET_WORKERBABY();
-        this.Views.GET_WORKERNURSE();
-        this.Views.GET_WORKERKEEPER();
-        this.Views.GET_CLIENTBABY();
-        this.Views.GET_CLIENTNURSE();
-        this.Views.GET_CLIENTKEEPER();
-        this.Store.GET_JOBOPTIONS(); this.Store.GET_TYPEOFWORKS(); this.Store.GET_NURSETYPEOFWORKS(); this.Store.GET_HOUSEKEEPERTYPEOFWORKS();
-        this.Store.GET_EMPLOYMENTS(); this.Store.GET_CITYS();
+        //this.Views.GET_WORKERBABY();
+        //this.Views.GET_WORKERNURSE();
+        //this.Views.GET_WORKERKEEPER();
+        //this.Views.GET_CLIENTBABY();
+        //this.Views.GET_CLIENTNURSE();
+        //this.Views.GET_CLIENTKEEPER();
+        //this.Store.GET_JOBOPTIONS(); this.Store.GET_TYPEOFWORKS(); this.Store.GET_NURSETYPEOFWORKS(); this.Store.GET_HOUSEKEEPERTYPEOFWORKS();
+        //this.Store.GET_EMPLOYMENTS(); this.Store.GET_CITYS();
     },      
 }
 </script>
