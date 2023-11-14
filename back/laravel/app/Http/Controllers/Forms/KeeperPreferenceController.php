@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Forms;
+namespace App\Http\Controllers\forms;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
-use App\Models\Forms\FormKeeperPreference;
+use App\Models\forms\FormKeeperpreference;
 
 class KeeperpreferenceController extends Controller
 {
@@ -31,7 +31,7 @@ class KeeperpreferenceController extends Controller
     public function store(Request $request)
     {
         for($i = 0; $i < $request[1]; ++$i) {
-            $formDutie = new FormKeeperPreference([
+            $formDutie = new FormKeeperpreference([
                 'form_id' => $request[0][$i]["form_id"],
                 'keeperpreference_id' => $request[0][$i]["keeperpreference_id"]
             ]);                    
@@ -70,8 +70,8 @@ class KeeperpreferenceController extends Controller
      */
     public function destroy(string $id)
     {
-        FormKeeperPreference::where('form_id', '=', $id)->delete();
-        Cache::put('formkeeperpreferences', FormKeeperPreference::all());
+        FormKeeperpreference::where('form_id', '=', $id)->delete();
+        Cache::put('formkeeperpreferences', FormKeeperpreference::all());
         return response()->json('Удаление прошло успешно.');
     }
 }

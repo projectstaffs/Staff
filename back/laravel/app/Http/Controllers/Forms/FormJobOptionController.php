@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Forms;
+namespace App\Http\Controllers\forms;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
-use App\Models\Forms\FormJobOption;
+use App\Models\forms\FormJoboption;
 
 class FormJoboptionController extends Controller
 {
@@ -31,13 +31,13 @@ class FormJoboptionController extends Controller
     public function store(Request $request)
     {
         for($i = 0; $i < $request[1]; ++$i) {
-            $formJoboption = new FormJobOption([
+            $formJoboption = new FormJoboption([
                 'form_id' => $request[0][$i]["form_id"],
                 'joboption_id' => $request[0][$i]["joboption_id"]
             ]);                    
             $formJoboption->save();
         }  
-        Cache::put('formjoboptions', FormJobOption::all());      
+        Cache::put('formjoboptions', FormJoboption::all());      
         return $request[1];
     }
 
@@ -70,8 +70,8 @@ class FormJoboptionController extends Controller
      */
     public function destroy(string $id)
     {
-        FormJobOption::where('form_id', '=', $id)->delete();
-        Cache::put('formjoboptions', FormJobOption::all());
+        FormJoboption::where('form_id', '=', $id)->delete();
+        Cache::put('formjoboptions', FormJoboption::all());
         return response()->json('Удаление прошло успешно.');
     }
 }

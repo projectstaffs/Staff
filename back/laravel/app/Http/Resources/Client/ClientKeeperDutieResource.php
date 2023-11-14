@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Client;
+namespace App\Http\Resources\client;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Models\Data\HouseKeeperDutie;
+use App\Models\data\HousekeeperDutie;
 
 class ClientKeeperdutieResource extends JsonResource
 {
@@ -16,7 +16,7 @@ class ClientKeeperdutieResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        if(!Cache::has('housekeeperduties')) { Cache::put('housekeeperduties', HouseKeeperDutie::all()); }
+        if(!Cache::has('housekeeperduties')) { Cache::put('housekeeperduties', HousekeeperDutie::all()); }
         $Nursedutie = Cache::get('housekeeperduties');        
         foreach ($Nursedutie as $item) {
             if($item->id == $this->keeperdutie_id) {

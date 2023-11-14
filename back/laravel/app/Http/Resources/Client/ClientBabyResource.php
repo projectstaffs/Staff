@@ -1,23 +1,24 @@
 <?php
 
-namespace App\Http\Resources\Client;
+namespace App\Http\Resources\client;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Cache;
 
-use App\Models\Client\ClientAgeGroup;
-use App\Http\Resources\Client\ClientAgeGroupResource;
-use App\Models\Client\ClientJobOption;
-use App\Http\Resources\Client\ClientJobOptionResource;
-use App\Models\Client\ClientDutie;
-use App\Http\Resources\Client\ClientDutieResource;
+use App\Models\client\Client_baby;
+use App\Models\client\Client_agegroup;
+use App\Http\Resources\client\ClientAgegroupResource;
+use App\Models\client\Client_joboption;
+use App\Http\Resources\client\ClientJoboptionResource;
+use App\Models\client\Client_dutie;
+use App\Http\Resources\client\ClientDutieResource;
 
-use App\Models\Data\Children;
-use App\Models\Data\WorkPeriod;
-use App\Models\Data\Employment;
-use App\Models\Data\MonthlyPayment;
-use App\Models\Data\HourlyPayment;
+use App\Models\data\Children;
+use App\Models\data\WorkPeriod;
+use App\Models\data\Employment;
+use App\Models\data\MonthlyPayment;
+use App\Models\data\HourlyPayment;
 
 class ClientBabyResource extends JsonResource
 {
@@ -28,7 +29,7 @@ class ClientBabyResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        if(!Cache::has('client_agegroups')) { Cache::put('client_agegroups', ClientAgeGroup::all()); }
+        if(!Cache::has('client_agegroups')) { Cache::put('client_agegroups', Client_agegroup::all()); }
         $Client_agegroup = Cache::get('client_agegroups');
         $agegroup = array();
         foreach ($Client_agegroup as $item) {
@@ -37,7 +38,7 @@ class ClientBabyResource extends JsonResource
             }                           
         }
 
-        if(!Cache::has('client_joboptions')) { Cache::put('client_joboptions', ClientJobOption::all()); }
+        if(!Cache::has('client_joboptions')) { Cache::put('client_joboptions', Client_joboption::all()); }
         $Client_joboption = Cache::get('client_joboptions');
         $joboption = array();
         foreach ($Client_joboption as $item) {
@@ -46,7 +47,7 @@ class ClientBabyResource extends JsonResource
             }                           
         }
 
-        if(!Cache::has('client_duties')) { Cache::put('client_duties', ClientDutie::all()); }
+        if(!Cache::has('client_duties')) { Cache::put('client_duties', Client_dutie::all()); }
         $Client_dutie = Cache::get('client_duties');
         $dutie = array();
         foreach ($Client_dutie as $item) {
@@ -119,8 +120,8 @@ class ClientBabyResource extends JsonResource
             'hourpay' => $hourpay,
             'monthpay' => $monthpay,
 
-            'Agegroups' => ClientAgeGroupResource::collection($agegroup),            
-            'Joboptions' => ClientJobOptionResource::collection($joboption),
+            'Agegroups' => ClientAgegroupResource::collection($agegroup),            
+            'Joboptions' => ClientJoboptionResource::collection($joboption),
             'Duties' => ClientDutieResource::collection($dutie),
             
             'workperiod_id' => $this->workperiod_id,

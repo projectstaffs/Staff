@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Message;
+namespace App\Http\Controllers\message;
 use Illuminate\Routing\Controller;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
-use App\Models\Message\Message;
+use App\Models\message\Message;
 
 use App\Services\MySocket;
 use App\Http\Requests\MessageRequest;

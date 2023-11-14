@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Watch;
+namespace App\Models\watch;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
