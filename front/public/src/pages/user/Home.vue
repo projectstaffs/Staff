@@ -1,11 +1,9 @@
 <template>
     <h1>Home page</h1>    
     <div class="category_title">Все отзывы:</div>  
-<<<<<<< HEAD
-    <div>Some new222</div>    
-=======
-    <div>Some</div>    
->>>>>>> f48cf3da59a5ea48f7cd77fb5493c461d58adaa0
+
+    <div>Some new222</div>
+    
     <ul>                
         <li v-for="post in Review.reviews" :key="post.id" class="category_item">
             {{ post.name }} {{ post.surname }} {{ post.city }} {{ post.content }}                
