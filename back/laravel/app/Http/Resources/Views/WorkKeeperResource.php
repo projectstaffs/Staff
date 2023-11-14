@@ -1,30 +1,30 @@
 <?php
 
-namespace App\Http\Resources\Views;
+namespace App\Http\Resources\views;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Cache;
 
-use App\Models\Forms\Keeper;
-use App\Models\Forms\FormKeeperDutie;
-use App\Http\Resources\Forms\Keeper\KeeperDutieResource;
-use App\Models\Forms\FormKeeperJobOption;
-use App\Http\Resources\Forms\Keeper\KeeperJobOptionResource;
-use App\Models\Forms\FormKeeperPreference;
-use App\Http\Resources\Forms\Keeper\KeeperPreferenceResource;
-use App\Models\Forms\FormKeeperTypeWork;
-use App\Http\Resources\Forms\Keeper\KeeperTypeWorkResource;
+use App\Models\forms\Keeper;
+use App\Models\forms\FormKeeperdutie;
+use App\Http\Resources\forms\KeeperdutieResource;
+use App\Models\forms\FormKeeperjoboption;
+use App\Http\Resources\forms\KeeperjoboptionResource;
+use App\Models\forms\FormKeeperpreference;
+use App\Http\Resources\forms\KeeperpreferenceResource;
+use App\Models\forms\FormKeepertypework;
+use App\Http\Resources\forms\KeepertypeworkResource;
 use App\Models\User;
 use App\Http\Resources\UserResource;
 
-use App\Models\Data\WorkPeriod;
-use App\Models\Data\Employment;
-use App\Models\Data\MonthlyPayment;
-use App\Models\Data\HourlyPayment;
-use App\Models\Data\Recommendation;
-use App\Models\Data\Experience;
-use App\Models\Forms\Credential;
+use App\Models\data\WorkPeriod;
+use App\Models\data\Employment;
+use App\Models\data\MonthlyPayment;
+use App\Models\data\HourlyPayment;
+use App\Models\data\Recommendation;
+use App\Models\data\Experience;
+use App\Models\forms\Credential;
 
 class WorkKeeperResource extends JsonResource
 {
@@ -64,7 +64,7 @@ class WorkKeeperResource extends JsonResource
             }                           
         }
 
-        if(!Cache::has('formkeeperjoboptions')) { Cache::put('formkeeperjoboptions', FormKeeperJobOption::all()); }
+        if(!Cache::has('formkeeperjoboptions')) { Cache::put('formkeeperjoboptions', FormKeeperjoboption::all()); }
         $FormKeeperjoboption = Cache::get('formkeeperjoboptions');
         $joboption = array();
         foreach ($FormKeeperjoboption as $item) {
@@ -73,7 +73,7 @@ class WorkKeeperResource extends JsonResource
             }                           
         }
 
-        if(!Cache::has('formkeepertypeworks')) { Cache::put('formkeepertypeworks', FormKeeperTypeWork::all()); }
+        if(!Cache::has('formkeepertypeworks')) { Cache::put('formkeepertypeworks', FormKeepertypework::all()); }
         $FormKeepertypework = Cache::get('formkeepertypeworks');
         $typework = array();
         foreach ($FormKeepertypework as $item) {
@@ -82,7 +82,7 @@ class WorkKeeperResource extends JsonResource
             }                           
         }
 
-        if(!Cache::has('formkeeperduties')) { Cache::put('formkeeperduties', FormKeeperDutie::all()); }
+        if(!Cache::has('formkeeperduties')) { Cache::put('formkeeperduties', FormKeeperdutie::all()); }
         $FormKeeperdutie = Cache::get('formkeeperduties');
         $dutie = array();
         foreach ($FormKeeperdutie as $item) {
@@ -91,7 +91,7 @@ class WorkKeeperResource extends JsonResource
             }                           
         }
 
-        if(!Cache::has('formkeeperpreferences')) { Cache::put('formkeeperpreferences', FormKeeperPreference::all()); }
+        if(!Cache::has('formkeeperpreferences')) { Cache::put('formkeeperpreferences', FormKeeperpreference::all()); }
         $FormKeeperpreference = Cache::get('formkeeperpreferences');
         $preference = array();
         foreach ($FormKeeperpreference as $item) {
@@ -179,10 +179,10 @@ class WorkKeeperResource extends JsonResource
             'additional' => $additional,                      
             'confirmed' => $this->confirmed,            
                         
-            'Joboptions' => KeeperJobOptionResource::collection($joboption),
-            'Typeworks' => KeeperTypeWorkResource::collection($typework),
-            'Duties' => KeeperDutieResource::collection($dutie),
-            'Preferences' => KeeperPreferenceResource::collection($preference),
+            'Joboptions' => KeeperjoboptionResource::collection($joboption),
+            'Typeworks' => KeepertypeworkResource::collection($typework),
+            'Duties' => KeeperdutieResource::collection($dutie),
+            'Preferences' => KeeperpreferenceResource::collection($preference),
             'Credentials' => $credentials,
             'User' => $USER,                        
             

@@ -6,15 +6,15 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-use App\Models\User\Image;
-use App\Models\Data\City;
-use App\Models\Data\Country;
-use App\Models\Data\Criminal;
-use App\Models\Data\Moving;
-use App\Models\Data\Smoking;
-use App\Models\Data\Status;
-use App\Models\Data\Religion;
-use App\Models\Data\Alcohol;
+use App\Models\user\Image;
+use App\Models\data\City;
+use App\Models\data\Country;
+use App\Models\data\Criminal;
+use App\Models\data\Moving;
+use App\Models\data\Smoking;
+use App\Models\data\Status;
+use App\Models\data\Religion;
+use App\Models\data\Alcohol;
 use Carbon\Carbon;
 
 class UserResource extends JsonResource

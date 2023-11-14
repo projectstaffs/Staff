@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Data;
+namespace App\Http\Controllers\data;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
-use App\Models\Data\HouseKeeperDutie;
+use App\Models\data\HousekeeperDutie;
 
 class HousekeeperDutieController extends Controller
 {
@@ -14,7 +14,7 @@ class HousekeeperDutieController extends Controller
      */
     public function index()
     {
-        if(!Cache::has('housekeeperduties')) { Cache::put('housekeeperduties', HouseKeeperDutie::all()); }
+        if(!Cache::has('housekeeperduties')) { Cache::put('housekeeperduties', HousekeeperDutie::all()); }
         $getItems = Cache::get('housekeeperduties');
         return $getItems;
         //return HousekeeperDutie::orderBy('created_at', 'desc')->get();
@@ -33,12 +33,12 @@ class HousekeeperDutieController extends Controller
      */
     public function store(Request $request)
     {
-        $housekeeperDutie = new HouseKeeperDutie([
+        $housekeeperDutie = new HousekeeperDutie([
             'title' => $request->title
         ]);
         $housekeeperDutie->save();  
         
-        Cache::put('housekeeperduties', HouseKeeperDutie::all());
+        Cache::put('housekeeperduties', HousekeeperDutie::all());
         return response()->json('The housekeeperDutie successfully added');
     }
 
@@ -63,11 +63,11 @@ class HousekeeperDutieController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $housekeeperDutie = HouseKeeperDutie::find($id);
+        $housekeeperDutie = HousekeeperDutie::find($id);
         $housekeeperDutie->title = $request['title'];
         $housekeeperDutie->save();
 
-        Cache::put('housekeeperduties', HouseKeeperDutie::all());
+        Cache::put('housekeeperduties', HousekeeperDutie::all());
         return response()->json(["The housekeeperDutie successfully updated"]);
     }
 
@@ -76,10 +76,10 @@ class HousekeeperDutieController extends Controller
      */
     public function destroy(string $id)
     {
-        $housekeeperDutie = HouseKeeperDutie::find($id);
+        $housekeeperDutie = HousekeeperDutie::find($id);
         $housekeeperDutie->delete();        
 
-        Cache::put('housekeeperduties', HouseKeeperDutie::all());
+        Cache::put('housekeeperduties', HousekeeperDutie::all());
         return response()->json('The housekeeperDutie successfully deleted');
     }
 }

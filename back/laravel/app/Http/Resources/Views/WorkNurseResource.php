@@ -1,36 +1,36 @@
 <?php
 
-namespace App\Http\Resources\Views;
+namespace App\Http\Resources\views;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Cache;
 
-use App\Models\Forms\Nurse;
-use App\Models\Forms\FormNurseEducation;
-use App\Http\Resources\Forms\Nurse\FormNurseEducationResource;
-use App\Models\Forms\FormNurseJobOption;
-use App\Http\Resources\Forms\Nurse\FormNurseJobOptionResource;
-use App\Models\Forms\FormDiagnose;
-use App\Http\Resources\Forms\Nurse\FormDiagnoseResource;
-use App\Models\Forms\FormNurseDutie;
-use App\Http\Resources\Forms\Nurse\FormNurseDutieResource;
-use App\Models\Forms\FormNurseSkill;
-use App\Http\Resources\Forms\Nurse\FormNurseSkillResource;
-use App\Models\Forms\FormNurseTypeWork;
-use App\Http\Resources\Forms\Nurse\FormNurseTypeWorkResource;
-use App\Models\Forms\FormNurseWorkLocation;
-use App\Http\Resources\Forms\Nurse\FormNurseWorkLocationkResource;
+use App\Models\forms\Nurse;
+use App\Models\forms\FormNurseeducation;
+use App\Http\Resources\forms\FormNurseeducationResource;
+use App\Models\forms\FormNursejoboption;
+use App\Http\Resources\forms\FormNursejoboptionResource;
+use App\Models\forms\FormDiagnose;
+use App\Http\Resources\forms\FormDiagnoseResource;
+use App\Models\forms\FormNursedutie;
+use App\Http\Resources\forms\FormNursedutieResource;
+use App\Models\forms\FormNurseskill;
+use App\Http\Resources\forms\FormNurseskillResource;
+use App\Models\forms\FormNursetypework;
+use App\Http\Resources\forms\FormNursetypeworkResource;
+use App\Models\forms\FormNurseworklocation;
+use App\Http\Resources\forms\FormNurseworklocationkResource;
 use App\Models\User;
 use App\Http\Resources\UserResource;
 
-use App\Models\Data\WorkPeriod;
-use App\Models\Data\Employment;
-use App\Models\Data\MonthlyPayment;
-use App\Models\Data\HourlyPayment;
-use App\Models\Data\Recommendation;
-use App\Models\Data\Experience;
-use App\Models\Forms\Credential;
+use App\Models\data\WorkPeriod;
+use App\Models\data\Employment;
+use App\Models\data\MonthlyPayment;
+use App\Models\data\HourlyPayment;
+use App\Models\data\Recommendation;
+use App\Models\data\Experience;
+use App\Models\forms\Credential;
 
 class WorkNurseResource extends JsonResource
 {
@@ -70,7 +70,7 @@ class WorkNurseResource extends JsonResource
             }                           
         }
 
-        if(!Cache::has('formnurseeducations')) { Cache::put('formnurseeducations', FormNurseEducation::all()); }
+        if(!Cache::has('formnurseeducations')) { Cache::put('formnurseeducations', FormNurseeducation::all()); }
         $FormNurseeducation = Cache::get('formnurseeducations');
         $education = array();
         foreach ($FormNurseeducation as $item) {
@@ -79,7 +79,7 @@ class WorkNurseResource extends JsonResource
             }                           
         }
 
-        if(!Cache::has('formnursejoboptions')) { Cache::put('formnursejoboptions', FormNurseJobOption::all()); }
+        if(!Cache::has('formnursejoboptions')) { Cache::put('formnursejoboptions', FormNursejoboption::all()); }
         $FormNursejoboption = Cache::get('formnursejoboptions');
         $joboption = array();
         foreach ($FormNursejoboption as $item) {
@@ -88,7 +88,7 @@ class WorkNurseResource extends JsonResource
             }                           
         }
 
-        if(!Cache::has('formnursetypeworks')) { Cache::put('formnursetypeworks', FormNurseTypeWork::all()); }
+        if(!Cache::has('formnursetypeworks')) { Cache::put('formnursetypeworks', FormNursetypework::all()); }
         $FormNurseeducation = Cache::get('formnursetypeworks');
         $typework = array();
         foreach ($FormNurseeducation as $item) {
@@ -97,7 +97,7 @@ class WorkNurseResource extends JsonResource
             }                           
         }
 
-        if(!Cache::has('formnurseduties')) { Cache::put('formnurseduties', FormNurseDutie::all()); }
+        if(!Cache::has('formnurseduties')) { Cache::put('formnurseduties', FormNursedutie::all()); }
         $FormNursedutie = Cache::get('formnurseduties');
         $dutie = array();
         foreach ($FormNursedutie as $item) {
@@ -115,7 +115,7 @@ class WorkNurseResource extends JsonResource
             }                           
         }
 
-        if(!Cache::has('formnurseskills')) { Cache::put('formnurseskills', FormNurseSkill::all()); }
+        if(!Cache::has('formnurseskills')) { Cache::put('formnurseskills', FormNurseskill::all()); }
         $FormNurseskill = Cache::get('formnurseskills');
         $skill = array();
         foreach ($FormNurseskill as $item) {
@@ -124,7 +124,7 @@ class WorkNurseResource extends JsonResource
             }                           
         }
 
-        if(!Cache::has('formnurseworklocations')) { Cache::put('formnurseworklocations', FormNurseWorkLocation::all()); }
+        if(!Cache::has('formnurseworklocations')) { Cache::put('formnurseworklocations', FormNurseworklocation::all()); }
         $FormNurseworklocation = Cache::get('formnurseworklocations');
         $worklocation = array();
         foreach ($FormNurseworklocation as $item) {
@@ -208,13 +208,13 @@ class WorkNurseResource extends JsonResource
             'additional' => $additional,                       
             'confirmed' => $this->confirmed,
             
-            'Educations' => FormNurseEducationResource::collection($education),            
-            'Joboptions' => FormNurseJobOptionResource::collection($joboption),
-            'Typeworks' => FormNurseTypeWorkResource::collection($typework),
-            'Duties' => FormNurseDutieResource::collection($dutie),
+            'Educations' => FormNurseeducationResource::collection($education),            
+            'Joboptions' => FormNursejoboptionResource::collection($joboption),
+            'Typeworks' => FormNursetypeworkResource::collection($typework),
+            'Duties' => FormNursedutieResource::collection($dutie),
             'Diagnoses' => FormDiagnoseResource::collection($diagnose),
-            'Skills' => FormNurseSkillResource::collection($skill),
-            'Worklocations' => FormNurseWorkLocationkResource::collection($worklocation),
+            'Skills' => FormNurseskillResource::collection($skill),
+            'Worklocations' => FormNurseworklocationkResource::collection($worklocation),
             'Credentials' => $credentials,
             'User' => $USER,            
             

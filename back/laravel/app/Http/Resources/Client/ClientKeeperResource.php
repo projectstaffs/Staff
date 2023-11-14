@@ -1,20 +1,21 @@
 <?php
 
-namespace App\Http\Resources\Client;
+namespace App\Http\Resources\client;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Cache;
 
-use App\Models\Client\ClientKeeperJobOption;
-use App\Http\Resources\Client\ClientKeeperJobOptionResource;
-use App\Models\Client\ClientKeeperDutie;
-use App\Http\Resources\Client\ClientKeeperDutieResource;
+use App\Models\client\Client_keeper;
+use App\Models\client\Client_keeperjoboption;
+use App\Http\Resources\client\ClientKeeperjoboptionResource;
+use App\Models\client\Client_keeperdutie;
+use App\Http\Resources\client\ClientKeeperdutieResource;
 
-use App\Models\Data\WorkPeriod;
-use App\Models\Data\Employment;
-use App\Models\Data\MonthlyPayment;
-use App\Models\Data\HourlyPayment;
+use App\Models\data\WorkPeriod;
+use App\Models\data\Employment;
+use App\Models\data\MonthlyPayment;
+use App\Models\data\HourlyPayment;
 
 class ClientKeeperResource extends JsonResource
 {
@@ -25,7 +26,7 @@ class ClientKeeperResource extends JsonResource
      */
     public function toArray(Request $request): array
     {        
-        if(!Cache::has('client_keeperjoboptions')) { Cache::put('client_keeperjoboptions', ClientKeeperJobOption::all()); }
+        if(!Cache::has('client_keeperjoboptions')) { Cache::put('client_keeperjoboptions', Client_keeperjoboption::all()); }
         $Client_keeperjoboption = Cache::get('client_keeperjoboptions');
         $joboption = array();
         foreach ($Client_keeperjoboption as $item) {
@@ -34,7 +35,7 @@ class ClientKeeperResource extends JsonResource
             }                           
         }
 
-        if(!Cache::has('client_keeperduties')) { Cache::put('client_keeperduties', ClientKeeperDutie::all()); }
+        if(!Cache::has('client_keeperduties')) { Cache::put('client_keeperduties', Client_keeperdutie::all()); }
         $Client_keeperdutie = Cache::get('client_keeperduties');
         $dutie = array();
         foreach ($Client_keeperdutie as $item) {
@@ -96,8 +97,8 @@ class ClientKeeperResource extends JsonResource
             'hourpay' => $hourpay,
             'monthpay' => $monthpay,
             
-            'Joboptions' => ClientKeeperJobOptionResource::collection($joboption),
-            'Duties' => ClientKeeperDutieResource::collection($dutie),
+            'Joboptions' => ClientKeeperjoboptionResource::collection($joboption),
+            'Duties' => ClientKeeperdutieResource::collection($dutie),
             
             'workperiod_id' => $this->workperiod_id,
             'employment_id' => $this->employment_id,

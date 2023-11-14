@@ -1,35 +1,35 @@
 <?php
 
-namespace App\Http\Resources\Views;
+namespace App\Http\Resources\views;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Cache;
 
-use App\Models\Forms\Baby;
-use App\Models\Forms\UserLanguages;
-use App\Http\Resources\Forms\Baby\UserLanguagesResource;
-use App\Models\Forms\FormAgeGroup;
-use App\Http\Resources\Forms\Baby\FormAgeGroupResource;
-use App\Models\Forms\FormEducation;
-use App\Http\Resources\Forms\Baby\FormEducationResource;
-use App\Models\Forms\FormTypeWork;
-use App\Http\Resources\Forms\Baby\FormTypeWorkResource;
-use App\Models\Forms\FormJobOption;
-use App\Http\Resources\Forms\Baby\FormJobOptionResource;
-use App\Models\Forms\FormDutie;
-use App\Http\Resources\Forms\Baby\FormDutieResource;
+use App\Models\forms\Baby;
+use App\Models\forms\UserLanguages;
+use App\Http\Resources\forms\UserLanguagesResource;
+use App\Models\forms\FormAgegroup;
+use App\Http\Resources\forms\FormAgegroupResource;
+use App\Models\forms\FormEducation;
+use App\Http\Resources\forms\FormEducationResource;
+use App\Models\forms\FormTypework;
+use App\Http\Resources\forms\FormTypeworkResource;
+use App\Models\forms\FormJoboption;
+use App\Http\Resources\forms\FormJoboptionResource;
+use App\Models\forms\FormDutie;
+use App\Http\Resources\forms\FormDutieResource;
 use App\Models\User;
 use App\Http\Resources\UserResource;
 
-use App\Models\Data\Children;
-use App\Models\Data\WorkPeriod;
-use App\Models\Data\Employment;
-use App\Models\Data\MonthlyPayment;
-use App\Models\Data\HourlyPayment;
-use App\Models\Data\Recommendation;
-use App\Models\Data\Experience;
-use App\Models\Forms\Credential;
+use App\Models\data\Children;
+use App\Models\data\WorkPeriod;
+use App\Models\data\Employment;
+use App\Models\data\MonthlyPayment;
+use App\Models\data\HourlyPayment;
+use App\Models\data\Recommendation;
+use App\Models\data\Experience;
+use App\Models\forms\Credential;
 
 class WorkBabyResource extends JsonResource
 {
@@ -78,7 +78,7 @@ class WorkBabyResource extends JsonResource
             }                           
         }
 
-        if(!Cache::has('formagegroups')) { Cache::put('formagegroups', FormAgeGroup::all()); }
+        if(!Cache::has('formagegroups')) { Cache::put('formagegroups', FormAgegroup::all()); }
         $FormAgegroup = Cache::get('formagegroups');
         $agegroup = array();
         foreach ($FormAgegroup as $item) {
@@ -96,7 +96,7 @@ class WorkBabyResource extends JsonResource
             }                           
         }
 
-        if(!Cache::has('formtypeworks')) { Cache::put('formtypeworks', FormTypeWork::all()); }
+        if(!Cache::has('formtypeworks')) { Cache::put('formtypeworks', FormTypework::all()); }
         $FormTypework = Cache::get('formtypeworks');
         $typework = array();
         foreach ($FormTypework as $item) {
@@ -105,7 +105,7 @@ class WorkBabyResource extends JsonResource
             }                           
         }
 
-        if(!Cache::has('formjoboptions')) { Cache::put('formjoboptions', FormJobOption::all()); }
+        if(!Cache::has('formjoboptions')) { Cache::put('formjoboptions', FormJoboption::all()); }
         $FormJoboption = Cache::get('formjoboptions');
         $joboption = array();
         foreach ($FormJoboption as $item) {
@@ -210,11 +210,11 @@ class WorkBabyResource extends JsonResource
             'confirmed' => $this->confirmed,
 
             'Languages' => UserLanguagesResource::collection($lang),
-            'Agegroups' => FormAgeGroupResource::collection($agegroup),
+            'Agegroups' => FormAgegroupResource::collection($agegroup),
             'Credentials' => $credentials,            
             'Educations' => FormEducationResource::collection($education),
-            'Typeworks' => FormTypeWorkResource::collection($typework),
-            'Joboptions' => FormJobOptionResource::collection($joboption),
+            'Typeworks' => FormTypeworkResource::collection($typework),
+            'Joboptions' => FormJoboptionResource::collection($joboption),
             'Duties' => FormDutieResource::collection($dutie),
             'User' => $USER,
             

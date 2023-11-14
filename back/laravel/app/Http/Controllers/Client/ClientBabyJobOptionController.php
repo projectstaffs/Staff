@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Client;
+namespace App\Http\Controllers\client;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
-use App\Models\Client\ClientJobOption;
+use App\Models\client\Client_joboption;
 
 class ClientBabyjoboptionController extends Controller
 {
@@ -31,13 +31,13 @@ class ClientBabyjoboptionController extends Controller
     public function store(Request $request)
     {
         for($i = 0; $i < $request[1]; ++$i) {
-            $formJoboption = new ClientJobOption([
+            $formJoboption = new Client_joboption([
                 'form_id' => $request[0][$i]["form_id"],
                 'joboption_id' => $request[0][$i]["joboption_id"]
             ]);                    
             $formJoboption->save();
         }   
-        Cache::put('client_joboptions', ClientJobOption::all());      
+        Cache::put('client_joboptions', Client_joboption::all());      
         return $request[1];
     }
 
@@ -70,8 +70,8 @@ class ClientBabyjoboptionController extends Controller
      */
     public function destroy(string $id)
     {
-        ClientJobOption::where('form_id', '=', $id)->delete();
-        Cache::put('client_joboptions', ClientJobOption::all());
+        Client_joboption::where('form_id', '=', $id)->delete();
+        Cache::put('client_joboptions', Client_joboption::all());
         return response()->json('Удаление прошло успешно.');
     }
 }

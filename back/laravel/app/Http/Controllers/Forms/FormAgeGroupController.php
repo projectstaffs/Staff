@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Forms;
+namespace App\Http\Controllers\forms;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
-use App\Models\Forms\FormAgeGroup;
+use App\Models\forms\FormAgegroup;
 
 class FormAgegroupController extends Controller
 {
@@ -31,13 +31,13 @@ class FormAgegroupController extends Controller
     public function store(Request $request)
     {
         for($i = 0; $i < $request[1]; ++$i) {
-            $formAgegroup = new FormAgeGroup([
+            $formAgegroup = new FormAgegroup([
                 'form_id' => $request[0][$i]["form_id"],
                 'agegroup_id' => $request[0][$i]["agegroup_id"]
             ]);                    
             $formAgegroup->save();
         }  
-        Cache::put('formagegroups', FormAgeGroup::all());      
+        Cache::put('formagegroups', FormAgegroup::all());      
         return $request[1]; 
     }
 
@@ -70,8 +70,8 @@ class FormAgegroupController extends Controller
      */
     public function destroy(string $id)
     {
-        FormAgeGroup::where('form_id', '=', $id)->delete();
-        Cache::put('formagegroups', FormAgeGroup::all());
+        FormAgegroup::where('form_id', '=', $id)->delete();
+        Cache::put('formagegroups', FormAgegroup::all());
         return response()->json('Удаление прошло успешно.');
     }
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Client;
+namespace App\Http\Controllers\client;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
-use App\Models\Client\ClientDutie;
+use App\Models\client\Client_dutie;
 
 class ClientBabydutieController extends Controller
 {
@@ -31,13 +31,13 @@ class ClientBabydutieController extends Controller
     public function store(Request $request)
     {
         for($i = 0; $i < $request[1]; ++$i) {
-            $formDutie = new ClientDutie([
+            $formDutie = new Client_dutie([
                 'form_id' => $request[0][$i]["form_id"],
                 'dutie_id' => $request[0][$i]["dutie_id"]
             ]);                    
             $formDutie->save();
         }   
-        Cache::put('client_duties', ClientDutie::all());     
+        Cache::put('client_duties', Client_dutie::all());     
         return $request[1];
     }
 
@@ -70,8 +70,8 @@ class ClientBabydutieController extends Controller
      */
     public function destroy(string $id)
     {
-        ClientDutie::where('form_id', '=', $id)->delete();
-        Cache::put('client_duties', ClientDutie::all());
+        Client_dutie::where('form_id', '=', $id)->delete();
+        Cache::put('client_duties', Client_dutie::all());
         return response()->json('Удаление прошло успешно.');
     }
 }

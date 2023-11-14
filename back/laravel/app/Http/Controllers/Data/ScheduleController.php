@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Data;
+namespace App\Http\Controllers\data;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
-use App\Models\Data\Schedule;
+use App\Models\data\Schedule;
 
 class ScheduleController extends Controller
 {

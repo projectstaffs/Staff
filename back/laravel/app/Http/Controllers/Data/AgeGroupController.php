@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Data;
+namespace App\Http\Controllers\data;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
-use App\Models\Data\AgeGroup;
+use App\Models\data\AgeGroup;
 
 class AgeGroupController extends Controller
 {

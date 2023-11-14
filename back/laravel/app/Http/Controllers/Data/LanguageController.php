@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Data;
+namespace App\Http\Controllers\data;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
-use App\Models\Data\Language;
+use App\Models\data\Language;
 
 class LanguageController extends Controller
 {

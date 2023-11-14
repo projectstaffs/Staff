@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Data;
+namespace App\Http\Controllers\data;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
-use App\Models\Data\Religion;
+use App\Models\data\Religion;
 
 class ReligionController extends Controller
 {

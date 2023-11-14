@@ -1,7 +1,11 @@
 <template>
     <h1>Home page</h1>    
     <div class="category_title">Все отзывы:</div>  
+<<<<<<< HEAD
     <div>Some new222</div>    
+=======
+    <div>Some</div>    
+>>>>>>> f48cf3da59a5ea48f7cd77fb5493c461d58adaa0
     <ul>                
         <li v-for="post in Review.reviews" :key="post.id" class="category_item">
             {{ post.name }} {{ post.surname }} {{ post.city }} {{ post.content }}                
@@ -27,16 +31,14 @@ export default {
     mounted() {
         this.User.GET_TOKEN();
         this.Review.GET_REVIEWS();
-        //if(localStorage.access_token) {
-        //    this.Views.GET_WORKERBABY();
-        //    this.Views.GET_WORKERNURSE();
-        //    this.Views.GET_WORKERKEEPER();
-        //    this.Views.GET_CLIENTBABY();
-        //    this.Views.GET_CLIENTNURSE();
-        //    this.Views.GET_CLIENTKEEPER();
-        //    this.Store.GET_JOBOPTIONS(); this.Store.GET_TYPEOFWORKS(); this.Store.GET_NURSETYPEOFWORKS(); this.Store.GET_HOUSEKEEPERTYPEOFWORKS();
-        //    this.Store.GET_EMPLOYMENTS(); this.Store.GET_CITYS();
-        //}        
+        this.Views.GET_WORKERBABY();
+        this.Views.GET_WORKERNURSE();
+        this.Views.GET_WORKERKEEPER();
+        this.Views.GET_CLIENTBABY();
+        this.Views.GET_CLIENTNURSE();
+        this.Views.GET_CLIENTKEEPER();
+        this.Store.GET_JOBOPTIONS(); this.Store.GET_TYPEOFWORKS(); this.Store.GET_NURSETYPEOFWORKS(); this.Store.GET_HOUSEKEEPERTYPEOFWORKS();
+        this.Store.GET_EMPLOYMENTS(); this.Store.GET_CITYS();
     },      
 }
 </script>

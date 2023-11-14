@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Forms;
+namespace App\Http\Controllers\forms;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
-use App\Models\Forms\FormKeeperTypeWork;
+use App\Models\forms\FormKeepertypework;
 
 class KeepertypeworkController extends Controller
 {
@@ -31,13 +31,13 @@ class KeepertypeworkController extends Controller
     public function store(Request $request)
     {
         for($i = 0; $i < $request[1]; ++$i) {
-            $formDutie = new FormKeeperTypeWork([
+            $formDutie = new FormKeepertypework([
                 'form_id' => $request[0][$i]["form_id"],
                 'keepertypework_id' => $request[0][$i]["keepertypework_id"]
             ]);                    
             $formDutie->save();
         } 
-        Cache::put('formkeepertypeworks', FormKeeperTypeWork::all());       
+        Cache::put('formkeepertypeworks', FormKeepertypework::all());       
         return $request[1];
     }
 
@@ -70,8 +70,8 @@ class KeepertypeworkController extends Controller
      */
     public function destroy(string $id)
     {
-        FormKeeperTypeWork::where('form_id', '=', $id)->delete();
-        Cache::put('formkeepertypeworks', FormKeeperTypeWork::all());
+        FormKeepertypework::where('form_id', '=', $id)->delete();
+        Cache::put('formkeepertypeworks', FormKeepertypework::all());
         return response()->json('Удаление прошло успешно.');
     }
 }

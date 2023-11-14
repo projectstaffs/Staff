@@ -9,6 +9,16 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+use App\Models\data\Country;
+use App\Models\data\City;
+use App\Models\data\Criminal;
+use App\Models\data\Moving;
+use App\Models\data\Smoking;
+use App\Models\data\Alcohol;
+use App\Models\data\Status;
+use App\Models\data\Religion;
+use App\Models\user\Image;
+
 class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
