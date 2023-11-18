@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\data;
+namespace App\Http\Controllers\Data;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
-use App\Models\data\HousekeeperPreference;
+use App\Models\Data\HouseKeeperPreference;
 
 class HousekeeperPreferenceController extends Controller
 {
@@ -14,10 +14,10 @@ class HousekeeperPreferenceController extends Controller
      */
     public function index()
     {
-        if(!Cache::has('housekeeperpreferences')) { Cache::put('housekeeperpreferences', HousekeeperPreference::all()); }
+        if(!Cache::has('housekeeperpreferences')) { Cache::put('housekeeperpreferences', HouseKeeperPreference::all()); }
         $getItems = Cache::get('housekeeperpreferences');
         return $getItems;
-        //return HousekeeperPreference::orderBy('created_at', 'desc')->get();
+        //return HouseKeeperPreference::orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -33,12 +33,12 @@ class HousekeeperPreferenceController extends Controller
      */
     public function store(Request $request)
     {
-        $housekeeperPreference = new HousekeeperPreference([
+        $housekeeperPreference = new HouseKeeperPreference([
             'title' => $request->title
         ]);
         $housekeeperPreference->save();   
         
-        Cache::put('housekeeperpreferences', HousekeeperPreference::all());
+        Cache::put('housekeeperpreferences', HouseKeeperPreference::all());
         return response()->json('The housekeeperPreference successfully added');
     }
 
@@ -63,11 +63,11 @@ class HousekeeperPreferenceController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $housekeeperPreference = HousekeeperPreference::find($id);
+        $housekeeperPreference = HouseKeeperPreference::find($id);
         $housekeeperPreference->title = $request['title'];
         $housekeeperPreference->save();
 
-        Cache::put('housekeeperpreferences', HousekeeperPreference::all());
+        Cache::put('housekeeperpreferences', HouseKeeperPreference::all());
         return response()->json(["The housekeeperPreference successfully updated"]);
     }
 
@@ -76,10 +76,10 @@ class HousekeeperPreferenceController extends Controller
      */
     public function destroy(string $id)
     {
-        $housekeeperPreference = HousekeeperPreference::find($id);
+        $housekeeperPreference = HouseKeeperPreference::find($id);
         $housekeeperPreference->delete();        
 
-        Cache::put('housekeeperpreferences', HousekeeperPreference::all());
+        Cache::put('housekeeperpreferences', HouseKeeperPreference::all());
         return response()->json('The housekeeperPreference successfully deleted');
     }
 }

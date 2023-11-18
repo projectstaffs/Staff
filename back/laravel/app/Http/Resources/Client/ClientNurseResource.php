@@ -1,21 +1,20 @@
 <?php
 
-namespace App\Http\Resources\client;
+namespace App\Http\Resources\Client;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Cache;
 
-use App\Models\client\Client_nurse;
-use App\Models\client\Client_nursejoboption;
-use App\Http\Resources\client\ClientNursejoboptionResource;
-use App\Models\client\Client_nursedutie;
-use App\Http\Resources\client\ClientNursedutieResource;
+use App\Models\Client\ClientNurseJobOption;
+use App\Http\Resources\Client\ClientNurseJobOptionResource;
+use App\Models\Client\ClientNurseDutie;
+use App\Http\Resources\Client\ClientNurseDutieResource;
 
-use App\Models\data\WorkPeriod;
-use App\Models\data\Employment;
-use App\Models\data\MonthlyPayment;
-use App\Models\data\HourlyPayment;
+use App\Models\Data\WorkPeriod;
+use App\Models\Data\Employment;
+use App\Models\Data\MonthlyPayment;
+use App\Models\Data\HourlyPayment;
 
 class ClientNurseResource extends JsonResource
 {
@@ -26,7 +25,7 @@ class ClientNurseResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        if(!Cache::has('client_nursejoboptions')) { Cache::put('client_nursejoboptions', Client_nursejoboption::all()); }
+        if(!Cache::has('client_nursejoboptions')) { Cache::put('client_nursejoboptions', ClientNurseJobOption::all()); }
         $Client_nursejoboption = Cache::get('client_nursejoboptions');
         $joboption = array();
         foreach ($Client_nursejoboption as $item) {
@@ -35,7 +34,7 @@ class ClientNurseResource extends JsonResource
             }                           
         }
 
-        if(!Cache::has('client_nurseduties')) { Cache::put('client_nurseduties', Client_nursedutie::all()); }
+        if(!Cache::has('client_nurseduties')) { Cache::put('client_nurseduties', ClientNurseDutie::all()); }
         $Client_nursedutie = Cache::get('client_nurseduties');
         $dutie = array();
         foreach ($Client_nursedutie as $item) {
@@ -97,8 +96,8 @@ class ClientNurseResource extends JsonResource
             'hourpay' => $hourpay,
             'monthpay' => $monthpay,
             
-            'Joboptions' => ClientNursejoboptionResource::collection($joboption),
-            'Duties' => ClientNursedutieResource::collection($dutie),
+            'Joboptions' => ClientNurseJobOptionResource::collection($joboption),
+            'Duties' => ClientNurseDutieResource::collection($dutie),
             
             'workperiod_id' => $this->workperiod_id,
             'employment_id' => $this->employment_id,

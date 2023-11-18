@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\client;
+namespace App\Http\Controllers\Client;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
-use App\Models\client\Client_agegroup;
+use App\Models\Client\ClientAgeGroup;
 
 class ClientBabyagegroupController extends Controller
 {
@@ -31,13 +31,13 @@ class ClientBabyagegroupController extends Controller
     public function store(Request $request)
     {
         for($i = 0; $i < $request[1]; ++$i) {
-            $formAgegroup = new Client_agegroup([
+            $formAgegroup = new ClientAgeGroup([
                 'form_id' => $request[0][$i]["form_id"],
                 'agegroup_id' => $request[0][$i]["agegroup_id"]
             ]);                    
             $formAgegroup->save();
         } 
-        Cache::put('client_agegroups', Client_agegroup::all());       
+        Cache::put('client_agegroups', ClientAgeGroup::all());       
         return $request[1];
     }
 
@@ -70,8 +70,8 @@ class ClientBabyagegroupController extends Controller
      */
     public function destroy(string $id)
     {
-        Client_agegroup::where('form_id', '=', $id)->delete();
-        Cache::put('client_agegroups', Client_agegroup::all());
+        ClientAgeGroup::where('form_id', '=', $id)->delete();
+        Cache::put('client_agegroups', ClientAgeGroup::all());
         return response()->json('Удаление прошло успешно.');
     }
 }

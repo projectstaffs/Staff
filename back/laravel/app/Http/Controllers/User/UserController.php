@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\user;
+namespace App\Http\Controllers\User;
 use Illuminate\Routing\Controller;
 
 use Illuminate\Support\Facades\Cache;
@@ -9,8 +9,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\UserRequest;
-use App\Http\Requests\UserupdateRequest;
-use App\Jobs\UsergreetingJob;
+use App\Http\Requests\UserUpdateRequest;
+use App\Jobs\Emails\UserGreetingJob;
 
 class UserController extends Controller
 {
@@ -63,7 +63,7 @@ class UserController extends Controller
         
         $temp = new UserResource($user);
         Cache::put('users', User::all()); 
-        UsergreetingJob::dispatch($user->name, $user->email, $temp_password);       
+        UserGreetingJob::dispatch($user->name, $user->email, $temp_password);       
         return response(['access_token' => $token, 'user' => $temp]);        
     }
 
@@ -86,7 +86,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UserupdateRequest $request, string $id)
+    public function update(UserUpdateRequest $request, string $id)
     {
         $request['password'] = Hash::make($request['password']);
         $user = User::find($id);      

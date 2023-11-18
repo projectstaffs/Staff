@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\watch;
+namespace App\Http\Controllers\Watch;
 
 use Illuminate\Support\Facades\Cache;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\watch\WatchClientNurse;
+use App\Models\Watch\WatchClientNurse;
 
 class WatchClientNurseController extends Controller
 {

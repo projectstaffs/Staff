@@ -21,10 +21,10 @@ services:
             - "9000:9000"
             - "9009:9009"
         volumes:
-            - ./volumes/storages/minio:/data
+            - ./volumes/storages/minio:/data        
         env_file:
             - .env
-        command: server --console-address :9009 /data        
+        command: server --console-address :9009 /data 
         extra_hosts:
             - 'host.docker.internal:host-gateway'
         networks:

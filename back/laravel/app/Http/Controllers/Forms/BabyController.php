@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\forms;
+namespace App\Http\Controllers\Forms;
 use Illuminate\Routing\Controller;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
-use App\Models\forms\Baby;
-use App\Http\Resources\forms\BabyResource;
-use App\Http\Requests\worker\BabyRequest;
+use App\Models\Forms\Baby;
+use App\Http\Resources\Forms\Baby\BabyResource;
+use App\Http\Requests\Worker\BabyRequest;
 
 class BabyController extends Controller
 {

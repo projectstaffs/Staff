@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\forms;
+namespace App\Http\Controllers\Forms;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
-use App\Models\forms\UserLanguages;
+use App\Models\Forms\UserLanguages;
 
 class UserLanguagesController extends Controller
 {

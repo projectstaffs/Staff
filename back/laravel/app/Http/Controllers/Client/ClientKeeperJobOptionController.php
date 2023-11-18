@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\client;
+namespace App\Http\Controllers\Client;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
-use App\Models\client\Client_keeperjoboption;
+use App\Models\Client\ClientKeeperJobOption;
 
 class ClientKeeperjoboptionController extends Controller
 {
@@ -31,13 +31,13 @@ class ClientKeeperjoboptionController extends Controller
     public function store(Request $request)
     {
         for($i = 0; $i < $request[1]; ++$i) {
-            $formDutie = new Client_keeperjoboption([
+            $formDutie = new ClientKeeperJobOption([
                 'form_id' => $request[0][$i]["form_id"],
                 'keeperjoboption_id' => $request[0][$i]["keeperjoboption_id"]
             ]);                    
             $formDutie->save();
         }    
-        Cache::put('client_keeperjoboptions', Client_keeperjoboption::all());     
+        Cache::put('client_keeperjoboptions', ClientKeeperJobOption::all());     
         return $request[1];
     }
 
@@ -70,8 +70,8 @@ class ClientKeeperjoboptionController extends Controller
      */
     public function destroy(string $id)
     {
-        Client_keeperjoboption::where('form_id', '=', $id)->delete();
-        Cache::put('client_keeperjoboptions', Client_keeperjoboption::all());
+        ClientKeeperJobOption::where('form_id', '=', $id)->delete();
+        Cache::put('client_keeperjoboptions', ClientKeeperJobOption::all());
         return response()->json('Удаление прошло успешно.');
     }
 }

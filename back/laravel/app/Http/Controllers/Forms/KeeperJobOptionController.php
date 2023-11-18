@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\forms;
+namespace App\Http\Controllers\Forms;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
-use App\Models\forms\FormKeeperjoboption;
+use App\Models\Forms\FormKeeperJobOption;
 
 class KeeperjoboptionController extends Controller
 {
@@ -31,13 +31,13 @@ class KeeperjoboptionController extends Controller
     public function store(Request $request)
     {
         for($i = 0; $i < $request[1]; ++$i) {
-            $formDutie = new FormKeeperjoboption([
+            $formDutie = new FormKeeperJobOption([
                 'form_id' => $request[0][$i]["form_id"],
                 'keeperjoboption_id' => $request[0][$i]["keeperjoboption_id"]
             ]);                    
             $formDutie->save();
         } 
-        Cache::put('formkeeperjoboptions', FormKeeperjoboption::all());       
+        Cache::put('formkeeperjoboptions', FormKeeperJobOption::all());       
         return $request[1];
     }
 
@@ -70,8 +70,8 @@ class KeeperjoboptionController extends Controller
      */
     public function destroy(string $id)
     {
-        FormKeeperjoboption::where('form_id', '=', $id)->delete();
-        Cache::put('formkeeperjoboptions', FormKeeperjoboption::all());
+        FormKeeperJobOption::where('form_id', '=', $id)->delete();
+        Cache::put('formkeeperjoboptions', FormKeeperJobOption::all());
         return response()->json('Удаление прошло успешно.');
     }
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\forms;
+namespace App\Http\Controllers\Forms;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
-use App\Models\forms\FormNursejoboption;
+use App\Models\Forms\FormNurseJobOption;
 
 class FormNursejoboptionController extends Controller
 {
@@ -31,13 +31,13 @@ class FormNursejoboptionController extends Controller
     public function store(Request $request)
     {
         for($i = 0; $i < $request[1]; ++$i) {
-            $formEducation = new FormNursejoboption([
+            $formEducation = new FormNurseJobOption([
                 'form_id' => $request[0][$i]["form_id"],
                 'nursejoboption_id' => $request[0][$i]["nursejoboption_id"]
             ]);                    
             $formEducation->save();
         }    
-        Cache::put('formnursejoboptions', FormNursejoboption::all());    
+        Cache::put('formnursejoboptions', FormNurseJobOption::all());    
         return $request[1];
     }
 
@@ -70,8 +70,8 @@ class FormNursejoboptionController extends Controller
      */
     public function destroy(string $id)
     {
-        FormNursejoboption::where('form_id', '=', $id)->delete();
-        Cache::put('formnursejoboptions', FormNursejoboption::all());
+        FormNurseJobOption::where('form_id', '=', $id)->delete();
+        Cache::put('formnursejoboptions', FormNurseJobOption::all());
         return response()->json('Удаление прошло успешно.');
     }
 }

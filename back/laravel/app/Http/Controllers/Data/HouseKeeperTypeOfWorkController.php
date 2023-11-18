@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\data;
+namespace App\Http\Controllers\Data;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
-use App\Models\data\HousekeeperTypeOfWork;
+use App\Models\Data\HouseKeeperTypeOfWork;
 
 class HousekeeperTypeOfWorkController extends Controller
 {
@@ -14,7 +14,7 @@ class HousekeeperTypeOfWorkController extends Controller
      */
     public function index()
     {
-        if(!Cache::has('housekeepertypeofworks')) { Cache::put('housekeepertypeofworks', HousekeeperTypeOfWork::all()); }
+        if(!Cache::has('housekeepertypeofworks')) { Cache::put('housekeepertypeofworks', HouseKeeperTypeOfWork::all()); }
         $getItems = Cache::get('housekeepertypeofworks');
         return $getItems;
         //return HousekeeperTypeOfWork::orderBy('created_at', 'desc')->get();
@@ -33,12 +33,12 @@ class HousekeeperTypeOfWorkController extends Controller
      */
     public function store(Request $request)
     {
-        $housekeeperTypeOfWork = new HousekeeperTypeOfWork([
+        $housekeeperTypeOfWork = new HouseKeeperTypeOfWork([
             'title' => $request->title
         ]);
         $housekeeperTypeOfWork->save(); 
         
-        Cache::put('housekeepertypeofworks', HousekeeperTypeOfWork::all());
+        Cache::put('housekeepertypeofworks', HouseKeeperTypeOfWork::all());
         return response()->json('The housekeeperTypeOfWork successfully added');
     }
 
@@ -63,11 +63,11 @@ class HousekeeperTypeOfWorkController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $housekeeperTypeOfWork = HousekeeperTypeOfWork::find($id);
+        $housekeeperTypeOfWork = HouseKeeperTypeOfWork::find($id);
         $housekeeperTypeOfWork->title = $request['title'];
         $housekeeperTypeOfWork->save();
         
-        Cache::put('housekeepertypeofworks', HousekeeperTypeOfWork::all());
+        Cache::put('housekeepertypeofworks', HouseKeeperTypeOfWork::all());
         return response()->json(["The housekeeperTypeOfWork successfully updated"]);
     }
 
@@ -76,10 +76,10 @@ class HousekeeperTypeOfWorkController extends Controller
      */
     public function destroy(string $id)
     {
-        $housekeeperTypeOfWork = HousekeeperTypeOfWork::find($id);
+        $housekeeperTypeOfWork = HouseKeeperTypeOfWork::find($id);
         $housekeeperTypeOfWork->delete();        
 
-        Cache::put('housekeepertypeofworks', HousekeeperTypeOfWork::all());
+        Cache::put('housekeepertypeofworks', HouseKeeperTypeOfWork::all());
         return response()->json('The housekeeperTypeOfWork successfully deleted');
     }
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\data;
+namespace App\Http\Controllers\Data;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
-use App\Models\data\HourlyPayment;
+use App\Models\Data\HourlyPayment;
 
 class HourlyPaymentController extends Controller
 {

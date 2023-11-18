@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\message;
+namespace App\Http\Controllers\Message;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
-use App\Models\message\Review;
+use App\Models\Message\Review;
 use App\Http\Requests\ReviewRequest;
 
 class ReviewController extends Controller

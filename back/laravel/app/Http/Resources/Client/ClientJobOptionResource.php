@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\client;
+namespace App\Http\Resources\Client;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Models\data\JobOption;
+use App\Models\Data\JobOption;
 
 class ClientJoboptionResource extends JsonResource
 {

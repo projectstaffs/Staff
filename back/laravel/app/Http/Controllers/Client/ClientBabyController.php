@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\client;
+namespace App\Http\Controllers\Client;
 use Illuminate\Routing\Controller;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
-use App\Models\client\Client_baby;
-use App\Http\Resources\client\ClientBabyResource;
-use App\Http\Requests\client\BabyRequest;
+use App\Models\Client\ClientBaby;
+use App\Http\Resources\Client\ClientBabyResource;
+use App\Http\Requests\Client\BabyRequest;
 
 class ClientBabyController extends Controller
 {
@@ -16,7 +16,7 @@ class ClientBabyController extends Controller
      */
     public function index(Request $request)
     {
-        if(!Cache::has('client_babies')) { Cache::put('client_babies', Client_baby::all()); }
+        if(!Cache::has('client_babies')) { Cache::put('client_babies', ClientBaby::all()); }
         $Client_baby = Cache::get('client_babies');
         $client_baby = null;
         foreach ($Client_baby as $item) {
@@ -43,7 +43,7 @@ class ClientBabyController extends Controller
      */
     public function store(BabyRequest $request)
     {
-         $baby = new Client_baby([
+         $baby = new ClientBaby([
             'user_id' => $request->user_id,
             'confirmed' => $request->confirmed,
             'title' => $request->title,
@@ -58,7 +58,7 @@ class ClientBabyController extends Controller
         ]);                
         $baby->save();
 
-        Cache::put('client_babies', Client_baby::all());
+        Cache::put('client_babies', ClientBaby::all());
         return $baby;
     }
 
@@ -83,7 +83,7 @@ class ClientBabyController extends Controller
      */
     public function update(BabyRequest $request, string $id)
     {
-        $baby = Client_baby::find($id);       
+        $baby = ClientBaby::find($id);       
         $baby->title = $request['title'];
         $baby->title_about = $request['title_about'];
         $baby->childrencount_id = $request['childrencount_id'];
@@ -95,7 +95,7 @@ class ClientBabyController extends Controller
         $baby->monthpay_id = $request['monthpay_id'];
         $baby->save(); 
 
-        Cache::put('client_babies', Client_baby::all());
+        Cache::put('client_babies', ClientBaby::all());
         return $baby;
     }
 
@@ -104,8 +104,8 @@ class ClientBabyController extends Controller
      */
     public function destroy(string $id)
     {
-        Client_baby::where('user_id', '=', $id)->delete();
-        Cache::put('client_babies', Client_baby::all());
+        ClientBaby::where('user_id', '=', $id)->delete();
+        Cache::put('client_babies', ClientBaby::all());
         return response()->json('Удаление анкеты прошло успешно.');
     }
 }

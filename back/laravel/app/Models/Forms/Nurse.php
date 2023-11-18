@@ -1,16 +1,9 @@
 <?php
 
-namespace App\Models\forms;
+namespace App\Models\Forms;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
-use App\Models\data\Experience;
-use App\Models\data\Recommendation;
-use App\Models\data\Workperiod;
-use App\Models\data\Employment;
-use App\Models\data\HourlyPayment;
-use App\Models\data\MonthlyPayment;
 
 class Nurse extends Model
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\forms;
+namespace App\Http\Controllers\Forms;
 use Illuminate\Routing\Controller;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
-use App\Models\forms\FormDutie;
+use App\Models\Forms\FormDutie;
 
 class FormDutieController extends Controller
 {

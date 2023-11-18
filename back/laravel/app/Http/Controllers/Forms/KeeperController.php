@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\forms;
+namespace App\Http\Controllers\Forms;
 use Illuminate\Routing\Controller;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
-use App\Models\forms\Keeper;
-use App\Http\Resources\forms\KeeperResource;
-use App\Http\Requests\worker\KeeperRequest;
+use App\Models\Forms\Keeper;
+use App\Http\Resources\Forms\Keeper\KeeperResource;
+use App\Http\Requests\Worker\KeeperRequest;
 
 class KeeperController extends Controller
 {

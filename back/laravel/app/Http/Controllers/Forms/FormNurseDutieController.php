@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\forms;
+namespace App\Http\Controllers\Forms;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
-use App\Models\forms\FormNursedutie;
+use App\Models\Forms\FormNurseDutie;
 
 class FormNursedutieController extends Controller
 {
@@ -31,13 +31,13 @@ class FormNursedutieController extends Controller
     public function store(Request $request)
     {
         for($i = 0; $i < $request[1]; ++$i) {
-            $formDutie = new FormNursedutie([
+            $formDutie = new FormNurseDutie([
                 'form_id' => $request[0][$i]["form_id"],
                 'nursedutie_id' => $request[0][$i]["nursedutie_id"]
             ]);                    
             $formDutie->save();
         }   
-        Cache::put('formnurseduties', FormNursedutie::all());     
+        Cache::put('formnurseduties', FormNurseDutie::all());     
         return $request[1];
     }
 
@@ -70,8 +70,8 @@ class FormNursedutieController extends Controller
      */
     public function destroy(string $id)
     {
-        FormNursedutie::where('form_id', '=', $id)->delete();
-        Cache::put('formnurseduties', FormNursedutie::all());
+        FormNurseDutie::where('form_id', '=', $id)->delete();
+        Cache::put('formnurseduties', FormNurseDutie::all());
         return response()->json('Удаление прошло успешно.');
     }
 }

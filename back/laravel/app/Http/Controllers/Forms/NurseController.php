@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\forms;
+namespace App\Http\Controllers\Forms;
 use Illuminate\Routing\Controller;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
-use App\Models\forms\Nurse;
-use App\Http\Resources\forms\NurseResource;
-use App\Http\Requests\worker\NurseRequest;
+use App\Models\Forms\Nurse;
+use App\Http\Resources\Forms\Nurse\NurseResource;
+use App\Http\Requests\Worker\NurseRequest;
 
 class NurseController extends Controller
 {

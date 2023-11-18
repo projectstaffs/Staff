@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\client;
+namespace App\Http\Controllers\Client;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
-use App\Models\client\Client_nurse;
-use App\Http\Resources\client\ClientNurseResource;
-use App\Http\Requests\client\NurseRequest;
+use App\Models\Client\ClientNurse;
+use App\Http\Resources\Client\ClientNurseResource;
+use App\Http\Requests\Client\NurseRequest;
 
 class ClientNurseController extends Controller
 {
@@ -16,7 +16,7 @@ class ClientNurseController extends Controller
      */
     public function index(Request $request)
     {
-        if(!Cache::has('client_nurses')) { Cache::put('client_nurses', Client_nurse::all()); }
+        if(!Cache::has('client_nurses')) { Cache::put('client_nurses', ClientNurse::all()); }
         $Client_nurse = Cache::get('client_nurses');
         $client_nurse = null;
         foreach ($Client_nurse as $item) {
@@ -43,7 +43,7 @@ class ClientNurseController extends Controller
      */
     public function store(NurseRequest $request)
     {
-        $nurse = new Client_nurse([
+        $nurse = new ClientNurse([
             'user_id' => $request->user_id,
             'confirmed' => $request->confirmed,
             'title' => $request->title,
@@ -57,7 +57,7 @@ class ClientNurseController extends Controller
         ]);                
         $nurse->save();
 
-        Cache::put('client_nurses', Client_nurse::all());
+        Cache::put('client_nurses', ClientNurse::all());
         return $nurse;
     }
 
@@ -82,7 +82,7 @@ class ClientNurseController extends Controller
      */
     public function update(NurseRequest $request, string $id)
     {
-        $nurse = Client_nurse::find($id);       
+        $nurse = ClientNurse::find($id);       
         $nurse->title = $request['title'];
         $nurse->title_about = $request['title_about'];        
         $nurse->workperiod_id = $request['workperiod_id'];
@@ -93,7 +93,7 @@ class ClientNurseController extends Controller
         $nurse->monthpay_id = $request['monthpay_id'];
         $nurse->save(); 
 
-        Cache::put('client_nurses', Client_nurse::all());
+        Cache::put('client_nurses', ClientNurse::all());
         return $nurse;
     }
 
@@ -102,8 +102,8 @@ class ClientNurseController extends Controller
      */
     public function destroy(string $id)
     {
-        Client_nurse::where('user_id', '=', $id)->delete();
-        Cache::put('client_nurses', Client_nurse::all());
+        ClientNurse::where('user_id', '=', $id)->delete();
+        Cache::put('client_nurses', ClientNurse::all());
         return response()->json('Удаление анкеты прошло успешно.');
     }
 }

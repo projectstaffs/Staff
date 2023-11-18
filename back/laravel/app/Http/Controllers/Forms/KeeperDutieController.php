@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\forms;
+namespace App\Http\Controllers\Forms;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Http\Request;
-use App\Models\forms\FormKeeperdutie;
+use App\Models\Forms\FormKeeperDutie;
 
 class KeeperdutieController extends Controller
 {
@@ -31,13 +31,13 @@ class KeeperdutieController extends Controller
     public function store(Request $request)
     {
         for($i = 0; $i < $request[1]; ++$i) {
-            $formDutie = new FormKeeperdutie([
+            $formDutie = new FormKeeperDutie([
                 'form_id' => $request[0][$i]["form_id"],
                 'keeperdutie_id' => $request[0][$i]["keeperdutie_id"]
             ]);                    
             $formDutie->save();
         }  
-        Cache::put('formkeeperduties', FormKeeperdutie::all());      
+        Cache::put('formkeeperduties', FormKeeperDutie::all());      
         return $request[1];
     }
 
@@ -70,8 +70,8 @@ class KeeperdutieController extends Controller
      */
     public function destroy(string $id)
     {
-        FormKeeperdutie::where('form_id', '=', $id)->delete();
-        Cache::put('formkeeperduties', FormKeeperdutie::all());
+        FormKeeperDutie::where('form_id', '=', $id)->delete();
+        Cache::put('formkeeperduties', FormKeeperDutie::all());
         return response()->json('Удаление прошло успешно.');
     }
 }
