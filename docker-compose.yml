@@ -62,7 +62,7 @@ services:
             -   ./docs/doc.env
 
     redis.socket:
-        image: 'redis:alpine'
+        image: 'redis:7.2.3-alpine3.18'
         volumes:
             - './volumes/db/redis/sockets:/data'
         extra_hosts:
@@ -117,7 +117,7 @@ services:
             - .env        
 
     nginx:
-        image: nginx:alpine
+        image: nginx:1.25.3-alpine
         volumes:
             - ./nginx.conf:/etc/nginx/nginx.conf:ro
         extra_hosts:
@@ -128,7 +128,7 @@ services:
             - "80:80"     
 
     redis.laravel:
-        image: 'redis:alpine'
+        image: 'redis:7.2.3-alpine3.18'
         volumes:
             - './volumes/db/redis/laravel:/data'
         extra_hosts:
@@ -139,7 +139,7 @@ services:
             - diplom          
 
     db.mysql.main:
-        image: 'mysql/mysql-server:latest'
+        image: 'mysql/mysql-server:8.0'
         ports:
             - '33121:3306' # Что бы я мог из редактора посмотреть - что творится в базе данных
         volumes:
