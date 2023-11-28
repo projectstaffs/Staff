@@ -1,13 +1,14 @@
 <template>
-    <h1>Home page</h1>    
-    <div class="category_title">Все отзывы:</div>  
-    <div>Some hello</div>    
-    <div>New 2222</div>
-    <ul>                
+    <h1>Home page</h1>
+    <div class="category_title">Все отзывы:</div>
+    <div>Some hello</div>
+    <div class="test2">Some hello</div>
+    <div class="test">Some hello</div>
+    <ul>
         <li v-for="post in Review.reviews" :key="post.id" class="category_item">
-            {{ post.name }} {{ post.surname }} {{ post.city }} {{ post.content }}                
-        </li> 
-          
+            {{ post.name }} {{ post.surname }} {{ post.city }} {{ post.content }}
+        </li>
+
     </ul>
 </template>
 
@@ -24,7 +25,7 @@ export default {
         const Views = useViewsStore();
         const Store = useDataStore();
         return { User, Review, Views, Store };
-    }, 
+    },
     mounted() {
         this.User.GET_TOKEN();
         this.Review.GET_REVIEWS();
@@ -36,7 +37,18 @@ export default {
         //this.Views.GET_CLIENTKEEPER();
         //this.Store.GET_JOBOPTIONS(); this.Store.GET_TYPEOFWORKS(); this.Store.GET_NURSETYPEOFWORKS(); this.Store.GET_HOUSEKEEPERTYPEOFWORKS();
         //this.Store.GET_EMPLOYMENTS(); this.Store.GET_CITYS();
-    },      
+    },
 }
 </script>
 
+<style>
+.test {
+    font-family: Playfair Display;
+    font-weight: 500;
+}
+
+.test2 {
+    font-family: Roboto;
+    font-weight: 500;
+}
+</style>

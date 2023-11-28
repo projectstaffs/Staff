@@ -1,8 +1,8 @@
 <template>
     <Header></Header>
     <component :is="layout">
-        <router-view/>
-    </component>        
+        <router-view />
+    </component>
 </template>
 
 <script>
@@ -12,11 +12,10 @@ import Cabinet from './pages/layouts/Cabinet.vue';
 export default {
     name: "App",
     computed: {
-        layout(){
+        layout() {
             return (this.$route.meta.layout || 'User')
         }
     },
-    components: { User, Cabinet, Header }    
+    components: { User, Cabinet, Header }
 }
 </script>
-
