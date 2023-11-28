@@ -16,7 +16,7 @@ services:
             - .env
 
     storage.minio:
-        build: ./storages/minio
+        image: alexnik2411/minio:8.4.3
         ports:
             - "9000:9000"
             - "9009:9009"
