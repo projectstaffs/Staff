@@ -2,7 +2,7 @@
     <h1>Home page</h1>    
     <div class="category_title">Все отзывы:</div>  
     <div>Some hello</div>    
-    <div>New</div>
+    <div>New 2222</div>
     <ul>                
         <li v-for="post in Review.reviews" :key="post.id" class="category_item">
             {{ post.name }} {{ post.surname }} {{ post.city }} {{ post.content }}                
