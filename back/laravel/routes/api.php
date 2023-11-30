@@ -197,5 +197,6 @@ Route::resource('/status', StatusController::class);
 Route::resource('/religion', ReligionController::class);
 
 Route::post('/forgot_password', [HelpController::class, 'forgotPassword']);
+Route::post('/changelang', [HelpController::class, 'changeLang']);
 //Route::get('/redis', [HelpController::class, 'redisAll']);
 //Route::get('/minio', [HelpController::class, 'minio']);

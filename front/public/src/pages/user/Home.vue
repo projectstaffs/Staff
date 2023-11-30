@@ -8,10 +8,12 @@
     <div class="test">Some hello</div>
     <ul>
         <li v-for="post in Review.reviews" :key="post.id" class="category_item">
-            {{ post.name }} {{ post.surname }} {{ post.city }} {{ post.content }}
+            {{ post.name }} {{ post.surname[locale] }} {{ post.city[locale] }} {{ post.content[locale] }}
         </li>
 
     </ul>
+
+    <div @click.prevent="test" class="category_change_btn">test</div>
 </template>
 
 <script>
@@ -34,6 +36,9 @@ export default {
         changeLang() {
             this.locale === 'ua' ? this.locale = 'en' : this.locale = 'ua'
             localStorage.lang = this.locale;
+        },
+        test() {
+            this.Review.TEST_REVIEW('Some');
         }
     },
     mounted() {
