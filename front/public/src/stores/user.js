@@ -50,6 +50,7 @@ export const useUserStore = defineStore('user', {
                     localStorage.removeItem('user_image');
                     localStorage.removeItem('admin_id');
                     localStorage.removeItem('userID');
+                    localStorage.removeItem('lang');
                     localStorage.removeItem('clientBabyitem'); localStorage.removeItem('clientBabyitemUser'); 
                     localStorage.removeItem('clientNurseitem'); localStorage.removeItem('clientNurseitemUser');
                     localStorage.removeItem('clientKeeperitem'); localStorage.removeItem('clientKeeperitemUser');
