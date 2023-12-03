@@ -1,4 +1,4 @@
-FROM minio/minio:latest
+FROM docker.io/alexnik2411/minio:8.4.3
 
 
 # Установка утилиты mc Мы удалили
