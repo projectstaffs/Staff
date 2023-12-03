@@ -1,5 +1,15 @@
 <template>
-    <div @click.prevent="changeLang" class="category_change_btn">{{ $t('swithLang') }}</div>
+    <section class="main-top">
+        <div class="main-top_container">
+            <div class="main-top_inner">
+                <div class="main-top_title"> {{ $t('main.top_title') }} </div>
+                <div class="main-top_subtitle"> {{ $t('main.top_subtitle') }} </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div @click.prevent="changeLang" class="category_change_btn">{{ $t('header.swithLang') }}</div>
     <h1>{{ $t('title') }}</h1>
 
     <div class="category_title">{{ $t('reviews.title') }}</div>
@@ -8,7 +18,7 @@
     <div class="test">Some hello</div>
     <ul>
         <li v-for="post in Review.reviews" :key="post.id" class="category_item">
-            {{ post.name }} {{ post.surname[locale] }} {{ post.city[locale] }} {{ post.content[locale] }}
+            {{ post.name[locale] }} {{ post.surname[locale] }} {{ post.city[locale] }} {{ post.content[locale] }}
         </li>
 
     </ul>
@@ -57,6 +67,44 @@ export default {
 </script>
 
 <style>
+.main-top {
+    height: 100vh;
+    background: #5C4538 url(../../assets/img/main/video.jpg) no-repeat center;
+    background-size: cover;
+    color: #FFF0D2;
+}
+
+.main-top_container {
+    padding: 0 15px;
+    width: 1108px;
+    max-width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    padding-top: 120px;
+}
+
+.main-top_inner {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.main-top_title {
+    font-family: Playfair Display;
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 120%;
+    margin-bottom: 16px;
+}
+
+.main-top_subtitle {
+    font-size: 40px;
+    line-height: 130%;
+}
+
+
+
 .test {
     font-family: Playfair Display;
     font-weight: 500;
