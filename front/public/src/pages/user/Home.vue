@@ -1,6 +1,6 @@
 <template>
     <section class="main-top">
-        <div class="main-top_container">
+        <div class="container">
             <div class="main-top_inner">
                 <div class="main-top_title"> {{ $t('main.top_title') }} </div>
                 <div class="main-top_subtitle"> {{ $t('main.top_subtitle') }} </div>
@@ -8,22 +8,15 @@
         </div>
     </section>
 
-
-    <div @click.prevent="changeLang" class="category_change_btn">{{ $t('header.swithLang') }}</div>
-    <h1>{{ $t('title') }}</h1>
-
-    <div class="category_title">{{ $t('reviews.title') }}</div>
-    <div>{{ $t('reviews.text') }}</div>
-    <div class="test2">Some hello Український</div>
-    <div class="test">Some hello</div>
+    <!--
     <ul>
         <li v-for="post in Review.reviews" :key="post.id" class="category_item">
             {{ post.name[locale] }} {{ post.surname[locale] }} {{ post.city[locale] }} {{ post.content[locale] }}
         </li>
 
     </ul>
-
     <div @click.prevent="test" class="category_change_btn">test</div>
+    -->
 </template>
 
 <script>
@@ -43,10 +36,6 @@ export default {
         return { t, locale, User, Review, Views, Store };
     },
     methods: {
-        changeLang() {
-            this.locale === 'ua' ? this.locale = 'en' : this.locale = 'ua'
-            localStorage.lang = this.locale;
-        },
         test() {
             this.Review.TEST_REVIEW('Some');
         }
@@ -68,22 +57,15 @@ export default {
 
 <style>
 .main-top {
+    min-height: 400px;
     height: 100vh;
     background: #5C4538 url(../../assets/img/main/video.jpg) no-repeat center;
     background-size: cover;
     color: #FFF0D2;
 }
 
-.main-top_container {
-    padding: 0 15px;
-    width: 1108px;
-    max-width: 100%;
-    height: 100%;
-    margin: 0 auto;
-    padding-top: 120px;
-}
-
 .main-top_inner {
+    padding-top: 120px;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -103,6 +85,29 @@ export default {
     line-height: 130%;
 }
 
+@media (max-width: 992px) {
+    .main-top_title {
+        font-size: 52px;
+    }
+
+    .main-top_subtitle {
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 576px) {
+    .main-top_inner {
+        padding: 60px 0px;
+    }
+
+    .main-top_title {
+        font-size: 30px;
+    }
+
+    .main-top_subtitle {
+        font-size: 16px;
+    }
+}
 
 
 .test {

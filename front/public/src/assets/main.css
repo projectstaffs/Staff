@@ -62,8 +62,35 @@ body {
     color: #1E1510;
 }
 
+/* 1200px 992px 767px 576px */
 /* Компоненты */
+.container {
+    padding: 0 15px;
+    max-width: 100%;
+    width: 1138px;
+    height: 100%;
+    margin: 0 auto;
+}
 
+.btn {
+    width: 115px;
+    height: 48px;
+    display: flex;
+    padding: 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 10px;
+    background: #1E1510;
+
+    color: rgba(255, 255, 255, 0.50);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.btn:hover {
+    cursor: pointer;
+}
 
 /* Старые стили */
 
