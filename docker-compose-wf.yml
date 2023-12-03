@@ -1,0 +1,154 @@
+version: '3'
+services:
+
+    front.admin:
+        build: ./front/admin
+        image: projectstaff/front.admin:latest
+        volumes:
+            - ./front/admin:/usr/src/app
+        command: sh -c " npm install && npm start "
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        networks:
+            - diplom
+        environment:
+            - NAME=front.admin
+
+    db.mysql.main:
+        build: ./test/mysql
+        image: projectstaff/db.mysql.main:latest
+        ports:
+            - '33121:3306' # Что бы я мог из редактора посмотреть - что творится в базе данных
+        volumes:
+            - './volumes/db/mysql/main:/var/lib/mysql'
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        networks:
+            - diplom
+
+    storage.minio:
+        build: ./storages/minio
+        image: projectstaff/storage.minio:latest
+        ports:
+            - "9000:9000"
+            - "9009:9009"
+        volumes:
+            - ./volumes/storages/minio:/data        
+        command: server --console-address :9009 /data 
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        networks:
+            - diplom
+
+    laravel.jobs:
+        build:
+            context: ./back/laravel
+            dockerfile: Dockerfile
+        image: projectstaff/laravel.jobs:latest
+        command: sh -c "/var/www/html/artisan queue:work"
+        volumes:
+            - './back/laravel:/var/www/html'
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        networks:
+            - diplom
+        environment:
+            - NAME=jobs.laravel
+        depends_on:
+            - laravel.api
+
+    front.docs:
+        build: ./test/swag
+        image: projectstaff/front.docs:latest
+        volumes:
+            - ./docs:/usr/share/nginx/html/docs
+        ports:
+            - "8080:8080"
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        networks:
+            - diplom
+        env_file:
+            -   ./docs/doc.env
+
+    redis.socket:
+        build: ./test/red_soc
+        image: projectstaff/redis.socket:latest
+        volumes:
+            - './volumes/db/redis/sockets:/data'
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        networks:
+            - diplom 
+
+    socket.jonny:
+        build: ./socket/socket_instance
+        image: projectstaff/socket.jonny:latest
+        volumes:
+            - ./socket/socket_instance:/usr/src/app
+        command: sh -c " npm install && npm start "
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        networks:
+            - diplom
+        depends_on:
+            - redis.socket
+        environment:
+            - SERVER_NAME=socket.jonny
+
+    front.public:
+        build: ./front/public
+        image: projectstaff/front.public:latest
+        volumes:
+            - ./front/public:/usr/src/app
+        command: sh -c " npm install && npm start "
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        networks:
+            - diplom
+        environment:
+            - NAME=front.public
+
+    laravel.api:
+        build:
+            context: ./back/laravel
+            dockerfile: Dockerfile
+        image: projectstaff/laravel.api:latest
+        command: sh -c "composer install && /var/www/html/artisan serve --host=0.0.0.0"
+        volumes:
+            - './back/laravel:/var/www/html'
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        networks:
+            - diplom
+        environment:
+            - NAME=laravel.api       
+
+    nginx:
+        build: ./test/nginx
+        image: projectstaff/nginx:latest
+        volumes:
+            - ./nginx.conf:/etc/nginx/nginx.conf:ro
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        networks:
+            - diplom
+        ports:
+            - "80:80"     
+
+    redis.laravel:
+        build: ./test/red_lar
+        image: projectstaff/redis.laravel:latest
+        volumes:
+            - './volumes/db/redis/laravel:/data'
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        ports:
+            - "6379:6379"
+        networks:
+            - diplom   
+                   
+networks:
+    diplom:
+        driver: bridge 
+    
