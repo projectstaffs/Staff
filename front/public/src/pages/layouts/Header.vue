@@ -136,6 +136,12 @@ export default {
     align-items: center;
 }
 
+.header_end_items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
 .header_start:hover {
     cursor: pointer;
 }
