@@ -1,11 +1,22 @@
 <template>
-    <section class="main-top">
+    <section class="main_top">
         <div class="container">
-            <div class="main-top_inner">
-                <div class="main-top_title"> {{ $t('main.top_title') }} </div>
-                <div class="main-top_subtitle"> {{ $t('main.top_subtitle') }} </div>
+            <div class="main_top_inner">
+                <div class="main_top_title"> {{ $t('main.top_title') }} </div>
+                <div class="main_top_subtitle"> {{ $t('main.top_subtitle') }} </div>
             </div>
         </div>
+    </section>
+
+    <section class="main_info">
+        <div class="main_info_top">
+            <div class="container">
+                <div class="main_info_text"> {{ $t('main.top_text') }} </div>
+            </div>
+        </div>
+        <div class="main_info_bottom"></div>
+        <div class="main_info_client"></div>
+        <div class="main_info_worker"></div>
     </section>
 
     <!--
@@ -56,7 +67,7 @@ export default {
 </script>
 
 <style>
-.main-top {
+.main_top {
     min-height: 400px;
     height: 100vh;
     background: #5C4538 url(../../assets/img/main/video.jpg) no-repeat center;
@@ -64,7 +75,7 @@ export default {
     color: #FFF0D2;
 }
 
-.main-top_inner {
+.main_top_inner {
     padding-top: 120px;
     height: 100%;
     display: flex;
@@ -72,7 +83,7 @@ export default {
     justify-content: center;
 }
 
-.main-top_title {
+.main_top_title {
     font-family: Playfair Display;
     font-size: 64px;
     font-weight: 700;
@@ -80,43 +91,42 @@ export default {
     margin-bottom: 16px;
 }
 
-.main-top_subtitle {
+.main_top_subtitle {
     font-size: 40px;
     line-height: 130%;
 }
 
+.main_info_top {
+    height: 340px;
+    background: #FFF0D2;
+}
+
+.main_info_bottom {
+    height: 454px;
+    background: #1E1510;
+}
+
 @media (max-width: 992px) {
-    .main-top_title {
+    .main_top_title {
         font-size: 52px;
     }
 
-    .main-top_subtitle {
+    .main_top_subtitle {
         font-size: 32px;
     }
 }
 
 @media (max-width: 576px) {
-    .main-top_inner {
+    .main_top_inner {
         padding: 60px 0px;
     }
 
-    .main-top_title {
+    .main_top_title {
         font-size: 30px;
     }
 
-    .main-top_subtitle {
+    .main_top_subtitle {
         font-size: 16px;
     }
-}
-
-
-.test {
-    font-family: Playfair Display;
-    font-weight: 500;
-}
-
-.test2 {
-    font-family: Roboto;
-    font-weight: 500;
 }
 </style>

@@ -2,10 +2,9 @@
     <header class="header">
         <div class="container">
             <div class="header_inner">
-                <div class="header_start">
-                    <div @click.prevent="home" class="header_logo">
-                        <img src="../../assets/img/logo.svg" alt="" class="header_img">
-                    </div>
+                <div @click.prevent="home" class="header_start">
+                    <img @mouseover="handleMouseOver" @mouseout="handleMouseOut"
+                        :src="isHovered ? hoveredImageSrc : originalImageSrc" alt="" class="header_img">
                 </div>
                 <div class="header_end">
                     <ul class="header_end_items">
@@ -30,6 +29,11 @@
                         <li @click.prevent="setEN" class="header_langs_item">EN</li>
                     </ul>
                     <div class="btn">{{ $t('header.login') }}</div>
+                    <button class="header_burger_btn" type="button">
+                        <span class="header_burger_box">
+                            <span class="header_burger_inner"></span>
+                        </span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -55,6 +59,13 @@ import { useI18n } from 'vue-i18n';
 import { useUserStore } from '../../stores/user'
 export default {
     name: "Header",
+    data() {
+        return {
+            originalImageSrc: '../../src/assets/img/logo.svg',
+            hoveredImageSrc: '../../src/assets/img/footer/footer_logo.svg',
+            isHovered: false,
+        }
+    },
     setup() {
         const { t, locale } = useI18n({ useScope: 'global' });
         const User = useUserStore();
@@ -86,6 +97,12 @@ export default {
                 localStorage.lang = this.locale;
             }
         },
+        handleMouseOver() {
+            this.isHovered = true;
+        },
+        handleMouseOut() {
+            this.isHovered = false;
+        },
     },
     mounted() {
         this.User.GET_TOKEN();
@@ -94,5 +111,193 @@ export default {
 </script>
 
 <style>
-.header {}
+.header {
+    padding: 8px 0px 2px 0px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    z-index: 5;
+    background: rgba(255, 255, 255, 0.10);
+}
+
+.header_inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header_end,
+.header_start,
+.header_logo,
+.header_end_items {
+    display: flex;
+    align-items: center;
+}
+
+.header_start:hover {
+    cursor: pointer;
+}
+
+.header_end_item {
+    display: flex;
+    align-items: center;
+    height: 48px;
+    padding: 16px 12px;
+    margin: 0px 9px;
+}
+
+.header_btn {
+    color: #1C1C1C;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 0.25;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    75% {
+        opacity: 0.75;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.header_img:hover {
+    animation: fadeInOut 0.3s;
+}
+
+.header_btn:hover {
+    color: #FFF0D2;
+}
+
+.header_langs {
+    margin: 0px 14px 0px 5px;
+}
+
+.header_langs_item {
+    display: flex;
+    align-items: center;
+    width: 24px;
+    height: 22px;
+    padding: 4px;
+    color: #1C1C1C;
+    font-size: 12px;
+    border-radius: 4px;
+    transition: color 0.3s, background 0.3s;
+}
+
+.header_langs_item:hover {
+    cursor: pointer;
+    background: #1C1C1C;
+    color: #FFF0D2;
+}
+
+.header_burger_btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    background: none;
+    border-radius: 0;
+    cursor: pointer;
+    margin-left: 30px;
+    padding: 3px;
+    border: 0;
+}
+
+.header_burger_box {
+    display: inline-block;
+}
+
+.header_burger_inner {
+    position: relative;
+    background: #1E1510;
+    height: 4px;
+    width: 33px;
+    display: block;
+    top: 50%;
+    border-radius: 4px;
+}
+
+.header_burger_inner::before,
+.header_burger_inner::after {
+    content: '';
+    height: 4px;
+    width: 100%;
+    background: #1E1510;
+    position: absolute;
+    left: 0;
+    border-radius: 4px;
+}
+
+.header_burger_inner::before {
+    top: -10px;
+}
+
+.header_burger_inner::after {
+    bottom: -10px;
+}
+
+.header_burger_btn {
+    display: none;
+}
+
+@media (max-width: 1200px) {
+
+    .header_end_item {
+        margin: 0px;
+    }
+
+    .header_langs {
+        margin: 0px 5px 0px 0px;
+    }
+}
+
+@media (max-width: 992px) {
+    .header {
+        height: 90px;
+    }
+
+    .header_img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .header_end_items {
+        display: none;
+    }
+
+    .header_burger_btn {
+        display: flex;
+    }
+
+    .header_langs {
+        margin: 0px 30px 0px 5px;
+    }
+}
+
+@media (max-width: 576px) {
+    .header_end .btn {
+        display: none;
+    }
+
+    .header_langs {
+        margin-right: 0px;
+    }
+}
 </style>

@@ -62,12 +62,22 @@ body {
     color: #1E1510;
 }
 
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
 /* 1200px 992px 767px 576px */
 /* Компоненты */
 .container {
-    padding: 0 15px;
+    padding: 0 30px;
     max-width: 100%;
-    width: 1138px;
+    width: 1168px;
     height: 100%;
     margin: 0 auto;
 }
@@ -79,17 +89,19 @@ body {
     padding: 16px;
     justify-content: center;
     align-items: center;
-    gap: 10px;
     border-radius: 10px;
     background: #1E1510;
 
     color: rgba(255, 255, 255, 0.50);
     font-size: 14px;
     font-weight: 500;
+    transition: color 0.3s, background 0.3s;
 }
 
 .btn:hover {
     cursor: pointer;
+    background: #FFF0D2;
+    color: #1E1510;
 }
 
 /* Старые стили */
