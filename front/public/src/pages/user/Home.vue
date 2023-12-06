@@ -163,7 +163,7 @@
         <div class="container">
             <div class="main_point_business">
                 <div class="main_point_business_start">
-                    <img src="../../assets/img/main/for_business.jpg" alt="" class="main_point_business_img">
+                    <div class="main_point_business_img"></div>
                 </div>
                 <div class="main_point_business_end">
                     <div class="main_point_business_title"> {{ $t('main.end_business_title') }} </div>
@@ -172,11 +172,18 @@
                     <div class="btn"> <img src="../../assets/img/main/arrow.svg" alt=""> </div>
                 </div>
             </div>
-            <div class="main_point_staff">
-                <div class="main_point_staff_start"></div>
-                <div class="main_point_staff_end"></div>
+            <div class="main_point_business">
+                <div class="main_point_business_end">
+                    <div class="main_point_business_title"> {{ $t('main.end_staff_title') }} </div>
+                    <div class="main_point_business_subtitle"> {{ $t('main.end_staff_subtitle') }} </div>
+                    <div class="main_point_business_text"> {{ $t('main.end_staff_text') }} </div>
+                    <div class="btn"> <img src="../../assets/img/main/arrow.svg" alt=""> </div>
+                </div>
+                <div class="main_point_business_start">
+                    <div class="main_point_staff_img"></div>
+                </div>
             </div>
-            <div class="staff_title"> {{ $t('main.footer_title') }} </div>
+            <div class="staff_title main_point_border"> {{ $t('main.footer_title') }} </div>
         </div>
     </section>
 
@@ -468,35 +475,78 @@ export default {
     text-align: center;
 }
 
-.main_point_business,
-.main_point_staff {
+.main_point_business {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 32px;
+    margin-bottom: 64px;
+    height: 315px;
 }
 
 .main_point_business_start {
     width: 658px;
-    height: 228px;
+    height: 261px;
     border-radius: 10px;
     background: #5C4538;
     position: relative;
+    margin-top: 45px;
 }
 
-.main_point_business_img {
+.main_point_business_img,
+.main_point_staff_img {
     position: absolute;
-    left: 41px;
-    bottom: 33px;
-    max-width: 618px;
-    max-height: auto;
-    border-radius: 5px 10px 0px 5px;
+    left: 40px;
+    bottom: 32px;
+    width: 618px;
+    height: 274px;
+    border-radius: 5px 0px 0px 5px;
     border: 1px solid #FFF0D2;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
+.main_point_business_img {
+    background: url(../../assets/img/main/for_business.jpg) no-repeat center;
+}
+
+.main_point_staff_img {
+    background: url(../../assets/img/main/for_staff.jpg) no-repeat center;
+}
+
 .main_point_business_end {
     width: 376px;
-    height: 228px;
+    position: relative;
+}
+
+.main_point_business_end .btn {
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+
+    width: 164px;
+    height: 40px;
+    padding: 8px 24px;
+    background: #5C4538;
+}
+
+.main_point_business_end .btn:hover {
+    background: #1E1510;
+}
+
+.main_point_business_title {
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 120%;
+    margin-bottom: 8px;
+}
+
+.main_point_business_subtitle {
+    font-size: 24px;
+    font-weight: 300;
+    margin-bottom: 24px;
+}
+
+.main_point_border {
+    padding-top: 64px;
+    border-top: 1px solid #8E8E8E;
 }
 
 /* media */
