@@ -48,7 +48,136 @@
     </section>
 
     <section class="main_homestaff">
-        <div class="main_homestaff_title"></div>
+        <div class="container">
+            <div class="staff_title"> {{ $t('main.staff_title') }} </div>
+            <div class="main_homestaff_items">
+                <div class="staff_item">
+                    <img class="staff_img" src="../../assets/img/main/category/home/item1.jpg" alt="">
+                    <div class="staff_text"> {{ $t('main.staff_item1') }} </div>
+                </div>
+                <div class="staff_item">
+                    <img class="staff_img" src="../../assets/img/main/category/home/item2.jpg" alt="">
+                    <div class="staff_text"> {{ $t('main.staff_item2') }} </div>
+                </div>
+                <div class="staff_item">
+                    <img class="staff_img" src="../../assets/img/main/category/home/item3.jpg" alt="">
+                    <div class="staff_text"> {{ $t('main.staff_item3') }} </div>
+                </div>
+                <div class="staff_item">
+                    <img class="staff_img" src="../../assets/img/main/category/home/item4.jpg" alt="">
+                    <div class="staff_text"> {{ $t('main.staff_item4') }} </div>
+                </div>
+                <div class="staff_item">
+                    <img class="staff_img" src="../../assets/img/main/category/home/item5.jpg" alt="">
+                    <div class="staff_text"> {{ $t('main.staff_item5') }} </div>
+                </div>
+                <div class="staff_item">
+                    <img class="staff_img" src="../../assets/img/main/category/home/item6.jpg" alt="">
+                    <div class="staff_text"> {{ $t('main.staff_item6') }} </div>
+                </div>
+                <div class="staff_item">
+                    <img class="staff_img" src="../../assets/img/main/category/home/item7.jpg" alt="">
+                    <div class="staff_text"> {{ $t('main.staff_item7') }} </div>
+                </div>
+                <div class="staff_item">
+                    <img class="staff_img" src="../../assets/img/main/category/home/item8.jpg" alt="">
+                    <div class="staff_text"> {{ $t('main.staff_item8') }} </div>
+                </div>
+            </div>
+            <div class="btn"> {{ $t('main.staff_btn') }} <img class="main_info_arrow" src="../../assets/img/main/arrow.svg"
+                    alt=""></div>
+        </div>
+        <div class="main_homestaff_back"></div>
+    </section>
+
+    <section class="main_business_staff">
+        <div class="container">
+            <div class="staff_title"> {{ $t('main.business_title') }} </div>
+            <div class="main_homestaff_items">
+                <div class="staff_item">
+                    <img class="staff_img" src="../../assets/img/main/category/business/item1.jpg" alt="">
+                    <div class="staff_text"> {{ $t('main.business_item1') }} </div>
+                </div>
+                <div class="staff_item">
+                    <img class="staff_img" src="../../assets/img/main/category/business/item2.jpg" alt="">
+                    <div class="staff_text"> {{ $t('main.business_item2') }} </div>
+                </div>
+                <div class="staff_item">
+                    <img class="staff_img" src="../../assets/img/main/category/business/item3.jpg" alt="">
+                    <div class="staff_text"> {{ $t('main.business_item3') }} </div>
+                </div>
+                <div class="staff_item">
+                    <img class="staff_img" src="../../assets/img/main/category/business/item4.jpg" alt="">
+                    <div class="staff_text"> {{ $t('main.business_item4') }} </div>
+                </div>
+            </div>
+            <div class="btn"> {{ $t('main.staff_btn') }} <img class="main_info_arrow" src="../../assets/img/main/arrow.svg"
+                    alt=""></div>
+        </div>
+        <div class="main_business_staff_back"></div>
+    </section>
+
+    <section class="main_about">
+        <div class="container">
+            <div class="staff_title"> {{ $t('main.bottom_title') }} </div>
+            <div class="main_about_content">
+                <div class="main_about_text"> {{ $t('main.bottom_text') }} </div>
+                <ul class="main_about_items">
+                    <li class="main_about_item"> {{ $t('main.bottom_item1') }} </li>
+                    <li class="main_about_item"> {{ $t('main.bottom_item2') }} </li>
+                    <li class="main_about_item"> {{ $t('main.bottom_item3') }} </li>
+                    <li class="main_about_item"> {{ $t('main.bottom_item4') }} </li>
+                    <li class="main_about_item"> {{ $t('main.bottom_item5') }} </li>
+                </ul>
+            </div>
+            <div class="main_about_end"> {{ $t('main.bottom_about') }} </div>
+        </div>
+    </section>
+
+    <section class="main_point">
+        <div class="container">
+            <div class="staff_title"> {{ $t('main.end_title') }} </div>
+        </div>
+        <div class="main_point_items">
+            <div class="container">
+                <div class="main_point_inner">
+                    <div class="main_point_item">
+                        <img src="../../assets/img/main/icons/users.svg" alt="" class="main_point_logo">
+                        <div class="main_point_text"> {{ $t('main.end_item1') }} </div>
+                    </div>
+                    <div class="main_point_item">
+                        <img src="../../assets/img/main/icons/organization.svg" alt="" class="main_point_logo">
+                        <div class="main_point_text"> {{ $t('main.end_item2') }} </div>
+                    </div>
+                    <div class="main_point_item">
+                        <img src="../../assets/img/main/icons/phonebook-contacts.svg" alt="" class="main_point_logo">
+                        <div class="main_point_text"> {{ $t('main.end_item3') }} </div>
+                    </div>
+                    <div class="main_point_item">
+                        <img src="../../assets/img/main/icons/user-check.svg" alt="" class="main_point_logo">
+                        <div class="main_point_text"> {{ $t('main.end_item4') }} </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="main_point_business">
+                <div class="main_point_business_start">
+                    <img src="../../assets/img/main/for_business.jpg" alt="" class="main_point_business_img">
+                </div>
+                <div class="main_point_business_end">
+                    <div class="main_point_business_title"> {{ $t('main.end_business_title') }} </div>
+                    <div class="main_point_business_subtitle"> {{ $t('main.end_business_subtitle') }} </div>
+                    <div class="main_point_business_text"> {{ $t('main.end_business_text') }} </div>
+                    <div class="btn"> <img src="../../assets/img/main/arrow.svg" alt=""> </div>
+                </div>
+            </div>
+            <div class="main_point_staff">
+                <div class="main_point_staff_start"></div>
+                <div class="main_point_staff_end"></div>
+            </div>
+            <div class="staff_title"> {{ $t('main.footer_title') }} </div>
+        </div>
     </section>
 
     <!--
@@ -197,11 +326,7 @@ export default {
 
 .main_info_client .btn,
 .main_info_worker .btn {
-    width: 280px;
-    padding: 16px 24px;
-    margin: 0 auto;
-    color: #FFF0D2;
-    font-size: 18px;
+    height: 56px;
 }
 
 .main_info_client .btn:hover {
@@ -229,11 +354,152 @@ export default {
 
 /* main_homestaff */
 .main_homestaff {
-    height: 860px;
     background: #FFF0D2;
-    padding-top: 80px;
+    padding: 80px 0px;
+    position: relative;
 }
 
+.main_homestaff_back,
+.main_business_staff_back {
+    position: absolute;
+    left: 0;
+    bottom: 150px;
+    width: 100%;
+    height: 527px;
+    flex-shrink: 0;
+    background: url(../../assets/img/main/stripes.svg), #FFF0D2 50% / cover no-repeat;
+    z-index: 1;
+}
+
+.main_business_staff_back {
+    height: 268px;
+}
+
+.main_homestaff_fone {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: #FFF0D2;
+}
+
+.main_homestaff .btn,
+.main_business_staff .btn {
+    width: 164px;
+    font-size: 14px;
+    transition: scale 0.3s;
+}
+
+.main_homestaff .btn:hover,
+.main_business_staff .btn:hover {
+    scale: 1.1;
+}
+
+.main_homestaff_items {
+    margin: 64px 0px 32px 0px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+}
+
+.main_business_staff {
+    background: #FFF0D2;
+    padding-bottom: 80px;
+    position: relative;
+}
+
+/* main_about */
+.main_about {
+    background: #FFF0D2;
+    padding-bottom: 80px;
+}
+
+.main_about_text {
+    margin-bottom: 30px;
+}
+
+.main_about_content {
+    margin: 64px 0px;
+    padding: 80px;
+    border-radius: 10px;
+    background: #5C4538;
+    color: #FFF0D2;
+}
+
+/* main_point */
+.main_point {
+    background: #FFF0D2;
+    padding-bottom: 120px;
+}
+
+.main_point_items {
+    color: #FFF0D2;
+    margin: 64px 0px;
+    padding: 64px 0px;
+    background: #1E1510;
+}
+
+.main_point_inner {
+    display: flex;
+    justify-content: space-between;
+}
+
+.main_point_item {
+    display: flex;
+    width: 262px;
+    height: 150px;
+    padding: 16px 24px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 240, 210, 0.50);
+}
+
+.main_point_logo {
+    margin-bottom: 24px;
+}
+
+.main_point_text {
+    font-size: 12px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.main_point_business,
+.main_point_staff {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 32px;
+}
+
+.main_point_business_start {
+    width: 658px;
+    height: 228px;
+    border-radius: 10px;
+    background: #5C4538;
+    position: relative;
+}
+
+.main_point_business_img {
+    position: absolute;
+    left: 41px;
+    bottom: 33px;
+    max-width: 618px;
+    max-height: auto;
+    border-radius: 5px 10px 0px 5px;
+    border: 1px solid #FFF0D2;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.main_point_business_end {
+    width: 376px;
+    height: 228px;
+}
+
+/* media */
 @media (max-width: 992px) {
     .main_top_title {
         font-size: 52px;

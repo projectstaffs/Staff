@@ -77,26 +77,79 @@ a {
 }
 
 .btn {
-    width: 115px;
+    width: 280px;
     height: 48px;
+    margin: 0 auto;
     display: flex;
-    padding: 16px;
+    padding: 16px 24px;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
     background: #1E1510;
 
-    color: rgba(255, 255, 255, 0.50);
-    font-size: 14px;
+    cursor: pointer;
+    color: #FFF0D2;
+    font-size: 18px;
     font-weight: 500;
     transition: color 0.3s, background 0.3s;
 }
 
 .btn:hover {
-    cursor: pointer;
-    background: #FFF0D2;
-    color: #1E1510;
+    background: #5C4538;
 }
+
+/* staff */
+.staff_title {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 120%;
+}
+
+.staff_item {
+    width: 262px;
+    height: 262px;
+    margin-bottom: 32px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 12px 0px rgba(30, 21, 16, 0.35);
+    position: relative;
+    cursor: pointer;    
+    overflow: hidden;
+}
+
+.staff_text {
+    position: absolute;
+    left: 0;
+    bottom: 0px;
+    width: 262px;
+    height: 76px;
+    padding: 25px 14px;
+
+    display: flex;
+    align-items: center;
+    color: #FFF;
+    font-family: Playfair Display;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 130%; 
+
+    border-radius: 0px 0px 10px 10px;
+    background: rgba(255, 255, 255, 0.20);
+    backdrop-filter: blur(7.5px);
+    transition: height 0.75s;
+}
+
+.staff_item:hover .staff_text {
+    height: 262px;    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    color: #1E1510;
+    font-size: 30px;
+    font-weight: 800;
+} 
 
 /* Старые стили */
 

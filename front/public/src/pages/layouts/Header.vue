@@ -154,6 +154,18 @@ export default {
     margin: 0px 9px;
 }
 
+.header_end .btn {
+    width: 115px;
+    padding: 16px;
+    color: rgba(255, 255, 255, 0.50);
+    font-size: 14px;
+}
+
+.header_end .btn:hover {
+    background: #FFF0D2;
+    color: #1E1510;
+}
+
 .header_btn {
     color: #1C1C1C;
     font-size: 14px;
