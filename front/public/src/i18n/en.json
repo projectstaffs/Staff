@@ -73,5 +73,11 @@
         "item6": "Business services",
         "item7": "Employers",
         "item8": "Public offer contract"
+    },
+    "window": {
+        "title": "INFORMATION MESSAGE",
+        "subtitle": "This section of the site is under construction. We apologize for any inconvenience.",
+        "end": "Thank you for your cooperation.",
+        "button": "Home"
     }
 }

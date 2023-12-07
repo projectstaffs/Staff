@@ -4,11 +4,13 @@
         <router-view />
     </component>
     <Footer></Footer>
+    <Window></Window>
 </template>
 
 <script>
 import Header from './pages/layouts/Header.vue';
 import Footer from './pages/layouts/Footer.vue';
+import Window from './pages/layouts/Window.vue';
 import User from './pages/layouts/User.vue';
 import Cabinet from './pages/layouts/Cabinet.vue';
 export default {
@@ -18,6 +20,6 @@ export default {
             return (this.$route.meta.layout || 'User')
         }
     },
-    components: { User, Cabinet, Header, Footer }
+    components: { User, Cabinet, Header, Footer, Window }
 }
 </script>
