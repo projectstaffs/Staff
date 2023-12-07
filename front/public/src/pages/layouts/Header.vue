@@ -25,8 +25,8 @@
                         </li>
                     </ul>
                     <ul class="header_langs">
-                        <li @click.prevent="setUA" class="header_langs_item">UA</li>
-                        <li @click.prevent="setEN" class="header_langs_item">EN</li>
+                        <li @click.prevent="setUA" class="header_langs_item" data-lang="ua">UA</li>
+                        <li @click.prevent="setEN" class="header_langs_item" data-lang="en">EN</li>
                     </ul>
                     <div class="btn">{{ $t('header.login') }}</div>
                     <button class="header_burger_btn" type="button">
@@ -205,18 +205,35 @@ export default {
 
 .header_langs {
     margin: 0px 14px 0px 5px;
+    padding: 0;
 }
 
 .header_langs_item {
     display: flex;
     align-items: center;
     width: 24px;
-    height: 22px;
-    padding: 4px;
+    height: 0px;
+    padding: 0px;
+    margin: 0px;
     color: #1C1C1C;
     font-size: 12px;
     border-radius: 4px;
     transition: color 0.3s, background 0.3s;
+    opacity: 0;
+}
+
+.header_langs_item.is_active {
+    margin: 3px 0px;
+    padding: 4px;
+    height: 22px;
+    opacity: 1;
+}
+
+.header_langs:hover .header_langs_item {
+    margin: 3px 0px;
+    padding: 4px;
+    height: 22px;
+    opacity: 1;
 }
 
 .header_langs_item:hover {

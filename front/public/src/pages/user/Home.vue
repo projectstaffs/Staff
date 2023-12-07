@@ -59,11 +59,11 @@
                     <img class="staff_img" src="../../assets/img/main/category/home/item2.jpg" alt="">
                     <div class="staff_text"> {{ $t('main.staff_item2') }} </div>
                 </div>
-                <div class="staff_item">
+                <div class="staff_item" data-window="window">
                     <img class="staff_img" src="../../assets/img/main/category/home/item3.jpg" alt="">
                     <div class="staff_text"> {{ $t('main.staff_item3') }} </div>
                 </div>
-                <div class="staff_item">
+                <div class="staff_item" data-window="window">
                     <img class="staff_img" src="../../assets/img/main/category/home/item4.jpg" alt="">
                     <div class="staff_text"> {{ $t('main.staff_item4') }} </div>
                 </div>
@@ -71,15 +71,15 @@
                     <img class="staff_img" src="../../assets/img/main/category/home/item5.jpg" alt="">
                     <div class="staff_text"> {{ $t('main.staff_item5') }} </div>
                 </div>
-                <div class="staff_item">
+                <div class="staff_item" data-window="window">
                     <img class="staff_img" src="../../assets/img/main/category/home/item6.jpg" alt="">
                     <div class="staff_text"> {{ $t('main.staff_item6') }} </div>
                 </div>
-                <div class="staff_item">
+                <div class="staff_item" data-window="window">
                     <img class="staff_img" src="../../assets/img/main/category/home/item7.jpg" alt="">
                     <div class="staff_text"> {{ $t('main.staff_item7') }} </div>
                 </div>
-                <div class="staff_item">
+                <div class="staff_item" data-window="window">
                     <img class="staff_img" src="../../assets/img/main/category/home/item8.jpg" alt="">
                     <div class="staff_text"> {{ $t('main.staff_item8') }} </div>
                 </div>
@@ -94,19 +94,19 @@
         <div class="container">
             <div class="staff_title"> {{ $t('main.business_title') }} </div>
             <div class="main_homestaff_items">
-                <div class="staff_item">
+                <div class="staff_item" data-window="window">
                     <img class="staff_img" src="../../assets/img/main/category/business/item1.jpg" alt="">
                     <div class="staff_text"> {{ $t('main.business_item1') }} </div>
                 </div>
-                <div class="staff_item">
+                <div class="staff_item" data-window="window">
                     <img class="staff_img" src="../../assets/img/main/category/business/item2.jpg" alt="">
                     <div class="staff_text"> {{ $t('main.business_item2') }} </div>
                 </div>
-                <div class="staff_item">
+                <div class="staff_item" data-window="window">
                     <img class="staff_img" src="../../assets/img/main/category/business/item3.jpg" alt="">
                     <div class="staff_text"> {{ $t('main.business_item3') }} </div>
                 </div>
-                <div class="staff_item">
+                <div class="staff_item" data-window="window">
                     <img class="staff_img" src="../../assets/img/main/category/business/item4.jpg" alt="">
                     <div class="staff_text"> {{ $t('main.business_item4') }} </div>
                 </div>

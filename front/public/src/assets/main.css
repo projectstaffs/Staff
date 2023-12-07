@@ -62,6 +62,10 @@ body {
     color: #1E1510;
 }
 
+.no_scroll {
+    overflow: hidden;
+}
+
 a {
     text-decoration: none;
 }

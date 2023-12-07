@@ -7,10 +7,14 @@
                 </div>
                 <div class="footer_top_middle"> {{ $t('footer.text') }} </div>
                 <div class="footer_top_end">
-                    <img src="../../assets/img/footer/socials/linkedin.svg" alt="" class="footer_top_item">
-                    <img src="../../assets/img/footer/socials/instagram.svg" alt="" class="footer_top_item">
-                    <img src="../../assets/img/footer/socials/youtube.svg" alt="" class="footer_top_item">
-                    <img src="../../assets/img/footer/socials/facebook.svg" alt="" class="footer_top_item">
+                    <a href="#" class="footer_top_link"><img src="../../assets/img/footer/socials/linkedin.svg" alt=""
+                            class="footer_top_item"></a>
+                    <a href="#" class="footer_top_link"><img src="../../assets/img/footer/socials/instagram.svg" alt=""
+                            class="footer_top_item"></a>
+                    <a href="#" class="footer_top_link"><img src="../../assets/img/footer/socials/youtube.svg" alt=""
+                            class="footer_top_item"></a>
+                    <a href="#" class="footer_top_link"><img src="../../assets/img/footer/socials/facebook.svg" alt=""
+                            class="footer_top_item"></a>
                 </div>
             </div>
             <div class="footer_bottom">
@@ -66,6 +70,10 @@ export default {
 .footer_top_end {
     width: 182px;
     justify-content: space-between;
+}
+
+.footer_top_link {
+    height: 32px;
 }
 
 .footer_top_item {

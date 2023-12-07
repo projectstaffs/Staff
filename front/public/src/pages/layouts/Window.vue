@@ -8,7 +8,7 @@
                     <div class="window_title"> {{ $t('window.title') }} </div>
                     <div class="window_subtitle"> {{ $t('window.subtitle') }} </div>
                     <div class="window_end"> {{ $t('window.end') }} </div>
-                    <div class="btn"> {{ $t('window.button') }} </div>
+                    <div class="btn close_btn"> {{ $t('window.button') }} </div>
                 </div>
             </div>
         </div>
