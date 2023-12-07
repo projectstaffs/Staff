@@ -53,6 +53,7 @@ export default {
             var lang = localStorage.lang;
             if (lang === null) { lang = 'ua'; }
             var languages = document.querySelectorAll('.header_langs_item');
+            var lang_block = document.querySelector('.header_langs');
             for (var i = 0; i < languages.length; i++) {
                 var current = languages[i].getAttribute('data-lang');
                 if (current === lang) { showWindow(languages[i]); }
@@ -61,9 +62,9 @@ export default {
             body.addEventListener('click', function (e) {
                 // Переключение языка
                 if (e.target.classList.contains('header_langs_item')) {
-                    for (var i = 0; i < languages.length; i++) {
-                        closeWindow(languages[i]);
-                    }
+                    if (e.target.classList.contains('is_active')) { return; }
+                    var previousActive = lang_block.querySelector('.header_langs_item.is_active');
+                    closeWindow(previousActive);
                     showWindow(e.target);
                 }
                 // Закрытие окна по кнопкам либо пустому месту
