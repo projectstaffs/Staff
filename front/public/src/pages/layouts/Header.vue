@@ -250,6 +250,7 @@ export default {
     display: block;
     top: 50%;
     border-radius: 4px;
+    transition: background 0.3s;
 }
 
 .header_burger_inner::before,
@@ -261,6 +262,7 @@ export default {
     position: absolute;
     left: 0;
     border-radius: 4px;
+    transition: background 0.3s;
 }
 
 .header_burger_inner::before {
@@ -269,6 +271,12 @@ export default {
 
 .header_burger_inner::after {
     bottom: -10px;
+}
+
+.header_burger_btn:hover .header_burger_inner,
+.header_burger_btn:hover .header_burger_inner::before,
+.header_burger_btn:hover .header_burger_inner::after {
+    background: #FFF0D2;
 }
 
 .header_burger_btn {

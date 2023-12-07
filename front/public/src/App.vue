@@ -15,11 +15,19 @@ import User from './pages/layouts/User.vue';
 import Cabinet from './pages/layouts/Cabinet.vue';
 export default {
     name: "App",
+    methods: {
+        allScripts() {
+
+        }
+    },
     computed: {
         layout() {
             return (this.$route.meta.layout || 'User')
         }
     },
-    components: { User, Cabinet, Header, Footer, Window }
+    components: { User, Cabinet, Header, Footer, Window },
+    mounted() {
+        this.allScripts();
+    },
 }
 </script>
