@@ -1,5 +1,5 @@
 @import './normalize.css';
-@import './anketa.css';
+/*@import './anketa.css';*/
 
 /* Шрифты */
 @font-face {
@@ -62,12 +62,18 @@ body {
     color: #1E1510;
 }
 
-.no_scroll {
-    overflow: hidden;
+.content {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-a {
-    text-decoration: none;
+.content_inner {
+    flex: 1 1 auto;
+}
+
+.no_scroll {
+    overflow: hidden;
 }
 
 /* 1200px 992px 767px 576px */
@@ -155,7 +161,47 @@ a {
     font-weight: 800;
 } 
 
-/* Старые стили */
+/* main_point */
+.main_point {
+    background: #FFF0D2;
+    padding-bottom: 120px;
+}
+
+.main_point_items {
+    color: #FFF0D2;
+    margin: 64px 0px;
+    padding: 64px 0px;
+    background: #1E1510;
+}
+
+.main_point_inner {
+    display: flex;
+    justify-content: space-between;
+}
+
+.main_point_item {
+    display: flex;
+    width: 262px;
+    height: 150px;
+    padding: 16px 24px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 240, 210, 0.50);
+}
+
+.main_point_logo {
+    margin-bottom: 24px;
+}
+
+.main_point_text {
+    font-size: 12px;
+    font-weight: 400;
+    text-align: center;
+}
+
+/* Старые стили 
 
 html, body {
     margin: 0;
@@ -288,3 +334,4 @@ ul, p {
     display: flex;
     justify-content: space-between;
 }
+*/

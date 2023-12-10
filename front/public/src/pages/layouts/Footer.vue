@@ -2,7 +2,7 @@
     <section class="footer">
         <div class="container">
             <div class="footer_top">
-                <div class="footer_top_start">
+                <div @click.prevent="home" class="footer_top_start">
                     <img src="../../assets/img/footer/footer_logo.svg" alt="" class="footer_img">
                 </div>
                 <div class="footer_top_middle"> {{ $t('footer.text') }} </div>
@@ -18,13 +18,13 @@
                 </div>
             </div>
             <div class="footer_bottom">
-                <div class="footer_bottom_item"> {{ $t('footer.item1') }} </div>
-                <div class="footer_bottom_item"> {{ $t('footer.item2') }} </div>
-                <div class="footer_bottom_item"> {{ $t('footer.item3') }} </div>
+                <div data-color="about" @click.prevent="about" class="footer_bottom_item"> {{ $t('footer.item1') }} </div>
+                <div data-color="home_staff" class="footer_bottom_item"> {{ $t('footer.item2') }} </div>
+                <div data-color="worker" class="footer_bottom_item"> {{ $t('footer.item3') }} </div>
                 <div class="footer_bottom_item"> {{ $t('footer.item4') }} </div>
-                <div class="footer_bottom_item"> {{ $t('footer.item5') }} </div>
-                <div class="footer_bottom_item"> {{ $t('footer.item5') }} </div>
-                <div class="footer_bottom_item"> {{ $t('footer.item7') }} </div>
+                <div @click.prevent="contacts" class="footer_bottom_item"> {{ $t('footer.item5') }} </div>
+                <div data-color="service" class="footer_bottom_item"> {{ $t('footer.item6') }} </div>
+                <div data-color="client" class="footer_bottom_item"> {{ $t('footer.item7') }} </div>
                 <div class="footer_bottom_item"> {{ $t('footer.item8') }} </div>
             </div>
         </div>
@@ -38,6 +38,11 @@ export default {
     setup() {
         const { t, locale } = useI18n({ useScope: 'global' });
         return { t, locale };
+    },
+    methods: {
+        home() { this.$router.push({ name: "Home" }) },
+        about() { this.$router.push({ name: "About" }) },
+        contacts() { this.$router.push({ name: "Contacts" }) },
     },
 }
 </script>

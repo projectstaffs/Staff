@@ -436,45 +436,6 @@ export default {
 }
 
 /* main_point */
-.main_point {
-    background: #FFF0D2;
-    padding-bottom: 120px;
-}
-
-.main_point_items {
-    color: #FFF0D2;
-    margin: 64px 0px;
-    padding: 64px 0px;
-    background: #1E1510;
-}
-
-.main_point_inner {
-    display: flex;
-    justify-content: space-between;
-}
-
-.main_point_item {
-    display: flex;
-    width: 262px;
-    height: 150px;
-    padding: 16px 24px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-    border: 1px solid rgba(255, 240, 210, 0.50);
-}
-
-.main_point_logo {
-    margin-bottom: 24px;
-}
-
-.main_point_text {
-    font-size: 12px;
-    font-weight: 400;
-    text-align: center;
-}
-
 .main_point_business {
     display: flex;
     justify-content: space-between;

@@ -1,10 +1,12 @@
 <template>
-    <Header></Header>
-    <component :is="layout">
-        <router-view />
-    </component>
-    <Footer></Footer>
-    <Window></Window>
+    <div class="content">
+        <Header></Header>
+        <component :is="layout" class="content_inner">
+            <router-view />
+        </component>
+        <Footer></Footer>
+        <Window></Window>
+    </div>
 </template>
 
 <script>
@@ -54,12 +56,33 @@ export default {
             if (lang === null) { lang = 'ua'; }
             var languages = document.querySelectorAll('.header_langs_item');
             var lang_block = document.querySelector('.header_langs');
+            var page_block = document.querySelector('.header_end_items');
             for (var i = 0; i < languages.length; i++) {
                 var current = languages[i].getAttribute('data-lang');
                 if (current === lang) { showWindow(languages[i]); }
             }
 
             body.addEventListener('click', function (e) {
+                // Переключение страниц
+                if (e.target.classList.contains('header_img') || e.target.classList.contains('footer_img')) {
+                    var previousActive = page_block.querySelector('.header_btn.is_active');
+                    if (previousActive) { closeWindow(previousActive); }
+                }
+                if (e.target.classList.contains('header_btn')) {
+                    if (e.target.classList.contains('is_active')) { return; }
+                    var previousActive = page_block.querySelector('.header_btn.is_active');
+                    if (previousActive) { closeWindow(previousActive); }
+                    showWindow(e.target);
+                }
+                if (e.target.classList.contains('footer_bottom_item')) {
+                    var previousActive = page_block.querySelector('.header_btn.is_active');
+                    if (previousActive) { closeWindow(previousActive); }
+                    var current = e.target.getAttribute('data-color');
+                    if (current) {
+                        var newActive = document.getElementById(current);
+                        showWindow(newActive);
+                    }
+                }
                 // Переключение языка
                 if (e.target.classList.contains('header_langs_item')) {
                     if (e.target.classList.contains('is_active')) { return; }

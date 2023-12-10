@@ -1,13 +1,19 @@
 /* Стандартные стили */
 html {
+    height: 100%;
     line-height: 1.15; /* 1 */
     -webkit-text-size-adjust: 100%; /* 2 */
 }
 body {
+    height: 100%;
     margin: 0;
 }
 main {
     display: block;
+}
+p {
+    margin: 0;
+    padding: 0;
 }
 h1 {
     font-size: 2em;
@@ -24,6 +30,7 @@ pre {
 }
 a {
     background-color: transparent;
+    text-decoration: none;
 }
 abbr[title] {
     border-bottom: none; /* 1 */

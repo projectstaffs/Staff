@@ -10,6 +10,18 @@ const router = createRouter({
             component: () => import('../pages/user/Home.vue')
         },
         {
+            path: '/about',
+            name: 'About', 
+            meta: {layout: 'User'},     
+            component: () => import('../pages/staff/About.vue')
+        },
+        {
+            path: '/contacts',
+            name: 'Contacts', 
+            meta: {layout: 'User'},     
+            component: () => import('../pages/staff/Contacts.vue')
+        },
+        {
             name: 'ClientBabyAll',
             path: '/c_baby',
             meta: {layout: 'User'},            
@@ -249,7 +261,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {    
     if(!localStorage.access_token){
-        if(to.name === 'Forgot' || to.name === 'Login' || to.name === 'Register' || to.name === 'Register-menu' || to.name === 'Register-employer' || to.name === 'Home'){
+        if(to.name === 'Forgot' || to.name === 'Login' || to.name === 'Register' || to.name === 'Register-menu' || to.name === 'Register-employer' || to.name === 'Home' || to.name === 'About' || to.name === 'Contacts'){
             return next()
         } else {
             return next({

@@ -63,6 +63,25 @@
         "end_staff_text": "Join our scheduled courses to improve your abilities.Maximum amount of relevant and high-quality information in a short time. Certificate at the end of the course.",
         "footer_title": "Let's try it!"
     },
+    "about": {
+        "title": "About us",
+        "item1": "“HouseHub” domestic staff agency specializes in providing comprehensive services in the field of domestic services: recruitment, training, information support, and consulting.",
+        "item2": "The agency is one of the leaders in the field of home service recruitment. Each year of activity enriches us with experience that helps us better understand the needs of our clients and work with even greater accuracy. We cooperate with the best home service professionals in Ukraine.",
+        "item3": "Our clients are entrepreneurs, middle and senior managers, businessmen, politicians, people of creative professions, diplomats and expats. They are all united by the fact that they value time, quality of life and believe that any service should be performed by professionals.",
+        "title_middle": "Our benefits",
+        "title_bottom": "Our clients"
+    },
+    "contacts": {
+        "title": "Contacts",
+        "adress": "Our address",
+        "adress_item": "000004, Kryvyi Rih, Chervonohirska str. 16-B, office 3",
+        "adress_about": "The office is currently working remotely. We are available by phone and messengers from Monday to Thursday, 10:00 - 18:00, Friday 10:00 - 15:00.",
+        "phone": "Call us",
+        "phone_item": "(067) 256 89 89",
+        "phone_about": "office manager",
+        "mail": "Write to us",
+        "socials": "We are in social networks"
+    },
     "footer": {
         "text": "© 2023 - HouseHub Agency. All rights reserved.",
         "item1": "About us",

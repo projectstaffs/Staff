@@ -9,19 +9,19 @@
                 <div class="header_end">
                     <ul class="header_end_items">
                         <li class="header_end_item">
-                            <a class="header_btn" href="#">{{ $t('header.item1') }}</a>
+                            <a class="header_btn" id="home_staff" href="#">{{ $t('header.item1') }}</a>
                         </li>
                         <li class="header_end_item">
-                            <a class="header_btn" href="#">{{ $t('header.item2') }}</a>
+                            <a class="header_btn" id="service" href="#">{{ $t('header.item2') }}</a>
                         </li>
                         <li class="header_end_item">
-                            <a class="header_btn" href="#">{{ $t('header.item3') }}</a>
+                            <a class="header_btn" id="client" href="#">{{ $t('header.item3') }}</a>
                         </li>
                         <li class="header_end_item">
-                            <a class="header_btn" href="#">{{ $t('header.item4') }}</a>
+                            <a class="header_btn" id="worker" href="#">{{ $t('header.item4') }}</a>
                         </li>
-                        <li class="header_end_item">
-                            <a class="header_btn" href="#">{{ $t('header.item5') }}</a>
+                        <li @click.prevent="about" class="header_end_item">
+                            <a class="header_btn" id="about" href="#">{{ $t('header.item5') }}</a>
                         </li>
                     </ul>
                     <ul class="header_langs">
@@ -73,6 +73,8 @@ export default {
     },
     methods: {
         home() { this.$router.push({ name: "Home" }) },
+        about() { this.$router.push({ name: "About" }) },
+
         cabinet() { this.$router.push({ name: "Account" }) },
         worker_baby() { this.$router.push({ name: "BabyAll" }) },
         worker_nurse() { this.$router.push({ name: "NurseAll" }) },
@@ -171,6 +173,10 @@ export default {
     font-size: 14px;
     font-weight: 500;
     transition: color 0.3s;
+}
+
+.header_btn.is_active {
+    color: #FFF0D2;
 }
 
 @keyframes fadeInOut {
