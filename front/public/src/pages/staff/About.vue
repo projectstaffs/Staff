@@ -1,7 +1,7 @@
 <template>
-    <div class="about">
-        <div class="about_back"></div>
-        <div class="about_content">
+    <div class="block">
+        <div class="block_back"></div>
+        <div class="block_content">
             <div class="container">
                 <div class="staff_title">{{ $t('about.title') }}</div>
                 <div class="about_description">
@@ -64,27 +64,6 @@ export default {
 </script>
 
 <style>
-.about {
-    background: var(--bgbg-0, #FFF0D2);
-    padding: 120px 0px;
-    position: relative;
-}
-
-.about_back {
-    width: 100%;
-    height: 393px;
-    position: absolute;
-    left: 0;
-    top: 0;
-    background: linear-gradient(180deg, #AE9B83 0%, rgba(255, 240, 210, 0.50) 95.67%);
-}
-
-.about_content {
-    position: relative;
-    padding-top: 80px;
-    border-top: 1px solid rgba(0, 0, 0, 0.20);
-}
-
 .about_description {
     display: flex;
     justify-content: space-between;

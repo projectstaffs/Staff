@@ -21,11 +21,12 @@
                 <div data-color="about" @click.prevent="about" class="footer_bottom_item"> {{ $t('footer.item1') }} </div>
                 <div data-color="home_staff" class="footer_bottom_item"> {{ $t('footer.item2') }} </div>
                 <div data-color="worker" class="footer_bottom_item"> {{ $t('footer.item3') }} </div>
-                <div class="footer_bottom_item"> {{ $t('footer.item4') }} </div>
+                <div @click.prevent="privacy" class="footer_bottom_item"> {{ $t('footer.item4') }} </div>
                 <div @click.prevent="contacts" class="footer_bottom_item"> {{ $t('footer.item5') }} </div>
-                <div data-color="service" class="footer_bottom_item"> {{ $t('footer.item6') }} </div>
+                <div @click.prevent="service" data-color="service" class="footer_bottom_item"> {{ $t('footer.item6') }}
+                </div>
                 <div data-color="client" class="footer_bottom_item"> {{ $t('footer.item7') }} </div>
-                <div class="footer_bottom_item"> {{ $t('footer.item8') }} </div>
+                <div @click.prevent="contract" class="footer_bottom_item"> {{ $t('footer.item8') }} </div>
             </div>
         </div>
     </section>
@@ -43,6 +44,9 @@ export default {
         home() { this.$router.push({ name: "Home" }) },
         about() { this.$router.push({ name: "About" }) },
         contacts() { this.$router.push({ name: "Contacts" }) },
+        privacy() { this.$router.push({ name: "Privacy" }) },
+        contract() { this.$router.push({ name: "Contract" }) },
+        service() { this.$router.push({ name: "Service" }) },
     },
 }
 </script>

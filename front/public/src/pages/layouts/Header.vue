@@ -11,7 +11,7 @@
                         <li class="header_end_item">
                             <a class="header_btn" id="home_staff" href="#">{{ $t('header.item1') }}</a>
                         </li>
-                        <li class="header_end_item">
+                        <li @click.prevent="service" class="header_end_item">
                             <a class="header_btn" id="service" href="#">{{ $t('header.item2') }}</a>
                         </li>
                         <li class="header_end_item">
@@ -74,6 +74,7 @@ export default {
     methods: {
         home() { this.$router.push({ name: "Home" }) },
         about() { this.$router.push({ name: "About" }) },
+        service() { this.$router.push({ name: "Service" }) },
 
         cabinet() { this.$router.push({ name: "Account" }) },
         worker_baby() { this.$router.push({ name: "BabyAll" }) },
@@ -115,7 +116,7 @@ export default {
 <style>
 .header {
     padding: 8px 0px 2px 0px;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
