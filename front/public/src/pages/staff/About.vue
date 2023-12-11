@@ -41,7 +41,7 @@
             <div class="container">
                 <div class="staff_title">{{ $t('about.title_bottom') }}</div>
                 <div class="about_clients">
-                    <Carousel :items-to-show="2.5" :wrap-around="true">
+                    <Carousel :items-to-show="4" :wrap-around="true">
                         <Slide v-for="slide in clients" :key="slide">
                             <div class="carousel__item">
                                 <img :src="slide" class="about_clients_item" alt="">
@@ -112,6 +112,10 @@ export default {
 
 .about_clients_item {
     width: 262px;
+    height: 106px;
+}
+
+.carousel__item {
     height: 106px;
 }
 </style>
