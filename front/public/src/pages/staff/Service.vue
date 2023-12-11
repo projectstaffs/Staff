@@ -7,18 +7,21 @@
                 <div class="service_text">{{ $t('service.text') }}</div>
                 <div class="service_inner">
                     <div @mouseover="handleMouseOver1" @mouseout="handleMouseOut1" class="service_item">
+                        <div class="btn"><img src="../../assets/img/main/arrow.svg" alt=""></div>
                         <div class="service_item__block"><img :src="isHovered1 ? hoveredImageSrc1 : originalImageSrc1"
                                 class="service_item_img" alt=""></div>
                         <div class="service_item_title">{{ $t('service.item1_title') }}</div>
                         <div class="service_item_text">{{ $t('service.item1_text') }}</div>
                     </div>
                     <div @mouseover="handleMouseOver2" @mouseout="handleMouseOut2" class="service_item">
+                        <div class="btn"><img src="../../assets/img/main/arrow.svg" alt=""></div>
                         <div class="service_item__block"><img class="service_item_img"
                                 :src="isHovered2 ? hoveredImageSrc2 : originalImageSrc2" alt=""></div>
                         <div class="service_item_title">{{ $t('service.item2_title') }}</div>
                         <div class="service_item_text">{{ $t('service.item2_text') }}</div>
                     </div>
                     <div @mouseover="handleMouseOver3" @mouseout="handleMouseOut3" class="service_item">
+                        <div class="btn"><img src="../../assets/img/main/arrow.svg" alt=""></div>
                         <div class="service_item__block"><img class="service_item_img"
                                 :src="isHovered3 ? hoveredImageSrc3 : originalImageSrc3" alt=""></div>
                         <div class="service_item_title">{{ $t('service.item3_title') }}</div>
@@ -92,6 +95,22 @@ export default {
     border-radius: 11px;
     background: #1E1510;
     color: #FFF0D2;
+    position: relative;
+}
+
+.service_item .btn {
+    width: 46px;
+    padding: 8px 24px;
+    position: absolute;
+    right: 31px;
+    top: 190px;
+    border: 1px solid rgba(255, 240, 210, 0.50);
+    background: #5C4538;
+    z-index: 2;
+}
+
+.service_item .btn:hover {
+    background: #1E1510;
 }
 
 .service_item__block {
@@ -99,6 +118,7 @@ export default {
     height: 213px;
     border-radius: 10px 10px 0px 0px;
     overflow: hidden;
+    position: relative;
 }
 
 .service_item_img {

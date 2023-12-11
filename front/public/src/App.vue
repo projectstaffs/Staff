@@ -15,6 +15,7 @@ import Footer from './pages/layouts/Footer.vue';
 import Window from './pages/layouts/Window.vue';
 import User from './pages/layouts/User.vue';
 import Cabinet from './pages/layouts/Cabinet.vue';
+
 export default {
     name: "App",
     methods: {

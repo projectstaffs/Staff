@@ -45,20 +45,41 @@
                     <img src="../../assets/img/about/client2.jpg" alt="" class="about_clients_item">
                     <img src="../../assets/img/about/client3.jpg" alt="" class="about_clients_item">
                     <img src="../../assets/img/about/client4.jpg" alt="" class="about_clients_item">
+                    <img src="../../assets/img/about/client5.jpg" alt="" class="about_clients_item">
+                    <img src="../../assets/img/about/client6.jpg" alt="" class="about_clients_item">
                 </div>
+                <Carousel :items-to-show="2.5" :wrap-around="true">
+                    <Slide v-for="slide in clients" :key="slide">
+                        <div class="carousel__item">
+                            <img :src="slide" about_clients_item alt="">
+                        </div>
+                    </Slide>
+                </Carousel>
             </div>
-
         </div>
     </div>
 </template>
 
 <script>
 import { useI18n } from 'vue-i18n';
+import { Carousel, Navigation, Slide } from 'vue3-carousel'
+import 'vue3-carousel/dist/carousel.css'
+
 export default {
     name: "About",
+    data() {
+        return {
+            clients: ["../../src/assets/img/about/client1.jpg", "../../src/assets/img/about/client2.jpg", "../../src/assets/img/about/client3.jpg", "../../src/assets/img/about/client4.jpg", "../../src/assets/img/about/client5.jpg", "../../src/assets/img/about/client6.jpg",]
+        }
+    },
     setup() {
         const { t, locale } = useI18n({ useScope: 'global' });
         return { t, locale };
+    },
+    components: {
+        Carousel,
+        Slide,
+        Navigation,
     },
 }
 </script>
@@ -95,5 +116,10 @@ export default {
     margin-top: 64px;
     display: flex;
     justify-content: space-between;
+}
+
+.about_clients_item {
+    width: 262px;
+    height: 106px;
 }
 </style>
