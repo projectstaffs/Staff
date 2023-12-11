@@ -41,20 +41,14 @@
             <div class="container">
                 <div class="staff_title">{{ $t('about.title_bottom') }}</div>
                 <div class="about_clients">
-                    <img src="../../assets/img/about/client1.jpg" alt="" class="about_clients_item">
-                    <img src="../../assets/img/about/client2.jpg" alt="" class="about_clients_item">
-                    <img src="../../assets/img/about/client3.jpg" alt="" class="about_clients_item">
-                    <img src="../../assets/img/about/client4.jpg" alt="" class="about_clients_item">
-                    <img src="../../assets/img/about/client5.jpg" alt="" class="about_clients_item">
-                    <img src="../../assets/img/about/client6.jpg" alt="" class="about_clients_item">
+                    <Carousel :items-to-show="2.5" :wrap-around="true">
+                        <Slide v-for="slide in clients" :key="slide">
+                            <div class="carousel__item">
+                                <img :src="slide" class="about_clients_item" alt="">
+                            </div>
+                        </Slide>
+                    </Carousel>
                 </div>
-                <Carousel :items-to-show="2.5" :wrap-around="true">
-                    <Slide v-for="slide in clients" :key="slide">
-                        <div class="carousel__item">
-                            <img :src="slide" about_clients_item alt="">
-                        </div>
-                    </Slide>
-                </Carousel>
             </div>
         </div>
     </div>
@@ -114,8 +108,6 @@ export default {
 
 .about_clients {
     margin-top: 64px;
-    display: flex;
-    justify-content: space-between;
 }
 
 .about_clients_item {
