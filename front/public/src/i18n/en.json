@@ -171,6 +171,23 @@
         "item3_title": "We recommend resume",
         "item3_text": "In this section, we regularly post brief up-to-date information about job seekers"
     },
+    "servicepackages": {
+        "title": "Service packages for employers",
+        "text1": "We guarantee respectful, professional and pleasant communication from each of our employees, full compliance with contractual relations and expect the same from you.",
+        "text2": "You can familiarize yourself with the abbreviated terms of cooperation with Sweet Home by clicking on “More details” under each of the proposed service package options.",
+        "item1": "STANDARD",
+        "subitem1": "First resumes within 2-5 working days",
+        "subitem2": "Consultation of the recruiting manager on request",
+        "subitem3": "Meeting with job seekers online",
+        "subitem4": "Two warranty replacements of employees during the year",
+        "item2": "EXCLUSIVE",
+        "subitem5": "First resumes within 1 - 24 hours",
+        "subitem6": "Questionnaire/Video with the candidate's presentation",
+        "subitem7": "Consultation from the agency director on request",
+        "subitem8": "Meeting with candidates online",
+        "subitem9": "Guaranteed replacement of an employee during the year",
+        "button": "Text of the contract"
+    },
     "footer": {
         "text": "© 2023 - HouseHub Agency. All rights reserved.",
         "item1": "About us",

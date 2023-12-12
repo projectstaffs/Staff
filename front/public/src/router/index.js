@@ -34,6 +34,12 @@ const router = createRouter({
             component: () => import('../pages/staff/Contract.vue')
         },
         {
+            path: '/servicepackages',
+            name: 'ServicePackages', 
+            meta: {layout: 'User'},     
+            component: () => import('../pages/staff/client/ServicePackages.vue')
+        },
+        {
             path: '/service',
             name: 'Service', 
             meta: {layout: 'User'},     
@@ -280,7 +286,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {    
     if(!localStorage.access_token){
         if(to.name === 'Forgot' || to.name === 'Login' || to.name === 'Register' || to.name === 'Register-menu' || to.name === 'Register-employer' || 
-            to.name === 'Home' || to.name === 'About' || to.name === 'Contacts' || to.name === 'Privacy' || to.name === 'Contract' || to.name === 'Service'){
+            to.name === 'Home' || to.name === 'About' || to.name === 'Contacts' || to.name === 'Privacy' || to.name === 'Contract' || to.name === 'Service' || to.name === 'ServicePackages'){
             return next()
         } else {
             return next({

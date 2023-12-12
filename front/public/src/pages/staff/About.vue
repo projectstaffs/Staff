@@ -40,15 +40,15 @@
             </div>
             <div class="container">
                 <div class="staff_title">{{ $t('about.title_bottom') }}</div>
-                <div class="about_clients">
-                    <Carousel :items-to-show="4" :wrap-around="true">
-                        <Slide v-for="slide in clients" :key="slide">
-                            <div class="carousel__item">
-                                <img :src="slide" class="about_clients_item" alt="">
-                            </div>
-                        </Slide>
-                    </Carousel>
-                </div>
+            </div>
+            <div class="about_clients">
+                <Carousel :items-to-show="5" :wrap-around="false">
+                    <Slide v-for="slide in clients" :key="slide">
+                        <div class="carousel__item">
+                            <img :src="slide" class="about_clients_item" alt="">
+                        </div>
+                    </Slide>
+                </Carousel>
             </div>
         </div>
     </div>
@@ -108,11 +108,38 @@ export default {
 
 .about_clients {
     margin-top: 64px;
+    position: relative;
+    height: 106px;
+}
+
+.about_clients ol {
+    margin: 0;
+}
+
+.about_clients::before,
+.about_clients::after {
+    content: '';
+    width: calc((100% - 1108px)/2);
+    height: 106px;
+    position: absolute;
+    top: 0;
+}
+
+.about_clients::before {
+    left: 0;
+    background: linear-gradient(90deg, #FFF0D2 29.52%, rgba(255, 240, 210, 0.52) 71.69%, rgba(255, 240, 210, 0.00) 100%);
+    z-index: 2;
+}
+
+.about_clients::after {
+    right: 0;
+    background: linear-gradient(270deg, #FFF0D2 29.52%, rgba(255, 240, 210, 0.52) 71.69%, rgba(255, 240, 210, 0.00) 100%);
 }
 
 .about_clients_item {
     width: 262px;
     height: 106px;
+    /*border: 1px solid #5C4538;*/
 }
 
 .carousel__item {
