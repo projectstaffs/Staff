@@ -212,7 +212,7 @@ export default {
         const Review = useReviewStore();
         const Views = useViewsStore();
         const Store = useDataStore();
-        return { t, locale, User, Review, Views, Store };
+        return { t, locale, User /*, Review, Views, Store*/ };
     },
     methods: {
         test() {
@@ -221,7 +221,8 @@ export default {
     },
     mounted() {
         this.User.GET_TOKEN();
-        this.Review.GET_REVIEWS();
+        //this.Review.GET_REVIEWS();
+
         //this.Views.GET_WORKERBABY();
         //this.Views.GET_WORKERNURSE();
         //this.Views.GET_WORKERKEEPER();

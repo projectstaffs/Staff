@@ -52,4 +52,9 @@ export default {
 }
 
 </script>
-<style></style>
+
+<style>
+.servicepackages_block_inner {
+    margin-top: 48px;
+}
+</style>
