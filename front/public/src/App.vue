@@ -65,7 +65,7 @@ export default {
 
             body.addEventListener('click', function (e) {
                 // Переключение страниц
-                if (e.target.classList.contains('header_img') || e.target.classList.contains('footer_img') || e.target.classList.contains('inactive')) {
+                if (e.target.classList.contains('inactive')) {
                     var previousActive = page_block.querySelector('.header_btn.is_active');
                     if (previousActive) { closeWindow(previousActive); }
                 }

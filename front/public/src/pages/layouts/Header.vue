@@ -4,7 +4,7 @@
             <div class="header_inner">
                 <div @click.prevent="home" class="header_start">
                     <img @mouseover="handleMouseOver" @mouseout="handleMouseOut"
-                        :src="isHovered ? hoveredImageSrc : originalImageSrc" alt="" class="header_img">
+                        :src="isHovered ? hoveredImageSrc : originalImageSrc" alt="" class="header_img inactive">
                 </div>
                 <div class="header_end">
                     <ul class="header_end_items">
@@ -225,7 +225,7 @@ export default {
     color: #1C1C1C;
     font-size: 12px;
     border-radius: 4px;
-    transition: color 0.3s, background 0.3s;
+    transition: color 0.5s, background 0.5s;
     opacity: 0;
 }
 

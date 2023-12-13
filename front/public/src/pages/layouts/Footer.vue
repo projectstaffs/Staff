@@ -3,7 +3,7 @@
         <div class="container">
             <div class="footer_top">
                 <div @click.prevent="home" class="footer_top_start">
-                    <img src="../../assets/img/footer/footer_logo.svg" alt="" class="footer_img">
+                    <img src="../../assets/img/footer/footer_logo.svg" alt="" class="footer_img inactive">
                 </div>
                 <div class="footer_top_middle"> {{ $t('footer.text') }} </div>
                 <div class="footer_top_end">

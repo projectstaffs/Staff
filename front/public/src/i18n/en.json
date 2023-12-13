@@ -188,6 +188,18 @@
         "subitem9": "Guaranteed replacement of an employee during the year",
         "button": "Text of the contract"
     },
+    "study": {
+        "title": "Training, coaching",        
+        "item1_title": "Sign up an employee for courses at the Agency",
+        "item1_text": "Since 2023, despite the difficult situation in the country, the HousrHub agency has been constantly conducting offline and online courses for domestic staff. You can enroll your employees in the nearest courses that interest you.",
+        "item1_btn": "View courses",       
+        "item2_title": "ORDER INDIVIDUAL TRAINING AT HOME",
+        "item2_text": "If you want to train your domestic staff on your premises, at a time and in a format that suits you, we offer you individualized hands-on training from our experts. Your employees will receive a maximum of useful professional information and answers to their questions.The cost of an expert's work is from 1500 UAH per hour.",
+        "item2_btn": "Order training",        
+        "item3_title": "ORDER PROFESSIONAL CONSULTING FROM “HouseHub”",
+        "item3_text": "Order a consulting or coaching service on household management and get recommendations directly for your situation.Service cost:Consulting - 1500 UAH per hourCoaching - 2800 UAH per hour. The director and experts of the agency advise on household management: How many specialists to hire for the available volumes? How to distribute responsibilities? What schedules and working conditions to offer? How to retain the best? Experts advise on housekeeping issues: How to care for complex surfaces? How to choose home care products? How to restore a damaged item? Have questions? Don't hesitate to contact us!",
+        "item3_btn": "Order consulting"
+    },
     "footer": {
         "text": "© 2023 - HouseHub Agency. All rights reserved.",
         "item1": "About us",

@@ -15,7 +15,8 @@
                         <div class="service_item_text">{{ $t('service.item1_text') }}</div>
                     </div>
                     <div @mouseover="handleMouseOver2" @mouseout="handleMouseOut2" class="service_item">
-                        <div class="btn inactive"><img class="inactive" src="../../assets/img/main/arrow.svg" alt=""></div>
+                        <div @click.prevent="study" class="btn inactive"><img class="inactive"
+                                src="../../assets/img/main/arrow.svg" alt=""></div>
                         <div class="service_item__block"><img class="service_item_img"
                                 :src="isHovered2 ? hoveredImageSrc2 : originalImageSrc2" alt=""></div>
                         <div class="service_item_title">{{ $t('service.item2_title') }}</div>
@@ -54,25 +55,14 @@ export default {
         return { t, locale };
     },
     methods: {
-        handleMouseOver1() {
-            this.isHovered1 = true;
-        },
-        handleMouseOut1() {
-            this.isHovered1 = false;
-        },
-        handleMouseOver2() {
-            this.isHovered2 = true;
-        },
-        handleMouseOut2() {
-            this.isHovered2 = false;
-        },
-        handleMouseOver3() {
-            this.isHovered3 = true;
-        },
-        handleMouseOut3() {
-            this.isHovered3 = false;
-        },
-        servicepackages() { this.$router.push({ name: "ServicePackages" }) }
+        handleMouseOver1() { this.isHovered1 = true; },
+        handleMouseOut1() { this.isHovered1 = false; },
+        handleMouseOver2() { this.isHovered2 = true; },
+        handleMouseOut2() { this.isHovered2 = false; },
+        handleMouseOver3() { this.isHovered3 = true; },
+        handleMouseOut3() { this.isHovered3 = false; },
+        servicepackages() { this.$router.push({ name: "ServicePackages" }) },
+        study() { this.$router.push({ name: "Study" }) }
     },
 }
 </script>
