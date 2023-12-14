@@ -171,6 +171,20 @@
         "item3_title": "We recommend resume",
         "item3_text": "In this section, we regularly post brief up-to-date information about job seekers"
     },
+    "seekers": {
+        "title": "Job seekers",
+        "text": "We always take care to protect the balance of interests of all parties. Scaffolding workers who have started cooperation with the HouseHub Home Service Agency have the opportunity not only to receive job offers, but can also count on information support, the opportunity to grow professionally, while increasing their level of pay.",
+        "item1_title": "Working conditions",
+        "item1_text": "The team of the «HouseHub» Home Service Agency monitors proper working conditions and takes care of decent wages.",
+        "item2_title": "Appointment for an interview",
+        "item2_text": "Thank you for choosing «HouseHub»! Before making an appointment for an interview, please read the working conditions.",
+        "item3_title": "Job seeker application form",
+        "item3_text": "Before filling out the application form, please familiarize yourself with the working conditions and basic requirements for job seekers.",
+        "item4_title": "Vacancies",
+        "item4_text": "This section contains current employer vacancies. Sign up for a subscription to receive information about vacancies.",
+        "item5_title": "Useful information",
+        "item5_text": "Here we collect articles on labor market news and interesting information about professional trends. Stay up to date with fresh ideas."
+    },
     "servicepackages": {
         "title": "Service packages for employers",
         "text1": "We guarantee respectful, professional and pleasant communication from each of our employees, full compliance with contractual relations and expect the same from you.",
@@ -199,6 +213,30 @@
         "item3_title": "ORDER PROFESSIONAL CONSULTING FROM “HouseHub”",
         "item3_text": "Order a consulting or coaching service on household management and get recommendations directly for your situation.Service cost:Consulting - 1500 UAH per hourCoaching - 2800 UAH per hour. The director and experts of the agency advise on household management: How many specialists to hire for the available volumes? How to distribute responsibilities? What schedules and working conditions to offer? How to retain the best? Experts advise on housekeeping issues: How to care for complex surfaces? How to choose home care products? How to restore a damaged item? Have questions? Don't hesitate to contact us!",
         "item3_btn": "Order consulting"
+    },
+    "popup": {
+        "title": "INFORMATION MESSAGE",
+        "subtitle": "Your request is received",
+        "text": "A representative of the HouseHub Home Service Agency will contact you within a few minutes",
+        "end": "Thank you for your cooperation.",
+        "button": "Home"
+    },
+    "training": {
+        "title": "Home service school",        
+        "text": "Our HouseHub Agency trains home service professionals using proprietary methods. Modern and up-to-date information. Professional trainers and lecturers. Our training is for those who prioritize the quality of education.",
+        "online": "Course is available ONLINE",
+        "start": "Start the course",
+        "access": "Course access for 12 months",
+        "cost": "Cost",
+        "button": "Sign up",
+        "item1_title": "Home care",        
+        "item1_text": "The online program was developed by the best home service experts in Ukraine. Extensive material covering all topics of professional cleaning and work planning. Exclusive video tutorials. The latest trends in home care of any level of complexity! Technologies for impeccable cleaning! Emphasis on demonstration material and practical tasks. Convenient and easy to understand presentation of the material! 6 months access to the course! The course starts immediately after payment.",
+        "item1_date": "Immediately after payment", 
+        "item1_price": "From 2000 UAH",
+        "item2_title": "Adaptation course “Introduction to home service”",        
+        "item2_text": "The course is designed for those who are planning to get a new specialty or have experience and want to learn more about the specifics of home services. The information received by the course participants helps them to be successful in working with families by understanding the specifics of the work, their tasks and the ability to competently build working relationships with the employer.",
+        "item2_date": "February 01, 2024", 
+        "item2_price": "From 3100 UAH"
     },
     "footer": {
         "text": "© 2023 - HouseHub Agency. All rights reserved.",

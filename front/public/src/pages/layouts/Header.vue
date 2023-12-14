@@ -17,7 +17,7 @@
                         <li class="header_end_item">
                             <a class="header_btn" id="client" href="#">{{ $t('header.item3') }}</a>
                         </li>
-                        <li class="header_end_item">
+                        <li @click.prevent="seekers" class="header_end_item">
                             <a class="header_btn" id="worker" href="#">{{ $t('header.item4') }}</a>
                         </li>
                         <li @click.prevent="about" class="header_end_item">
@@ -75,6 +75,7 @@ export default {
         home() { this.$router.push({ name: "Home" }) },
         about() { this.$router.push({ name: "About" }) },
         service() { this.$router.push({ name: "Service" }) },
+        seekers() { this.$router.push({ name: "Seekers" }) },
 
         cabinet() { this.$router.push({ name: "Account" }) },
         worker_baby() { this.$router.push({ name: "BabyAll" }) },

@@ -11,7 +11,7 @@
                         <div class="study_start_start">
                             <div class="study_title">{{ $t('study.item1_title') }}</div>
                             <div class="study_text">{{ $t('study.item1_text') }}</div>
-                            <div class="btn">{{ $t('study.item1_btn') }}</div>
+                            <div @click.prevent="training" class="btn">{{ $t('study.item1_btn') }}</div>
                         </div>
                         <div class="study_start_end">
                             <img class="study_img" src="../../../assets/img/study/study1.jpg" alt="">
@@ -60,7 +60,8 @@ export default {
         return { t, locale };
     },
     methods: {
-        popup() { this.$router.push({ name: "Popup" }) }
+        popup() { this.$router.push({ name: "Popup" }) },
+        training() { this.$router.push({ name: "Training" }) }
     },
 }
 </script>

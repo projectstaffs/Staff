@@ -43,7 +43,7 @@ const router = createRouter({
             path: '/service',
             name: 'Service', 
             meta: {layout: 'User'},     
-            component: () => import('../pages/staff/Service.vue')
+            component: () => import('../pages/staff/client/Service.vue')
         },
         {
             path: '/study',
@@ -56,6 +56,24 @@ const router = createRouter({
             name: 'Popup', 
             meta: {layout: 'User'},     
             component: () => import('../pages/staff/worker/Popup.vue')
+        },
+        {
+            path: '/training',
+            name: 'Training', 
+            meta: {layout: 'User'},     
+            component: () => import('../pages/staff/worker/Training.vue')
+        },
+        {
+            path: '/seekers',
+            name: 'Seekers', 
+            meta: {layout: 'User'},     
+            component: () => import('../pages/staff/worker/Seekers.vue')
+        },
+        {
+            path: '/conditions',
+            name: 'Сonditions', 
+            meta: {layout: 'User'},     
+            component: () => import('../pages/staff/worker/Сonditions.vue')
         },
         {
             name: 'ClientBabyAll',
@@ -298,7 +316,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {    
     if(!localStorage.access_token){
         if(to.name === 'Forgot' || to.name === 'Login' || to.name === 'Register' || to.name === 'Register-menu' || to.name === 'Register-employer' || 
-            to.name === 'Home' || to.name === 'About' || to.name === 'Contacts' || to.name === 'Privacy' || to.name === 'Contract' || to.name === 'Service' || to.name === 'ServicePackages' || to.name === 'Study' || to.name === 'Popup'){
+            to.name === 'Home' || to.name === 'About' || to.name === 'Contacts' || to.name === 'Privacy' || to.name === 'Contract' || to.name === 'Service' || to.name === 'ServicePackages' || to.name === 'Study' || to.name === 'Popup' || to.name === 'Training' || to.name === 'Seekers' || to.name === 'Conditions'){
             return next()
         } else {
             return next({

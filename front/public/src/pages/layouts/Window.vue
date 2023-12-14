@@ -8,7 +8,7 @@
                     <div class="window_title"> {{ $t('window.title') }} </div>
                     <div class="window_subtitle"> {{ $t('window.subtitle') }} </div>
                     <div class="window_end"> {{ $t('window.end') }} </div>
-                    <div class="btn close_btn"> {{ $t('window.button') }} </div>
+                    <div @click.prevent="home" class="btn close_btn"> {{ $t('window.button') }} </div>
                 </div>
             </div>
         </div>
@@ -22,6 +22,9 @@ export default {
     setup() {
         const { t, locale } = useI18n({ useScope: 'global' });
         return { t, locale };
+    },
+    methods: {
+        home() { this.$router.push({ name: "Home" }) }
     },
 }
 </script>
