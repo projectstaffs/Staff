@@ -1,5 +1,8 @@
 <template>
     <section class="main_top">
+        <video class="main_video" autoplay muted loop>
+            <source src="../../assets/video.mp4" type="video/mp4">
+        </video>
         <div class="container">
             <div class="main_top_inner">
                 <div class="main_top_title"> {{ $t('main.top_title') }} </div>
@@ -242,6 +245,16 @@ export default {
     background: #5C4538 url(../../assets/img/main/video.jpg) no-repeat center;
     background-size: cover;
     color: #FFF0D2;
+    position: relative;
+}
+
+.main_video {
+    position: absolute;
+    left: 0;
+    top: 0;
+    max-width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .main_top_inner {
@@ -250,6 +263,7 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    position: relative;
 }
 
 .main_top_title {

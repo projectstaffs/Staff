@@ -1,9 +1,11 @@
 <template>
     <div class="content">
         <Header></Header>
-        <component :is="layout" class="content_inner">
-            <router-view />
-        </component>
+        <div class="content_inner">
+            <component :is="layout">
+                <router-view />
+            </component>
+        </div>
         <Footer></Footer>
         <Window></Window>
     </div>
