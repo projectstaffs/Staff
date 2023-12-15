@@ -7,23 +7,22 @@
                 <div class="service_text">{{ $t('service.text') }}</div>
                 <div class="service_inner">
                     <div @mouseover="handleMouseOver1" @mouseout="handleMouseOut1" class="service_item">
-                        <div @click.prevent="servicepackages" class="btn inactive"><img class="inactive"
-                                src="../../../assets/img/main/arrow.svg" alt=""></div>
+                        <div @click.prevent="servicepackages" class="btn"><img src="../../../assets/img/main/arrow.svg"
+                                alt=""></div>
                         <div class="service_item__block"><img :src="isHovered1 ? hoveredImageSrc1 : originalImageSrc1"
                                 class="service_item_img" alt=""></div>
                         <div class="service_item_title">{{ $t('service.item1_title') }}</div>
                         <div class="service_item_text">{{ $t('service.item1_text') }}</div>
                     </div>
                     <div @mouseover="handleMouseOver2" @mouseout="handleMouseOut2" class="service_item">
-                        <div @click.prevent="study" class="btn inactive"><img class="inactive"
-                                src="../../../assets/img/main/arrow.svg" alt=""></div>
+                        <div @click.prevent="study" class="btn"><img src="../../../assets/img/main/arrow.svg" alt=""></div>
                         <div class="service_item__block"><img class="service_item_img"
                                 :src="isHovered2 ? hoveredImageSrc2 : originalImageSrc2" alt=""></div>
                         <div class="service_item_title">{{ $t('service.item2_title') }}</div>
                         <div class="service_item_text">{{ $t('service.item2_text') }}</div>
                     </div>
                     <div @mouseover="handleMouseOver3" @mouseout="handleMouseOut3" class="service_item">
-                        <div class="btn inactive"><img class="inactive" src="../../../assets/img/main/arrow.svg" alt="">
+                        <div class="btn"><img src="../../../assets/img/main/arrow.svg" alt="">
                         </div>
                         <div class="service_item__block"><img class="service_item_img"
                                 :src="isHovered3 ? hoveredImageSrc3 : originalImageSrc3" alt=""></div>

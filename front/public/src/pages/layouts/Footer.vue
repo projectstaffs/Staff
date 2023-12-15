@@ -19,7 +19,8 @@
             </div>
             <div class="footer_bottom">
                 <div data-color="about" @click.prevent="about" class="footer_bottom_item"> {{ $t('footer.item1') }} </div>
-                <div data-color="home_staff" class="footer_bottom_item"> {{ $t('footer.item2') }} </div>
+                <div @click.prevent="homeStaff" data-color="home_staff" class="footer_bottom_item"> {{ $t('footer.item2') }}
+                </div>
                 <div data-color="worker" @click.prevent="seekers" class="footer_bottom_item"> {{ $t('footer.item3') }}
                 </div>
                 <div @click.prevent="privacy" class="footer_bottom_item"> {{ $t('footer.item4') }} </div>
@@ -49,6 +50,7 @@ export default {
         contract() { this.$router.push({ name: "Contract" }) },
         service() { this.$router.push({ name: "Service" }) },
         seekers() { this.$router.push({ name: "Seekers" }) },
+        homeStaff() { this.$router.push({ name: "HomeStaff" }) },
     },
 }
 </script>

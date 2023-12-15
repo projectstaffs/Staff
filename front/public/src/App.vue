@@ -77,14 +77,12 @@ export default {
                     if (previousActive) { closeWindow(previousActive); }
                     showWindow(e.target);
                 }
-                if (e.target.classList.contains('footer_bottom_item')) {
+                var windowColor = closestAttr(e.target, 'data-color');
+                if (windowColor !== null) {
                     var previousActive = page_block.querySelector('.header_btn.is_active');
                     if (previousActive) { closeWindow(previousActive); }
-                    var current = e.target.getAttribute('data-color');
-                    if (current) {
-                        var newActive = document.getElementById(current);
-                        showWindow(newActive);
-                    }
+                    var newActive = document.getElementById(windowColor);
+                    showWindow(newActive);
                 }
                 // Переключение языка
                 if (e.target.classList.contains('header_langs_item')) {
@@ -101,7 +99,6 @@ export default {
                         toggleScroll();
                     }
                 }
-
                 // Открытие окна о разработке
                 var windowClass = closestAttr(e.target, 'data-window');
                 if (windowClass !== null) {

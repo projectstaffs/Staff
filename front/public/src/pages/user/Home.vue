@@ -24,8 +24,8 @@
                         <li class="main_client_item"> {{ $t('main.client_item3') }} </li>
                         <li class="main_client_item"> {{ $t('main.client_item4') }} </li>
                     </ul>
-                    <div class="btn"> {{ $t('main.client_btn') }} <img class="main_info_arrow"
-                            src="../../assets/img/main/arrow.svg" alt=""></div>
+                    <div @click.prevent="businessStaff" class="btn"> {{ $t('main.client_btn') }} <img
+                            class="main_info_arrow" src="../../assets/img/main/arrow.svg" alt=""></div>
                 </div>
                 <div class="main_info_worker">
                     <div class="main_worker_title"> {{ $t('main.worker_title') }} </div>
@@ -36,7 +36,7 @@
                         <li class="main_worker_item"> {{ $t('main.worker_item3') }} </li>
                         <li class="main_worker_item"> {{ $t('main.worker_item4') }} </li>
                     </ul>
-                    <div class="btn"> {{ $t('main.worker_btn') }}
+                    <div @click.prevent="seekers" class="btn"> {{ $t('main.worker_btn') }}
                         <svg class="main_info_svg" width="25" height="24" viewBox="0 0 25 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path class="main_info_svg_inner"
@@ -87,8 +87,8 @@
                     <div class="staff_text"> {{ $t('main.staff_item8') }} </div>
                 </div>
             </div>
-            <div class="btn"> {{ $t('main.staff_btn') }} <img class="main_info_arrow" src="../../assets/img/main/arrow.svg"
-                    alt=""></div>
+            <div data-color="home_staff" @click.prevent="homeStaff" class="btn"> {{ $t('main.staff_btn') }} <img
+                    class="main_info_arrow" src="../../assets/img/main/arrow.svg" alt=""></div>
         </div>
         <div class="main_homestaff_back"></div>
     </section>
@@ -114,8 +114,8 @@
                     <div class="staff_text"> {{ $t('main.business_item4') }} </div>
                 </div>
             </div>
-            <div class="btn"> {{ $t('main.staff_btn') }} <img class="main_info_arrow" src="../../assets/img/main/arrow.svg"
-                    alt=""></div>
+            <div @click.prevent="businessStaff" class="btn"> {{ $t('main.staff_btn') }} <img class="main_info_arrow"
+                    src="../../assets/img/main/arrow.svg" alt=""></div>
         </div>
         <div class="main_business_staff_back"></div>
     </section>
@@ -220,7 +220,10 @@ export default {
     methods: {
         test() {
             this.Review.TEST_REVIEW('Some');
-        }
+        },
+        homeStaff() { this.$router.push({ name: "HomeStaff" }) },
+        businessStaff() { this.$router.push({ name: "BusinessStaff" }) },
+        seekers() { this.$router.push({ name: "Seekers" }) },
     },
     mounted() {
         this.User.GET_TOKEN();

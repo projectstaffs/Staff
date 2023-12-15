@@ -55,7 +55,7 @@ const router = createRouter({
             path: '/popup',
             name: 'Popup', 
             meta: {layout: 'User'},     
-            component: () => import('../pages/staff/worker/Popup.vue')
+            component: () => import('../pages/staff/Popup.vue')
         },
         {
             path: '/training',
@@ -74,6 +74,30 @@ const router = createRouter({
             name: 'Сonditions', 
             meta: {layout: 'User'},     
             component: () => import('../pages/staff/worker/Сonditions.vue')
+        },
+        {
+            path: '/interview',
+            name: 'Interview', 
+            meta: {layout: 'User'},     
+            component: () => import('../pages/staff/worker/Interview.vue')
+        },
+        {
+            path: '/information',
+            name: 'Information', 
+            meta: {layout: 'User'},     
+            component: () => import('../pages/staff/Information.vue')
+        },
+        {
+            path: '/homestaff',
+            name: 'HomeStaff', 
+            meta: {layout: 'User'},     
+            component: () => import('../pages/staff/client/HomeStaff.vue')
+        },
+        {
+            path: '/businessstaff',
+            name: 'BusinessStaff', 
+            meta: {layout: 'User'},     
+            component: () => import('../pages/staff/client/BusinessStaff.vue')
         },
         {
             name: 'ClientBabyAll',
@@ -316,7 +340,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {    
     if(!localStorage.access_token){
         if(to.name === 'Forgot' || to.name === 'Login' || to.name === 'Register' || to.name === 'Register-menu' || to.name === 'Register-employer' || 
-            to.name === 'Home' || to.name === 'About' || to.name === 'Contacts' || to.name === 'Privacy' || to.name === 'Contract' || to.name === 'Service' || to.name === 'ServicePackages' || to.name === 'Study' || to.name === 'Popup' || to.name === 'Training' || to.name === 'Seekers' || to.name === 'Conditions'){
+            to.name === 'Home' || to.name === 'About' || to.name === 'Contacts' || to.name === 'Privacy' || to.name === 'Contract' || to.name === 'Service' || to.name === 'ServicePackages' || to.name === 'Study' || to.name === 'Popup' || to.name === 'Training' || to.name === 'Seekers' || to.name === 'Conditions' || to.name === 'Interview' || to.name === 'Information' || to.name === 'HomeStaff' || to.name === 'BusinessStaff'){
             return next()
         } else {
             return next({

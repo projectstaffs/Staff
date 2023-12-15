@@ -68,7 +68,9 @@ body {
     flex-direction: column;
 }
 
-.content_inner {
+.content_inner {    
+    display: flex;
+    flex-direction: column;
     flex: 1 1 auto;
 }
 
@@ -203,9 +205,10 @@ body {
 
 /* block */
 .block {
-    background: var(--bgbg-0, #FFF0D2);
+    background: #FFF0D2;
     padding: 120px 0px;
     position: relative;
+    flex: 1;
 }
 
 .block_back {

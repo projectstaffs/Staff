@@ -8,13 +8,13 @@
                 </div>
                 <div class="header_end">
                     <ul class="header_end_items">
-                        <li class="header_end_item">
+                        <li @click.prevent="homeStaff" class="header_end_item">
                             <a class="header_btn" id="home_staff" href="#">{{ $t('header.item1') }}</a>
                         </li>
                         <li @click.prevent="service" class="header_end_item">
                             <a class="header_btn" id="service" href="#">{{ $t('header.item2') }}</a>
                         </li>
-                        <li class="header_end_item">
+                        <li @click.prevent="homeStaff" class="header_end_item">
                             <a class="header_btn" id="client" href="#">{{ $t('header.item3') }}</a>
                         </li>
                         <li @click.prevent="seekers" class="header_end_item">
@@ -76,6 +76,7 @@ export default {
         about() { this.$router.push({ name: "About" }) },
         service() { this.$router.push({ name: "Service" }) },
         seekers() { this.$router.push({ name: "Seekers" }) },
+        homeStaff() { this.$router.push({ name: "HomeStaff" }) },
 
         cabinet() { this.$router.push({ name: "Account" }) },
         worker_baby() { this.$router.push({ name: "BabyAll" }) },

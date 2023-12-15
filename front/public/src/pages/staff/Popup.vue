@@ -3,7 +3,7 @@
         <div class="block_back"></div>
         <div class="block_content">
             <div class="popup">
-                <img src="../../../assets/img/info-circle.svg" alt="" class="popup_img">
+                <img src="../../assets/img/info-circle.svg" alt="" class="popup_img">
                 <div class="popup_content">
                     <div class="popup_item">{{ $t('popup.title') }}</div>
                     <div class="popup_item">{{ $t('popup.subtitle') }}</div>
