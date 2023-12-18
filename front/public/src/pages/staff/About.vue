@@ -139,7 +139,7 @@ export default {
 .about_clients_item {
     width: 262px;
     height: 106px;
-    /*border: 1px solid #5C4538;*/
+    border: 1px solid #5C4538;
 }
 
 .carousel__item {

@@ -483,11 +483,11 @@ export default {
 }
 
 .main_point_business_img {
-    background: url(../../assets/img/main/for_business.jpg) no-repeat center;
+    background: url(../../assets/img/main/for_business.png) no-repeat center;
 }
 
 .main_point_staff_img {
-    background: url(../../assets/img/main/for_staff.jpg) no-repeat center;
+    background: url(../../assets/img/main/for_staff.png) no-repeat center;
 }
 
 .main_point_business_end {

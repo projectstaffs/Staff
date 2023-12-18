@@ -96,18 +96,18 @@ export default {
     name: "Information",
     data() {
         return {
-            originalImageSrc1: '../../src/assets/img/information/inform1.jpg',
-            hoveredImageSrc1: '../../src/assets/img/information/inform1hover.jpg',
-            originalImageSrc2: '../../src/assets/img/information/inform2.jpg',
-            hoveredImageSrc2: '../../src/assets/img/information/inform2hover.jpg',
-            originalImageSrc3: '../../src/assets/img/information/inform3.jpg',
-            hoveredImageSrc3: '../../src/assets/img/information/inform3hover.jpg',
-            originalImageSrc4: '../../src/assets/img/information/inform4.jpg',
-            hoveredImageSrc4: '../../src/assets/img/information/inform4hover.jpg',
-            originalImageSrc5: '../../src/assets/img/information/inform5.jpg',
-            hoveredImageSrc5: '../../src/assets/img/information/inform5hover.jpg',
-            originalImageSrc6: '../../src/assets/img/information/inform6.jpg',
-            hoveredImageSrc6: '../../src/assets/img/information/inform6hover.jpg',
+            originalImageSrc1: '../../src/assets/img/information/inform1.png',
+            hoveredImageSrc1: '../../src/assets/img/information/inform1hover.png',
+            originalImageSrc2: '../../src/assets/img/information/inform2.png',
+            hoveredImageSrc2: '../../src/assets/img/information/inform2hover.png',
+            originalImageSrc3: '../../src/assets/img/information/inform3.png',
+            hoveredImageSrc3: '../../src/assets/img/information/inform3hover.png',
+            originalImageSrc4: '../../src/assets/img/information/inform4.png',
+            hoveredImageSrc4: '../../src/assets/img/information/inform4hover.png',
+            originalImageSrc5: '../../src/assets/img/information/inform5.png',
+            hoveredImageSrc5: '../../src/assets/img/information/inform5hover.png',
+            originalImageSrc6: '../../src/assets/img/information/inform6.png',
+            hoveredImageSrc6: '../../src/assets/img/information/inform6hover.png',
             isHovered1: false, isHovered2: false, isHovered3: false, isHovered4: false, isHovered5: false, isHovered6: false
         }
     },
@@ -209,4 +209,5 @@ export default {
 .information_item_text {
     font-size: 14px;
     line-height: 140%;
-}</style>
+}
+</style>

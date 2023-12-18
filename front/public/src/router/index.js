@@ -70,7 +70,7 @@ const router = createRouter({
             component: () => import('../pages/staff/worker/Seekers.vue')
         },
         {
-            path: '/conditions',
+            path: '/сonditions',
             name: 'Сonditions', 
             meta: {layout: 'User'},     
             component: () => import('../pages/staff/worker/Сonditions.vue')
@@ -340,7 +340,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {    
     if(!localStorage.access_token){
         if(to.name === 'Forgot' || to.name === 'Login' || to.name === 'Register' || to.name === 'Register-menu' || to.name === 'Register-employer' || 
-            to.name === 'Home' || to.name === 'About' || to.name === 'Contacts' || to.name === 'Privacy' || to.name === 'Contract' || to.name === 'Service' || to.name === 'ServicePackages' || to.name === 'Study' || to.name === 'Popup' || to.name === 'Training' || to.name === 'Seekers' || to.name === 'Conditions' || to.name === 'Interview' || to.name === 'Information' || to.name === 'HomeStaff' || to.name === 'BusinessStaff'){
+            to.name === 'Home' || to.name === 'About' || to.name === 'Contacts' || to.name === 'Privacy' || to.name === 'Contract' || to.name === 'Service' || to.name === 'ServicePackages' || to.name === 'Study' || to.name === 'Popup' || to.name === 'Training' || to.name === 'Seekers' || to.name === 'Сonditions' || to.name === 'Interview' || to.name === 'Information' || to.name === 'HomeStaff' || to.name === 'BusinessStaff'){
             return next()
         } else {
             return next({

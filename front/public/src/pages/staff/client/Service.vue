@@ -41,12 +41,12 @@ export default {
     name: "Service",
     data() {
         return {
-            originalImageSrc1: '../../src/assets/img/service/item1.jpg',
-            hoveredImageSrc1: '../../src/assets/img/service/item1hover.jpg',
-            originalImageSrc2: '../../src/assets/img/service/item2.jpg',
-            hoveredImageSrc2: '../../src/assets/img/service/item2hover.jpg',
-            originalImageSrc3: '../../src/assets/img/service/item3.jpg',
-            hoveredImageSrc3: '../../src/assets/img/service/item3hover.jpg',
+            originalImageSrc1: '../../src/assets/img/service/item1.png',
+            hoveredImageSrc1: '../../src/assets/img/service/item1hover.png',
+            originalImageSrc2: '../../src/assets/img/service/item2.png',
+            hoveredImageSrc2: '../../src/assets/img/service/item2hover.png',
+            originalImageSrc3: '../../src/assets/img/service/item3.png',
+            hoveredImageSrc3: '../../src/assets/img/service/item3hover.png',
             isHovered1: false, isHovered2: false, isHovered3: false,
         }
     },

@@ -61,16 +61,16 @@ export default {
     name: "Seekers",
     data() {
         return {
-            originalImageSrc1: '../../src/assets/img/seekers/seekers1.jpg',
+            originalImageSrc1: '../../src/assets/img/seekers/seekers1.png',
             hoveredImageSrc1: '../../src/assets/img/seekers/seekers1hover.png',
-            originalImageSrc2: '../../src/assets/img/seekers/seekers2.jpg',
-            hoveredImageSrc2: '../../src/assets/img/seekers/seekers2hover.jpg',
-            originalImageSrc3: '../../src/assets/img/seekers/seekers3.jpg',
+            originalImageSrc2: '../../src/assets/img/seekers/seekers2.png',
+            hoveredImageSrc2: '../../src/assets/img/seekers/seekers2hover.png',
+            originalImageSrc3: '../../src/assets/img/seekers/seekers3.png',
             hoveredImageSrc3: '../../src/assets/img/seekers/seekers3hover.png',
-            originalImageSrc4: '../../src/assets/img/seekers/seekers4.jpg',
-            hoveredImageSrc4: '../../src/assets/img/seekers/seekers4hover.jpg',
-            originalImageSrc5: '../../src/assets/img/seekers/seekers5.jpg',
-            hoveredImageSrc5: '../../src/assets/img/seekers/seekers5hover.jpg',
+            originalImageSrc4: '../../src/assets/img/seekers/seekers4.png',
+            hoveredImageSrc4: '../../src/assets/img/seekers/seekers4hover.png',
+            originalImageSrc5: '../../src/assets/img/seekers/seekers5.png',
+            hoveredImageSrc5: '../../src/assets/img/seekers/seekers5hover.png',
             isHovered1: false, isHovered2: false, isHovered3: false, isHovered4: false, isHovered5: false
         }
     },
