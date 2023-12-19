@@ -335,6 +335,27 @@
         "register_worker": "Register as a job seeker",
         "error": "authorization failed, please try again"
     },
+    "register": {
+        "title": "РЕЄСТРАЦІЯ",
+        "text": "Вас вітає Агентство домашнього сервісу HouseHub.",
+        "item1": "Ім’я",
+        "item1_holder": "Введіть ім’я",
+        "item2": "Прізвище",
+        "item2_holder": "Введіть прізвище",
+        "item3": "Телефон",
+        "item3_holder": "Введіть телефон",
+        "item4": "Електронна пошта",
+        "item4_holder": " Введіть адресу електронної пошти",
+        "item5": "Країна проживання",
+        "item5_holder": " Введіть країну проживання",
+        "item6": "Місто",
+        "item6_holder": " Введіть своє місто",
+        "item7": "Пароль",
+        "item7_holder": "Введіть пароль",
+        "item8": "Підтвердіть пароль",
+        "item8_holder": "Підтвердіть пароль",
+        "button": "Зареєструватися"
+    },
     "footer": {
         "text": "© 2023 - HouseHub Agency. All rights reserved.",
         "item1": "About us",

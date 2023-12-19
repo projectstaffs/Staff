@@ -1,0 +1,22 @@
+/* block */
+.block {
+    background: #FFF0D2;
+    padding: 120px 0px;
+    position: relative;
+    flex: 1;
+}
+
+.block_back {
+    width: 100%;
+    height: 393px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: linear-gradient(180deg, #AE9B83 0%, rgba(255, 240, 210, 0.50) 95.67%);
+}
+
+.block_content {
+    position: relative;
+    padding-top: 80px;
+    border-top: 1px solid rgba(0, 0, 0, 0.20);
+}

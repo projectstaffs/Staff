@@ -1,5 +1,44 @@
 <template>
-    <div class="login_title"> Регистрация для нанимателя </div>
+    <div class="block">
+        <div class="block_back"></div>
+        <div class="block_content">
+            <div class="container">
+                <div class="staff_title">{{ $t('auth.title') }}</div>
+                <div class="login_text">{{ $t('auth.text') }}</div>
+            </div>
+            <div class="login_inner">
+                <div class="container">
+                    <div class="login_content">
+                        <form @submit.prevent="register" class="login_form">
+                            <div class="login_start">
+                                <div class="login_form_text">{{ $t('auth.item1') }}</div>
+                                <input v-model="user.email" required class="login_form_item" type="email"
+                                    :placeholder="$t('auth.item1_holder')">
+                                <div class="login_form_text">{{ $t('auth.item2') }}</div>
+                                <input v-model="user.password" required class="login_form_item" type="password"
+                                    :placeholder="$t('auth.item2_holder')">
+                                <label class="login_checkbox">
+                                    <input type="checkbox" v-model="rememberMe"> <span>{{ $t('auth.remember') }}</span>
+                                </label>
+                            </div>
+                            <div v-if="User.login_error" class="login_middle">
+                                <ul>
+                                    <li>{{ $t('auth.error') }}</li>
+                                </ul>
+                            </div>
+                            <div class="login_end">
+                                <button type="submit" class="btn">{{ $t('auth.enter') }}</button>
+                                <div @click.prevent="employer" class="btn">{{ $t('auth.register_client') }}</div>
+                                <div @click.prevent="executor" class="btn">{{ $t('auth.register_worker') }}</div>
+                                <div @click.prevent="forgot" class="login_forgot"><span>{{ $t('auth.forgot') }}</span></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <form @submit.prevent="register" class="login_form">
         <div>Укажите свое имя:</div>
         <input v-model="user.name" required class="login_form_item" type="text" placeholder="имя">
@@ -28,7 +67,6 @@
             placeholder="confirm password">
         <button type="submit" class="login_form_btn">register</button>
     </form>
-
     <div class="register_error" v-for="item in User.register_error" :key="item">
         {{ item[0] }}
     </div>
