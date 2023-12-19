@@ -184,12 +184,6 @@ const router = createRouter({
             component: () =>import('../pages/user/Forgot.vue')
         },
         {
-            name: 'Register-menu',
-            path: '/register_menu', 
-            meta: {layout: 'User'},           
-            component: () =>import('../pages/user/Register-menu.vue')
-        },
-        {
             name: 'Register',
             path: '/register', 
             meta: {layout: 'User'},           
@@ -207,13 +201,7 @@ const router = createRouter({
             path: '/account',
             meta: {layout: 'Cabinet'},
             component: () =>import('../pages/cabinet/Account.vue')
-        },
-        {
-            name: 'Mailbox',
-            path: '/mailbox',
-            meta: {layout: 'Cabinet'},
-            component: () =>import('../pages/cabinet/Mailbox.vue')
-        },
+        },        
         {
             name: 'Myphoto',
             path: '/myphoto',
@@ -225,36 +213,6 @@ const router = createRouter({
             path: '/edit',
             meta: {layout: 'Cabinet'},
             component: () =>import('../pages/cabinet/Edit.vue')
-        },
-        {
-            name: 'Vacancies',
-            path: '/vacancies',
-            meta: {layout: 'Cabinet'},
-            component: () =>import('../pages/cabinet/Vacancies.vue')
-        },
-        {
-            name: 'Credentials',
-            path: '/credentials',
-            meta: {layout: 'Cabinet'},
-            component: () =>import('../pages/cabinet/Credentials.vue')
-        },
-        {
-            name: 'Change-credential',
-            path: '/change-credential',
-            meta: {layout: 'Cabinet'},
-            component: () =>import('../pages/cabinet/Change-credential.vue')
-        },
-        {
-            name: 'Sent',
-            path: '/sent',
-            meta: {layout: 'Cabinet'},
-            component: () =>import('../pages/cabinet/Sent.vue')
-        },
-        {
-            name: 'Incoming',
-            path: '/incoming',
-            meta: {layout: 'Cabinet'},
-            component: () =>import('../pages/cabinet/Incoming.vue')
         },
         {
             name: 'Babysitting',
@@ -339,8 +297,10 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {    
     if(!localStorage.access_token){
-        if(to.name === 'Forgot' || to.name === 'Login' || to.name === 'Register' || to.name === 'Register-menu' || to.name === 'Register-employer' || 
-            to.name === 'Home' || to.name === 'About' || to.name === 'Contacts' || to.name === 'Privacy' || to.name === 'Contract' || to.name === 'Service' || to.name === 'ServicePackages' || to.name === 'Study' || to.name === 'Popup' || to.name === 'Training' || to.name === 'Seekers' || to.name === 'Сonditions' || to.name === 'Interview' || to.name === 'Information' || to.name === 'HomeStaff' || to.name === 'BusinessStaff'){
+        if(to.name === 'Forgot' || to.name === 'Login' || to.name === 'Register' || to.name === 'Register-employer' || 
+            to.name === 'Home' || to.name === 'About' || to.name === 'Contacts' || to.name === 'Privacy' || to.name === 'Contract' || to.name === 'Service' || 
+            to.name === 'ServicePackages' || to.name === 'Study' || to.name === 'Popup' || to.name === 'Training' || to.name === 'Seekers' || 
+            to.name === 'Сonditions' || to.name === 'Interview' || to.name === 'Information' || to.name === 'HomeStaff' || to.name === 'BusinessStaff'){
             return next()
         } else {
             return next({
@@ -359,3 +319,48 @@ router.beforeEach((to, from, next) => {
 });
 
 export default router
+
+/* 
+{
+    name: 'Register-menu',
+    path: '/register_menu', 
+    meta: {layout: 'User'},           
+    component: () =>import('../pages/user/Register-menu.vue')
+},
+{
+    name: 'Mailbox',
+    path: '/mailbox',
+    meta: {layout: 'Cabinet'},
+    component: () =>import('../pages/cabinet/Mailbox.vue')
+},
+{
+    name: 'Sent',
+    path: '/sent',
+    meta: {layout: 'Cabinet'},
+    component: () =>import('../pages/cabinet/Sent.vue')
+},
+{
+    name: 'Incoming',
+    path: '/incoming',
+    meta: {layout: 'Cabinet'},
+    component: () =>import('../pages/cabinet/Incoming.vue')
+},
+{
+    name: 'Vacancies', // Отзывы
+    path: '/vacancies',
+    meta: {layout: 'Cabinet'},
+    component: () =>import('../pages/cabinet/Vacancies.vue')
+},
+{
+    name: 'Credentials', // Рекомендации
+    path: '/credentials',
+    meta: {layout: 'Cabinet'},
+    component: () =>import('../pages/cabinet/Credentials.vue')
+},
+{
+    name: 'Change-credential',
+    path: '/change-credential',
+    meta: {layout: 'Cabinet'},
+    component: () =>import('../pages/cabinet/Change-credential.vue')
+},
+*/

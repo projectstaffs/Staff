@@ -17,13 +17,8 @@
 </template>
 
 <script>
-import { useI18n } from 'vue-i18n';
 export default {
     name: "Popup",
-    setup() {
-        const { t, locale } = useI18n({ useScope: 'global' });
-        return { t, locale };
-    },
     methods: {
         home() { this.$router.push({ name: "Home" }) }
     },

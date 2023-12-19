@@ -40,13 +40,8 @@
 </template>
 
 <script>
-import { useI18n } from 'vue-i18n';
 export default {
     name: "ServicePackages",
-    setup() {
-        const { t, locale } = useI18n({ useScope: 'global' });
-        return { t, locale };
-    },
     methods: {
         contract() { this.$router.push({ name: "Contract" }) }
     },

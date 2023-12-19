@@ -28,7 +28,7 @@
                         <li @click.prevent="setUA" class="header_langs_item" data-lang="ua">UA</li>
                         <li @click.prevent="setEN" class="header_langs_item" data-lang="en">EN</li>
                     </ul>
-                    <div class="btn">{{ $t('header.login') }}</div>
+                    <div @click.prevent="login" class="btn">{{ $t('header.login') }}</div>
                     <button class="header_burger_btn" type="button">
                         <span class="header_burger_box">
                             <span class="header_burger_inner"></span>
@@ -77,6 +77,7 @@ export default {
         service() { this.$router.push({ name: "Service" }) },
         seekers() { this.$router.push({ name: "Seekers" }) },
         homeStaff() { this.$router.push({ name: "HomeStaff" }) },
+        login() { this.$router.push({ name: "Login" }) },
 
         cabinet() { this.$router.push({ name: "Account" }) },
         worker_baby() { this.$router.push({ name: "BabyAll" }) },
@@ -85,11 +86,9 @@ export default {
         client_baby() { this.$router.push({ name: "ClientBabyAll" }) },
         client_nurse() { this.$router.push({ name: "ClientNurseAll" }) },
         client_keeper() { this.$router.push({ name: "ClientKeeperAll" }) },
-        login() { this.$router.push({ name: "Login" }) },
         register() { this.$router.push({ name: "Register-menu" }) },
-        logout() {
-            this.User.LOGOUT_USER();
-        },
+        logout() { this.User.LOGOUT_USER(); },
+
         setUA() {
             if (this.locale === 'en') {
                 this.locale = 'ua';
@@ -102,12 +101,8 @@ export default {
                 localStorage.lang = this.locale;
             }
         },
-        handleMouseOver() {
-            this.isHovered = true;
-        },
-        handleMouseOut() {
-            this.isHovered = false;
-        },
+        handleMouseOver() { this.isHovered = true; },
+        handleMouseOut() { this.isHovered = false; },
     },
     mounted() {
         this.User.GET_TOKEN();

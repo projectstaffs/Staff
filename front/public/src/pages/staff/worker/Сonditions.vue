@@ -79,13 +79,8 @@
 </template>
 
 <script>
-import { useI18n } from 'vue-i18n';
 export default {
     name: "Сonditions",
-    setup() {
-        const { t, locale } = useI18n({ useScope: 'global' });
-        return { t, locale };
-    },
     methods: {
         training() { this.$router.push({ name: "Training" }) }
     },

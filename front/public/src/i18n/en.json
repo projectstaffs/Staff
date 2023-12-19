@@ -321,6 +321,20 @@
         "item6_title": "Advantages and pitfalls of working as a maid in families.",
         "item6_text": "The maid's job, like any other, has advantages and pitfalls."
     },
+    "auth": {
+        "title": "AUTHORIZATION",
+        "text": "Welcome to the HouseHub home service agency.",
+        "item1": "Login",
+        "item1_holder": "Enter your email address",
+        "item2": "Password",
+        "item2_holder": "Enter your password",
+        "remember": "Remember me",
+        "forgot": "Forgot your password?",
+        "enter": "Login",
+        "register_client": "Register as an employer",
+        "register_worker": "Register as a job seeker",
+        "error": "authorization failed, please try again"
+    },
     "footer": {
         "text": "© 2023 - HouseHub Agency. All rights reserved.",
         "item1": "About us",

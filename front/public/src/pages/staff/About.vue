@@ -55,7 +55,6 @@
 </template>
 
 <script>
-import { useI18n } from 'vue-i18n';
 import { Carousel, Navigation, Slide } from 'vue3-carousel'
 import 'vue3-carousel/dist/carousel.css'
 
@@ -65,10 +64,6 @@ export default {
         return {
             clients: ["../../src/assets/img/about/client1.jpg", "../../src/assets/img/about/client2.jpg", "../../src/assets/img/about/client3.jpg", "../../src/assets/img/about/client4.jpg", "../../src/assets/img/about/client5.jpg", "../../src/assets/img/about/client6.jpg",]
         }
-    },
-    setup() {
-        const { t, locale } = useI18n({ useScope: 'global' });
-        return { t, locale };
     },
     components: {
         Carousel,

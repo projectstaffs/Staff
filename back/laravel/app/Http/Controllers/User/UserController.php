@@ -55,8 +55,10 @@ class UserController extends Controller
             'email' => $request->email,            
             'password' => $request->password,
             
-            'role' => $request->role, 'confirmed' => $request->confirmed, 'surname' => $request->surname, 'patronymic' => $request->patronymic, 'phone' => $request->phone, 'additional_phone' => $request->additional_phone, 'gender' => $request->gender, 'age' => $request->age, 'right_work' => $request->right_work, 'drive' => $request->drive, 'night_work' => $request->night_work, 'animal_work' => $request->animal_work, 'swimming' => $request->swimming, 'about' => $request->about, 'is_babysitting' => $request->is_babysitting, 'is_nurse' => $request->is_nurse, 'is_housekeeper' => $request->is_housekeeper,          
-            'smoking' => $request->smoking, 'country' => $request->country, 'citizen' => $request->citizen, 'criminal' => $request->criminal, 'moving' => $request->moving, 'alcohol' => $request->alcohol, 'status' => $request->status, 'religion' => $request->religion, 'city' => $request->city,            
+            'role' => $request->role, 'confirmed' => $request->confirmed, 'surname' => $request->surname, 'phone' => $request->phone, 
+            'gender' => $request->gender, 'age' => $request->age, 'animal_work' => $request->animal_work, 'about' => $request->about, 
+            'is_babysitting' => $request->is_babysitting, 'is_nurse' => $request->is_nurse, 'is_housekeeper' => $request->is_housekeeper,          
+            'country' => $request->country, 'city' => $request->city            
         ]);                
         $user->save();
         $token = auth()->tokenById($user->id);
@@ -97,30 +99,17 @@ class UserController extends Controller
             
         $user->role = $request['role']; 
         $user->confirmed = $request['confirmed']; 
-        $user->surname = $request['surname']; 
-        $user->patronymic = $request['patronymic']; 
+        $user->surname = $request['surname'];
         $user->phone = $request['phone']; 
-        $user->additional_phone = $request['additional_phone']; 
         $user->gender = $request['gender'];
         $user->age = $request['age']; 
-        $user->right_work = $request['right_work']; 
-        $user->drive = $request['drive']; 
-        $user->night_work = $request['night_work']; 
-        $user->animal_work = $request['animal_work']; 
-        $user->swimming = $request['swimming'];
+        $user->animal_work = $request['animal_work'];
         $user->about = $request['about']; 
         $user->is_babysitting = $request['is_babysitting']; 
         $user->is_nurse = $request['is_nurse']; 
         $user->is_housekeeper = $request['is_housekeeper'];         
         
-        $user->smoking = $request['smoking_id']; 
-        $user->country = $request['country_id']; 
-        $user->citizen = $request['citizen_id']; 
-        $user->criminal = $request['criminal_id']; 
-        $user->moving = $request['moving_id']; 
-        $user->alcohol = $request['alcohol_id']; 
-        $user->status = $request['status_id']; 
-        $user->religion = $request['religion_id']; 
+        $user->country = $request['country_id'];         
         $user->city = $request['city_id'];       
 
         $user->save();

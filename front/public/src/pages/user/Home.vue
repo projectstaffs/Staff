@@ -202,7 +202,6 @@
 </template>
 
 <script>
-import { useI18n } from 'vue-i18n';
 import { useUserStore } from '../../stores/user';
 import { useReviewStore } from '../../stores/review';
 import { useViewsStore } from '../../stores/views';
@@ -210,12 +209,11 @@ import { useDataStore } from '../../stores/variables';
 export default {
     name: "Home",
     setup() {
-        const { t, locale } = useI18n({ useScope: 'global' });
         const User = useUserStore();
         const Review = useReviewStore();
         const Views = useViewsStore();
         const Store = useDataStore();
-        return { t, locale, User /*, Review, Views, Store*/ };
+        return { User /*, Review, Views, Store*/ };
     },
     methods: {
         test() {

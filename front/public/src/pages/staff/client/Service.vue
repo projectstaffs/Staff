@@ -36,7 +36,6 @@
 </template>
 
 <script>
-import { useI18n } from 'vue-i18n';
 export default {
     name: "Service",
     data() {
@@ -49,10 +48,6 @@ export default {
             hoveredImageSrc3: '../../src/assets/img/service/item3hover.png',
             isHovered1: false, isHovered2: false, isHovered3: false,
         }
-    },
-    setup() {
-        const { t, locale } = useI18n({ useScope: 'global' });
-        return { t, locale };
     },
     methods: {
         handleMouseOver1() { this.isHovered1 = true; },
