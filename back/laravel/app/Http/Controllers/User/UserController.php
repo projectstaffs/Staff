@@ -56,7 +56,16 @@ class UserController extends Controller
             'password' => $request->password,
             
             'role' => $request->role, 'confirmed' => $request->confirmed, 'surname' => $request->surname, 'phone' => $request->phone, 
-            'gender' => $request->gender, 'age' => $request->age, 'animal_work' => $request->animal_work, 'about' => $request->about, 
+            'gender' => [
+               'en' => $request->gender['en'],
+               'ua' => $request->gender['ua']
+            ],
+            'age' => $request->age,
+            'animal_work' => [
+               'en' => $request->animal_work['en'],
+               'ua' => $request->animal_work['ua']            
+            ], 
+            'about' => $request->about, 
             'is_babysitting' => $request->is_babysitting, 'is_nurse' => $request->is_nurse, 'is_housekeeper' => $request->is_housekeeper,          
             'country' => $request->country, 'city' => $request->city            
         ]);                
@@ -101,7 +110,7 @@ class UserController extends Controller
         $user->confirmed = $request['confirmed']; 
         $user->surname = $request['surname'];
         $user->phone = $request['phone']; 
-        $user->gender = $request['gender'];
+        //$user->gender = $request['gender'];        
         $user->age = $request['age']; 
         $user->animal_work = $request['animal_work'];
         $user->about = $request['about']; 

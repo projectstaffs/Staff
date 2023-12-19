@@ -1,6 +1,6 @@
 .login_inner {
     margin-top: 200px;
-    height: 540px;
+    min-height: 540px;
     background: url(../../assets/img/main/stripes.svg), #FFF0D2 50% / cover no-repeat;
 }
 
@@ -21,7 +21,7 @@
     flex-direction: column;
     justify-content: space-between;
     width: 464px;
-    height: 647px;
+    min-height: 647px;
     margin: 0 auto;
     padding: 32px;
     color: #FFF0D2;
@@ -44,10 +44,22 @@
     background: #FFF;
 }
 
+.auth_arrow {    
+    appearance: none;
+    background-image: url('../img/down_arrow.svg');
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+}
+
 .login_form_item::placeholder {
     color: rgba(30, 21, 16, 0.50);
     font-size: 12px;
     font-weight: 300;
+}
+
+.register_textarea::placeholder {
+    padding-top: 15px;
 }
 
 .login_checkbox {
@@ -95,4 +107,13 @@
 
 .login_forgot span {
     cursor: pointer;
+}
+
+.register_phone {
+    display: flex;
+    align-items: center;
+}
+
+.register_phone span {
+    margin-bottom: 7px;
 }

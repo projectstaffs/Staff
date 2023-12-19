@@ -3,72 +3,60 @@
         <div class="block_back"></div>
         <div class="block_content">
             <div class="container">
-                <div class="staff_title">{{ $t('auth.title') }}</div>
-                <div class="login_text">{{ $t('auth.text') }}</div>
+                <div class="staff_title">{{ $t('register.title') }}</div>
+                <div class="login_text">{{ $t('register.text') }}</div>
             </div>
-            <div class="login_inner">
+            <div class="login_inner register_inner">
                 <div class="container">
                     <div class="login_content">
-                        <form @submit.prevent="register" class="login_form">
+                        <form @submit.prevent="register" class="login_form register_form">
                             <div class="login_start">
-                                <div class="login_form_text">{{ $t('auth.item1') }}</div>
+                                <div class="login_form_text">{{ $t('register.item1') }}</div>
+                                <input v-model="user.name" required class="login_form_item" type="text"
+                                    :placeholder="$t('register.item1_holder')">
+                                <div class="login_form_text">{{ $t('register.item2') }}</div>
+                                <input v-model="user.surname" required class="login_form_item" type="text"
+                                    :placeholder="$t('register.item2_holder')">
+                                <div class="login_form_text">{{ $t('register.item3') }}</div>
+                                <div class="register_phone">
+                                    <span>+380</span> &nbsp;&nbsp; <input v-model="user.phone" required
+                                        class="login_form_item" type="tel" :placeholder="$t('register.item3_holder')">
+                                </div>
+                                <div class="login_form_text">{{ $t('register.item4') }}</div>
                                 <input v-model="user.email" required class="login_form_item" type="email"
-                                    :placeholder="$t('auth.item1_holder')">
-                                <div class="login_form_text">{{ $t('auth.item2') }}</div>
+                                    :placeholder="$t('register.item4_holder')">
+                                <div class="login_form_text">{{ $t('register.item5') }}</div>
+                                <select v-model="user.country" class="login_form_item auth_arrow">
+                                    <option v-for="option in Store.countrys" :value="option.id">
+                                        {{ option.title }}
+                                    </option>
+                                </select>
+                                <div class="login_form_text">{{ $t('register.item6') }}</div>
+                                <select v-model="user.city" class="login_form_item auth_arrow">
+                                    <option v-for="option in Store.citys" :value="option.id">
+                                        {{ option.title }}
+                                    </option>
+                                </select>
+                                <div class="login_form_text">{{ $t('register.item7') }}</div>
                                 <input v-model="user.password" required class="login_form_item" type="password"
-                                    :placeholder="$t('auth.item2_holder')">
-                                <label class="login_checkbox">
-                                    <input type="checkbox" v-model="rememberMe"> <span>{{ $t('auth.remember') }}</span>
-                                </label>
+                                    :placeholder="$t('register.item7_holder')">
+                                <div class="login_form_text">{{ $t('register.item8') }}</div>
+                                <input v-model="user.password_confirmation" required class="login_form_item" type="password"
+                                    :placeholder="$t('register.item8_holder')">
                             </div>
-                            <div v-if="User.login_error" class="login_middle">
-                                <ul>
-                                    <li>{{ $t('auth.error') }}</li>
+                            <div v-if="User.register_error" class="login_middle">
+                                <ul v-for="item in User.register_error" :key="item">
+                                    <li>{{ item[0] }}</li>
                                 </ul>
                             </div>
                             <div class="login_end">
-                                <button type="submit" class="btn">{{ $t('auth.enter') }}</button>
-                                <div @click.prevent="employer" class="btn">{{ $t('auth.register_client') }}</div>
-                                <div @click.prevent="executor" class="btn">{{ $t('auth.register_worker') }}</div>
-                                <div @click.prevent="forgot" class="login_forgot"><span>{{ $t('auth.forgot') }}</span></div>
+                                <button type="submit" class="btn">{{ $t('register.button') }}</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <form @submit.prevent="register" class="login_form">
-        <div>Укажите свое имя:</div>
-        <input v-model="user.name" required class="login_form_item" type="text" placeholder="имя">
-        <div>Укажите свою фамилию:</div>
-        <input v-model="user.surname" required class="login_form_item" type="text" placeholder="фамилия">
-        <div>Укажите свой телефон:</div>
-        <div> +380 <input v-model="user.phone" required class="login_form_item" type="tel" placeholder="телефон"> </div>
-        <div>Укажите свой email:</div>
-        <input v-model="user.email" required class="login_form_item" type="email" placeholder="email">
-        <div>Укажите страну проживания:</div>
-        <select v-model="user.country" class="category_form_title">
-            <option v-for="option in Store.countrys" :value="option.id">
-                {{ option.title }}
-            </option>
-        </select>
-        <div>Укажите свой город:</div>
-        <select v-model="user.city" class="category_form_title">
-            <option v-for="option in Store.citys" :value="option.id">
-                {{ option.title }}
-            </option>
-        </select>
-        <div>Укажите свой пароль:</div>
-        <input v-model="user.password" required class="login_form_item" type="password" placeholder="password">
-        <div>Подтвердите свой пароль:</div>
-        <input v-model="user.password_confirmation" required class="login_form_item" type="password"
-            placeholder="confirm password">
-        <button type="submit" class="login_form_btn">register</button>
-    </form>
-    <div class="register_error" v-for="item in User.register_error" :key="item">
-        {{ item[0] }}
     </div>
 </template>
 
@@ -101,3 +89,13 @@ export default {
     },
 }
 </script>
+
+<style>
+.register_inner {
+    min-height: 840px;
+}
+
+.register_form {
+    min-height: 947px;
+}
+</style>

@@ -28,7 +28,8 @@
                         <li @click.prevent="setUA" class="header_langs_item" data-lang="ua">UA</li>
                         <li @click.prevent="setEN" class="header_langs_item" data-lang="en">EN</li>
                     </ul>
-                    <div @click.prevent="login" class="btn">{{ $t('header.login') }}</div>
+                    <div v-if="!User.token" @click.prevent="login" class="btn">{{ $t('header.login') }}</div>
+                    <div v-if="User.token" @click.prevent="logout" class="btn">Exit</div>
                     <button class="header_burger_btn" type="button">
                         <span class="header_burger_box">
                             <span class="header_burger_inner"></span>
@@ -78,6 +79,7 @@ export default {
         seekers() { this.$router.push({ name: "Seekers" }) },
         homeStaff() { this.$router.push({ name: "HomeStaff" }) },
         login() { this.$router.push({ name: "Login" }) },
+        logout() { this.User.LOGOUT_USER(); },
 
         cabinet() { this.$router.push({ name: "Account" }) },
         worker_baby() { this.$router.push({ name: "BabyAll" }) },
@@ -87,7 +89,7 @@ export default {
         client_nurse() { this.$router.push({ name: "ClientNurseAll" }) },
         client_keeper() { this.$router.push({ name: "ClientKeeperAll" }) },
         register() { this.$router.push({ name: "Register-menu" }) },
-        logout() { this.User.LOGOUT_USER(); },
+
 
         setUA() {
             if (this.locale === 'en') {
