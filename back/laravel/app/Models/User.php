@@ -24,7 +24,7 @@ class User extends Authenticatable implements JWTSubject
         'role', 'confirmed', 'surname', 'phone', 'gender', 'age', 'animal_work', 'about', 'is_babysitting', 'is_nurse', 'is_housekeeper', 
         'country', 'city'
     ]; 
-    public $translatable = [ 'gender', 'animal_work' ];       
+    public $translatable = [ 'name', 'surname', 'about', 'gender', 'animal_work' ];       
 
     /**
      * The attributes that should be hidden for serialization.

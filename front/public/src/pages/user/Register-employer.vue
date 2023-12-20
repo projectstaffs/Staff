@@ -12,11 +12,17 @@
                         <form @submit.prevent="register" class="login_form register_form">
                             <div class="login_start">
                                 <div class="login_form_text">{{ $t('register.item1') }}</div>
-                                <input v-model="user.name" required class="login_form_item" type="text"
+                                <input v-model="name.ua" required class="login_form_item" type="text"
                                     :placeholder="$t('register.item1_holder')">
+                                <div class="login_form_text">{{ $t('register.item1_en') }}</div>
+                                <input v-model="name.en" required class="login_form_item" type="text"
+                                    :placeholder="$t('register.item1_holder_en')">
                                 <div class="login_form_text">{{ $t('register.item2') }}</div>
-                                <input v-model="user.surname" required class="login_form_item" type="text"
+                                <input v-model="surname.ua" required class="login_form_item" type="text"
                                     :placeholder="$t('register.item2_holder')">
+                                <div class="login_form_text">{{ $t('register.item2_en') }}</div>
+                                <input v-model="surname.en" required class="login_form_item" type="text"
+                                    :placeholder="$t('register.item2_holder_en')">
                                 <div class="login_form_text">{{ $t('register.item3') }}</div>
                                 <div class="register_phone">
                                     <span>+380</span> &nbsp;&nbsp; <input v-model="user.phone" required
@@ -46,7 +52,7 @@
                             </div>
                             <div v-if="User.register_error" class="login_middle">
                                 <ul v-for="item in User.register_error" :key="item">
-                                    <li>{{ item[0] }}</li>
+                                    <li>{{ item[0][locale] }}</li>
                                 </ul>
                             </div>
                             <div class="login_end">
@@ -61,25 +67,43 @@
 </template>
 
 <script>
+import { useI18n } from 'vue-i18n';
 import { useUserStore } from '../../stores/user';
 import { useDataStore } from '../../stores/variables';
 export default {
     name: "Register-employer",
     data() {
         return {
-            user: {}
+            user: {},
+            name: {},
+            surname: {},
+            about: { en: "-", ua: "-" },
+            gender: { en: "-", ua: "-" },
+            animal_work: { en: "-", ua: "-" },
         }
     },
     setup() {
         const User = useUserStore();
         const Store = useDataStore();
-        return { User, Store };
+        const { t, locale } = useI18n({ useScope: 'global' });
+        return { t, locale, User, Store };
     },
     methods: {
         register() {
+            this.user.name = this.name;
+            this.user.surname = this.surname;
+            this.user.about = this.about;
+            this.user.gender = this.gender;
+            this.user.animal_work = this.animal_work;
             this.user.role = "Наниматель";
             this.user.confirmed = true;
-            this.User.CREATE_USER(this.user);
+            this.user.is_babysitting = false;
+            this.user.is_nurse = false;
+            this.user.is_housekeeper = false;
+            this.user.age = '0000-00-00';
+
+            console.log(this.user);
+            //this.User.CREATE_USER(this.user);
         }
     },
     mounted() {
@@ -92,10 +116,10 @@ export default {
 
 <style>
 .register_inner {
-    min-height: 840px;
+    min-height: 1040px;
 }
 
 .register_form {
-    min-height: 947px;
+    min-height: 1140px;
 }
 </style>

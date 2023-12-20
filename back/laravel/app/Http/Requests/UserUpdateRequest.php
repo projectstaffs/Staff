@@ -31,9 +31,9 @@ class UserUpdateRequest extends FormRequest
             'surname' => 'required|string',
             'phone' => 'required|numeric|digits:9',
             
-            'gender' => 'required|string',
+            'gender' => 'required',
             'age' => 'required|date',                
-            'animal_work' => 'required|string',                
+            'animal_work' => 'required',                
             'about' => 'required|string',
 
             'is_babysitting' => 'nullable|boolean',

@@ -27,11 +27,17 @@
                                 </div>
 
                                 <div class="login_form_text">{{ $t('register.item1') }}</div>
-                                <input v-model="user.name" required class="login_form_item" type="text"
+                                <input v-model="name.ua" required class="login_form_item" type="text"
                                     :placeholder="$t('register.item1_holder')">
+                                <div class="login_form_text">{{ $t('register.item1_en') }}</div>
+                                <input v-model="name.en" required class="login_form_item" type="text"
+                                    :placeholder="$t('register.item1_holder_en')">
                                 <div class="login_form_text">{{ $t('register.item2') }}</div>
-                                <input v-model="user.surname" required class="login_form_item" type="text"
+                                <input v-model="surname.ua" required class="login_form_item" type="text"
                                     :placeholder="$t('register.item2_holder')">
+                                <div class="login_form_text">{{ $t('register.item2_en') }}</div>
+                                <input v-model="surname.en" required class="login_form_item" type="text"
+                                    :placeholder="$t('register.item2_holder_en')">
                                 <div class="login_form_text">{{ $t('register.item3') }}</div>
                                 <div class="register_phone">
                                     <span>+380</span> &nbsp;&nbsp; <input v-model="user.phone" required
@@ -47,8 +53,7 @@
                                     </option>
                                 </select>
                                 <div class="login_form_text">{{ $t('register.item10') }}</div>
-                                <input v-model="user.age" required class="login_form_item" type="date"
-                                    :placeholder="$t('register.item10_holder')">
+                                <input v-model="user.age" required class="login_form_item" type="date">
                                 <div class="login_form_text">{{ $t('register.item11') }}</div>
                                 <select v-model="user.animal_work" class="login_form_item auth_arrow">
                                     <option v-for="option in work" :value="option.value">
@@ -56,8 +61,11 @@
                                     </option>
                                 </select>
                                 <div class="login_form_text">{{ $t('register.item12') }}</div>
-                                <textarea v-model="user.about" required class="login_form_item register_textarea"
+                                <textarea v-model="about.ua" required class="login_form_item register_textarea"
                                     :placeholder="$t('register.item12_holder')"></textarea>
+                                <div class="login_form_text">{{ $t('register.item12_en') }}</div>
+                                <textarea v-model="about.en" required class="login_form_item register_textarea"
+                                    :placeholder="$t('register.item12_holder_en')"></textarea>
                                 <div class="login_form_text">{{ $t('register.item5') }}</div>
                                 <select v-model="user.country" class="login_form_item auth_arrow">
                                     <option v-for="option in Store.countrys" :value="option.id">
@@ -79,7 +87,7 @@
                             </div>
                             <div v-if="User.register_error" class="login_middle">
                                 <ul v-for="item in User.register_error" :key="item">
-                                    <li>{{ item[0] }}</li>
+                                    <li>{{ item[0][locale] }}</li>
                                 </ul>
                             </div>
                             <div class="login_end">
@@ -102,6 +110,9 @@ export default {
     data() {
         return {
             user: {},
+            name: {},
+            surname: {},
+            about: {},
             gender: [
                 { value: { en: "Man", ua: "Чоловік" } },
                 { value: { en: "Woman", ua: "Жінка" } }
@@ -120,6 +131,9 @@ export default {
     },
     methods: {
         register() {
+            this.user.name = this.name;
+            this.user.surname = this.surname;
+            this.user.about = this.about;
             this.user.role = "Исполнитель";
             this.user.confirmed = true;
             this.User.CREATE_USER(this.user);
@@ -138,11 +152,11 @@ export default {
 
 <style>
 .register_fix_inner {
-    min-height: 1410px;
+    min-height: 1700px;
 }
 
 .register_fix_form {
-    min-height: 1517px;
+    min-height: 1800px;
 }
 
 .register_title {

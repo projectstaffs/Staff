@@ -29,7 +29,7 @@
                         <li @click.prevent="setEN" class="header_langs_item" data-lang="en">EN</li>
                     </ul>
                     <div v-if="!User.token" @click.prevent="login" class="btn">{{ $t('header.login') }}</div>
-                    <div v-if="User.token" @click.prevent="logout" class="btn">Exit</div>
+                    <div v-if="User.token" @click.prevent="logout" class="btn">{{ $t('header.logout') }}</div>
                     <button class="header_burger_btn" type="button">
                         <span class="header_burger_box">
                             <span class="header_burger_inner"></span>

@@ -51,11 +51,18 @@ class UserController extends Controller
         $request->password = Hash::make($request->password);        
         
         $user = new User([
-            'name' => $request->name,
+            'name' => [
+               'en' => $request->name['en'],
+               'ua' => $request->name['ua']
+            ],
             'email' => $request->email,            
-            'password' => $request->password,
-            
-            'role' => $request->role, 'confirmed' => $request->confirmed, 'surname' => $request->surname, 'phone' => $request->phone, 
+            'password' => $request->password,            
+            'role' => $request->role, 'confirmed' => $request->confirmed, 
+            'surname' => [
+               'en' => $request->surname['en'],
+               'ua' => $request->surname['ua']
+            ], 
+            'phone' => $request->phone, 
             'gender' => [
                'en' => $request->gender['en'],
                'ua' => $request->gender['ua']
@@ -65,7 +72,10 @@ class UserController extends Controller
                'en' => $request->animal_work['en'],
                'ua' => $request->animal_work['ua']            
             ], 
-            'about' => $request->about, 
+            'about' => [
+               'en' => $request->about['en'],
+               'ua' => $request->about['ua']
+            ], 
             'is_babysitting' => $request->is_babysitting, 'is_nurse' => $request->is_nurse, 'is_housekeeper' => $request->is_housekeeper,          
             'country' => $request->country, 'city' => $request->city            
         ]);                

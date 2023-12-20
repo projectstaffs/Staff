@@ -128,9 +128,13 @@ export const useUserStore = defineStore('user', {
                     this.user = res.data.user;                    
                     router.push({name: "Home"});                   
                 })
-                .catch(error => { 
-                    //console.log(error);
-                    this.register_error = error.response.data.errors;  
+                .catch(error => {
+                    if(error) {
+                        this.register_error = error.response.data.errors;
+                        for (const key in this.register_error) {
+                            this.register_error[key][0] = JSON.parse(this.register_error[key][0]);
+                        }
+                    }                      
                 })
         },        
     },
