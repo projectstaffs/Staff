@@ -27,7 +27,8 @@
                 <div @click.prevent="contacts" class="footer_bottom_item"> {{ $t('footer.item5') }} </div>
                 <div @click.prevent="service" data-color="service" class="footer_bottom_item"> {{ $t('footer.item6') }}
                 </div>
-                <div data-color="client" class="footer_bottom_item"> {{ $t('footer.item7') }} </div>
+                <div @click.prevent="homeStaff" data-color="home_staff" class="footer_bottom_item"> {{ $t('footer.item7') }}
+                </div>
                 <div @click.prevent="contract" class="footer_bottom_item"> {{ $t('footer.item8') }} </div>
             </div>
         </div>

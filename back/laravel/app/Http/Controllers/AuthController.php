@@ -31,7 +31,7 @@ class AuthController extends Controller
         if (!$token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Авторизация не удалась, пожалуйста попробуйте ещё раз.'], 401);
         }
-        $temp = new UserResource(auth()->user());         
+        $temp = new UserResource(auth()->user());        
         return [$this->respondWithToken($token), response()->json($temp)];       
     }
 

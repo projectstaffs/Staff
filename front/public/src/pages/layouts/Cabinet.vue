@@ -1,59 +1,91 @@
-<template>      
-    <div class="cabinet">        
-        <div class="cabinet_sidebar">
-            <div class="cabinet_sidebar_title">{{ User.user.name }}</div>
-            <div @click.prevent="account" class="admin_sidebar_item">Учетная запись</div>
-            <div @click.prevent="mailbox" class="admin_sidebar_item">Почтовый ящик</div> 
-            <div @click.prevent="vacancies" class="admin_sidebar_item">Отзывы</div>
-            <div v-if="User.user.role === 'Исполнитель'" @click.prevent="credentials" class="admin_sidebar_item">Мои рекомендации</div>
-            <div @click.prevent="edit" class="admin_sidebar_item">Редактировать профиль</div>
-            <div @click.prevent="myphoto" class="admin_sidebar_item">Моя фотография</div>
-            <div @click.prevent="logout" class="admin_sidebar_item">Выйти</div>
+<template>
+    <div class="block">
+        <div class="block_back"></div>
+        <div class="block_content">
+            <div class="container">
+                <div class="staff_title">{{ $t('personal.title') }}</div>
+                <div class="cabinet">
+                    <div class="cabinet_sidebar">
+                        <div class="cabinet_box">
+
+                        </div>
+                        <img v-if="photo" class="cabinet_img" :src="photo" alt="">
+                        <div @click.prevent="account" class="admin_sidebar_item">Учетная запись</div>
+                        <div @click.prevent="edit" class="admin_sidebar_item">Редактировать профиль</div>
+                        <div @click.prevent="myphoto" class="admin_sidebar_item">Моя фотография</div>
+                    </div>
+                    <div class="cabinet_main">
+                        <router-view />
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="cabinet_main">
-            <div @click.prevent="back()" class="category_change_btn">Назад</div>
-            <router-view/>        
-        </div>                
     </div>
 </template>
 
 <script>
-import { useUserStore } from '../../stores/user';
 export default {
-    name: "Cabinet", 
-    setup() {
-        const User = useUserStore();        
-        return { User };
-    },       
-    methods: {        
+    name: "Cabinet",
+    data() {
+        return {
+            photo: '',
+        }
+    },
+    methods: {
         back() {
-            this.$router.push({name: "Home"})
+            this.$router.push({ name: "Home" })
         },
         account() {
-            this.$router.push({name: "Account"})
+            this.$router.push({ name: "Account" })
         },
         mailbox() {
-            this.$router.push({name: "Mailbox"})
-        }, 
+            this.$router.push({ name: "Mailbox" })
+        },
         myphoto() {
-            this.$router.push({name: "Myphoto"})
+            this.$router.push({ name: "Myphoto" })
         },
         edit() {
-            this.$router.push({name: "Edit"})
+            this.$router.push({ name: "Edit" })
         },
         vacancies() {
-            this.$router.push({name: "Vacancies"})
+            this.$router.push({ name: "Vacancies" })
         },
         credentials() {
-            this.$router.push({name: "Credentials"})
+            this.$router.push({ name: "Credentials" })
         },
         logout() {
             this.User.LOGOUT_USER();
-        },       
-    }, 
+        },
+    },
     mounted() {
-        this.User.GET_USER();
-    },       
+        this.photo = localStorage.user_image;
+    },
 }
 </script>
+
+<style>
+.cabinet {
+    width: 100%;
+    display: flex;
+    margin-top: 48px;
+    border-top: 1px solid #8E8E8E;
+    padding-top: 32px;
+}
+
+.cabinet_sidebar {
+    width: 307px;
+    padding-right: 37px;
+    border-right: 1px solid #8E8E8E;
+}
+
+.cabinet_box {
+    width: 250px;
+    height: 250px;
+}
+
+.cabinet_main {
+    padding: 0 64px;
+    flex: 1;
+}
+</style>
 

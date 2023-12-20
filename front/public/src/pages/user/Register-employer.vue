@@ -77,9 +77,9 @@ export default {
             user: {},
             name: {},
             surname: {},
-            about: { en: "-", ua: "-" },
-            gender: { en: "-", ua: "-" },
-            animal_work: { en: "-", ua: "-" },
+            about: { en: "some", ua: "some" },
+            gender: { en: "some", ua: "some" },
+            animal_work: { en: "some", ua: "some" },
         }
     },
     setup() {
@@ -100,10 +100,9 @@ export default {
             this.user.is_babysitting = false;
             this.user.is_nurse = false;
             this.user.is_housekeeper = false;
-            this.user.age = '0000-00-00';
+            this.user.age = "2023-12-15";
 
-            console.log(this.user);
-            //this.User.CREATE_USER(this.user);
+            this.User.CREATE_USER(this.user);
         }
     },
     mounted() {

@@ -136,8 +136,8 @@ export default {
             this.user.about = this.about;
             this.user.role = "Исполнитель";
             this.user.confirmed = true;
+
             this.User.CREATE_USER(this.user);
-            console.log(this.user);
         },
     },
     mounted() {

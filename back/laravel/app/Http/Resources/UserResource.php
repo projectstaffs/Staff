@@ -45,7 +45,7 @@ class UserResource extends JsonResource
         $image = '';
         foreach ($Image as $item) {
             if($item->user_id == $this->id) {
-                $image = $item->url;
+                $image = $item->preview_url;
                 break;
             }                           
         }        
@@ -56,7 +56,7 @@ class UserResource extends JsonResource
 
             return [
                 'id' => $this->id,
-                'name' => $this->name,
+                'name' => $this->getTranslations('name'),
                 'email' => $this->email,                               
                 'role' => $this->role,
                 'confirmed' => $this->confirmed,

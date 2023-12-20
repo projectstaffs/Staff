@@ -88,7 +88,7 @@ export const useUserStore = defineStore('user', {
                     localStorage.userID = res.data[1].original.id;
 
                     this.token = res.data[0].original.access_token;
-                    this.user = res.data[1].original;
+                    this.user = res.data[1].original;                    
                     router.push({name: "Home"});                    
                 })
                 .catch(error => { 
