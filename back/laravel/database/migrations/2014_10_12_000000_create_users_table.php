@@ -28,10 +28,6 @@ return new class extends Migration
             $table->date('age');
             $table->string('animal_work');
             $table->text('about');
-            $table->boolean('is_babysitting');
-            $table->boolean('is_nurse');
-            $table->boolean('is_housekeeper');
-
             $table->timestamps();
         });
     }

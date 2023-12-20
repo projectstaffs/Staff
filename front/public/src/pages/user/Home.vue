@@ -1,7 +1,7 @@
 <template>
     <section class="main_top">
         <video class="main_video" autoplay muted loop>
-            <source src="../../assets/video.mp4" type="video/mp4">
+            <!--<source src="../../assets/video.mp4" type="video/mp4"> -->
         </video>
         <div class="container">
             <div class="main_top_inner">

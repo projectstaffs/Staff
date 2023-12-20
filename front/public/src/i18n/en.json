@@ -9,6 +9,16 @@
         "login": "Login",
         "logout": "Logout"
     },
+    "cabinet": {
+        "title": "User account",
+        "no_img": "Add a photo.",
+        "item1": "My profile",
+        "item2": "Edit profile",
+        "item3": "My photo",
+        "item4": "Questionnaire for a babysitter",
+        "item5": "Questionnaire for a nurse",
+        "item6": "Questionnaire for a housekeeper"        
+    },
     "main": {
         "top_title": "Home service agency",
         "top_subtitle": "Here your everyday tasks are solved",
@@ -362,11 +372,7 @@
         "item12": "About me (in Ukrainian)",
         "item12_holder": "Write a bit about yourself in Ukrainian",
         "item12_en": "About me (in English)",
-        "item12_holder_en": "Write a bit about yourself in English",
-        "ask": "What kind of job are you looking for?",
-        "ask_item1": "childcare services",
-        "ask_item2": "care for the elderly",
-        "ask_item3": "housekeeping",
+        "item12_holder_en": "Write a bit about yourself in English",        
         "button": "Register"
     },
     "footer": {

@@ -75,8 +75,7 @@ class UserController extends Controller
             'about' => [
                'en' => $request->about['en'],
                'ua' => $request->about['ua']
-            ], 
-            'is_babysitting' => $request->is_babysitting, 'is_nurse' => $request->is_nurse, 'is_housekeeper' => $request->is_housekeeper,          
+            ],                      
             'country' => $request->country, 'city' => $request->city            
         ]);                
         $user->save();
@@ -123,10 +122,7 @@ class UserController extends Controller
         //$user->gender = $request['gender'];        
         $user->age = $request['age']; 
         $user->animal_work = $request['animal_work'];
-        $user->about = $request['about']; 
-        $user->is_babysitting = $request['is_babysitting']; 
-        $user->is_nurse = $request['is_nurse']; 
-        $user->is_housekeeper = $request['is_housekeeper'];         
+        $user->about = $request['about'];         
         
         $user->country = $request['country_id'];         
         $user->city = $request['city_id'];       

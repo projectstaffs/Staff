@@ -11,21 +11,6 @@
                     <div class="login_content">
                         <form @submit.prevent="register" class="login_form register_fix_form">
                             <div class="login_start">
-                                <div class="register_title">{{ $t('register.ask') }}</div>
-                                <div class="register_boxitem"> <input type="checkbox" v-model="user.is_babysitting">
-                                    <span>{{
-                                        $t('register.ask_item1') }}</span>
-                                </div>
-                                <div class="register_boxitem"> <input type="checkbox" v-model="user.is_nurse">
-                                    <span>{{
-                                        $t('register.ask_item2') }}</span>
-                                </div>
-                                <div class="register_boxitem reg_last"> <input type="checkbox"
-                                        v-model="user.is_housekeeper">
-                                    <span>{{
-                                        $t('register.ask_item3') }} </span>
-                                </div>
-
                                 <div class="login_form_text">{{ $t('register.item1') }}</div>
                                 <input v-model="name.ua" required class="login_form_item" type="text"
                                     :placeholder="$t('register.item1_holder')">
@@ -157,26 +142,5 @@ export default {
 
 .register_fix_form {
     min-height: 1800px;
-}
-
-.register_title {
-    text-align: center;
-    margin-bottom: 5px;
-}
-
-.register_boxitem {
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-}
-
-.register_boxitem input {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-}
-
-.reg_last {
-    margin-bottom: 10px;
 }
 </style>

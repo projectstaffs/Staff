@@ -50,34 +50,30 @@ class UserResource extends JsonResource
             }                           
         }        
         
-            $birthdate = Carbon::createFromFormat('Y-m-d', $this->age);
-            $currentDate = Carbon::now();
-            $current_age = $currentDate->diffInYears($birthdate);
+        $birthdate = Carbon::createFromFormat('Y-m-d', $this->age);
+        $currentDate = Carbon::now();
+        $current_age = $currentDate->diffInYears($birthdate);
 
-            return [
-                'id' => $this->id,
-                'name' => $this->getTranslations('name'),
-                'email' => $this->email,                               
-                'role' => $this->role,
-                'confirmed' => $this->confirmed,
-                'surname' => $this->surname,
-                'phone_number' => "+380" . $this->phone,
-                'phone' => $this->phone,
-                'gender' => $this->gender,
-                'age' => $this->age,
-                'current_age' => $current_age,                
-                'animal_work' => $this->animal_work,                
-                'about' => $this->about,
-                'is_babysitting' => $this->is_babysitting,
-                'is_nurse' => $this->is_nurse,
-                'is_housekeeper' => $this->is_housekeeper,            
-                
-                'country' => $country,
-                'city' => $city,                           
-                'image' => $image,
-                'country_id' => $this->country,
-                'city_id' => $this->city                
-            ];
-        
+        return [
+            'id' => $this->id,
+            'name' => $this->getTranslations('name'),
+            'email' => $this->email,                               
+            'role' => $this->role,
+            'confirmed' => $this->confirmed,
+            'surname' => $this->surname,
+            'phone_number' => "+380" . $this->phone,
+            'phone' => $this->phone,
+            'gender' => $this->gender,
+            'age' => $this->age,
+            'current_age' => $current_age,                
+            'animal_work' => $this->animal_work,                
+            'about' => $this->about,            
+            
+            'country' => $country,
+            'city' => $city,                           
+            'image' => $image,
+            'country_id' => $this->country,
+            'city_id' => $this->city                
+        ];        
     }
 }

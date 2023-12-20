@@ -97,9 +97,6 @@ export default {
             this.user.animal_work = this.animal_work;
             this.user.role = "Наниматель";
             this.user.confirmed = true;
-            this.user.is_babysitting = false;
-            this.user.is_nurse = false;
-            this.user.is_housekeeper = false;
             this.user.age = "2023-12-15";
 
             this.User.CREATE_USER(this.user);

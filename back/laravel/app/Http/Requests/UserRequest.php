@@ -35,10 +35,7 @@ class UserRequest extends FormRequest
             'age' => 'required',            
             'animal_work' => 'required',            
             'about' => 'required',
-
-            'is_babysitting' => 'nullable|boolean',
-            'is_nurse' => 'nullable|boolean',
-            'is_housekeeper' => 'nullable|boolean',
+            
             'country' => 'required|numeric',
             'city' => 'required|numeric'            
         ];                
