@@ -54,13 +54,13 @@
                                 <div class="login_form_text">{{ $t('register.item5') }}</div>
                                 <select v-model="user.country" class="login_form_item auth_arrow">
                                     <option v-for="option in Store.countrys" :value="option.id">
-                                        {{ option.title }}
+                                        {{ option.title[locale] }}
                                     </option>
                                 </select>
                                 <div class="login_form_text">{{ $t('register.item6') }}</div>
                                 <select v-model="user.city" class="login_form_item auth_arrow">
                                     <option v-for="option in Store.citys" :value="option.id">
-                                        {{ option.title }}
+                                        {{ option.title[locale] }}
                                     </option>
                                 </select>
                                 <div class="login_form_text">{{ $t('register.item7') }}</div>
@@ -126,7 +126,6 @@ export default {
         },
     },
     mounted() {
-        this.user.is_babysitting = false; this.user.is_nurse = false; this.user.is_housekeeper = false;
         this.User.GET_TOKEN();
         this.Store.GET_COUNTRYS();
         this.Store.GET_CITYS();

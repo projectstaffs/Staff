@@ -25,7 +25,8 @@ class UserResource extends JsonResource
         $country = '';
         foreach ($Country as $item) {
             if($item->id == $this->country) {
-                $country = $item->title;                
+                //$country = $item->title; 
+                $country = $item;                               
                 break;
             }                           
         }
@@ -35,7 +36,8 @@ class UserResource extends JsonResource
         $city = '';
         foreach ($City as $item) {
             if($item->id == $this->city) {
-                $city = $item->title;                
+                //$city = $item->title; 
+                $city = $item;               
                 break;
             }                           
         }
@@ -60,20 +62,20 @@ class UserResource extends JsonResource
             'email' => $this->email,                               
             'role' => $this->role,
             'confirmed' => $this->confirmed,
-            'surname' => $this->surname,
+            'surname' => $this->getTranslations('surname'),
             'phone_number' => "+380" . $this->phone,
             'phone' => $this->phone,
-            'gender' => $this->gender,
+            'gender' => $this->getTranslations('gender'),
             'age' => $this->age,
             'current_age' => $current_age,                
-            'animal_work' => $this->animal_work,                
-            'about' => $this->about,            
+            'animal_work' => $this->getTranslations('animal_work'),                
+            'about' => $this->getTranslations('about'),            
             
-            'country' => $country,
-            'city' => $city,                           
+            'country_title' => $country,
+            'city_title' => $city,                           
             'image' => $image,
-            'country_id' => $this->country,
-            'city_id' => $this->city                
+            'country' => $this->country,
+            'city' => $this->city                
         ];        
     }
 }

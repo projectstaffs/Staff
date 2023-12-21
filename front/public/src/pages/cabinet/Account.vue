@@ -1,20 +1,12 @@
 <template>
     <div class="account">
-        <div v-if="User.user.role === 'Исполнитель'">
-            <div v-if="(User.user.is_babysitting === 1) || (User.user.is_babysitting === true)" @click.prevent="babysitting"
-                class="admin_sidebar_item">Анкета для няни </div>
-            <div v-if="User.user.is_nurse === 1 || (User.user.is_nurse === true)" @click.prevent="nurse"
-                class="admin_sidebar_item">Анкета для сиделки </div>
-            <div v-if="User.user.is_housekeeper === 1 || (User.user.is_housekeeper === true)" @click.prevent="housekeeper"
-                class="admin_sidebar_item">Анкета для домработницы </div>
-        </div>
-
-        <div v-if="User.user.role === 'Наниматель'">
-            <div @click.prevent="client_babysitting" class="admin_sidebar_item">Вакансия для няни </div>
-            <div @click.prevent="client_nurse" class="admin_sidebar_item">Вакансия для сиделки </div>
-            <div @click.prevent="client_housekeeper" class="admin_sidebar_item">Вакансия для домработницы </div>
-        </div>
-        <div class="cabinet_sidebar_title">{{ name[locale] }}</div>
+        <div class="account_name">{{ name[locale] }} {{ surname[locale] }}</div>
+        <div class="account_adress">{{ $t('cabinet.country') }} {{ country[locale] }}</div>
+        <div class="account_adress">{{ $t('cabinet.city') }} {{ city[locale] }}</div>
+        <div class="account_adress">{{ $t('cabinet.phone') }} {{ User.user.phone_number }}</div>
+        <div>{{ about[locale] }}</div>
+        <div>{{ gender[locale] }}</div>
+        <div>{{ animal_work[locale] }}</div>
 
     </div>
 </template>
@@ -28,6 +20,12 @@ export default {
         return {
             photo: '',
             name: {},
+            surname: {},
+            about: {},
+            gender: {},
+            animal_work: {},
+            country: {},
+            city: {},
         }
     },
     setup() {
@@ -36,38 +34,31 @@ export default {
         return { t, locale, User };
     },
     methods: {
-        babysitting() {
-            this.$router.push({ name: "Babysitting" })
-        },
-        nurse() {
-            this.$router.push({ name: "Nurse" })
-        },
-        housekeeper() {
-            this.$router.push({ name: "Housekeeper" })
-        },
 
-        client_babysitting() {
-            this.$router.push({ name: "Client_baby" })
-        },
-        client_nurse() {
-            this.$router.push({ name: "Client_nurse" })
-        },
-        client_housekeeper() {
-            this.$router.push({ name: "Client_keeper" })
-        },
     },
     mounted() {
         this.User.GET_USER();
         this.User.GET_TOKEN();
-        this.User.GET_ADMINID();
         this.name = this.User.user.name;
+        this.surname = this.User.user.surname;
+        this.about = this.User.user.about;
+        this.gender = this.User.user.gender;
+        this.animal_work = this.User.user.animal_work;
+        this.country = this.User.user.country_title.title;
+        this.city = this.User.user.city_title.title;
     },
 }
 </script>
 
 <style>
-.account_img {
-    width: 400px;
-    height: 400px;
+.account_name {
+    font-size: 24px;
+    font-weight: 300;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.account_adress {
+    margin-bottom: 15px;
 }
 </style>

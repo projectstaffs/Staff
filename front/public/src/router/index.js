@@ -215,6 +215,12 @@ const router = createRouter({
             component: () =>import('../pages/cabinet/Edit.vue')
         },
         {
+            name: 'EditClient',
+            path: '/editclient',
+            meta: {layout: 'Cabinet'},
+            component: () =>import('../pages/cabinet/EditClient.vue')
+        },
+        {
             name: 'Babysitting',
             path: '/babysitting',
             meta: {layout: 'Cabinet'},

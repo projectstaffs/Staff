@@ -13,9 +13,9 @@
                         <div @click.prevent="account" class="sidebar_item">{{ $t('cabinet.item1') }}</div>
                         <div @click.prevent="edit" class="sidebar_item">{{ $t('cabinet.item2') }}</div>
                         <div @click.prevent="myphoto" class="sidebar_item">{{ $t('cabinet.item3') }}</div>
-                        <div @click.prevent="account" class="sidebar_item">{{ $t('cabinet.item4') }}</div>
-                        <div @click.prevent="account" class="sidebar_item">{{ $t('cabinet.item5') }}</div>
-                        <div @click.prevent="account" class="sidebar_item">{{ $t('cabinet.item6') }}</div>
+                        <div @click.prevent="babysitter" class="sidebar_item">{{ $t('cabinet.item4') }}</div>
+                        <div @click.prevent="nurse" class="sidebar_item">{{ $t('cabinet.item5') }}</div>
+                        <div @click.prevent="keeper" class="sidebar_item">{{ $t('cabinet.item6') }}</div>
                     </div>
                     <div class="cabinet_main">
                         <router-view />
@@ -42,7 +42,22 @@ export default {
     methods: {
         account() { this.$router.push({ name: "Account" }) },
         myphoto() { this.$router.push({ name: "Myphoto" }) },
-        edit() { this.$router.push({ name: "Edit" }) },
+        edit() {
+            if (this.User.user.role === 'Исполнитель') { this.$router.push({ name: "Edit" }) }
+            else { this.$router.push({ name: "EditClient" }) }
+        },
+        babysitter() {
+            if (this.User.user.role === 'Исполнитель') { this.$router.push({ name: "Babysitting" }) }
+            else { this.$router.push({ name: "Client_baby" }) }
+        },
+        nurse() {
+            if (this.User.user.role === 'Исполнитель') { this.$router.push({ name: "Nurse" }) }
+            else { this.$router.push({ name: "Client_nurse" }) }
+        },
+        keeper() {
+            if (this.User.user.role === 'Исполнитель') { this.$router.push({ name: "Housekeeper" }) }
+            else { this.$router.push({ name: "Client_keeper" }) }
+        },
     },
     mounted() {
         //this.photo = localStorage.user_image;

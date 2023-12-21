@@ -8,11 +8,9 @@ export const useDataStore = defineStore('variables', {
             languages: {}, 
             agegroups: {}, 
             childrens: {}, 
-            alcohols: {}, 
             babysittingduties: {}, 
             citys: {}, 
             countrys: {}, 
-            criminals: {}, 
             diagnoses: {},               
             educations: {}, 
             employments: {}, 
@@ -23,15 +21,11 @@ export const useDataStore = defineStore('variables', {
             housekeepertypeofworks: {}, 
             joboptions: {}, 
             monthlypayments: {}, 
-            movings: {}, 
             nurseduties: {}, 
             nursetypeofworks: {}, 
             nursingskills: {}, 
-            recommendations: {}, 
-            religions: {}, 
-            schedules: {}, 
-            smokings: {}, 
-            statuss: {}, 
+            recommendations: {},
+            schedules: {},
             typeofworks: {}, 
             worklocations: {}, 
             workperiods: {},           
@@ -51,25 +45,11 @@ export const useDataStore = defineStore('variables', {
                     this.agegroups = res.data;
                 })
                 .catch(error => { console.log(error); })
-        },        
-        GET_ALCOHOLS(){
-            axios.get('http://localhost/api/alcohol')
-                .then(res => {                    
-                    this.alcohols = res.data;
-                })
-                .catch(error => { console.log(error); })
         },
         GET_BABYSITTINGDUTIES(){
             api.get('http://localhost/api/auth/babysittingdutie')
                 .then(res => {                    
                     this.babysittingduties = res.data;
-                })
-                .catch(error => { console.log(error); })
-        },
-        GET_CRIMINALS(){
-            axios.get('http://localhost/api/criminal')
-                .then(res => {                    
-                    this.criminals = res.data;
                 })
                 .catch(error => { console.log(error); })
         },
@@ -143,13 +123,6 @@ export const useDataStore = defineStore('variables', {
                 })
                 .catch(error => { console.log(error); })
         },
-        GET_MOVINGS(){
-            axios.get('http://localhost/api/moving')
-                .then(res => {                    
-                    this.movings = res.data;
-                })
-                .catch(error => { console.log(error); })
-        },
         GET_NURSEDUTIES(){
             api.get('http://localhost/api/auth/nursedutie')
                 .then(res => {                    
@@ -178,31 +151,10 @@ export const useDataStore = defineStore('variables', {
                 })
                 .catch(error => { console.log(error); })
         },
-        GET_RELIGIONS(){
-            axios.get('http://localhost/api/religion')
-                .then(res => {                    
-                    this.religions = res.data;
-                })
-                .catch(error => { console.log(error); })
-        },
         GET_SCHEDULES(){
             api.get('http://localhost/api/auth/schedule')
                 .then(res => {                    
                     this.schedules = res.data;
-                })
-                .catch(error => { console.log(error); })
-        },
-        GET_SMOKINGS(){        
-            axios.get('http://localhost/api/smoking')
-                .then(res => {                    
-                    this.smokings = res.data;
-                })
-                .catch(error => { console.log(error); })
-        },
-        GET_STATUSS(){
-            axios.get('http://localhost/api/status')
-                .then(res => {                    
-                    this.statuss = res.data;
                 })
                 .catch(error => { console.log(error); })
         },
@@ -237,14 +189,14 @@ export const useDataStore = defineStore('variables', {
         GET_CITYS() {            
             axios.get("http://localhost/api/city")            
                 .then(res => {                    
-                    this.citys = res.data;                   
+                    this.citys = res.data;                 
                 })
                 .catch(error => { console.log(error); })
         },  
         GET_COUNTRYS() {            
             axios.get("http://localhost/api/country")            
                 .then(res => {                    
-                    this.countrys = res.data;                   
+                    this.countrys = res.data;                
                 })
                 .catch(error => { console.log(error); })
         },

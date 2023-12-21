@@ -14,7 +14,6 @@ export const useReviewStore = defineStore('review', {
             api.get('api/auth/review')
                 .then(res => {                                    
                     this.reviews = res.data;
-                    //this.reviews = JSON.parse(res.data);
                     this.reviews.forEach((element) => {                               
                         element.name = JSON.parse(element.name); 
                         element.surname = JSON.parse(element.surname);
