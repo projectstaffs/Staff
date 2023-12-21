@@ -17,7 +17,17 @@
         "item3": "My photo",
         "item4": "Questionnaire for a babysitter",
         "item5": "Questionnaire for a nurse",
-        "item6": "Questionnaire for a housekeeper"        
+        "item6": "Questionnaire for a housekeeper",
+        "country": "Country:", 
+        "city": "City:",
+        "phone": "Phone number:",
+        "email": "Email address:",
+        "gender": "Gender:",
+        "age": "Number of years:",
+        "animal": "Willingness to work in a house with pets:",
+        "about": "About me:",
+        "edit_title": "Profile data:",
+        "edit_btn": "Save changes"        
     },
     "main": {
         "top_title": "Home service agency",

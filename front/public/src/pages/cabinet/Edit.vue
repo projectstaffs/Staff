@@ -1,214 +1,142 @@
 <template>
-    <div class="login_title"> Изменение учетных данных: </div>    
-    <form v-if="User.user.role === 'Исполнитель'" @submit.prevent="change_User" class="login_form">
-        <div>Какую работу Вы ищите?:</div>
-        <div> <input type="checkbox" v-model="is_babysitting"> <span>по уходу за детьми</span> </div>
-        <div> <input type="checkbox" v-model="is_nurse"> <span>по уходу за престарелыми</span> </div>
-        <div> <input type="checkbox" v-model="is_housekeeper"> <span>по ведению домашнего хозяйства</span> </div>        
-        
-        <div>Укажите свое имя:</div>
-        <input v-model="User.user.name" required class="login_form_item" type="text" placeholder="имя">
-        <div>Укажите свое отчество:</div>
-        <input v-model="User.user.patronymic" required class="login_form_item" type="text" placeholder="отчество">
-        <div>Укажите свою фамилию:</div>
-        <input v-model="User.user.surname" required class="login_form_item" type="text" placeholder="фамилия">
-        <div>Укажите свой телефон:</div>
-        <div> +380 <input v-model="User.user.phone" required class="login_form_item" type="tel" placeholder="телефон"> </div>
-        <div>Укажите свой дополнительный телефон:</div>
-        <div> +380 <input v-model="User.user.additional_phone" required class="login_form_item" type="tel" placeholder="телефон"> </div>
-        <div>Укажите свой email:</div>
-        <input v-model="User.user.email" required class="login_form_item" type="email" placeholder="email">        
-        <div>Укажите свой пол:</div>
-        <select v-model="User.user.gender" class="category_form_title">
-            <option v-for="option in gender" :value="option.value">
-                {{ option.value }}                
-            </option>
-        </select>
-        <div>Укажите дату своего рождения:</div>
-        <input v-model="User.user.age" required class="login_form_item" type="date" placeholder="возраст">
-        <div>Право работать на территории Украины?:</div>
-        <select v-model="User.user.right_work" class="category_form_title">
-            <option v-for="option in work" :value="option.value">
-                {{ option.value }}                
-            </option>
-        </select>
-        <div>Наличие водительского удостоверения?:</div>
-        <select v-model="User.user.drive" class="category_form_title">
-            <option v-for="option in work" :value="option.value">
-                {{ option.value }}                
-            </option>
-        </select>
-        <div>Согласны ли вы работать в ночное время?:</div>
-        <select v-model="User.user.night_work" class="category_form_title">
-            <option v-for="option in work" :value="option.value">
-                {{ option.value }}                
-            </option>
-        </select>
-        <div>Готовы ли вы работать в доме с домашними животными?:</div>
-        <select v-model="User.user.animal_work" class="category_form_title">
-            <option v-for="option in work" :value="option.value">
-                {{ option.value }}                
-            </option>
-        </select>
-        <div>Умеете ли вы плавать?:</div>
-        <select v-model="User.user.swimming" class="category_form_title">
-            <option v-for="option in work" :value="option.value">
-                {{ option.value }}                
-            </option>
-        </select>
-        <div>Напишите немного о себе:</div>        
-        <textarea v-model="User.user.about" required class="login_form_item" placeholder="about"></textarea>
-
-        <div>Укажите страну проживания:</div>
-        <select v-model="User.user.country_id" class="category_form_title">
-            <option v-for="option in Store.countrys" :value="option.id">
-                {{ option.title }}                
-            </option>
-        </select>
-        <div>Укажите свой город:</div>
-        <select v-model="User.user.city_id" class="category_form_title">
-            <option v-for="option in Store.citys" :value="option.id">
-                {{ option.title }}                
-            </option>
-        </select>
-        <div>Укажите гражданство(страна):</div>
-        <select v-model="User.user.citizen_id" class="category_form_title">
-            <option v-for="option in Store.countrys" :value="option.id">
-                {{ option.title }}                
-            </option>
-        </select>
-        <div>Наличие справки из полиция об отсутствии судимости:</div>
-        <select v-model="User.user.criminal_id" class="category_form_title">
-            <option v-for="option in Store.criminals" :value="option.id">
-                {{ option.title }}                
-            </option>
-        </select>
-        <div>Согласны ли вы на переезд:</div>
-        <select v-model="User.user.moving_id" class="category_form_title">
-            <option v-for="option in Store.movings" :value="option.id">
-                {{ option.title }}                
-            </option>
-        </select>
-        <div>Укажите отношение к курению:</div>
-        <select v-model="User.user.smoking_id" class="category_form_title">
-            <option v-for="option in Store.smokings" :value="option.id">
-                {{ option.title }}                
-            </option>
-        </select>
-        <div>Укажите отношение к алкоголю:</div>
-        <select v-model="User.user.alcohol_id" class="category_form_title">
-            <option v-for="option in Store.alcohols" :value="option.id">
-                {{ option.title }}                
-            </option>
-        </select>
-        <div>Укажите семейное положение:</div>
-        <select v-model="User.user.status_id" class="category_form_title">
-            <option v-for="option in Store.statuss" :value="option.id">
-                {{ option.title }}                
-            </option>
-        </select>
-        <div>Укажите свою религию:</div>
-        <select v-model="User.user.religion_id" class="category_form_title">
-            <option v-for="option in Store.religions" :value="option.id">
-                {{ option.title }}                
-            </option>
-        </select>
-        <div>Укажите свой пароль:</div>
-        <input v-model="User.user.password" required class="login_form_item" type="password" placeholder="password">
-        <div>Подтвердите свой пароль:</div>
-        <input v-model="User.user.password_confirmation" required class="login_form_item" type="password" placeholder="confirm password">
-        <button type="submit" class="login_form_btn">Изменить данные</button>
+    <div class="edit_title">{{ $t('cabinet.edit_title') }}</div>
+    <form @submit.prevent="change_User" class="login_form edit_fix">
+        <div class="login_start">
+            <div class="login_form_text">{{ $t('register.item1') }}</div>
+            <input v-model="name.ua" required class="login_form_item" type="text"
+                :placeholder="$t('register.item1_holder')">
+            <div class="login_form_text">{{ $t('register.item1_en') }}</div>
+            <input v-model="name.en" required class="login_form_item" type="text"
+                :placeholder="$t('register.item1_holder_en')">
+            <div class="login_form_text">{{ $t('register.item2') }}</div>
+            <input v-model="surname.ua" required class="login_form_item" type="text"
+                :placeholder="$t('register.item2_holder')">
+            <div class="login_form_text">{{ $t('register.item2_en') }}</div>
+            <input v-model="surname.en" required class="login_form_item" type="text"
+                :placeholder="$t('register.item2_holder_en')">
+            <div class="login_form_text">{{ $t('register.item3') }}</div>
+            <div class="register_phone">
+                <span>+380</span> &nbsp;&nbsp; <input v-model="User.user.phone" required class="login_form_item" type="tel"
+                    :placeholder="$t('register.item3_holder')">
+            </div>
+            <div class="login_form_text">{{ $t('register.item4') }}</div>
+            <input v-model="User.user.email" required class="login_form_item" type="email"
+                :placeholder="$t('register.item4_holder')">
+            <div class="login_form_text">{{ $t('register.item9') }}</div>
+            <select v-model="User.user.gender" class="login_form_item auth_arrow">
+                <option v-for="option in gender_items" :value="option.value">
+                    {{ option.value[locale] }}
+                </option>
+            </select>
+            <div class="login_form_text">{{ $t('register.item10') }}</div>
+            <input v-model="User.user.age" required class="login_form_item" type="date">
+            <div class="login_form_text">{{ $t('register.item11') }}</div>
+            <select v-model="User.user.animal_work" class="login_form_item auth_arrow">
+                <option v-for="option in work" :value="option.value">
+                    {{ option.value[locale] }}
+                </option>
+            </select>
+            <div class="login_form_text">{{ $t('register.item12') }}</div>
+            <textarea v-model="about.ua" required class="login_form_item register_textarea"
+                :placeholder="$t('register.item12_holder')"></textarea>
+            <div class="login_form_text">{{ $t('register.item12_en') }}</div>
+            <textarea v-model="about.en" required class="login_form_item register_textarea"
+                :placeholder="$t('register.item12_holder_en')"></textarea>
+            <div class="login_form_text">{{ $t('register.item5') }}</div>
+            <select v-model="User.user.country" class="login_form_item auth_arrow">
+                <option v-for="option in Store.countrys" :value="option.id">
+                    {{ option.title[locale] }}
+                </option>
+            </select>
+            <div class="login_form_text">{{ $t('register.item6') }}</div>
+            <select v-model="User.user.city" class="login_form_item auth_arrow">
+                <option v-for="option in Store.citys" :value="option.id">
+                    {{ option.title[locale] }}
+                </option>
+            </select>
+            <div class="login_form_text">{{ $t('register.item7') }}</div>
+            <input v-model="User.user.password" required class="login_form_item" type="password"
+                :placeholder="$t('register.item7_holder')">
+            <div class="login_form_text">{{ $t('register.item8') }}</div>
+            <input v-model="User.user.password_confirmation" required class="login_form_item" type="password"
+                :placeholder="$t('register.item8_holder')">
+        </div>
+        <div v-if="User.register_error" class="login_middle">
+            <ul v-for="item in User.register_error" :key="item">
+                <li>{{ item[0][locale] }}</li>
+            </ul>
+        </div>
+        <div class="login_end">
+            <button type="submit" class="btn">{{ $t('cabinet.edit_btn') }}</button>
+        </div>
     </form>
-
-    <form v-else @submit.prevent="change_ClientUser" class="login_form">
-        <div>Укажите свое имя:</div>
-        <input v-model="User.user.name" required class="login_form_item" type="text" placeholder="имя">
-        <div>Укажите свое отчество:</div>
-        <input v-model="User.user.patronymic" required class="login_form_item" type="text" placeholder="отчество">
-        <div>Укажите свою фамилию:</div>
-        <input v-model="User.user.surname" required class="login_form_item" type="text" placeholder="фамилия">
-        <div>Укажите свой телефон:</div>
-        <div> +380 <input v-model="User.user.phone" required class="login_form_item" type="tel" placeholder="телефон"> </div>        
-        <div>Укажите свой дополнительный телефон:</div>
-        <div> +380 <input v-model="User.user.additional_phone" required class="login_form_item" type="tel" placeholder="телефон"> </div>
-        <div>Укажите свой email:</div>
-        <input v-model="User.user.email" required class="login_form_item" type="email" placeholder="email">        
-        <div>Укажите страну проживания:</div>
-        <select v-model="User.user.country_id" class="category_form_title">
-            <option v-for="option in Store.countrys" :value="option.id">
-                {{ option.title }}                
-            </option>
-        </select>
-        <div>Укажите свой город:</div>
-        <select v-model="User.user.city_id" class="category_form_title">
-            <option v-for="option in Store.citys" :value="option.id">
-                {{ option.title }}                
-            </option>
-        </select>
-        <div>Укажите свой пароль:</div>
-        <input v-model="User.user.password" required class="login_form_item" type="password" placeholder="password">
-        <div>Подтвердите свой пароль:</div>
-        <input v-model="User.user.password_confirmation" required class="login_form_item" type="password" placeholder="confirm password">
-        <button type="submit" class="login_form_btn">Изменить данные</button>
-    </form>
-
-    <div class="register_error" v-for="item in User.register_error" :key="item">
-        {{ item[0] }}
-    </div>
 </template>
 
 <script>
+import { useI18n } from 'vue-i18n';
 import { useUserStore } from '../../stores/user';
 import { useDataStore } from '../../stores/variables';
 export default {
     name: "Edit",
     data() {
         return {
-            is_babysitting: false,
-            is_nurse: false,
-            is_housekeeper: false,            
-            gender: [
-                { value: 'Мужчина' },
-                { value: 'Женщина' }
+            gender_items: [
+                { value: { en: "Man", ua: "Чоловік" } },
+                { value: { en: "Woman", ua: "Жінка" } }
             ],
             work: [
-                { value: 'Да' },
-                { value: 'Нет' }
+                { value: { en: "Yes", ua: "Так" } },
+                { value: { en: "No", ua: "Ні" } }
             ],
+            name: {},
+            surname: {},
+            about: {},
         }
     },
     setup() {
         const User = useUserStore();
         const Store = useDataStore();
-        return { User, Store };
+        const { t, locale } = useI18n({ useScope: 'global' });
+        return { t, locale, User, Store };
     },
     methods: {
-        change_User() {                
-            this.User.user.is_babysitting = this.is_babysitting;
-            this.User.user.is_nurse = this.is_nurse;
-            this.User.user.is_housekeeper = this.is_housekeeper;                
-            
-            this.User.UPDATE_USER(this.User.user);
-        },
-        change_ClientUser() {              
+        change_User() {
+            this.User.user.name = this.name;
+            this.User.user.surname = this.surname;
+            this.User.user.about = this.about;
             this.User.UPDATE_USER(this.User.user);
         }
     },
-    mounted() {    
-        this.User.GET_TOKEN();        
-        this.User.GET_USER(); 
-        this.Store.GET_COUNTRYS(); 
-        this.Store.GET_CITYS(); 
-        this.Store.GET_CRIMINALS();
-        this.Store.GET_MOVINGS();
-        this.Store.GET_SMOKINGS();    
-        this.Store.GET_ALCOHOLS(); 
-        this.Store.GET_STATUSS(); 
-        this.Store.GET_RELIGIONS();
-        if(this.User.user.is_babysitting === 1 || this.User.user.is_babysitting === true) {this.is_babysitting = true;}
-        if(this.User.user.is_nurse === 1 || this.User.user.is_nurse === true) {this.is_nurse = true;}
-        if(this.User.user.is_housekeeper === 1 || this.User.user.is_housekeeper === true) {this.is_housekeeper = true;}
-        this.User.register_error = null;                         
+    mounted() {
+        this.User.GET_TOKEN();
+        this.User.GET_USER();
+        this.Store.GET_COUNTRYS();
+        this.Store.GET_CITYS();
+        this.User.register_error = null;
+
+        this.name = this.User.user.name;
+        this.surname = this.User.user.surname;
+        this.about = this.User.user.about;
     },
 }
 </script>
+
+<style>
+.edit_title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 120%;
+    margin-bottom: 24px;
+}
+
+.edit_fix {
+    position: static;
+    transform: none;
+    min-height: 1675px;
+}
+
+.hide {
+    display: none;
+}
+</style>

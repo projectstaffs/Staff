@@ -1,13 +1,19 @@
 <template>
     <div class="account">
         <div class="account_name">{{ name[locale] }} {{ surname[locale] }}</div>
-        <div class="account_adress">{{ $t('cabinet.country') }} {{ country[locale] }}</div>
-        <div class="account_adress">{{ $t('cabinet.city') }} {{ city[locale] }}</div>
-        <div class="account_adress">{{ $t('cabinet.phone') }} {{ User.user.phone_number }}</div>
-        <div>{{ about[locale] }}</div>
-        <div>{{ gender[locale] }}</div>
-        <div>{{ animal_work[locale] }}</div>
-
+        <div class="account_item">{{ $t('cabinet.country') }} {{ country[locale] }}</div>
+        <div class="account_item">{{ $t('cabinet.city') }} {{ city[locale] }}</div>
+        <div class="account_item">{{ $t('cabinet.phone') }} {{ User.user.phone_number }}</div>
+        <div class="account_item">{{ $t('cabinet.email') }} {{ User.user.email }}</div>
+        <div v-if="User.user.role === 'Исполнитель'">
+            <div class="account_item">{{ $t('cabinet.gender') }} {{ User.user.gender[locale] }}</div>
+            <div class="account_item">{{ $t('cabinet.age') }} {{ User.user.current_age }}</div>
+            <div class="account_item">{{ $t('cabinet.animal') }} {{ User.user.animal_work[locale] }}</div>
+            <div class="account_item">
+                <div class="account_item_title">{{ $t('cabinet.about') }}</div>
+                <div class="account_item_text">{{ about[locale] }}</div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -22,8 +28,6 @@ export default {
             name: {},
             surname: {},
             about: {},
-            gender: {},
-            animal_work: {},
             country: {},
             city: {},
         }
@@ -42,8 +46,6 @@ export default {
         this.name = this.User.user.name;
         this.surname = this.User.user.surname;
         this.about = this.User.user.about;
-        this.gender = this.User.user.gender;
-        this.animal_work = this.User.user.animal_work;
         this.country = this.User.user.country_title.title;
         this.city = this.User.user.city_title.title;
     },
@@ -58,7 +60,16 @@ export default {
     margin-bottom: 15px;
 }
 
-.account_adress {
+.account_item {
     margin-bottom: 15px;
+}
+
+.account_item_title {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.account_item_text {
+    font-size: 16px;
 }
 </style>

@@ -111,21 +111,36 @@ class UserController extends Controller
         $request['password'] = Hash::make($request['password']);
         $user = User::find($id);      
         
-        $user->name = $request['name'];
+        $user->name = [
+               'en' => $request->name['en'],
+               'ua' => $request->name['ua']
+            ];
         $user->email = $request['email'];            
         $user->password = $request['password'];
             
         $user->role = $request['role']; 
         $user->confirmed = $request['confirmed']; 
-        $user->surname = $request['surname'];
+        $user->surname = [
+               'en' => $request->surname['en'],
+               'ua' => $request->surname['ua']
+            ];
         $user->phone = $request['phone']; 
-        //$user->gender = $request['gender'];        
+        $user->gender = [
+               'en' => $request->gender['en'],
+               'ua' => $request->gender['ua']
+            ];        
         $user->age = $request['age']; 
-        $user->animal_work = $request['animal_work'];
-        $user->about = $request['about'];         
+        $user->animal_work = [
+               'en' => $request->animal_work['en'],
+               'ua' => $request->animal_work['ua']            
+            ];
+        $user->about = [
+               'en' => $request->about['en'],
+               'ua' => $request->about['ua']
+            ];        
         
-        $user->country = $request['country_id'];         
-        $user->city = $request['city_id'];       
+        $user->country = $request['country'];         
+        $user->city = $request['city'];       
 
         $user->save();
         $temp = new UserResource($user);

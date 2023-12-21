@@ -22,47 +22,44 @@ class UserUpdateRequest extends FormRequest
     public function rules(): array
     {        
         return [
-            'name' => 'required|string',
+            'name' => 'required',
             'email' => 'required|email|string|unique:users,email,' . $this->id,
             'password' => 'required|string|confirmed|min:3',
             'password_confirmation' => 'required|string',
             'role' => 'required|string',
             'confirmed' => 'required|boolean',
-            'surname' => 'required|string',
+            'surname' => 'required',
             'phone' => 'required|numeric|digits:9',
             
             'gender' => 'required',
             'age' => 'required|date',                
             'animal_work' => 'required',                
-            'about' => 'required|string',
-
-            'is_babysitting' => 'nullable|boolean',
-            'is_nurse' => 'nullable|boolean',
-            'is_housekeeper' => 'nullable|boolean',
-            'country_id' => 'required|numeric',
-            'city_id' => 'required|numeric'                
+            'about' => 'required',
+            
+            'country' => 'required|numeric',
+            'city' => 'required|numeric'                
         ];                
     }
 
     public function messages() {
         return [
-            'name.required' => 'Укажите свое имя.',
-            'surname.required' => 'Укажите свою фамилию.',            
-            'about.required' => 'Напишите немного о себе.',
-            'phone.numeric' => 'Номер телефона должен быть числом.',
-            'phone.digits' => 'Номер телефона должен содержать 9 цифр.',            
-            'email.required' => 'Укажите свой email.',
-            'email.unique' => 'Адрес электронной почты должен быть уникальным.', 
-            'country_id.required' => 'Укажите страну проживания.',
-            'city_id.required' => 'Укажите свой город.',
-            'password.confirmed' => 'Подтверждение пароля указано не корректно.',           
-            'password.min' => 'Пароль должен состоять как минимум из 3 символов.',
-            'password.required' => 'Укажите свой пароль.',
+            'name.required' => '{"en":"Enter your name.","ua":"Вкажіть своє ім’я."}',
+            'surname.required' => '{"en":"Enter your surname.","ua":"Вкажіть своє прізвище."}',            
+            'about.required' => '{"en":"Write a little about yourself.","ua":"Напишіть трохи про себе."}',
+            'phone.numeric' => '{"en":"The phone number must be a number.","ua":"Номер телефону має бути числом."}',
+            'phone.digits' => '{"en":"The phone number must contain 9 digits.","ua":"Номер телефону має містити 9 цифр."}',            
+            'email.required' => '{"en":"Enter your email.","ua":"Вкажіть свій email."}',
+            'email.unique' => '{"en":"The email address must be unique.","ua":"Адреса електронної пошти має бути унікальною."}', 
+            'country.required' => '{"en":"Specify your country of residence.","ua":"Вкажіть країну проживання."}',
+            'city.required' => '{"en":"Enter your city.","ua":"Вкажіть своє місто."}',
+            'password.confirmed' => '{"en":"The password confirmation is incorrect.","ua":"Підтвердження пароля вказано некоректно."}',           
+            'password.min' => '{"en":"The password must consist of at least 3 characters.","ua":"Пароль має складатися щонайменше з 3 символів."}',
+            'password.required' => '{"en":"Enter your password.","ua":"Вкажіть свій пароль."}',
 
-            'phone.required' => 'Укажите свой номер телефона.',            
-            'gender.required' => 'Укажите свой пол.',
-            'age.required' => 'Укажите дату своего рождения.',            
-            'animal_work.required' => 'Укажите готовы ли вы работать в доме с домашними животными.'            
+            'phone.required' => '{"en":"Enter your phone number.","ua":"Вкажіть свій номер телефону."}',            
+            'gender.required' => '{"en":"Please indicate your gender.","ua":"Вкажіть свою стать."}',
+            'age.required' => '{"en":"Enter your date of birth.","ua":"Вкажіть дату свого народження."}',            
+            'animal_work.required' => '{"en":"Indicate whether you are ready to work in a house with pets.","ua":"Вкажіть чи готові ви працювати в будинку з домашніми тваринами."}'
         ];
     }
 }

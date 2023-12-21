@@ -112,8 +112,12 @@ export const useUserStore = defineStore('user', {
                     router.push({name: "Account"});                   
                 })
                 .catch(error => { 
-                    //console.log(error);
-                    this.register_error = error.response.data.errors; 
+                    if(error) {
+                        this.register_error = error.response.data.errors;
+                        for (const key in this.register_error) {
+                            this.register_error[key][0] = JSON.parse(this.register_error[key][0]);
+                        }
+                    } 
                 })
         },
         CREATE_USER(data){                                    
