@@ -1,11 +1,11 @@
 <template>
-    <form class="category_form" @submit.prevent="createPhoto">               
+    <form class="category_form" @submit.prevent="createPhoto">
         <div ref="dropzone" class="category_dropzone">
             Добавьте изображение...
-        </div>                                            
-        <button class="category_form_btn" type="submit" > Сохранить изображение </button>        
+        </div>
+        <button class="category_form_btn" type="submit"> Сохранить изображение </button>
     </form>
-    
+
     <div class="register_error">{{ image_error }}</div>
 </template>
 
@@ -25,38 +25,38 @@ export default {
         return { User };
     },
     methods: {
-        createPhoto(){                
+        createPhoto() {
             const data = new FormData()
             const files = this.dropzone.getAcceptedFiles()
-            if(files.length === 1) {
+            if (files.length === 1) {
                 this.image_error = '';
                 files.forEach(file => {
-                    if(file.size < 900000) {
+                    if (file.size < 2000000) {
                         data.append('images[]', file);
-                        this.dropzone.removeFile(file);                        
-                    } else { this.image_error = 'Размер изображения не должен привышать 0,9мб.'; }                                    
+                        this.dropzone.removeFile(file);
+                    } else { this.image_error = 'Размер изображения не должен привышать 2мб.'; }
                 })
-                if(this.image_error === '') {
+                if (this.image_error === '') {
                     data.append('user_id', localStorage.userID);
-                    if(localStorage.user_image) { this.User.DELETE_PHOTO(localStorage.userID); }                
+                    if (localStorage.user_image) { this.User.DELETE_PHOTO(localStorage.userID); }
                     this.User.CREATE_PHOTO(data);
-                }                                                               
-            } else if(files.length === 0) {
+                }
+            } else if (files.length === 0) {
                 this.image_error = 'Добавьте фото.';
             } else {
                 this.image_error = 'Добавьте только одно фото.';
-            }                                                                        
+            }
         },
     },
-    mounted() { 
-        this.User.GET_TOKEN();       
+    mounted() {
+        //this.User.GET_TOKEN();
         this.dropzone = new Dropzone(this.$refs.dropzone, {
             url: "/api/photo",
             autoProcessQueue: false,
             addRemoveLinks: true,
             //maxFiles: 1
         });
-        this.image_error = '';         
+        this.image_error = '';
     },
 }
 </script>
@@ -69,5 +69,5 @@ export default {
     cursor: pointer;
     font-size: 20px;
     line-height: 2;
-}    
+}
 </style>

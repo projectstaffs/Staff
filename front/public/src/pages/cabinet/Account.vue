@@ -42,7 +42,7 @@ export default {
     },
     mounted() {
         this.User.GET_USER();
-        this.User.GET_TOKEN();
+        //this.User.GET_TOKEN();
         this.name = this.User.user.name;
         this.surname = this.User.user.surname;
         this.about = this.User.user.about;

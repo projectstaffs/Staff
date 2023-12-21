@@ -108,7 +108,7 @@ export default {
         }
     },
     mounted() {
-        this.User.GET_TOKEN();
+        //this.User.GET_TOKEN();
         this.User.GET_USER();
         this.Store.GET_COUNTRYS();
         this.Store.GET_CITYS();

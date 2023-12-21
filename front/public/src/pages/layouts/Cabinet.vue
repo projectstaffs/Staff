@@ -7,7 +7,7 @@
                 <div class="cabinet">
                     <div class="cabinet_sidebar">
                         <div class="cabinet_box">
-                            <img v-if="photo" class="cabinet_img" :src="photo" alt="">
+                            <img v-if="User.photo" class="cabinet_img" :src="User.photo" alt="">
                             <div v-else class="cabinet_noimg">{{ $t('cabinet.no_img') }}</div>
                         </div>
                         <div @click.prevent="account" class="sidebar_item">{{ $t('cabinet.item1') }}</div>
@@ -30,11 +30,6 @@
 import { useUserStore } from '../../stores/user';
 export default {
     name: "Cabinet",
-    data() {
-        return {
-            photo: '',
-        }
-    },
     setup() {
         const User = useUserStore();
         return { User };
@@ -60,8 +55,9 @@ export default {
         },
     },
     mounted() {
-        //this.photo = localStorage.user_image;
         this.User.GET_USER();
+        this.User.GET_PHOTO();
+        this.User.GET_TOKEN();
     },
 }
 </script>

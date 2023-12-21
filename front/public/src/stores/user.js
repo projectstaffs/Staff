@@ -9,6 +9,7 @@ export const useUserStore = defineStore('user', {
             user: {},
             users: {}, 
             token: '',
+            photo: '',
             login_error: '',
             forgot_error: '',
             register_error: null,
@@ -18,7 +19,10 @@ export const useUserStore = defineStore('user', {
     actions: {  
         GET_TOKEN(){
             this.token = localStorage.access_token;
-        },      
+        }, 
+        GET_PHOTO(){
+            this.photo = localStorage.user_image;
+        },     
         GET_ADMINID(){            
             api.get('api/auth/admin')
                 .then((res) => {                
@@ -29,7 +33,8 @@ export const useUserStore = defineStore('user', {
         CREATE_PHOTO(data){            
             api.post('api/auth/photo', data)
                 .then((res) => {   
-                    //console.log(res);                                
+                    //console.log(res); 
+                    this.photo = res.data.url;                               
                     localStorage.user_image = res.data.preview_url;
                     router.push({name: "Account"});                 
                 })

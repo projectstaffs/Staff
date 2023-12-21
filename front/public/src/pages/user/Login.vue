@@ -66,7 +66,7 @@ export default {
         forgot() { this.$router.push({ name: "Forgot" }) },
     },
     mounted() {
-        this.User.GET_TOKEN();
+        //this.User.GET_TOKEN();
         if (localStorage.userLogin) { this.new_user.email = localStorage.userLogin }
     },
 }

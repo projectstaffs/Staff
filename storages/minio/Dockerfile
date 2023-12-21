@@ -1,10 +1,10 @@
-FROM minio/minio:latest
+FROM docker.io/alexnik2411/minio:8.4.3
 
 
 # Установка утилиты mc Мы удалили
-RUN curl -LO https://dl.min.io/client/mc/release/linux-amd64/mc && \
-    chmod +x mc && \
-    mv mc /usr/bin/mc
+#RUN curl -LO https://dl.min.io/client/mc/release/linux-amd64/mc && \
+#    chmod +x mc && \
+#    mv mc /usr/bin/mc
 
 
 # скопировать файл настройки хранилища

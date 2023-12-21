@@ -107,7 +107,7 @@ export default {
         handleMouseOut() { this.isHovered = false; },
     },
     mounted() {
-        this.User.GET_TOKEN();
+        //this.User.GET_TOKEN();
     },
 }
 </script>

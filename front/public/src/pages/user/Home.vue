@@ -202,19 +202,19 @@
 </template>
 
 <script>
-import { useUserStore } from '../../stores/user';
-import { useReviewStore } from '../../stores/review';
-import { useViewsStore } from '../../stores/views';
-import { useDataStore } from '../../stores/variables';
+//import { useUserStore } from '../../stores/user';
+//import { useReviewStore } from '../../stores/review';
+//import { useViewsStore } from '../../stores/views';
+//import { useDataStore } from '../../stores/variables';
 export default {
     name: "Home",
-    setup() {
+    /*setup() {
         const User = useUserStore();
         const Review = useReviewStore();
         const Views = useViewsStore();
         const Store = useDataStore();
-        return { User /*, Review, Views, Store*/ };
-    },
+        return { User /*, Review, Views, Store };
+    },*/
     methods: {
         test() {
             this.Review.TEST_REVIEW('Some');
@@ -224,7 +224,7 @@ export default {
         seekers() { this.$router.push({ name: "Seekers" }) },
     },
     mounted() {
-        this.User.GET_TOKEN();
+        //this.User.GET_TOKEN();
         //this.Review.GET_REVIEWS();
 
         //this.Views.GET_WORKERBABY();
