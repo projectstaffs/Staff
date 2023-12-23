@@ -1,9 +1,10 @@
 <template>
-    <form class="category_form" @submit.prevent="createPhoto">
-        <div ref="dropzone" class="category_dropzone">
-            Добавьте изображение...
+    <form @submit.prevent="createPhoto">
+        <div class="edit_title">{{ $t('cabinet.no_img') }}</div>
+        <div ref="dropzone" class="photo_dropzone">
+            <img src="../../assets/img/phone/photo_icon.svg" alt="">
         </div>
-        <button class="category_form_btn" type="submit"> Сохранить изображение </button>
+        <button class="btn" type="submit"> {{ $t('cabinet.img_save') }} </button>
     </form>
 
     <div class="register_error">{{ image_error }}</div>
@@ -62,12 +63,20 @@ export default {
 </script>
 
 <style>
-.category_dropzone {
-    min-height: 50px;
-    text-align: center;
-    background-color: aquamarine;
+.photo_dropzone {
+    width: 150px;
+    height: 150px;
     cursor: pointer;
-    font-size: 20px;
-    line-height: 2;
+    border-radius: 10px;
+    border: 1px dashed #5C4538;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px auto 24px;
+    transition: background 0.3s;
+}
+
+.photo_dropzone:hover {
+    background: #5C4538;
 }
 </style>

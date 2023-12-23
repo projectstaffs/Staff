@@ -13,11 +13,8 @@ return new class extends Migration
     {
         Schema::create('credentials', function (Blueprint $table) {
             $table->id();
-            $table->string('full_name');
-            $table->string('email');
-            $table->integer('phone');
-            $table->text('content');
-            $table->integer('user_id');
+            $table->string('title');
+            $table->string('icon');
             $table->timestamps();
         });
     }

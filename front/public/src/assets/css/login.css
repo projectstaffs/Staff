@@ -44,11 +44,59 @@
     background: #FFF;
 }
 
+.login_form_phone { 
+    display: flex;
+    align-items: center;   
+    width: 175px;
+    position: relative;
+    cursor: pointer;
+    color: #1E1510;
+}
+
+.login_form_dropdown {
+    display: flex;
+}
+
+.login_form_dropdown-list {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    top: 46px;
+    cursor: pointer;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    display: none;
+}
+
+.login_form_phone.is_active .login_form_dropdown-list {
+    display: block;
+}
+
+.login_form_dropdown-list li {
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    padding: 0px 10px;
+}
+
+.login_form_dropdown-list li:hover {
+    background: lightskyblue;
+}
+
+.login_form_dropdown-icon {
+    margin-right: 8px;
+}
+
 .auth_arrow {    
     appearance: none;
     background-image: url('../img/down_arrow.svg');
     background-repeat: no-repeat;
-    background-position: right 1rem center;
+    background-position: right 15px center;
     background-size: 1em;
 }
 
@@ -112,8 +160,4 @@
 .register_phone {
     display: flex;
     align-items: center;
-}
-
-.register_phone span {
-    margin-bottom: 7px;
 }

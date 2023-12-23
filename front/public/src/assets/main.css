@@ -113,3 +113,11 @@ body {
 .btn:hover {
     background: #5C4538;
 } 
+
+.edit_title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 120%;
+    margin-bottom: 24px;
+}

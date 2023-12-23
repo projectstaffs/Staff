@@ -11,7 +11,8 @@
     },
     "cabinet": {
         "title": "User account",
-        "no_img": "Add a photo.",
+        "no_img": "Upload your photo",
+        "img_save": "Download photo",
         "item1": "My profile",
         "item2": "Edit profile",
         "item3": "My photo",

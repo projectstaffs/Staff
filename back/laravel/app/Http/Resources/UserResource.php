@@ -9,6 +9,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use App\Models\User\Image;
 use App\Models\Data\City;
 use App\Models\Data\Country;
+use App\Models\Forms\Credential;
 use Carbon\Carbon;
 
 class UserResource extends JsonResource
@@ -20,6 +21,17 @@ class UserResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        if(!Cache::has('credentials')) { Cache::put('credentials', Credential::all()); }
+        $Credential = Cache::get('credentials');
+        $phone_code = '';
+        foreach ($Credential as $item) {
+            if($item->id == $this->phone_code) {
+                //$country = $item->title; 
+                $phone_code = $item;                               
+                break;
+            }                           
+        }
+
         if(!Cache::has('countries')) { Cache::put('countries', Country::all()); }
         $Country = Cache::get('countries');
         $country = '';
@@ -63,8 +75,9 @@ class UserResource extends JsonResource
             'role' => $this->role,
             'confirmed' => $this->confirmed,
             'surname' => $this->getTranslations('surname'),
-            'phone_number' => "+380" . $this->phone,
+            'phone_number' => $phone_code->title . $this->phone,
             'phone' => $this->phone,
+            'phone_code' => $phone_code,
             'gender' => $this->getTranslations('gender'),
             'age' => $this->age,
             'current_age' => $current_age,                

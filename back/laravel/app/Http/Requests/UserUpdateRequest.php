@@ -30,6 +30,7 @@ class UserUpdateRequest extends FormRequest
             'confirmed' => 'required|boolean',
             'surname' => 'required',
             'phone' => 'required|numeric|digits:9',
+            'phone_code' => 'required|string',
             
             'gender' => 'required',
             'age' => 'required|date',                
@@ -51,6 +52,7 @@ class UserUpdateRequest extends FormRequest
             'email.required' => '{"en":"Enter your email.","ua":"Вкажіть свій email."}',
             'email.unique' => '{"en":"The email address must be unique.","ua":"Адреса електронної пошти має бути унікальною."}', 
             'country.required' => '{"en":"Specify your country of residence.","ua":"Вкажіть країну проживання."}',
+            'phone_code.required' => '{"en":"Enter country code.","ua":"Вкажіть код країни."}',
             'city.required' => '{"en":"Enter your city.","ua":"Вкажіть своє місто."}',
             'password.confirmed' => '{"en":"The password confirmation is incorrect.","ua":"Підтвердження пароля вказано некоректно."}',           
             'password.min' => '{"en":"The password must consist of at least 3 characters.","ua":"Пароль має складатися щонайменше з 3 символів."}',

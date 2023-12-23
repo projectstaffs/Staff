@@ -24,6 +24,7 @@ return new class extends Migration
 
             $table->string('surname');            
             $table->integer('phone');
+            $table->string('phone_code');
             $table->string('gender');
             $table->date('age');
             $table->string('animal_work');

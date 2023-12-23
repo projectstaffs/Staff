@@ -1,5 +1,6 @@
 <template>
     <div class="edit_title">{{ $t('cabinet.edit_title') }}</div>
+
     <form @submit.prevent="change_User" class="login_form edit_fix">
         <div class="login_start">
             <div class="login_form_text">{{ $t('register.item1') }}</div>
@@ -16,7 +17,18 @@
                 :placeholder="$t('register.item2_holder_en')">
             <div class="login_form_text">{{ $t('register.item3') }}</div>
             <div class="register_phone">
-                <span>+380</span> &nbsp;&nbsp; <input v-model="User.user.phone" required class="login_form_item" type="tel"
+                <div class="login_form_item login_form_phone auth_arrow">
+                    <div class="login_form_dropdown">
+                        <img :src="selectedOption.icon" alt="" class="login_form_dropdown-icon">
+                        {{ selectedOption.title }}
+                    </div>
+                    <ul class="login_form_dropdown-list">
+                        <li v-for="option in Credential.credentials" :key="option.id" @click.prevent="selectOption(option)">
+                            <img :src="option.icon" alt="" class="login_form_dropdown-icon">
+                            {{ option.title }}
+                        </li>
+                    </ul>
+                </div> &nbsp;&nbsp; <input v-model="User.user.phone" required class="login_form_item" type="tel"
                     :placeholder="$t('register.item3_holder')">
             </div>
             <div class="login_form_text">{{ $t('register.item4') }}</div>
@@ -76,6 +88,7 @@
 import { useI18n } from 'vue-i18n';
 import { useUserStore } from '../../stores/user';
 import { useDataStore } from '../../stores/variables';
+import { useCredentialStore } from '../../stores/credential';
 export default {
     name: "Edit",
     data() {
@@ -91,45 +104,48 @@ export default {
             name: {},
             surname: {},
             about: {},
+            test: {},
+            selectedOption: {},
         }
     },
     setup() {
         const User = useUserStore();
         const Store = useDataStore();
+        const Credential = useCredentialStore();
         const { t, locale } = useI18n({ useScope: 'global' });
-        return { t, locale, User, Store };
+        return { t, locale, User, Store, Credential };
     },
     methods: {
         change_User() {
             this.User.user.name = this.name;
             this.User.user.surname = this.surname;
             this.User.user.about = this.about;
+            this.User.user.phone_code = this.this.selectedOption.id;
             this.User.UPDATE_USER(this.User.user);
-        }
+        },
+        selectOption(option) {
+            this.selectedOption = option;
+            //console.log(this.selectedOption.id);
+        },
     },
     mounted() {
         //this.User.GET_TOKEN();
         this.User.GET_USER();
         this.Store.GET_COUNTRYS();
         this.Store.GET_CITYS();
+        this.Credential.GET_CREDENTIALS();
         this.User.register_error = null;
 
         this.name = this.User.user.name;
         this.surname = this.User.user.surname;
         this.about = this.User.user.about;
+        this.selectedOption.title = this.User.user.phone_code.title;
+        this.selectedOption.icon = this.User.user.phone_code.icon;
     },
 }
 </script>
 
 <style>
-.edit_title {
-    text-align: center;
-    font-size: 24px;
-    font-weight: 500;
-    line-height: 120%;
-    margin-bottom: 24px;
-}
-
 .edit_fix {
     position: static;
     transform: none;

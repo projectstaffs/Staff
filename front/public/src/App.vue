@@ -91,6 +91,15 @@ export default {
                     closeWindow(previousActive);
                     showWindow(e.target);
                 }
+                // Выпадающий список номеров телефонов
+                var dropdown = closestItemByClass(e.target, 'login_form_phone');
+                if (dropdown !== null) {
+                    if (dropdown.classList.contains('is_active')) { closeWindow(dropdown); }
+                    else { showWindow(dropdown); }
+                } else {
+                    var dropdownList = document.querySelector('.login_form_phone.is_active');
+                    if (dropdownList) { closeWindow(dropdownList); }
+                }
                 // Закрытие окна по кнопкам либо пустому месту
                 if (e.target.classList.contains('window_btn') || e.target.classList.contains('window_inner') || e.target.classList.contains('close_btn')) {
                     var window = closestItemByClass(e.target, 'window');

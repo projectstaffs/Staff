@@ -62,7 +62,7 @@ class UserController extends Controller
                'en' => $request->surname['en'],
                'ua' => $request->surname['ua']
             ], 
-            'phone' => $request->phone, 
+            'phone' => $request->phone, 'phone_code' => $request->phone_code, 
             'gender' => [
                'en' => $request->gender['en'],
                'ua' => $request->gender['ua']
@@ -124,7 +124,7 @@ class UserController extends Controller
                'en' => $request->surname['en'],
                'ua' => $request->surname['ua']
             ];
-        $user->phone = $request['phone']; 
+        $user->phone = $request['phone']; $user->phone_code = $request['phone_code'];
         $user->gender = [
                'en' => $request->gender['en'],
                'ua' => $request->gender['ua']
