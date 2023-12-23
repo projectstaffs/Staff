@@ -1,9 +1,11 @@
 <template>
     <form @submit.prevent="createPhoto">
         <div class="edit_title">{{ $t('cabinet.no_img') }}</div>
-        <div ref="dropzone" class="photo_dropzone">
-            <img src="../../assets/img/phone/photo_icon.svg" alt="">
+        <div class="photo">
+            <img class="photo_dropzone_img" src="../../assets/img/phone/photo_icon.svg" alt="">
+            <div ref="dropzone" class="photo_dropzone"></div>
         </div>
+
         <button class="btn" type="submit"> {{ $t('cabinet.img_save') }} </button>
     </form>
 
@@ -63,20 +65,29 @@ export default {
 </script>
 
 <style>
-.photo_dropzone {
-    width: 150px;
-    height: 150px;
+.photo {
+    width: 400px;
+    height: 400px;
     cursor: pointer;
     border-radius: 10px;
-    border: 1px dashed #5C4538;
+    margin: 0px auto 24px;
+    background: #5C4538;
+    position: relative;
+}
+
+.photo_dropzone_img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.photo_dropzone {
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0px auto 24px;
-    transition: background 0.3s;
-}
-
-.photo_dropzone:hover {
-    background: #5C4538;
+    position: relative;
 }
 </style>
