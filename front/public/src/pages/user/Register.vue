@@ -25,8 +25,20 @@
                                     :placeholder="$t('register.item2_holder_en')">
                                 <div class="login_form_text">{{ $t('register.item3') }}</div>
                                 <div class="register_phone">
-                                    <span>+380</span> &nbsp;&nbsp; <input v-model="user.phone" required
-                                        class="login_form_item" type="tel" :placeholder="$t('register.item3_holder')">
+                                    <div class="login_form_item login_form_phone auth_arrow">
+                                        <div class="login_form_dropdown">
+                                            <img :src="selectedOption.icon" alt="" class="login_form_dropdown-icon">
+                                            {{ selectedOption.title }}
+                                        </div>
+                                        <ul class="login_form_dropdown-list">
+                                            <li v-for="option in Credential.credentials" :key="option.id"
+                                                @click.prevent="selectOption(option)">
+                                                <img :src="option.icon" alt="" class="login_form_dropdown-icon">
+                                                {{ option.title }}
+                                            </li>
+                                        </ul>
+                                    </div> &nbsp;&nbsp; <input v-model="user.phone" required class="login_form_item"
+                                        type="tel" :placeholder="$t('register.item3_holder')">
                                 </div>
                                 <div class="login_form_text">{{ $t('register.item4') }}</div>
                                 <input v-model="user.email" required class="login_form_item" type="email"
@@ -90,6 +102,7 @@
 import { useI18n } from 'vue-i18n';
 import { useUserStore } from '../../stores/user';
 import { useDataStore } from '../../stores/variables';
+import { useCredentialStore } from '../../stores/credential';
 export default {
     name: "Register",
     data() {
@@ -106,13 +119,15 @@ export default {
                 { value: { en: "Yes", ua: "Так" } },
                 { value: { en: "No", ua: "Ні" } }
             ],
+            selectedOption: {},
         }
     },
     setup() {
         const User = useUserStore();
         const Store = useDataStore();
+        const Credential = useCredentialStore();
         const { t, locale } = useI18n({ useScope: 'global' });
-        return { t, locale, User, Store };
+        return { t, locale, User, Store, Credential };
     },
     methods: {
         register() {
@@ -121,14 +136,20 @@ export default {
             this.user.about = this.about;
             this.user.role = "Исполнитель";
             this.user.confirmed = true;
+            this.user.phone_code = this.selectedOption.id;
 
             this.User.CREATE_USER(this.user);
+        },
+        selectOption(option) {
+            this.selectedOption = option;
+            //console.log(this.selectedOption.id);
         },
     },
     mounted() {
         this.User.GET_TOKEN();
         this.Store.GET_COUNTRYS();
         this.Store.GET_CITYS();
+        this.Credential.GET_CREDENTIALS();
         this.User.register_error = null;
     },
 }

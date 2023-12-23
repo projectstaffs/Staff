@@ -30,7 +30,7 @@ class UserRequest extends FormRequest
             'confirmed' => 'required|boolean',
             'surname' => 'required',            
             'phone' => 'required|numeric|digits:9',
-            'phone_code' => 'required|string',
+            'phone_code' => 'required',
             
             'gender' => 'required',
             'age' => 'required',            

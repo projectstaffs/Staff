@@ -117,7 +117,7 @@ function ($router) {
         Route::get('/message_in', [HelpController::class, 'getMessage_in']);
         Route::resource('/message', MessageController::class); //message out
         Route::resource('/review', ReviewController::class);
-        Route::resource('/credential', CredentialController::class);
+        
         Route::resource('/photo', ImageController::class);
         Route::resource('/language', LanguageController::class);
         Route::resource('/children', ChildrenController::class);
@@ -183,6 +183,7 @@ function ($router) {
 Route::resource('/user', UserController::class);
 Route::resource('/country', CountryController::class);
 Route::resource('/city', CityController::class);
+Route::resource('/credential', CredentialController::class);
 
 Route::post('/forgot_password', [HelpController::class, 'forgotPassword']);
 Route::post('/changelang', [HelpController::class, 'changeLang']);
