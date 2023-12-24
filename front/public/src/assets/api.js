@@ -32,8 +32,8 @@ api.interceptors.response.use({}, error => {
     }
 
     if(error.response.status === 422) {
-        const User = useUserStore();
-        User.global_error = error.response.data.errors;
+        //const User = useUserStore();
+        //User.global_error = error.response.data.errors;
         throw error;
     }
 

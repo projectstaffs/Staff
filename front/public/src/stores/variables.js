@@ -18,8 +18,7 @@ export const useDataStore = defineStore('variables', {
             hourlypayments: {}, 
             housekeeperduties: {}, 
             housekeeperpreferences: {}, 
-            housekeepertypeofworks: {}, 
-            joboptions: {}, 
+            housekeepertypeofworks: {},
             monthlypayments: {}, 
             nurseduties: {}, 
             nursetypeofworks: {}, 
@@ -67,13 +66,6 @@ export const useDataStore = defineStore('variables', {
                 })
                 .catch(error => { console.log(error); })
         },
-        GET_EMPLOYMENTS(){
-            api.get('http://localhost/api/auth/employment')
-                .then(res => {                    
-                    this.employments = res.data;
-                })
-                .catch(error => { console.log(error); })
-        },
         GET_EXPERIENCES(){
             api.get('http://localhost/api/auth/experience')
                 .then(res => {                    
@@ -109,13 +101,6 @@ export const useDataStore = defineStore('variables', {
                 })
                 .catch(error => { console.log(error); })
         },
-        GET_JOBOPTIONS(){
-            api.get('http://localhost/api/auth/joboption')
-                .then(res => {                    
-                    this.joboptions = res.data;
-                })
-                .catch(error => { console.log(error); })
-        },
         GET_MONTHLYPAYMENTS(){
             api.get('http://localhost/api/auth/monthlypayment')
                 .then(res => {                    
@@ -141,13 +126,6 @@ export const useDataStore = defineStore('variables', {
             api.get('http://localhost/api/auth/nursingskill')
                 .then(res => {                    
                     this.nursingskills = res.data;
-                })
-                .catch(error => { console.log(error); })
-        },
-        GET_RECOMMENDATIONS(){
-            api.get('http://localhost/api/auth/recommendation')
-                .then(res => {                    
-                    this.recommendations = res.data;
                 })
                 .catch(error => { console.log(error); })
         },

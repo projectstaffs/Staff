@@ -46,17 +46,19 @@ class BabyController extends Controller
     {
         $baby = new Baby([
             'user_id' => $request->user_id,
-            'baby_exp' => $request->baby_exp,
+            'baby_exp' => [
+               'en' => $request->baby_exp['en'],
+               'ua' => $request->baby_exp['ua']
+            ],
             'experience_id' => $request->experience_id,
-            'recommendation_id' => $request->recommendation_id,
-            'education_about' => $request->education_about,
             'workperiod_id' => $request->workperiod_id,
-            'employment_id' => $request->employment_id,
             'childrencount_id' => $request->childrencount_id,                                    
-            'children_invalid' => $request->children_invalid,
+            'children_invalid' => [
+               'en' => $request->children_invalid['en'],
+               'ua' => $request->children_invalid['ua']
+            ],
             'hourpay_id' => $request->hourpay_id,
             'monthpay_id' => $request->monthpay_id,
-            'additional' => $request->additional,
             'confirmed' => $request->confirmed,
         ]);                
         $baby->save();
@@ -89,15 +91,11 @@ class BabyController extends Controller
         $baby = Baby::find($id);       
         $baby->baby_exp = $request['baby_exp'];
         $baby->experience_id = $request['experience_id'];
-        $baby->recommendation_id = $request['recommendation_id'];
-        $baby->education_about = $request['education_about'];
         $baby->workperiod_id = $request['workperiod_id'];
-        $baby->employment_id = $request['employment_id'];
         $baby->childrencount_id = $request['childrencount_id'];                                    
         $baby->children_invalid = $request['children_invalid'];
         $baby->hourpay_id = $request['hourpay_id'];
         $baby->monthpay_id = $request['monthpay_id'];
-        $baby->additional = $request['additional'];
         $baby->save(); 
 
         Cache::put('babies', Baby::all());

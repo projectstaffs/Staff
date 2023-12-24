@@ -1,0 +1,8 @@
+.anketa {
+    width: 600px;
+    margin: 0 auto;
+}
+
+.anketa_errors {
+    min-height: 50px;
+}

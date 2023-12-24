@@ -12,8 +12,7 @@ export const useUserStore = defineStore('user', {
             photo: '',
             login_error: '',
             forgot_error: '',
-            register_error: null,
-            global_error: null                     
+            register_error: null,                    
         }
     },
     actions: {  

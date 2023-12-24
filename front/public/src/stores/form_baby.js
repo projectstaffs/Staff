@@ -6,7 +6,8 @@ export const useForm_BabyStore = defineStore('form_baby', {
     state: () => {
         return {
             baby: {},
-            baby_options: {}
+            baby_options: {},
+            errors: null
         }
     },
 
@@ -20,7 +21,6 @@ export const useForm_BabyStore = defineStore('form_baby', {
                     api.post('api/auth/formagegroup/' + data[1], {_method: 'DELETE'})
                     api.post('api/auth/formdutie/' + data[1], {_method: 'DELETE'})
                     api.post('api/auth/formeducation/' + data[1], {_method: 'DELETE'})
-                    api.post('api/auth/formjoboption/' + data[1], {_method: 'DELETE'})
                     api.post('api/auth/formtypework/' + data[1], {_method: 'DELETE'})
                 })
                 .catch(error => { console.log(error); })
@@ -33,7 +33,6 @@ export const useForm_BabyStore = defineStore('form_baby', {
                     api.post('api/auth/formagegroup/' + data[0].id, {_method: 'DELETE'})
                     api.post('api/auth/formdutie/' + data[0].id, {_method: 'DELETE'})
                     api.post('api/auth/formeducation/' + data[0].id, {_method: 'DELETE'})
-                    api.post('api/auth/formjoboption/' + data[0].id, {_method: 'DELETE'})
                     api.post('api/auth/formtypework/' + data[0].id, {_method: 'DELETE'})
                         
                     let user_language = {};
@@ -66,19 +65,9 @@ export const useForm_BabyStore = defineStore('form_baby', {
                     })                  
                     this.CREATE_FORMTYPEWORK([result_typework, result_typework.length]);
     
-                    let joboption = {};
-                    let result_joboption = [];
-                    data[4].forEach((element) => {                               
-                        joboption.form_id = data[0].id;
-                        joboption.joboption_id = element;
-                        result_joboption.push(joboption);
-                        joboption = {};                                                               
-                    })                  
-                    this.CREATE_FORMJOBOPTION([result_joboption, result_joboption.length]);
-    
                     let dutie = {};
                     let result_dutie = [];
-                    data[5].forEach((element) => {                               
+                    data[4].forEach((element) => {                               
                         dutie.form_id = data[0].id;
                         dutie.dutie_id = element;
                         result_dutie.push(dutie);
@@ -88,7 +77,7 @@ export const useForm_BabyStore = defineStore('form_baby', {
     
                     let agegroup = {};
                     let result_agegroup = [];
-                    data[6].forEach((element) => {                               
+                    data[5].forEach((element) => {                               
                         agegroup.form_id = data[0].id;
                         agegroup.agegroup_id = element;
                         result_agegroup.push(agegroup);
@@ -101,7 +90,8 @@ export const useForm_BabyStore = defineStore('form_baby', {
         },
         CREATE_BABY(data){                    
             api.post('api/auth/baby', data[0])
-                .then((res) => {                 
+                .then((res) => { 
+                    this.errors = null;                
                     let user_language = {};
                     let result = [];
                     data[1].forEach((element) => {                               
@@ -132,19 +122,9 @@ export const useForm_BabyStore = defineStore('form_baby', {
                     })                  
                     this.CREATE_FORMTYPEWORK([result_typework, result_typework.length]);
     
-                    let joboption = {};
-                    let result_joboption = [];
-                    data[4].forEach((element) => {                               
-                        joboption.form_id = res.data.id;
-                        joboption.joboption_id = element;
-                        result_joboption.push(joboption);
-                        joboption = {};                                                               
-                    })                  
-                    this.CREATE_FORMJOBOPTION([result_joboption, result_joboption.length]);
-    
                     let dutie = {};
                     let result_dutie = [];
-                    data[5].forEach((element) => {                               
+                    data[4].forEach((element) => {                               
                         dutie.form_id = res.data.id;
                         dutie.dutie_id = element;
                         result_dutie.push(dutie);
@@ -154,7 +134,7 @@ export const useForm_BabyStore = defineStore('form_baby', {
     
                     let agegroup = {};
                     let result_agegroup = [];
-                    data[6].forEach((element) => {                               
+                    data[5].forEach((element) => {                               
                         agegroup.form_id = res.data.id;
                         agegroup.agegroup_id = element;
                         result_agegroup.push(agegroup);
@@ -164,7 +144,13 @@ export const useForm_BabyStore = defineStore('form_baby', {
     
                     this.GET_BABY(data[0].user_id);
                 })
-                .catch(error => { console.log(error); })
+                .catch(error => { 
+                    this.errors = error.response.data.errors;
+                    console.log(this.errors);
+                    for (const key in this.errors) {
+                        this.errors[key][0] = JSON.parse(this.errors[key][0]);
+                    } 
+                })
         },
         GET_BABY(data){ 
             api.get('api/auth/baby', {params: {data}})
@@ -186,15 +172,12 @@ export const useForm_BabyStore = defineStore('form_baby', {
                     for (let i = 0; i < res.data.data.Typeworks.length; i++) {            
                         temp.push(res.data.data.Typeworks[i].id);
                     }
-                    this.baby_options.anketatypeworks = temp; temp = [];
-                    for (let i = 0; i < res.data.data.Joboptions.length; i++) {            
-                        temp.push(res.data.data.Joboptions[i].id);
-                    }   
-                    this.baby_options.anketajoboptions = temp; temp = [];     
+                    this.baby_options.anketatypeworks = temp; temp = [];                         
                     for (let i = 0; i < res.data.data.Duties.length; i++) {            
                         temp.push(res.data.data.Duties[i].id);
                     }
                     this.baby_options.anketaduties = temp; temp = [];
+                    console.log(this.baby);
                 })
                 .catch(error => { console.log(error); })
         },
@@ -218,12 +201,6 @@ export const useForm_BabyStore = defineStore('form_baby', {
         },
         CREATE_FORMEDUCATION(data){            
             api.post('api/auth/formeducation', data)
-                .then((res) => {
-                })
-                .catch(error => { console.log(error); })
-        },
-        CREATE_FORMJOBOPTION(data){            
-            api.post('api/auth/formjoboption', data)
                 .then((res) => {
                 })
                 .catch(error => { console.log(error); })

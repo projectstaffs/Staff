@@ -31,6 +31,27 @@
         "edit_title": "Profile data:",
         "edit_btn": "Save changes"        
     },
+    "w_baby": {
+        "title": "Questionnaire for a babysitter",
+        "text1": "Before filling out the application form, please read the terms of cooperation and basic requirements for candidates. If the terms and conditions are suitable for you and you meet our requirements, start filling out the application form!",
+        "text2": "We do our best to make you feel comfortable working with us. Fill out the questionnaire easily and in a place convenient for you.",
+        "item1_ua": "Experience working with children (in Ukrainian):",
+        "item1_ua_holder": "Describe your experience of working with children in Ukrainian",
+        "item1_en": "Experience working with children (in English):",
+        "item1_en_holder": "Describe your experience working with children in English",
+        "item2": "Experience working with children by age group:",
+        "item3": "Knowledge of foreign languages:",
+        "item4": "Experience working with children:",
+        "item5": "Your education:",
+        "item6": "What kind of job are you looking for?:",
+        "item7": "Period of work:",
+        "item8": "Number of children:",
+        "item9": "Work with disabled children:",
+        "item10": "Duties that you are ready to perform:",
+        "item11": "Hourly pay:",
+        "item12": "Monthly payment:",
+        "btn": "Додати анкету"
+    },
     "main": {
         "top_title": "Home service agency",
         "top_subtitle": "Here your everyday tasks are solved",
