@@ -88,6 +88,7 @@
     <div v-if="Baby.baby" class="anketa">
         <div class="anketa_item">{{ $t('w_baby.title') }}</div>
         <div class="anketa_text"> {{ name[locale] }} {{ surname[locale] }} </div>
+        <div class="anketa_text">{{ $t('baby_anketa.item2') }} {{ country[locale] }}</div>
         <div class="anketa_text">
             {{ $t('baby_anketa.item1') }} {{ User.user.current_age }}
             &nbsp;&nbsp;•&nbsp;&nbsp; {{ city[locale] }}
