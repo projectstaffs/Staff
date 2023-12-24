@@ -90,26 +90,26 @@
         <div class="anketa_text"> {{ name[locale] }} {{ surname[locale] }} </div>
         <div class="anketa_text">
             {{ $t('baby_anketa.item1') }} {{ User.user.current_age }}
-            &nbsp;&nbsp;•&nbsp;&nbsp; {{ $t('baby_anketa.item2')
-            }} {{ experience[locale] }}
             &nbsp;&nbsp;•&nbsp;&nbsp; {{ city[locale] }}
         </div>
-        <div class="anketa_item">{{ $t('baby_anketa.item3') }}</div>
-        <span v-for="(item, index) in typeworks" :key="index" class="anketa_text">{{ item.title.title[locale] }}{{ index <
-            typeworks.length - 1 ? ', ' : '' }} </span>
-                <div class="anketa_item anketa_fix">{{ $t('baby_anketa.item4') }}</div>
-                <div class="anketa_text">{{ User.user.phone_number }}</div>
-                <div class="anketa_item">{{ $t('baby_anketa.item5') }}</div>
-                <div class="anketa_text">
-                    <p>{{ about[locale] }}</p>
-                    <p>{{ experience[locale] }}</p>
-                </div>
-                <div class="anketa_item"> {{ $t('baby_anketa.item6') }} </div>
-                <div class="anketa_text">{{ animal_work[locale] }}</div>
-                <div class="anketa_item">{{ $t('baby_anketa.item7') }}</div>
-                <span class="anketa_text" v-for="(item, index) in languages" :key="index"> {{ item.title.title[locale] }}{{
-                    index < languages.length - 1 ? ', ' : '' }} </span>
-                        <div class="anketa_item anketa_fix">{{ $t('baby_anketa.item9') }}</div>
+        <div class="anketa_item anketa_fix">{{ $t('baby_anketa.item4') }}</div>
+        <div class="anketa_text">{{ User.user.phone_number }}</div>
+        <div class="anketa_item">{{ $t('baby_anketa.item5') }}</div>
+        <div class="anketa_text">
+            <p>{{ about[locale] }}</p>
+            <p>{{ baby_experience[locale] }}</p>
+        </div>
+        <div class="anketa_item"> {{ $t('baby_anketa.item6') }} </div>
+        <div class="anketa_text">{{ animal_work[locale] }}</div>
+        <div class="anketa_item">{{ $t('baby_anketa.item7') }}</div>
+        <span class="anketa_text" v-for="(item, index) in languages" :key="index"> {{ item.title.title[locale] }}{{
+            index < languages.length - 1 ? ', ' : '' }} </span>
+                <div class="anketa_item  anketa_fix">{{ $t('baby_anketa.item3') }}</div>
+                <span v-for="(item, index) in typeworks" :key="index" class="anketa_text">{{ item.title.title[locale] }}{{
+                    index < typeworks.length - 1 ? ', ' : '' }} </span>
+                        <div class="anketa_item anketa_fix">{{ $t('baby_anketa.item8') }}</div>
+                        <div class="anketa_text"> {{ experience[locale] }}</div>
+                        <div class="anketa_item">{{ $t('baby_anketa.item9') }}</div>
                         <span class="anketa_text" v-for="(item, index) in agegroups" :key="index"> {{
                             item.title.title[locale] }}{{ index < agegroups.length - 1 ? ', ' : '' }} </span>
                                 <div class="anketa_item anketa_fix">{{ $t('baby_anketa.item10') }}</div>
@@ -167,7 +167,7 @@ export default {
             experience: {},
             typeworks: {},
             languages: {},
-            experience: {},
+            baby_experience: {},
             agegroups: {},
             educations: {},
             monthpay: {},
@@ -228,7 +228,7 @@ export default {
             this.experience = this.Baby.baby.experience.title;
             this.typeworks = this.Baby.baby.Typeworks;
             this.languages = this.Baby.baby.Languages;
-            this.experience = this.Baby.baby.baby_exp;
+            this.baby_experience = this.Baby.baby.baby_exp;
             this.agegroups = this.Baby.baby.Agegroups;
             this.educations = this.Baby.baby.Educations;
             this.monthpay = this.Baby.baby.monthpay.title;
