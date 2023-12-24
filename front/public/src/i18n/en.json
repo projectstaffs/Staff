@@ -52,6 +52,25 @@
         "item12": "Monthly payment:",
         "btn": "Додати анкету"
     },
+    "baby_anketa": {
+        "item1": "Age (years):",
+        "item2": "Work experience:",
+        "item3": "I provide services:",
+        "item4": "Telephone:",
+        "item5": "About me",
+        "item6": "Willingness to work in a house with pets:",
+        "item7": "Knowledge of languages:",
+        "item8": "Experience and education",
+        "item9": "Experience working with children of the following age groups:",
+        "item10": "Education/courses:",
+        "item11": "Expectations from the desired position:",
+        "item12": "Position:",   
+        "item13": "Desired salary:",
+        "item14": "Maximum number of children in the family for work:",
+        "item15": "Work for a term:",
+        "item16": "Willingness to perform such duties:",     
+        "item17": "Willingness to work with disabled children:"        
+    },
     "main": {
         "top_title": "Home service agency",
         "top_subtitle": "Here your everyday tasks are solved",

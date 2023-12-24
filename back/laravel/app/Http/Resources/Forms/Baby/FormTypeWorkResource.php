@@ -22,7 +22,7 @@ class FormTypeworkResource extends JsonResource
             if($item->id == $this->typework_id) {
                 return [
                     'id' => $this->typework_id,
-                    'title' => $item->title            
+                    'title' => $item            
                 ];                
             }                           
         }

@@ -83,7 +83,7 @@ class BabyResource extends JsonResource
         $children = '';
         foreach ($Children as $item) {
             if($item->id == $this->childrencount_id) {
-                $children = $item->title;                
+                $children = $item;                
                 break;
             }                           
         }
@@ -93,7 +93,7 @@ class BabyResource extends JsonResource
         $workPeriod = '';
         foreach ($WorkPeriod as $item) {
             if($item->id == $this->workperiod_id) {
-                $workPeriod = $item->title;                
+                $workPeriod = $item;                
                 break;
             }                           
         }
@@ -103,7 +103,7 @@ class BabyResource extends JsonResource
         $hourpay = '';
         foreach ($HourlyPayment as $item) {
             if($item->id == $this->hourpay_id) {
-                $hourpay = $item->title;                
+                $hourpay = $item;                
                 break;
             }                           
         }
@@ -113,7 +113,7 @@ class BabyResource extends JsonResource
         $monthpay = '';
         foreach ($MonthlyPayment as $item) {
             if($item->id == $this->monthpay_id) {
-                $monthpay = $item->title;                
+                $monthpay = $item;                
                 break;
             }                           
         }
@@ -123,7 +123,7 @@ class BabyResource extends JsonResource
         $experience = '';
         foreach ($Experience as $item) {
             if($item->id == $this->experience_id) {
-                $experience = $item->title;                
+                $experience = $item;                
                 break;
             }                           
         }
@@ -131,11 +131,11 @@ class BabyResource extends JsonResource
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,
-            'baby_exp' => $this->baby_exp,
+            'baby_exp' => $this->getTranslations('baby_exp'),
             'experience' => $experience,
             'workperiod' => $workPeriod,
             'childrencount' => $children,
-            'children_invalid' => $this->children_invalid,
+            'children_invalid' => $this->getTranslations('children_invalid'),
             'hourpay' => $hourpay,
             'monthpay' => $monthpay,        
             'confirmed' => $this->confirmed,

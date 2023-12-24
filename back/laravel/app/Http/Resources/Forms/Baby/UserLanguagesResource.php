@@ -22,7 +22,7 @@ class UserLanguagesResource extends JsonResource
             if($item->id == $this->language_id) {
                 return [
                     'id' => $this->language_id,
-                    'title' => $item->title            
+                    'title' => $item            
                 ];                
             }                           
         }

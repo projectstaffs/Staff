@@ -177,7 +177,6 @@ export const useForm_BabyStore = defineStore('form_baby', {
                         temp.push(res.data.data.Duties[i].id);
                     }
                     this.baby_options.anketaduties = temp; temp = [];
-                    console.log(this.baby);
                 })
                 .catch(error => { console.log(error); })
         },

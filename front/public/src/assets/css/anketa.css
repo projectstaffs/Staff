@@ -1,8 +1,28 @@
-.anketa {
+.personal {
     width: 600px;
     margin: 0 auto;
 }
 
-.anketa_errors {
+.personal_errors {
     min-height: 50px;
+}
+
+.personal_btns {
+    display: flex;
+    margin-top: 36px;
+}
+
+.anketa_item {  
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 120%;  
+    margin-bottom: 14px;
+} 
+
+.anketa_text {
+    margin-bottom: 14px;
+}  
+
+.anketa_fix {
+    margin-top: 14px;
 }
