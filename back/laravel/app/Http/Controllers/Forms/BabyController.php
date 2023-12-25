@@ -28,7 +28,7 @@ class BabyController extends Controller
 
         //$baby = Baby::where('user_id', $request["data"])->first();
         if($baby) { return new BabyResource($baby); }
-        else { return null; }        
+        else { return 'null'; }        
     }
 
     /**
@@ -89,11 +89,17 @@ class BabyController extends Controller
     public function update(BabyRequest $request, string $id)
     {        
         $baby = Baby::find($id);       
-        $baby->baby_exp = $request['baby_exp'];
+        $baby->baby_exp = [
+               'en' => $request->baby_exp['en'],
+               'ua' => $request->baby_exp['ua']
+            ];
         $baby->experience_id = $request['experience_id'];
         $baby->workperiod_id = $request['workperiod_id'];
         $baby->childrencount_id = $request['childrencount_id'];                                    
-        $baby->children_invalid = $request['children_invalid'];
+        $baby->children_invalid = [
+               'en' => $request->children_invalid['en'],
+               'ua' => $request->children_invalid['ua']
+            ];
         $baby->hourpay_id = $request['hourpay_id'];
         $baby->monthpay_id = $request['monthpay_id'];
         $baby->save(); 

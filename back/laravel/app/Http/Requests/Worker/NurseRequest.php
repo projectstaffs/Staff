@@ -24,26 +24,19 @@ class NurseRequest extends FormRequest
         return [
             'user_id' => 'required|numeric',
             'confirmed' => 'required|boolean',
-            'nurse_exp' => 'required|string',
+            'nurse_exp' => 'required',
             'experience_id' => 'required|numeric',
-            'recommendation_id' => 'required|numeric',
-            'education_about' => 'required|string',
-            'workperiod_id' => 'required|numeric',           
-            'employment_id' => 'required|numeric',
+            'workperiod_id' => 'required|numeric',
             'hourpay_id' => 'required|numeric',
             'monthpay_id' => 'required|numeric',
-            'additional' => 'nullable',
         ];
     }
 
     public function messages() {
         return [
             'nurse_exp.required' => 'Опишите Ваш опыт работы с пристарелыми.',
-            'education_about.required' => 'Подробно опишите полученноое Вами образование.',
             'experience_id.required' => 'Укажите свой опыт работы с пристарелыми.',
-            'recommendation_id.required' => 'Укажите количество рекомендаций.',
             'workperiod_id.required' => 'Укажите период работы.',
-            'employment_id.required' => 'Укажите занятость.',
             'hourpay_id.required' => 'Укажите ожидаемую почасовую оплату.',
             'monthpay_id.required' => 'Укажите ожидаемую помесячную оплату.'
         ];

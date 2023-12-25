@@ -33,6 +33,7 @@
     },
     "w_baby": {
         "title": "Questionnaire for a babysitter",
+        "title_change": "Editing a nanny profile",
         "text1": "Before filling out the application form, please read the terms of cooperation and basic requirements for candidates. If the terms and conditions are suitable for you and you meet our requirements, start filling out the application form!",
         "text2": "We do our best to make you feel comfortable working with us. Fill out the questionnaire easily and in a place convenient for you.",
         "item1_ua": "Experience working with children (in Ukrainian):",

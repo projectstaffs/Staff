@@ -1,6 +1,6 @@
 <template>
+    <div class="edit_title">{{ $t('w_baby.title') }}</div>
     <form v-if="!Baby.baby" @submit.prevent="createForm" class="personal">
-        <div class="edit_title">{{ $t('w_baby.title') }}</div>
         <div class="login_form_text">{{ $t('w_baby.item1_ua') }}</div>
         <textarea v-model="baby_exp.ua" required class="login_form_item register_textarea"
             :placeholder="$t('w_baby.item1_ua_holder')"></textarea>
@@ -86,7 +86,6 @@
     </form>
 
     <div v-if="Baby.baby" class="anketa">
-        <div class="anketa_item">{{ $t('w_baby.title') }}</div>
         <div class="anketa_text"> {{ name[locale] }} {{ surname[locale] }} </div>
         <div class="anketa_text">{{ $t('baby_anketa.item2') }} {{ country[locale] }}</div>
         <div class="anketa_text">
@@ -156,7 +155,6 @@ export default {
                 { value: { en: "No", ua: "Ні" } }
             ],
             errors: {},
-            baby_exp: {},
 
             name: {},
             surname: {},
@@ -165,6 +163,7 @@ export default {
             city: {},
             animal_work: {},
 
+            baby_exp: {}, // Вввод описания опыта в 2 языках
             experience: {},
             typeworks: {},
             languages: {},
@@ -225,20 +224,22 @@ export default {
         this.country = this.User.user.country_title.title;
         this.city = this.User.user.city_title.title;
         this.animal_work = this.User.user.animal_work;
-        setTimeout(() => {
-            this.experience = this.Baby.baby.experience.title;
-            this.typeworks = this.Baby.baby.Typeworks;
-            this.languages = this.Baby.baby.Languages;
-            this.baby_experience = this.Baby.baby.baby_exp;
-            this.agegroups = this.Baby.baby.Agegroups;
-            this.educations = this.Baby.baby.Educations;
-            this.monthpay = this.Baby.baby.monthpay.title;
-            this.childrencount = this.Baby.baby.childrencount.title;
-            this.workperiod = this.Baby.baby.workperiod.title;
-            this.duties = this.Baby.baby.Duties;
-            this.children_invalid = this.Baby.baby.children_invalid;
-        }, 250);
 
+        if (this.Baby.baby) {
+            setTimeout(() => {
+                this.experience = this.Baby.baby.experience.title; // Вывод количества лет опыта
+                this.typeworks = this.Baby.baby.Typeworks;
+                this.languages = this.Baby.baby.Languages;
+                this.baby_experience = this.Baby.baby.baby_exp; // Вывод описания опыта на двух языках
+                this.agegroups = this.Baby.baby.Agegroups;
+                this.educations = this.Baby.baby.Educations;
+                this.monthpay = this.Baby.baby.monthpay.title;
+                this.childrencount = this.Baby.baby.childrencount.title;
+                this.workperiod = this.Baby.baby.workperiod.title;
+                this.duties = this.Baby.baby.Duties;
+                this.children_invalid = this.Baby.baby.children_invalid;
+            }, 250);
+        }
     },
 }
 </script>

@@ -5,7 +5,7 @@ import router from "../router";
 export const useForm_BabyStore = defineStore('form_baby', {
     state: () => {
         return {
-            baby: {},
+            baby: null,
             baby_options: {},
             errors: null
         }
@@ -86,7 +86,12 @@ export const useForm_BabyStore = defineStore('form_baby', {
                     this.CREATE_FORMAGEGROUP([result_agegroup, result_agegroup.length]);                    
                     router.push({name: "Babysitting"});
                 })
-                .catch(error => { console.log(error); })
+                .catch(error => {
+                    this.errors = error.response.data.errors;                    
+                    for (const key in this.errors) {
+                        this.errors[key][0] = JSON.parse(this.errors[key][0]);
+                    }  
+                })
         },
         CREATE_BABY(data){                    
             api.post('api/auth/baby', data[0])
@@ -145,8 +150,7 @@ export const useForm_BabyStore = defineStore('form_baby', {
                     this.GET_BABY(data[0].user_id);
                 })
                 .catch(error => { 
-                    this.errors = error.response.data.errors;
-                    console.log(this.errors);
+                    this.errors = error.response.data.errors;                    
                     for (const key in this.errors) {
                         this.errors[key][0] = JSON.parse(this.errors[key][0]);
                     } 
@@ -155,28 +159,30 @@ export const useForm_BabyStore = defineStore('form_baby', {
         GET_BABY(data){ 
             api.get('api/auth/baby', {params: {data}})
                 .then((res) => {
-                    this.baby = res.data.data; 
-                    let temp = [];
-                    for (let i = 0; i < res.data.data.Agegroups.length; i++) {            
-                        temp.push(res.data.data.Agegroups[i].id);
-                    }  
-                    this.baby_options.anketaagegroups = temp; temp = [];              
-                    for (let i = 0; i < res.data.data.Languages.length; i++) {            
-                        temp.push(res.data.data.Languages[i].id);
-                    }
-                    this.baby_options.anketalanguages = temp; temp = [];
-                    for (let i = 0; i < res.data.data.Educations.length; i++) {            
-                        temp.push(res.data.data.Educations[i].id);
-                    }
-                    this.baby_options.anketaeducations = temp; temp = [];
-                    for (let i = 0; i < res.data.data.Typeworks.length; i++) {            
-                        temp.push(res.data.data.Typeworks[i].id);
-                    }
-                    this.baby_options.anketatypeworks = temp; temp = [];                         
-                    for (let i = 0; i < res.data.data.Duties.length; i++) {            
-                        temp.push(res.data.data.Duties[i].id);
-                    }
-                    this.baby_options.anketaduties = temp; temp = [];
+                    if(res.data !== null) {
+                        this.baby = res.data.data;                    
+                        let temp = [];
+                        for (let i = 0; i < res.data.data.Agegroups.length; i++) {            
+                            temp.push(res.data.data.Agegroups[i].id);
+                        }  
+                        this.baby_options.anketaagegroups = temp; temp = [];              
+                        for (let i = 0; i < res.data.data.Languages.length; i++) {            
+                            temp.push(res.data.data.Languages[i].id);
+                        }
+                        this.baby_options.anketalanguages = temp; temp = [];
+                        for (let i = 0; i < res.data.data.Educations.length; i++) {            
+                            temp.push(res.data.data.Educations[i].id);
+                        }
+                        this.baby_options.anketaeducations = temp; temp = [];
+                        for (let i = 0; i < res.data.data.Typeworks.length; i++) {            
+                            temp.push(res.data.data.Typeworks[i].id);
+                        }
+                        this.baby_options.anketatypeworks = temp; temp = [];                         
+                        for (let i = 0; i < res.data.data.Duties.length; i++) {            
+                            temp.push(res.data.data.Duties[i].id);
+                        }
+                        this.baby_options.anketaduties = temp; temp = [];                      
+                    }                      
                 })
                 .catch(error => { console.log(error); })
         },
