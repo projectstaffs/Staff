@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('path');
             $table->string('url');
+            $table->string('preview_path');
             $table->string('preview_url');
             $table->integer('user_id');            
             $table->timestamps();            

@@ -29,6 +29,8 @@ return new class extends Migration
             $table->date('age');
             $table->string('animal_work');
             $table->text('about');
+            $table->integer('country');
+            $table->integer('city');
             $table->timestamps();
         });
     }
