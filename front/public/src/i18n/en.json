@@ -51,7 +51,24 @@
         "item10": "Duties that you are ready to perform:",
         "item11": "Hourly pay:",
         "item12": "Monthly payment:",
-        "btn": "Додати анкету"
+        "btn": "Add a questionnaire"
+    },
+    "w_nurse": {
+        "title": "Questionnaire for a nurse",
+        "title_change": "Editing the questionnaire for a nurse",        
+        "item1_ua": "Experience working with the elderly (in Ukrainian):",
+        "item1_ua_holder": "Describe your experience of working with the elderly in Ukrainian",
+        "item1_en": "Experience working with the elderly (in English):",
+        "item1_en_holder": "Describe your experience of working with the elderly in English",
+        "item2": "Mark the diagnoses of the patients you have worked with:",
+        "item3": "Please describe your experience working with the elderly:",
+        "item4": "Your education:",
+        "item5": "What kind of job are you looking for?",
+        "item6": "Period of work:",
+        "item7": "Duties that you are ready to perform:",
+        "item8": "Hourly pay:",
+        "item9": "Monthly payment:",
+        "btn": "Add a questionnaire"
     },
     "baby_anketa": {
         "item1": "Age (years):",

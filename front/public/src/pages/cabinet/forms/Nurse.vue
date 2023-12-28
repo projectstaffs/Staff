@@ -1,62 +1,72 @@
 <template>
     <div class="edit_title">{{ $t('w_nurse.title') }}</div>
     <form v-if="!Nurse.nurse" @submit.prevent="createForm" class="personal">
-        <div>Опишите Ваш опыт работы с пристарелыми:</div>
-        <textarea v-model="anketa.nurse_exp" required class="login_form_item" placeholder="about"></textarea>
-        <div>Отметьте диагнозы пациентов, с которыми вам приходилось работать:</div>
-        <div v-for="post in Store.diagnoses" :key="post.id" class="language_item">
+        <div class="login_form_text">{{ $t('w_nurse.item1_ua') }}</div>
+        <textarea v-model="nurse_exp.ua" required class="login_form_item register_textarea"
+            :placeholder="$t('w_nurse.item1_ua_holder')"></textarea>
+        <div class="login_form_text">{{ $t('w_nurse.item1_en') }}</div>
+        <textarea v-model="nurse_exp.en" required class="login_form_item register_textarea"
+            :placeholder="$t('w_nurse.item1_en_holder')"></textarea>
+        <div class="login_form_text">{{ $t('w_nurse.item2') }}</div>
+        <div v-for="post in Store.diagnoses" :key="post.id" class="login_checkbox">
             <input type="checkbox" v-bind:value="post.id" v-model="anketadiagnoses">
-            {{ post.title }}
+            {{ post.title[locale] }}
         </div>
-        <div>Укажите свой опыт работы с пристарелыми:</div>
-        <select v-model="anketa.experience_id" class="category_form_title">
+        <div class="login_form_text">{{ $t('w_nurse.item3') }}</div>
+        <select v-model="anketa.experience_id" class="login_form_item auth_arrow">
             <option v-for="option in Store.experiences" :value="option.id">
-                {{ option.title }}
+                {{ option.title[locale] }}
             </option>
         </select>
-        <div>Укажите Ваше образование:</div>
-        <div v-for="post in Store.educations" :key="post.id" class="language_item">
+        <div class="login_form_text">{{ $t('w_nurse.item4') }}</div>
+        <div v-for="post in Store.educations" :key="post.id" class="login_checkbox">
             <input type="checkbox" v-bind:value="post.id" v-model="anketaeducations">
-            {{ post.title }}
+            {{ post.title[locale] }}
         </div>
-        <div>Какую работу вы ищите:</div>
-        <div v-for="post in Store.nursetypeofworks" :key="post.id" class="language_item">
+        <div class="login_form_text">{{ $t('w_nurse.item5') }}</div>
+        <div v-for="post in Store.nursetypeofworks" :key="post.id" class="login_checkbox">
             <input type="checkbox" v-bind:value="post.id" v-model="anketatypeworks">
-            {{ post.title }}
+            {{ post.title[locale] }}
         </div>
-        <div>Укажите период работы:</div>
-        <select v-model="anketa.workperiod_id" class="category_form_title">
+        <div class="login_form_text">{{ $t('w_nurse.item6') }}</div>
+        <select v-model="anketa.workperiod_id" class="login_form_item auth_arrow">
             <option v-for="option in Store.workperiods" :value="option.id">
-                {{ option.title }}
+                {{ option.title[locale] }}
             </option>
         </select>
-        <div>Какие обязанности вы готовы выполнять:</div>
-        <div v-for="post in Store.nurseduties" :key="post.id" class="language_item">
+        <div class="login_form_text">{{ $t('w_nurse.item7') }}</div>
+        <div v-for="post in Store.nurseduties" :key="post.id" class="login_checkbox">
             <input type="checkbox" v-bind:value="post.id" v-model="anketaduties">
-            {{ post.title }}
+            {{ post.title[locale] }}
         </div>
-        <div>Ожидаемая почасовая оплата:</div>
-        <select v-model="anketa.hourpay_id" class="category_form_title">
+        <div class="login_form_text">{{ $t('w_nurse.item8') }}</div>
+        <select v-model="anketa.hourpay_id" class="login_form_item auth_arrow">
             <option v-for="option in Store.hourlypayments" :value="option.id">
-                {{ option.title }}
+                {{ option.title[locale] }}
             </option>
         </select>
-        <div>Ожидаемая помесячная оплата:</div>
-        <select v-model="anketa.monthpay_id" class="category_form_title">
+        <div class="login_form_text">{{ $t('w_nurse.item9') }}</div>
+        <select v-model="anketa.monthpay_id" class="login_form_item auth_arrow">
             <option v-for="option in Store.monthlypayments" :value="option.id">
-                {{ option.title }}
+                {{ option.title[locale] }}
             </option>
         </select>
 
-        <button type="submit" class="login_form_btn">Добавить анкету</button>
-    </form>
+        <div class="personal_errors">
+            <div v-if="errors" class="login_middle">
+                <ul v-for="item in errors" :key="item">
+                    <li>{{ item[locale] }}</li>
+                </ul>
+            </div>
+            <div v-if="Nurse.errors" class="login_middle">
+                <ul v-for="item in Nurse.errors" :key="item">
+                    <li>{{ item[0][locale] }}</li>
+                </ul>
+            </div>
+        </div>
 
-    <div class="register_error" v-for="item in errors" :key="item">
-        {{ item }}
-    </div>
-    <div class="register_error" v-for="item in Nurse.errors" :key="item">
-        {{ item[0] }}
-    </div>
+        <button type="submit" class="btn">{{ $t('w_nurse.btn') }}</button>
+    </form>
 
     <div v-if="Nurse.nurse" class="anketa">
         <div v-if="photo" class="anketaitem_img"> <img :src="photo" alt="photo"> </div>
@@ -143,6 +153,7 @@ export default {
             anketatypeworks: [],
             anketaduties: [],
             errors: null,
+            nurse_exp: {}
         }
     },
     setup() {
@@ -157,10 +168,10 @@ export default {
             this.Nurse.errors = null;
             if ((this.anketaduties.length == 0) || (this.anketadiagnoses.length == 0) || (this.anketaeducations.length == 0) || (this.anketatypeworks.length == 0)) {
                 this.errors = [];
-                if (this.anketaeducations.length == 0) { this.errors.push('Укажите Ваше образование.'); }
+                if (this.anketaeducations.length == 0) { this.errors.push({ en: "Please indicate your education.", ua: "Вкажіть Вашу освіту." }); }
                 if (this.anketadiagnoses.length == 0) { this.errors.push('Отметьте диагнозы пациентов, с которыми вам приходилось работать.'); }
                 if (this.anketaduties.length == 0) { this.errors.push('Укажите обязанности для сиделки.'); }
-                if (this.anketatypeworks.length == 0) { this.errors.push('Укажите какую работу вы ищите.'); }
+                if (this.anketatypeworks.length == 0) { this.errors.push({ en: "Specify what kind of job you are looking for.", ua: "Вкажіть яку роботу ви шукаєте." }); }
             } else {
                 this.errors = null;
                 this.anketa.user_id = localStorage.userID;

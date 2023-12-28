@@ -13,7 +13,6 @@ export const useDataStore = defineStore('variables', {
             countrys: {}, 
             diagnoses: {},               
             educations: {}, 
-            employments: {}, 
             experiences: {}, 
             hourlypayments: {}, 
             housekeeperduties: {}, 
@@ -21,12 +20,9 @@ export const useDataStore = defineStore('variables', {
             housekeepertypeofworks: {},
             monthlypayments: {}, 
             nurseduties: {}, 
-            nursetypeofworks: {}, 
-            nursingskills: {}, 
-            recommendations: {},
+            nursetypeofworks: {},
             schedules: {},
             typeofworks: {}, 
-            worklocations: {}, 
             workperiods: {},           
         }
     },
@@ -56,6 +52,9 @@ export const useDataStore = defineStore('variables', {
             api.get('http://localhost/api/auth/diagnose')
                 .then(res => {                    
                     this.diagnoses = res.data;
+                    this.diagnoses.forEach((element) => {                               
+                        element.title = JSON.parse(element.title);                                                               
+                    })
                 })
                 .catch(error => { console.log(error); })
         },
@@ -112,6 +111,9 @@ export const useDataStore = defineStore('variables', {
             api.get('http://localhost/api/auth/nursedutie')
                 .then(res => {                    
                     this.nurseduties = res.data;
+                    this.nurseduties.forEach((element) => {                               
+                        element.title = JSON.parse(element.title);                                                               
+                    })
                 })
                 .catch(error => { console.log(error); })
         },
@@ -119,13 +121,9 @@ export const useDataStore = defineStore('variables', {
             api.get('http://localhost/api/auth/nursetypeofwork')
                 .then(res => {                    
                     this.nursetypeofworks = res.data;
-                })
-                .catch(error => { console.log(error); })
-        },
-        GET_NURSINGSKILLS(){
-            api.get('http://localhost/api/auth/nursingskill')
-                .then(res => {                    
-                    this.nursingskills = res.data;
+                    this.nursetypeofworks.forEach((element) => {                               
+                        element.title = JSON.parse(element.title);                                                               
+                    })
                 })
                 .catch(error => { console.log(error); })
         },
@@ -140,13 +138,6 @@ export const useDataStore = defineStore('variables', {
             api.get('http://localhost/api/auth/typeofwork')
                 .then(res => {                    
                     this.typeofworks = res.data;
-                })
-                .catch(error => { console.log(error); })
-        },
-        GET_WORKLOCATIONS(){
-            api.get('http://localhost/api/auth/worklocation')
-                .then(res => {                    
-                    this.worklocations = res.data;
                 })
                 .catch(error => { console.log(error); })
         },
