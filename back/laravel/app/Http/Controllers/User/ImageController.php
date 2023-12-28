@@ -41,7 +41,7 @@ class ImageController extends Controller
                 $previewName = 'images/prev_' . $name;
                 $path = Storage::disk('minio')->putFileAs('/images', $image, $name);
                 PreviewImgJob::dispatch($path, $previewName);
-                
+
                 $res = Image::create([
                     'user_id' => $request['user_id'],
                     'path' => $path,

@@ -28,7 +28,7 @@ class NurseController extends Controller
 
         //$nurse = Nurse::where('user_id', $request["data"])->first();
         if($nurse) { return new NurseResource($nurse);}
-        else { return null; }        
+        else { return 'null'; }        
     }
 
     /**

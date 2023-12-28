@@ -157,10 +157,10 @@ export default {
 
 <style>
 .register_fix_inner {
-    min-height: 1700px;
+    min-height: 1600px;
 }
 
 .register_fix_form {
-    min-height: 1800px;
+    min-height: 1700px;
 }
 </style>
