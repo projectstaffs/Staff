@@ -2,10 +2,10 @@
     <div class="edit_title">{{ $t('w_baby.title_change') }}</div>
     <form @submit.prevent="changeForm" class="personal">
         <div class="login_form_text">{{ $t('w_baby.item1_ua') }}</div>
-        <textarea v-model="baby_experience.ua" required class="login_form_item register_textarea"
+        <textarea v-if="Baby.baby" v-model="Baby.baby.baby_exp.ua" required class="login_form_item register_textarea"
             :placeholder="$t('w_baby.item1_ua_holder')"></textarea>
         <div class="login_form_text">{{ $t('w_baby.item1_en') }}</div>
-        <textarea v-model="baby_experience.en" required class="login_form_item register_textarea"
+        <textarea v-if="Baby.baby" v-model="Baby.baby.baby_exp.en" required class="login_form_item register_textarea"
             :placeholder="$t('w_baby.item1_en_holder')"></textarea>
         <div class="login_form_text">{{ $t('w_baby.item2') }}</div>
         <div v-for="post in Store.agegroups" :key="post.id" class="login_checkbox">
@@ -18,7 +18,7 @@
             {{ post.title[locale] }}
         </div>
         <div class="login_form_text">{{ $t('w_baby.item4') }}</div>
-        <select v-model="Baby.baby.experience_id" class="login_form_item auth_arrow">
+        <select v-if="Baby.baby" v-model="Baby.baby.experience_id" class="login_form_item auth_arrow">
             <option v-for="option in Store.experiences" :value="option.id">
                 {{ option.title[locale] }}
             </option>
@@ -34,19 +34,19 @@
             {{ post.title[locale] }}
         </div>
         <div class="login_form_text">{{ $t('w_baby.item7') }}</div>
-        <select v-model="Baby.baby.workperiod_id" class="login_form_item auth_arrow">
+        <select v-if="Baby.baby" v-model="Baby.baby.workperiod_id" class="login_form_item auth_arrow">
             <option v-for="option in Store.workperiods" :value="option.id">
                 {{ option.title[locale] }}
             </option>
         </select>
         <div class="login_form_text">{{ $t('w_baby.item8') }}</div>
-        <select v-model="Baby.baby.childrencount_id" class="login_form_item auth_arrow">
+        <select v-if="Baby.baby" v-model="Baby.baby.childrencount_id" class="login_form_item auth_arrow">
             <option v-for="option in Store.childrens" :value="option.id">
                 {{ option.title[locale] }}
             </option>
         </select>
         <div class="login_form_text">{{ $t('w_baby.item9') }}</div>
-        <select v-model="Baby.baby.children_invalid" class="login_form_item auth_arrow">
+        <select v-if="Baby.baby" v-model="Baby.baby.children_invalid" class="login_form_item auth_arrow">
             <option v-for="option in work" :value="option.value">
                 {{ option.value[locale] }}
             </option>
@@ -57,13 +57,13 @@
             {{ post.title[locale] }}
         </div>
         <div class="login_form_text">{{ $t('w_baby.item11') }}</div>
-        <select v-model="Baby.baby.hourpay_id" class="login_form_item auth_arrow">
+        <select v-if="Baby.baby" v-model="Baby.baby.hourpay_id" class="login_form_item auth_arrow">
             <option v-for="option in Store.hourlypayments" :value="option.id">
                 {{ option.title[locale] }}
             </option>
         </select>
         <div class="login_form_text">{{ $t('w_baby.item12') }}</div>
-        <select v-model="Baby.baby.monthpay_id" class="login_form_item auth_arrow">
+        <select v-if="Baby.baby" v-model="Baby.baby.monthpay_id" class="login_form_item auth_arrow">
             <option v-for="option in Store.monthlypayments" :value="option.id">
                 {{ option.title[locale] }}
             </option>
@@ -100,7 +100,6 @@ export default {
                 { value: { en: "No", ua: "Ні" } }
             ],
             errors: null,
-            baby_experience: {},
         }
     },
     setup() {
@@ -129,18 +128,11 @@ export default {
     },
     mounted() {
         this.Baby.GET_BABY(localStorage.userID);
-        //this.Baby.baby = JSON.parse(localStorage.personalWBaby);
-        //this.Baby.baby_options = JSON.parse(localStorage.babyOptions);
-        //console.log(this.Baby.baby);
 
         this.Store.GET_LANGUAGES(); this.Store.GET_EXPERIENCES(); this.Store.GET_EDUCATIONS(); this.Store.GET_TYPEOFWORKS();
         this.Store.GET_WORKPERIODS(); this.Store.GET_CHILDRENS(); this.Store.GET_BABYSITTINGDUTIES();
         this.Store.GET_HOURLYPAYMENTS(); this.Store.GET_MONTHLYPAYMENTS(); this.Store.GET_AGEGROUPS();
         this.Baby.errors = null; this.errors = null;
-
-        setTimeout(() => {
-            this.baby_experience = this.Baby.baby.baby_exp; // Вывод описания опыта на двух языках
-        }, 250);
     },
 }
 </script>
