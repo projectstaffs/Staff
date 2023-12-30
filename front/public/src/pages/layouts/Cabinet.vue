@@ -28,11 +28,13 @@
 
 <script>
 import { useUserStore } from '../../stores/user';
+import { useForm_BabyStore } from '../../stores/form_baby';
 export default {
     name: "Cabinet",
     setup() {
+        const Baby = useForm_BabyStore();
         const User = useUserStore();
-        return { User };
+        return { User, Baby };
     },
     methods: {
         account() { this.$router.push({ name: "Account" }) },
@@ -42,7 +44,10 @@ export default {
             else { this.$router.push({ name: "EditClient" }) }
         },
         babysitter() {
-            if (this.User.user.role === 'Исполнитель') { this.$router.push({ name: "Babysitting" }) }
+            if (this.User.user.role === 'Исполнитель') {
+                if (this.Baby.baby) { this.$router.push({ name: "Babysitting" }) }
+                else { this.$router.push({ name: "CreateBabysitting" }) }
+            }
             else { this.$router.push({ name: "Client_baby" }) }
         },
         nurse() {
@@ -58,6 +63,8 @@ export default {
         this.User.GET_USER();
         this.User.GET_PHOTO();
         this.User.GET_TOKEN();
+
+        this.Baby.GET_BABY(localStorage.userID);
     },
 }
 </script>

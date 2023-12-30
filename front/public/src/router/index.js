@@ -227,6 +227,12 @@ const router = createRouter({
             component: () =>import('../pages/cabinet/forms/Babysitting.vue')
         },
         {
+            name: 'CreateBabysitting',
+            path: '/createbabysitting',
+            meta: {layout: 'Cabinet'},
+            component: () =>import('../pages/cabinet/forms/CreateBabysitting.vue')
+        },
+        {
             name: 'Change-babysitting',
             path: '/change-babysitting',
             meta: {layout: 'Cabinet'},

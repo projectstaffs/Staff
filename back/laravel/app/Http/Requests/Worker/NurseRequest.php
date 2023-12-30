@@ -34,8 +34,8 @@ class NurseRequest extends FormRequest
 
     public function messages() {
         return [
-            'nurse_exp.required' => 'Опишите Ваш опыт работы с пристарелыми.',
-            'experience_id.required' => 'Укажите свой опыт работы с пристарелыми.',
+            'nurse_exp.required' => '{"en":"Describe your experience of working with the elderly.","ua":"Опишіть Ваш досвід роботи з людьми похилого віку."}',
+            'experience_id.required' => '{"en":"Please describe your experience working with the elderly.","ua":"Вкажіть свій досвід роботи з людьми похилого віку."}',
             'workperiod_id.required' => '{"en":"Enter the period of work.","ua":"Вкажіть період роботи."}',
             'hourpay_id.required' => '{"en":"Indicate the expected hourly rate.","ua":"Вкажіть очікувану погодинну оплату."}',
             'monthpay_id.required' => '{"en":"Indicate the expected monthly payment.","ua":"Вкажіть очікувану помісячну оплату."}'
