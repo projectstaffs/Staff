@@ -27,7 +27,7 @@ api.interceptors.response.use({}, error => {
     }
 
     if(error.response.status === 500) {
-        console.log(error.response.data.errors);
+        console.log(error.response);
         throw error;
     }
 

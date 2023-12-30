@@ -22,6 +22,7 @@ export const useForm_BabyStore = defineStore('form_baby', {
                     api.post('api/auth/formdutie/' + data[1], {_method: 'DELETE'})
                     api.post('api/auth/formeducation/' + data[1], {_method: 'DELETE'})
                     api.post('api/auth/formtypework/' + data[1], {_method: 'DELETE'})
+                    router.push({name: "Account"});
                 })
                 .catch(error => { console.log(error); })
         },
@@ -93,7 +94,7 @@ export const useForm_BabyStore = defineStore('form_baby', {
                     }  
                 })
         },
-        CREATE_BABY(data){                    
+        CREATE_BABY(data){                  
             api.post('api/auth/baby', data[0])
                 .then((res) => { 
                     this.errors = null;                
@@ -148,6 +149,7 @@ export const useForm_BabyStore = defineStore('form_baby', {
                     this.CREATE_FORMAGEGROUP([result_agegroup, result_agegroup.length]);
     
                     this.GET_BABY(data[0].user_id);
+                    router.push({name: "Account"});
                 })
                 .catch(error => { 
                     this.errors = error.response.data.errors;                    

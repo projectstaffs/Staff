@@ -20,6 +20,7 @@ export const useForm_NurseStore = defineStore('form_nurse', {
                     api.post('api/auth/formnursedutie/' + data[1], {_method: 'DELETE'})
                     api.post('api/auth/formnursetypework/' + data[1], {_method: 'DELETE'})
                     api.post('api/auth/formnurseeducation/' + data[1], {_method: 'DELETE'})
+                    router.push({name: "Account"});
                 })
                 .catch(error => { console.log(error); })
         },
@@ -79,7 +80,7 @@ export const useForm_NurseStore = defineStore('form_nurse', {
                     } 
                 })
         },
-        CREATE_NURSE(data){                           
+        CREATE_NURSE(data){                          
             api.post('api/auth/nurse', data[0])
                 .then((res) => {
                     let education = {};
@@ -123,6 +124,7 @@ export const useForm_NurseStore = defineStore('form_nurse', {
                     this.CREATE_FORMNURSETYPEWORK([result_nursetypework, result_nursetypework.length]);
     
                     this.GET_NURSE(data[0].user_id);
+                    router.push({name: "Account"});
                 })
                 .catch(error => { 
                     this.errors = error.response.data.errors;                    

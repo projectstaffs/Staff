@@ -169,13 +169,16 @@ export default {
             if ((this.anketaduties.length == 0) || (this.anketadiagnoses.length == 0) || (this.anketaeducations.length == 0) || (this.anketatypeworks.length == 0)) {
                 this.errors = [];
                 if (this.anketaeducations.length == 0) { this.errors.push({ en: "Please indicate your education.", ua: "Вкажіть Вашу освіту." }); }
-                if (this.anketadiagnoses.length == 0) { this.errors.push('Отметьте диагнозы пациентов, с которыми вам приходилось работать.'); }
-                if (this.anketaduties.length == 0) { this.errors.push('Укажите обязанности для сиделки.'); }
+                if (this.anketadiagnoses.length == 0) { this.errors.push({ en: "Mark the diagnoses of the patients you have worked with.", ua: "Позначте діагнози пацієнтів, з якими вам доводилося працювати." }); }
+                if (this.anketaduties.length == 0) { this.errors.push({ en: "Specify the responsibilities for the caregiver.", ua: "Вкажіть обов'язки для доглядальниці." }); }
                 if (this.anketatypeworks.length == 0) { this.errors.push({ en: "Specify what kind of job you are looking for.", ua: "Вкажіть яку роботу ви шукаєте." }); }
             } else {
                 this.errors = null;
                 this.anketa.user_id = localStorage.userID;
                 this.anketa.confirmed = true;
+                this.anketa.nurse_exp = this.nurse_exp;
+
+                //console.log(this.anketa);
                 this.Nurse.CREATE_NURSE([this.anketa, this.anketaeducations, this.anketadiagnoses, this.anketaduties, this.anketatypeworks]);
             }
         },

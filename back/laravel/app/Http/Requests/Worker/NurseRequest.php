@@ -36,9 +36,9 @@ class NurseRequest extends FormRequest
         return [
             'nurse_exp.required' => 'Опишите Ваш опыт работы с пристарелыми.',
             'experience_id.required' => 'Укажите свой опыт работы с пристарелыми.',
-            'workperiod_id.required' => 'Укажите период работы.',
-            'hourpay_id.required' => 'Укажите ожидаемую почасовую оплату.',
-            'monthpay_id.required' => 'Укажите ожидаемую помесячную оплату.'
+            'workperiod_id.required' => '{"en":"Enter the period of work.","ua":"Вкажіть період роботи."}',
+            'hourpay_id.required' => '{"en":"Indicate the expected hourly rate.","ua":"Вкажіть очікувану погодинну оплату."}',
+            'monthpay_id.required' => '{"en":"Indicate the expected monthly payment.","ua":"Вкажіть очікувану помісячну оплату."}'
         ];
     }
 }
