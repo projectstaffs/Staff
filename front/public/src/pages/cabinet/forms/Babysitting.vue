@@ -58,9 +58,9 @@
                                                     Baby.baby.children_invalid[locale]
                                                 }}</div>
     </div>
-    <div v-if="Baby.baby" class="personal_btns">
-        <div class="btn" @click.prevent="change_baby()">Изменить анкету</div>
-        <div class="btn" @click.prevent="delete_baby()">Удалить анкету</div>
+    <div class="personal_btns">
+        <div class="btn" @click.prevent="change_baby()">{{ $t('baby_anketa.btn_1') }}</div>
+        <div class="btn" @click.prevent="delete_baby()">{{ $t('baby_anketa.btn_2') }}</div>
     </div>
 </template>
 

@@ -257,6 +257,12 @@ const router = createRouter({
             component: () =>import('../pages/cabinet/forms/Nurse.vue')
         },
         {
+            name: 'CreateNurse',
+            path: '/createnurse',
+            meta: {layout: 'Cabinet'},
+            component: () =>import('../pages/cabinet/forms/CreateNurse.vue')
+        },
+        {
             name: 'Change-nurse',
             path: '/change-nurse',
             meta: {layout: 'Cabinet'},

@@ -87,7 +87,10 @@
         "item14": "Maximum number of children in the family for work:",
         "item15": "Work for a term:",
         "item16": "Willingness to perform such duties:",     
-        "item17": "Willingness to work with disabled children:"        
+        "item17": "Willingness to work with disabled children:",
+        "n_item18": "Experience with such patient diagnoses:",
+        "btn_1": "Change the questionnaire",
+        "btn_2": "Delete the questionnaire"        
     },
     "main": {
         "top_title": "Home service agency",

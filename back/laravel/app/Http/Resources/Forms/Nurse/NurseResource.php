@@ -71,7 +71,7 @@ class NurseResource extends JsonResource
         $workPeriod = '';
         foreach ($WorkPeriod as $item) {
             if($item->id == $this->workperiod_id) {
-                $workPeriod = $item->title;                
+                $workPeriod = $item;                
                 break;
             }                           
         }
@@ -81,7 +81,7 @@ class NurseResource extends JsonResource
         $hourpay = '';
         foreach ($HourlyPayment as $item) {
             if($item->id == $this->hourpay_id) {
-                $hourpay = $item->title;                
+                $hourpay = $item;                
                 break;
             }                           
         }
@@ -91,7 +91,7 @@ class NurseResource extends JsonResource
         $monthpay = '';
         foreach ($MonthlyPayment as $item) {
             if($item->id == $this->monthpay_id) {
-                $monthpay = $item->title;                
+                $monthpay = $item;                
                 break;
             }                           
         }
@@ -101,7 +101,7 @@ class NurseResource extends JsonResource
         $experience = '';
         foreach ($Experience as $item) {
             if($item->id == $this->experience_id) {
-                $experience = $item->title;                
+                $experience = $item;                
                 break;
             }                           
         }

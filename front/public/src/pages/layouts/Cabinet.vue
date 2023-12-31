@@ -29,12 +29,14 @@
 <script>
 import { useUserStore } from '../../stores/user';
 import { useForm_BabyStore } from '../../stores/form_baby';
+import { useForm_NurseStore } from '../../stores/form_nurse';
 export default {
     name: "Cabinet",
     setup() {
         const Baby = useForm_BabyStore();
+        const Nurse = useForm_NurseStore();
         const User = useUserStore();
-        return { User, Baby };
+        return { User, Baby, Nurse };
     },
     methods: {
         account() { this.$router.push({ name: "Account" }) },
@@ -51,7 +53,10 @@ export default {
             else { this.$router.push({ name: "Client_baby" }) }
         },
         nurse() {
-            if (this.User.user.role === 'Исполнитель') { this.$router.push({ name: "Nurse" }) }
+            if (this.User.user.role === 'Исполнитель') {
+                if (this.Nurse.nurse) { this.$router.push({ name: "Nurse" }) }
+                else { this.$router.push({ name: "CreateNurse" }) }
+            }
             else { this.$router.push({ name: "Client_nurse" }) }
         },
         keeper() {

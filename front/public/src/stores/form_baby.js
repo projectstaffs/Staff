@@ -148,7 +148,6 @@ export const useForm_BabyStore = defineStore('form_baby', {
                     })                  
                     this.CREATE_FORMAGEGROUP([result_agegroup, result_agegroup.length]);
     
-                    //this.GET_BABY(data[0].user_id);
                     router.push({name: "Babysitting"});
                 })
                 .catch(error => { 
