@@ -32,7 +32,7 @@ export const useForm_HousekeeperStore = defineStore('form_housekeeper', {
                     
                     let preference = {};
                     let result_preference = [];
-                    data[2].forEach((element) => {                               
+                    data[1].forEach((element) => {                               
                         preference.form_id = data[0].id;
                         preference.keeperpreference_id = element;
                         result_preference.push(preference);
@@ -42,7 +42,7 @@ export const useForm_HousekeeperStore = defineStore('form_housekeeper', {
     
                     let keeperdutie = {};
                     let result_keeperdutie = [];
-                    data[3].forEach((element) => {                               
+                    data[2].forEach((element) => {                               
                         keeperdutie.form_id = data[0].id;
                         keeperdutie.keeperdutie_id = element;
                         result_keeperdutie.push(keeperdutie);
@@ -52,7 +52,7 @@ export const useForm_HousekeeperStore = defineStore('form_housekeeper', {
     
                     let keepertypework = {};
                     let result_keepertypework = [];
-                    data[4].forEach((element) => {                               
+                    data[3].forEach((element) => {                               
                         keepertypework.form_id = data[0].id;
                         keepertypework.keepertypework_id = element;
                         result_keepertypework.push(keepertypework);
@@ -73,7 +73,7 @@ export const useForm_HousekeeperStore = defineStore('form_housekeeper', {
                 .then((res) => {    
                     let preference = {};
                     let result_preference = [];
-                    data[2].forEach((element) => {                               
+                    data[1].forEach((element) => {                               
                         preference.form_id = res.data.id;
                         preference.keeperpreference_id = element;
                         result_preference.push(preference);
@@ -83,7 +83,7 @@ export const useForm_HousekeeperStore = defineStore('form_housekeeper', {
     
                     let keeperdutie = {};
                     let result_keeperdutie = [];
-                    data[3].forEach((element) => {                               
+                    data[2].forEach((element) => {                               
                         keeperdutie.form_id = res.data.id;
                         keeperdutie.keeperdutie_id = element;
                         result_keeperdutie.push(keeperdutie);
@@ -93,7 +93,7 @@ export const useForm_HousekeeperStore = defineStore('form_housekeeper', {
     
                     let keepertypework = {};
                     let result_keepertypework = [];
-                    data[4].forEach((element) => {                               
+                    data[3].forEach((element) => {                               
                         keepertypework.form_id = res.data.id;
                         keepertypework.keepertypework_id = element;
                         result_keepertypework.push(keepertypework);
@@ -120,8 +120,8 @@ export const useForm_HousekeeperStore = defineStore('form_housekeeper', {
                             temp.push(res.data.data.Typeworks[i].id);
                         }
                         this.keeper_options.anketatypeworks = temp; temp = [];
-                        for (let i = 0; i < res.data.data.Joboptions.length; i++) {            
-                            temp.push(res.data.data.Joboptions[i].id);
+                        for (let i = 0; i < res.data.data.Duties.length; i++) {            
+                            temp.push(res.data.data.Duties[i].id);
                         }
                         this.keeper_options.anketaduties = temp; temp = [];
                         for (let i = 0; i < res.data.data.Preferences.length; i++) {            

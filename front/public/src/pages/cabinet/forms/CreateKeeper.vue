@@ -7,71 +7,60 @@
         <div class="login_form_text">{{ $t('w_keeper.item1_en') }}</div>
         <textarea v-model="keeper_exp.en" required class="login_form_item register_textarea"
             :placeholder="$t('w_keeper.item1_en_holder')"></textarea>
-        <div>Укажите свой опыт работы:</div>
-        <select v-model="anketa.experience_id" class="category_form_title">
+        <div class="login_form_text">{{ $t('w_keeper.item2') }}</div>
+        <select v-model="anketa.experience_id" class="login_form_item auth_arrow">
             <option v-for="option in Store.experiences" :value="option.id">
-                {{ option.title }}
+                {{ option.title[locale] }}
             </option>
         </select>
-        <div>Какую работу вы ищите:</div>
-        <div v-for="post in Store.housekeepertypeofworks" :key="post.id" class="language_item">
+        <div class="login_form_text">{{ $t('w_baby.item6') }}</div>
+        <div v-for="post in Store.housekeepertypeofworks" :key="post.id" class="login_checkbox">
             <input type="checkbox" v-bind:value="post.id" v-model="anketatypeworks">
-            {{ post.title }}
+            {{ post.title[locale] }}
         </div>
-        <div>Укажите период работы:</div>
-        <select v-model="anketa.workperiod_id" class="category_form_title">
+        <div class="login_form_text">{{ $t('w_baby.item7') }}</div>
+        <select v-model="anketa.workperiod_id" class="login_form_item auth_arrow">
             <option v-for="option in Store.workperiods" :value="option.id">
-                {{ option.title }}
+                {{ option.title[locale] }}
             </option>
         </select>
-        <div>Вы предпочитаете:</div>
-        <div v-for="post in Store.housekeeperpreferences" :key="post.id" class="language_item">
+        <div class="login_form_text">{{ $t('w_keeper.item3') }}</div>
+        <div v-for="post in Store.housekeeperpreferences" :key="post.id" class="login_checkbox">
             <input type="checkbox" v-bind:value="post.id" v-model="anketarpreferences">
-            {{ post.title }}
+            {{ post.title[locale] }}
         </div>
-        <div>Какие обязанности вы готовы выполнять:</div>
-        <div v-for="post in Store.housekeeperduties" :key="post.id" class="language_item">
+        <div class="login_form_text">{{ $t('w_baby.item10') }}</div>
+        <div v-for="post in Store.housekeeperduties" :key="post.id" class="login_checkbox">
             <input type="checkbox" v-bind:value="post.id" v-model="anketaduties">
-            {{ post.title }}
+            {{ post.title[locale] }}
         </div>
-        <div>Можете ли вы обеспечить собственную технику для уборки:</div>
-        <select v-model="anketa.technique" class="category_form_title">
-            <option v-for="option in work" :value="option.value">
-                {{ option.value }}
-            </option>
-        </select>
-        <div>Можете ли вы обеспечить собственные средства для уборки:</div>
-        <select v-model="anketa.material" class="category_form_title">
-            <option v-for="option in work" :value="option.value">
-                {{ option.value }}
-            </option>
-        </select>
-        <div>Можете ли вы присматривать за детьми:</div>
-        <select v-model="anketa.baby_keeper" class="category_form_title">
-            <option v-for="option in work" :value="option.value">
-                {{ option.value }}
-            </option>
-        </select>
-        <div>Можете ли вы присматривать за пристарелыми:</div>
-        <select v-model="anketa.nurse_keeper" class="category_form_title">
-            <option v-for="option in work" :value="option.value">
-                {{ option.value }}
-            </option>
-        </select>
-        <div>Ожидаемая почасовая оплата:</div>
-        <select v-model="anketa.hourpay_id" class="category_form_title">
+        <div class="login_form_text">{{ $t('w_baby.item11') }}</div>
+        <select v-model="anketa.hourpay_id" class="login_form_item auth_arrow">
             <option v-for="option in Store.hourlypayments" :value="option.id">
-                {{ option.title }}
+                {{ option.title[locale] }}
             </option>
         </select>
-        <div>Ожидаемая помесячная оплата:</div>
-        <select v-model="anketa.monthpay_id" class="category_form_title">
+        <div class="login_form_text">{{ $t('w_baby.item12') }}</div>
+        <select v-model="anketa.monthpay_id" class="login_form_item auth_arrow">
             <option v-for="option in Store.monthlypayments" :value="option.id">
-                {{ option.title }}
+                {{ option.title[locale] }}
             </option>
         </select>
 
-        <button type="submit" class="login_form_btn">Добавить анкету</button>
+        <div class="personal_errors">
+            <div v-if="errors" class="login_middle">
+                <ul v-for="item in errors" :key="item">
+                    <li>{{ item[locale] }}</li>
+                </ul>
+            </div>
+            <div v-if="Keeper.errors" class="login_middle">
+                <ul v-for="item in Keeper.errors" :key="item">
+                    <li>{{ item[0][locale] }}</li>
+                </ul>
+            </div>
+        </div>
+
+        <button type="submit" class="btn">{{ $t('w_baby.btn') }}</button>
     </form>
 </template>
 
@@ -87,12 +76,8 @@ export default {
             anketaduties: [],
             anketarpreferences: [],
             anketatypeworks: [],
-            work: [
-                { value: 'Да' },
-                { value: 'Нет' }
-            ],
+            keeper_exp: {},
             errors: null,
-            keeper_exp: {}
         }
     },
     setup() {
@@ -100,6 +85,23 @@ export default {
         const Keeper = useForm_HousekeeperStore();
         const { t, locale } = useI18n({ useScope: 'global' });
         return { Store, t, locale, Keeper };
+    },
+    methods: {
+        createForm() {
+            this.Keeper.errors = null;
+            if ((this.anketarpreferences.length == 0) || (this.anketaduties.length == 0) || (this.anketatypeworks.length == 0)) {
+                this.errors = [];
+                if (this.anketarpreferences.length == 0) { this.errors.push({ en: "Please indicate your preference.", ua: "Вкажіть, чому Ви надаєте перевагу." }); }
+                if (this.anketaduties.length == 0) { this.errors.push({ en: "Specify the responsibilities for the housekeeper.", ua: "Вкажіть обов'язки для домробітниці." }); }
+                if (this.anketatypeworks.length == 0) { this.errors.push({ en: "Specify what kind of job you are looking for.", ua: "Вкажіть яку роботу ви шукаєте." }); }
+            } else {
+                this.errors = null;
+                this.anketa.user_id = localStorage.userID;
+                this.anketa.confirmed = true;
+                this.anketa.keeper_exp = this.keeper_exp;
+                this.Keeper.CREATE_KEEPER([this.anketa, this.anketarpreferences, this.anketaduties, this.anketatypeworks]);
+            }
+        },
     },
     mounted() {
         this.Store.GET_EXPERIENCES(); this.Store.GET_HOUSEKEEPERTYPEOFWORKS();

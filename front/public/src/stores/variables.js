@@ -83,13 +83,16 @@ export const useDataStore = defineStore('variables', {
             api.get('http://localhost/api/auth/housekeeperdutie')
                 .then(res => {                    
                     this.housekeeperduties = res.data;
+                    this.housekeeperduties.forEach((element) => {                               
+                        element.title = JSON.parse(element.title);                                                               
+                    })
                 })
                 .catch(error => { console.log(error); })
         },
         GET_HOUSEKEEPERPREFERENCES(){
             api.get('http://localhost/api/auth/housekeeperpreference')
                 .then(res => {                    
-                    this.housekeeperpreferences = res.data;
+                    this.housekeeperpreferences = res.data;                    
                 })
                 .catch(error => { console.log(error); })
         },
@@ -97,6 +100,9 @@ export const useDataStore = defineStore('variables', {
             api.get('http://localhost/api/auth/housekeepertypeofwork')
                 .then(res => {                    
                     this.housekeepertypeofworks = res.data;
+                    this.housekeepertypeofworks.forEach((element) => {                               
+                        element.title = JSON.parse(element.title);                                                               
+                    })
                 })
                 .catch(error => { console.log(error); })
         },

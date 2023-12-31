@@ -38,7 +38,7 @@
     width: 100%;
     height: 46px;
     margin-bottom: 12px;
-    padding: 0px 16px;
+    padding: 10px 16px;
     border-radius: 10px;
     border: 0.2px solid #5C4538;
     background: #FFF;
@@ -107,7 +107,7 @@
 }
 
 .register_textarea::placeholder {
-    padding-top: 15px;
+    padding-top: 5px;
 }
 
 .login_checkbox {
