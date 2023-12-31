@@ -5,8 +5,9 @@ import router from "../router";
 export const useClient_KeeperStore = defineStore('client_keeper', {    
     state: () => {
         return {                        
-            keeper: {},
-            keeper_options: {},                      
+            keeper: null,
+            keeper_options: {}, 
+            errors: null                     
         }
     },
     actions: {  

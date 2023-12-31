@@ -24,34 +24,21 @@ class KeeperRequest extends FormRequest
         return [
             'user_id' => 'required|numeric',
             'confirmed' => 'required|boolean',
-            'keeper_exp' => 'required|string',
+            'keeper_exp' => 'required',
             'experience_id' => 'required|numeric',
-            'recommendation_id' => 'required|numeric',
-            'workperiod_id' => 'required|numeric',           
-            'employment_id' => 'required|numeric',            
-            'technique' => 'required|string',
-            'material' => 'required|string',
-            'baby_keeper' => 'required|string',
-            'nurse_keeper' => 'required|string',            
+            'workperiod_id' => 'required|numeric',            
             'hourpay_id' => 'required|numeric',
             'monthpay_id' => 'required|numeric',
-            'additional' => 'nullable',
         ];
     }
 
     public function messages() {
         return [
-            'keeper_exp.required' => 'Опишите Ваш опыт работы.',
-            'experience_id.required' => 'Укажите свой опыт работы по дому.',
-            'recommendation_id.required' => 'Укажите количество рекомендаций.',
-            'workperiod_id.required' => 'Укажите период работы.',
-            'employment_id.required' => 'Укажите занятость.',
-            'technique.required' => 'Укажите можете ли Вы обеспечить собственную технику для уборки.',
-            'material.required' => 'Укажите можете ли Вы обеспечить собственные средства для уборки.',
-            'baby_keeper.required' => 'Укажите можете ли Вы присматривать за детьми.',
-            'nurse_keeper.required' => 'Укажите можете ли Вы присматривать за пристарелыми.',
-            'hourpay_id.required' => 'Укажите ожидаемую почасовую оплату.',
-            'monthpay_id.required' => 'Укажите ожидаемую помесячную оплату.'
+            'keeper_exp.required' => '{"en":"Please describe your work experience.","ua":"Опишіть Ваш досвід роботи."}',
+            'experience_id.required' => '{"en":"Please indicate your experience with homework.","ua":"Вкажіть свій досвід домашньої роботи."}',
+            'workperiod_id.required' => '{"en":"Enter the period of work.","ua":"Вкажіть період роботи."}',
+            'hourpay_id.required' => '{"en":"Indicate the expected hourly rate.","ua":"Вкажіть очікувану погодинну оплату."}',
+            'monthpay_id.required' => '{"en":"Indicate the expected monthly payment.","ua":"Вкажіть очікувану помісячну оплату."}'
         ];
     }
 }

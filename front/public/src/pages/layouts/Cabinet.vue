@@ -30,13 +30,15 @@
 import { useUserStore } from '../../stores/user';
 import { useForm_BabyStore } from '../../stores/form_baby';
 import { useForm_NurseStore } from '../../stores/form_nurse';
+import { useForm_HousekeeperStore } from '../../stores/form_housekeeper';
 export default {
     name: "Cabinet",
     setup() {
         const Baby = useForm_BabyStore();
         const Nurse = useForm_NurseStore();
+        const Keeper = useForm_HousekeeperStore();
         const User = useUserStore();
-        return { User, Baby, Nurse };
+        return { User, Baby, Nurse, Keeper };
     },
     methods: {
         account() { this.$router.push({ name: "Account" }) },
@@ -60,7 +62,10 @@ export default {
             else { this.$router.push({ name: "Client_nurse" }) }
         },
         keeper() {
-            if (this.User.user.role === 'Исполнитель') { this.$router.push({ name: "Housekeeper" }) }
+            if (this.User.user.role === 'Исполнитель') {
+                if (this.Keeper.keeper) { this.$router.push({ name: "Housekeeper" }) }
+                else { this.$router.push({ name: "CreateKeeper" }) }
+            }
             else { this.$router.push({ name: "Client_keeper" }) }
         },
     },
@@ -70,6 +75,8 @@ export default {
         this.User.GET_TOKEN();
 
         this.Baby.GET_BABY(localStorage.userID);
+        this.Nurse.GET_NURSE(localStorage.userID);
+        this.Keeper.GET_KEEPER(localStorage.userID);
     },
 }
 </script>

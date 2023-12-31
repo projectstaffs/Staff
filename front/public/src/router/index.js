@@ -245,6 +245,12 @@ const router = createRouter({
             component: () =>import('../pages/cabinet/forms/Housekeeper.vue')
         },
         {
+            name: 'CreateKeeper',
+            path: '/createkeeper',
+            meta: {layout: 'Cabinet'},
+            component: () =>import('../pages/cabinet/forms/CreateKeeper.vue')
+        },
+        {
             name: 'Change-housekeeper',
             path: '/change-housekeeper',
             meta: {layout: 'Cabinet'},

@@ -4,9 +4,11 @@ namespace App\Models\Forms;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
 
 class Keeper extends Model
 {
-    use HasFactory;
-    protected $fillable = ['user_id', 'keeper_exp', 'experience_id', 'recommendation_id', 'workperiod_id', 'employment_id', 'technique', 'material', 'baby_keeper', 'nurse_keeper', 'hourpay_id', 'monthpay_id', 'additional', 'confirmed'];
+    use HasFactory; use HasTranslations;
+    protected $fillable = ['user_id', 'keeper_exp', 'experience_id', 'workperiod_id', 'hourpay_id', 'monthpay_id', 'confirmed'];
+    public $translatable = [ 'keeper_exp' ];
 }
