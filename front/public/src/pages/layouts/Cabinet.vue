@@ -31,14 +31,16 @@ import { useUserStore } from '../../stores/user';
 import { useForm_BabyStore } from '../../stores/form_baby';
 import { useForm_NurseStore } from '../../stores/form_nurse';
 import { useForm_HousekeeperStore } from '../../stores/form_housekeeper';
+import { useClient_BabyStore } from '../../stores/client_baby';
 export default {
     name: "Cabinet",
     setup() {
         const Baby = useForm_BabyStore();
         const Nurse = useForm_NurseStore();
         const Keeper = useForm_HousekeeperStore();
+        const ClientBaby = useClient_BabyStore();
         const User = useUserStore();
-        return { User, Baby, Nurse, Keeper };
+        return { User, Baby, Nurse, Keeper, ClientBaby };
     },
     methods: {
         account() { this.$router.push({ name: "Account" }) },
@@ -52,7 +54,10 @@ export default {
                 if (this.Baby.baby) { this.$router.push({ name: "Babysitting" }) }
                 else { this.$router.push({ name: "CreateBabysitting" }) }
             }
-            else { this.$router.push({ name: "Client_baby" }) }
+            else {
+                if (this.ClientBaby.baby) { this.$router.push({ name: "Client_baby" }) }
+                else { this.$router.push({ name: "CreateClientBaby" }) }
+            }
         },
         nurse() {
             if (this.User.user.role === 'Исполнитель') {
@@ -77,6 +82,7 @@ export default {
         this.Baby.GET_BABY(localStorage.userID);
         this.Nurse.GET_NURSE(localStorage.userID);
         this.Keeper.GET_KEEPER(localStorage.userID);
+        this.ClientBaby.GET_BABY(localStorage.userID);
     },
 }
 </script>

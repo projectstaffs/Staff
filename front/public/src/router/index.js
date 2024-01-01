@@ -281,6 +281,12 @@ const router = createRouter({
             component: () =>import('../pages/cabinet/client/Client_baby.vue')
         },
         {
+            name: 'CreateClientBaby',
+            path: '/createclientbaby',
+            meta: {layout: 'Cabinet'},
+            component: () =>import('../pages/cabinet/client/CreateClientBaby.vue')
+        },
+        {
             name: 'Change-client_baby',
             path: '/change-client_baby',
             meta: {layout: 'Cabinet'},

@@ -70,6 +70,17 @@
         "item9": "Monthly payment:",
         "btn": "Add a questionnaire"
     },
+    "w_keeper": {
+        "title": "Questionnaire for a housekeeper",
+        "title_change": "Editing a questionnaire for a housekeeper",
+        "item1_ua": "Work experience (in Ukrainian):",
+        "item1_ua_holder": "Describe your work experience in Ukrainian",
+        "item1_en": "Work experience (in English):",
+        "item1_en_holder": "Describe your work experience in English",
+        "item2": "Please specify your work experience:",
+        "item3": "You prefer it:",
+        "item4": "Place of work:"
+    },
     "baby_anketa": {
         "item1": "Age (years):",
         "item2": "Country:",

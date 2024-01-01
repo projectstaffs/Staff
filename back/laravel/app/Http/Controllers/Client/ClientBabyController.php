@@ -27,7 +27,7 @@ class ClientBabyController extends Controller
         }
 
         if($client_baby) { return new ClientBabyResource($client_baby); }
-        else { return null; }        
+        else { return 'null'; }        
     }
 
     /**
@@ -46,13 +46,12 @@ class ClientBabyController extends Controller
          $baby = new ClientBaby([
             'user_id' => $request->user_id,
             'confirmed' => $request->confirmed,
-            'title' => $request->title,
-            'title_about' => $request->title_about,
+            'title_about' => [
+               'en' => $request->title_about['en'],
+               'ua' => $request->title_about['ua']
+            ],
             'childrencount_id' => $request->childrencount_id,            
             'workperiod_id' => $request->workperiod_id,
-            'employment_id' => $request->employment_id,
-            'drive' => $request->drive,
-            'agents' => $request->agents,
             'hourpay_id' => $request->hourpay_id,
             'monthpay_id' => $request->monthpay_id
         ]);                
@@ -83,14 +82,13 @@ class ClientBabyController extends Controller
      */
     public function update(BabyRequest $request, string $id)
     {
-        $baby = ClientBaby::find($id);       
-        $baby->title = $request['title'];
-        $baby->title_about = $request['title_about'];
+        $baby = ClientBaby::find($id);
+        $baby->title_about = [
+               'en' => $request->title_about['en'],
+               'ua' => $request->title_about['ua']
+            ];
         $baby->childrencount_id = $request['childrencount_id'];
         $baby->workperiod_id = $request['workperiod_id'];
-        $baby->employment_id = $request['employment_id'];
-        $baby->drive = $request['drive'];
-        $baby->agents = $request['agents'];
         $baby->hourpay_id = $request['hourpay_id'];
         $baby->monthpay_id = $request['monthpay_id'];
         $baby->save(); 

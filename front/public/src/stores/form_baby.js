@@ -96,8 +96,7 @@ export const useForm_BabyStore = defineStore('form_baby', {
         },
         CREATE_BABY(data){                  
             api.post('api/auth/baby', data[0])
-                .then((res) => { 
-                    this.errors = null;                
+                .then((res) => {                
                     let user_language = {};
                     let result = [];
                     data[1].forEach((element) => {                               
