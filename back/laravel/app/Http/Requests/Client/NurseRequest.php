@@ -24,12 +24,8 @@ class NurseRequest extends FormRequest
         return [
             'user_id' => 'required|numeric',
             'confirmed' => 'required|boolean',
-            'title' => 'required|string',
             'title_about' => 'required|string',
             'workperiod_id' => 'required|numeric',
-            'employment_id' => 'required|numeric',
-            'drive' => 'required|string',
-            'agents' => 'required|string',
             'hourpay_id' => 'required|numeric',
             'monthpay_id' => 'required|numeric'
         ];
@@ -37,14 +33,10 @@ class NurseRequest extends FormRequest
 
     public function messages() {
         return [
-            'title.required' => 'Укажите Заголовок вакансии.',
-            'title_about.required' => 'Опишите вакансию.',
-            'workperiod_id.required' => 'Укажите период работы.',
-            'employment_id.required' => 'Укажите занятость.',
-            'drive.required' => 'Укажите наличие у работника водительского удостоверения.',
-            'agents.required' => 'Укажите позволять ли компаниям и агентствам связываться с Вами по данной вакансии.',
-            'hourpay_id.required' => 'Укажите ожидаемую почасовую оплату.',
-            'monthpay_id.required' => 'Укажите ожидаемую помесячную оплату.'
+            'title_about.required' => '{"en":"Describe the vacancy.","ua":"Опишіть вакансію."}',
+            'workperiod_id.required' => '{"en":"Enter the period of work.","ua":"Вкажіть період роботи."}',
+            'hourpay_id.required' => '{"en":"Indicate the expected hourly rate.","ua":"Вкажіть очікувану погодинну оплату."}',
+            'monthpay_id.required' => '{"en":"Indicate the expected monthly payment.","ua":"Вкажіть очікувану помісячну оплату."}'
         ];
     }
 }

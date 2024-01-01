@@ -21,7 +21,7 @@ api.interceptors.response.use({}, error => {
             console.log('Токен успешно восстановлен.')
             localStorage.access_token = res.data.access_token;
             error.config.headers.authorization = `Bearer ${res.data.access_token}`;
-
+            window.location.reload(true);
             return api.request(error.config);
         })
     }

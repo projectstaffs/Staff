@@ -124,7 +124,7 @@ export const useForm_NurseStore = defineStore('form_nurse', {
                     })                  
                     this.CREATE_FORMNURSETYPEWORK([result_nursetypework, result_nursetypework.length]);
     
-                    this.GET_NURSE(data[0].user_id);
+                    //this.GET_NURSE(data[0].user_id);
                     router.push({name: "Nurse"});
                 })
                 .catch(error => { 

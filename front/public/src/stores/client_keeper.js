@@ -73,7 +73,7 @@ export const useClient_KeeperStore = defineStore('client_keeper', {
                     })                  
                     this.CREATE_FORMKEEPERDUTIE([result_keeperdutie, result_keeperdutie.length]);
     
-                    this.GET_KEEPER(data[0].user_id);
+                    //this.GET_KEEPER(data[0].user_id);
                 })
                 .catch(error => { console.log(error); })
         },
