@@ -14,7 +14,7 @@ export const useForm_HousekeeperStore = defineStore('form_housekeeper', {
         DELETE_KEEPER(data){                                
             api.post('api/auth/keeper/' + data[0], {_method: 'DELETE'})
                 .then((res) => {
-                    this.GET_KEEPER(data[0]);
+                    //this.GET_KEEPER(data[0]);
                     api.post('api/auth/keeperdutie/' + data[1], {_method: 'DELETE'})
                     api.post('api/auth/keeperpreference/' + data[1], {_method: 'DELETE'})
                     api.post('api/auth/keepertypework/' + data[1], {_method: 'DELETE'})
@@ -25,7 +25,7 @@ export const useForm_HousekeeperStore = defineStore('form_housekeeper', {
         CHANGE_KEEPER(data){
             api.put('api/auth/keeper/' + data[0].id, data[0])      
                 .then((res) => {                
-                    this.GET_KEEPER(data[0].user_id);                
+                    //this.GET_KEEPER(data[0].user_id);                
                     api.post('api/auth/keeperdutie/' + data[0].id, {_method: 'DELETE'})
                     api.post('api/auth/keeperpreference/' + data[0].id, {_method: 'DELETE'})
                     api.post('api/auth/keepertypework/' + data[0].id, {_method: 'DELETE'})        

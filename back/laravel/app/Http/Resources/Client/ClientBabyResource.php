@@ -87,7 +87,7 @@ class ClientBabyResource extends JsonResource
             'id' => $this->id,
             'user_id' => $this->user_id,
             'confirmed' => $this->confirmed,
-            'title_about' => $this->title_about,
+            'title_about' => $this->getTranslations('title_about'),
             'workperiod' => $workPeriod,
             'childrencount' => $children,
             'hourpay' => $hourpay,

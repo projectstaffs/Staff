@@ -103,6 +103,16 @@
         "btn_1": "Change the questionnaire",
         "btn_2": "Delete the questionnaire"        
     },
+    "c_baby": {
+        "title": "Vacancy for a nanny",
+        "title_change": "Editing a vacancy for a nanny",
+        "item1_ua": "About the vacancy (in Ukrainian):",
+        "item1_ua_holder": "Describe your position in Ukrainian",
+        "item1_en": "About the vacancy (in English):",
+        "item1_en_holder": "Describe your position in English",
+        "item2": "The city:",
+        "item3": "Position description:"
+    },
     "main": {
         "top_title": "Home service agency",
         "top_subtitle": "Here your everyday tasks are solved",

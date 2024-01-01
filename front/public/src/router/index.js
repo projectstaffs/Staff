@@ -299,6 +299,12 @@ const router = createRouter({
             component: () =>import('../pages/cabinet/client/Client_nurse.vue')
         },
         {
+            name: 'CreateClientNurse',
+            path: '/createclientnurse',
+            meta: {layout: 'Cabinet'},
+            component: () =>import('../pages/cabinet/client/CreateClientNurse.vue')
+        },
+        {
             name: 'Change-client_nurse',
             path: '/change-client_nurse',
             meta: {layout: 'Cabinet'},

@@ -14,7 +14,7 @@ export const useForm_NurseStore = defineStore('form_nurse', {
         DELETE_NURSE(data){                                
             api.post('api/auth/nurse/' + data[0], {_method: 'DELETE'})
                 .then((res) => {
-                    this.GET_NURSE(data[0]);
+                    //this.GET_NURSE(data[0]);
                     
                     api.post('api/auth/formdiagnose/' + data[1], {_method: 'DELETE'})
                     api.post('api/auth/formnursedutie/' + data[1], {_method: 'DELETE'})
@@ -27,7 +27,7 @@ export const useForm_NurseStore = defineStore('form_nurse', {
         CHANGE_NURSE(data){
             api.put('api/auth/nurse/' + data[0].id, data[0])      
                 .then((res) => {                
-                    this.GET_NURSE(data[0].user_id);                
+                    //this.GET_NURSE(data[0].user_id);                
                     api.post('api/auth/formdiagnose/' + data[0].id, {_method: 'DELETE'})
                     api.post('api/auth/formnursedutie/' + data[0].id, {_method: 'DELETE'})
                     api.post('api/auth/formnursetypework/' + data[0].id, {_method: 'DELETE'})

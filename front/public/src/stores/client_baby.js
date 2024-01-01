@@ -15,7 +15,7 @@ export const useClient_BabyStore = defineStore('client_baby', {
         DELETE_BABY(data){                                
             api.post('api/auth/clientbaby/' + data[0], {_method: 'DELETE'})
                 .then((res) => {                    
-                    this.GET_BABY(data[0]);                    
+                    //this.GET_BABY(data[0]);                    
                     
                     api.post('api/auth/clientagegroup/' + data[1], {_method: 'DELETE'})
                     api.post('api/auth/clientdutie/' + data[1], {_method: 'DELETE'})                    
@@ -26,7 +26,7 @@ export const useClient_BabyStore = defineStore('client_baby', {
         CHANGE_BABY(data){
             api.put('api/auth/clientbaby/' + data[0].id, data[0])      
                 .then((res) => {                
-                    this.GET_BABY(data[0].user_id);
+                    //this.GET_BABY(data[0].user_id);
                     
                     api.post('api/auth/clientagegroup/' + data[0].id, {_method: 'DELETE'})
                     api.post('api/auth/clientdutie/' + data[0].id, {_method: 'DELETE'})                    
@@ -61,8 +61,7 @@ export const useClient_BabyStore = defineStore('client_baby', {
         },
         CREATE_BABY(data){                    
             api.post('api/auth/clientbaby', data[0])            
-                .then((res) => {
-    
+                .then((res) => {    
                     let dutie = {};
                     let result_dutie = [];
                     data[1].forEach((element) => {                               

@@ -121,7 +121,6 @@ export default {
                 if (this.Baby.baby_options.anketaagegroups.length == 0) { this.errors.push({ en: "Indicate your experience working with children by age group.", ua: "Вкажіть досвід роботи з дітьми за віковими групами." }); }
             } else {
                 this.errors = null;
-                this.Baby.baby_exp = this.baby_experience;
                 this.Baby.CHANGE_BABY([this.Baby.baby, this.Baby.baby_options.anketalanguages, this.Baby.baby_options.anketaeducations, this.Baby.baby_options.anketatypeworks, this.Baby.baby_options.anketaduties, this.Baby.baby_options.anketaagegroups]);
             }
         },

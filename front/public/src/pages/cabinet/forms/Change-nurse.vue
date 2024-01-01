@@ -103,7 +103,7 @@ export default {
                 if (this.Nurse.nurse_options.anketaduties.length == 0) { this.errors.push({ en: "Specify the responsibilities for the caregiver.", ua: "Вкажіть обов'язки для доглядальниці." }); }
                 if (this.Nurse.nurse_options.anketatypeworks.length == 0) { this.errors.push({ en: "Specify what kind of job you are looking for.", ua: "Вкажіть яку роботу ви шукаєте." }); }
             } else {
-                this.errors = null; this.User.global_error = null;
+                this.errors = null;
                 this.Nurse.CHANGE_NURSE([this.Nurse.nurse, this.Nurse.nurse_options.anketaeducations, this.Nurse.nurse_options.anketadiagnoses, this.Nurse.nurse_options.anketaduties, this.Nurse.nurse_options.anketatypeworks]);
             }
         },

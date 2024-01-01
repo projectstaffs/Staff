@@ -15,7 +15,7 @@ export const useForm_BabyStore = defineStore('form_baby', {
         DELETE_BABY(data){                                
             api.post('api/auth/baby/' + data[0], {_method: 'DELETE'})
                 .then((res) => {                    
-                    this.GET_BABY(data[0]);
+                    //this.GET_BABY(data[0]);
                     
                     api.post('api/auth/userlanguages/' + data[0], {_method: 'DELETE'})
                     api.post('api/auth/formagegroup/' + data[1], {_method: 'DELETE'})
@@ -29,7 +29,7 @@ export const useForm_BabyStore = defineStore('form_baby', {
         CHANGE_BABY(data){
             api.put('api/auth/baby/' + data[0].id, data[0])      
                 .then((res) => {                
-                    this.GET_BABY(data[0].user_id);
+                    //this.GET_BABY(data[0].user_id);
                     api.post('api/auth/userlanguages/' + data[0].user_id, {_method: 'DELETE'})
                     api.post('api/auth/formagegroup/' + data[0].id, {_method: 'DELETE'})
                     api.post('api/auth/formdutie/' + data[0].id, {_method: 'DELETE'})

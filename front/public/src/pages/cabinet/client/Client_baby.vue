@@ -1,62 +1,42 @@
 <template>
     <div class="edit_title">{{ $t('c_baby.title') }}</div>
     <div class="anketa">
-        <div v-if="photo" class="anketaitem_img"> <img :src="photo" alt="photo"> </div>
-        <div class="anketa_content">
-            <div class="anketa_content_name">
-                {{ Baby.baby.title }}
-            </div>
-            <div class="anketa_content_age">
-                <b>Имя работодателя:</b> {{ User.user.name }} {{ User.user.patronymic }} {{ User.user.surname }}
-            </div>
-            <div class="anketa_content_typeworks">
-                <b>Место работы: </b> {{ User.user.city }}
-            </div>
-            <div class="anketa_content_phone">
-                <b>Телефон:</b> {{ User.user.phone_number }}
-            </div>
-
-            <h2 class="anketa_title">Описание работы</h2>
-            <p class="anketa_client_about">{{ Baby.baby.title_about }}</p>
-
-            <div class="anketa_content_phone">
-                <b>Количество детей: </b> {{ Baby.baby.childrencount }}
-            </div>
-            <div class="anketa_content_phone">
-                <b>Возраст детей: </b> <span v-for="age in Baby.baby.Agegroups" :key="age.id"> {{ age.title }},&nbsp;
-                </span>
-            </div>
-
-            <div class="anketa_inform">
-                <div class="anketa_inform_item">
-                    <b>Занятость:</b> <br>
-                    <span v-for="work in Baby.baby.Joboptions" :key="work.id"> {{ work.title }},&nbsp; </span>
-                    {{ Baby.baby.employment }}
-                </div>
-                <div class="anketa_inform_item">
-                    <b>Заработная плата:</b> <br>
-                    {{ Baby.baby.monthpay }}
-                </div>
-                <div class="anketa_inform_item">
-                    <b>Работа на срок:</b> <br>
-                    {{ Baby.baby.workperiod }}
-                </div>
-                <div class="anketa_inform_item">
-                    <b>Наличие водительского удостоверения:</b> <br> {{ Baby.baby.drive }}
-                </div>
-                <div class="anketa_inform_item">
-                    <b>Готовность выполнять следующие обязанности:</b> <br>
-                    <span v-for="work in Baby.baby.Duties" :key="work.id"> {{ work.title }},&nbsp; </span>
-                </div>
-            </div>
+        <div class="anketa_text"> <span v-if="User.user.name">{{ User.user.name[locale] }}</span> <span
+                v-if="User.user.surname">{{
+                    User.user.surname[locale] }}</span> </div>
+        <div v-if="User.user.country_title" class="anketa_text">{{ $t('baby_anketa.item2') }} {{
+            User.user.country_title.title[locale] }}</div>
+        <div class="anketa_text">
+            {{ $t('c_baby.item2') }} <span v-if="User.user.city_title">{{ User.user.city_title.title[locale] }}</span>
         </div>
+        <div class="anketa_item anketa_fix">{{ $t('baby_anketa.item4') }}</div>
+        <div class="anketa_text">{{ User.user.phone_number }}</div>
+        <div class="anketa_item"> {{ $t('c_baby.item3') }} </div>
+        <div v-if="Baby.baby" class="anketa_text">{{ Baby.baby.title_about[locale] }}</div>
+        <div class="anketa_item">{{ $t('baby_anketa.item14') }}</div>
+        <div v-if="Baby.baby" class="anketa_text"> {{ Baby.baby.childrencount.title[locale]
+        }}</div>
+        <div class="anketa_item">{{ $t('baby_anketa.item9') }}</div>
+        <span v-if="Baby.baby" class="anketa_text" v-for="(item, index) in Baby.baby.Agegroups" :key="index"> {{
+            item.title.title[locale] }}{{ index < Baby.baby.Agegroups.length - 1 ? ', ' : '' }} </span>
+                <div class="anketa_item anketa_fix">{{ $t('baby_anketa.item13') }}</div>
+                <div v-if="Baby.baby" class="anketa_text"> {{ Baby.baby.monthpay.title[locale] }}
+                </div>
+                <div class="anketa_item">{{ $t('baby_anketa.item15') }}</div>
+                <div v-if="Baby.baby" class="anketa_text">{{ Baby.baby.workperiod.title[locale] }}
+                </div>
+                <div class="anketa_item">{{ $t('baby_anketa.item16') }}</div>
+                <span v-if="Baby.baby" class="anketa_text" v-for="(item, index) in Baby.baby.Duties" :key="index"> {{
+                    item.title.title[locale] }}{{ index < Baby.baby.Duties.length - 1 ? ', ' : '' }} </span>
     </div>
-
-    <span v-if="Baby.baby" class="category_change_btn" @click.prevent="change_baby()">Изменить анкету</span>
-    <span v-if="Baby.baby" class="category_change_btn red" @click.prevent="delete_baby()">Удалить анкету</span>
+    <div class="personal_btns">
+        <span class="btn" @click.prevent="change_baby()">Изменить анкету</span>
+        <span class="btn" @click.prevent="delete_baby()">Удалить анкету</span>
+    </div>
 </template>
 
 <script>
+import { useI18n } from 'vue-i18n';
 import { useClient_BabyStore } from '../../../stores/client_baby';
 import { useUserStore } from '../../../stores/user';
 export default {
@@ -64,25 +44,10 @@ export default {
     setup() {
         const Baby = useClient_BabyStore();
         const User = useUserStore();
-        return { Baby, User };
+        const { t, locale } = useI18n({ useScope: 'global' });
+        return { t, locale, Baby, User };
     },
     methods: {
-        back() {
-            this.$router.push({ name: "Account" })
-        },
-        createForm() {
-            if ((this.anketajoboptions.length == 0) || (this.anketaduties.length == 0) || (this.anketaagegroups.length == 0)) {
-                this.errors = [];
-                if (this.anketajoboptions.length == 0) { this.errors.push('Укажите приемлемые варианты работы.'); }
-                if (this.anketaduties.length == 0) { this.errors.push('Укажите обязанности для няни.'); }
-                if (this.anketaagegroups.length == 0) { this.errors.push('Укажите опыт работы с детьми по возрастным группам.'); }
-            } else {
-                this.errors = null; this.User.global_error = null;
-                this.anketa.user_id = localStorage.userID;
-                this.anketa.confirmed = true;
-                this.Baby.CREATE_BABY([this.anketa, this.anketajoboptions, this.anketaduties, this.anketaagegroups]);
-            }
-        },
         change_baby() {
             this.$router.push({ name: "Change-client_baby" });
         },
