@@ -24,7 +24,7 @@ class NurseRequest extends FormRequest
         return [
             'user_id' => 'required|numeric',
             'confirmed' => 'required|boolean',
-            'title_about' => 'required|string',
+            'title_about' => 'required',
             'workperiod_id' => 'required|numeric',
             'hourpay_id' => 'required|numeric',
             'monthpay_id' => 'required|numeric'

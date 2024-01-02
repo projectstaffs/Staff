@@ -55,7 +55,7 @@
             </div>
         </div>
 
-        <button type="submit" class="btn">{{ $t('w_baby.btn') }}</button>
+        <button type="submit" class="btn">{{ $t('c_nurse.btn') }}</button>
     </form>
 </template>
 
@@ -70,7 +70,6 @@ export default {
             anketa: {},
             anketaduties: [],
             anketaagegroups: [],
-            baby_exp: {},
             title_about: {},
             errors: {},
         }

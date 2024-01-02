@@ -113,6 +113,16 @@
         "item2": "The city:",
         "item3": "Position description:"
     },
+    "c_nurse": {
+        "title": "Vacancy for a nurse",
+        "title_change": "Editing a vacancy for a nurse",        
+        "btn": "Add a vacancy",
+        "btn_change": "Change the vacancy",
+        "btn_delete": "Delete a vacancy"
+    },
+    "c_keeper": {
+        "title": "Vacancy for a housekeeper"
+    },
     "main": {
         "top_title": "Home service agency",
         "top_subtitle": "Here your everyday tasks are solved",

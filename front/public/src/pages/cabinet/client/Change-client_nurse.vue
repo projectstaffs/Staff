@@ -1,70 +1,55 @@
-<template> 
-    <div @click.prevent="back" class="category_change_btn">Назад</div>
-    <div class="category_title">Изменение вакансии для сиделки:</div>   
-    <form @submit.prevent="changeForm" class="login_form">   
-        <div>Измените Заголовок вакансии:</div>
-        <input v-model="Nurse.nurse.title" required class="login_form_item" type="text" placeholder="Заголовок">
-        <div>Опишите вакансию:</div>
-        <textarea v-model="Nurse.nurse.title_about" required class="login_form_item" placeholder="about"></textarea>
-        <div>Приемлемые варианты работы:</div>
-        <div v-for="post in Store.joboptions" :key="post.id" class="language_item">
-            <input type="checkbox" v-bind:value="post.id" v-model="Nurse.nurse_options.anketajoboptions">
-            {{ post.title }}                                    
-        </div>
-        <div>Измените период работы:</div>
-        <select v-model="Nurse.nurse.workperiod_id" class="category_form_title">
+<template>
+    <div class="edit_title">{{ $t('c_nurse.title_change') }}</div>
+    <form @submit.prevent="changeForm" class="personal">
+        <div class="login_form_text">{{ $t('c_baby.item1_ua') }}</div>
+        <textarea v-if="Nurse.nurse" v-model="Nurse.nurse.title_about.ua" required class="login_form_item register_textarea"
+            :placeholder="$t('c_baby.item1_ua_holder')"></textarea>
+        <div class="login_form_text">{{ $t('c_baby.item1_en') }}</div>
+        <textarea v-if="Nurse.nurse" v-model="Nurse.nurse.title_about.en" required class="login_form_item register_textarea"
+            :placeholder="$t('c_baby.item1_en_holder')"></textarea>
+        <div class="login_form_text">{{ $t('w_baby.item7') }}</div>
+        <select v-if="Nurse.nurse" v-model="Nurse.nurse.workperiod_id" class="login_form_item auth_arrow">
             <option v-for="option in Store.workperiods" :value="option.id">
-                {{ option.title }}                
+                {{ option.title[locale] }}
             </option>
         </select>
-        <div>Измените занятость:</div>
-        <select v-model="Nurse.nurse.employment_id" class="category_form_title">
-            <option v-for="option in Store.employments" :value="option.id">
-                {{ option.title }}                
-            </option>
-        </select>
-        <div>Наличие у работника водительского удостоверения:</div>
-        <select v-model="Nurse.nurse.drive" class="category_form_title">
-            <option v-for="option in work" :value="option.value">
-                {{ option.value }}                
-            </option>
-        </select>
-        <div>Позволять компаниям и агентствам связываться со мной по данной вакансии:</div>
-        <select v-model="Nurse.nurse.agents" class="category_form_title">
-            <option v-for="option in work" :value="option.value">
-                {{ option.value }}                
-            </option>
-        </select>                
-        <div>Какие обязанности вы готовы выполнять:</div>
-        <div v-for="post in Store.nurseduties" :key="post.id" class="language_item">
+        <div class="login_form_text">{{ $t('w_nurse.item7') }}</div>
+        <div v-for="post in Store.nurseduties" :key="post.id" class="login_checkbox">
             <input type="checkbox" v-bind:value="post.id" v-model="Nurse.nurse_options.anketaduties">
-            {{ post.title }}                                    
+            {{ post.title[locale] }}
         </div>
-        <div>Ожидаемая почасовая оплата:</div>
-        <select v-model="Nurse.nurse.hourpay_id" class="category_form_title">
+        <div class="login_form_text">{{ $t('w_nurse.item8') }}</div>
+        <select v-if="Nurse.nurse" v-model="Nurse.nurse.hourpay_id" class="login_form_item auth_arrow">
             <option v-for="option in Store.hourlypayments" :value="option.id">
-                {{ option.title }}                
+                {{ option.title[locale] }}
             </option>
-        </select> 
-        <div>Ожидаемая помесячная оплата:</div>
-        <select v-model="Nurse.nurse.monthpay_id" class="category_form_title">
+        </select>
+        <div class="login_form_text">{{ $t('w_nurse.item9') }}</div>
+        <select v-if="Nurse.nurse" v-model="Nurse.nurse.monthpay_id" class="login_form_item auth_arrow">
             <option v-for="option in Store.monthlypayments" :value="option.id">
-                {{ option.title }}                
+                {{ option.title[locale] }}
             </option>
-        </select> 
+        </select>
 
-        <button type="submit" class="login_form_btn">Изменить вакансию</button>
+        <div class="personal_errors">
+            <div v-if="errors" class="login_middle">
+                <ul v-for="item in errors" :key="item">
+                    <li>{{ item[locale] }}</li>
+                </ul>
+            </div>
+            <div v-if="Nurse.errors" class="login_middle">
+                <ul v-for="item in Nurse.errors" :key="item">
+                    <li>{{ item[0][locale] }}</li>
+                </ul>
+            </div>
+        </div>
+
+        <button type="submit" class="btn">{{ $t('cabinet.edit_btn') }}</button>
     </form>
-    
-    <div class="register_error" v-for="item in errors" :key="item">
-        {{ item }}
-    </div>
-    <div class="register_error" v-for="item in User.global_error" :key="item">
-        {{ item[0] }}
-    </div>
 </template>
 
 <script>
+import { useI18n } from 'vue-i18n';
 import { useClient_NurseStore } from '../../../stores/client_nurse';
 import { useDataStore } from '../../../stores/variables';
 import { useUserStore } from '../../../stores/user';
@@ -72,10 +57,6 @@ export default {
     name: "Change-client_nurse",
     data() {
         return {
-            work: [
-                { value: 'Да' },
-                { value: 'Нет' }
-            ],
             errors: null
         }
     },
@@ -83,30 +64,28 @@ export default {
         const Nurse = useClient_NurseStore();
         const Store = useDataStore();
         const User = useUserStore();
-        return { Store, Nurse, User };
+        const { t, locale } = useI18n({ useScope: 'global' });
+        return { t, locale, Store, Nurse, User };
     },
     methods: {
-        back() {
-            this.$router.push({name: "Client_nurse"})
-        },        
-        changeForm() {  
-            if((this.Nurse.nurse_options.anketajoboptions.length == 0) || (this.Nurse.nurse_options.anketaduties.length == 0)) {
+        changeForm() {
+            this.Nurse.errors = null;
+            if ((this.Nurse.nurse_options.anketaduties.length == 0)) {
                 this.errors = [];
-                if(this.Nurse.nurse_options.anketajoboptions.length == 0) {this.errors.push('Укажите приемлемые варианты работы.');}
-                if(this.Nurse.nurse_options.anketaduties == 0) {this.errors.push('Укажите обязанности для сиделки.');}
+                if (this.Nurse.nurse_options.anketaduties == 0) { this.errors.push({ en: "Specify the responsibilities for the caregiver.", ua: "Вкажіть обов'язки для доглядальниці." }); }
             } else {
-                this.errors = null; this.User.global_error = null;
-                this.Nurse.CHANGE_NURSE([this.Nurse.nurse, this.Nurse.nurse_options.anketajoboptions, this.Nurse.nurse_options.anketaduties]);
+                this.errors = null;
+                this.Nurse.CHANGE_NURSE([this.Nurse.nurse, this.Nurse.nurse_options.anketaduties]);
             }
         },
     },
     mounted() {
-        this.User.GET_TOKEN();
         this.Nurse.GET_NURSE(localStorage.userID);
-        this.Store.GET_JOBOPTIONS(); this.Store.GET_WORKPERIODS(); 
-        this.Store.GET_EMPLOYMENTS(); this.Store.GET_NURSEDUTIES();
-        this.Store.GET_HOURLYPAYMENTS(); this.Store.GET_MONTHLYPAYMENTS();                               
-        this.User.global_error = null; this.errors = null;
+
+        this.Store.GET_WORKPERIODS();
+        this.Store.GET_NURSEDUTIES();
+        this.Store.GET_HOURLYPAYMENTS(); this.Store.GET_MONTHLYPAYMENTS();
+        this.Nurse.errors = null; this.errors = null;
     },
 }
 </script>

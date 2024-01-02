@@ -79,9 +79,6 @@ export default {
         return { t, locale, Store, Baby, User };
     },
     methods: {
-        back() {
-            this.$router.push({ name: "Client_baby" })
-        },
         changeForm() {
             this.Baby.errors = null;
             if ((this.Baby.baby_options.anketaduties.length == 0) || (this.Baby.baby_options.anketaagegroups.length == 0)) {

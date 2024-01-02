@@ -13,9 +13,18 @@
                         <div @click.prevent="account" class="sidebar_item">{{ $t('cabinet.item1') }}</div>
                         <div @click.prevent="edit" class="sidebar_item">{{ $t('cabinet.item2') }}</div>
                         <div @click.prevent="myphoto" class="sidebar_item">{{ $t('cabinet.item3') }}</div>
-                        <div @click.prevent="babysitter" class="sidebar_item">{{ $t('cabinet.item4') }}</div>
-                        <div @click.prevent="nurse" class="sidebar_item">{{ $t('cabinet.item5') }}</div>
-                        <div @click.prevent="keeper" class="sidebar_item">{{ $t('cabinet.item6') }}</div>
+                        <div @click.prevent="babysitter" class="sidebar_item">
+                            <span v-if="User.user.role === 'Исполнитель'">{{ $t('cabinet.item4') }}</span>
+                            <span v-else>{{ $t('c_baby.title') }}</span>
+                        </div>
+                        <div @click.prevent="nurse" class="sidebar_item">
+                            <span v-if="User.user.role === 'Исполнитель'">{{ $t('cabinet.item5') }}</span>
+                            <span v-else>{{ $t('c_nurse.title') }}</span>
+                        </div>
+                        <div @click.prevent="keeper" class="sidebar_item">
+                            <span v-if="User.user.role === 'Исполнитель'">{{ $t('cabinet.item6') }}</span>
+                            <span v-else>{{ $t('c_keeper.title') }}</span>
+                        </div>
                     </div>
                     <div class="cabinet_main">
                         <router-view />
@@ -32,6 +41,7 @@ import { useForm_BabyStore } from '../../stores/form_baby';
 import { useForm_NurseStore } from '../../stores/form_nurse';
 import { useForm_HousekeeperStore } from '../../stores/form_housekeeper';
 import { useClient_BabyStore } from '../../stores/client_baby';
+import { useClient_NurseStore } from '../../stores/client_nurse';
 export default {
     name: "Cabinet",
     setup() {
@@ -39,8 +49,9 @@ export default {
         const Nurse = useForm_NurseStore();
         const Keeper = useForm_HousekeeperStore();
         const ClientBaby = useClient_BabyStore();
+        const ClientNurse = useClient_NurseStore();
         const User = useUserStore();
-        return { User, Baby, Nurse, Keeper, ClientBaby };
+        return { User, Baby, Nurse, Keeper, ClientBaby, ClientNurse };
     },
     methods: {
         account() { this.$router.push({ name: "Account" }) },
@@ -64,7 +75,10 @@ export default {
                 if (this.Nurse.nurse) { this.$router.push({ name: "Nurse" }) }
                 else { this.$router.push({ name: "CreateNurse" }) }
             }
-            else { this.$router.push({ name: "Client_nurse" }) }
+            else {
+                if (this.ClientNurse.nurse) { this.$router.push({ name: "Client_nurse" }) }
+                else { this.$router.push({ name: "CreateClientNurse" }) }
+            }
         },
         keeper() {
             if (this.User.user.role === 'Исполнитель') {
@@ -83,6 +97,7 @@ export default {
         this.Nurse.GET_NURSE(localStorage.userID);
         this.Keeper.GET_KEEPER(localStorage.userID);
         this.ClientBaby.GET_BABY(localStorage.userID);
+        this.ClientNurse.GET_NURSE(localStorage.userID);
     },
 }
 </script>

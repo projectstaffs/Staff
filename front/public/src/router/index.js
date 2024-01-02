@@ -317,6 +317,12 @@ const router = createRouter({
             component: () =>import('../pages/cabinet/client/Client_keeper.vue')
         },
         {
+            name: 'CreateClientKeeper',
+            path: '/createclientkeeper',
+            meta: {layout: 'Cabinet'},
+            component: () =>import('../pages/cabinet/client/CreateClientKeeper.vue')
+        },
+        {
             name: 'Change-client_keeper',
             path: '/change-client_keeper',
             meta: {layout: 'Cabinet'},

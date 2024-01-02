@@ -30,8 +30,8 @@
                     item.title.title[locale] }}{{ index < Baby.baby.Duties.length - 1 ? ', ' : '' }} </span>
     </div>
     <div class="personal_btns">
-        <span class="btn" @click.prevent="change_baby()">Изменить анкету</span>
-        <span class="btn" @click.prevent="delete_baby()">Удалить анкету</span>
+        <span class="btn" @click.prevent="change_baby()">{{ $t('c_nurse.btn_change') }}</span>
+        <span class="btn" @click.prevent="delete_baby()">{{ $t('c_nurse.btn_delete') }}</span>
     </div>
 </template>
 
