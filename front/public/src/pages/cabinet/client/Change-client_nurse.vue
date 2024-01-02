@@ -31,18 +31,7 @@
             </option>
         </select>
 
-        <div class="personal_errors">
-            <div v-if="errors" class="login_middle">
-                <ul v-for="item in errors" :key="item">
-                    <li>{{ item[locale] }}</li>
-                </ul>
-            </div>
-            <div v-if="Nurse.errors" class="login_middle">
-                <ul v-for="item in Nurse.errors" :key="item">
-                    <li>{{ item[0][locale] }}</li>
-                </ul>
-            </div>
-        </div>
+        <Errors :errors="errors" :formErrors="Nurse.errors" />
 
         <button type="submit" class="btn">{{ $t('cabinet.edit_btn') }}</button>
     </form>
@@ -53,6 +42,7 @@ import { useI18n } from 'vue-i18n';
 import { useClient_NurseStore } from '../../../stores/client_nurse';
 import { useDataStore } from '../../../stores/variables';
 import { useUserStore } from '../../../stores/user';
+import Errors from '../../layouts/Error.vue';
 export default {
     name: "Change-client_nurse",
     data() {
@@ -67,6 +57,7 @@ export default {
         const { t, locale } = useI18n({ useScope: 'global' });
         return { t, locale, Store, Nurse, User };
     },
+    components: { Errors },
     methods: {
         changeForm() {
             this.Nurse.errors = null;

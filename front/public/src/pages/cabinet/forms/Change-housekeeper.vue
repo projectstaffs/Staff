@@ -47,18 +47,7 @@
             </option>
         </select>
 
-        <div class="personal_errors">
-            <div v-if="errors" class="login_middle">
-                <ul v-for="item in errors" :key="item">
-                    <li>{{ item[locale] }}</li>
-                </ul>
-            </div>
-            <div v-if="Keeper.errors" class="login_middle">
-                <ul v-for="item in Keeper.errors" :key="item">
-                    <li>{{ item[0][locale] }}</li>
-                </ul>
-            </div>
-        </div>
+        <Errors :errors="errors" :formErrors="Keeper.errors" />
 
         <button type="submit" class="btn">Изменить анкету</button>
     </form>
@@ -69,6 +58,7 @@ import { useI18n } from 'vue-i18n';
 import { useForm_HousekeeperStore } from '../../../stores/form_housekeeper';
 import { useDataStore } from '../../../stores/variables';
 import { useUserStore } from '../../../stores/user';
+import Errors from '../../layouts/Error.vue';
 export default {
     name: "Change-housekeeper",
     data() {
@@ -83,6 +73,7 @@ export default {
         const { t, locale } = useI18n({ useScope: 'global' });
         return { t, locale, Store, Keeper, User };
     },
+    components: { Errors },
     methods: {
         changeForm() {
             if ((this.Keeper.keeper_options.anketarpreferences.length == 0) || (this.Keeper.keeper_options.anketaduties.length == 0) || (this.Keeper.keeper_options.anketatypeworks.length == 0)) {

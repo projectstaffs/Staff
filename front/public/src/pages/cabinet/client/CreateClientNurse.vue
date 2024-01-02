@@ -31,18 +31,7 @@
             </option>
         </select>
 
-        <div class="personal_errors">
-            <div v-if="errors" class="login_middle">
-                <ul v-for="item in errors" :key="item">
-                    <li>{{ item[locale] }}</li>
-                </ul>
-            </div>
-            <div v-if="Nurse.errors" class="login_middle">
-                <ul v-for="item in Nurse.errors" :key="item">
-                    <li>{{ item[0][locale] }}</li>
-                </ul>
-            </div>
-        </div>
+        <Errors :errors="errors" :formErrors="Nurse.errors" />
 
         <button type="submit" class="btn">{{ $t('c_nurse.btn') }}</button>
     </form>
@@ -52,6 +41,7 @@
 import { useI18n } from 'vue-i18n';
 import { useDataStore } from '../../../stores/variables';
 import { useClient_NurseStore } from '../../../stores/client_nurse';
+import Errors from '../../layouts/Error.vue';
 export default {
     name: "CreateClientNurse",
     data() {
@@ -62,6 +52,7 @@ export default {
             errors: {},
         }
     },
+    components: { Errors },
     setup() {
         const Nurse = useClient_NurseStore();
         const Store = useDataStore();

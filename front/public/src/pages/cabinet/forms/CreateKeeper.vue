@@ -47,18 +47,7 @@
             </option>
         </select>
 
-        <div class="personal_errors">
-            <div v-if="errors" class="login_middle">
-                <ul v-for="item in errors" :key="item">
-                    <li>{{ item[locale] }}</li>
-                </ul>
-            </div>
-            <div v-if="Keeper.errors" class="login_middle">
-                <ul v-for="item in Keeper.errors" :key="item">
-                    <li>{{ item[0][locale] }}</li>
-                </ul>
-            </div>
-        </div>
+        <Errors :errors="errors" :formErrors="Keeper.errors" />
 
         <button type="submit" class="btn">{{ $t('w_baby.btn') }}</button>
     </form>
@@ -68,6 +57,7 @@
 import { useI18n } from 'vue-i18n';
 import { useDataStore } from '../../../stores/variables';
 import { useForm_HousekeeperStore } from '../../../stores/form_housekeeper';
+import Errors from '../../layouts/Error.vue';
 export default {
     name: "CreateKeeper",
     data() {
@@ -86,6 +76,7 @@ export default {
         const { t, locale } = useI18n({ useScope: 'global' });
         return { Store, t, locale, Keeper };
     },
+    components: { Errors },
     methods: {
         createForm() {
             this.Keeper.errors = null;

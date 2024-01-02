@@ -42,18 +42,7 @@
             </option>
         </select>
 
-        <div class="personal_errors">
-            <div v-if="errors" class="login_middle">
-                <ul v-for="item in errors" :key="item">
-                    <li>{{ item[locale] }}</li>
-                </ul>
-            </div>
-            <div v-if="Baby.errors" class="login_middle">
-                <ul v-for="item in Baby.errors" :key="item">
-                    <li>{{ item[0][locale] }}</li>
-                </ul>
-            </div>
-        </div>
+        <Errors :errors="errors" :formErrors="Baby.errors" />
 
         <button type="submit" class="btn">{{ $t('cabinet.edit_btn') }}</button>
     </form>
@@ -64,6 +53,7 @@ import { useI18n } from 'vue-i18n';
 import { useClient_BabyStore } from '../../../stores/client_baby';
 import { useDataStore } from '../../../stores/variables';
 import { useUserStore } from '../../../stores/user';
+import Errors from '../../layouts/Error.vue';
 export default {
     name: "Change-client_baby",
     data() {
@@ -78,6 +68,7 @@ export default {
         const { t, locale } = useI18n({ useScope: 'global' });
         return { t, locale, Store, Baby, User };
     },
+    components: { Errors },
     methods: {
         changeForm() {
             this.Baby.errors = null;

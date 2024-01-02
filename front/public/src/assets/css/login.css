@@ -106,10 +106,6 @@
     font-weight: 300;
 }
 
-.register_textarea::placeholder {
-    padding-top: 5px;
-}
-
 .login_checkbox {
     display: flex;
     align-items: center;
@@ -155,6 +151,14 @@
 
 .login_forgot span {
     cursor: pointer;
+}
+
+.register_textarea {
+    resize: vertical;
+}
+
+.register_textarea::placeholder {
+    padding-top: 5px;
 }
 
 .register_phone {

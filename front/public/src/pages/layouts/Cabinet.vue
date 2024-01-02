@@ -42,6 +42,7 @@ import { useForm_NurseStore } from '../../stores/form_nurse';
 import { useForm_HousekeeperStore } from '../../stores/form_housekeeper';
 import { useClient_BabyStore } from '../../stores/client_baby';
 import { useClient_NurseStore } from '../../stores/client_nurse';
+import { useClient_KeeperStore } from '../../stores/client_keeper';
 export default {
     name: "Cabinet",
     setup() {
@@ -50,8 +51,9 @@ export default {
         const Keeper = useForm_HousekeeperStore();
         const ClientBaby = useClient_BabyStore();
         const ClientNurse = useClient_NurseStore();
+        const ClientKeeper = useClient_KeeperStore();
         const User = useUserStore();
-        return { User, Baby, Nurse, Keeper, ClientBaby, ClientNurse };
+        return { User, Baby, Nurse, Keeper, ClientBaby, ClientNurse, ClientKeeper };
     },
     methods: {
         account() { this.$router.push({ name: "Account" }) },
@@ -85,7 +87,10 @@ export default {
                 if (this.Keeper.keeper) { this.$router.push({ name: "Housekeeper" }) }
                 else { this.$router.push({ name: "CreateKeeper" }) }
             }
-            else { this.$router.push({ name: "Client_keeper" }) }
+            else {
+                if (this.ClientKeeper.keeper) { this.$router.push({ name: "Client_keeper" }) }
+                else { this.$router.push({ name: "CreateClientKeeper" }) }
+            }
         },
     },
     mounted() {
@@ -98,6 +103,7 @@ export default {
         this.Keeper.GET_KEEPER(localStorage.userID);
         this.ClientBaby.GET_BABY(localStorage.userID);
         this.ClientNurse.GET_NURSE(localStorage.userID);
+        this.ClientKeeper.GET_KEEPER(localStorage.userID);
     },
 }
 </script>
