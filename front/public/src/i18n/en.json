@@ -121,7 +121,8 @@
         "btn_delete": "Delete a vacancy"
     },
     "c_keeper": {
-        "title": "Vacancy for a housekeeper"
+        "title": "Vacancy for a housekeeper",
+        "title_change": "Editing a vacancy for a housekeeper"
     },
     "main": {
         "top_title": "Home service agency",

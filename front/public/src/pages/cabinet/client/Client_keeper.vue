@@ -1,38 +1,39 @@
 <template>
     <div class="edit_title">{{ $t('c_keeper.title') }}</div>
     <div class="anketa">
-        <div class="anketa_content_age">
-            <b>Имя работодателя:</b> {{ User.user.name }} {{ User.user.patronymic }} {{ User.user.surname }}
+        <div class="anketa_text"> <span v-if="User.user.name">{{ User.user.name[locale] }}</span> <span
+                v-if="User.user.surname">{{
+                    User.user.surname[locale] }}</span> </div>
+        <div v-if="User.user.country_title" class="anketa_text">{{ $t('baby_anketa.item2') }} {{
+            User.user.country_title.title[locale] }}</div>
+        <div class="anketa_text">
+            {{ $t('c_baby.item2') }} <span v-if="User.user.city_title">{{ User.user.city_title.title[locale] }}</span>
         </div>
-        <div class="anketa_content_typeworks">
-            <b>Место работы: </b> {{ User.user.city }}
-        </div>
-        <div class="anketa_content_phone">
-            <b>Телефон:</b> {{ User.user.phone_number }}
-        </div>
+        <div class="anketa_item anketa_fix">{{ $t('baby_anketa.item4') }}</div>
+        <div class="anketa_text">{{ User.user.phone_number }}</div>
 
-        <h2 class="anketa_title">Описание работы</h2>
-        <p class="anketa_client_about">{{ Keeper.keeper.title_about }}</p>
+        <div class="anketa_item"> {{ $t('c_baby.item3') }} </div>
+        <div v-if="Keeper.keeper" class="anketa_text">{{ Keeper.keeper.title_about[locale] }}</div>
 
-        <div class="anketa_inform_item">
-            <b>Заработная плата:</b> <br>
-            {{ Keeper.keeper.monthpay }}
+        <div class="anketa_item anketa_fix">{{ $t('baby_anketa.item13') }}</div>
+        <div v-if="Keeper.keeper" class="anketa_text"> {{ Keeper.keeper.monthpay.title[locale] }}
         </div>
-        <div class="anketa_inform_item">
-            <b>Работа на срок:</b> <br>
-            {{ Keeper.keeper.workperiod }}
+        <div class="anketa_item">{{ $t('baby_anketa.item15') }}</div>
+        <div v-if="Keeper.keeper" class="anketa_text">{{ Keeper.keeper.workperiod.title[locale] }}
         </div>
-        <div class="anketa_inform_item">
-            <b>Готовность выполнять следующие обязанности:</b> <br>
-            <span v-for="work in Keeper.keeper.Duties" :key="work.id"> {{ work.title }},&nbsp; </span>
-        </div>
+        <div class="anketa_item">{{ $t('baby_anketa.item16') }}</div>
+        <span v-if="Keeper.keeper" class="anketa_text" v-for="(item, index) in Keeper.keeper.Duties" :key="index"> {{
+            item.title[locale] }}{{ index < Keeper.keeper.Duties.length - 1 ? ', ' : '' }} </span>
     </div>
 
-    <span v-if="Keeper.keeper" class="category_change_btn" @click.prevent="change_keeper()">Изменить анкету</span>
-    <span v-if="Keeper.keeper" class="category_change_btn red" @click.prevent="delete_keeper()">Удалить анкету</span>
+    <div class="personal_btns">
+        <span class="btn" @click.prevent="change_keeper()">{{ $t('c_nurse.btn_change') }}</span>
+        <span class="btn" @click.prevent="delete_keeper()">{{ $t('c_nurse.btn_delete') }}</span>
+    </div>
 </template>
 
 <script>
+import { useI18n } from 'vue-i18n';
 import { useClient_KeeperStore } from '../../../stores/client_keeper';
 import { useUserStore } from '../../../stores/user';
 export default {
@@ -41,7 +42,8 @@ export default {
     setup() {
         const Keeper = useClient_KeeperStore();
         const User = useUserStore();
-        return { Keeper, User };
+        const { t, locale } = useI18n({ useScope: 'global' });
+        return { t, locale, Keeper, User };
     },
     methods: {
         change_keeper() {

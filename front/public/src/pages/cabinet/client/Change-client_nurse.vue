@@ -13,7 +13,7 @@
                 {{ option.title[locale] }}
             </option>
         </select>
-        <div class="login_form_text">{{ $t('w_nurse.item7') }}</div>
+        <div class="login_form_text">{{ $t('baby_anketa.item16') }}</div>
         <div v-for="post in Store.nurseduties" :key="post.id" class="login_checkbox">
             <input type="checkbox" v-bind:value="post.id" v-model="Nurse.nurse_options.anketaduties">
             {{ post.title[locale] }}

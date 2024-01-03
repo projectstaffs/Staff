@@ -34,26 +34,30 @@
             <div class="login_form_text">{{ $t('register.item4') }}</div>
             <input v-model="User.user.email" required class="login_form_item" type="email"
                 :placeholder="$t('register.item4_holder')">
-            <div class="login_form_text">{{ $t('register.item9') }}</div>
-            <select v-model="User.user.gender" class="login_form_item auth_arrow">
-                <option v-for="option in gender_items" :value="option.value">
-                    {{ option.value[locale] }}
-                </option>
-            </select>
-            <div class="login_form_text">{{ $t('register.item10') }}</div>
-            <input v-model="User.user.age" required class="login_form_item" type="date">
-            <div class="login_form_text">{{ $t('register.item11') }}</div>
-            <select v-model="User.user.animal_work" class="login_form_item auth_arrow">
-                <option v-for="option in work" :value="option.value">
-                    {{ option.value[locale] }}
-                </option>
-            </select>
-            <div class="login_form_text">{{ $t('register.item12') }}</div>
-            <textarea v-model="about.ua" required class="login_form_item register_textarea"
-                :placeholder="$t('register.item12_holder')"></textarea>
-            <div class="login_form_text">{{ $t('register.item12_en') }}</div>
-            <textarea v-model="about.en" required class="login_form_item register_textarea"
-                :placeholder="$t('register.item12_holder_en')"></textarea>
+
+            <div v-if="User.user.role === 'Исполнитель'">
+                <div class="login_form_text">{{ $t('register.item9') }}</div>
+                <select v-model="User.user.gender" class="login_form_item auth_arrow">
+                    <option v-for="option in gender_items" :value="option.value">
+                        {{ option.value[locale] }}
+                    </option>
+                </select>
+                <div class="login_form_text">{{ $t('register.item10') }}</div>
+                <input v-model="User.user.age" required class="login_form_item" type="date">
+                <div class="login_form_text">{{ $t('register.item11') }}</div>
+                <select v-model="User.user.animal_work" class="login_form_item auth_arrow">
+                    <option v-for="option in work" :value="option.value">
+                        {{ option.value[locale] }}
+                    </option>
+                </select>
+                <div class="login_form_text">{{ $t('register.item12') }}</div>
+                <textarea v-model="about.ua" required class="login_form_item register_textarea"
+                    :placeholder="$t('register.item12_holder')"></textarea>
+                <div class="login_form_text">{{ $t('register.item12_en') }}</div>
+                <textarea v-model="about.en" required class="login_form_item register_textarea"
+                    :placeholder="$t('register.item12_holder_en')"></textarea>
+            </div>
+
             <div class="login_form_text">{{ $t('register.item5') }}</div>
             <select v-model="User.user.country" class="login_form_item auth_arrow">
                 <option v-for="option in Store.countrys" :value="option.id">
@@ -120,7 +124,7 @@ export default {
             this.User.user.name = this.name;
             this.User.user.surname = this.surname;
             this.User.user.about = this.about;
-            this.User.user.phone_code = this.this.selectedOption.id;
+            this.User.user.phone_code = this.selectedOption.id;
             this.User.UPDATE_USER(this.User.user);
         },
         selectOption(option) {
@@ -149,10 +153,6 @@ export default {
 .edit_fix {
     position: static;
     transform: none;
-    min-height: 1675px;
-}
-
-.hide {
-    display: none;
+    min-height: 1150px;
 }
 </style>

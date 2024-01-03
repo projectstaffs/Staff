@@ -67,17 +67,17 @@ export default {
 
             body.addEventListener('click', function (e) {
                 // Переключение страниц
-                if (e.target.classList.contains('inactive')) {
+                if (e.target.classList.contains('inactive')) { // Отключение активной страницы
                     var previousActive = page_block.querySelector('.header_btn.is_active');
                     if (previousActive) { closeWindow(previousActive); }
                 }
-                if (e.target.classList.contains('header_btn')) {
+                if (e.target.classList.contains('header_btn')) { // Переключение страниц
                     if (e.target.classList.contains('is_active')) { return; }
                     var previousActive = page_block.querySelector('.header_btn.is_active');
                     if (previousActive) { closeWindow(previousActive); }
                     showWindow(e.target);
                 }
-                var windowColor = closestAttr(e.target, 'data-color');
+                var windowColor = closestAttr(e.target, 'data-color'); // Переключение страниц с футера
                 if (windowColor !== null) {
                     var previousActive = page_block.querySelector('.header_btn.is_active');
                     if (previousActive) { closeWindow(previousActive); }

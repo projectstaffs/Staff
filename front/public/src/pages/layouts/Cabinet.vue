@@ -59,8 +59,7 @@ export default {
         account() { this.$router.push({ name: "Account" }) },
         myphoto() { this.$router.push({ name: "Myphoto" }) },
         edit() {
-            if (this.User.user.role === 'Исполнитель') { this.$router.push({ name: "Edit" }) }
-            else { this.$router.push({ name: "EditClient" }) }
+            this.$router.push({ name: "Edit" })
         },
         babysitter() {
             if (this.User.user.role === 'Исполнитель') {

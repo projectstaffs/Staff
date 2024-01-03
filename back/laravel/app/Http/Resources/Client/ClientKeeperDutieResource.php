@@ -22,7 +22,7 @@ class ClientKeeperdutieResource extends JsonResource
             if($item->id == $this->keeperdutie_id) {
                 return [
                     'id' => $this->keeperdutie_id,
-                    'title' => $item->title            
+                    'title' => json_decode($item->title)            
                 ];                
             }                           
         }

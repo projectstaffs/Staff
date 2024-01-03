@@ -9,7 +9,7 @@
                 <div class="container">
                     <div class="homestaff_content">
                         <div class="homestaff_inner">
-                            <div class="staff_item">
+                            <div class="staff_item" @click.prevent="baby">
                                 <img class="staff_img" src="../../../assets/img/main/category/home/item1.jpg" alt="">
                                 <div class="staff_text"> {{ $t('main.staff_item1') }} </div>
                             </div>
@@ -84,6 +84,9 @@
 <script>
 export default {
     name: "HomeStaff",
+    methods: {
+        baby() { this.$router.push({ name: "BabyAll" }) }
+    },
 }
 </script>
 
