@@ -25,6 +25,7 @@ use App\Models\Data\WorkPeriod;
 use App\Models\Data\MonthlyPayment;
 use App\Models\Data\HourlyPayment;
 use App\Models\Data\Experience;
+use Illuminate\Support\Carbon;
 
 class WorkBabyResource extends JsonResource
 {
@@ -141,6 +142,8 @@ class WorkBabyResource extends JsonResource
             }                           
         }
         
+        $Date = Carbon::parse($this->created_at)->format('d.m.Y');
+        
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,
@@ -152,6 +155,7 @@ class WorkBabyResource extends JsonResource
             'hourpay' => $hourpay,
             'monthpay' => $monthpay,         
             'confirmed' => $this->confirmed,
+            'date' => $Date,
 
             'Languages' => UserLanguagesResource::collection($lang),
             'Agegroups' => FormAgeGroupResource::collection($agegroup),

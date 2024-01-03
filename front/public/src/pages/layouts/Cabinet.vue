@@ -122,32 +122,6 @@ export default {
     border-right: 1px solid #8E8E8E;
 }
 
-.cabinet_box {
-    width: 250px;
-    height: 250px;
-    border-radius: 10px;
-    background: #1E1510;
-    margin: 20px 0px;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.cabinet_img {
-    position: absolute;
-    left: 20px;
-    bottom: 20px;
-    width: 250px;
-    height: 250px;
-    background: yellow;
-    border-radius: 10px;
-}
-
-.cabinet_noimg {
-    color: #FFF0D2;
-}
-
 .sidebar_item {
     cursor: pointer;
     transition: color 0.3s, background 0.3s;
