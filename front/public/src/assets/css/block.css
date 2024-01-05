@@ -20,3 +20,49 @@
     padding-top: 80px;
     border-top: 1px solid rgba(0, 0, 0, 0.20);
 }
+
+.container {
+    padding: 0 30px;
+    max-width: 100%;
+    width: 1168px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.search_block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.search_block .btn {
+    display: inline-block;
+    width: 115px;
+    height: 30px;
+    margin: 0;
+    padding: 0px 16px;
+    border: 0.2px solid #5C4538;
+    background: none;
+
+    color: var(--typography-typography-50-brown, rgba(30, 21, 16, 0.50));
+    font-size: 12px;
+}
+
+.search_block .btn:hover {
+    color: #FFF0D2;
+    background: #5C4538;
+}
+
+.search {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search .login_form_item {
+    width: 250px;
+    height: 30px;
+    padding: 2px 10px;
+    margin: 0px 15px 0px 0px;
+}

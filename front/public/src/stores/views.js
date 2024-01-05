@@ -196,18 +196,17 @@ export const useViewsStore = defineStore('views', {
             this.workerBabyitem = JSON.parse(localStorage.workerBabyitem);
             this.workerBabyitemUser = JSON.parse(localStorage.workerBabyitemUser);
         },
-        SEARCH_WORKERBABY(data){            
+        SEARCH_WORKERBABY(data){           
             api.get('api/auth/w_baby')
                 .then(res => {
                     let result = [];
                     res.data.data.forEach((item) => { 
                         let count = 0;
-                        if(item.User.city_id === data.city) { count++; } 
-                        if(item.employment_id === data.employment) { count++; }
+                        if(item.User.city === data.city) { count++; }
                         item.Typeworks.forEach((el) => {
                             if(el.id === data.typeofwork) {count++;}
-                        })                             
-                        if(count === 3) { result.push(item); }                                                               
+                        })                           
+                        if(count === 2) { result.push(item); }                                                               
                     })        
                     this.workerBaby = result;
                     this.currentWBPage = 1;

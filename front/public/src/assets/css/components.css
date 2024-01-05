@@ -1,0 +1,58 @@
+.btn {
+    width: 280px;
+    height: 48px;
+    margin: 0 auto;
+    display: flex;
+    padding: 16px 24px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background: #1E1510;
+
+    cursor: pointer;
+    color: #FFF0D2;
+    font-size: 18px;
+    font-weight: 500;
+    transition: color 0.3s, background 0.3s;
+}
+
+.btn:hover {
+    background: #5C4538;
+} 
+
+.edit_title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 120%;
+    margin-bottom: 24px;
+}
+
+.pagination_prew {
+    float: left;
+}
+
+.pagination_next {
+    float: right;
+}
+
+.pagination .btn {
+    font-size: 14px;
+    font-weight: 500;
+    width: 220px;
+    color: #1E1510;
+    background: none; 
+    border: 1px solid #1E1510;   
+}
+
+.pagination .btn:hover {
+    color: #FFF0D2;
+    background: #5C4538;
+}
+.pagination .btn:hover .view_svg { 
+    fill: #FFF0D2;
+}
+
+button:disabled {
+    display: none;
+}

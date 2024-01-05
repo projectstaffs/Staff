@@ -1,10 +1,13 @@
 @import './css/normalize.css';
+@import './css/components.css';
 @import './css/block.css';
 @import './css/staff.css';
 @import './css/service.css';
 @import './css/point.css';
 @import './css/login.css';
 @import './css/anketa.css';
+@import './css/view.css';
+
 
 /* Шрифты */
 @font-face {
@@ -84,41 +87,3 @@ body {
 }
 
 /* 1200px 992px 767px 576px */
-/* Компоненты */
-.container {
-    padding: 0 30px;
-    max-width: 100%;
-    width: 1168px;
-    height: 100%;
-    margin: 0 auto;
-}
-
-.btn {
-    width: 280px;
-    height: 48px;
-    margin: 0 auto;
-    display: flex;
-    padding: 16px 24px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    background: #1E1510;
-
-    cursor: pointer;
-    color: #FFF0D2;
-    font-size: 18px;
-    font-weight: 500;
-    transition: color 0.3s, background 0.3s;
-}
-
-.btn:hover {
-    background: #5C4538;
-} 
-
-.edit_title {
-    text-align: center;
-    font-size: 24px;
-    font-weight: 500;
-    line-height: 120%;
-    margin-bottom: 24px;
-}

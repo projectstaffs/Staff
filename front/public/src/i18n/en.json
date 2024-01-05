@@ -122,7 +122,17 @@
     },
     "c_keeper": {
         "title": "Vacancy for a housekeeper",
-        "title_change": "Editing a vacancy for a housekeeper"
+        "title_change": "Editing a vacancy for a housekeeper",
+        "btn_details": "Read more",
+        "btn_prew": "Previous page",
+        "btn_next": "Next page",
+        "view_title": "Details of the selected vacancy",
+        "view_join": "Sign up for an interview"
+    },
+    "search": {
+        "item1": "Reviewed by",
+        "item2": "Find",
+        "item3": "Reset"
     },
     "main": {
         "top_title": "Home service agency",

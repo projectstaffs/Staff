@@ -4,21 +4,21 @@
         <div class="block_content">
             <div class="container">
                 <div class="search_block">
-                    <button @click.prevent="watch" class="login_form_btn">Просмотренные</button>
+                    <button @click.prevent="watch" class="btn">{{ $t('search.item1') }}</button>
                     <form class="search" @submit.prevent="search">
-                        <select v-model="searchData.typeofwork">
+                        <select v-model="searchData.typeofwork" class="login_form_item auth_arrow">
                             <option v-for="option in Store.typeofworks" :value="option.id">
-                                {{ option.title }}
+                                {{ option.title[locale] }}
                             </option>
                         </select>
-                        <select v-model="searchData.city">
+                        <select v-model="searchData.city" class="login_form_item auth_arrow">
                             <option v-for="option in Store.citys" :value="option.id">
-                                {{ option.title }}
+                                {{ option.title[locale] }}
                             </option>
                         </select>
-                        <button type="submit" class="login_form_btn">Найти</button>
+                        <button type="submit" class="btn">{{ $t('search.item2') }}</button>
                     </form>
-                    <button @click.prevent="clear" class="login_form_btn">Сбросить</button>
+                    <button @click.prevent="clear" class="btn">{{ $t('search.item3') }}</button>
                 </div>
 
                 <div v-for="post in displayedPosts" :key="post.id">
@@ -89,7 +89,7 @@ export default {
     data() {
         return {
             searchData: {},
-            itemsPerPage: 5, // Количество постов на странице
+            itemsPerPage: 2, // Количество постов на странице
         }
     },
     setup() {
@@ -105,6 +105,7 @@ export default {
         },
         search() {
             this.Views.SEARCH_WORKERBABY(this.searchData);
+            //console.log(this.searchData);
         },
         clear() {
             this.Views.GET_WORKERBABY();
