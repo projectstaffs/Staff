@@ -78,16 +78,9 @@ export default {
         return { Views, User, Store, t, locale };
     },
     methods: {
-        watch() {
-            this.Views.WATCH_CLIENTBABY(localStorage.userID);
-        },
-        search() {
-            //console.log(this.searchData);
-            this.Views.SEARCH_CLIENTBABY(this.searchData);
-        },
-        clear() {
-            this.Views.GET_CLIENTBABY();
-        },
+        watch() { this.Views.WATCH_CLIENTBABY(localStorage.userID); },
+        search() { this.Views.SEARCH_CLIENTBABY(this.searchData); },
+        clear() { this.Views.GET_CLIENTBABY(); },
         showItem(item) {
             this.Views.clientBabyitemUser = item.User;
             localStorage.clientBabyitemUser = JSON.stringify(item.User);

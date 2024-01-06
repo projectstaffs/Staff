@@ -17,7 +17,7 @@
                                 {{ Views.clientBabyitemUser.country_title.title[locale] }}
                             </div>
                             <div v-if="Views.clientBabyitemUser.city_title" class="anketa_text">
-                                {{ $t('register.item6') }} {{ Views.clientBabyitemUser.city_title.title[locale] }}
+                                {{ $t('cabinet.city') }} {{ Views.clientBabyitemUser.city_title.title[locale] }}
                             </div>
                             <div class="anketa_item anketa_fix">{{ $t('baby_anketa.item4') }}</div>
                             <div class="anketa_text">{{ Views.clientBabyitemUser.phone_number }}</div>

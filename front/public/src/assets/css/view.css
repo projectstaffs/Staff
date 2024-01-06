@@ -63,9 +63,14 @@
 .view_top {
     margin-bottom: 30px;
     display: flex;
+}
+
+.view_top_content {
+    width: 100%;
+    display: flex;
     justify-content: center;
 }
 
-.view_top .btn {
+.view_top_content .btn {
     margin: 0px 15px;
 }
