@@ -111,6 +111,7 @@ class ClientBabyResource extends JsonResource
             'Agegroups' => ClientAgeGroupResource::collection($agegroup),            
             'Duties' => ClientDutieResource::collection($dutie),
             'User' => $USER,
+            'date' => $Date,
             
             'workperiod_id' => $this->workperiod_id,
             'childrencount_id' => $this->childrencount_id,

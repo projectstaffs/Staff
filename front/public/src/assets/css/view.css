@@ -59,3 +59,13 @@
 .view_fixmargin {
     margin-top: 50px;
 }
+
+.view_top {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.view_top .btn {
+    margin: 0px 15px;
+}

@@ -33,6 +33,10 @@
     font-size: 12px;
 }
 
+.btn_search:hover {
+    color: #FFF0D2;
+}
+
 .edit_title {
     text-align: center;
     font-size: 24px;

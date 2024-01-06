@@ -34,12 +34,11 @@ export const useViewsStore = defineStore('views', {
                     let result = [];
                     res.data.data.forEach((item) => { 
                         let count = 0;
-                        if(item.User.city_id === data.city) { count++; } 
-                        if(item.employment_id === data.employment) { count++; }
-                        item.Joboptions.forEach((el) => {
-                            if(el.id === data.joboption) {count++;}
+                        if(item.User.city === data.city) { count++; }                        
+                        item.Duties.forEach((el) => {
+                            if(el.id === data.typeofwork) {count++;}
                         })                             
-                        if(count === 3) { result.push(item); }                                                               
+                        if(count === 2) { result.push(item); }                                                               
                     })        
                     this.clientBaby = result;
                     this.currentCBPage = 1;

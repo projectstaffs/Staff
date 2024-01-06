@@ -133,7 +133,10 @@
         "item1": "Reviewed by",
         "item2": "Find",
         "item3": "Reset",
-        "item4": "Back"
+        "item4": "Back",
+        "item5": "Nannies",
+        "item6": "Nurses",
+        "item7": "Cleaners"
     },
     "main": {
         "top_title": "Home service agency",
