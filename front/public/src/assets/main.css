@@ -1,10 +1,10 @@
 @import './css/normalize.css';
 @import './css/components.css';
+@import './css/login.css';
 @import './css/block.css';
 @import './css/staff.css';
 @import './css/service.css';
 @import './css/point.css';
-@import './css/login.css';
 @import './css/anketa.css';
 @import './css/view.css';
 

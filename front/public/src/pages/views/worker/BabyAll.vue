@@ -4,12 +4,12 @@
         <div class="block_content">
             <div class="container">
                 <div class="search_block">
-                    <button @click.prevent="watch" class="btn">{{ $t('search.item1') }}</button>
+                    <button @click.prevent="watch" class="btn btn_search">{{ $t('search.item1') }}</button>
                     <form class="search" @submit.prevent="search">
                         <Search :data="searchData" :typework="Store.typeofworks" :city="Store.citys" />
-                        <button type="submit" class="btn">{{ $t('search.item2') }}</button>
+                        <button type="submit" class="btn btn_search">{{ $t('search.item2') }}</button>
                     </form>
-                    <button @click.prevent="clear" class="btn">{{ $t('search.item3') }}</button>
+                    <button @click.prevent="clear" class="btn btn_search">{{ $t('search.item3') }}</button>
                 </div>
 
                 <div v-for="post in displayedPosts" :key="post.id">
@@ -78,15 +78,9 @@ export default {
         return { Views, User, Store, t, locale };
     },
     methods: {
-        watch() {
-            this.Views.WATCH_WORKERBABY(localStorage.userID);
-        },
-        search() {
-            this.Views.SEARCH_WORKERBABY(this.searchData);
-        },
-        clear() {
-            this.Views.GET_WORKERBABY();
-        },
+        watch() { this.Views.WATCH_WORKERBABY(localStorage.userID); },
+        search() { this.Views.SEARCH_WORKERBABY(this.searchData); },
+        clear() { this.Views.GET_WORKERBABY(); },
         showItem(item) {
             this.Views.workerBabyitemUser = item.User;
             localStorage.workerBabyitemUser = JSON.stringify(item.User);
@@ -109,7 +103,7 @@ export default {
     },
     mounted() {
         this.Store.GET_TYPEOFWORKS(); this.Store.GET_CITYS();
-        //this.Views.GET_WORKERBABY();        
+
         this.searchData.typeofwork = 7;
         this.searchData.city = 4;
     },

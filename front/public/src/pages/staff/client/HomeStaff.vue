@@ -13,7 +13,7 @@
                                 <img class="staff_img" src="../../../assets/img/main/category/home/item1.jpg" alt="">
                                 <div class="staff_text"> {{ $t('main.staff_item1') }} </div>
                             </div>
-                            <div class="staff_item">
+                            <div class="staff_item" @click.prevent="keeper">
                                 <img class="staff_img" src="../../../assets/img/main/category/home/item2.jpg" alt="">
                                 <div class="staff_text"> {{ $t('main.staff_item2') }} </div>
                             </div>
@@ -25,7 +25,7 @@
                                 <img class="staff_img" src="../../../assets/img/main/category/home/item4.jpg" alt="">
                                 <div class="staff_text"> {{ $t('main.staff_item4') }} </div>
                             </div>
-                            <div class="staff_item">
+                            <div class="staff_item" @click.prevent="nurse">
                                 <img class="staff_img" src="../../../assets/img/main/category/home/item5.jpg" alt="">
                                 <div class="staff_text"> {{ $t('main.staff_item5') }} </div>
                             </div>
@@ -85,7 +85,9 @@
 export default {
     name: "HomeStaff",
     methods: {
-        baby() { this.$router.push({ name: "BabyAll" }) }
+        baby() { this.$router.push({ name: "BabyAll" }) },
+        nurse() { this.$router.push({ name: "NurseAll" }) },
+        keeper() { this.$router.push({ name: "KeeperAll" }) }
     },
 }
 </script>

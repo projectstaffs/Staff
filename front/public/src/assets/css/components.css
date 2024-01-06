@@ -20,6 +20,19 @@
     background: #5C4538;
 } 
 
+.btn_search {
+    display: inline-block;
+    width: 115px;
+    height: 30px;
+    margin: 0;
+    padding: 0px 16px;
+    border: 0.2px solid #5C4538;
+    background: none;
+
+    color: var(--typography-typography-50-brown, rgba(30, 21, 16, 0.50));
+    font-size: 12px;
+}
+
 .edit_title {
     text-align: center;
     font-size: 24px;

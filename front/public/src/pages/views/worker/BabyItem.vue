@@ -4,6 +4,7 @@
         <div class="block_content">
             <div class="container">
                 <div class="staff_title"> {{ $t('c_keeper.view_title') }} </div>
+                <button @click.prevent="back" class="btn btn_search">{{ $t('search.item4') }}</button>
                 <div class="anketa">
                     <div class="anketa_block">
                         <div class="anketa_inner">
@@ -42,7 +43,7 @@
                         v-for="(item, index) in Views.workerBabyitem.Languages" :key="index">
                         {{ item.title.title[locale] }}
                         {{ index < Views.workerBabyitem.Languages.length - 1 ? ', ' : '' }} </span>
-                            <div class="anketa_item  anketa_fix">{{ $t('baby_anketa.item3') }}</div>
+                            <div class="anketa_item anketa_fix">{{ $t('baby_anketa.item3') }}</div>
                             <span v-if="Views.workerBabyitem.Typeworks"
                                 v-for="(item, index) in Views.workerBabyitem.Typeworks" :key="index" class="anketa_text">
                                 {{ item.title.title[locale] }}
@@ -107,6 +108,7 @@ export default {
         return { Views, User, t, locale };
     },
     methods: {
+        back() { this.$router.push({ name: "BabyAll" }) },
         join() { this.$router.push({ name: "Popup" }); }
     },
     mounted() {

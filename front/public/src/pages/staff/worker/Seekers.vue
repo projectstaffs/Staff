@@ -31,7 +31,8 @@
                         <div class="service_item_text">{{ $t('seekers.item3_text') }}</div>
                     </div>
                     <div class="seekers_inner">
-                        <div @mouseover="handleMouseOver4" @mouseout="handleMouseOut4" class="service_item">
+                        <div @mouseover="handleMouseOver4" @mouseout="handleMouseOut4" class="service_item"
+                            @click.prevent="vacancy">
                             <div class="btn"><img src="../../../assets/img/main/arrow.svg" alt="">
                             </div>
                             <div class="service_item__block"><img class="service_item_img"
@@ -87,6 +88,7 @@ export default {
         conditions() { this.$router.push({ name: "Сonditions" }) },
         interview() { this.$router.push({ name: "Interview" }) },
         information() { this.$router.push({ name: "Information" }) },
+        vacancy() { this.$router.push({ name: "ClientBabyAll" }) }
     },
 }
 </script>

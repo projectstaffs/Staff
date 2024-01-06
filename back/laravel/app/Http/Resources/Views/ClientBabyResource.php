@@ -7,8 +7,6 @@ use Illuminate\Support\Facades\Cache;
 
 use App\Models\Client\ClientAgeGroup;
 use App\Http\Resources\Client\ClientAgeGroupResource;
-use App\Models\Client\ClientJobOption;
-use App\Http\Resources\Client\ClientJobOptionResource;
 use App\Models\Client\ClientDutie;
 use App\Http\Resources\Client\ClientDutieResource;
 use App\Models\User;
@@ -16,9 +14,9 @@ use App\Http\Resources\UserResource;
 
 use App\Models\Data\Children;
 use App\Models\Data\WorkPeriod;
-use App\Models\Data\Employment;
 use App\Models\Data\MonthlyPayment;
 use App\Models\Data\HourlyPayment;
+use Illuminate\Support\Carbon;
 
 class ClientBabyResource extends JsonResource
 {
@@ -47,15 +45,6 @@ class ClientBabyResource extends JsonResource
             if($item->form_id == $this->id) {
                 array_push($agegroup, $item);
             }                           
-        }
-        
-        if(!Cache::has('client_joboptions')) { Cache::put('client_joboptions', ClientJobOption::all()); }
-        $Joboption = Cache::get('client_joboptions');
-        $joboption = array();
-        foreach ($Joboption as $item) {
-            if($item->form_id == $this->id) {
-                array_push($joboption, $item);
-            }                           
         } 
         
         if(!Cache::has('client_duties')) { Cache::put('client_duties', ClientDutie::all()); }
@@ -72,7 +61,7 @@ class ClientBabyResource extends JsonResource
         $children = '';
         foreach ($Children as $item) {
             if($item->id == $this->childrencount_id) {
-                $children = $item->title;                
+                $children = $item;                
                 break;
             }                           
         }
@@ -82,17 +71,7 @@ class ClientBabyResource extends JsonResource
         $workPeriod = '';
         foreach ($WorkPeriod as $item) {
             if($item->id == $this->workperiod_id) {
-                $workPeriod = $item->title;                
-                break;
-            }                           
-        }
-
-        if(!Cache::has('employments')) { Cache::put('employments', Employment::all()); }
-        $Employment = Cache::get('employments');
-        $employment = '';
-        foreach ($Employment as $item) {
-            if($item->id == $this->employment_id) {
-                $employment = $item->title;                
+                $workPeriod = $item;                
                 break;
             }                           
         }
@@ -102,7 +81,7 @@ class ClientBabyResource extends JsonResource
         $hourpay = '';
         foreach ($HourlyPayment as $item) {
             if($item->id == $this->hourpay_id) {
-                $hourpay = $item->title;                
+                $hourpay = $item;                
                 break;
             }                           
         }
@@ -112,33 +91,28 @@ class ClientBabyResource extends JsonResource
         $monthpay = '';
         foreach ($MonthlyPayment as $item) {
             if($item->id == $this->monthpay_id) {
-                $monthpay = $item->title;                
+                $monthpay = $item;                
                 break;
             }                           
         }
+
+        $Date = Carbon::parse($this->created_at)->format('d.m.Y');
         
         return [            
             'id' => $this->id,
             'user_id' => $this->user_id,
             'confirmed' => $this->confirmed,
-            'title' => $this->title,
-            'title_about' => $this->title_about,
-            
+            'title_about' => $this->getTranslations('title_about'),
             'childrencount' => $children,
             'workperiod' => $workPeriod,
-            'employment' => $employment,
-            'drive' => $this->drive,
-            'agents' => $this->agents,
             'hourpay' => $hourpay,
             'monthpay' => $monthpay,
 
             'Agegroups' => ClientAgeGroupResource::collection($agegroup),            
-            'Joboptions' => ClientJobOptionResource::collection($joboption),
             'Duties' => ClientDutieResource::collection($dutie),
             'User' => $USER,
             
             'workperiod_id' => $this->workperiod_id,
-            'employment_id' => $this->employment_id,
             'childrencount_id' => $this->childrencount_id,
             'hourpay_id' => $this->hourpay_id,
             'monthpay_id' => $this->monthpay_id,            

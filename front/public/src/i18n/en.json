@@ -89,7 +89,7 @@
         "item5": "About me",
         "item6": "Willingness to work in a house with pets:",
         "item7": "Knowledge of languages:",
-        "item8": "Experience",
+        "item8": "Experience:",
         "item9": "Experience working with children of the following age groups:",
         "item10": "Education/courses:",
         "item11": "Expectations from the desired position:",
@@ -132,7 +132,8 @@
     "search": {
         "item1": "Reviewed by",
         "item2": "Find",
-        "item3": "Reset"
+        "item3": "Reset",
+        "item4": "Back"
     },
     "main": {
         "top_title": "Home service agency",
