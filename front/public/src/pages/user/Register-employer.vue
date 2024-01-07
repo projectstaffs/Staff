@@ -111,7 +111,7 @@ export default {
             this.user.gender = this.gender;
             this.user.animal_work = this.animal_work;
             this.user.role = "Наниматель";
-            this.user.confirmed = true;
+            this.user.confirmed = false;
             this.user.age = "2023-12-15";
             this.user.phone_code = this.selectedOption.id;
 

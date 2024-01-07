@@ -85,13 +85,13 @@ class HelpController extends Controller
     {
         $email = $request->input('email');
         
-        //$user = User::where('email', $email)->first();
-        //if ($user) {
-        //    $user->confirmed = false;
-        //     $user->save();
-        //
-        //    Cache::put('users', User::all());
-        // }
+        $user = User::where('email', $email)->first();
+        if ($user) {
+            $user->confirmed = false;
+             $user->save();
+        
+            Cache::put('users', User::all());
+         }
         
         dd($email);               
     }

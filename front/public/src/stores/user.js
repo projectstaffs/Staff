@@ -52,7 +52,7 @@ export const useUserStore = defineStore('user', {
                     localStorage.removeItem('access_token');
                     localStorage.removeItem('user');                
                     localStorage.removeItem('user_image');
-                    localStorage.removeItem('admin_id');
+                    localStorage.removeItem('userConfirmed');
                     localStorage.removeItem('userID');
                     localStorage.removeItem('lang');
                     localStorage.removeItem('clientBabyitem'); localStorage.removeItem('clientBabyitemUser'); 
@@ -89,6 +89,7 @@ export const useUserStore = defineStore('user', {
                     localStorage.access_token = res.data[0].original.access_token;
                     localStorage.user = JSON.stringify(res.data[1].original);               
                     localStorage.user_image = res.data[1].original.image;
+                    localStorage.userConfirmed = res.data[1].original.confirmed;
                     localStorage.userID = res.data[1].original.id;
 
                     this.token = res.data[0].original.access_token;
@@ -131,10 +132,11 @@ export const useUserStore = defineStore('user', {
                     localStorage.access_token = res.data.access_token;
                     localStorage.user = JSON.stringify(res.data.user);
                     localStorage.userID = res.data.user.id;
+                    localStorage.userConfirmed = res.data.user.confirmed;
 
                     this.token = res.data.access_token;
                     this.user = res.data.user;                    
-                    router.push({name: "Home"});                   
+                    router.push({name: "PopupMail"});                   
                 })
                 .catch(error => {
                     if(error) {

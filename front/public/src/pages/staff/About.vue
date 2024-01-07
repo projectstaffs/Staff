@@ -137,6 +137,14 @@ export default {
     border: 1px solid #5C4538;
 }
 
+.carousel:hover {
+    cursor: grab;
+}
+
+.carousel:active {
+    cursor: grabbing;
+}
+
 .carousel__item {
     height: 106px;
 }

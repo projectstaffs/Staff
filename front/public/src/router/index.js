@@ -58,6 +58,12 @@ const router = createRouter({
             component: () => import('../pages/staff/Popup.vue')
         },
         {
+            path: '/popupmail',
+            name: 'PopupMail', 
+            meta: {layout: 'User'},     
+            component: () => import('../pages/staff/PopupMail.vue')
+        },
+        {
             path: '/training',
             name: 'Training', 
             meta: {layout: 'User'},     
@@ -331,11 +337,17 @@ const router = createRouter({
     ]
 })
 
-router.beforeEach((to, from, next) => {    
+router.beforeEach((to, from, next) => { 
+    if((to.name === 'Forgot' || to.name === 'Login' || to.name === 'Register'|| to.name === 'Register-menu' || to.name === 'Register-employer') && localStorage.access_token){
+        return next({
+            name: 'Home'
+        })
+    } 
+
     if(!localStorage.access_token){
         if(to.name === 'Forgot' || to.name === 'Login' || to.name === 'Register' || to.name === 'Register-employer' || 
             to.name === 'Home' || to.name === 'About' || to.name === 'Contacts' || to.name === 'Privacy' || to.name === 'Contract' || to.name === 'Service' || 
-            to.name === 'ServicePackages' || to.name === 'Study' || to.name === 'Popup' || to.name === 'Training' || to.name === 'Seekers' || 
+            to.name === 'ServicePackages' || to.name === 'Study' || to.name === 'Popup' || to.name === 'PopupMail' || to.name === 'Training' || to.name === 'Seekers' || 
             to.name === 'Сonditions' || to.name === 'Interview' || to.name === 'Information' || to.name === 'HomeStaff' || to.name === 'BusinessStaff'){
             return next()
         } else {
@@ -343,13 +355,20 @@ router.beforeEach((to, from, next) => {
                 name: 'Login'
             })
         }
-    }    
-
-    if((to.name === 'Forgot' || to.name === 'Login' || to.name === 'Register'|| to.name === 'Register-menu' || to.name === 'Register-employer') && localStorage.access_token){
-        return next({
-            name: 'Home'
-        })
-    }    
+    } 
+     
+    if((localStorage.access_token) && (localStorage.userConfirmed === '0')) {
+        if(to.name === 'Forgot' || to.name === 'Login' || to.name === 'Register' || to.name === 'Register-employer' || 
+            to.name === 'Home' || to.name === 'About' || to.name === 'Contacts' || to.name === 'Privacy' || to.name === 'Contract' || to.name === 'Service' || 
+            to.name === 'ServicePackages' || to.name === 'Study' || to.name === 'Popup' || to.name === 'PopupMail' || to.name === 'Training' || to.name === 'Seekers' || 
+            to.name === 'Сonditions' || to.name === 'Interview' || to.name === 'Information' || to.name === 'HomeStaff' || to.name === 'BusinessStaff'){
+            return next()
+        } else {
+            return next({
+                name: 'PopupMail'
+            })
+        }
+    }
 
     next();
 });

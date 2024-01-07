@@ -85,9 +85,15 @@
 export default {
     name: "HomeStaff",
     methods: {
-        baby() { this.$router.push({ name: "BabyAll" }) },
-        nurse() { this.$router.push({ name: "NurseAll" }) },
-        keeper() { this.$router.push({ name: "KeeperAll" }) }
+        baby() {
+            this.$router.push({ name: "BabyAll" })
+        },
+        nurse() {
+            this.$router.push({ name: "NurseAll" })
+        },
+        keeper() {
+            this.$router.push({ name: "KeeperAll" })
+        }
     },
 }
 </script>

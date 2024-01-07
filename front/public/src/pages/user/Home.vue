@@ -24,8 +24,8 @@
                         <li class="main_client_item"> {{ $t('main.client_item3') }} </li>
                         <li class="main_client_item"> {{ $t('main.client_item4') }} </li>
                     </ul>
-                    <div @click.prevent="businessStaff" class="btn"> {{ $t('main.client_btn') }} <img
-                            class="main_info_arrow" src="../../assets/img/main/arrow.svg" alt=""></div>
+                    <div @click.prevent="homeStaff" class="btn"> {{ $t('main.client_btn') }} <img class="main_info_arrow"
+                            src="../../assets/img/main/arrow.svg" alt=""></div>
                 </div>
                 <div class="main_info_worker">
                     <div class="main_worker_title"> {{ $t('main.worker_title') }} </div>
@@ -54,11 +54,11 @@
         <div class="container">
             <div class="staff_title"> {{ $t('main.staff_title') }} </div>
             <div class="main_homestaff_items">
-                <div class="staff_item">
+                <div class="staff_item" @click.prevent="baby">
                     <img class="staff_img" src="../../assets/img/main/category/home/item1.jpg" alt="">
                     <div class="staff_text"> {{ $t('main.staff_item1') }} </div>
                 </div>
-                <div class="staff_item">
+                <div class="staff_item" @click.prevent="keeper">
                     <img class="staff_img" src="../../assets/img/main/category/home/item2.jpg" alt="">
                     <div class="staff_text"> {{ $t('main.staff_item2') }} </div>
                 </div>
@@ -70,7 +70,7 @@
                     <img class="staff_img" src="../../assets/img/main/category/home/item4.jpg" alt="">
                     <div class="staff_text"> {{ $t('main.staff_item4') }} </div>
                 </div>
-                <div class="staff_item">
+                <div class="staff_item" @click.prevent="nurse">
                     <img class="staff_img" src="../../assets/img/main/category/home/item5.jpg" alt="">
                     <div class="staff_text"> {{ $t('main.staff_item5') }} </div>
                 </div>
@@ -172,7 +172,7 @@
                     <div class="main_point_business_title"> {{ $t('main.end_business_title') }} </div>
                     <div class="main_point_business_subtitle"> {{ $t('main.end_business_subtitle') }} </div>
                     <div class="main_point_business_text"> {{ $t('main.end_business_text') }} </div>
-                    <div class="btn"> <img src="../../assets/img/main/arrow.svg" alt=""> </div>
+                    <div class="btn" @click.prevent="study"> <img src="../../assets/img/main/arrow.svg" alt=""> </div>
                 </div>
             </div>
             <div class="main_point_business">
@@ -180,7 +180,7 @@
                     <div class="main_point_business_title"> {{ $t('main.end_staff_title') }} </div>
                     <div class="main_point_business_subtitle"> {{ $t('main.end_staff_subtitle') }} </div>
                     <div class="main_point_business_text"> {{ $t('main.end_staff_text') }} </div>
-                    <div class="btn"> <img src="../../assets/img/main/arrow.svg" alt=""> </div>
+                    <div class="btn" @click.prevent="training"> <img src="../../assets/img/main/arrow.svg" alt=""> </div>
                 </div>
                 <div class="main_point_business_start">
                     <div class="main_point_staff_img"></div>
@@ -189,52 +189,20 @@
             <div class="staff_title main_point_border"> {{ $t('main.footer_title') }} </div>
         </div>
     </section>
-
-    <!--
-    <ul>
-        <li v-for="post in Review.reviews" :key="post.id" class="category_item">
-            {{ post.name[locale] }} {{ post.surname[locale] }} {{ post.city[locale] }} {{ post.content[locale] }}
-        </li>
-
-    </ul>
-    <div @click.prevent="test" class="category_change_btn">test</div>
-    -->
 </template>
 
 <script>
-//import { useUserStore } from '../../stores/user';
-//import { useReviewStore } from '../../stores/review';
-//import { useViewsStore } from '../../stores/views';
-//import { useDataStore } from '../../stores/variables';
 export default {
     name: "Home",
-    /*setup() {
-        const User = useUserStore();
-        const Review = useReviewStore();
-        const Views = useViewsStore();
-        const Store = useDataStore();
-        return { User /*, Review, Views, Store };
-    },*/
     methods: {
-        test() {
-            this.Review.TEST_REVIEW('Some');
-        },
         homeStaff() { this.$router.push({ name: "HomeStaff" }) },
         businessStaff() { this.$router.push({ name: "BusinessStaff" }) },
         seekers() { this.$router.push({ name: "Seekers" }) },
-    },
-    mounted() {
-        //this.User.GET_TOKEN();
-        //this.Review.GET_REVIEWS();
-
-        //this.Views.GET_WORKERBABY();
-        //this.Views.GET_WORKERNURSE();
-        //this.Views.GET_WORKERKEEPER();
-        //this.Views.GET_CLIENTBABY();
-        //this.Views.GET_CLIENTNURSE();
-        //this.Views.GET_CLIENTKEEPER();
-        //this.Store.GET_JOBOPTIONS(); this.Store.GET_TYPEOFWORKS(); this.Store.GET_NURSETYPEOFWORKS(); this.Store.GET_HOUSEKEEPERTYPEOFWORKS();
-        //this.Store.GET_EMPLOYMENTS(); this.Store.GET_CITYS();
+        baby() { this.$router.push({ name: "BabyAll" }) },
+        nurse() { this.$router.push({ name: "NurseAll" }) },
+        keeper() { this.$router.push({ name: "KeeperAll" }) },
+        study() { this.$router.push({ name: "Study" }) },
+        training() { this.$router.push({ name: "Training" }) }
     },
 }
 </script>

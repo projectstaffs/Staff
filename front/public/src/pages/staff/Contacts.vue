@@ -8,22 +8,22 @@
                     <div class="contacts_item">
                         <div class="contacts_item_start">{{ $t('contacts.adress') }}</div>
                         <div class="contacts_item_middle contacts_no_back">
-                            <div class="contacts_line">
-                                <div class="some"></div>
-                            </div>
+                            <div class="contacts_line"> </div>
                             <img src="../../assets/img/contacts/adress.svg" alt="">
                         </div>
                         <div class="contacts_item_end">
-                            <span class="contacts_br">{{ $t('contacts.adress_item') }}</span> {{ $t('contacts.adress_about')
-                            }}
+                            <span class="contacts_br">
+                                {{ $t('contacts.adress_item') }}
+                            </span> {{ $t('contacts.adress_about') }}
                         </div>
                     </div>
                     <div class="contacts_item">
-                        <div class="contacts_item_start">{{ $t('contacts.phone') }}</div>
+                        <div class="contacts_item_start"> {{ $t('contacts.phone') }} </div>
                         <div class="contacts_item_middle">
                             <img src="../../assets/img/contacts/call.svg" alt="">
                         </div>
-                        <div class="contacts_item_end">{{ $t('contacts.phone_item') }} - {{ $t('contacts.phone_about') }}
+                        <div class="contacts_item_end"><a href="#">{{ $t('contacts.phone_item') }}</a> - {{
+                            $t('contacts.phone_about') }}
                         </div>
                     </div>
                     <div class="contacts_item">

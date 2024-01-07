@@ -18,10 +18,9 @@
 
 <script>
 export default {
-    name: "Popup",
+    name: "PopupMail",
     methods: {
         home() { this.$router.push({ name: "Home" }) }
     },
 }
 </script>
-
