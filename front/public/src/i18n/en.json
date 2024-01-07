@@ -366,7 +366,10 @@
         "subtitle": "Your request is received",
         "text": "A representative of the HouseHub Home Service Agency will contact you within a few minutes",
         "end": "Thank you for your cooperation.",
-        "button": "Home"
+        "button": "Home",
+        "item1": "Hello",
+        "item2": "Thank you for registering on our website! To complete the registration process, please confirm your email address.",
+        "item3": "To do this, follow the link we sent in an email to your email address."
     },
     "training": {
         "title": "Home service school",        

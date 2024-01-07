@@ -23,7 +23,7 @@
                         <div class="service_item_text">{{ $t('seekers.item2_text') }}</div>
                     </div>
                     <div @mouseover="handleMouseOver3" @mouseout="handleMouseOut3" class="service_item">
-                        <div class="btn"><img src="../../../assets/img/main/arrow.svg" alt="">
+                        <div class="btn" @click.prevent="cabinet"><img src="../../../assets/img/main/arrow.svg" alt="">
                         </div>
                         <div class="service_item__block"><img class="service_item_img"
                                 :src="isHovered3 ? hoveredImageSrc3 : originalImageSrc3" alt=""></div>
@@ -88,7 +88,8 @@ export default {
         conditions() { this.$router.push({ name: "Сonditions" }) },
         interview() { this.$router.push({ name: "Interview" }) },
         information() { this.$router.push({ name: "Information" }) },
-        vacancy() { this.$router.push({ name: "ClientBabyAll" }) }
+        vacancy() { this.$router.push({ name: "ClientBabyAll" }) },
+        cabinet() { this.$router.push({ name: "Account" }) },
     },
 }
 </script>

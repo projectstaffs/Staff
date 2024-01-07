@@ -347,7 +347,7 @@ router.beforeEach((to, from, next) => {
     if(!localStorage.access_token){
         if(to.name === 'Forgot' || to.name === 'Login' || to.name === 'Register' || to.name === 'Register-employer' || 
             to.name === 'Home' || to.name === 'About' || to.name === 'Contacts' || to.name === 'Privacy' || to.name === 'Contract' || to.name === 'Service' || 
-            to.name === 'ServicePackages' || to.name === 'Study' || to.name === 'Popup' || to.name === 'PopupMail' || to.name === 'Training' || to.name === 'Seekers' || 
+            to.name === 'ServicePackages' || to.name === 'Popup' || to.name === 'PopupMail' || to.name === 'Seekers' || 
             to.name === 'Сonditions' || to.name === 'Interview' || to.name === 'Information' || to.name === 'HomeStaff' || to.name === 'BusinessStaff'){
             return next()
         } else {
@@ -360,7 +360,7 @@ router.beforeEach((to, from, next) => {
     if((localStorage.access_token) && (localStorage.userConfirmed === '0')) {
         if(to.name === 'Forgot' || to.name === 'Login' || to.name === 'Register' || to.name === 'Register-employer' || 
             to.name === 'Home' || to.name === 'About' || to.name === 'Contacts' || to.name === 'Privacy' || to.name === 'Contract' || to.name === 'Service' || 
-            to.name === 'ServicePackages' || to.name === 'Study' || to.name === 'Popup' || to.name === 'PopupMail' || to.name === 'Training' || to.name === 'Seekers' || 
+            to.name === 'ServicePackages' || to.name === 'Popup' || to.name === 'PopupMail' || to.name === 'Seekers' || 
             to.name === 'Сonditions' || to.name === 'Interview' || to.name === 'Information' || to.name === 'HomeStaff' || to.name === 'BusinessStaff'){
             return next()
         } else {

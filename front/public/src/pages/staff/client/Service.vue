@@ -22,7 +22,7 @@
                         <div class="service_item_text">{{ $t('service.item2_text') }}</div>
                     </div>
                     <div @mouseover="handleMouseOver3" @mouseout="handleMouseOut3" class="service_item">
-                        <div class="btn"><img src="../../../assets/img/main/arrow.svg" alt="">
+                        <div class="btn" data-window="window"><img src="../../../assets/img/main/arrow.svg" alt="">
                         </div>
                         <div class="service_item__block"><img class="service_item_img"
                                 :src="isHovered3 ? hoveredImageSrc3 : originalImageSrc3" alt=""></div>

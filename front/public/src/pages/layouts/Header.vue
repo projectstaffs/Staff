@@ -39,20 +39,6 @@
             </div>
         </div>
     </header>
-
-    <!-- 
-        <div @click.prevent="home" class="user_btn">Главная</div>
-        <div v-if="User.token" @click.prevent="cabinet" class="user_btn">Личный кабинет</div>
-        <div v-if="User.token" @click.prevent="worker_baby" class="user_btn">Няни</div>
-        <div v-if="User.token" @click.prevent="worker_nurse" class="user_btn">Сиделки</div>
-        <div v-if="User.token" @click.prevent="worker_keeper" class="user_btn">Домработницы</div>
-        <div v-if="User.token" @click.prevent="client_baby" class="user_btn">Работа для няни</div>
-        <div v-if="User.token" @click.prevent="client_nurse" class="user_btn">Работа для сиделки</div>
-        <div v-if="User.token" @click.prevent="client_keeper" class="user_btn">Работа для домработницы</div>
-        <div v-if="!User.token" @click.prevent="login" class="user_btn">login</div>
-        <div v-if="!User.token" @click.prevent="register" class="user_btn">register</div>
-        <div v-if="User.token" @click.prevent="logout" class="user_btn">logout</div>
-    -->
 </template>
 
 <script>
@@ -81,16 +67,6 @@ export default {
         login() { this.$router.push({ name: "Login" }) },
         logout() { this.User.LOGOUT_USER(); },
         cabinet() { this.$router.push({ name: "Account" }) },
-
-        worker_baby() { this.$router.push({ name: "BabyAll" }) },
-        worker_nurse() { this.$router.push({ name: "NurseAll" }) },
-        worker_keeper() { this.$router.push({ name: "KeeperAll" }) },
-        client_baby() { this.$router.push({ name: "ClientBabyAll" }) },
-        client_nurse() { this.$router.push({ name: "ClientNurseAll" }) },
-        client_keeper() { this.$router.push({ name: "ClientKeeperAll" }) },
-        register() { this.$router.push({ name: "Register-menu" }) },
-
-
         setUA() {
             if (this.locale === 'en') {
                 this.locale = 'ua';
