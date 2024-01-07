@@ -3,7 +3,7 @@
         <div class="block_back"></div>
         <div class="block_content">
             <div class="container">
-                <Links />
+                <Links :data="link" />
                 <div class="search_block">
                     <button @click.prevent="watch" class="btn btn_search">{{ $t('search.item1') }}</button>
                     <form class="search" @submit.prevent="search">
@@ -66,7 +66,8 @@ export default {
         return {
             itemsPerPage: 2, // Количество постов на странице
             searchData: {},
-            pageValue: "currentCNPage"
+            pageValue: "currentCNPage",
+            link: 'item2'
         }
     },
     components: { Search, Pagination, Links },

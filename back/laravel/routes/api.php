@@ -169,5 +169,5 @@ Route::resource('/credential', CredentialController::class);
 
 Route::post('/forgot_password', [HelpController::class, 'forgotPassword']);
 Route::post('/changelang', [HelpController::class, 'changeLang']);
-//Route::get('/redis', [HelpController::class, 'redisAll']);
-//Route::get('/minio', [HelpController::class, 'minio']);
+
+Route::post('/test', [HelpController::class, 'testMail']);

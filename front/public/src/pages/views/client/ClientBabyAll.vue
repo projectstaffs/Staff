@@ -3,7 +3,7 @@
         <div class="block_back"></div>
         <div class="block_content">
             <div class="container">
-                <Links />
+                <Links :data="link" />
                 <div class="search_block">
                     <button @click.prevent="watch" class="btn btn_search">{{ $t('search.item1') }}</button>
                     <form class="search" @submit.prevent="search">
@@ -12,6 +12,7 @@
                     </form>
                     <button @click.prevent="clear" class="btn btn_search">{{ $t('search.item3') }}</button>
                 </div>
+
 
                 <div v-for="post in displayedPosts" :key="post.id">
                     <div class="view">
@@ -66,7 +67,8 @@ export default {
         return {
             itemsPerPage: 2, // Количество постов на странице
             searchData: {},
-            pageValue: "currentCBPage"
+            pageValue: "currentCBPage",
+            link: 'item1'
         }
     },
     components: { Search, Pagination, Links },

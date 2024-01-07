@@ -37,6 +37,11 @@
     color: #FFF0D2;
 }
 
+.btn_active{
+    color: #FFF0D2;
+    background: #5C4538;
+}
+
 .edit_title {
     text-align: center;
     font-size: 24px;

@@ -80,4 +80,19 @@ class HelpController extends Controller
         $review->save();
         Cache::put('reviews', Review::all());
     }
+
+    public function testMail (Request $request)
+    {
+        $email = $request->input('email');
+        
+        //$user = User::where('email', $email)->first();
+        //if ($user) {
+        //    $user->confirmed = false;
+        //     $user->save();
+        //
+        //    Cache::put('users', User::all());
+        // }
+        
+        dd($email);               
+    }
 }
