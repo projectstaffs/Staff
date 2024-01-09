@@ -18,16 +18,14 @@ class UserGreetingJob implements ShouldQueue
     
     protected $name;
     protected $email;
-    protected $password;
     
     /**
      * Create a new job instance.
      */
-    public function __construct($name, $email, $password)
+    public function __construct($name, $email)
     {
         $this->name = $name;
         $this->email = $email;
-        $this->password = $password;
     }
 
     /**
@@ -35,6 +33,6 @@ class UserGreetingJob implements ShouldQueue
      */
     public function handle(): void
     {
-        Mail::to($this->email)->send(new UserMail($this->name, $this->email, $this->password));
+        Mail::to($this->email)->send(new UserMail($this->name, $this->email));
     }
 }

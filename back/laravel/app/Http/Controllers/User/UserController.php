@@ -23,16 +23,6 @@ class UserController extends Controller
         $Users = Cache::get('users');
 
         return $Users;
-        /*$users = array();
-        $count = 0;
-        foreach ($Users as $item) {
-            if($item->role == "Администратор") {
-                //array_push($users, $item);
-                unset($Users[$count]);
-                // возможно $count--;               
-            }
-            $count++;                           
-        }*/
     }
 
     /**
@@ -83,7 +73,7 @@ class UserController extends Controller
         
         $temp = new UserResource($user);
         Cache::put('users', User::all()); 
-        UserGreetingJob::dispatch($user->name, $user->email, $temp_password);       
+        UserGreetingJob::dispatch($user->name, $user->email);       
         return response(['access_token' => $token, 'user' => $temp]);        
     }
 
