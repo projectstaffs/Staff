@@ -1,12 +1,30 @@
 <template>
-    <div class="login_title"> Восстановление пароля </div>    
-    <form @submit.prevent="forgot" class="login_form">        
-        <input v-model="user.email" required class="login_form_item" type="email" placeholder="email">
-        <button type="submit" class="login_form_btn">Восстановить пароль</button>
-        <div @click.prevent="remember" class="user_btn">Вспомнил пароль.</div> 
-    </form>    
-    
-    <div class="register_error">{{ User.forgot_error }}</div>
+    <div class="block">
+        <div class="block_back"></div>
+        <div class="block_content">
+            <div class="container">
+                <div class="login_title"> Восстановление пароля </div>
+            </div>
+            <div class="login_inner">
+                <div class="container">
+                    <div class="login_content">
+                        <form @submit.prevent="forgot" class="login_form">
+                            <input v-model="user.email" required class="login_form_item" type="email" placeholder="email">
+
+                            <div v-if="User.forgot_error" class="login_middle">
+                                <ul>
+                                    <li>{{ $t('auth.error') }}</li>
+                                </ul>
+                            </div>
+
+                            <button type="submit" class="btn">Восстановить пароль</button>
+                            <div @click.prevent="remember" class="btn">Вспомнил пароль.</div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -22,17 +40,18 @@ export default {
         const User = useUserStore();
         return { User };
     },
-    methods: {        
+    methods: {
         forgot() {
-            this.User.FORGOT_PASSWORD(this.user);            
+            //console.log(this.user);
+            this.User.FORGOT_PASSWORD(this.user);
         },
         remember() {
-            this.$router.push({name: "Login"})
+            this.$router.push({ name: "Login" })
         },
     },
     mounted() {
         this.User.GET_TOKEN();
         this.User.forgot_error = '';
-    },    
+    },
 }
 </script>

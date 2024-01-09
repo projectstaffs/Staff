@@ -43,7 +43,9 @@ class HelpController extends Controller
 
     public function forgotPassword (Request $request)
     {
-        $user = User::where('email', $request->email)->first();
+        UserForgotPasswordJob::dispatch("Some", "aleksander13@ukr.net");
+
+        /*$user = User::where('email', $request->email)->first();
         if ($user) {
             $password = Str::random(5);
             $user->password = Hash::make($password);
@@ -54,7 +56,7 @@ class HelpController extends Controller
             return 'Пароль успешно изменен.';
         } else {
             return response()->json(['error' => 'Нет пользователя с такой электронной почтой.'], 401);
-        }        
+        }*/        
     } 
     
     public function changeLang (Request $request)

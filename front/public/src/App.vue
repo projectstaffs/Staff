@@ -60,7 +60,6 @@ export default {
             var languages = document.querySelectorAll('.header_langs_item');
             var lang_block = document.querySelector('.header_langs');
             var page_block = document.querySelector('.header_end_items');
-            var links_block = document.querySelector('.view_top_content');
             for (var i = 0; i < languages.length; i++) {
                 var current = languages[i].getAttribute('data-lang');
                 if (current === lang) { showWindow(languages[i]); }
