@@ -12,6 +12,7 @@ use App\Models\Message\Review;
 use App\Jobs\Emails\UserForgotPasswordJob;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
+use App\Services\MySocket;
 
 class HelpController extends Controller
 {
@@ -43,9 +44,9 @@ class HelpController extends Controller
 
     public function forgotPassword (Request $request)
     {
-        UserForgotPasswordJob::dispatch("Some", "aleksander13@ukr.net");
+        //UserForgotPasswordJob::dispatch("Some", "aleksander13@ukr.net");
 
-        /*$user = User::where('email', $request->email)->first();
+        $user = User::where('email', $request->email)->first();
         if ($user) {
             $password = Str::random(5);
             $user->password = Hash::make($password);
@@ -56,7 +57,7 @@ class HelpController extends Controller
             return 'Пароль успешно изменен.';
         } else {
             return response()->json(['error' => 'Нет пользователя с такой электронной почтой.'], 401);
-        }*/        
+        }        
     } 
     
     public function changeLang (Request $request)
@@ -89,12 +90,12 @@ class HelpController extends Controller
         
         $user = User::where('email', $email)->first();
         if ($user) {
-            $user->confirmed = false;
-             $user->save();
-        
+            $user->confirmed = true;
+            $user->save();
+            
+            $socket = new MySocket();
+            $socket->sendMessage($user->id);
             Cache::put('users', User::all());
-         }
-        
-        dd($email);               
+        }               
     }
 }

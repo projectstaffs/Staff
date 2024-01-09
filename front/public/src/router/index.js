@@ -357,7 +357,7 @@ router.beforeEach((to, from, next) => {
         }
     } 
      
-    if((localStorage.access_token) && (localStorage.userConfirmed === '0')) {
+    if((localStorage.access_token) && ((localStorage.userConfirmed === '0') || (localStorage.userConfirmed === 'false'))) {
         if(to.name === 'Forgot' || to.name === 'Login' || to.name === 'Register' || to.name === 'Register-employer' || 
             to.name === 'Home' || to.name === 'About' || to.name === 'Contacts' || to.name === 'Privacy' || to.name === 'Contract' || to.name === 'Service' || 
             to.name === 'ServicePackages' || to.name === 'Popup' || to.name === 'PopupMail' || to.name === 'Seekers' || 

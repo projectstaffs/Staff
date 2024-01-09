@@ -13,18 +13,14 @@ class UserMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $name;
     public $email;
-    public $password;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($name, $email, $password)
-    {
-        $this->name = $name;
+    public function __construct($email)
+    {        
         $this->email = $email;
-        $this->password = $password;
     }
 
     /**
@@ -33,7 +29,7 @@ class UserMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Письмо от сайта Babysitting',
+            subject: 'Агенство домашнього сервісу HouseHub.',
         );
     }
 

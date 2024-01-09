@@ -1,6 +1,7 @@
 import {defineStore} from "pinia";
 import {io} from "socket.io-client";
 import { useMessageStore } from './message';
+import { useUserStore } from './user';
 
 export const useSocketStore = defineStore('socket', {
     state: () => ({
@@ -17,9 +18,11 @@ export const useSocketStore = defineStore('socket', {
             this.socket.on('sendMessage', (data) => {
                 //toast.success('Connect to: ' + data)
                 if(data == localStorage.userID) {
-                    const Message = useMessageStore();
-                    Message.GET_COUNTMESSAGE_USER(localStorage.userID);
-                    Message.GET_MESSAGES_INSOCKET(localStorage.userID);
+                    //const Message = useMessageStore();
+                    //Message.GET_COUNTMESSAGE_USER(localStorage.userID);
+                    //Message.GET_MESSAGES_INSOCKET(localStorage.userID);
+                    const User = useUserStore();
+                    User.GET_USER_SOCKET();
                 }
             })
         }

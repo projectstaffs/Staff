@@ -43,6 +43,7 @@ import { useForm_HousekeeperStore } from '../../stores/form_housekeeper';
 import { useClient_BabyStore } from '../../stores/client_baby';
 import { useClient_NurseStore } from '../../stores/client_nurse';
 import { useClient_KeeperStore } from '../../stores/client_keeper';
+import { useSocketStore } from '../../stores/socket';
 export default {
     name: "Cabinet",
     setup() {
@@ -53,7 +54,8 @@ export default {
         const ClientNurse = useClient_NurseStore();
         const ClientKeeper = useClient_KeeperStore();
         const User = useUserStore();
-        return { User, Baby, Nurse, Keeper, ClientBaby, ClientNurse, ClientKeeper };
+        const Socket = useSocketStore();
+        return { User, Socket, Baby, Nurse, Keeper, ClientBaby, ClientNurse, ClientKeeper };
     },
     methods: {
         account() { this.$router.push({ name: "Account" }) },
@@ -96,6 +98,7 @@ export default {
         this.User.GET_USER();
         this.User.GET_PHOTO();
         this.User.GET_TOKEN();
+        this.Socket.connect();
 
         this.Baby.GET_BABY(localStorage.userID);
         this.Nurse.GET_NURSE(localStorage.userID);

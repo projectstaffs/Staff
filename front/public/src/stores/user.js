@@ -71,6 +71,13 @@ export const useUserStore = defineStore('user', {
         GET_USER(){                                     
             this.user = JSON.parse(localStorage.user);
         },
+        GET_USER_SOCKET(){                                     
+            this.user = JSON.parse(localStorage.user);
+            this.user.confirmed = 1;
+            localStorage.user = JSON.stringify(this.user);
+            localStorage.userConfirmed = 1;
+            window.location.reload(true);
+        },
         FORGOT_PASSWORD(data){                                      
             axios.post('api/forgot_password', data)
                 .then((res) => { 

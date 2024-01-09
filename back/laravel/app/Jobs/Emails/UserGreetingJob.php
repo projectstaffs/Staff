@@ -16,15 +16,13 @@ class UserGreetingJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     
-    protected $name;
     protected $email;
     
     /**
      * Create a new job instance.
      */
-    public function __construct($name, $email)
-    {
-        $this->name = $name;
+    public function __construct($email)
+    {        
         $this->email = $email;
     }
 
@@ -33,6 +31,6 @@ class UserGreetingJob implements ShouldQueue
      */
     public function handle(): void
     {
-        Mail::to($this->email)->send(new UserMail($this->name, $this->email));
+        Mail::to($this->email)->send(new UserMail($this->email));
     }
 }
