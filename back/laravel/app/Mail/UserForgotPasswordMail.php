@@ -12,17 +12,19 @@ use Illuminate\Queue\SerializesModels;
 class UserForgotPasswordMail extends Mailable
 {
     use Queueable, SerializesModels;
-
-    public $name;
+    
     public $email;
+    public $lang;
+    public $password;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($name, $email)
-    {
-        $this->name = $name;
+    public function __construct($email, $lang, $password)
+    {        
         $this->email = $email;
+        $this->lang = $lang;
+        $this->password = $password;
     }
 
     /**
@@ -30,9 +32,15 @@ class UserForgotPasswordMail extends Mailable
      */
     public function envelope(): Envelope
     {
-        return new Envelope(
-            subject: 'Письмо от сайта Babysitting',
-        );
+        if($this->lang == "ua") {
+            return new Envelope(
+                subject: 'Агенство домашнього сервісу HouseHub.',
+            );
+        } else {
+            return new Envelope(
+                subject: 'Home service agency HouseHub.',
+            );
+        }        
     }
 
     /**
@@ -40,9 +48,15 @@ class UserForgotPasswordMail extends Mailable
      */
     public function content(): Content
     {
-        return new Content(
-            markdown: 'mail.forgotpassword',
-        );
+        if($this->lang == "ua") {
+            return new Content(
+                markdown: 'mail.forgotpassword',
+            );
+        } else {
+            return new Content(
+                markdown: 'mail.forgotpassworden',
+            );
+        }
     }
 
     /**

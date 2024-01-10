@@ -468,7 +468,8 @@
         "enter": "Login",
         "register_client": "Register as an employer",
         "register_worker": "Register as a job seeker",
-        "error": "authorization failed, please try again"
+        "error": "authorization failed, please try again",
+        "error_pass": "password recovery failed, please try again"
     },
     "register": {
         "title": "REGISTRATION",

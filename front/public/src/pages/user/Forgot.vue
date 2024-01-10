@@ -18,7 +18,7 @@
 
                             <div v-if="User.forgot_error" class="login_middle">
                                 <ul>
-                                    <li>{{ $t('auth.error') }}</li>
+                                    <li>{{ $t('auth.error_pass') }}</li>
                                 </ul>
                             </div>
 

@@ -17,32 +17,30 @@
 
     <div style="width: 500px; margin: 0 auto;">
         <div style="margin-top: 35px;color: #000;text-align: center;font-family: Roboto;font-size: 20px;font-weight: 400;line-height: 130%;">
-            Ласкаво просимо до HouseHub!  
+            Відновлення паролю!  
         </div>
         <div style="margin: 35px 0;color: #000;font-family: Roboto;font-size: 18px;font-weight: 300;line-height: 130%; text-align: center;">
-            Ми раді бачити Вас і хочемо подякувати Вам від імені всієї нашої компанії за те, що Ви вибрали нас.
-            Ми віримо, що наш сайт допоможе Вам, якщо Ви знаходитесь в активному пошуку роботи у сфері домашнього сервісу або Ви — Представник бізнесу, який хоче вирішити питання, пов’язані з укомплектуванням  чи управлінням персоналом.
+            Ви зробили запит на зміну пароля для вашого облікового запису на сайті HouseHub.
         </div>
     </div>
 
     <div style="height: 176px;background: #5C4538;">
         <div style="width: 500px; margin: 0 auto;padding-top: 37px;">
             <div style="color: #FFF0D2;text-align: center;font-family: Roboto;font-size: 18px;font-weight: 400;line-height: 130%;">
-                Для підтвердження Вашої електронної пошти, будь-ласка, натисніть на кнопку «Підтвердити реєстрацію»
+                Оновлені дані Вашого облікового запису:                
             </div>
-            <form style="margin-top: 25px;" action="http://localhost/api/test/" method="POST">
-                <input type="hidden" name="email" value="{{ $email }}">
-                <div style="width: 256px; margin: 0 auto;">
-                    <button style="cursor: pointer;width: 236px;height: 32px;border-radius: 10px;background: #1E1510;color: #FFF0D2;text-align: center;font-family: Roboto;font-size: 16px;font-weight: 500;line-height: 130%;" type="submit">
-                        Підтвердити реєстрацію
-                    </button>
-                </div>                
-            </form>
+            <ul style="margin-top: 25px;color: #FFF0D2;font-family: Roboto;font-size: 16px;font-weight: 500;line-height: 130%;">
+                <li> Електронна пошта: {{ $email }} </li>
+                <li> Пароль: {{ $password }} </li>
+            </ul>            
         </div>
     </div>    
 
     <div style="width: 500px; margin: 0 auto; padding-top: 20px;color: #000;text-align: center;font-family: Roboto;font-size: 18px;font-weight: 300;line-height: 130%;">
         <div style="padding: 0 10px;">
+            Якщо ви не запитували зміни пароля, проігноруйте цей лист.
+        </div>
+        <div style="padding: 0 10px;margin-top: 20px;">
             Це повідомлення відправлено Вам компанією HouseHub. Якщо ви не бажаєте більше отримувати листи від нас, Ви можете 
             <span style="font-weight: 400;cursor: pointer;border-bottom: 1px solid #000;">відписатись</span>
         </div>

@@ -52,36 +52,12 @@ class HelpController extends Controller
             $user->save();
 
             Cache::put('users', User::all());
-            UserForgotPasswordJob::dispatch($user->email, $request->lang);
+            UserForgotPasswordJob::dispatch($user->email, $request->lang, $password);
             return 'Пароль успешно изменен.';
         } else {
             return response()->json(['error' => 'Нет пользователя с такой электронной почтой.'], 401);
         }        
     } 
-    
-    public function changeLang (Request $request)
-    {
-        $review = new Review([
-            'name' => [
-               'en' => 'Stas',
-               'ua' => 'Станіслав'
-            ],
-            'surname' => [
-               'en' => 'Sydorov',
-               'ua' => 'Сидоров'
-            ],
-            'city' => [
-               'en' => 'Lviv',
-               'ua' => 'Львів'
-            ],
-            'content' => [
-               'en' => 'About',
-               'ua' => 'Опис'
-            ],
-        ]);        
-        $review->save();
-        Cache::put('reviews', Review::all());
-    }
 
     public function testMail (Request $request)
     {
