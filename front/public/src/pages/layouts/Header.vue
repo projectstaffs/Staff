@@ -30,7 +30,7 @@
                     </ul>
                     <div v-if="!User.token" @click.prevent="login" class="btn">{{ $t('header.login') }}</div>
                     <div v-if="User.token" @click.prevent="logout" class="btn inactive">{{ $t('header.logout') }}</div>
-                    <button class="header_burger_btn" type="button">
+                    <button class="header_burger_btn" type="button" data-window="window_menu">
                         <span class="header_burger_box">
                             <span class="header_burger_inner"></span>
                         </span>
@@ -293,6 +293,12 @@ export default {
     }
 }
 
+@media (max-width: 1050px) {
+    .header_end_item {
+        padding: 12px 6px;
+    }
+}
+
 @media (max-width: 992px) {
     .header {
         height: 90px;
@@ -313,16 +319,6 @@ export default {
 
     .header_langs {
         margin: 0px 30px 0px 5px;
-    }
-}
-
-@media (max-width: 576px) {
-    .header_end .btn {
-        display: none;
-    }
-
-    .header_langs {
-        margin-right: 0px;
     }
 }
 </style>

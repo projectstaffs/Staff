@@ -8,6 +8,7 @@
         </div>
         <Footer></Footer>
         <Window></Window>
+        <WindowMenu></WindowMenu>
     </div>
 </template>
 
@@ -15,6 +16,7 @@
 import Header from './pages/layouts/Header.vue';
 import Footer from './pages/layouts/Footer.vue';
 import Window from './pages/layouts/Window.vue';
+import WindowMenu from './pages/layouts/WindowMenu.vue';
 import User from './pages/layouts/User.vue';
 import Cabinet from './pages/layouts/Cabinet.vue';
 
@@ -107,6 +109,11 @@ export default {
                         closeWindow(window);
                         toggleScroll();
                     }
+                    var window_menu = closestItemByClass(e.target, 'window_menu');
+                    if (window_menu) {
+                        closeWindow(window_menu);
+                        toggleScroll();
+                    }
                 }
                 // Открытие окна о разработке
                 var windowClass = closestAttr(e.target, 'data-window');
@@ -135,7 +142,7 @@ export default {
             return (this.$route.meta.layout || 'User')
         }
     },
-    components: { User, Cabinet, Header, Footer, Window },
+    components: { User, Cabinet, Header, Footer, Window, WindowMenu },
     mounted() {
         this.allScripts();
     },

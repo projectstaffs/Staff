@@ -78,11 +78,11 @@
                     <img class="staff_img" src="../../assets/img/main/category/home/item6.jpg" alt="">
                     <div class="staff_text"> {{ $t('main.staff_item6') }} </div>
                 </div>
-                <div class="staff_item" data-window="window">
+                <div class="staff_item staff_item_hide" data-window="window">
                     <img class="staff_img" src="../../assets/img/main/category/home/item7.jpg" alt="">
                     <div class="staff_text"> {{ $t('main.staff_item7') }} </div>
                 </div>
-                <div class="staff_item" data-window="window">
+                <div class="staff_item staff_item_hide" data-window="window">
                     <img class="staff_img" src="../../assets/img/main/category/home/item8.jpg" alt="">
                     <div class="staff_text"> {{ $t('main.staff_item8') }} </div>
                 </div>
@@ -109,7 +109,7 @@
                     <img class="staff_img" src="../../assets/img/main/category/business/item3.jpg" alt="">
                     <div class="staff_text"> {{ $t('main.business_item3') }} </div>
                 </div>
-                <div class="staff_item" data-window="window">
+                <div class="staff_item staff_item_hide" data-window="window">
                     <img class="staff_img" src="../../assets/img/main/category/business/item4.jpg" alt="">
                     <div class="staff_text"> {{ $t('main.business_item4') }} </div>
                 </div>
@@ -269,7 +269,6 @@ export default {
 
 .main_info_client {
     position: absolute;
-
     width: 550px;
     height: 454px;
     padding: 64px;
@@ -495,6 +494,30 @@ export default {
 }
 
 /* media */
+@media (max-width: 1200px) {
+    .main_info_text {
+        width: 100%;
+    }
+
+    .main_info_worker {
+        margin: -40px 0px 0px 400px;
+    }
+
+    .main_info_client {
+        margin-top: 450px;
+    }
+
+    .main_info_bottom {
+        height: 825px;
+    }
+}
+
+@media (max-width: 1125px) {
+    .staff_item_hide {
+        display: none;
+    }
+}
+
 @media (max-width: 992px) {
     .main_top_title {
         font-size: 52px;
@@ -502,6 +525,80 @@ export default {
 
     .main_top_subtitle {
         font-size: 32px;
+    }
+
+    .main_info_worker {
+        margin: -40px 0px 0px 160px;
+    }
+
+    .main_info_bottom {
+        height: 875px;
+    }
+
+    .main_homestaff {
+        padding: 40px 0;
+    }
+
+    .main_homestaff_items {
+        margin-top: 32px;
+    }
+}
+
+@media (max-width: 862px) {
+    .main_homestaff_back {
+        height: 800px;
+    }
+
+    .main_business_staff_back {
+        height: 525px;
+    }
+}
+
+@media (max-width: 767px) {
+    .main_info_text {
+        font-size: 16px;
+        padding-top: 20px;
+    }
+
+    .main_info_worker {
+        width: 456px;
+        height: 450px;
+        margin: -40px 0px 0px 30px;
+        padding: 32px;
+    }
+
+    .main_info_client {
+        width: 456px;
+        height: 400px;
+        margin-top: 410px;
+        margin-left: 30px;
+        padding: 32px;
+    }
+
+    .main_info_bottom {
+        height: 750px;
+    }
+
+    .main_homestaff {
+        padding: 20px 0;
+    }
+
+    .main_homestaff_items {
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .main_homestaff_items {
+        justify-content: center;
+    }
+
+    .main_homestaff_back {
+        height: 1650px;
+    }
+
+    .main_business_staff_back {
+        height: 800px;
     }
 }
 
@@ -516,6 +613,14 @@ export default {
 
     .main_top_subtitle {
         font-size: 16px;
+    }
+
+    .main_info_bottom {
+        height: 750px;
+    }
+
+    .main_homestaff_items {
+        margin-bottom: 0;
     }
 }
 </style>
