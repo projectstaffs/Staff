@@ -455,6 +455,7 @@
     },
     "auth": {
         "title": "AUTHORIZATION",
+        "title_pass": "PASSWORD RECOVERY",
         "text": "Welcome to the HouseHub home service agency.",
         "item1": "Login",
         "item1_holder": "Enter your email address",
@@ -462,6 +463,8 @@
         "item2_holder": "Enter your password",
         "remember": "Remember me",
         "forgot": "Forgot your password?",
+        "btn_pass": "Recover password",
+        "btn_pass2": "Return to the authorization menu",
         "enter": "Login",
         "register_client": "Register as an employer",
         "register_worker": "Register as a job seeker",

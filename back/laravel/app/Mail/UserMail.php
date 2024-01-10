@@ -14,13 +14,34 @@ class UserMail extends Mailable
     use Queueable, SerializesModels;
 
     public $email;
+    public $lang;
+    //public $images;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($email)
+    public function __construct($email, $lang)
     {        
         $this->email = $email;
+        $this->lang = $lang;
+        /*$imagePaths = [
+            public_path('images/logo.png'),
+            public_path('images/logo_footer.png'),
+            public_path('images/linkedin.png'),
+            public_path('images/instagram.png'),
+            public_path('images/youtybe.png'),
+            public_path('images/facebook.png'),
+        ];
+
+        $images = [];
+
+        foreach ($imagePaths as $imagePath) {
+            $imageData = file_get_contents($imagePath);
+            $imageBase64 = base64_encode($imageData);
+            $imageSrc = 'data:image/png;base64,' . $imageBase64;
+            $images[] = $imageSrc;
+        }
+        $this->images = $images;*/
     }
 
     /**
@@ -28,9 +49,15 @@ class UserMail extends Mailable
      */
     public function envelope(): Envelope
     {
-        return new Envelope(
-            subject: 'Агенство домашнього сервісу HouseHub.',
-        );
+        if($this->lang == "ua") {
+            return new Envelope(
+                subject: 'Агенство домашнього сервісу HouseHub.',
+            );
+        } else {
+            return new Envelope(
+                subject: 'Home service agency HouseHub.',
+            );
+        }        
     }
 
     /**
@@ -38,9 +65,15 @@ class UserMail extends Mailable
      */
     public function content(): Content
     {
-        return new Content(
-            markdown: 'mail.password',
-        );
+        if($this->lang == "ua") {
+            return new Content(
+                markdown: 'mail.password',
+            );
+        } else {
+            return new Content(
+                markdown: 'mail.passworden',
+            );
+        }        
     }
 
     /**

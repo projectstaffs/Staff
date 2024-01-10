@@ -78,7 +78,10 @@ export const useUserStore = defineStore('user', {
             localStorage.userConfirmed = 1;
             window.location.reload(true);
         },
-        FORGOT_PASSWORD(data){                                      
+        FORGOT_PASSWORD(data){ 
+            if(localStorage.lang && (localStorage.lang == 'en')) {
+                data.lang = 'en'; 
+            } else { data.lang = 'ua'; }                                     
             axios.post('api/forgot_password', data)
                 .then((res) => { 
                     this.forgot_error = '';
@@ -132,7 +135,10 @@ export const useUserStore = defineStore('user', {
                     } 
                 })
         },
-        CREATE_USER(data){                                    
+        CREATE_USER(data){
+            if(localStorage.lang && (localStorage.lang == 'en')) {
+                data.lang = 'en'; 
+            } else { data.lang = 'ua'; }                                  
             axios.post('api/user', data)
                 .then((res) => { 
                     this.register_error = null;               
