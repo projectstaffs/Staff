@@ -114,4 +114,80 @@ export default {
 .footer_bottom_item:hover {
     color: #FFF0D2;
 }
+
+@media (max-width: 1200px) {}
+
+@media (max-width: 992px) {
+    .footer {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+
+    .footer_img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .footer_top_end {
+        width: 150px;
+    }
+
+    .footer_top_middle {
+        font-size: 16px;
+    }
+
+    .footer_bottom_item {
+        width: 200px;
+    }
+}
+
+@media (max-width: 767px) {
+    .footer {
+        padding: 20px 0px;
+    }
+
+    .footer_top_middle {
+        text-align: center;
+        margin: 0 10px;
+    }
+
+    .footer_top {
+        height: 80px;
+        margin-bottom: 16px;
+    }
+
+    .footer_bottom {
+        padding-top: 16px;
+    }
+}
+
+@media (max-width: 576px) {
+    .footer {
+        padding-top: 10px;
+    }
+
+    .footer_top {
+        height: auto;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .footer_top_middle {
+        margin-bottom: 15px;
+    }
+
+    .footer_top_end {
+        width: 182px;
+    }
+
+    .footer_bottom {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 436px) {
+    .footer_bottom {
+        text-align: center;
+    }
+}
 </style>

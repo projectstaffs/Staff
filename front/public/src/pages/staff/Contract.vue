@@ -7,7 +7,7 @@
                 <div class="contract_inner">
                     <div class="contract_top">
                         <div class="contract_top_start">
-                            <div class="contract_top_item">{{ $t('contract.top_item1') }}</div>
+                            <div class="contract_top_item contract_fix">{{ $t('contract.top_item1') }}</div>
                             <div class="contract_top_item">{{ $t('contract.top_item2') }}</div>
                             <div class="contract_top_item">{{ $t('contract.top_item3') }}</div>
                         </div>
@@ -100,5 +100,36 @@ export default {
 
 .contract_item {
     margin-bottom: 20px;
+}
+
+@media (max-width: 992px) {
+    .contract_inner {
+        margin-top: 24px;
+    }
+}
+
+@media (max-width: 767px) {
+    .contract_top {
+        margin-bottom: 15px;
+    }
+
+    .contract_item {
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .contract_inner {
+        font-size: 16px;
+    }
+
+    .contract_top {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .contract_fix {
+        text-align: center;
+    }
 }
 </style>

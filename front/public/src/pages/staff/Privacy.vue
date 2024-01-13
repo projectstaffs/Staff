@@ -50,4 +50,28 @@ export default {
 .privacy_item {
     margin-bottom: 20px;
 }
+
+@media (max-width: 992px) {
+    .privacy_inner {
+        margin-top: 24px;
+    }
+}
+
+@media (max-width: 767px) {
+    .privacy_item {
+        margin-bottom: 10px;
+    }
+
+    .privacy_inner ol {
+        margin: 9px 0;
+        padding-left: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .privacy_inner {
+        margin-top: 12px;
+        font-size: 16px;
+    }
+}
 </style>

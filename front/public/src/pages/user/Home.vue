@@ -580,7 +580,7 @@ export default {
 
     .main_point_business_end .btn {
         bottom: 10px;
-        left: 400px;
+        left: 385px;
     }
 
     .main_point_business_start {
@@ -603,6 +603,14 @@ export default {
 
     .main_point_staff_img {
         width: 618px;
+    }
+
+    .main_point_border {
+        padding-top: 32px;
+    }
+
+    .main_point {
+        padding-bottom: 60px;
     }
 }
 
@@ -672,6 +680,28 @@ export default {
     .main_about_content {
         padding: 40px;
         margin: 32px 0;
+    }
+
+    .main_point_business_start {
+        width: 382px;
+        margin-left: -60px;
+    }
+
+    .main_point_business_end {
+        margin-bottom: 60px;
+    }
+
+    .main_point_business_end .btn {
+        left: 70px;
+        bottom: -50px;
+    }
+
+    .main_point_business_img {
+        width: 418px;
+    }
+
+    .main_point_staff_img {
+        width: 418px;
     }
 }
 
@@ -795,11 +825,46 @@ export default {
     .main_point_business {
         margin-bottom: 16px;
     }
+
+    .main_point_border {
+        padding-top: 16px;
+    }
+
+    .main_point {
+        padding-bottom: 30px;
+    }
 }
 
 @media (max-width: 553px) {
     .main_info_bottom {
         height: 560px;
+    }
+
+    .main_point_business_end {
+        width: 270px;
+    }
+
+    .main_point_business_title {
+        font-size: 24px;
+    }
+
+    .main_point_business_subtitle {
+        font-size: 18px;
+        margin-bottom: 6px;
+    }
+
+    .main_point_business_text {
+        font-size: 16px;
+    }
+
+    .main_point_business_start {
+        width: 232px;
+    }
+
+    .main_point_staff_img,
+    .main_point_business_img {
+        width: 268px;
+        left: 20px;
     }
 }
 

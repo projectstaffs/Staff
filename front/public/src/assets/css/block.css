@@ -63,8 +63,26 @@
     background-size: 1em;
 }
 
+@media (max-width: 992px) {
+    .block {
+        padding: 90px 0 45px;
+    }
+
+    .block_content {
+        padding-top: 40px;
+    }
+}
+
 @media (max-width: 576px) {
     .container {
         padding: 0 10px;
+    }
+
+    .block {
+        padding-bottom: 20px;
+    }
+
+    .block_content {
+        padding-top: 20px;
     }
 }
