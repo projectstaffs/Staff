@@ -175,14 +175,14 @@
                     <div class="btn" @click.prevent="study"> <img src="../../assets/img/main/arrow.svg" alt=""> </div>
                 </div>
             </div>
-            <div class="main_point_business">
+            <div class="main_point_business business_pos_fix">
                 <div class="main_point_business_end">
                     <div class="main_point_business_title"> {{ $t('main.end_staff_title') }} </div>
                     <div class="main_point_business_subtitle"> {{ $t('main.end_staff_subtitle') }} </div>
                     <div class="main_point_business_text"> {{ $t('main.end_staff_text') }} </div>
                     <div class="btn" @click.prevent="training"> <img src="../../assets/img/main/arrow.svg" alt=""> </div>
                 </div>
-                <div class="main_point_business_start">
+                <div class="main_point_business_start business_start_fix">
                     <div class="main_point_staff_img"></div>
                 </div>
             </div>
@@ -249,6 +249,7 @@ export default {
 }
 
 /* main_info */
+
 .main_info_top {
     height: 280px;
     background: #FFF0D2;
@@ -495,6 +496,10 @@ export default {
 
 /* media */
 @media (max-width: 1200px) {
+    .main_info_bottom {
+        height: 850px;
+    }
+
     .main_info_text {
         width: 100%;
     }
@@ -507,8 +512,20 @@ export default {
         margin-top: 450px;
     }
 
-    .main_info_bottom {
-        height: 825px;
+    .main_point_business_start {
+        width: 382px;
+    }
+
+    .business_start_fix {
+        margin-right: 90px;
+    }
+
+    .main_point_business_img {
+        width: 418px;
+    }
+
+    .main_point_staff_img {
+        width: 418px;
     }
 }
 
@@ -531,22 +548,77 @@ export default {
         margin: -40px 0px 0px 160px;
     }
 
-    .main_info_bottom {
-        height: 875px;
-    }
-
-    .main_homestaff {
+    .main_homestaff,
+    .main_business_staff {
         padding: 40px 0;
     }
 
     .main_homestaff_items {
         margin-top: 32px;
     }
+
+    .main_homestaff_back {
+        bottom: 110px;
+    }
+
+    .main_business_staff_back {
+        bottom: 110px;
+    }
+
+    .main_about {
+        padding-bottom: 40px;
+    }
+
+    .main_point_business {
+        margin-bottom: 32px;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        position: static;
+        height: auto;
+    }
+
+    .main_point_business_end .btn {
+        bottom: 10px;
+        left: 400px;
+    }
+
+    .main_point_business_start {
+        width: 582px;
+        margin-bottom: 15px;
+    }
+
+    .business_start_fix {
+        margin-right: 0px;
+        order: 1;
+    }
+
+    .business_pos_fix .main_point_business_end {
+        order: 2;
+    }
+
+    .main_point_business_img {
+        width: 618px;
+    }
+
+    .main_point_staff_img {
+        width: 618px;
+    }
 }
 
-@media (max-width: 862px) {
+@media (max-width: 922px) {
+
+    /*Change*/
+    .main_info_bottom {
+        height: 875px;
+    }
+
+    .main_homestaff_items {
+        justify-content: center;
+    }
+
     .main_homestaff_back {
-        height: 800px;
+        height: 820px;
     }
 
     .main_business_staff_back {
@@ -555,6 +627,10 @@ export default {
 }
 
 @media (max-width: 767px) {
+    .main_info_bottom {
+        height: 725px;
+    }
+
     .main_info_text {
         font-size: 16px;
         padding-top: 20px;
@@ -575,24 +651,31 @@ export default {
         padding: 32px;
     }
 
-    .main_info_bottom {
-        height: 750px;
-    }
-
-    .main_homestaff {
+    .main_homestaff,
+    .main_business_staff {
         padding: 20px 0;
     }
 
     .main_homestaff_items {
         margin-bottom: 0;
     }
-}
 
-@media (max-width: 600px) {
-    .main_homestaff_items {
-        justify-content: center;
+    .main_homestaff_back {
+        bottom: 90px;
+        height: 800px;
     }
 
+    .main_business_staff_back {
+        bottom: 90px;
+    }
+
+    .main_about_content {
+        padding: 40px;
+        margin: 32px 0;
+    }
+}
+
+@media (max-width: 640px) {
     .main_homestaff_back {
         height: 1650px;
     }
@@ -602,9 +685,36 @@ export default {
     }
 }
 
+@media (max-width: 607px) {
+    .main_info_bottom {
+        height: 755px;
+    }
+}
+
 @media (max-width: 576px) {
+    .main_info .container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .main_info_text {
+        margin-bottom: 10px;
+    }
+
+    .main_worker_title,
+    .main_client_title {
+        font-size: 24px;
+        margin-bottom: 8px;
+    }
+
+    .main_client_subtitle,
+    .main_worker_subtitle {
+        margin-bottom: 12px;
+    }
+
     .main_top_inner {
         padding: 60px 0px;
+        text-align: center;
     }
 
     .main_top_title {
@@ -615,12 +725,99 @@ export default {
         font-size: 16px;
     }
 
-    .main_info_bottom {
-        height: 750px;
+    .main_info_client,
+    .main_info_worker {
+        margin: 0;
+        padding: 16px;
+        display: block;
+        position: relative;
+        height: auto;
+        width: 100%;
+    }
+
+    .main_info_text {
+        order: 1;
+    }
+
+    .main_info_worker {
+        order: 2;
+    }
+
+    .main_info_client {
+        order: 3;
+    }
+
+    .main_info_client ul,
+    .main_info_worker ul {
+        padding-left: 20px;
+        margin: 8px 0;
+    }
+
+    .main_info_client .btn,
+    .main_info_worker .btn {
+        width: 250px;
+        padding-left: 16px;
+        padding-right: 16px;
+        font-size: 16px;
     }
 
     .main_homestaff_items {
         margin-bottom: 0;
+    }
+
+    .main_info_bottom {
+        height: 490px;
+    }
+
+    .main_about_content {
+        padding: 20px;
+        margin: 16px 0;
+        font-size: 16px;
+    }
+
+    .main_about_end {
+        font-size: 16px;
+    }
+
+    .main_about_text {
+        margin-bottom: 0px;
+    }
+
+    .main_about_content ul {
+        padding-left: 20px;
+        margin-bottom: 0;
+    }
+
+    .main_about {
+        padding-bottom: 20px;
+    }
+
+    .main_point_business {
+        margin-bottom: 16px;
+    }
+}
+
+@media (max-width: 553px) {
+    .main_info_bottom {
+        height: 560px;
+    }
+}
+
+@media (max-width: 457px) {
+    .main_info_bottom {
+        height: 640px;
+    }
+}
+
+@media (max-width: 414px) {
+    .main_info_bottom {
+        height: 720px;
+    }
+}
+
+@media (max-width: 393px) {
+    .main_info_bottom {
+        height: 805px;
     }
 }
 </style>

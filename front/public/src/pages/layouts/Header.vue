@@ -28,8 +28,10 @@
                         <li @click.prevent="setUA" class="header_langs_item" data-lang="ua">UA</li>
                         <li @click.prevent="setEN" class="header_langs_item" data-lang="en">EN</li>
                     </ul>
-                    <div v-if="!User.token" @click.prevent="login" class="btn">{{ $t('header.login') }}</div>
-                    <div v-if="User.token" @click.prevent="logout" class="btn inactive">{{ $t('header.logout') }}</div>
+                    <div class="header_auth">
+                        <div v-if="!User.token" @click.prevent="login" class="btn">{{ $t('header.login') }}</div>
+                        <div v-if="User.token" @click.prevent="logout" class="btn inactive">{{ $t('header.logout') }}</div>
+                    </div>
                     <button class="header_burger_btn" type="button" data-window="window_menu">
                         <span class="header_burger_box">
                             <span class="header_burger_inner"></span>
@@ -309,7 +311,8 @@ export default {
         height: 80px;
     }
 
-    .header_end_items {
+    .header_end_items,
+    .header_auth {
         display: none;
     }
 
@@ -318,7 +321,7 @@ export default {
     }
 
     .header_langs {
-        margin: 0px 30px 0px 5px;
+        margin: 0px 5px 0px 5px;
     }
 }
 </style>

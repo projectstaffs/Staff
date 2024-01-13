@@ -51,8 +51,16 @@
     font-weight: 800;
 }
 
+@media (max-width: 1125px) {
+    .staff_item {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+
 @media (max-width: 767px) {
     .staff_title {
         font-size: 24px;
-    }    
+    }      
 }
+

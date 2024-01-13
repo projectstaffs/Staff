@@ -62,6 +62,7 @@ export default {
             var languages = document.querySelectorAll('.header_langs_item');
             var lang_block = document.querySelector('.header_langs');
             var page_block = document.querySelector('.header_end_items');
+            var menu_block = document.querySelector('.window_menu_items');
             for (var i = 0; i < languages.length; i++) {
                 var current = languages[i].getAttribute('data-lang');
                 if (current === lang) { showWindow(languages[i]); }
@@ -72,11 +73,15 @@ export default {
                 if (e.target.classList.contains('inactive')) { // Отключение активной страницы
                     var previousActive = page_block.querySelector('.header_btn.is_active');
                     if (previousActive) { closeWindow(previousActive); }
+                    var previousMenuActive = menu_block.querySelector('.header_btn.is_active');
+                    if (previousMenuActive) { closeWindow(previousMenuActive); }
                 }
                 if (e.target.classList.contains('header_btn')) { // Переключение страниц
                     if (e.target.classList.contains('is_active')) { return; }
                     var previousActive = page_block.querySelector('.header_btn.is_active');
                     if (previousActive) { closeWindow(previousActive); }
+                    var previousMenuActive = menu_block.querySelector('.header_btn.is_active');
+                    if (previousMenuActive) { closeWindow(previousMenuActive); }
                     showWindow(e.target);
                 }
                 var windowColor = closestAttr(e.target, 'data-color'); // Переключение страниц с футера

@@ -37,3 +37,28 @@
     font-weight: 400;
     text-align: center;
 }
+
+@media (max-width: 992px) {
+    .main_point_items {
+        margin: 32px 0;
+        padding: 32px 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .main_point_inner {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .main_point_item {
+        width: 200px;
+    }
+}
+
+@media (max-width: 576px) {
+    .main_point_items {
+        margin: 16px 0;
+        padding: 16px 0;
+    }
+}
