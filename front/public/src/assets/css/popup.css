@@ -1,6 +1,5 @@
 .popup {
-    width: 720px;
-    height: 468px;
+    max-width: 720px;
     border-radius: 20px;
     background: #5C4538;
     margin: 0 auto;
@@ -41,4 +40,24 @@
 .popup .btn:hover {
     scale: 1.2;
     background: #1E1510;
+}
+
+@media (max-width: 576px) {
+    .popup {
+        padding: 20px 16px;
+    }
+
+    .popup_img {        
+        left: 15px;
+        top: 15px;        
+    }
+
+    .popup_item {
+        margin-bottom: 15px;
+        font-size: 18px;        
+    }
+
+    .popup_subitem {
+        margin-bottom: 10px;
+    }
 }

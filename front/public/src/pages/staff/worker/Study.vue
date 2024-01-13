@@ -13,8 +13,8 @@
                             <div class="study_text">{{ $t('study.item1_text') }}</div>
                             <div @click.prevent="training" class="btn">{{ $t('study.item1_btn') }}</div>
                         </div>
-                        <div class="study_start_end">
-                            <img class="study_img" src="../../../assets/img/study/study1.jpg" alt="">
+                        <div class="study_start_end_prew">
+                            <div class="study_start_end"></div>
                         </div>
                     </div>
                 </div>
@@ -22,8 +22,9 @@
             <div class="study_middle">
                 <div class="container">
                     <div class="study_inner">
-                        <div class="study_middle_start">
-                            <img class="study_img" src="../../../assets/img/study/study2.jpg" alt="">
+                        <div class="study_middle_start_prew">
+                            <div class="study_middle_start">
+                            </div>
                         </div>
                         <div class="study_middle_end">
                             <div class="study_title">{{ $t('study.item2_title') }}</div>
@@ -41,9 +42,10 @@
                             <div class="study_text">{{ $t('study.item3_text') }}</div>
                             <div @click.prevent="popup" class="btn">{{ $t('study.item3_btn') }}</div>
                         </div>
-                        <div class="study_end_end">
-                            <img class="study_img" src="../../../assets/img/study/study3.jpg" alt="">
+                        <div class="study_end_end_prew">
+                            <div class="study_end_end"></div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -62,53 +64,28 @@ export default {
 </script>
 
 <style>
-.study_start,
-.study_middle,
-.study_end {
-    background: rgba(30, 21, 16, 0.08);
-}
-
 .study_start {
     height: 317px;
     margin-top: 155px;
+    background: #5C4538;
 }
 
 .study_middle {
     height: 375px;
     margin-top: 190px;
+    background: #1E1510;
 }
 
 .study_end {
-    height: 561px;
+    height: 365px;
     margin-top: 175px;
+    background: #5C4538;
+    margin-bottom: 125px;
 }
 
 .study_inner {
     display: flex;
     justify-content: space-between;
-}
-
-.study_start_start,
-.study_middle_end,
-.study_end_start {
-    width: 541px;
-    padding: 36px 15px 48px 52px;
-    border-radius: 20px;
-    border: 1px solid #8E8E8E;
-}
-
-.study_start_end,
-.study_middle_start,
-.study_end_end {
-    width: 523px;
-    height: 375px;
-    border-radius: 21px;
-    background: #1E1510;
-    text-align: right;
-}
-
-.study_middle_start {
-    text-align: left;
 }
 
 .study_start_start .btn,
@@ -121,27 +98,83 @@ export default {
 }
 
 .study_start_start,
-.study_start_end {
-    height: 375px;
-    margin-top: -90px;
-}
-
-.study_middle_end {
-    height: 483px;
+.study_middle_end,
+.study_end_start {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 541px;
+    padding: 36px 15px 48px 52px;
+    border-radius: 20px;
+    border: 1px solid #8E8E8E;
 }
 
 .study_end_start {
     height: 651px;
-}
-
-.study_middle_start,
-.study_middle_end,
-.study_end_start,
-.study_end_end {
+    background: #FFF0D2;
     margin-top: -122px;
 }
 
-.study_img {
+.study_start_start {
+    background: #FFF0D2;
+    margin-top: -90px;
+}
+
+.study_middle_end {
+    height: 470px;
+    color: #FFF0D2;
+    background: #5C4538;
+    margin-top: -122px;
+}
+
+.study_end_end_prew {
+    width: 498px;
+    height: 375px;
+    border-radius: 22px;
+    background: #1E1510;
+    margin-left: 15px;
+    padding-left: 25px;
+    margin-top: -122px;
+}
+
+.study_end_end {
+    width: 100%;
+    height: 100%;
+    background: url(../../../assets/img/study/study3.jpg) no-repeat center;
+    border-radius: 20px;
+}
+
+.study_middle_start_prew {
+    width: 518px;
+    height: 375px;
+    border-radius: 22px;
+    margin-top: -122px;
+    margin-right: 15px;
+    background: #1E1510;
+    padding-right: 20px;
+}
+
+.study_middle_start {
+    width: 100%;
+    height: 100%;
+    background: url(../../../assets/img/study/study2.jpg) no-repeat center;
+    border-radius: 20px;
+}
+
+.study_start_end_prew {
+    width: 523px;
+    height: 375px;
+    background: #1E1510;
+    margin-left: 15px;
+    margin-top: -90px;
+    padding-left: 25px;
+    border-radius: 22px;
+}
+
+.study_start_end {
+    width: 100%;
+    height: 100%;
+    background: url(../../../assets/img/study/study1.jpg) no-repeat center;
     border-radius: 20px;
 }
 
@@ -151,6 +184,38 @@ export default {
 }
 
 .study_text {
-    margin: 45px 0px;
+    margin: 15px 0px;
+}
+
+@media (max-width: 1150px) {
+
+    .study_start_start,
+    .study_middle_end,
+    .study_end_start {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 992px) {
+    .study_start {
+        margin-top: 130px;
+    }
+
+    .study_middle {
+        margin-top: 180px;
+    }
+
+    .study_end_start {
+        height: 700px;
+        font-size: 16px;
+    }
+
+    .study_text {
+        margin: 10px 0;
+    }
+
+    .study_end {
+        margin-bottom: 205px;
+    }
 }
 </style>
