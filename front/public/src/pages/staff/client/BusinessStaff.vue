@@ -73,6 +73,7 @@ export default {
 
 .business_items {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     width: 100%;
     position: absolute;
@@ -95,5 +96,128 @@ export default {
 
 .business_about ol {
     padding-inline-start: 20px;
+}
+
+@media (max-width: 1125px) {
+    .business_items {
+        justify-content: center;
+    }
+
+    .business_about {
+        height: auto;
+        padding: 20px;
+        left: 0;
+        bottom: 0px;
+    }
+
+    .business_inner {
+        height: 1000px;
+    }
+
+    .business_content {
+        height: 970px;
+    }
+}
+
+@media (max-width: 992px) {
+    .business_subtitle {
+        margin-top: 24px;
+    }
+
+    .business_inner {
+        margin-top: 70px;
+    }
+}
+
+@media (max-width: 877px) {
+    .business_inner {
+        height: 1100px;
+    }
+
+    .business_content {
+        height: 1070px;
+    }
+}
+
+@media (max-width: 691px) {
+    .business_inner {
+        height: 1200px;
+    }
+
+    .business_content {
+        height: 1170px;
+    }
+}
+
+@media (max-width: 640px) {
+    .business_about {
+        font-size: 16px;
+    }
+
+    .business_inner {
+        height: 1750px;
+    }
+
+    .business_content {
+        height: 1720px;
+    }
+}
+
+@media (max-width: 530px) {
+    .business_subtitle {
+        margin: 12px 0;
+    }
+
+    .business_inner {
+        margin-top: 50px;
+    }
+
+    .business_inner {
+        height: 1850px;
+    }
+
+    .business_content {
+        height: 1820px;
+    }
+}
+
+@media (max-width: 435px) {
+    .business_inner {
+        height: 1950px;
+    }
+
+    .business_content {
+        height: 1920px;
+    }
+}
+
+@media (max-width: 397px) {
+    .business_inner {
+        height: 2050px;
+    }
+
+    .business_content {
+        height: 2020px;
+    }
+}
+
+@media (max-width: 367px) {
+    .business_inner {
+        height: 2150px;
+    }
+
+    .business_content {
+        height: 2120px;
+    }
+}
+
+@media (max-width: 334px) {
+    .business_inner {
+        height: 2290px;
+    }
+
+    .business_content {
+        height: 2260px;
+    }
 }
 </style>

@@ -6,7 +6,7 @@
                 <div class="staff_title">{{ $t('about.title') }}</div>
                 <div class="about_description">
                     <div class="about_start">
-                        <img src="../../assets/img/about/prev.jpg" alt="" class="about_start_img">
+                        <div class="about_start_img"></div>
                     </div>
                     <div class="about_end">
                         <p>{{ $t('about.item1') }}</p>
@@ -42,7 +42,7 @@
                 <div class="staff_title">{{ $t('about.title_bottom') }}</div>
             </div>
             <div class="about_clients">
-                <Carousel :items-to-show="5" :wrap-around="false">
+                <Carousel :items-to-show="visibleItems" :wrap-around="false">
                     <Slide v-for="slide in clients" :key="slide">
                         <div class="carousel__item">
                             <img :src="slide" class="about_clients_item" alt="">
@@ -62,13 +62,36 @@ export default {
     name: "About",
     data() {
         return {
-            clients: ["../../src/assets/img/about/client1.jpg", "../../src/assets/img/about/client2.jpg", "../../src/assets/img/about/client3.jpg", "../../src/assets/img/about/client4.jpg", "../../src/assets/img/about/client5.jpg", "../../src/assets/img/about/client6.jpg",]
+            clients: ["../../src/assets/img/about/client1.jpg", "../../src/assets/img/about/client2.jpg", "../../src/assets/img/about/client3.jpg", "../../src/assets/img/about/client4.jpg", "../../src/assets/img/about/client5.jpg", "../../src/assets/img/about/client6.jpg",],
+            visibleItems: 5,
         }
     },
     components: {
         Carousel,
         Slide,
         Navigation,
+    },
+    methods: {
+        updateVisibleItems() {
+            // обновляем значение visibleItems в зависимости от ширины окна
+            const windowWidth = window.innerWidth;
+
+            if (windowWidth < 550) {
+                this.visibleItems = 1;
+            } else if (windowWidth < 825) {
+                this.visibleItems = 2;
+            } else if (windowWidth < 1100) {
+                this.visibleItems = 3;
+            } else if (windowWidth < 1350) {
+                this.visibleItems = 4;
+            } else {
+                this.visibleItems = 5;
+            }
+        },
+    },
+    mounted() {
+        this.updateVisibleItems(); // вызывается при монтировании компонента
+        window.addEventListener('resize', this.updateVisibleItems); // подписываемся на событие изменения размера окна
     },
 }
 </script>
@@ -84,12 +107,16 @@ export default {
     width: 503px;
     height: 310px;
     margin-top: 10px;
+    margin-right: 10px;
     padding: 10px;
     border-radius: 10px;
     background: #1E1510;
 }
 
 .about_start_img {
+    width: 100%;
+    height: 100%;
+    background: url(../../assets/img/about/prev.jpg) no-repeat center;
     border-radius: 10px;
 }
 
@@ -147,5 +174,51 @@ export default {
 
 .carousel__item {
     height: 106px;
+}
+
+@media (max-width: 1400px) {}
+
+@media (max-width: 992px) {
+    .about_description {
+        margin: 30px 0 10px;
+    }
+
+    .about_clients {
+        margin-top: 32px;
+    }
+}
+
+@media (max-width: 767px) {
+    .about_description {
+        flex-direction: column;
+    }
+
+    .about_start {
+        width: 100%;
+        margin: 0 0 10px 0;
+    }
+
+    .about_end {
+        width: 100%;
+    }
+
+    .about_start_img {
+        max-width: 483px;
+        margin: 0 auto;
+    }
+
+    .about_end p {
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .about_description {
+        margin-top: 20px;
+    }
+
+    .about_end {
+        font-size: 16px;
+    }
 }
 </style>

@@ -6,6 +6,9 @@
                 <div class="staff_title">{{ $t('main.staff_title') }}</div>
             </div>
             <div class="homestaff">
+                <div class="homestaff_test">
+                    <div class="homestaff_test_grad"></div>
+                </div>
                 <div class="container">
                     <div class="homestaff_content">
                         <div class="homestaff_inner">
@@ -100,21 +103,58 @@ export default {
 
 <style>
 .homestaff {
-    margin-top: 127px;
-    height: 1132px;
     background: url(../../../assets/img/main/stripes.svg), #FFF0D2 50% / cover no-repeat;
 }
 
+.homestaff_test {
+    height: 127px;
+    background: #FFF0D2;
+}
+
+.homestaff_test_grad {
+    height: 100%;
+    background: linear-gradient(180deg, #e4d3b7 0%, rgba(255, 240, 210, 0.50) 95.67%);
+}
+
 .homestaff_content {
-    position: relative;
+    margin-top: -63px;
 }
 
 .homestaff_inner {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    position: absolute;
-    left: 0;
-    top: -63px;
+}
+
+@media (max-width: 1125px) {
+    .homestaff_inner {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 992px) {
+    .homestaff_test {
+        height: 107px;
+    }
+
+    .homestaff_test_grad {
+        background: linear-gradient(180deg, #d4c3a8 0%, rgba(255, 240, 210, 0.50) 95.67%);
+    }
+}
+
+@media (max-width: 767px) {
+    .homestaff_test_grad {
+        background: linear-gradient(180deg, #d0bfa5 0%, rgba(255, 240, 210, 0.50) 95.67%);
+    }
+}
+
+@media (max-width: 576px) {
+    .homestaff_test {
+        height: 92px;
+    }
+
+    .homestaff_test_grad {
+        background: linear-gradient(180deg, #ccbaa0 0%, rgba(255, 240, 210, 0.50) 95.67%);
+    }
 }
 </style>

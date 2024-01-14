@@ -80,6 +80,7 @@ export default {
 
 .training_start {
     width: 630px;
+    padding-right: 15px;
 }
 
 .training_end {
@@ -134,5 +135,79 @@ export default {
     width: 164px;
     font-size: 14px;
     font-weight: 500;
+}
+
+@media (max-width: 992px) {
+    .training_text {
+        margin-top: 24px;
+    }
+
+    .training_item {
+        margin-top: 32px;
+        padding-top: 24px;
+    }
+
+    .training_item_inner {
+        margin-bottom: 32px;
+    }
+
+    .training_end {
+        padding-left: 30px;
+    }
+
+    .training_item_access {
+        margin-bottom: 24px;
+    }
+}
+
+@media (max-width: 767px) {
+    .training_text {
+        margin-top: 12px;
+    }
+
+    .training_item {
+        margin-top: 20px;
+    }
+
+    .training_end {
+        padding-left: 15px;
+    }
+
+    .training_item_inner {
+        margin-bottom: 16px;
+    }
+}
+
+@media (max-width: 576px) {
+    .training_item_inner {
+        flex-direction: column;
+    }
+
+    .training_start,
+    .training_end {
+        width: auto;
+        height: auto;
+        padding: 0;
+    }
+
+    .training_start {
+        margin-bottom: 20px;
+    }
+
+    .training_end {
+        padding-left: 15px;
+    }
+
+    .training_item_price {
+        font-size: 24px;
+    }
+
+    .training_item_access {
+        margin-bottom: 10px;
+    }
+
+    .training_item_date {
+        margin-top: 10px;
+    }
 }
 </style>

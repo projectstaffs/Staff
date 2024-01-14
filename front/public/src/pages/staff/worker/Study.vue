@@ -168,7 +168,7 @@ export default {
     margin-left: 15px;
     margin-top: -90px;
     padding-left: 25px;
-    border-radius: 22px;
+    border-radius: 20px;
 }
 
 .study_start_end {
@@ -176,6 +176,7 @@ export default {
     height: 100%;
     background: url(../../../assets/img/study/study1.jpg) no-repeat center;
     border-radius: 20px;
+    overflow: hidden;
 }
 
 .study_title {
@@ -216,6 +217,123 @@ export default {
 
     .study_end {
         margin-bottom: 205px;
+    }
+}
+
+@media (max-width: 767px) {
+    .study_middle {
+        margin-top: 400px;
+    }
+
+    .study_end {
+        margin-top: 390px;
+        height: 580px;
+    }
+
+    .study_inner {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .study_start_start,
+    .study_middle_start_prew,
+    .study_end_start {
+        margin-top: 20px;
+    }
+
+    .study_start_end_prew,
+    .study_end_end_prew {
+        margin-left: 0;
+    }
+
+    .study_middle_start_prew {
+        margin-right: 0;
+    }
+
+    .study_start_start,
+    .study_start_end_prew,
+    .study_middle_start_prew,
+    .study_middle_end,
+    .study_end_start,
+    .study_end_end_prew {
+        width: 100%;
+    }
+
+    .study_start_end,
+    .study_middle_start {
+        max-width: 498px;
+        margin: 0 auto;
+    }
+
+    .study_end_end {
+        max-width: 473px;
+        margin: 0 auto;
+    }
+
+    .study_end_start {
+        height: 500px;
+    }
+
+    .study_middle_end {
+        height: 350px;
+    }
+
+    .study_start_end_prew,
+    .study_end_end_prew,
+    .study_middle_end {
+        order: 1;
+    }
+
+    .study_start_start,
+    .study_end_start,
+    .study_middle_start_prew {
+        order: 2;
+    }
+}
+
+@media (max-width: 576px) {
+    .study_start {
+        margin-top: 110px;
+    }
+
+    .study_middle,
+    .study_end {
+        margin-top: 490px;
+    }
+
+    .study_end {
+        height: 860px;
+    }
+
+    .study_start_start,
+    .study_middle_end,
+    .study_end_start {
+        padding: 10px;
+    }
+
+    .study_middle_end {
+        height: 450px;
+    }
+
+    .study_start_start {
+        height: 358px;
+    }
+
+    .study_middle_end {
+        height: 448px;
+    }
+
+    .study_end_start {
+        height: 790px;
+    }
+
+    .study_title {
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .study_text {
+        font-size: 16px;
     }
 }
 </style>

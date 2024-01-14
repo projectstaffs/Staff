@@ -89,7 +89,7 @@
                 </div>
                 <div class="contacts_bottom">
                     <div class="contacts_bottom_start">
-                        <img src="../../assets/img/contacts/house.jpg" alt="">
+                        <div class="contacts_bottom_start_img"></div>
                     </div>
                     <div class="contacts_bottom_end">
                         <iframe
@@ -130,11 +130,11 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 48px;
+    min-width: 48px;
     height: 48px;
     border: 3px solid #1E1510;
     border-radius: 50%;
-    margin-top: -10px;
+    margin: -10px 10px 0px 10px;
     position: relative;
     background: #FFF0D2;
 }
@@ -213,8 +213,8 @@ export default {
     justify-content: space-between;
 }
 
-.contacts_bottom_start,
-.contacts_bottom_end {
+.contacts_bottom_end,
+.contacts_bottom_start {
     width: 546px;
     height: 393px;
     border-radius: 10px;
@@ -222,7 +222,100 @@ export default {
     padding: 3px 4px;
 }
 
-.contacts_bottom_start img {
+.contacts_bottom_start {
+    margin-right: 10px;
+}
+
+.contacts_bottom_start_img {
+    width: 100%;
+    height: 100%;
+    background: url(../../assets/img/contacts/house.jpg) no-repeat center;
     border-radius: 10px;
+}
+
+@media (max-width: 992px) {
+    .contacts_inner {
+        padding: 32px 0;
+    }
+
+    .contacts_item {
+        margin-bottom: 32px;
+    }
+
+    .contacts_line::before {
+        height: 350px;
+    }
+}
+
+@media (max-width: 767px) {
+    .contacts_inner {
+        padding-bottom: 10px;
+    }
+
+    .contacts_item {
+        margin-bottom: 16px;
+    }
+
+    .contacts_item_start {
+        font-size: 18px;
+    }
+
+    .contacts_item_end {
+        font-size: 16px;
+    }
+
+    .contacts_br {
+        margin-bottom: 8px;
+    }
+
+    .contacts_bottom {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contacts_bottom_start {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .contacts_bottom_end {
+        width: 100%;
+    }
+
+    .contacts_bottom_start_img {
+        max-width: 538px;
+        margin: 0 auto;
+    }
+
+    .contacts_line::before {
+        height: 300px;
+    }
+}
+
+@media (max-width: 576px) {
+    .contacts_inner {
+        padding-top: 20px;
+    }
+
+    .contacts_line::before,
+    .contacts_line::after {
+        height: 0px;
+    }
+
+    .contacts_item {
+        flex-direction: column;
+    }
+
+    .contacts_item_middle {
+        width: 48px;
+        margin-top: 0px;
+    }
+
+    .contacts_item_end {
+        width: 100%;
+        padding-left: 70px;
+        margin-top: -35px;
+    }
 }
 </style>
