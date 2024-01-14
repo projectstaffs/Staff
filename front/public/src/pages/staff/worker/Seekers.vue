@@ -30,25 +30,22 @@
                         <div class="service_item_title">{{ $t('seekers.item3_title') }}</div>
                         <div class="service_item_text">{{ $t('seekers.item3_text') }}</div>
                     </div>
-                    <div class="seekers_inner">
-                        <div @mouseover="handleMouseOver4" @mouseout="handleMouseOut4" class="service_item"
-                            @click.prevent="vacancy">
-                            <div class="btn"><img src="../../../assets/img/main/arrow.svg" alt="">
-                            </div>
-                            <div class="service_item__block"><img class="service_item_img"
-                                    :src="isHovered4 ? hoveredImageSrc4 : originalImageSrc4" alt=""></div>
-                            <div class="service_item_title">{{ $t('seekers.item4_title') }}</div>
-                            <div class="service_item_text">{{ $t('seekers.item4_text') }}</div>
+                    <div @mouseover="handleMouseOver4" @mouseout="handleMouseOut4" class="service_item"
+                        @click.prevent="vacancy">
+                        <div class="btn"><img src="../../../assets/img/main/arrow.svg" alt="">
                         </div>
-                        <div @mouseover="handleMouseOver5" @mouseout="handleMouseOut5" class="service_item">
-                            <div @click.prevent="information" class="btn"><img src="../../../assets/img/main/arrow.svg"
-                                    alt="">
-                            </div>
-                            <div class="service_item__block"><img class="service_item_img"
-                                    :src="isHovered5 ? hoveredImageSrc5 : originalImageSrc5" alt=""></div>
-                            <div class="service_item_title">{{ $t('seekers.item5_title') }}</div>
-                            <div class="service_item_text">{{ $t('seekers.item5_text') }}</div>
+                        <div class="service_item__block"><img class="service_item_img"
+                                :src="isHovered4 ? hoveredImageSrc4 : originalImageSrc4" alt=""></div>
+                        <div class="service_item_title">{{ $t('seekers.item4_title') }}</div>
+                        <div class="service_item_text">{{ $t('seekers.item4_text') }}</div>
+                    </div>
+                    <div @mouseover="handleMouseOver5" @mouseout="handleMouseOut5" class="service_item">
+                        <div @click.prevent="information" class="btn"><img src="../../../assets/img/main/arrow.svg" alt="">
                         </div>
+                        <div class="service_item__block"><img class="service_item_img"
+                                :src="isHovered5 ? hoveredImageSrc5 : originalImageSrc5" alt=""></div>
+                        <div class="service_item_title">{{ $t('seekers.item5_title') }}</div>
+                        <div class="service_item_text">{{ $t('seekers.item5_text') }}</div>
                     </div>
                 </div>
             </div>
@@ -93,12 +90,3 @@ export default {
     },
 }
 </script>
-
-<style>
-.seekers_inner {
-    display: flex;
-    justify-content: space-between;
-    width: 732px;
-    margin: 0px auto -32px;
-}
-</style>

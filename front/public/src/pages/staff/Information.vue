@@ -166,7 +166,7 @@ export default {
 }
 
 .information_item_block {
-    width: 356px;
+    max-width: 356px;
     height: 213px;
     border-radius: 10px 10px 0px 0px;
     overflow: hidden;
@@ -204,5 +204,42 @@ export default {
 .information_item_text {
     font-size: 14px;
     line-height: 140%;
+}
+
+@media (max-width: 1144px) {
+    .information_inner {
+        justify-content: center;
+    }
+
+    .information_item {
+        margin: 0 5px 20px 0;
+    }
+}
+
+
+@media (max-width: 992px) {
+    .information_text {
+        margin-top: 24px;
+    }
+
+    .information_inner {
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .information_item {
+        height: auto;
+    }
+
+    .information_item_content {
+        height: auto;
+        padding: 20px;
+    }
+
+    .information_text {
+        font-size: 16px;
+        margin-top: 12px;
+    }
 }
 </style>

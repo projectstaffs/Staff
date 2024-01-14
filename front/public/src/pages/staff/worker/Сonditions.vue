@@ -272,4 +272,229 @@ export default {
     font-size: 24px;
     margin-bottom: 65px;
 }
+
+@media (max-width: 1125px) {
+    .conditions_bottom_start {
+        padding: 20px 32px;
+    }
+}
+
+@media (max-width: 992px) {
+    .conditions_middle {
+        height: 320px;
+    }
+
+    .conditions_text {
+        margin: 24px 0;
+    }
+
+    .conditions_start {
+        height: auto;
+        margin-top: 32px;
+        padding: 25px 0;
+    }
+
+    .conditions_middle_start {
+        width: 556px;
+        height: 320px;
+        padding: 16px;
+        margin-top: -20px;
+    }
+
+    .conditions_middle_title {
+        margin-bottom: 16px;
+    }
+
+    .conditions_middle_end {
+        width: 520px;
+        height: auto;
+        padding: 16px;
+        margin-top: 0px;
+    }
+
+    .conditions_middle_start ul,
+    .conditions_middle_end ul {
+        padding-left: 20px;
+    }
+
+    .conditions_bottom_vertical {
+        height: 150px;
+    }
+
+    .conditions_bottom_block {
+        width: 100%;
+    }
+
+    .conditions_bottom_start {
+        height: 550px;
+    }
+
+    .conditions_bottom_picture {
+        left: 32px;
+        top: 240px;
+    }
+
+    .conditions_end {
+        height: auto;
+        margin-top: 150px;
+        padding: 22px 0;
+    }
+
+    .conditions_end_title {
+        margin-bottom: 21px;
+    }
+
+    .conditions_end_text {
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 767px) {
+    .conditions_text {
+        margin: 12px 0;
+    }
+
+    .conditions_start {
+        margin-top: 16px;
+        padding: 12px 0;
+    }
+
+    .conditions_middle_title {
+        margin-bottom: 10px;
+        font-size: 24px;
+    }
+
+    .conditions_middle_start ul,
+    .conditions_middle_end ul {
+        margin-top: 10px;
+        margin-bottom: 0;
+        font-size: 16px;
+    }
+
+    .conditions_middle_start {
+        height: 270px;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .conditions_middle_end {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .conditions_bottom_start {
+        padding: 15px;
+        height: 500px;
+    }
+
+    .conditions_bottom_title {
+        margin-bottom: 12px;
+    }
+
+    .conditions_bottom_subtitle,
+    .conditions_bottom_block_text,
+    .conditions_end_title {
+        font-size: 24px;
+    }
+
+    .conditions_bottom_block_start,
+    .conditions_end_text,
+    .conditions_bottom_end {
+        font-size: 18px;
+    }
+
+    .conditions_bottom_picture {
+        top: 200px;
+    }
+
+    .conditions_end {
+        margin-top: 100px;
+    }
+}
+
+@media (max-width: 576px) {
+    .conditions_text {
+        font-size: 16px;
+    }
+
+    .staff_title,
+    .conditions_bottom_title,
+    .conditions_bottom_subtitle,
+    .conditions_bottom_block_text {
+        font-size: 18px;
+    }
+
+    .conditions_start {
+        padding: 5px 0;
+    }
+
+    .conditions_start ul {
+        margin: 10px 0;
+        padding-left: 20px;
+        font-size: 16px;
+    }
+
+    .conditions_middle_inner {
+        flex-direction: column;
+    }
+
+    .conditions_middle_start,
+    .conditions_middle_end {
+        width: 100%;
+    }
+
+    .conditions_middle_start {
+        margin-top: -10px;
+        margin-bottom: 10px;
+    }
+
+    .conditions_middle {
+        margin-bottom: 250px;
+    }
+
+    .conditions_bottom_end {
+        height: auto;
+        padding: 8px 0;
+        font-size: 16px;
+    }
+
+    .conditions_bottom_block {
+        flex-direction: column;
+    }
+
+    .conditions_bottom_block_start,
+    .conditions_bottom_block_end {
+        width: 100%;
+        padding-left: 10px;
+    }
+
+    .conditions_bottom_start {
+        height: 520px;
+    }
+
+    .conditions_bottom_picture {
+        left: 0;
+        top: 220px;
+        width: 283px;
+    }
+
+    .conditions_img {
+        margin-left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+@media (max-width: 523px) {
+    .conditions_middle {
+        margin-bottom: 300px;
+    }
+}
+
+@media (max-width: 348px) {
+    .conditions_middle {
+        margin-bottom: 330px;
+    }
+}
 </style>

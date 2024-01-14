@@ -50,7 +50,7 @@ export default {
 }
 
 .interview_item {
-    padding: 36px 0px 36px 48px;
+    padding: 36px 15px 36px 48px;
     border-radius: 20px;
     border: 1px solid #8E8E8E;
     margin-top: 40px;
@@ -62,5 +62,52 @@ export default {
     font-weight: 500;
     line-height: 120%;
     margin-bottom: 24px;
+}
+
+@media (max-width: 992px) {
+    .interview_text {
+        margin: 32px 0;
+    }
+
+    .interview_item {
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 767px) {
+    .interview_text {
+        margin: 16px 0;
+    }
+
+    .interview_item {
+        padding: 20px;
+    }
+
+    .interview_item ul {
+        margin-bottom: 0;
+        padding-left: 20px;
+    }
+
+    .interview_subtitle {
+        font-size: 24px;
+    }
+
+    .interview_item_title {
+        margin-bottom: 12px;
+    }
+}
+
+@media (max-width: 576px) {
+    .interview_text {
+        font-size: 16px;
+    }
+
+    .interview_item_title {
+        font-size: 18px;
+    }
+
+    .interview_item_text {
+        font-size: 16px;
+    }
 }
 </style>
