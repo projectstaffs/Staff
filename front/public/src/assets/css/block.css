@@ -36,6 +36,12 @@
     margin-bottom: 40px;
 }
 
+.search_block_btns {
+    width: 250px;
+    display: flex;
+    justify-content: space-between;
+}
+
 .search_block .btn:hover {
     color: #FFF0D2;
     background: #5C4538;
@@ -70,6 +76,32 @@
 
     .block_content {
         padding-top: 40px;
+    }
+
+    .search_block {
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+
+    .search_block_btns {
+        order: 2;
+    }
+
+    .search {
+        order: 1;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 767px) {
+    .search {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .search .login_form_item {
+        margin-bottom: 10px;
+        margin-right: 0;
     }
 }
 

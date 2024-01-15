@@ -37,7 +37,7 @@ class UserUpdateRequest extends FormRequest
             'animal_work' => 'required',                
             'about' => 'required',
             
-            'country' => 'required|numeric',
+            //'country' => 'required|numeric',
             'city' => 'required|numeric'                
         ];                
     }
@@ -51,7 +51,7 @@ class UserUpdateRequest extends FormRequest
             'phone.digits' => '{"en":"The phone number must contain 9 digits.","ua":"Номер телефону має містити 9 цифр."}',            
             'email.required' => '{"en":"Enter your email.","ua":"Вкажіть свій email."}',
             'email.unique' => '{"en":"The email address must be unique.","ua":"Адреса електронної пошти має бути унікальною."}', 
-            'country.required' => '{"en":"Specify your country of residence.","ua":"Вкажіть країну проживання."}',
+            //'country.required' => '{"en":"Specify your country of residence.","ua":"Вкажіть країну проживання."}',
             'phone_code.required' => '{"en":"Enter country code.","ua":"Вкажіть код країни."}',
             'city.required' => '{"en":"Enter your city.","ua":"Вкажіть своє місто."}',
             'password.confirmed' => '{"en":"The password confirmation is incorrect.","ua":"Підтвердження пароля вказано некоректно."}',           

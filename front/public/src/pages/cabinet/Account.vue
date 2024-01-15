@@ -1,7 +1,6 @@
 <template>
     <div class="account">
         <div class="account_name">{{ name[locale] }} {{ surname[locale] }}</div>
-        <div class="account_item">{{ $t('cabinet.country') }} {{ country[locale] }}</div>
         <div class="account_item">{{ $t('cabinet.city') }} {{ city[locale] }}</div>
         <div class="account_item">{{ $t('cabinet.phone') }} {{ User.user.phone_number }}</div>
         <div class="account_item">{{ $t('cabinet.email') }} {{ User.user.email }}</div>
@@ -28,7 +27,6 @@ export default {
             name: {},
             surname: {},
             about: {},
-            country: {},
             city: {},
         }
     },
@@ -46,7 +44,6 @@ export default {
         this.name = this.User.user.name;
         this.surname = this.User.user.surname;
         this.about = this.User.user.about;
-        this.country = this.User.user.country_title.title;
         this.city = this.User.user.city_title.title;
     },
 }
@@ -71,5 +68,15 @@ export default {
 
 .account_item_text {
     font-size: 16px;
+}
+
+@media (max-width: 576px) {
+
+    .account_name,
+    .account_item,
+    .account_item_title {
+        margin-bottom: 5px;
+        font-size: 16px;
+    }
 }
 </style>

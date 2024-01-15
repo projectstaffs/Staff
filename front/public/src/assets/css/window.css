@@ -113,3 +113,14 @@
     scale: 1.2;
     background: #1E1510;
 }
+
+@media (max-width: 576px) {
+    .window_title, .window_subtitle, .window_end {
+        margin-bottom: 20px;
+        font-size: 18px;
+    }
+
+    .window_title {
+        margin-top: 30px;
+    }
+}

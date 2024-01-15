@@ -4,8 +4,6 @@
         <div class="anketa_text"> <span v-if="User.user.name">{{ User.user.name[locale] }}</span> <span
                 v-if="User.user.surname">{{
                     User.user.surname[locale] }}</span> </div>
-        <div v-if="User.user.country_title" class="anketa_text">{{ $t('baby_anketa.item2') }} {{
-            User.user.country_title.title[locale] }}</div>
         <div class="anketa_text">
             {{ $t('baby_anketa.item1') }} {{ User.user.current_age }}
             &nbsp;&nbsp;•&nbsp;&nbsp; <span v-if="User.user.city_title">{{ User.user.city_title.title[locale] }}</span>

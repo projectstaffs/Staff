@@ -71,4 +71,14 @@ export default {
 .forgot_form {
     min-height: 400px;
 }
+
+@media (max-width: 576px) {
+    .forgot_inner {
+        min-height: 200px;
+    }
+
+    .forgot_form {
+        min-height: 300px;
+    }
+}
 </style>

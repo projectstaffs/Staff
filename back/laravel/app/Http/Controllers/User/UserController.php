@@ -129,7 +129,7 @@ class UserController extends Controller
                'ua' => $request->about['ua']
             ];        
         
-        $user->country = $request['country'];         
+        //$user->country = $request['country'];         
         $user->city = $request['city'];       
 
         $user->save();

@@ -12,10 +12,6 @@
                                 {{ Views.clientKeeperitemUser.name[locale] }}
                                 {{ Views.clientKeeperitemUser.surname[locale] }}
                             </div>
-                            <div v-if="Views.clientKeeperitemUser.country_title" class="anketa_text">{{
-                                $t('baby_anketa.item2') }}
-                                {{ Views.clientKeeperitemUser.country_title.title[locale] }}
-                            </div>
                             <div v-if="Views.clientKeeperitemUser.city_title" class="anketa_text">
                                 {{ $t('cabinet.city') }} {{ Views.clientKeeperitemUser.city_title.title[locale] }}
                             </div>

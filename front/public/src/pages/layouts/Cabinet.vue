@@ -10,20 +10,22 @@
                             <img v-if="User.photo" class="cabinet_img" :src="User.photo" alt="">
                             <div v-else class="cabinet_noimg">{{ $t('cabinet.no_img') }}</div>
                         </div>
-                        <div @click.prevent="account" class="sidebar_item">{{ $t('cabinet.item1') }}</div>
-                        <div @click.prevent="edit" class="sidebar_item">{{ $t('cabinet.item2') }}</div>
-                        <div @click.prevent="myphoto" class="sidebar_item">{{ $t('cabinet.item3') }}</div>
-                        <div @click.prevent="babysitter" class="sidebar_item">
-                            <span v-if="User.user.role === 'Исполнитель'">{{ $t('cabinet.item4') }}</span>
-                            <span v-else>{{ $t('c_baby.title') }}</span>
-                        </div>
-                        <div @click.prevent="nurse" class="sidebar_item">
-                            <span v-if="User.user.role === 'Исполнитель'">{{ $t('cabinet.item5') }}</span>
-                            <span v-else>{{ $t('c_nurse.title') }}</span>
-                        </div>
-                        <div @click.prevent="keeper" class="sidebar_item">
-                            <span v-if="User.user.role === 'Исполнитель'">{{ $t('cabinet.item6') }}</span>
-                            <span v-else>{{ $t('c_keeper.title') }}</span>
+                        <div class="sidebar_items">
+                            <div @click.prevent="account" class="sidebar_item">{{ $t('cabinet.item1') }}</div>
+                            <div @click.prevent="edit" class="sidebar_item">{{ $t('cabinet.item2') }}</div>
+                            <div @click.prevent="myphoto" class="sidebar_item">{{ $t('cabinet.item3') }}</div>
+                            <div @click.prevent="babysitter" class="sidebar_item">
+                                <span v-if="User.user.role === 'Исполнитель'">{{ $t('cabinet.item4') }}</span>
+                                <span v-else>{{ $t('c_baby.title') }}</span>
+                            </div>
+                            <div @click.prevent="nurse" class="sidebar_item">
+                                <span v-if="User.user.role === 'Исполнитель'">{{ $t('cabinet.item5') }}</span>
+                                <span v-else>{{ $t('c_nurse.title') }}</span>
+                            </div>
+                            <div @click.prevent="keeper" class="sidebar_item">
+                                <span v-if="User.user.role === 'Исполнитель'">{{ $t('cabinet.item6') }}</span>
+                                <span v-else>{{ $t('c_keeper.title') }}</span>
+                            </div>
                         </div>
                     </div>
                     <div class="cabinet_main">
@@ -143,6 +145,54 @@ export default {
 .cabinet_main {
     padding: 0 64px;
     flex: 1;
+}
+
+@media (max-width: 992px) {
+    .cabinet {
+        margin-top: 24px;
+        padding-top: 16px;
+    }
+
+    .cabinet_main {
+        padding: 0 16px;
+    }
+
+    .cabinet_sidebar {
+        width: auto;
+        padding-right: 32px;
+    }
+}
+
+@media (max-width: 767px) {
+    .cabinet {
+        flex-direction: column;
+    }
+
+    .cabinet_sidebar {
+        padding-right: 0;
+        border-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .cabinet_box {
+        margin: 20px auto 10px;
+    }
+
+    .sidebar_items {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .sidebar_item {
+        width: auto;
+        margin: 5px;
+        padding: 0 5px;
+    }
+
+    .cabinet_main {
+        border-left: 1px solid #8E8E8E;
+    }
 }
 </style>
 

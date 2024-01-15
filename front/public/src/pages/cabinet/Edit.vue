@@ -58,12 +58,6 @@
                     :placeholder="$t('register.item12_holder_en')"></textarea>
             </div>
 
-            <div class="login_form_text">{{ $t('register.item5') }}</div>
-            <select v-model="User.user.country" class="login_form_item auth_arrow">
-                <option v-for="option in Store.countrys" :value="option.id">
-                    {{ option.title[locale] }}
-                </option>
-            </select>
             <div class="login_form_text">{{ $t('register.item6') }}</div>
             <select v-model="User.user.city" class="login_form_item auth_arrow">
                 <option v-for="option in Store.citys" :value="option.id">
@@ -125,6 +119,7 @@ export default {
             this.User.user.surname = this.surname;
             this.User.user.about = this.about;
             this.User.user.phone_code = this.selectedOption.id;
+            //console.log(this.User.user);
             this.User.UPDATE_USER(this.User.user);
         },
         selectOption(option) {
@@ -135,7 +130,7 @@ export default {
     mounted() {
         //this.User.GET_TOKEN();
         this.User.GET_USER();
-        this.Store.GET_COUNTRYS();
+        //this.Store.GET_COUNTRYS();
         this.Store.GET_CITYS();
         this.Credential.GET_CREDENTIALS();
         this.User.register_error = null;
@@ -143,8 +138,10 @@ export default {
         this.name = this.User.user.name;
         this.surname = this.User.user.surname;
         this.about = this.User.user.about;
+
         this.selectedOption.title = this.User.user.phone_code.title;
         this.selectedOption.icon = this.User.user.phone_code.icon;
+        this.selectedOption.id = this.User.user.phone_code.id;
     },
 }
 </script>
@@ -154,5 +151,18 @@ export default {
     position: static;
     transform: none;
     min-height: 1150px;
+}
+
+@media (max-width: 992px) {
+    .edit_fix {
+        width: auto;
+        padding: 16px;
+    }
+}
+
+@media (max-width: 576px) {
+    .edit_title {
+        margin-bottom: 12px;
+    }
 }
 </style>

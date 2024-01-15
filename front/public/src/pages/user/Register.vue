@@ -63,12 +63,6 @@
                                 <div class="login_form_text">{{ $t('register.item12_en') }}</div>
                                 <textarea v-model="about.en" required class="login_form_item register_textarea"
                                     :placeholder="$t('register.item12_holder_en')"></textarea>
-                                <div class="login_form_text">{{ $t('register.item5') }}</div>
-                                <select v-model="user.country" class="login_form_item auth_arrow">
-                                    <option v-for="option in Store.countrys" :value="option.id">
-                                        {{ option.title[locale] }}
-                                    </option>
-                                </select>
                                 <div class="login_form_text">{{ $t('register.item6') }}</div>
                                 <select v-model="user.city" class="login_form_item auth_arrow">
                                     <option v-for="option in Store.citys" :value="option.id">
@@ -135,6 +129,7 @@ export default {
             this.user.surname = this.surname;
             this.user.about = this.about;
             this.user.role = "Исполнитель";
+            this.user.country = 5;
             this.user.confirmed = false;
             this.user.phone_code = this.selectedOption.id;
 
@@ -146,8 +141,7 @@ export default {
         },
     },
     mounted() {
-        this.User.GET_TOKEN();
-        this.Store.GET_COUNTRYS();
+        //this.Store.GET_COUNTRYS();
         this.Store.GET_CITYS();
         this.Credential.GET_CREDENTIALS();
         this.User.register_error = null;
@@ -157,10 +151,20 @@ export default {
 
 <style>
 .register_fix_inner {
-    min-height: 1600px;
+    min-height: 1500px;
 }
 
 .register_fix_form {
-    min-height: 1700px;
+    min-height: 1600px;
+}
+
+@media (max-width: 576px) {
+    .register_fix_inner {
+        min-height: 1450px;
+    }
+
+    .register_fix_form {
+        min-height: 1550px;
+    }
 }
 </style>

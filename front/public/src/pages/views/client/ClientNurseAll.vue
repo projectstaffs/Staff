@@ -5,12 +5,14 @@
             <div class="container">
                 <Links :data="link" />
                 <div class="search_block">
-                    <button @click.prevent="watch" class="btn btn_search">{{ $t('search.item1') }}</button>
+                    <div class="search_block_btns">
+                        <button @click.prevent="watch" class="btn btn_search">{{ $t('search.item1') }}</button>
+                        <button @click.prevent="clear" class="btn btn_search">{{ $t('search.item3') }}</button>
+                    </div>
                     <form class="search" @submit.prevent="search">
                         <Search :data="searchData" :typework="Store.nurseduties" :city="Store.citys" />
                         <button type="submit" class="btn btn_search">{{ $t('search.item2') }}</button>
                     </form>
-                    <button @click.prevent="clear" class="btn btn_search">{{ $t('search.item3') }}</button>
                 </div>
 
                 <div v-for="post in displayedPosts" :key="post.id">
@@ -25,7 +27,6 @@
                                 </div>
                                 <div class="anketa_text">
                                     {{ post.monthpay.title[locale] }} &nbsp;&nbsp;•&nbsp;&nbsp;
-                                    {{ post.User.country_title.title[locale] }} &nbsp;&nbsp;•&nbsp;&nbsp;
                                     {{ post.User.city_title.title[locale] }}
                                 </div>
                                 <div class="anketa_text"> {{ post.title_about[locale] }} </div>

@@ -12,10 +12,6 @@
                                 {{ Views.clientNurseitemUser.name[locale] }}
                                 {{ Views.clientNurseitemUser.surname[locale] }}
                             </div>
-                            <div v-if="Views.clientNurseitemUser.country_title" class="anketa_text">{{
-                                $t('baby_anketa.item2') }}
-                                {{ Views.clientNurseitemUser.country_title.title[locale] }}
-                            </div>
                             <div v-if="Views.clientNurseitemUser.city_title" class="anketa_text">
                                 {{ $t('cabinet.city') }} {{ Views.clientNurseitemUser.city_title.title[locale] }}
                             </div>

@@ -43,12 +43,6 @@
                                 <div class="login_form_text">{{ $t('register.item4') }}</div>
                                 <input v-model="user.email" required class="login_form_item" type="email"
                                     :placeholder="$t('register.item4_holder')">
-                                <div class="login_form_text">{{ $t('register.item5') }}</div>
-                                <select v-model="user.country" class="login_form_item auth_arrow">
-                                    <option v-for="option in Store.countrys" :value="option.id">
-                                        {{ option.title[locale] }}
-                                    </option>
-                                </select>
                                 <div class="login_form_text">{{ $t('register.item6') }}</div>
                                 <select v-model="user.city" class="login_form_item auth_arrow">
                                     <option v-for="option in Store.citys" :value="option.id">
@@ -110,6 +104,7 @@ export default {
             this.user.about = this.about;
             this.user.gender = this.gender;
             this.user.animal_work = this.animal_work;
+            this.user.country = 5;
             this.user.role = "Наниматель";
             this.user.confirmed = false;
             this.user.age = "2023-12-15";
@@ -123,8 +118,8 @@ export default {
         },
     },
     mounted() {
-        this.User.GET_TOKEN();
-        this.Store.GET_COUNTRYS(); this.Store.GET_CITYS();
+        this.Store.GET_CITYS();
+        //this.Store.GET_COUNTRYS(); 
         this.Credential.GET_CREDENTIALS();
         this.User.register_error = null;
     },
@@ -133,10 +128,20 @@ export default {
 
 <style>
 .register_inner {
-    min-height: 1040px;
+    min-height: 1000px;
 }
 
 .register_form {
-    min-height: 1140px;
+    min-height: 1100px;
+}
+
+@media (max-width: 576px) {
+    .register_inner {
+        min-height: 900px;
+    }
+
+    .register_form {
+        min-height: 1000px;
+    }
 }
 </style>

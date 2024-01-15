@@ -12,10 +12,6 @@
                                 {{ Views.workerBabyitemUser.name[locale] }}
                                 {{ Views.workerBabyitemUser.surname[locale] }}
                             </div>
-                            <div v-if="Views.workerBabyitemUser.country_title" class="anketa_text">{{
-                                $t('baby_anketa.item2') }}
-                                {{ Views.workerBabyitemUser.country_title.title[locale] }}
-                            </div>
                             <div v-if="Views.workerBabyitemUser.city_title" class="anketa_text">
                                 {{ $t('baby_anketa.item1') }} {{ Views.workerBabyitemUser.current_age }}
                                 &nbsp;&nbsp;•&nbsp;&nbsp; {{ Views.workerBabyitemUser.city_title.title[locale] }}

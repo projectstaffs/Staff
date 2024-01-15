@@ -1,6 +1,6 @@
 <template>
     <div class="edit_title">{{ $t('cabinet.no_img') }}</div>
-    <form @submit.prevent="createPhoto">
+    <form class="photo_form" @submit.prevent="createPhoto">
         <div class="photo">
             <div class="photo_inner">
                 <img class="photo_dropzone_img" src="../../assets/img/phone/photo_icon.svg" alt="">
@@ -76,10 +76,11 @@ export default {
 .photo {
     display: flex;
     justify-content: center;
+    width: 100%;
 }
 
 .photo_inner {
-    width: 300px;
+    width: 50%;
     height: 300px;
     cursor: pointer;
     border-radius: 10px;
@@ -125,5 +126,32 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+@media (max-width: 992px) {
+    .photo {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .photo_inner {
+        margin-bottom: 20px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .photo_inner {
+        height: 200px;
+    }
+
+    .photo_text {
+        width: 100%;
+    }
+
+    .photo_form .btn {
+        width: 100%;
+    }
 }
 </style>
