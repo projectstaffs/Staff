@@ -7,7 +7,8 @@ export const useUserStore = defineStore('user', {
     state: () => {
         return {         
             user: {},
-            users: {},                     
+            users: {}, 
+            token: '',                    
         }
     },
     actions: {  
@@ -55,8 +56,9 @@ export const useUserStore = defineStore('user', {
                     localStorage.user_image = res.data[1].original.image;
                     localStorage.userID = res.data[1].original.id;                    
                     
+                    this.token = res.data[0].original.access_token;
                     this.user = res.data[1].original;
-                    router.push({name: "Messages"});                    
+                    router.push({name: "Users"});                    
                 })
                 .catch(error => { console.log(error); })
         },

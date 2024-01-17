@@ -8,32 +8,19 @@ export const useDataStore = defineStore('variables', {
             languages: {}, language: {},
             agegroups: {}, agegroup: {},
             childrens: {}, children: {},
-            alcohols: {}, alcohol: {},
             babysittingduties: {}, babysittingdutie: {},
             citys: {}, city: {},
-            countrys: {}, country: {},
-            criminals: {}, criminal: {},
             diagnoses: {}, diagnose: {},              
             educations: {}, education: {},
-            employments: {}, employment: {},
             experiences: {}, experience: {},
             hourlypayments: {}, hourlypayment: {},
             housekeeperduties: {}, housekeeperdutie: {},
             housekeeperpreferences: {}, housekeeperpreference: {},
             housekeepertypeofworks: {}, housekeepertypeofwork: {},
-            joboptions: {}, joboption: {},
             monthlypayments: {}, monthlypayment: {},
-            movings: {}, moving: {},
             nurseduties: {}, nursedutie: {},
             nursetypeofworks: {}, nursetypeofwork: {},
-            nursingskills: {}, nursingskill: {},
-            recommendations: {}, recommendation: {},
-            religions: {}, religion: {},
-            schedules: {}, schedule: {},
-            smokings: {}, smoking: {},
-            statuss: {}, status: {},
             typeofworks: {}, typeofwork: {},
-            worklocations: {}, worklocation: {},
             workperiods: {}, workperiod: {},          
         }
     },
@@ -98,38 +85,7 @@ export const useDataStore = defineStore('variables', {
                     this.GET_AGEGROUPS();
                 })
                 .catch(error => { console.log(error); })
-        },
-
-        DELETE_ALCOHOL(data){                       
-            axios.post('http://localhost/api/alcohol/' + data, {_method: 'DELETE'})
-                .then((res) => {
-                    this.GET_ALCOHOLS();
-                })
-                .catch(error => { console.log(error); })
-        },
-        CHANGE_ALCOHOL( data){                       
-            axios.put('http://localhost/api/alcohol/' + data.id, data)
-                .then((res) => {
-                })
-                .catch(error => { console.log(error); })
-        },
-        GET_ALCOHOL(data){
-            this.alcohol = data;
-        },
-        GET_ALCOHOLS(){
-            axios.get('http://localhost/api/alcohol')
-                .then(res => {                    
-                    this.alcohols = res.data;
-                })
-                .catch(error => { console.log(error); })
-        }, 
-        CREATE_ALCOHOL(data){            
-            axios.post('http://localhost/api/alcohol', data)
-                .then((res) => {                    
-                    this.GET_ALCOHOLS();
-                })
-                .catch(error => { console.log(error); })
-        },
+        },        
 
         DELETE_BABYSITTINGDUTIE(data){                       
             api.post('http://localhost/api/auth/babysittingdutie/' + data, {_method: 'DELETE'})
@@ -160,38 +116,7 @@ export const useDataStore = defineStore('variables', {
                     this.GET_BABYSITTINGDUTIES();
                 })
                 .catch(error => { console.log(error); })
-        },
-
-        DELETE_CRIMINAL(data){                       
-            axios.post('http://localhost/api/criminal/' + data, {_method: 'DELETE'})
-                .then((res) => {
-                    this.GET_CRIMINALS();
-                })
-                .catch(error => { console.log(error); })
-        },
-        CHANGE_CRIMINAL( data){                       
-            axios.put('http://localhost/api/criminal/' + data.id, data)
-                .then((res) => {
-                })
-                .catch(error => { console.log(error); })
-        },
-        GET_CRIMINAL(data){
-            this.criminal = data;
-        },
-        GET_CRIMINALS(){
-            axios.get('http://localhost/api/criminal')
-                .then(res => {                    
-                    this.criminals = res.data;
-                })
-                .catch(error => { console.log(error); })
-        }, 
-        CREATE_CRIMINAL(data){            
-            axios.post('http://localhost/api/criminal', data)
-                .then((res) => {                    
-                    this.GET_CRIMINALS();
-                })
-                .catch(error => { console.log(error); })
-        },
+        },        
 
         DELETE_DIAGNOSE(data){                       
             api.post('http://localhost/api/auth/diagnose/' + data, {_method: 'DELETE'})
@@ -253,38 +178,7 @@ export const useDataStore = defineStore('variables', {
                     this.GET_EDUCATIONS();
                 })
                 .catch(error => { console.log(error); })
-        },
-
-        DELETE_EMPLOYMENT(data){                       
-            api.post('http://localhost/api/auth/employment/' + data, {_method: 'DELETE'})
-                .then((res) => {
-                    this.GET_EMPLOYMENTS();
-                })
-                .catch(error => { console.log(error); })
-        },
-        CHANGE_EMPLOYMENT( data){                       
-            api.put('http://localhost/api/auth/employment/' + data.id, data)
-                .then((res) => {
-                })
-                .catch(error => { console.log(error); })
-        },
-        GET_EMPLOYMENT(data){
-            this.employment = data;
-        },
-        GET_EMPLOYMENTS(){
-            api.get('http://localhost/api/auth/employment')
-                .then(res => {                    
-                    this.employments = res.data;
-                })
-                .catch(error => { console.log(error); })
-        }, 
-        CREATE_EMPLOYMENT(data){            
-            api.post('http://localhost/api/auth/employment', data)
-                .then((res) => {                    
-                    this.GET_EMPLOYMENTS();
-                })
-                .catch(error => { console.log(error); })
-        },
+        },        
 
         DELETE_EXPERIENCE(data){                       
             api.post('http://localhost/api/auth/experience/' + data, {_method: 'DELETE'})
@@ -441,37 +335,6 @@ export const useDataStore = defineStore('variables', {
                 .catch(error => { console.log(error); })
         },
 
-        DELETE_JOBOPTION(data){                       
-            api.post('http://localhost/api/auth/joboption/' + data, {_method: 'DELETE'})
-                .then((res) => {
-                    this.GET_JOBOPTIONS();
-                })
-                .catch(error => { console.log(error); })
-        },
-        CHANGE_JOBOPTION( data){                       
-            api.put('http://localhost/api/auth/joboption/' + data.id, data)
-                .then((res) => {
-                })
-                .catch(error => { console.log(error); })
-        },
-        GET_JOBOPTION(data){
-            this.joboption = data;
-        },
-        GET_JOBOPTIONS(){
-            api.get('http://localhost/api/auth/joboption')
-                .then(res => {                    
-                    this.joboptions = res.data;
-                })
-                .catch(error => { console.log(error); })
-        }, 
-        CREATE_JOBOPTION(data){            
-            api.post('http://localhost/api/auth/joboption', data)
-                .then((res) => {                    
-                    this.GET_JOBOPTIONS();
-                })
-                .catch(error => { console.log(error); })
-        },
-
         DELETE_MONTHLYPAYMENT(data){                       
             api.post('http://localhost/api/auth/monthlypayment/' + data, {_method: 'DELETE'})
                 .then((res) => {
@@ -499,37 +362,6 @@ export const useDataStore = defineStore('variables', {
             api.post('http://localhost/api/auth/monthlypayment', data)
                 .then((res) => {                    
                     this.GET_MONTHLYPAYMENTS();
-                })
-                .catch(error => { console.log(error); })
-        },
-
-        DELETE_MOVING(data){                       
-            axios.post('http://localhost/api/moving/' + data, {_method: 'DELETE'})
-                .then((res) => {
-                    this.GET_MOVINGS();
-                })
-                .catch(error => { console.log(error); })
-        },
-        CHANGE_MOVING( data){                       
-            axios.put('http://localhost/api/moving/' + data.id, data)
-                .then((res) => {
-                })
-                .catch(error => { console.log(error); })
-        },
-        GET_MOVING(data){
-            this.moving = data;
-        },
-        GET_MOVINGS(){
-            axios.get('http://localhost/api/moving')
-                .then(res => {                    
-                    this.movings = res.data;
-                })
-                .catch(error => { console.log(error); })
-        }, 
-        CREATE_MOVING(data){            
-            axios.post('http://localhost/api/moving', data)
-                .then((res) => {                    
-                    this.GET_MOVINGS();
                 })
                 .catch(error => { console.log(error); })
         },
@@ -596,192 +428,6 @@ export const useDataStore = defineStore('variables', {
                 .catch(error => { console.log(error); })
         },
 
-        DELETE_NURSINGSKILL(data){                       
-            api.post('http://localhost/api/auth/nursingskill/' + data, {_method: 'DELETE'})
-                .then((res) => {
-                    this.GET_NURSINGSKILLS();
-                })
-                .catch(error => { console.log(error); })
-        },
-        CHANGE_NURSINGSKILL( data){                       
-            api.put('http://localhost/api/auth/nursingskill/' + data.id, data)
-                .then((res) => {
-                })
-                .catch(error => { console.log(error); })
-        },
-        GET_NURSINGSKILL(data){
-            this.nursingskill = data;
-        },
-        GET_NURSINGSKILLS(){
-            api.get('http://localhost/api/auth/nursingskill')
-                .then(res => {                    
-                    this.nursingskills = res.data;
-                })
-                .catch(error => { console.log(error); })
-        }, 
-        CREATE_NURSINGSKILL(data){            
-            api.post('http://localhost/api/auth/nursingskill', data)
-                .then((res) => {                    
-                    this.GET_NURSINGSKILLS();
-                })
-                .catch(error => { console.log(error); })
-        },
-
-        DELETE_RECOMMENDATION(data){                       
-            api.post('http://localhost/api/auth/recommendation/' + data, {_method: 'DELETE'})
-                .then((res) => {
-                    this.GET_RECOMMENDATIONS();
-                })
-                .catch(error => { console.log(error); })
-        },
-        CHANGE_RECOMMENDATION( data){                       
-            api.put('http://localhost/api/auth/recommendation/' + data.id, data)
-                .then((res) => {
-                })
-                .catch(error => { console.log(error); })
-        },
-        GET_RECOMMENDATION(data){
-            this.recommendation = data;
-        },
-        GET_RECOMMENDATIONS(){
-            api.get('http://localhost/api/auth/recommendation')
-                .then(res => {                    
-                    this.recommendations = res.data;
-                })
-                .catch(error => { console.log(error); })
-        }, 
-        CREATE_RECOMMENDATION(data){            
-            api.post('http://localhost/api/auth/recommendation', data)
-                .then((res) => {                    
-                    this.GET_RECOMMENDATIONS();
-                })
-                .catch(error => { console.log(error); })
-        },
-
-        DELETE_RELIGION(data){                       
-            axios.post('http://localhost/api/religion/' + data, {_method: 'DELETE'})
-                .then((res) => {
-                    this.GET_RELIGIONS();
-                })
-                .catch(error => { console.log(error); })
-        },
-        CHANGE_RELIGION( data){                       
-            axios.put('http://localhost/api/religion/' + data.id, data)
-                .then((res) => {
-                })
-                .catch(error => { console.log(error); })
-        },
-        GET_RELIGION(data){
-            this.religion = data;
-        },
-        GET_RELIGIONS(){
-            axios.get('http://localhost/api/religion')
-                .then(res => {                    
-                    this.religions = res.data;
-                })
-                .catch(error => { console.log(error); })
-        }, 
-        CREATE_RELIGION(data){            
-            axios.post('http://localhost/api/religion', data)
-                .then((res) => {                    
-                    this.GET_RELIGIONS();
-                })
-                .catch(error => { console.log(error); })
-        },
-
-        DELETE_SCHEDULE(data){                       
-            api.post('http://localhost/api/auth/schedule/' + data, {_method: 'DELETE'})
-                .then((res) => {
-                    this.GET_SCHEDULES();
-                })
-                .catch(error => { console.log(error); })
-        },
-        CHANGE_SCHEDULE( data){                       
-            api.put('http://localhost/api/auth/schedule/' + data.id, data)
-                .then((res) => {
-                })
-                .catch(error => { console.log(error); })
-        },
-        GET_SCHEDULE(data){
-            this.schedule = data;
-        },
-        GET_SCHEDULES(){
-            api.get('http://localhost/api/auth/schedule')
-                .then(res => {                    
-                    this.schedules = res.data;
-                })
-                .catch(error => { console.log(error); })
-        }, 
-        CREATE_SCHEDULE(data){            
-            api.post('http://localhost/api/auth/schedule', data)
-                .then((res) => {                    
-                    this.GET_SCHEDULES();
-                })
-                .catch(error => { console.log(error); })
-        },
-
-        DELETE_SMOKING(data){            
-            axios.post('http://localhost/api/smoking/' + data, {_method: 'DELETE'})
-                .then((res) => {
-                    this.GET_SMOKINGS();
-                })
-                .catch(error => { console.log(error); })
-        },
-        CHANGE_SMOKING( data){       
-            axios.put('http://localhost/api/smoking/' + data.id, data)
-                .then((res) => {
-                })
-                .catch(error => { console.log(error); })
-        },
-        GET_SMOKING(data){
-            this.smoking = data;
-        },
-        GET_SMOKINGS(){        
-            axios.get('http://localhost/api/smoking')
-                .then(res => {                    
-                    this.smokings = res.data;
-                })
-                .catch(error => { console.log(error); })
-        }, 
-        CREATE_SMOKING(data){        
-            axios.post('http://localhost/api/smoking', data)
-                .then((res) => {                    
-                    this.GET_SMOKINGS();
-                })
-                .catch(error => { console.log(error); })
-        },
-
-        DELETE_STATUS(data){                       
-            axios.post('http://localhost/api/status/' + data, {_method: 'DELETE'})
-                .then((res) => {
-                    this.GET_STATUSS();
-                })
-                .catch(error => { console.log(error); })
-        },
-        CHANGE_STATUS( data){                       
-            axios.put('http://localhost/api/status/' + data.id, data)
-                .then((res) => {
-                })
-                .catch(error => { console.log(error); })
-        },
-        GET_STATUS(data){
-            this.status = data;
-        },
-        GET_STATUSS(){
-            axios.get('http://localhost/api/status')
-                .then(res => {                    
-                    this.statuss = res.data;
-                })
-                .catch(error => { console.log(error); })
-        }, 
-        CREATE_STATUS(data){            
-            axios.post('http://localhost/api/status', data)
-                .then((res) => {                    
-                    this.GET_STATUSS();
-                })
-                .catch(error => { console.log(error); })
-        },
-
         DELETE_TYPEOFWORK(data){                       
             api.post('http://localhost/api/auth/typeofwork/' + data, {_method: 'DELETE'})
                 .then((res) => {
@@ -809,37 +455,6 @@ export const useDataStore = defineStore('variables', {
             api.post('http://localhost/api/auth/typeofwork', data)
                 .then((res) => {                    
                     this.GET_TYPEOFWORKS();
-                })
-                .catch(error => { console.log(error); })
-        },
-
-        DELETE_WORKLOCATION( data){                       
-            api.post('http://localhost/api/auth/worklocation/' + data, {_method: 'DELETE'})
-                .then((res) => {
-                    this.GET_WORKLOCATIONS();
-                })
-                .catch(error => { console.log(error); })
-        },
-        CHANGE_WORKLOCATION( data){                       
-            api.put('http://localhost/api/auth/worklocation/' + data.id, data)
-                .then((res) => {
-                })
-                .catch(error => { console.log(error); })
-        },
-        GET_WORKLOCATION(data){
-            this.worklocation = data;
-        },
-        GET_WORKLOCATIONS(){
-            api.get('http://localhost/api/auth/worklocation')
-                .then(res => {                    
-                    this.worklocations = res.data;
-                })
-                .catch(error => { console.log(error); })
-        }, 
-        CREATE_WORKLOCATION(data){            
-            api.post('http://localhost/api/auth/worklocation', data)
-                .then((res) => {                    
-                    this.GET_WORKLOCATIONS();
                 })
                 .catch(error => { console.log(error); })
         },
@@ -933,37 +548,6 @@ export const useDataStore = defineStore('variables', {
             axios.post("http://localhost/api/city", data)
                 .then((res) => {                    
                     this.GET_CITYS();                    
-                })
-                .catch(error => { console.log(error); })
-        },
-        
-        DELETE_COUNTRY(data){                       
-            axios.post("http://localhost/api/country/" + data, {_method: 'DELETE'})
-                .then((res) => {
-                    this.GET_COUNTRYS();            
-                })
-                .catch(error => { console.log(error); })
-        },
-        CHANGE_COUNTRY(data){                                   
-            axios.put("http://localhost/api/country/" + data.id, data)
-                .then((res) => {                                
-                })
-                .catch(error => { console.log(error); })
-        },
-        GET_COUNTRY(data){            
-            this.country = data;
-        },  
-        GET_COUNTRYS() {            
-            axios.get("http://localhost/api/country")            
-                .then(res => {                    
-                    this.countrys = res.data;                   
-                })
-                .catch(error => { console.log(error); })
-        },
-        CREATE_COUNTRY(data){            
-            axios.post("http://localhost/api/country", data)
-                .then((res) => {                    
-                    this.GET_COUNTRYS();                    
                 })
                 .catch(error => { console.log(error); })
         },

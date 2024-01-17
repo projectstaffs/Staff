@@ -8,41 +8,11 @@ const router = createRouter({
             path: '/', 
             meta: {layout: 'User'},           
             component: () =>import('../pages/Login.vue')                       
-        },  
-        {
-            name: 'Reviews',
-            path: '/reviews', 
-            meta: {layout: 'Menu'},           
-            component: () =>import('../pages/message/Reviews.vue')                       
-        },   
-        {
-            name: 'Add-message',
-            path: '/add-message', 
-            meta: {layout: 'Menu'},           
-            component: () =>import('../pages/message/Add-message.vue')                       
-        },
-        {
-            name: 'Msg-sent',
-            path: '/msg-sent', 
-            meta: {layout: 'Menu'},            
-            component: () =>import('../pages/message/Msg-sent.vue')
-        },
-        {
-            name: 'Msg-received',
-            path: '/msg-received',  
-            meta: {layout: 'Menu'},           
-            component: () =>import('../pages/message/Msg-received.vue')
-        },
-        {
-            name: 'Messages',
-            path: '/message',  
-            meta: {layout: 'Menu'},           
-            component: () =>import('../pages/message/Messages.vue')
-        },    
+        },            
         {
             name: 'Users',
             path: '/users',   
-            meta: {layout: 'Menu'},          
+            meta: {layout: 'User'},          
             component: () =>import('../pages/Users.vue')
         },        
         {
@@ -80,19 +50,7 @@ const router = createRouter({
             path: '/change-agegroup',   
             meta: {layout: 'Menu'},          
             component: () =>import('../pages/change-data/Change-agegroup.vue')
-        },
-        {
-            name: 'Alcohol',
-            path: '/alcohol',     
-            meta: {layout: 'Menu'},        
-            component: () =>import('../pages/data/Alcohol.vue')
-        },
-        {
-            name: 'Change-alcohol',
-            path: '/change-alcohol',   
-            meta: {layout: 'Menu'},          
-            component: () =>import('../pages/change-data/Change-alcohol.vue')
-        },
+        },        
         {
             name: 'Babysittingdutie',
             path: '/babysittingdutie',  
@@ -116,31 +74,7 @@ const router = createRouter({
             path: '/change-city',    
             meta: {layout: 'Menu'},         
             component: () =>import('../pages/change-data/Change-city.vue')
-        },
-        {
-            name: 'Country',
-            path: '/country',       
-            meta: {layout: 'Menu'},      
-            component: () =>import('../pages/data/Country.vue')
-        },
-        {
-            name: 'Change-country',
-            path: '/change-country',   
-            meta: {layout: 'Menu'},          
-            component: () =>import('../pages/change-data/Change-country.vue')
-        },
-        {
-            name: 'Criminal',
-            path: '/criminal',    
-            meta: {layout: 'Menu'},         
-            component: () =>import('../pages/data/Criminal.vue')
-        },
-        {
-            name: 'Change-criminal',
-            path: '/change-criminal',  
-            meta: {layout: 'Menu'},           
-            component: () =>import('../pages/change-data/Change-criminal.vue')
-        },
+        },        
         {
             name: 'Diagnose',
             path: '/diagnose',     
@@ -164,19 +98,7 @@ const router = createRouter({
             path: '/change-education',   
             meta: {layout: 'Menu'},          
             component: () =>import('../pages/change-data/Change-education.vue')
-        },
-        {
-            name: 'Employment',
-            path: '/employment',       
-            meta: {layout: 'Menu'},      
-            component: () =>import('../pages/data/Employment.vue')
-        },
-        {
-            name: 'Change-employment',
-            path: '/change-employment',   
-            meta: {layout: 'Menu'},          
-            component: () =>import('../pages/change-data/Change-employment.vue')
-        },
+        },        
         {
             name: 'Experience',
             path: '/experience',         
@@ -236,19 +158,7 @@ const router = createRouter({
             path: '/change-housekeepertypeofwork',   
             meta: {layout: 'Menu'},          
             component: () =>import('../pages/change-data/Change-housekeepertypeofwork.vue')
-        },
-        {
-            name: 'Joboption',
-            path: '/joboption',             
-            meta: {layout: 'Menu'},
-            component: () =>import('../pages/data/Joboption.vue')
-        },
-        {
-            name: 'Change-joboption',
-            path: '/change-joboption',    
-            meta: {layout: 'Menu'},         
-            component: () =>import('../pages/change-data/Change-joboption.vue')
-        },
+        },        
         {
             name: 'Monthlypayment',
             path: '/monthlypayment',     
@@ -260,19 +170,7 @@ const router = createRouter({
             path: '/change-monthlypayment',   
             meta: {layout: 'Menu'},          
             component: () =>import('../pages/change-data/Change-monthlypayment.vue')
-        },
-        {
-            name: 'Moving',
-            path: '/moving',             
-            meta: {layout: 'Menu'},
-            component: () =>import('../pages/data/Moving.vue')
-        },
-        {
-            name: 'Change-moving',
-            path: '/change-moving',      
-            meta: {layout: 'Menu'},       
-            component: () =>import('../pages/change-data/Change-moving.vue')
-        },    
+        },            
         {
             name: 'Nursedutie',
             path: '/nursedutie',        
@@ -298,78 +196,6 @@ const router = createRouter({
             component: () =>import('../pages/change-data/Change-nursetypeofwork.vue')
         },
         {
-            name: 'Nursingskill',
-            path: '/nursingskill',       
-            meta: {layout: 'Menu'},      
-            component: () =>import('../pages/data/Nursingskill.vue')
-        },
-        {
-            name: 'Change-nursingskill',
-            path: '/change-nursingskill',   
-            meta: {layout: 'Menu'},          
-            component: () =>import('../pages/change-data/Change-nursingskill.vue')
-        },
-        {
-            name: 'Recommendation',
-            path: '/recommendation',      
-            meta: {layout: 'Menu'},       
-            component: () =>import('../pages/data/Recommendation.vue')
-        },
-        {
-            name: 'Change-recommendation',
-            path: '/change-recommendation', 
-            meta: {layout: 'Menu'},            
-            component: () =>import('../pages/change-data/Change-recommendation.vue')
-        },
-        {
-            name: 'Religion',
-            path: '/religion',             
-            meta: {layout: 'Menu'},
-            component: () =>import('../pages/data/Religion.vue')
-        },
-        {
-            name: 'Change-religion',
-            path: '/change-religion',        
-            meta: {layout: 'Menu'},     
-            component: () =>import('../pages/change-data/Change-religion.vue')
-        },
-        {
-            name: 'Schedule',
-            path: '/schedule',             
-            meta: {layout: 'Menu'},
-            component: () =>import('../pages/data/Schedule.vue')
-        },
-        {
-            name: 'Change-schedule',
-            path: '/change-schedule',       
-            meta: {layout: 'Menu'},      
-            component: () =>import('../pages/change-data/Change-schedule.vue')
-        },
-        {
-            name: 'Smoking',
-            path: '/smoking',             
-            meta: {layout: 'Menu'},
-            component: () =>import('../pages/data/Smoking.vue')
-        },
-        {
-            name: 'Change-smoking',
-            path: '/change-smoking',        
-            meta: {layout: 'Menu'},     
-            component: () =>import('../pages/change-data/Change-smoking.vue')
-        },
-        {
-            name: 'Status',
-            path: '/status',             
-            meta: {layout: 'Menu'},
-            component: () =>import('../pages/data/Status.vue')
-        },
-        {
-            name: 'Change-status',
-            path: '/change-status',         
-            meta: {layout: 'Menu'},    
-            component: () =>import('../pages/change-data/Change-status.vue')
-        },
-        {
             name: 'Typeofwork',
             path: '/typeofwork',             
             meta: {layout: 'Menu'},
@@ -382,18 +208,6 @@ const router = createRouter({
             component: () =>import('../pages/change-data/Change-typeofwork.vue')
         },
         {
-            name: 'Worklocation',
-            path: '/worklocation',    
-            meta: {layout: 'Menu'},         
-            component: () =>import('../pages/data/Worklocation.vue')
-        },
-        {
-            name: 'Change-worklocation',
-            path: '/change-worklocation',   
-            meta: {layout: 'Menu'},          
-            component: () =>import('../pages/change-data/Change-worklocation.vue')
-        },
-        {
             name: 'Workperiod',
             path: '/workperiod',         
             meta: {layout: 'Menu'},    
@@ -404,14 +218,13 @@ const router = createRouter({
             path: '/change-workperiod',  
             meta: {layout: 'Menu'},           
             component: () =>import('../pages/change-data/Change-workperiod.vue')
-        },
-        ,
-    {
-        name: '404',
-        path: '/:pathMatch(.*)',
-        meta: {layout: 'User'},           
-        component: () =>import('../pages/Login.vue')
-    }      
+        },        
+        {
+            name: '404',
+            path: '/:pathMatch(.*)',
+            meta: {layout: 'User'},           
+            component: () =>import('../pages/Login.vue')
+        }      
     ]
 })
 
@@ -429,20 +242,12 @@ router.beforeEach((to, from, next) => {
             } else { return next({ name: 'Login' }) }
         } else {
             if(to.name === 'Login'){
-                return next({ name: 'Messages' })
+                return next({ name: 'Users' })
             } else {
                 next();
             }
         }
-    }    
-
-    /*if(to.name === 'Login' && localStorage.access_token && userInfo.role == 'Администратор'){
-        return next({
-            name: 'Messages'
-        })
-    } 
-
-    next();*/
+    }
 });
 
 export default router
