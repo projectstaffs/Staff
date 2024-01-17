@@ -12,7 +12,7 @@ const router = createRouter({
         {
             name: 'Users',
             path: '/users',   
-            meta: {layout: 'User'},          
+            meta: {layout: 'Menu'},          
             component: () =>import('../pages/Users.vue')
         },        
         {
