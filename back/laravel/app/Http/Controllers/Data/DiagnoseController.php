@@ -34,7 +34,10 @@ class DiagnoseController extends Controller
     public function store(Request $request)
     {
         $diagnose = new Diagnose([
-            'title' => $request->title
+            'title' => [
+               'en' => $request->en,
+               'ua' => $request->ua
+            ],
         ]);
         $diagnose->save(); 
         
@@ -64,7 +67,10 @@ class DiagnoseController extends Controller
     public function update(Request $request, string $id)
     {
         $diagnose = Diagnose::find($id);
-        $diagnose->title = $request['title'];
+        $diagnose->title = [
+               'en' => $request->title['en'],
+               'ua' => $request->title['ua']
+            ];
         $diagnose->save();
 
         Cache::put('diagnoses', Diagnose::all());

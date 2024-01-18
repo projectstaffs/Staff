@@ -34,7 +34,10 @@ class BabysittingDutieController extends Controller
     public function store(Request $request)
     {
         $babysittingDutie = new BabysittingDutie([
-            'title' => $request->title
+            'title' => [
+               'en' => $request->en,
+               'ua' => $request->ua
+            ],
         ]);
         $babysittingDutie->save();  
         
@@ -64,7 +67,10 @@ class BabysittingDutieController extends Controller
     public function update(Request $request, string $id)
     {
         $babysittingDutie = BabysittingDutie::find($id);
-        $babysittingDutie->title = $request['title'];
+        $babysittingDutie->title = [
+               'en' => $request->title['en'],
+               'ua' => $request->title['ua']
+            ];
         $babysittingDutie->save();
 
         Cache::get('babysittingduties');

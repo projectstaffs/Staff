@@ -34,7 +34,10 @@ class CityController extends Controller
     public function store(Request $request)
     {
         $city = new City([
-            'title' => $request->title
+            'title' => [
+               'en' => $request->en,
+               'ua' => $request->ua
+            ],
         ]);        
         $city->save(); 
         
@@ -64,7 +67,10 @@ class CityController extends Controller
     public function update(Request $request, string $id)
     {
         $city = City::find($id);
-        $city->title = $request['title'];
+        $city->title = [
+               'en' => $request->title['en'],
+               'ua' => $request->title['ua']
+            ];
         $city->save();
 
         Cache::put('cities', City::all());

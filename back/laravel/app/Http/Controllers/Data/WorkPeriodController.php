@@ -34,7 +34,10 @@ class WorkPeriodController extends Controller
     public function store(Request $request)
     {
         $workPeriod = new WorkPeriod([
-            'title' => $request->title
+            'title' => [
+               'en' => $request->en,
+               'ua' => $request->ua
+            ],
         ]);
         $workPeriod->save();
         
@@ -64,7 +67,10 @@ class WorkPeriodController extends Controller
     public function update(Request $request, string $id)
     {
         $workPeriod = WorkPeriod::find($id);
-        $workPeriod->title = $request['title'];
+        $workPeriod->title = [
+               'en' => $request->title['en'],
+               'ua' => $request->title['ua']
+            ];
         $workPeriod->save();
 
         Cache::put('workperiods', WorkPeriod::all());

@@ -34,7 +34,10 @@ class AgeGroupController extends Controller
     public function store(Request $request)
     {
         $agegroup = new AgeGroup([
-            'title' => $request->title
+            'title' => [
+               'en' => $request->en,
+               'ua' => $request->ua
+            ],
         ]);                
         $agegroup->save();  
 
@@ -64,7 +67,10 @@ class AgeGroupController extends Controller
     public function update(Request $request, string $id)
     {
         $agegroup = AgeGroup::find($id);
-        $agegroup->title = $request['title'];
+        $agegroup->title = [
+               'en' => $request->title['en'],
+               'ua' => $request->title['ua']
+            ];
         $agegroup->save();
 
         Cache::put('agegroups', AgeGroup::all());

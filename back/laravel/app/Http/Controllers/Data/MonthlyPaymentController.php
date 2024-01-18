@@ -34,7 +34,10 @@ class MonthlyPaymentController extends Controller
     public function store(Request $request)
     {
         $monthlyPayment = new MonthlyPayment([
-            'title' => $request->title
+            'title' => [
+               'en' => $request->en,
+               'ua' => $request->ua
+            ],
         ]);
         $monthlyPayment->save(); 
         
@@ -64,7 +67,10 @@ class MonthlyPaymentController extends Controller
     public function update(Request $request, string $id)
     {
         $monthlyPayment = MonthlyPayment::find($id);
-        $monthlyPayment->title = $request['title'];
+        $monthlyPayment->title = [
+               'en' => $request->title['en'],
+               'ua' => $request->title['ua']
+            ];
         $monthlyPayment->save();
 
         Cache::put('monthlypayments', MonthlyPayment::all());

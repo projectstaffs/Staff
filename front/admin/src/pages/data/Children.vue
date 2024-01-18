@@ -75,9 +75,9 @@ export default {
         change_children(id, title) {
             this.fix_children.id = id;
             this.fix_children.title = title;
-            console.log(this.fix_children);
-            //this.Store.GET_CHILDREN(this.fix_children);
-            //this.$router.push({ name: "Change-children" })
+
+            this.Store.GET_CHILDREN(this.fix_children);
+            this.$router.push({ name: "Change-children" })
         },
         delete_children(id) {
             this.Store.DELETE_CHILDREN(id);

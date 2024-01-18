@@ -34,7 +34,10 @@ class EducationController extends Controller
     public function store(Request $request)
     {
         $education = new Education([
-            'title' => $request->title
+            'title' => [
+               'en' => $request->en,
+               'ua' => $request->ua
+            ],
         ]);
         $education->save(); 
         
@@ -64,7 +67,10 @@ class EducationController extends Controller
     public function update(Request $request, string $id)
     {
         $education = Education::find($id);
-        $education->title = $request['title'];
+        $education->title = [
+               'en' => $request->title['en'],
+               'ua' => $request->title['ua']
+            ];
         $education->save();
 
         Cache::put('educations', Education::all());

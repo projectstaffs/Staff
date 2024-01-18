@@ -34,7 +34,10 @@ class ExperienceController extends Controller
     public function store(Request $request)
     {
         $experience = new Experience([
-            'title' => $request->title
+            'title' => [
+               'en' => $request->en,
+               'ua' => $request->ua
+            ],
         ]);
         $experience->save();  
         
@@ -64,7 +67,10 @@ class ExperienceController extends Controller
     public function update(Request $request, string $id)
     {
         $experience = Experience::find($id);
-        $experience->title = $request['title'];
+        $experience->title = [
+               'en' => $request->title['en'],
+               'ua' => $request->title['ua']
+            ];
         $experience->save();
 
         Cache::put('experiences', Experience::all());

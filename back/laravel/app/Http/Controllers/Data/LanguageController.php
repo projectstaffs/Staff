@@ -34,7 +34,10 @@ class LanguageController extends Controller
     public function store(Request $request)
     {
         $language = new Language([
-            'title' => $request->title
+            'title' => [
+               'en' => $request->en,
+               'ua' => $request->ua
+            ],
         ]);
         $language->save(); 
         
@@ -64,7 +67,10 @@ class LanguageController extends Controller
     public function update(Request $request, string $id)
     {
         $language = Language::find($id);
-        $language->title = $request['title'];
+        $language->title = [
+               'en' => $request->title['en'],
+               'ua' => $request->title['ua']
+            ];
         $language->save();
 
         Cache::put('languages', Language::all());

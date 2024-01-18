@@ -34,7 +34,10 @@ class HousekeeperDutieController extends Controller
     public function store(Request $request)
     {
         $housekeeperDutie = new HouseKeeperDutie([
-            'title' => $request->title
+            'title' => [
+               'en' => $request->en,
+               'ua' => $request->ua
+            ],
         ]);
         $housekeeperDutie->save();  
         
@@ -64,7 +67,10 @@ class HousekeeperDutieController extends Controller
     public function update(Request $request, string $id)
     {
         $housekeeperDutie = HouseKeeperDutie::find($id);
-        $housekeeperDutie->title = $request['title'];
+        $housekeeperDutie->title = [
+               'en' => $request->title['en'],
+               'ua' => $request->title['ua']
+            ];
         $housekeeperDutie->save();
 
         Cache::put('housekeeperduties', HouseKeeperDutie::all());
