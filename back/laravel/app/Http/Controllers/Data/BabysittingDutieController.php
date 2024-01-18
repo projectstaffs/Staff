@@ -39,9 +39,9 @@ class BabysittingDutieController extends Controller
                'ua' => $request->ua
             ],
         ]);
-        $babysittingDutie->save();  
+        $babysittingDutie->save();         
         
-        Cache::get('babysittingduties');
+        Cache::put('babysittingduties', BabysittingDutie::all());
         return response()->json('The babysittingDutie successfully added');
     }
 
@@ -73,7 +73,7 @@ class BabysittingDutieController extends Controller
             ];
         $babysittingDutie->save();
 
-        Cache::get('babysittingduties');
+        Cache::put('babysittingduties', BabysittingDutie::all());
         return response()->json(["The babysittingDutie successfully updated"]);
     }
 
@@ -85,7 +85,7 @@ class BabysittingDutieController extends Controller
         $babysittingDutie = BabysittingDutie::find($id);
         $babysittingDutie->delete();        
 
-        Cache::get('babysittingduties');
+        Cache::put('babysittingduties', BabysittingDutie::all());
         return response()->json('The babysittingDutie successfully deleted');
     }
 }

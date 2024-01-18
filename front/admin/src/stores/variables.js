@@ -143,7 +143,7 @@ export const useDataStore = defineStore('variables', {
         }, 
         CREATE_DIAGNOSE(data){            
             api.post('http://localhost/api/auth/diagnose', data)
-                .then((res) => {                    
+                .then((res) => {
                     this.GET_DIAGNOSES();
                 })
                 .catch(error => { console.log(error); })

@@ -42,7 +42,7 @@ class DiagnoseController extends Controller
         $diagnose->save(); 
         
         Cache::put('diagnoses', Diagnose::all());
-        return response()->json('The diagnose successfully added');
+        return response()->json('The diagnose successfully added');        
     }
 
     /**

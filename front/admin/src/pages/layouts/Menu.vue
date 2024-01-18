@@ -140,12 +140,6 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a @click.prevent="babysittingdutie" href="pages/tables/data.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Обов'язки для няні</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
                                     <a @click.prevent="city" href="pages/tables/data.html" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Місто</p>
@@ -164,9 +158,33 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a @click.prevent="experience" href="pages/tables/data.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Досвід роботи</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a @click.prevent="monthlypayment" href="pages/tables/data.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Щомісячна оплата</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a @click.prevent="hourlypayment" href="pages/tables/data.html" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Погодинна оплата</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a @click.prevent="babysittingdutie" href="pages/tables/data.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Обов'язки для няні</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a @click.prevent="nursedutie" href="pages/tables/data.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Обов'язки для доглядальниці</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -176,10 +194,15 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a @click.prevent="housekeeperpreference" href="pages/tables/data.html"
-                                        class="nav-link">
+                                    <a @click.prevent="typeofwork" href="pages/tables/data.html" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Вподобання для домробітниці</p>
+                                        <p>Види робіт для няні</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a @click.prevent="nursetypeofwork" href="pages/tables/data.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Види робіт для доглядальниці</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -190,27 +213,10 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a @click.prevent="monthlypayment" href="pages/tables/data.html" class="nav-link">
+                                    <a @click.prevent="housekeeperpreference" href="pages/tables/data.html"
+                                        class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Щомісячна оплата</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a @click.prevent="nursedutie" href="pages/tables/data.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Обов'язки для доглядальниці</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a @click.prevent="nursetypeofwork" href="pages/tables/data.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Види робіт для доглядальниці</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a @click.prevent="typeofwork" href="pages/tables/data.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Види робіт для няні</p>
+                                        <p>Вподобання для домробітниці</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">

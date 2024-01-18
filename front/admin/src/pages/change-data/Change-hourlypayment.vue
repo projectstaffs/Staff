@@ -1,11 +1,27 @@
 <template>
-    <div @click.prevent="back()" class="category_change_btn">Назад</div>
-    <div class="category_title">Изменение почасовую оплату:</div>
-    <form @submit.prevent="changeHourlypayment" class="category_form">
-        <div>Введите новую почасовую оплату:</div>
-        <input class="category_form_title" v-model="Store.hourlypayment.title" type="text" required placeholder="Напишите что-нибудь">                
-        <button class="category_form_btn" type="submit">Изменить почасовую оплату</button>
-    </form>
+    <button @click.prevent="back()" class="btn btn-block btn-info btn-sm data_btn">Назад</button>
+    <div class="card card-warning">
+        <div class="card-header">
+            <h3 class="card-title">Зміна погодинної оплати:</h3>
+        </div>
+        <form @submit.prevent="changeHourlypayment">
+            <div class="card-body">
+                <div class="form-group">
+                    <label>Введіть погодинну оплату українською мовою:</label>
+                    <input v-model="Store.hourlypayment.title.ua" type="text" class="form-control" required
+                        placeholder="погодинна оплата українською мовою">
+                </div>
+                <div class="form-group">
+                    <label>Введіть погодинну оплату англійською мовою:</label>
+                    <input v-model="Store.hourlypayment.title.en" type="text" class="form-control" required
+                        placeholder="погодинна оплата англійською мовою">
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-warning">Змінити погодинну оплату</button>
+            </div>
+        </form>
+    </div>
 </template>
 
 <script>
@@ -18,11 +34,11 @@ export default {
     },
     methods: {
         back() {
-            this.$router.push({name: "Hourlypayment"})
+            this.$router.push({ name: "Hourlypayment" })
         },
-        changeHourlypayment() {            
+        changeHourlypayment() {
             this.Store.CHANGE_HOURLYPAYMENT(this.Store.hourlypayment);
-            this.$router.push({name: "Hourlypayment"})
+            this.$router.push({ name: "Hourlypayment" })
         }
     },
 }

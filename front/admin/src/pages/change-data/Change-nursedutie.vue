@@ -1,11 +1,27 @@
 <template>
-    <div @click.prevent="back()" class="category_change_btn">Назад</div>
-    <div class="category_title">Изменение обязаность сиделки:</div>
-    <form @submit.prevent="changeNursedutie" class="category_form">
-        <div>Введите новое название обязаности сиделки:</div>
-        <input class="category_form_title" v-model="Store.nursedutie.title" type="text" required placeholder="Напишите что-нибудь">                
-        <button class="category_form_btn" type="submit">Изменить обязаность сиделки</button>
-    </form>
+    <button @click.prevent="back()" class="btn btn-block btn-info btn-sm data_btn">Назад</button>
+    <div class="card card-warning">
+        <div class="card-header">
+            <h3 class="card-title">Зміна обов'язків для доглядальниці:</h3>
+        </div>
+        <form @submit.prevent="changeNursedutie">
+            <div class="card-body">
+                <div class="form-group">
+                    <label>Введіть обов'язок для доглядальниці українською мовою:</label>
+                    <input v-model="Store.nursedutie.title.ua" type="text" class="form-control" required
+                        placeholder="обов'язок для доглядальниці українською мовою">
+                </div>
+                <div class="form-group">
+                    <label>Введіть обов'язок для доглядальниці англійською мовою:</label>
+                    <input v-model="Store.nursedutie.title.en" type="text" class="form-control" required
+                        placeholder="обов'язок для доглядальниці англійською мовою">
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-warning">Змінити обов'язок для доглядальниці</button>
+            </div>
+        </form>
+    </div>
 </template>
 
 <script>
@@ -18,11 +34,11 @@ export default {
     },
     methods: {
         back() {
-            this.$router.push({name: "Nursedutie"})
+            this.$router.push({ name: "Nursedutie" })
         },
-        changeNursedutie() {            
+        changeNursedutie() {
             this.Store.CHANGE_NURSEDUTIE(this.Store.nursedutie);
-            this.$router.push({name: "Nursedutie"})
+            this.$router.push({ name: "Nursedutie" })
         }
     },
 }

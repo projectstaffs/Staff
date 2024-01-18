@@ -1,11 +1,27 @@
 <template>
-    <div @click.prevent="back()" class="category_change_btn">Назад</div>
-    <div class="category_title">Изменение обязаность для няни:</div>
-    <form @submit.prevent="changeBabysittingdutie" class="category_form">
-        <div>Введите новую обязаность:</div>
-        <input class="category_form_title" v-model="Store.babysittingdutie.title" type="text" required placeholder="Напишите что-нибудь">                
-        <button class="category_form_btn" type="submit">Изменить обязаность</button>
-    </form>
+    <button @click.prevent="back()" class="btn btn-block btn-info btn-sm data_btn">Назад</button>
+    <div class="card card-warning">
+        <div class="card-header">
+            <h3 class="card-title">Зміна обов'язків для няні:</h3>
+        </div>
+        <form @submit.prevent="changeBabysittingdutie">
+            <div class="card-body">
+                <div class="form-group">
+                    <label>Введіть обов'язок для няні українською мовою:</label>
+                    <input v-model="Store.babysittingdutie.title.ua" type="text" class="form-control" required
+                        placeholder="обов'язок для няні українською мовою">
+                </div>
+                <div class="form-group">
+                    <label>Введіть обов'язок для няні англійською мовою:</label>
+                    <input v-model="Store.babysittingdutie.title.en" type="text" class="form-control" required
+                        placeholder="обов'язок для няні англійською мовою">
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-warning">Змінити обов'язок для няні</button>
+            </div>
+        </form>
+    </div>
 </template>
 
 <script>
@@ -15,14 +31,14 @@ export default {
     setup() {
         const Store = useDataStore();
         return { Store };
-    }, 
+    },
     methods: {
         back() {
-            this.$router.push({name: "Babysittingdutie"})
+            this.$router.push({ name: "Babysittingdutie" })
         },
-        changeBabysittingdutie() {            
+        changeBabysittingdutie() {
             this.Store.CHANGE_BABYSITTINGDUTIE(this.Store.babysittingdutie);
-            this.$router.push({name: "Babysittingdutie"})
+            this.$router.push({ name: "Babysittingdutie" })
         }
     },
 }

@@ -1,11 +1,27 @@
 <template>
-    <div @click.prevent="back()" class="category_change_btn">Назад</div>
-    <div class="category_title">Изменение периода работы:</div>
-    <form @submit.prevent="changeWorkperiod" class="category_form">
-        <div>Введите новый период работы:</div>
-        <input class="category_form_title" v-model="Store.workperiod.title" type="text" required placeholder="Напишите что-нибудь">                
-        <button class="category_form_btn" type="submit">Изменить период работы</button>
-    </form>
+    <button @click.prevent="back()" class="btn btn-block btn-info btn-sm data_btn">Назад</button>
+    <div class="card card-warning">
+        <div class="card-header">
+            <h3 class="card-title">Зміна періода роботи:</h3>
+        </div>
+        <form @submit.prevent="changeWorkperiod">
+            <div class="card-body">
+                <div class="form-group">
+                    <label>Введіть період роботи українською мовою:</label>
+                    <input v-model="Store.workperiod.title.ua" type="text" class="form-control" required
+                        placeholder="період роботи українською мовою">
+                </div>
+                <div class="form-group">
+                    <label>Введіть період роботи англійською мовою:</label>
+                    <input v-model="Store.workperiod.title.en" type="text" class="form-control" required
+                        placeholder="період роботи англійською мовою">
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-warning">Змінити період роботи</button>
+            </div>
+        </form>
+    </div>
 </template>
 
 <script>
@@ -18,11 +34,11 @@ export default {
     },
     methods: {
         back() {
-            this.$router.push({name: "Workperiod"})
+            this.$router.push({ name: "Workperiod" })
         },
-        changeWorkperiod() {            
+        changeWorkperiod() {
             this.Store.CHANGE_WORKPERIOD(this.Store.workperiod);
-            this.$router.push({name: "Workperiod"})
+            this.$router.push({ name: "Workperiod" })
         }
     },
 }

@@ -1,11 +1,27 @@
 <template>
-    <div @click.prevent="back()" class="category_change_btn">Назад</div>
-    <div class="category_title">Изменение диагноза:</div>
-    <form @submit.prevent="changeDiagnose" class="category_form">
-        <div>Введите новое название диагноза:</div>
-        <input class="category_form_title" v-model="Store.diagnose.title" type="text" required placeholder="Напишите что-нибудь">                
-        <button class="category_form_btn" type="submit">Изменить диагноз</button>
-    </form>
+    <button @click.prevent="back()" class="btn btn-block btn-info btn-sm data_btn">Назад</button>
+    <div class="card card-warning">
+        <div class="card-header">
+            <h3 class="card-title">Зміна діагнозу:</h3>
+        </div>
+        <form @submit.prevent="changeDiagnose">
+            <div class="card-body">
+                <div class="form-group">
+                    <label>Введіть діагноз українською мовою:</label>
+                    <input v-model="Store.diagnose.title.ua" type="text" class="form-control" required
+                        placeholder="діагноз українською мовою">
+                </div>
+                <div class="form-group">
+                    <label>Введіть діагноз англійською мовою:</label>
+                    <input v-model="Store.diagnose.title.en" type="text" class="form-control" required
+                        placeholder="діагноз англійською мовою">
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-warning">Змінити діагноз</button>
+            </div>
+        </form>
+    </div>
 </template>
 
 <script>
@@ -18,11 +34,11 @@ export default {
     },
     methods: {
         back() {
-            this.$router.push({name: "Diagnose"})
+            this.$router.push({ name: "Diagnose" })
         },
-        changeDiagnose() {            
+        changeDiagnose() {
             this.Store.CHANGE_DIAGNOSE(this.Store.diagnose);
-            this.$router.push({name: "Diagnose"})
+            this.$router.push({ name: "Diagnose" })
         }
     },
 }
