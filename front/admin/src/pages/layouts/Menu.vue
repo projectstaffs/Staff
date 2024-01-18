@@ -41,13 +41,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a @click.prevent="users" href="#" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Роботодавці</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a @click.prevent="usersWorker" href="#" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Шукачі роботи</p>
                                     </a>
@@ -267,6 +267,9 @@ export default {
         },
         users() {
             this.$router.push({ name: "Users" })
+        },
+        usersWorker() {
+            this.$router.push({ name: "UsersWorker" })
         },
         children() {
             this.$router.push({ name: "Children" })

@@ -15,11 +15,10 @@ export const useSocketStore = defineStore('socket', {
 
             // Реакция на сообщение с сервера
             this.socket.on('sendMessage', (data) => {
-                //toast.success('Connect to: ' + data)
                 if(data == localStorage.userID) {
-                    const Message = useMessageStore();
-                    Message.GET_COUNTMESSAGE(localStorage.userID);
-                    Message.GET_MSG_INSOCKET(localStorage.userID);
+                    //const Message = useMessageStore();
+                    //Message.GET_COUNTMESSAGE(localStorage.userID);
+                    //Message.GET_MSG_INSOCKET(localStorage.userID);
                 }
             })
         }

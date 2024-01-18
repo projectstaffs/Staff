@@ -64,9 +64,8 @@ export const useUserStore = defineStore('user', {
         },
         GET_USERS(){       
             axios.get('http://localhost/api/user/')
-                .then((res) => {
-                    //console.log(res);                              
-                    this.users = res.data;                 
+                .then((res) => {                                                 
+                    this.users = res.data.data;                 
                 })
                 .catch(error => { console.log(error); })
         },                

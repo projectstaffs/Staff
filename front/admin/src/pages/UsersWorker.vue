@@ -3,7 +3,7 @@
         <div class="card card-solid">
             <div class="card-body pb-0">
                 <div v-for="user in User.users" :key="user.id" class="row">
-                    <div v-if="user.role === 'Наниматель'"
+                    <div v-if="user.role === 'Исполнитель'"
                         class="col-12 col-sm-6 col-md-12 d-flex align-items-stretch flex-column">
                         <div class="card bg-light d-flex flex-fill">
                             <div class="card-header text-muted border-bottom-0">
@@ -49,7 +49,7 @@
 <script>
 import { useUserStore } from '../stores/user';
 export default {
-    name: "Users",
+    name: "UsersWorker",
     setup() {
         const User = useUserStore();
         return { User };

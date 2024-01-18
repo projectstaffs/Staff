@@ -22,7 +22,7 @@ class UserController extends Controller
         if(!Cache::has('users')) { Cache::put('users', User::all()); }
         $Users = Cache::get('users');
 
-        return $Users;
+        return UserResource::collection($Users);
     }
 
     /**

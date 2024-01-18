@@ -14,7 +14,13 @@ const router = createRouter({
             path: '/users',   
             meta: {layout: 'Menu'},          
             component: () =>import('../pages/Users.vue')
-        },        
+        }, 
+        {
+            name: 'UsersWorker',
+            path: '/usersworker',   
+            meta: {layout: 'Menu'},          
+            component: () =>import('../pages/UsersWorker.vue')
+        },       
         {
             name: 'Languages',
             path: '/languages',  
