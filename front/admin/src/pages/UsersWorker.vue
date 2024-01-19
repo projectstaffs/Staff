@@ -12,13 +12,28 @@
                                 <div class="row">
                                     <div class="col-7">
                                         <h2 class="lead"><b>{{ user.name.ua }} {{ user.surname.ua }}</b></h2>
-                                        <p class="text-muted text-sm"><b>Телефон: </b> {{ user.phone_number }} </p>
-                                        <p class="text-muted text-sm"><b>Електронна пошта: </b> {{ user.email }} </p>
-                                        <p class="text-muted text-sm"><b>Місто (укр.): </b> {{ user.country_title.title.ua
-                                        }}
+                                        <p class="text-muted text-sm user_fix"><b>Телефон: </b> {{ user.phone_number }} </p>
+                                        <p class="text-muted text-sm user_fix"><b>Електронна пошта: </b> {{ user.email }}
                                         </p>
-                                        <p class="text-muted text-sm"><b>Місто (англ.): </b> {{ user.country_title.title.en
-                                        }} </p>
+                                        <p class="text-muted text-sm user_fix"><b>Місто: </b>
+                                            {{ user.country_title.title.ua }}
+                                        </p>
+                                        <p class="text-muted text-sm user_fix"><b>Стать: </b>
+                                            {{ user.gender.ua }}
+                                        </p>
+                                        <p class="text-muted text-sm user_fix"><b>Вік(років): </b>
+                                            {{ user.current_age }}
+                                        </p>
+                                        <p class="text-muted text-sm user_fix"><b>Готовність працювати в будинку з домашніми
+                                                тваринами: </b>
+                                            {{ user.animal_work.ua }}
+                                        </p>
+                                        <p class="text-muted text-sm user_fix"><b>Про себе(укр.): </b>
+                                            {{ user.about.ua }}
+                                        </p>
+                                        <p class="text-muted text-sm user_fix"><b>Про себе(англ.): </b>
+                                            {{ user.about.en }}
+                                        </p>
                                     </div>
                                     <div class="col-5 text-center">
                                         <img :src="user.image" alt="user-avatar" class="img-circle img-fluid">
@@ -48,6 +63,11 @@
 import { useUserStore } from '../stores/user';
 export default {
     name: "UsersWorker",
+    data() {
+        return {
+            temp: {}
+        }
+    },
     setup() {
         const User = useUserStore();
         return { User };

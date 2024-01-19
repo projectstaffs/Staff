@@ -13,12 +13,11 @@
                                     <div class="col-7">
                                         <h2 class="lead"><b>{{ user.name.ua }} {{ user.surname.ua }}</b></h2>
                                         <p class="text-muted text-sm"><b>Телефон: </b> {{ user.phone_number }} </p>
-                                        <p class="text-muted text-sm"><b>Електронна пошта: </b> {{ user.email }} </p>
-                                        <p class="text-muted text-sm"><b>Місто (укр.): </b> {{ user.country_title.title.ua
-                                        }}
+                                        <p class="text-muted text-sm"><b>Електронна пошта: </b> {{ user.email }}
                                         </p>
-                                        <p class="text-muted text-sm"><b>Місто (англ.): </b> {{ user.country_title.title.en
-                                        }} </p>
+                                        <p class="text-muted text-sm"><b>Місто: </b>
+                                            {{ user.country_title.title.ua }}
+                                        </p>
                                     </div>
                                     <div class="col-5 text-center">
                                         <img :src="user.image" alt="user-avatar" class="img-circle img-fluid">
