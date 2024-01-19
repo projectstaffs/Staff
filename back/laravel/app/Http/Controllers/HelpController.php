@@ -74,4 +74,30 @@ class HelpController extends Controller
         } 
         return redirect('http://localhost/');              
     }
+
+    public function blockUser (Request $request)
+    {               
+        $user = User::where('id', $request->id)->first();
+        if ($user) {
+            $user->confirmed = false;
+            $user->save();
+            
+            $socket = new MySocket();
+            $socket->sendBlock($user->id);
+            Cache::put('users', User::all());            
+        }             
+    }
+    
+    public function restoreUser (Request $request)
+    {               
+        $user = User::where('id', $request->id2)->first();
+        if ($user) {
+            $user->confirmed = true;
+            $user->save();
+            
+            $socket = new MySocket();
+            $socket->sendMessage($user->id);
+            Cache::put('users', User::all());            
+        }             
+    }
 }

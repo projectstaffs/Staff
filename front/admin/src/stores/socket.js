@@ -14,13 +14,10 @@ export const useSocketStore = defineStore('socket', {
             this.isConnect = true
 
             // Реакция на сообщение с сервера
-            this.socket.on('sendMessage', (data) => {
-                if(data == localStorage.userID) {
-                    //const Message = useMessageStore();
-                    //Message.GET_COUNTMESSAGE(localStorage.userID);
-                    //Message.GET_MSG_INSOCKET(localStorage.userID);
-                }
-            })
+            //this.socket.on('sendBlock', (data) => {
+            //    if(data == localStorage.userID) {                   
+            //    }
+            //})
         }
     }
 })

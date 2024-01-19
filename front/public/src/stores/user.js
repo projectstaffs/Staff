@@ -78,6 +78,13 @@ export const useUserStore = defineStore('user', {
             localStorage.userConfirmed = 1;
             window.location.reload(true);
         },
+        BLOCK_USER_SOCKET(){                                     
+            this.user = JSON.parse(localStorage.user);
+            this.user.confirmed = 0;
+            localStorage.user = JSON.stringify(this.user);
+            localStorage.userConfirmed = 0;
+            window.location.reload(true);
+        },
         FORGOT_PASSWORD(data){ 
             if(localStorage.lang && (localStorage.lang == 'en')) {
                 data.lang = 'en'; 

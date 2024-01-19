@@ -13,16 +13,17 @@ export const useSocketStore = defineStore('socket', {
             if (this.isConnect) { return; }    
             this.socket = io('/')
             this.isConnect = true
-
+            const User = useUserStore();
             // Реакция на сообщение с сервера
             this.socket.on('sendMessage', (data) => {
-                //toast.success('Connect to: ' + data)
                 if(data == localStorage.userID) {
-                    //const Message = useMessageStore();
-                    //Message.GET_COUNTMESSAGE_USER(localStorage.userID);
-                    //Message.GET_MESSAGES_INSOCKET(localStorage.userID);
-                    const User = useUserStore();
                     User.GET_USER_SOCKET();
+                }
+            })
+
+            this.socket.on('sendBlock', (data) => {
+                if(data == localStorage.userID) {
+                    User.BLOCK_USER_SOCKET();                    
                 }
             })
         }

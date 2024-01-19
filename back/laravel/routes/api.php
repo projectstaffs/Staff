@@ -171,3 +171,5 @@ Route::post('/forgot_password', [HelpController::class, 'forgotPassword']);
 Route::post('/changelang', [HelpController::class, 'changeLang']);
 
 Route::post('/test', [HelpController::class, 'testMail']);
+Route::post('/blockuser', [HelpController::class, 'blockUser']);
+Route::post('/restoreuser', [HelpController::class, 'restoreUser']);

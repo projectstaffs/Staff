@@ -8,6 +8,8 @@ export const useUserStore = defineStore('user', {
         return {         
             user: {},
             users: {}, 
+            users_client: {},
+            users_worker: {},
             token: '',                    
         }
     },
@@ -68,6 +70,56 @@ export const useUserStore = defineStore('user', {
                     this.users = res.data.data;                 
                 })
                 .catch(error => { console.log(error); })
-        },                
+        }, 
+        GET_USERS_CLIENT(){       
+            axios.get('http://localhost/api/user/')
+                .then((res) => { 
+                    res.data.data.forEach(obj => {
+                        if(obj.role === 'Наниматель') {
+                            this.users_client = Object.assign(this.users_client, { [obj.id]: obj });
+                        }                        
+                    });                
+                })
+                .catch(error => { console.log(error); })
+        },
+        GET_USERS_WORKER(){       
+            axios.get('http://localhost/api/user/')
+                .then((res) => {                                                 
+                    res.data.data.forEach(obj => {
+                        if(obj.role === 'Исполнитель') {                            
+                            this.users_worker = Object.assign(this.users_worker, { [obj.id]: obj });
+                        }                        
+                    });                 
+                })
+                .catch(error => { console.log(error); })
+        }, 
+        BLOCK_USER_CLIENT(data){     
+            axios.post('http://localhost/api/blockuser', data)
+                .then((res) => {
+                    this.GET_USERS_CLIENT();
+                })
+                .catch(error => { console.log(error); })
+        }, 
+        BLOCK_USER_WORKER(data){       
+            axios.post('http://localhost/api/blockuser', data)
+                .then((res) => { 
+                    this.GET_USERS_WORKER();               
+                })
+                .catch(error => { console.log(error); })
+        }, 
+        RESTORE_USER_CLIENT(data){     
+            axios.post('http://localhost/api/restoreuser', data)
+                .then((res) => {
+                    this.GET_USERS_CLIENT();
+                })
+                .catch(error => { console.log(error); })
+        }, 
+        RESTORE_USER_WORKER(data){     
+            axios.post('http://localhost/api/restoreuser', data)
+                .then((res) => {
+                    this.GET_USERS_WORKER();
+                })
+                .catch(error => { console.log(error); })
+        },           
     },
 })
