@@ -88,7 +88,8 @@ class UserResource extends JsonResource
             'city_title' => $city,                           
             'image' => $image,
             'country' => $this->country,
-            'city' => $this->city                
+            'city' => $this->city,
+            'verify' => $this->email_verified_at                            
         ];        
     }
 }

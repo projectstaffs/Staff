@@ -64,6 +64,12 @@ const router = createRouter({
             component: () => import('../pages/staff/PopupMail.vue')
         },
         {
+            path: '/popupblock',
+            name: 'PopupBlock', 
+            meta: {layout: 'User'},     
+            component: () => import('../pages/staff/PopupBlock.vue')
+        },
+        {
             path: '/training',
             name: 'Training', 
             meta: {layout: 'User'},     
@@ -347,7 +353,7 @@ router.beforeEach((to, from, next) => {
     if(!localStorage.access_token){
         if(to.name === 'Forgot' || to.name === 'Login' || to.name === 'Register' || to.name === 'Register-employer' || 
             to.name === 'Home' || to.name === 'About' || to.name === 'Contacts' || to.name === 'Privacy' || to.name === 'Contract' || to.name === 'Service' || 
-            to.name === 'ServicePackages' || to.name === 'Popup' || to.name === 'PopupMail' || to.name === 'Seekers' || 
+            to.name === 'ServicePackages' || to.name === 'Popup' || to.name === 'PopupMail' || to.name === 'PopupBlock' || to.name === 'Seekers' || 
             to.name === 'Сonditions' || to.name === 'Interview' || to.name === 'Information' || to.name === 'HomeStaff' || to.name === 'BusinessStaff'){
             return next()
         } else {
@@ -357,15 +363,28 @@ router.beforeEach((to, from, next) => {
         }
     } 
      
-    if((localStorage.access_token) && ((localStorage.userConfirmed === '0') || (localStorage.userConfirmed === 'false'))) {
+    if(localStorage.access_token && (localStorage.userVerify === 'null')) {
         if(to.name === 'Forgot' || to.name === 'Login' || to.name === 'Register' || to.name === 'Register-employer' || 
             to.name === 'Home' || to.name === 'About' || to.name === 'Contacts' || to.name === 'Privacy' || to.name === 'Contract' || to.name === 'Service' || 
-            to.name === 'ServicePackages' || to.name === 'Popup' || to.name === 'PopupMail' || to.name === 'Seekers' || 
+            to.name === 'ServicePackages' || to.name === 'Popup' || to.name === 'PopupMail' || to.name === 'PopupBlock' || to.name === 'Seekers' || 
             to.name === 'Сonditions' || to.name === 'Interview' || to.name === 'Information' || to.name === 'HomeStaff' || to.name === 'BusinessStaff'){
             return next()
         } else {
             return next({
                 name: 'PopupMail'
+            })
+        }
+    } 
+    
+    if((localStorage.access_token) && ((localStorage.userConfirmed === '0') || (localStorage.userConfirmed === 'false'))) {
+        if(to.name === 'Forgot' || to.name === 'Login' || to.name === 'Register' || to.name === 'Register-employer' || 
+            to.name === 'Home' || to.name === 'About' || to.name === 'Contacts' || to.name === 'Privacy' || to.name === 'Contract' || to.name === 'Service' || 
+            to.name === 'ServicePackages' || to.name === 'Popup' || to.name === 'PopupMail' || to.name === 'PopupBlock' || to.name === 'Seekers' || 
+            to.name === 'Сonditions' || to.name === 'Interview' || to.name === 'Information' || to.name === 'HomeStaff' || to.name === 'BusinessStaff'){
+            return next()
+        } else {
+            return next({
+                name: 'PopupBlock'
             })
         }
     }

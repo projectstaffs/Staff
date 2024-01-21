@@ -2,7 +2,7 @@
     <section v-if="User.users" class="content">
         <div class="card card-solid">
             <div class="card-body pb-0">
-                <div v-for="user in User.users_client" :key="user.id" class="row">
+                <div v-for="user in displayedPosts" :key="user.id" class="row">
                     <div class="col-12 col-sm-6 col-md-12 d-flex align-items-stretch flex-column">
                         <div class="card bg-light d-flex flex-fill">
                             <div class="card-header text-muted border-bottom-0">
@@ -39,6 +39,22 @@
                     </div>
                 </div>
             </div>
+
+            <div v-if="totalPages > 1" class="card-footer">
+                <nav aria-label="Contacts Page Navigation">
+                    <ul class="pagination justify-content-center m-0">
+                        <li class="page-item">
+                            <button @click="prevPage" :disabled="User.currentCPage === 1" class="page-link"
+                                href="#">Назад</button>
+                        </li>
+                        <li class="page-item active p_fix"><a class="page-link" href="#">{{ User.currentCPage }}</a></li>
+                        <li class="page-item">
+                            <button @click="nextPage" :disabled="User.currentCPage === totalPages" class="page-link"
+                                href="#">Вперед</button>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
     </section>
 </template>
@@ -49,7 +65,8 @@ export default {
     name: "Users",
     data() {
         return {
-            temp: {}
+            temp: {},
+            itemsPerPage: 2,
         }
     },
     setup() {
@@ -64,7 +81,24 @@ export default {
         restore(id) {
             this.temp.id2 = id;
             this.User.RESTORE_USER_CLIENT(this.temp);
-        }
+        },
+        nextPage() {
+            if (this.User.currentCPage < this.totalPages) { this.User.currentCPage++; }
+        },
+        prevPage() {
+            if (this.User.currentCPage > 1) { this.User.currentCPage--; }
+        },
+    },
+    computed: {
+        displayedPosts() {
+            const keys = Object.keys(this.User.users_client);
+            const startIndex = (this.User.currentCPage - 1) * this.itemsPerPage;
+            const endIndex = startIndex + this.itemsPerPage;
+            return keys.slice(startIndex, endIndex).map(key => this.User.users_client[key]);
+        },
+        totalPages() {
+            return Math.ceil(Object.values(this.User.users_client).length / this.itemsPerPage);
+        },
     },
     mounted() {
         this.User.GET_USERS_CLIENT();

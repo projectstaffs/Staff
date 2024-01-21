@@ -65,7 +65,7 @@ class HelpController extends Controller
         
         $user = User::where('email', $email)->first();
         if ($user) {
-            $user->confirmed = true;
+            $user->email_verified_at = "2023-12-15";
             $user->save();
             
             $socket = new MySocket();
@@ -96,7 +96,7 @@ class HelpController extends Controller
             $user->save();
             
             $socket = new MySocket();
-            $socket->sendMessage($user->id);
+            $socket->sendRestore($user->id);
             Cache::put('users', User::all());            
         }             
     }

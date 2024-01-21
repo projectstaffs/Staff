@@ -130,7 +130,7 @@ export default {
             this.user.about = this.about;
             this.user.role = "Исполнитель";
             this.user.country = 5;
-            this.user.confirmed = false;
+            this.user.confirmed = true;
             this.user.phone_code = this.selectedOption.id;
 
             this.User.CREATE_USER(this.user);

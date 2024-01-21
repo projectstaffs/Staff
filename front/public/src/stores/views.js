@@ -342,8 +342,7 @@ export const useViewsStore = defineStore('views', {
                         })
                         .catch(error => { console.log(error); })
                 })
-                .catch(error => { console.log(error); })   
-                
+                .catch(error => { console.log(error); })
         },
     }
 })

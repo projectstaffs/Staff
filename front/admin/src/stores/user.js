@@ -10,7 +10,8 @@ export const useUserStore = defineStore('user', {
             users: {}, 
             users_client: {},
             users_worker: {},
-            token: '',                    
+            token: '',
+            currentCPage: 1, currentWPage: 1                 
         }
     },
     actions: {  
@@ -40,10 +41,12 @@ export const useUserStore = defineStore('user', {
                     localStorage.removeItem('user');                
                     localStorage.removeItem('user_image');
                     localStorage.removeItem('user_id');  
-                    localStorage.removeItem('userID');                  
+                    localStorage.removeItem('userID');
+                    localStorage.removeItem('userVerify');                  
                     
                     this.user = {};                   
-                    router.push({name: "Login"});                    
+                    //router.push({name: "Login"}); 
+                    window.location.href = 'http://localhost';                   
                 })
                 .catch(error => { console.log(error); })
         },

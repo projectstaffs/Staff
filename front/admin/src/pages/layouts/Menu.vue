@@ -13,10 +13,7 @@
             </ul>
 
             <ul class="navbar-nav ml-auto">
-                <li v-if="!User.token" @click.prevent="login" class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Авторизація</a>
-                </li>
-                <li v-if="User.token" @click.prevent="logout" class="nav-item d-none d-sm-inline-block">
+                <li @click.prevent="logout" class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Вихід</a>
                 </li>
             </ul>
@@ -58,25 +55,25 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-edit"></i>
                                 <p>
-                                    Анкети для роботодавців
+                                    Вакансії для шукачів роботи
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a @click.prevent="clientBaby" href="#" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Няні</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a @click.prevent="clientNurse" href="#" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Доглядальниці</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a @click.prevent="clientKeeper" href="#" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Домробітниці</p>
                                     </a>
@@ -87,25 +84,25 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-edit"></i>
                                 <p>
-                                    Анкети для шукачів роботи
+                                    Анкети робітників
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a @click.prevent="baby" href="#" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Няні</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a @click.prevent="nurse" href="#" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Доглядальниці</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a @click.prevent="keeper" href="#" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Домробітниці</p>
                                     </a>
@@ -259,9 +256,6 @@ export default {
         return { User };
     },
     methods: {
-        login() {
-            this.$router.push({ name: "Login" })
-        },
         logout() {
             this.User.LOGOUT_USER();
         },
@@ -270,6 +264,24 @@ export default {
         },
         usersWorker() {
             this.$router.push({ name: "UsersWorker" })
+        },
+        baby() {
+            this.$router.push({ name: "BabyAll" })
+        },
+        nurse() {
+            this.$router.push({ name: "NurseAll" })
+        },
+        keeper() {
+            this.$router.push({ name: "KeeperAll" })
+        },
+        clientBaby() {
+            this.$router.push({ name: "ClientBabyAll" })
+        },
+        clientNurse() {
+            this.$router.push({ name: "ClientNurseAll" })
+        },
+        clientKeeper() {
+            this.$router.push({ name: "ClientKeeperAll" })
         },
         children() {
             this.$router.push({ name: "Children" })

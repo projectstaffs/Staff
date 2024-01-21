@@ -106,7 +106,7 @@ export default {
             this.user.animal_work = this.animal_work;
             this.user.country = 5;
             this.user.role = "Наниматель";
-            this.user.confirmed = false;
+            this.user.confirmed = true;
             this.user.age = "2023-12-15";
             this.user.phone_code = this.selectedOption.id;
 

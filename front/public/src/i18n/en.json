@@ -369,7 +369,9 @@
         "button": "Home",
         "item1": "Hello",
         "item2": "Thank you for registering on our website! To complete the registration process, please confirm your email address.",
-        "item3": "To do this, follow the link we sent in an email to your email address."
+        "item3": "To do this, follow the link we sent in an email to your email address.",
+        "item4": "Your account has been blocked.",
+        "item5": "We're sorry, but your account has been banned by the site administrator. For more information, please contact the site support team."
     },
     "training": {
         "title": "Home service school",        

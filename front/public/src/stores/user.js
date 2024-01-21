@@ -60,7 +60,8 @@ export const useUserStore = defineStore('user', {
                     localStorage.removeItem('clientKeeperitem'); localStorage.removeItem('clientKeeperitemUser');
                     localStorage.removeItem('workerBabyitem'); localStorage.removeItem('workerBabyitemUser');
                     localStorage.removeItem('workerNurseitem'); localStorage.removeItem('workerNurseitemUser');
-                    localStorage.removeItem('workerKeeperitem'); localStorage.removeItem('workerKeeperitemUser');                  
+                    localStorage.removeItem('workerKeeperitem'); localStorage.removeItem('workerKeeperitemUser');
+                    localStorage.removeItem('userVerify');                   
                     
                     this.user = {}; 
                     this.token = '';                   
@@ -73,9 +74,9 @@ export const useUserStore = defineStore('user', {
         },
         GET_USER_SOCKET(){                                     
             this.user = JSON.parse(localStorage.user);
-            this.user.confirmed = 1;
+            this.user.verify = "2023-12-15";
             localStorage.user = JSON.stringify(this.user);
-            localStorage.userConfirmed = 1;
+            localStorage.userVerify = "2023-12-15";
             window.location.reload(true);
         },
         BLOCK_USER_SOCKET(){                                     
@@ -83,6 +84,13 @@ export const useUserStore = defineStore('user', {
             this.user.confirmed = 0;
             localStorage.user = JSON.stringify(this.user);
             localStorage.userConfirmed = 0;
+            window.location.reload(true);
+        },
+        RESTORE_USER_SOCKET(){                                     
+            this.user = JSON.parse(localStorage.user);
+            this.user.confirmed = 1;
+            localStorage.user = JSON.stringify(this.user);
+            localStorage.userConfirmed = 1;
             window.location.reload(true);
         },
         FORGOT_PASSWORD(data){ 
@@ -108,6 +116,7 @@ export const useUserStore = defineStore('user', {
                     localStorage.user_image = res.data[1].original.image;
                     localStorage.userConfirmed = res.data[1].original.confirmed;
                     localStorage.userID = res.data[1].original.id;
+                    localStorage.userVerify = res.data[1].original.verify;
 
                     this.token = res.data[0].original.access_token;
                     this.user = res.data[1].original;                    
@@ -153,6 +162,7 @@ export const useUserStore = defineStore('user', {
                     localStorage.user = JSON.stringify(res.data.user);
                     localStorage.userID = res.data.user.id;
                     localStorage.userConfirmed = res.data.user.confirmed;
+                    localStorage.userVerify = res.data.user.verify;
 
                     this.token = res.data.access_token;
                     this.user = res.data.user;                    

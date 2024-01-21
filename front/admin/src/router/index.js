@@ -3,15 +3,51 @@ import { createRouter, createWebHistory } from 'vue-router'
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [   
-        {
+        /*{
             name: 'Login',
             path: '/', 
             meta: {layout: 'User'},           
             component: () =>import('../pages/Login.vue')                       
+        },*/
+        {
+            name: 'ClientBabyAll',
+            path: '/c_baby',
+            meta: {layout: 'Menu'},            
+            component: () =>import('../pages/views/client/ClientBabyAll.vue')
+        },
+        {
+            name: 'ClientNurseAll',
+            path: '/c_nurse',
+            meta: {layout: 'Menu'},            
+            component: () =>import('../pages/views/client/ClientNurseAll.vue')
+        },
+        {
+            name: 'ClientKeeperAll',
+            path: '/c_keeper',
+            meta: {layout: 'Menu'},            
+            component: () =>import('../pages/views/client/ClientKeeperAll.vue')
+        },
+        {
+            name: 'BabyAll',
+            path: '/w_baby',
+            meta: {layout: 'Menu'},            
+            component: () =>import('../pages/views/worker/BabyAll.vue')
+        },
+        {
+            name: 'NurseAll',
+            path: '/w_nurse',
+            meta: {layout: 'Menu'},            
+            component: () =>import('../pages/views/worker/NurseAll.vue')
+        },
+        {
+            name: 'KeeperAll',
+            path: '/w_keeper',
+            meta: {layout: 'Menu'},            
+            component: () =>import('../pages/views/worker/KeeperAll.vue')
         },            
         {
             name: 'Users',
-            path: '/users',   
+            path: '/',   
             meta: {layout: 'Menu'},          
             component: () =>import('../pages/Users.vue')
         }, 
@@ -237,21 +273,13 @@ const router = createRouter({
 router.beforeEach((to, from, next) => { 
        
     if(!localStorage.access_token) {
-        if(to.name === 'Login'){
-            return next()
-        } else { return next({ name: 'Login' }) }
+        window.location.href = 'http://localhost';
     } else {
         let userInfo = JSON.parse(localStorage.user);
-        if(userInfo.role !== 'Администратор') {
-            if(to.name === 'Login'){
-                return next()
-            } else { return next({ name: 'Login' }) }
-        } else {
-            if(to.name === 'Login'){
-                return next({ name: 'Users' })
-            } else {
-                next();
-            }
+        if(userInfo.role !== 'Администратор') {            
+            window.location.href = 'http://localhost';
+        } else {            
+            next();            
         }
     }
 });

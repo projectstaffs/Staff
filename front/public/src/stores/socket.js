@@ -26,6 +26,12 @@ export const useSocketStore = defineStore('socket', {
                     User.BLOCK_USER_SOCKET();                    
                 }
             })
+
+            this.socket.on('sendRestore', (data) => {
+                if(data == localStorage.userID) {
+                    User.RESTORE_USER_SOCKET();                    
+                }
+            })
         }
     }
 })

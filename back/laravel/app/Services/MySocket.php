@@ -25,4 +25,9 @@ class MySocket
     {
         $this->emitter->emit('sendBlock', $user_id);
     }
+
+    function sendRestore($user_id)
+    {
+        $this->emitter->emit('sendRestore', $user_id);
+    }
 }
