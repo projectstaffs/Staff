@@ -48,7 +48,7 @@ export const useViewsStore = defineStore('views', {
         ADD_CLIENTBABY(data){   
             api.post('api/auth/w_c_baby', data)
                 .then(res => {                                    
-                    console.log(res.data);
+                    //console.log(res.data);
                 })
                 .catch(error => { console.log(error); })
         },
@@ -103,7 +103,7 @@ export const useViewsStore = defineStore('views', {
         ADD_CLIENTNURSE(data){   
             api.post('api/auth/w_c_nurse', data)
                 .then(res => {                                    
-                    console.log(res.data);
+                    //console.log(res.data);
                 })
                 .catch(error => { console.log(error); })
         },
@@ -158,7 +158,7 @@ export const useViewsStore = defineStore('views', {
         ADD_CLIENTKEEPER(data){   
             api.post('api/auth/w_c_keeper', data)
                 .then(res => {                                    
-                    console.log(res.data);
+                    //console.log(res.data);
                 })
                 .catch(error => { console.log(error); })
         },
@@ -213,7 +213,7 @@ export const useViewsStore = defineStore('views', {
         ADD_WORKERBABY(data){   
             api.post('api/auth/w_w_baby', data)
                 .then(res => {                                    
-                    console.log(res.data);
+                    //console.log(res.data);
                 })
                 .catch(error => { console.log(error); })
         },
@@ -267,7 +267,7 @@ export const useViewsStore = defineStore('views', {
         ADD_WORKERNURSE(data){   
             api.post('api/auth/w_w_nurse', data)
                 .then(res => {                                    
-                    console.log(res.data);
+                    //console.log(res.data);
                 })
                 .catch(error => { console.log(error); })
         },
@@ -322,7 +322,7 @@ export const useViewsStore = defineStore('views', {
         ADD_WORKERKEEPER(data){   
             api.post('api/auth/w_w_keeper', data)
                 .then(res => {                                    
-                    console.log(res.data);
+                    //console.log(res.data);
                 })
                 .catch(error => { console.log(error); })
         },
