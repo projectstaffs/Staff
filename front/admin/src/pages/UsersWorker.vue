@@ -16,7 +16,7 @@
                                         <p class="text-muted text-sm user_fix"><b>Електронна пошта: </b> {{ user.email }}
                                         </p>
                                         <p class="text-muted text-sm user_fix"><b>Місто: </b>
-                                            {{ user.country_title.title.ua }}
+                                            {{ user.city_title.title.ua }}
                                         </p>
                                         <p class="text-muted text-sm user_fix"><b>Стать: </b>
                                             {{ user.gender.ua }}

@@ -16,7 +16,7 @@
                                         <p class="text-muted text-sm"><b>Електронна пошта: </b> {{ user.email }}
                                         </p>
                                         <p class="text-muted text-sm"><b>Місто: </b>
-                                            {{ user.country_title.title.ua }}
+                                            {{ user.city_title.title.ua }}
                                         </p>
                                     </div>
                                     <div class="col-5 text-center">

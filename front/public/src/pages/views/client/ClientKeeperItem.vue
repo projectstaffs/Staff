@@ -39,7 +39,8 @@
                     <div class="anketa_item">{{ $t('baby_anketa.item16') }}</div>
                     <span v-if="Views.clientKeeperitem.Duties" class="anketa_text"
                         v-for="(item, index) in Views.clientKeeperitem.Duties" :key="index">
-                        {{ item.title[locale] }}{{ index < Views.clientKeeperitem.Duties.length - 1 ? ', ' : '' }} </span>
+                        {{ item.title.title[locale] }}{{ index < Views.clientKeeperitem.Duties.length - 1 ? ', ' : '' }}
+                            </span>
                 </div>
 
                 <div class="view_fixmargin">

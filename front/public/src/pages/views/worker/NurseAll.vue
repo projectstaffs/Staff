@@ -29,7 +29,8 @@
                                     {{ post.User.city_title.title[locale] }}
                                 </div>
                                 <span v-for="(item, index) in post.Typeworks" :key="index" class="anketa_text">
-                                    {{ item.title[locale] }}{{ index < post.Typeworks.length - 1 ? ', ' : '' }} </span>
+                                    {{ item.title.title[locale] }}{{ index < post.Typeworks.length - 1 ? ', ' : '' }}
+                                        </span>
                             </div>
                             <div class="btn" @click.prevent="showItem(post)">
                                 <svg class="view_arrow" width="24" height="24" viewBox="0 0 24 24" fill="none"

@@ -37,7 +37,7 @@
                     <div class="anketa_item">{{ $t('baby_anketa.item3') }}</div>
                     <span v-if="Views.workerNurseitem.Typeworks" v-for="(item, index) in Views.workerNurseitem.Typeworks"
                         :key="index" class="anketa_text">
-                        {{ item.title[locale] }}
+                        {{ item.title.title[locale] }}
                         {{ index < Views.workerNurseitem.Typeworks.length - 1 ? ', ' : '' }} </span>
                             <div class="anketa_item anketa_fix">{{ $t('baby_anketa.item8') }}</div>
                             <div v-if="Views.workerNurseitem.experience" class="anketa_text"> {{
@@ -46,7 +46,7 @@
                             <div class="anketa_item">{{ $t('baby_anketa.n_item18') }}</div>
                             <span v-if="Views.workerNurseitem.Diagnoses"
                                 v-for="(item, index) in Views.workerNurseitem.Diagnoses" :key="index" class="anketa_text">
-                                {{ item.title[locale] }}{{
+                                {{ item.title.title[locale] }}{{
                                     index < Views.workerNurseitem.Diagnoses.length - 1 ? ', ' : '' }} </span>
                                     <div class="anketa_item anketa_fix">{{ $t('baby_anketa.item10') }}</div>
                                     <span v-if="Views.workerNurseitem.Educations" class="anketa_text"
@@ -64,8 +64,8 @@
                                             <div class="anketa_item">{{ $t('baby_anketa.item16') }}</div>
                                             <span v-if="Views.workerNurseitem.Duties" class="anketa_text"
                                                 v-for="(item, index) in Views.workerNurseitem.Duties" :key="index">
-                                                {{ item.title[locale] }}{{ index < Views.workerNurseitem.Duties.length - 1
-                                                    ? ', ' : '' }}</span>
+                                                {{ item.title.title[locale] }}{{ index < Views.workerNurseitem.Duties.length
+                                                    - 1 ? ', ' : '' }}</span>
                 </div>
 
                 <div class="view_fixmargin">
