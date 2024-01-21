@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\User\UserBlockController;
+use App\Http\Controllers\User\UserRestoreController;
 
 use App\Http\Controllers\Data\LanguageController;
 use App\Http\Controllers\Data\AgeGroupController;
@@ -159,6 +161,23 @@ function ($router) {
 
         Route::resource('/clientkeeperdutie', ClientKeeperDutieController::class);
         Route::resource('/clientkeeper', ClientKeeperController::class);
+
+        Route::post('/blockuser', [HelpController::class, 'blockUser']);
+        Route::post('/restoreuser', [HelpController::class, 'restoreUser']);
+
+        Route::post('/blockbaby', [UserBlockController::class, 'blockBaby']);
+        Route::post('/blocknurse', [UserBlockController::class, 'blockNurse']);
+        Route::post('/blockkeeper', [UserBlockController::class, 'blockKeeper']);
+        Route::post('/blockclientbaby', [UserBlockController::class, 'blockClientBaby']);
+        Route::post('/blockclientnurse', [UserBlockController::class, 'blockClientNurse']);
+        Route::post('/blockclientkeeper', [UserBlockController::class, 'blockClientKeeper']);
+
+        Route::post('/restorebaby', [UserRestoreController::class, 'restoreBaby']);
+        Route::post('/restorenurse', [UserRestoreController::class, 'restoreNurse']);
+        Route::post('/restorekeeper', [UserRestoreController::class, 'restoreKeeper']);
+        Route::post('/restoreclientbaby', [UserRestoreController::class, 'restoreClientBaby']);
+        Route::post('/restoreclientnurse', [UserRestoreController::class, 'restoreClientNurse']);
+        Route::post('/restoreclientkeeper', [UserRestoreController::class, 'restoreClientKeeper']);
     });    
 });
 
@@ -171,5 +190,3 @@ Route::post('/forgot_password', [HelpController::class, 'forgotPassword']);
 Route::post('/changelang', [HelpController::class, 'changeLang']);
 
 Route::post('/test', [HelpController::class, 'testMail']);
-Route::post('/blockuser', [HelpController::class, 'blockUser']);
-Route::post('/restoreuser', [HelpController::class, 'restoreUser']);

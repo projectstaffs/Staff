@@ -136,6 +136,7 @@ export default {
     methods: {
         block(id) {
             this.temp.id = id;
+            this.Views.BLOCK_BABY(this.temp);
         },
         restore(id) {
             this.temp.id2 = id;

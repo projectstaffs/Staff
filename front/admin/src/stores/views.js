@@ -47,6 +47,13 @@ export const useViewsStore = defineStore('views', {
                     this.workerBaby = res.data.data;
                 })
                 .catch(error => { console.log(error); })
+        },
+        BLOCK_BABY(data){   
+            api.post('http://localhost/api/auth/blockbaby', data)
+                .then(res => {
+                    this.GET_WORKERBABY();
+                })
+                .catch(error => { console.log(error); })
         },        
 
         GET_WORKERNURSE(){   

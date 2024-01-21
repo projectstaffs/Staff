@@ -104,7 +104,7 @@ export default {
             } else {
                 this.errors = null;
                 this.anketa.user_id = localStorage.userID;
-                this.anketa.confirmed = true;
+                this.anketa.confirmed = false;
                 this.anketa.nurse_exp = this.nurse_exp;
 
                 //console.log(this.anketa);

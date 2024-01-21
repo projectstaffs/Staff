@@ -118,7 +118,7 @@ export default {
             } else {
                 this.errors = null;
                 this.anketa.user_id = localStorage.userID;
-                this.anketa.confirmed = true;
+                this.anketa.confirmed = false;
                 this.anketa.baby_exp = this.baby_exp;
                 //console.log(this.anketa);
                 this.Baby.CREATE_BABY([this.anketa, this.anketalanguages, this.anketaeducations, this.anketatypeworks, this.anketaduties, this.anketaagegroups]);

@@ -88,7 +88,7 @@ export default {
             } else {
                 this.errors = null;
                 this.anketa.user_id = localStorage.userID;
-                this.anketa.confirmed = true;
+                this.anketa.confirmed = false;
                 this.anketa.keeper_exp = this.keeper_exp;
                 this.Keeper.CREATE_KEEPER([this.anketa, this.anketarpreferences, this.anketaduties, this.anketatypeworks]);
             }

@@ -184,8 +184,14 @@ export const useViewsStore = defineStore('views', {
 
         GET_WORKERBABY(){   
             api.get('api/auth/w_baby')
-                .then(res => {                                    
-                    this.workerBaby = res.data.data;
+                .then(res => {
+                    let result = [];
+                    res.data.data.forEach((item) => {
+                        if(item.confirmed === 1) {
+                            result.push(item);
+                        }
+                    });
+                    this.workerBaby = result;
                 })
                 .catch(error => { console.log(error); })
         },
