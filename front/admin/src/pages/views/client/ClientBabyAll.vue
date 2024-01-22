@@ -84,7 +84,7 @@ export default {
     name: 'ClientBabyAll',
     data() {
         return {
-            itemsPerPage: 2,
+            itemsPerPage: 5,
             pageValue: "currentCBPage",
             temp: {}
         }

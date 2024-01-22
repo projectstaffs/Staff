@@ -65,7 +65,7 @@ export default {
     name: 'KeeperAll',
     data() {
         return {
-            itemsPerPage: 2, // Количество постов на странице
+            itemsPerPage: 5, // Количество постов на странице
             searchData: {},
             pageValue: "currentWKPage"
         }

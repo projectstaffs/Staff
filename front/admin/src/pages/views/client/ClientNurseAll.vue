@@ -75,7 +75,7 @@ export default {
     name: 'ClientNurseAll',
     data() {
         return {
-            itemsPerPage: 2,
+            itemsPerPage: 5,
             pageValue: "currentCNPage",
             temp: {}
         }

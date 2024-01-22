@@ -75,7 +75,7 @@ export default {
     name: 'ClientKeeperAll',
     data() {
         return {
-            itemsPerPage: 2,
+            itemsPerPage: 5,
             pageValue: "currentCKPage",
             temp: {}
         }

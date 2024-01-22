@@ -66,7 +66,7 @@ export default {
     data() {
         return {
             searchData: {},
-            itemsPerPage: 2, // Количество постов на странице
+            itemsPerPage: 5, // Количество постов на странице
             pageValue: "currentWBPage"
         }
     },

@@ -104,7 +104,7 @@ export default {
     name: 'KeeperAll',
     data() {
         return {
-            itemsPerPage: 2,
+            itemsPerPage: 5,
             pageValue: "currentWKPage",
             temp: {}
         }
