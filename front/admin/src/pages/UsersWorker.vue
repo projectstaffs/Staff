@@ -82,7 +82,7 @@ export default {
     data() {
         return {
             temp: {},
-            itemsPerPage: 2,
+            itemsPerPage: 5,
         }
     },
     setup() {
