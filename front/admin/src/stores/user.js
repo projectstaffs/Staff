@@ -97,28 +97,28 @@ export const useUserStore = defineStore('user', {
                 .catch(error => { console.log(error); })
         }, 
         BLOCK_USER_CLIENT(data){     
-            axios.post('http://localhost/api/blockuser', data)
+            api.post('http://localhost/api/auth/blockuser', data)
                 .then((res) => {
                     this.GET_USERS_CLIENT();
                 })
                 .catch(error => { console.log(error); })
         }, 
         BLOCK_USER_WORKER(data){       
-            axios.post('http://localhost/api/blockuser', data)
+            api.post('http://localhost/api/auth/blockuser', data)
                 .then((res) => { 
                     this.GET_USERS_WORKER();               
                 })
                 .catch(error => { console.log(error); })
         }, 
         RESTORE_USER_CLIENT(data){     
-            axios.post('http://localhost/api/restoreuser', data)
+            api.post('http://localhost/api/auth/restoreuser', data)
                 .then((res) => {
                     this.GET_USERS_CLIENT();
                 })
                 .catch(error => { console.log(error); })
         }, 
         RESTORE_USER_WORKER(data){     
-            axios.post('http://localhost/api/restoreuser', data)
+            api.post('http://localhost/api/auth/restoreuser', data)
                 .then((res) => {
                     this.GET_USERS_WORKER();
                 })
