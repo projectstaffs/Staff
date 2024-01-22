@@ -105,7 +105,8 @@ export default {
     data() {
         return {
             itemsPerPage: 2,
-            pageValue: "currentWKPage"
+            pageValue: "currentWKPage",
+            temp: {}
         }
     },
     components: { Pagination },
@@ -117,9 +118,11 @@ export default {
     methods: {
         block(id) {
             this.temp.id = id;
+            this.Views.BLOCK_KEEPER(this.temp);
         },
         restore(id) {
             this.temp.id2 = id;
+            this.Views.RESTORE_KEEPER(this.temp);
         },
     },
     computed: {

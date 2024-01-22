@@ -140,6 +140,7 @@ export default {
         },
         restore(id) {
             this.temp.id2 = id;
+            this.Views.RESTORE_BABY(this.temp);
         },
     },
     computed: {

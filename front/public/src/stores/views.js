@@ -20,7 +20,13 @@ export const useViewsStore = defineStore('views', {
         GET_CLIENTBABY(){   
             api.get('api/auth/c_baby')
                 .then(res => {
-                    this.clientBaby = res.data.data;
+                    let result = [];
+                    res.data.data.forEach((item) => {
+                        if(item.confirmed === 1) {
+                            result.push(item);
+                        }
+                    });
+                    this.clientBaby = result;
                 })
                 .catch(error => { console.log(error); })
         },
@@ -74,8 +80,14 @@ export const useViewsStore = defineStore('views', {
 
         GET_CLIENTNURSE(){   
             api.get('api/auth/c_nurse')
-                .then(res => {                                    
-                    this.clientNurse = res.data.data;
+                .then(res => { 
+                    let result = [];
+                    res.data.data.forEach((item) => {
+                        if(item.confirmed === 1) {
+                            result.push(item);
+                        }
+                    });                                   
+                    this.clientNurse = result;
                 })
                 .catch(error => { console.log(error); })
         },
@@ -129,8 +141,14 @@ export const useViewsStore = defineStore('views', {
         
         GET_CLIENTKEEPER(){   
             api.get('api/auth/c_keeper')
-                .then(res => {                                    
-                    this.clientKeeper = res.data.data;
+                .then(res => {   
+                    let result = [];
+                    res.data.data.forEach((item) => {
+                        if(item.confirmed === 1) {
+                            result.push(item);
+                        }
+                    });                                 
+                    this.clientKeeper = result;
                 })
                 .catch(error => { console.log(error); })
         },
@@ -244,8 +262,14 @@ export const useViewsStore = defineStore('views', {
 
         GET_WORKERNURSE(){   
             api.get('api/auth/w_nurse')
-                .then(res => {                                    
-                    this.workerNurse = res.data.data;
+                .then(res => {  
+                    let result = [];
+                    res.data.data.forEach((item) => {
+                        if(item.confirmed === 1) {
+                            result.push(item);
+                        }
+                    });                                  
+                    this.workerNurse = result;
                 })
                 .catch(error => { console.log(error); })
         },
@@ -299,8 +323,14 @@ export const useViewsStore = defineStore('views', {
 
         GET_WORKERKEEPER(){   
             api.get('api/auth/w_keeper')
-                .then(res => {                                    
-                    this.workerKeeper = res.data.data;
+                .then(res => {            
+                    let result = [];
+                    res.data.data.forEach((item) => {
+                        if(item.confirmed === 1) {
+                            result.push(item);
+                        }
+                    });                        
+                    this.workerKeeper = result;
                 })
                 .catch(error => { console.log(error); })
         },

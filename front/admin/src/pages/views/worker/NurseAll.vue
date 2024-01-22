@@ -113,7 +113,8 @@ export default {
     data() {
         return {
             itemsPerPage: 2,
-            pageValue: "currentWNPage"
+            pageValue: "currentWNPage",
+            temp: {}
         }
     },
     components: { Pagination },
@@ -125,9 +126,11 @@ export default {
     methods: {
         block(id) {
             this.temp.id = id;
+            this.Views.BLOCK_NURSE(this.temp);
         },
         restore(id) {
             this.temp.id2 = id;
+            this.Views.RESTORE_NURSE(this.temp);
         },
     },
     computed: {

@@ -86,6 +86,7 @@ export default {
         return {
             itemsPerPage: 2,
             pageValue: "currentCBPage",
+            temp: {}
         }
     },
     components: { Pagination, },
@@ -97,9 +98,11 @@ export default {
     methods: {
         block(id) {
             this.temp.id = id;
+            this.Views.BLOCK_CLIENTBABY(this.temp);
         },
         restore(id) {
             this.temp.id2 = id;
+            this.Views.RESTORE_CLIENTBABY(this.temp);
         },
     },
     computed: {

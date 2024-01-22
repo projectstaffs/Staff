@@ -77,6 +77,7 @@ export default {
         return {
             itemsPerPage: 2,
             pageValue: "currentCNPage",
+            temp: {}
         }
     },
     components: { Pagination, },
@@ -89,9 +90,11 @@ export default {
     methods: {
         block(id) {
             this.temp.id = id;
+            this.Views.BLOCK_CLIENTNURSE(this.temp);
         },
         restore(id) {
             this.temp.id2 = id;
+            this.Views.RESTORE_CLIENTNURSE(this.temp);
         },
     },
     computed: {

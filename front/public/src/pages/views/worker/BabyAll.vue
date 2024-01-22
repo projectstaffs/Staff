@@ -15,7 +15,7 @@
                 </div>
 
                 <div v-for="post in displayedPosts" :key="post.id">
-                    <div v-if="post.confirmed === 1" class="view">
+                    <div class="view">
                         <div class="view_content">
                             <div class="view_inner">
                                 <div class="edit_title">
