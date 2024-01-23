@@ -49,7 +49,7 @@
 
         <Errors :errors="errors" :formErrors="Keeper.errors" />
 
-        <button type="submit" class="btn">Изменить анкету</button>
+        <button type="submit" class="btn">{{ $t('cabinet.edit_btn') }}</button>
     </form>
 </template>
 

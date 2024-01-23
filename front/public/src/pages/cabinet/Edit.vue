@@ -153,6 +153,10 @@ export default {
     min-height: 1150px;
 }
 
+.edit_fix .login_end {
+    margin-top: 15px;
+}
+
 @media (max-width: 992px) {
     .edit_fix {
         width: auto;

@@ -19,14 +19,14 @@
         <div v-if="User.user.animal_work" class="anketa_text">{{ User.user.animal_work[locale] }}</div>
         <div class="anketa_item  anketa_fix">{{ $t('baby_anketa.item3') }}</div>
         <span v-if="Nurse.nurse" v-for="(item, index) in Nurse.nurse.Typeworks" :key="index" class="anketa_text">
-            {{ item.title[locale] }}{{
+            {{ item.title.title[locale] }}{{
                 index < Nurse.nurse.Typeworks.length - 1 ? ', ' : '' }} </span>
                 <div class="anketa_item anketa_fix">{{ $t('baby_anketa.item8') }}</div>
                 <div v-if="Nurse.nurse" class="anketa_text"> {{ Nurse.nurse.experience.title[locale] }}</div>
 
                 <div class="anketa_item">{{ $t('baby_anketa.n_item18') }}</div>
                 <span v-if="Nurse.nurse" v-for="(item, index) in Nurse.nurse.Diagnoses" :key="index" class="anketa_text">
-                    {{ item.title[locale] }}{{
+                    {{ item.title.title[locale] }}{{
                         index < Nurse.nurse.Diagnoses.length - 1 ? ', ' : '' }} </span>
 
                         <div class="anketa_item anketa_fix">{{ $t('baby_anketa.item10') }}</div>
@@ -44,7 +44,8 @@
                                 <div class="anketa_item">{{ $t('baby_anketa.item16') }}</div>
                                 <span v-if="Nurse.nurse" class="anketa_text" v-for="(item, index) in Nurse.nurse.Duties"
                                     :key="index"> {{
-                                        item.title[locale] }}{{ index < Nurse.nurse.Duties.length - 1 ? ', ' : '' }} </span>
+                                        item.title.title[locale] }}{{ index < Nurse.nurse.Duties.length - 1 ? ', ' : '' }}
+                                        </span>
     </div>
     <div class="personal_btns">
         <span class="btn" @click.prevent="change_nurse()">{{ $t('baby_anketa.btn_1') }}</span>

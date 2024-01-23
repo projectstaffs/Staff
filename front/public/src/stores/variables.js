@@ -52,9 +52,6 @@ export const useDataStore = defineStore('variables', {
             api.get('http://localhost/api/auth/diagnose')
                 .then(res => {                    
                     this.diagnoses = res.data;
-                    this.diagnoses.forEach((element) => {                               
-                        element.title = JSON.parse(element.title);                                                               
-                    })
                 })
                 .catch(error => { console.log(error); })
         },

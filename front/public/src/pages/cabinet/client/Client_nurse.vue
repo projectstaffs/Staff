@@ -21,7 +21,7 @@
         </div>
         <div class="anketa_item">{{ $t('baby_anketa.item16') }}</div>
         <span v-if="Nurse.nurse" class="anketa_text" v-for="(item, index) in Nurse.nurse.Duties" :key="index"> {{
-            item.title[locale] }}{{ index < Nurse.nurse.Duties.length - 1 ? ', ' : '' }} </span>
+            item.title.title[locale] }}{{ index < Nurse.nurse.Duties.length - 1 ? ', ' : '' }} </span>
     </div>
 
     <div class="personal_btns">

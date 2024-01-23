@@ -17,9 +17,6 @@
                             </div>
                             <div class="anketa_item anketa_fix">{{ $t('baby_anketa.item4') }}</div>
                             <div class="anketa_text">{{ Views.clientNurseitemUser.phone_number }}</div>
-                            <div class="anketa_item">{{ $t('c_baby.item3') }}</div>
-                            <div class="anketa_text" v-if="Views.clientNurseitem.title_about">
-                                {{ Views.clientNurseitem.title_about[locale] }}</div>
                         </div>
                         <div class="cabinet_box">
                             <img v-if="Views.clientNurseitemUser.image" class="cabinet_img"
@@ -27,6 +24,10 @@
                             <div v-else class="cabinet_noimg">{{ $t('cabinet.no_img') }}</div>
                         </div>
                     </div>
+
+                    <div class="anketa_item">{{ $t('c_baby.item3') }}</div>
+                    <div class="anketa_text" v-if="Views.clientNurseitem.title_about">
+                        {{ Views.clientNurseitem.title_about[locale] }}</div>
                     <div class="anketa_item">{{ $t('baby_anketa.item13') }}</div>
                     <div v-if="Views.clientNurseitem.monthpay" class="anketa_text">
                         {{ Views.clientNurseitem.monthpay.title[locale] }}

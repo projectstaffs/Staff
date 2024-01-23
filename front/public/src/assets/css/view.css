@@ -1,5 +1,5 @@
 .view {
-    height: 311px;
+    min-height: 311px;
     display: flex;
     justify-content: space-between;
     padding-top: 40px;
@@ -84,16 +84,16 @@
     .view_fixmargin {
         margin-top: 25px;
     }
+
+    .view_inner {
+        padding-right: 5px;
+    }
 }
 
 @media (max-width: 767px) {
     .view_content {
         width: 48%;
-    }
-
-    .view_inner {
-        padding-right: 5px;
-    }
+    }    
 
     .view_top {
         margin-bottom: 10px;

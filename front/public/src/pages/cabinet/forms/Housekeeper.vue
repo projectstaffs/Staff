@@ -19,7 +19,7 @@
         <div v-if="User.user.animal_work" class="anketa_text">{{ User.user.animal_work[locale] }}</div>
         <div class="anketa_item  anketa_fix">{{ $t('baby_anketa.item3') }}</div>
         <span v-if="Keeper.keeper" v-for="(item, index) in Keeper.keeper.Typeworks" :key="index" class="anketa_text">
-            {{ item.title[locale] }}{{
+            {{ item.title.title[locale] }}{{
                 index < Keeper.keeper.Typeworks.length - 1 ? ', ' : '' }} </span>
                 <div class="anketa_item anketa_fix">{{ $t('baby_anketa.item8') }}</div>
                 <div v-if="Keeper.keeper" class="anketa_text"> {{ Keeper.keeper.experience.title[locale] }}</div>
@@ -38,7 +38,7 @@
                         <div class="anketa_item">{{ $t('baby_anketa.item16') }}</div>
                         <span v-if="Keeper.keeper" class="anketa_text" v-for="(item, index) in Keeper.keeper.Duties"
                             :key="index"> {{
-                                item.title[locale] }}{{ index < Keeper.keeper.Duties.length - 1 ? ', ' : '' }} </span>
+                                item.title.title[locale] }}{{ index < Keeper.keeper.Duties.length - 1 ? ', ' : '' }} </span>
     </div>
     <div class="personal_btns">
         <span class="btn" @click.prevent="change_keeper()">{{ $t('baby_anketa.btn_1') }}</span>

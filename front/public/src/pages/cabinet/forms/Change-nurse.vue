@@ -56,7 +56,7 @@
 
         <Errors :errors="errors" :formErrors="Nurse.errors" />
 
-        <button type="submit" class="btn">{{ $t('baby_anketa.btn_1') }}</button>
+        <button type="submit" class="btn">{{ $t('cabinet.edit_btn') }}</button>
     </form>
 </template>
 

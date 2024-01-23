@@ -21,7 +21,7 @@
         </div>
         <div class="anketa_item">{{ $t('baby_anketa.item16') }}</div>
         <span v-if="Keeper.keeper" class="anketa_text" v-for="(item, index) in Keeper.keeper.Duties" :key="index"> {{
-            item.title[locale] }}{{ index < Keeper.keeper.Duties.length - 1 ? ', ' : '' }} </span>
+            item.title.title[locale] }}{{ index < Keeper.keeper.Duties.length - 1 ? ', ' : '' }} </span>
     </div>
 
     <div class="personal_btns">

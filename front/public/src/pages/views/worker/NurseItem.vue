@@ -18,18 +18,19 @@
                             </div>
                             <div class="anketa_item anketa_fix">{{ $t('baby_anketa.item4') }}</div>
                             <div class="anketa_text">{{ Views.workerNurseitemUser.phone_number }}</div>
-                            <div class="anketa_item">{{ $t('baby_anketa.item5') }}</div>
-                            <div class="anketa_text">
-                                <p v-if="Views.workerNurseitemUser.about">{{ Views.workerNurseitemUser.about[locale] }}
-                                </p>
-                                <p v-if="Views.workerNurseitem.nurse_exp">{{ Views.workerNurseitem.nurse_exp[locale] }}</p>
-                            </div>
                         </div>
                         <div class="cabinet_box">
                             <img v-if="Views.workerNurseitemUser.image" class="cabinet_img"
                                 :src="Views.workerNurseitemUser.image" alt="">
                             <div v-else class="cabinet_noimg">{{ $t('cabinet.no_img') }}</div>
                         </div>
+                    </div>
+
+                    <div class="anketa_item">{{ $t('baby_anketa.item5') }}</div>
+                    <div class="anketa_text">
+                        <p v-if="Views.workerNurseitemUser.about">{{ Views.workerNurseitemUser.about[locale] }}
+                        </p>
+                        <p v-if="Views.workerNurseitem.nurse_exp">{{ Views.workerNurseitem.nurse_exp[locale] }}</p>
                     </div>
                     <div class="anketa_item"> {{ $t('baby_anketa.item6') }} </div>
                     <div v-if="Views.workerNurseitemUser.animal_work" class="anketa_text">{{

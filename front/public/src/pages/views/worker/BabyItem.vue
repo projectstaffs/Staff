@@ -18,11 +18,6 @@
                             </div>
                             <div class="anketa_item anketa_fix">{{ $t('baby_anketa.item4') }}</div>
                             <div class="anketa_text">{{ Views.workerBabyitemUser.phone_number }}</div>
-                            <div class="anketa_item">{{ $t('baby_anketa.item5') }}</div>
-                            <div class="anketa_text">
-                                <p v-if="Views.workerBabyitemUser.about">{{ Views.workerBabyitemUser.about[locale] }}</p>
-                                <p v-if="Views.workerBabyitem.baby_exp">{{ Views.workerBabyitem.baby_exp[locale] }}</p>
-                            </div>
                         </div>
                         <div class="cabinet_box">
                             <img v-if="Views.workerBabyitemUser.image" class="cabinet_img"
@@ -31,6 +26,11 @@
                         </div>
                     </div>
 
+                    <div class="anketa_item">{{ $t('baby_anketa.item5') }}</div>
+                    <div class="anketa_text">
+                        <p v-if="Views.workerBabyitemUser.about">{{ Views.workerBabyitemUser.about[locale] }}</p>
+                        <p v-if="Views.workerBabyitem.baby_exp">{{ Views.workerBabyitem.baby_exp[locale] }}</p>
+                    </div>
                     <div class="anketa_item"> {{ $t('baby_anketa.item6') }} </div>
                     <div v-if="Views.workerBabyitemUser.animal_work" class="anketa_text">{{
                         Views.workerBabyitemUser.animal_work[locale] }}</div>
