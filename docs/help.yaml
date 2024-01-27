@@ -81,9 +81,7 @@ paths:
           description: Successful response
           content:
             application/json:
-              example: "Пароль успешно изменен."
-        '401':
-          description: Unauthorized
+              example: "Пароль успешно изменен."        
         '401':
           description: User not found
 
