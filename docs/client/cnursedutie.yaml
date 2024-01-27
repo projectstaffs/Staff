@@ -1,0 +1,64 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Client Nurse Dutie API
+paths:
+  /client/nurseduties:
+    post:
+      summary: Create client nurse dutie
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                0:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      form_id:
+                        type: integer
+                        description: Form ID
+                      nursedutie_id:
+                        type: integer
+                        description: Nurse Dutie ID
+                  description: Request array
+                1:
+                  type: integer
+                  description: Number of items
+              required:
+                - 0
+                - 1
+              example:
+                0:
+                  - form_id: 1
+                    nursedutie_id: 2
+                  - form_id: 3
+                    nursedutie_id: 4
+                1: 2
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: 2
+
+  /client/nurseduties/{id}:
+    delete:
+      summary: Delete client nurse dutie by ID
+      parameters:
+        - name: id
+          in: path
+          description: Nurse Dutie ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                message: "Удаление прошло успешно."

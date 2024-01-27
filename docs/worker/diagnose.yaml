@@ -1,0 +1,56 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Form Diagnose API
+paths:
+  /forms/formdiagnoses:
+    post:
+      summary: Add diagnoses to a form
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  form_id:
+                    type: string
+                    description: Form ID
+                  diagnose_id:
+                    type: string
+                    description: Diagnose ID
+              required:
+                - form_id
+                - diagnose_id
+              example:
+                - form_id: "1"
+                  diagnose_id: "2"
+                - form_id: "1"
+                  diagnose_id: "3"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                message: "Diagnoses successfully added"
+
+  /forms/formdiagnoses/{id}:
+    delete:
+      summary: Remove diagnoses from a form by ID
+      parameters:
+        - name: id
+          in: path
+          description: Form ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                message: "Diagnoses successfully removed"

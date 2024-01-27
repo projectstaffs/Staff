@@ -1,0 +1,71 @@
+openapi: 3.0.0
+info:
+  title: Image API
+  version: 1.0.0
+tags:
+  - name: images
+    description: Endpoints related to user images
+paths:
+  /images:
+    post:
+      summary: Upload user images
+      tags:
+        - images
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                  description: User ID for whom the images are being uploaded
+                images:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+              required:
+                - user_id
+                - images
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  user_id: 1
+                  path: "/images/example_image.jpg"
+                  url: "http://localhost:9000/storage/images/example_image.jpg"
+                  preview_path: "/images/prev_example_image.jpg"
+                  preview_url: "http://localhost:9000/storage/images/prev_example_image.jpg"
+                - id: 2
+                  user_id: 1
+                  path: "/images/another_image.jpg"
+                  url: "http://localhost:9000/storage/images/another_image.jpg"
+                  preview_path: "/images/prev_another_image.jpg"
+                  preview_url: "http://localhost:9000/storage/images/prev_another_image.jpg"
+        '401':
+          description: Unauthorized
+
+  /images/{id}:
+    delete:
+      summary: Delete user images by user ID
+      tags:
+        - images
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: "Картинки успешно удалены."
+        '401':
+          description: Unauthorized

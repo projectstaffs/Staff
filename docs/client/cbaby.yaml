@@ -1,0 +1,175 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Client Baby API
+paths:
+  /client/babies:
+    get:
+      summary: Get client baby details
+      parameters:
+        - name: data
+          in: query
+          description: User ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                user_id: 1
+                confirmed: true
+                title_about:
+                  en: "About Title English"
+                  ua: "About Title Ukrainian"
+                childrencount_id: 2
+                workperiod_id: 3
+                hourpay_id: 4
+                monthpay_id: 5
+        # Add other response codes as needed
+
+    post:
+      summary: Create client baby
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                  description: User ID
+                confirmed:
+                  type: boolean
+                  description: Confirmation status
+                title_about:
+                  type: object
+                  properties:
+                    en:
+                      type: string
+                      description: Title in English
+                    ua:
+                      type: string
+                      description: Title in Ukrainian
+                childrencount_id:
+                  type: integer
+                  description: Children Count ID
+                workperiod_id:
+                  type: integer
+                  description: Work Period ID
+                hourpay_id:
+                  type: integer
+                  description: Hourly Pay ID
+                monthpay_id:
+                  type: integer
+                  description: Monthly Pay ID
+              example:
+                user_id: 1
+                confirmed: true
+                title_about:
+                  en: "About Title English"
+                  ua: "About Title Ukrainian"
+                childrencount_id: 2
+                workperiod_id: 3
+                hourpay_id: 4
+                monthpay_id: 5
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                user_id: 1
+                confirmed: true
+                title_about:
+                  en: "About Title English"
+                  ua: "About Title Ukrainian"
+                childrencount_id: 2
+                workperiod_id: 3
+                hourpay_id: 4
+                monthpay_id: 5
+        # Add other response codes as needed
+
+  /client/babies/{id}:
+    put:
+      summary: Update client baby
+      parameters:
+        - name: id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title_about:
+                  type: object
+                  properties:
+                    en:
+                      type: string
+                      description: Title in English
+                    ua:
+                      type: string
+                      description: Title in Ukrainian
+                childrencount_id:
+                  type: integer
+                  description: Children Count ID
+                workperiod_id:
+                  type: integer
+                  description: Work Period ID
+                hourpay_id:
+                  type: integer
+                  description: Hourly Pay ID
+                monthpay_id:
+                  type: integer
+                  description: Monthly Pay ID
+              example:
+                title_about:
+                  en: "Updated Title English"
+                  ua: "Updated Title Ukrainian"
+                childrencount_id: 2
+                workperiod_id: 3
+                hourpay_id: 4
+                monthpay_id: 5
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                user_id: 1
+                confirmed: true
+                title_about:
+                  en: "Updated Title English"
+                  ua: "Updated Title Ukrainian"
+                childrencount_id: 2
+                workperiod_id: 3
+                hourpay_id: 4
+                monthpay_id: 5
+        # Add other response codes as needed
+
+    delete:
+      summary: Delete client baby
+      parameters:
+        - name: id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                message: "Удаление анкеты прошло успешно."
+        # Add other response codes as needed

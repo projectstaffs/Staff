@@ -1,0 +1,56 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Client Baby Age Group API
+paths:
+  /client/babyagegroup:
+    post:
+      summary: Add client age groups
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  form_id:
+                    type: integer
+                    description: Form ID
+                  agegroup_id:
+                    type: integer
+                    description: Age Group ID
+              example:
+                - form_id: 1
+                  agegroup_id: 101
+                - form_id: 2
+                  agegroup_id: 102
+                # Add more examples if needed
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                message: "Сохранение прошло успешно."
+        # Add other response codes as needed
+
+  /client/babyagegroup/{id}:
+    delete:
+      summary: Remove client age groups
+      parameters:
+        - name: id
+          in: path
+          description: Form ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                message: "Удаление прошло успешно."
+        # Add other response codes as needed

@@ -1,0 +1,54 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Client Keeper Dutie API
+paths:
+  /client/keeperduties:
+    post:
+      summary: Create client keeper duties
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  form_id:
+                    type: integer
+                    description: Form ID
+                  keeperdutie_id:
+                    type: integer
+                    description: Keeper Dutie ID
+              example:
+                - form_id: 1
+                  keeperdutie_id: 2
+                - form_id: 3
+                  keeperdutie_id: 4
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: 2
+        # Add other response codes as needed
+
+  /client/keeperduties/{id}:
+    delete:
+      summary: Delete client keeper duties
+      parameters:
+        - name: id
+          in: path
+          description: Form ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                message: "Удаление прошло успешно."
+        # Add other response codes as needed

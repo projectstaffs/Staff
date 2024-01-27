@@ -1,0 +1,57 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Form Keeper Preferences API
+paths:
+  /forms/keeperpreferences:
+    post:
+      summary: Add keeper preferences for a form
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  form_id:
+                    type: string
+                    description: Form ID
+                  keeperpreference_id:
+                    type: string
+                    description: Keeper preference ID
+              required:
+                - form_id
+                - keeperpreference_id
+              example:
+                - form_id: "1"
+                  keeperpreference_id: "2"
+                - form_id: "1"
+                  keeperpreference_id: "3"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                message: "Keeper preferences successfully added"
+                count: 2
+
+  /forms/keeperpreferences/{id}:
+    delete:
+      summary: Remove keeper preferences by form ID
+      parameters:
+        - name: id
+          in: path
+          description: Form ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                message: "Keeper preferences successfully removed"

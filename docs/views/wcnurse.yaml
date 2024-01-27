@@ -1,0 +1,83 @@
+openapi: 3.0.0
+info:
+  title: Watch Client Nurse API
+  version: 1.0.0
+tags:
+  - name: watchClientNurse
+    description: Endpoints related to watching client nurse profiles
+paths:
+  /watchclientnurses:
+    get:
+      summary: Get watched client nurse profiles for a user
+      tags:
+        - watchClientNurse
+      parameters:
+        - in: query
+          name: data
+          required: true
+          schema:
+            type: string
+          description: User ID
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: 
+                - user_id: 1
+                  anketa_id: 300
+                - user_id: 1
+                  anketa_id: 301
+    post:
+      summary: Add a client nurse profile to watchlist
+      tags:
+        - watchClientNurse
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                  description: User ID
+                anketa_id:
+                  type: integer
+                  description: Client Nurse profile ID
+              required:
+                - user_id
+                - anketa_id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: "Client Nurse profile added to watchlist."
+        '400':
+          description: Bad request
+        '404':
+          description: Client Nurse profile not found
+        '409':
+          description: Client Nurse profile already in watchlist
+
+  /watchclientnurses/{id}:
+    delete:
+      summary: Remove a client nurse profile from watchlist
+      tags:
+        - watchClientNurse
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: WatchClientNurse ID
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: "Client Nurse profile removed from watchlist."
+        '404':
+          description: WatchClientNurse ID not found

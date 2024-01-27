@@ -1,0 +1,170 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Client Nurse API
+paths:
+  /client/nurses:
+    get:
+      summary: Get client nurse by user ID
+      parameters:
+        - name: data
+          in: query
+          required: true
+          description: User ID
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                user_id: 1
+                confirmed: true
+                title_about:
+                  en: "English title"
+                  ua: "Український заголовок"
+                workperiod_id: 2
+                hourpay_id: 3
+                monthpay_id: 4
+
+    post:
+      summary: Create client nurse
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                  description: User ID
+                confirmed:
+                  type: boolean
+                  description: Confirmation status
+                title_about:
+                  type: object
+                  properties:
+                    en:
+                      type: string
+                    ua:
+                      type: string
+                  description: Title in different languages
+                workperiod_id:
+                  type: integer
+                  description: Work period ID
+                hourpay_id:
+                  type: integer
+                  description: Hour pay ID
+                monthpay_id:
+                  type: integer
+                  description: Month pay ID
+              required:
+                - user_id
+                - confirmed
+                - title_about
+                - workperiod_id
+                - hourpay_id
+                - monthpay_id
+              example:
+                user_id: 1
+                confirmed: true
+                title_about:
+                  en: "English title"
+                  ua: "Український заголовок"
+                workperiod_id: 2
+                hourpay_id: 3
+                monthpay_id: 4
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                user_id: 1
+                confirmed: true
+                title_about:
+                  en: "English title"
+                  ua: "Український заголовок"
+                workperiod_id: 2
+                hourpay_id: 3
+                monthpay_id: 4
+
+  /client/nurses/{id}:
+    put:
+      summary: Update client nurse by ID
+      parameters:
+        - name: id
+          in: path
+          description: Nurse ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title_about:
+                  type: object
+                  properties:
+                    en:
+                      type: string
+                    ua:
+                      type: string
+                  description: Title in different languages
+                workperiod_id:
+                  type: integer
+                  description: Work period ID
+                hourpay_id:
+                  type: integer
+                  description: Hour pay ID
+                monthpay_id:
+                  type: integer
+                  description: Month pay ID
+              required:
+                - title_about
+                - workperiod_id
+                - hourpay_id
+                - monthpay_id
+              example:
+                title_about:
+                  en: "Updated English title"
+                  ua: "Оновлений український заголовок"
+                workperiod_id: 5
+                hourpay_id: 6
+                monthpay_id: 7
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                user_id: 1
+                confirmed: true
+                title_about:
+                  en: "Updated English title"
+                  ua: "Оновлений український заголовок"
+                workperiod_id: 5
+                hourpay_id: 6
+                monthpay_id: 7
+
+    delete:
+      summary: Delete client nurse by ID
+      parameters:
+        - name: id
+          in: path
+          description: Nurse ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                message: "Удаление анкеты прошло успешно."

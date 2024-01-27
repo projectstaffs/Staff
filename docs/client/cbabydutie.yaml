@@ -1,0 +1,58 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Client Dutie API
+paths:
+  /client/duties:
+    post:
+      summary: Create client duties
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  form_id:
+                    type: integer
+                    description: Form ID
+                  dutie_id:
+                    type: integer
+                    description: Dutie ID
+              example:
+                - form_id: 1
+                  dutie_id: 2
+                - form_id: 3
+                  dutie_id: 4
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - form_id: 1
+                  dutie_id: 2
+                - form_id: 3
+                  dutie_id: 4
+        # Add other response codes as needed
+
+  /client/duties/{id}:
+    delete:
+      summary: Delete client duties
+      parameters:
+        - name: id
+          in: path
+          description: Form ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                message: "Удаление прошло успешно."
+        # Add other response codes as needed

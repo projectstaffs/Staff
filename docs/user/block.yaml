@@ -1,0 +1,175 @@
+openapi: 3.0.0
+info:
+  title: User Block API
+  version: 1.0.0
+tags:
+  - name: userBlock
+    description: Endpoints related to blocking user accounts
+paths:
+  /block_baby:
+    post:
+      summary: Block baby account
+      tags:
+        - userBlock
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  description: Baby ID to be blocked
+              required:
+                - id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: "Baby account successfully blocked."
+        '401':
+          description: Unauthorized
+        '404':
+          description: Baby account not found
+
+  /block_nurse:
+    post:
+      summary: Block nurse account
+      tags:
+        - userBlock
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  description: Nurse ID to be blocked
+              required:
+                - id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: "Nurse account successfully blocked."
+        '401':
+          description: Unauthorized
+        '404':
+          description: Nurse account not found
+
+  /block_keeper:
+    post:
+      summary: Block keeper account
+      tags:
+        - userBlock
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  description: Keeper ID to be blocked
+              required:
+                - id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: "Keeper account successfully blocked."
+        '401':
+          description: Unauthorized
+        '404':
+          description: Keeper account not found
+
+  /block_client_baby:
+    post:
+      summary: Block client baby account
+      tags:
+        - userBlock
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  description: Client Baby ID to be blocked
+              required:
+                - id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: "Client Baby account successfully blocked."
+        '401':
+          description: Unauthorized
+        '404':
+          description: Client Baby account not found
+
+  /block_client_nurse:
+    post:
+      summary: Block client nurse account
+      tags:
+        - userBlock
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  description: Client Nurse ID to be blocked
+              required:
+                - id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: "Client Nurse account successfully blocked."
+        '401':
+          description: Unauthorized
+        '404':
+          description: Client Nurse account not found
+
+  /block_client_keeper:
+    post:
+      summary: Block client keeper account
+      tags:
+        - userBlock
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  description: Client Keeper ID to be blocked
+              required:
+                - id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: "Client Keeper account successfully blocked."
+        '401':
+          description: Unauthorized
+        '404':
+          description: Client Keeper account not found

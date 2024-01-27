@@ -1,0 +1,83 @@
+openapi: 3.0.0
+info:
+  title: Watch Client Baby API
+  version: 1.0.0
+tags:
+  - name: watchClientBaby
+    description: Endpoints related to watching client baby profiles
+paths:
+  /watchclientbabies:
+    get:
+      summary: Get watched client baby profiles for a user
+      tags:
+        - watchClientBaby
+      parameters:
+        - in: query
+          name: data
+          required: true
+          schema:
+            type: string
+          description: User ID
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: 
+                - user_id: 1
+                  anketa_id: 100
+                - user_id: 1
+                  anketa_id: 101
+    post:
+      summary: Add a client baby profile to watchlist
+      tags:
+        - watchClientBaby
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                  description: User ID
+                anketa_id:
+                  type: integer
+                  description: Client Baby profile ID
+              required:
+                - user_id
+                - anketa_id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: "Client Baby profile added to watchlist."
+        '400':
+          description: Bad request
+        '404':
+          description: Client Baby profile not found
+        '409':
+          description: Client Baby profile already in watchlist
+
+  /watchclientbabies/{id}:
+    delete:
+      summary: Remove a client baby profile from watchlist
+      tags:
+        - watchClientBaby
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: WatchClientBaby ID
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: "Client Baby profile removed from watchlist."
+        '404':
+          description: WatchClientBaby ID not found

@@ -1,0 +1,127 @@
+openapi: 3.0.0
+info:
+  title: Views API
+  version: 1.0.0
+tags:
+  - name: views
+    description: Endpoints related to views
+paths:
+  /views/babies:
+    get:
+      summary: Get a list of babies
+      tags:
+        - views
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  name: "Baby 1"
+                  age: 6
+                - id: 2
+                  name: "Baby 2"
+                  age: 9
+        '401':
+          description: Unauthorized
+
+  /views/nurses:
+    get:
+      summary: Get a list of nurses
+      tags:
+        - views
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  name: "Nurse 1"
+                  experience: 5
+                - id: 2
+                  name: "Nurse 2"
+                  experience: 8
+        '401':
+          description: Unauthorized
+
+  /views/keepers:
+    get:
+      summary: Get a list of keepers
+      tags:
+        - views
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  name: "Keeper 1"
+                  preference: "Day Shift"
+                - id: 2
+                  name: "Keeper 2"
+                  preference: "Night Shift"
+        '401':
+          description: Unauthorized
+
+  /views/client_babies:
+    get:
+      summary: Get a list of client babies
+      tags:
+        - views
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  name: "Client Baby 1"
+                  age: 2
+                - id: 2
+                  name: "Client Baby 2"
+                  age: 3
+        '401':
+          description: Unauthorized
+
+  /views/client_nurses:
+    get:
+      summary: Get a list of client nurses
+      tags:
+        - views
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  name: "Client Nurse 1"
+                  experience: 4
+                - id: 2
+                  name: "Client Nurse 2"
+                  experience: 7
+        '401':
+          description: Unauthorized
+
+  /views/client_keepers:
+    get:
+      summary: Get a list of client keepers
+      tags:
+        - views
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  name: "Client Keeper 1"
+                  preference: "Flexible Schedule"
+                - id: 2
+                  name: "Client Keeper 2"
+                  preference: "Fixed Schedule"
+        '401':
+          description: Unauthorized

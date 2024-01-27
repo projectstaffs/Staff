@@ -1,0 +1,229 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Baby Form API
+paths:
+  /forms/babies:
+    get:
+      summary: Get baby form by user ID
+      parameters:
+        - name: data
+          in: query
+          description: User ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                user_id: 1
+                baby_exp:
+                  en: "English experience"
+                  ua: "Український досвід"
+                experience_id: 2
+                workperiod_id: 3
+                childrencount_id: 4
+                children_invalid:
+                  en: "English children invalid"
+                  ua: "Українські недієздатні діти"
+                hourpay_id: 5
+                monthpay_id: 6
+                confirmed: true
+
+    post:
+      summary: Create baby form
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                  description: User ID
+                baby_exp:
+                  type: object
+                  properties:
+                    en:
+                      type: string
+                      description: English experience
+                    ua:
+                      type: string
+                      description: Ukrainian experience
+                  description: Baby experience
+                experience_id:
+                  type: integer
+                  description: Experience ID
+                workperiod_id:
+                  type: integer
+                  description: Work period ID
+                childrencount_id:
+                  type: integer
+                  description: Children count ID
+                children_invalid:
+                  type: object
+                  properties:
+                    en:
+                      type: string
+                      description: English children invalid
+                    ua:
+                      type: string
+                      description: Ukrainian children invalid
+                  description: Children invalid description
+                hourpay_id:
+                  type: integer
+                  description: Hour pay ID
+                monthpay_id:
+                  type: integer
+                  description: Month pay ID
+                confirmed:
+                  type: boolean
+                  description: Confirmation status
+              required:
+                - user_id
+                - baby_exp
+                - experience_id
+                - workperiod_id
+                - childrencount_id
+                - children_invalid
+                - hourpay_id
+                - monthpay_id
+                - confirmed
+              example:
+                user_id: 1
+                baby_exp:
+                  en: "English experience"
+                  ua: "Український досвід"
+                experience_id: 2
+                workperiod_id: 3
+                childrencount_id: 4
+                children_invalid:
+                  en: "English children invalid"
+                  ua: "Українські недієздатні діти"
+                hourpay_id: 5
+                monthpay_id: 6
+                confirmed: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                user_id: 1
+                baby_exp:
+                  en: "English experience"
+                  ua: "Український досвід"
+                experience_id: 2
+                workperiod_id: 3
+                childrencount_id: 4
+                children_invalid:
+                  en: "English children invalid"
+                  ua: "Українські недієздатні діти"
+                hourpay_id: 5
+                monthpay_id: 6
+                confirmed: true
+
+  /forms/babies/{id}:
+    put:
+      summary: Update baby form by ID
+      parameters:
+        - name: id
+          in: path
+          description: Baby Form ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                baby_exp:
+                  type: object
+                  properties:
+                    en:
+                      type: string
+                      description: English experience
+                    ua:
+                      type: string
+                      description: Ukrainian experience
+                  description: Baby experience
+                experience_id:
+                  type: integer
+                  description: Experience ID
+                workperiod_id:
+                  type: integer
+                  description: Work period ID
+                childrencount_id:
+                  type: integer
+                  description: Children count ID
+                children_invalid:
+                  type: object
+                  properties:
+                    en:
+                      type: string
+                      description: English children invalid
+                    ua:
+                      type: string
+                      description: Ukrainian children invalid
+                  description: Children invalid description
+                hourpay_id:
+                  type: integer
+                  description: Hour pay ID
+                monthpay_id:
+                  type: integer
+                  description: Month pay ID
+              example:
+                baby_exp:
+                  en: "Updated English experience"
+                  ua: "Оновлений український досвід"
+                experience_id: 2
+                workperiod_id: 3
+                childrencount_id: 4
+                children_invalid:
+                  en: "Updated English children invalid"
+                  ua: "Оновлені українські недієздатні діти"
+                hourpay_id: 5
+                monthpay_id: 6
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                user_id: 1
+                baby_exp:
+                  en: "Updated English experience"
+                  ua: "Оновлений український досвід"
+                experience_id: 2
+                workperiod_id: 3
+                childrencount_id: 4
+                children_invalid:
+                  en: "Updated English children invalid"
+                  ua: "Оновлені українські недієздатні діти"
+                hourpay_id: 5
+                monthpay_id: 6
+                confirmed: true
+
+    delete:
+      summary: Delete baby form by ID
+      parameters:
+        - name: id
+          in: path
+          description: Baby Form ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                message: "Удаление анкеты прошло успешно."

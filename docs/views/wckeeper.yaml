@@ -1,0 +1,83 @@
+openapi: 3.0.0
+info:
+  title: Watch Client Keeper API
+  version: 1.0.0
+tags:
+  - name: watchClientKeeper
+    description: Endpoints related to watching client keeper profiles
+paths:
+  /watchclientkeepers:
+    get:
+      summary: Get watched client keeper profiles for a user
+      tags:
+        - watchClientKeeper
+      parameters:
+        - in: query
+          name: data
+          required: true
+          schema:
+            type: string
+          description: User ID
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: 
+                - user_id: 1
+                  anketa_id: 200
+                - user_id: 1
+                  anketa_id: 201
+    post:
+      summary: Add a client keeper profile to watchlist
+      tags:
+        - watchClientKeeper
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                  description: User ID
+                anketa_id:
+                  type: integer
+                  description: Client Keeper profile ID
+              required:
+                - user_id
+                - anketa_id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: "Client Keeper profile added to watchlist."
+        '400':
+          description: Bad request
+        '404':
+          description: Client Keeper profile not found
+        '409':
+          description: Client Keeper profile already in watchlist
+
+  /watchclientkeepers/{id}:
+    delete:
+      summary: Remove a client keeper profile from watchlist
+      tags:
+        - watchClientKeeper
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: WatchClientKeeper ID
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: "Client Keeper profile removed from watchlist."
+        '404':
+          description: WatchClientKeeper ID not found
