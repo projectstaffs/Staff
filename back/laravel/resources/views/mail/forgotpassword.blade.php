@@ -3,9 +3,9 @@
 <head>
        
 </head>
-<body style="background: #FFF0D2;margin: 0;width: 612px;">    
-    <div style="height: 85px; border-bottom: 0.5px solid #bfb4b4; background: linear-gradient(180deg, #1E1510 -110.59%, rgba(92, 69, 56, 0.00) 114.71%);">
-        <div style="width: 500px;margin: 0 auto;padding-top: 20px;">
+<body style="background: #FFF0D2;margin: 0;width: 100%;">    
+    <div style="border-bottom: 0.5px solid #bfb4b4; background: linear-gradient(180deg, #1E1510 -110.59%, rgba(92, 69, 56, 0.00) 114.71%);">
+        <div style="width: 500px;margin: 0 auto;padding-top: 20px;padding-bottom: 10px;">
             <div style="text-align: center;margin-bottom: 3px;color: #1E1510;font-family: Playfair Display;font-size: 20px;font-weight: 700;line-height: 120%;">
                 Агенство домашнього сервісу
             </div>
@@ -24,8 +24,8 @@
         </div>
     </div>
 
-    <div style="height: 176px;background: #5C4538;">
-        <div style="width: 500px; margin: 0 auto;padding-top: 37px;">
+    <div style="background: #5C4538;">
+        <div style="width: 500px; margin: 0 auto;padding-top: 30px;padding-bottom: 10px;">
             <div style="color: #FFF0D2;text-align: center;font-family: Roboto;font-size: 18px;font-weight: 400;line-height: 130%;">
                 Оновлені дані Вашого облікового запису:                
             </div>
@@ -53,7 +53,7 @@
         </div>
     </div>
     
-    <div style="width: 612px;height: 40px;background: #1E1510;padding-top: 20px;">
+    <div style="width: 100%;background: #1E1510;padding-top: 20px;padding-bottom: 20px;">
         <div style="text-align: center;color: #FFF0D2;text-align: center;font-family: Roboto;font-size: 10px;font-weight: 400;line-height: 150%;">
             © 2023 - HouseHub Agency. Всі права захищені.            
         </div>        

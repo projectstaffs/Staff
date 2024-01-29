@@ -11,7 +11,8 @@ export const useUserStore = defineStore('user', {
             users_client: {},
             users_worker: {},
             token: '',
-            currentCPage: 1, currentWPage: 1                 
+            currentCPage: 1, currentWPage: 1,
+            url: 'http://192.168.0.101/'                 
         }
     },
     actions: {  
@@ -19,7 +20,7 @@ export const useUserStore = defineStore('user', {
             this.token = localStorage.access_token;
         },      
         CREATE_PHOTO(data){            
-            api.post('http://localhost/api/auth/photo', data)
+            api.post(this.url + 'api/auth/photo', data)
                 .then((res) => {                                   
                     localStorage.user_image = res.data.preview_url;                    
                     router.push({name: "Account"});                 
@@ -27,7 +28,7 @@ export const useUserStore = defineStore('user', {
                 .catch(error => { console.log(error); })
         },
         DELETE_PHOTO(data) {            
-            api.post('http://localhost/api/auth/photo/' + data, {_method: 'DELETE'})
+            api.post(this.url + 'api/auth/photo/' + data, {_method: 'DELETE'})
                 .then((res) => { 
                     localStorage.user_image = '';                
                 })
@@ -35,7 +36,7 @@ export const useUserStore = defineStore('user', {
         },       
         
         LOGOUT_USER(){                                                 
-            api.post('http://localhost/api/auth/logout')
+            api.post(this.url + 'api/auth/logout')
                 .then((res) => {                    
                     localStorage.removeItem('access_token');
                     localStorage.removeItem('user');                
@@ -46,7 +47,7 @@ export const useUserStore = defineStore('user', {
                     
                     this.user = {};                   
                     //router.push({name: "Login"}); 
-                    window.location.href = 'http://localhost';                   
+                    window.location.href = this.url;                   
                 })
                 .catch(error => { console.log(error); })
         },
@@ -54,7 +55,7 @@ export const useUserStore = defineStore('user', {
             this.user = JSON.parse(localStorage.user);
         },
         LOGIN_USER(data){                                                 
-            axios.post('http://localhost/api/auth/login', data)
+            axios.post(this.url + 'api/auth/login', data)
                 .then((res) => {                
                     localStorage.access_token = res.data[0].original.access_token;
                     localStorage.user = JSON.stringify(res.data[1].original);               
@@ -68,14 +69,14 @@ export const useUserStore = defineStore('user', {
                 .catch(error => { console.log(error); })
         },
         GET_USERS(){       
-            axios.get('http://localhost/api/user/')
+            axios.get(this.url + 'api/user/')
                 .then((res) => {                                                 
                     this.users = res.data.data;                 
                 })
                 .catch(error => { console.log(error); })
         }, 
         GET_USERS_CLIENT(){       
-            axios.get('http://localhost/api/user/')
+            axios.get(this.url + 'api/user/')
                 .then((res) => { 
                     res.data.data.forEach(obj => {
                         if(obj.role === 'Наниматель') {
@@ -86,7 +87,7 @@ export const useUserStore = defineStore('user', {
                 .catch(error => { console.log(error); })
         },
         GET_USERS_WORKER(){       
-            axios.get('http://localhost/api/user/')
+            axios.get(this.url + 'api/user/')
                 .then((res) => {                                                 
                     res.data.data.forEach(obj => {
                         if(obj.role === 'Исполнитель') {                            
@@ -97,28 +98,28 @@ export const useUserStore = defineStore('user', {
                 .catch(error => { console.log(error); })
         }, 
         BLOCK_USER_CLIENT(data){     
-            api.post('http://localhost/api/auth/blockuser', data)
+            api.post(this.url + 'api/auth/blockuser', data)
                 .then((res) => {
                     this.GET_USERS_CLIENT();
                 })
                 .catch(error => { console.log(error); })
         }, 
         BLOCK_USER_WORKER(data){       
-            api.post('http://localhost/api/auth/blockuser', data)
+            api.post(this.url + 'api/auth/blockuser', data)
                 .then((res) => { 
                     this.GET_USERS_WORKER();               
                 })
                 .catch(error => { console.log(error); })
         }, 
         RESTORE_USER_CLIENT(data){     
-            api.post('http://localhost/api/auth/restoreuser', data)
+            api.post(this.url + 'api/auth/restoreuser', data)
                 .then((res) => {
                     this.GET_USERS_CLIENT();
                 })
                 .catch(error => { console.log(error); })
         }, 
         RESTORE_USER_WORKER(data){     
-            api.post('http://localhost/api/auth/restoreuser', data)
+            api.post(this.url + 'api/auth/restoreuser', data)
                 .then((res) => {
                     this.GET_USERS_WORKER();
                 })

@@ -85,6 +85,11 @@
 
     .personal_btns {
         margin-top: 20px;
+    }    
+
+    .cabinet_box {
+        width: 250px;
+        margin: 20px auto 10px;
     }
 }
 

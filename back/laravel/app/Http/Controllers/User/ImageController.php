@@ -45,9 +45,9 @@ class ImageController extends Controller
                 $res = Image::create([
                     'user_id' => $request['user_id'],
                     'path' => $path,
-                    'url' => url('http://localhost:9000/storage/' . $path),
+                    'url' => url('http://192.168.0.101:9000/storage/' . $path),
                     'preview_path' => $previewName,
-                    'preview_url' => url('http://localhost:9000/storage/' . $previewName)                    
+                    'preview_url' => url('http://192.168.0.101:9000/storage/' . $previewName)                    
                 ]);                
             }
             Cache::put('images', Image::all());

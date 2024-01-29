@@ -2,9 +2,9 @@
 <html>
 <head>    
 </head>
-<body style="background: #FFF0D2;margin: 0;width: 612px;">    
-    <div style="height: 85px; border-bottom: 0.5px solid #bfb4b4; background: linear-gradient(180deg, #1E1510 -110.59%, rgba(92, 69, 56, 0.00) 114.71%);">
-        <div style="width: 500px;margin: 0 auto;padding-top: 20px;">
+<body style="background: #FFF0D2;margin: 0;width: 100%;">    
+    <div style="border-bottom: 0.5px solid #bfb4b4; background: linear-gradient(180deg, #1E1510 -110.59%, rgba(92, 69, 56, 0.00) 114.71%);">
+        <div style="width: 500px;margin: 0 auto;padding-top: 20px;padding-bottom: 10px;">
             <div style="text-align: center;margin-bottom: 3px;color: #1E1510;font-family: Playfair Display;font-size: 20px;font-weight: 700;line-height: 120%;">
                 Агенство домашнього сервісу
             </div>
@@ -24,15 +24,15 @@
         </div>
     </div>
 
-    <div style="height: 176px;background: #5C4538;">
-        <div style="width: 500px; margin: 0 auto;padding-top: 37px;">
+    <div style="background: #5C4538;">
+        <div style="width: 500px; margin: 0 auto;padding-top: 20px;padding-bottom: 20px;">
             <div style="color: #FFF0D2;text-align: center;font-family: Roboto;font-size: 18px;font-weight: 400;line-height: 130%;">
                 Для підтвердження Вашої електронної пошти, будь-ласка, натисніть на кнопку «Підтвердити реєстрацію»
             </div>
-            <form style="margin-top: 25px;" action="http://localhost/api/test/" method="POST">
+            <form style="margin-top: 25px;" action="http://192.168.0.101/api/test/" method="POST">
                 <input type="hidden" name="email" value="{{ $email }}">
                 <div style="width: 256px; margin: 0 auto;">
-                    <button style="cursor: pointer;width: 236px;height: 32px;border-radius: 10px;background: #1E1510;color: #FFF0D2;text-align: center;font-family: Roboto;font-size: 16px;font-weight: 500;line-height: 130%;" type="submit">
+                    <button style="cursor: pointer;width: 236px;padding-top: 5px;padding-bottom: 5px;border-radius: 10px;background: #1E1510;color: #FFF0D2;text-align: center;font-family: Roboto;font-size: 16px;font-weight: 500;line-height: 130%;" type="submit">
                         Підтвердити реєстрацію
                     </button>
                 </div>                
@@ -54,7 +54,7 @@
         </div>
     </div>
     
-    <div style="width: 612px;height: 40px;background: #1E1510;padding-top: 20px;">
+    <div style="width: 100%;background: #1E1510;padding-top: 20px;padding-bottom: 20px;">
         <div style="text-align: center;color: #FFF0D2;text-align: center;font-family: Roboto;font-size: 10px;font-weight: 400;line-height: 150%;">
             © 2023 - HouseHub Agency. Всі права захищені.            
         </div>        

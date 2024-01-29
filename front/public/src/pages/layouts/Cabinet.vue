@@ -174,10 +174,6 @@ export default {
         margin-bottom: 10px;
     }
 
-    .cabinet_box {
-        margin: 20px auto 10px;
-    }
-
     .sidebar_items {
         display: flex;
         flex-wrap: wrap;

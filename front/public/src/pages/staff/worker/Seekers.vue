@@ -30,9 +30,8 @@
                         <div class="service_item_title">{{ $t('seekers.item3_title') }}</div>
                         <div class="service_item_text">{{ $t('seekers.item3_text') }}</div>
                     </div>
-                    <div @mouseover="handleMouseOver4" @mouseout="handleMouseOut4" class="service_item"
-                        @click.prevent="vacancy">
-                        <div class="btn"><img src="../../../assets/img/main/arrow.svg" alt="">
+                    <div @mouseover="handleMouseOver4" @mouseout="handleMouseOut4" class="service_item">
+                        <div @click.prevent="vacancy" class="btn"><img src="../../../assets/img/main/arrow.svg" alt="">
                         </div>
                         <div class="service_item__block"><img class="service_item_img"
                                 :src="isHovered4 ? hoveredImageSrc4 : originalImageSrc4" alt=""></div>

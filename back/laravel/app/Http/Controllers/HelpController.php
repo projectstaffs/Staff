@@ -72,7 +72,7 @@ class HelpController extends Controller
             $socket->sendMessage($user->id);
             Cache::put('users', User::all());            
         } 
-        return redirect('http://localhost/');              
+        return redirect('http://192.168.0.101/');              
     }
 
     public function blockUser (Request $request)
