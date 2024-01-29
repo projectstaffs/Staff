@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useUserStore } from '../stores/user';
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -270,14 +271,14 @@ const router = createRouter({
     ]
 })
 
-router.beforeEach((to, from, next) => { 
-       
+router.beforeEach((to, from, next) => {
+    const User = useUserStore();
     if(!localStorage.access_token) {
-        window.location.href = 'http://localhost';
+        window.location.href = User.url;
     } else {
         let userInfo = JSON.parse(localStorage.user);
         if(userInfo.role !== 'Администратор') {            
-            window.location.href = 'http://localhost';
+            window.location.href = User.url;
         } else {            
             next();            
         }

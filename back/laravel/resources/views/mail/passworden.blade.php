@@ -29,7 +29,7 @@
             <div style="color: #FFF0D2;text-align: center;font-family: Roboto;font-size: 18px;font-weight: 400;line-height: 130%;">
                 To confirm your email address, please click on the "Confirm registration" button
             </div>
-            <form style="margin-top: 25px;" action="http://192.168.0.101/api/test/" method="POST">
+            <form style="margin-top: 25px;" action="{{ env('APP_URL') }}/api/test/" method="POST">
                 <input type="hidden" name="email" value="{{ $email }}">
                 <div style="width: 256px; margin: 0 auto;">
                     <button style="cursor: pointer;width: 236px;padding-top: 5px;padding-bottom: 5px;border-radius: 10px;background: #1E1510;color: #FFF0D2;text-align: center;font-family: Roboto;font-size: 16px;font-weight: 500;line-height: 130%;" type="submit">

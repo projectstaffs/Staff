@@ -238,7 +238,7 @@
         </div>
 
         <footer class="main-footer">
-            <strong>&copy; 2023 <a href="http://localhost/"> HouseHub Agency</a>.</strong>
+            <strong>&copy; 2023 <a :href="User.url"> HouseHub Agency</a>.</strong>
             Всі права захищені.
             <div class="float-right d-none d-sm-inline-block">
                 <b>Версія</b> 1.1.0

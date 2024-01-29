@@ -71,8 +71,9 @@ class HelpController extends Controller
             $socket = new MySocket();
             $socket->sendMessage($user->id);
             Cache::put('users', User::all());            
-        } 
-        return redirect('http://192.168.0.101/');              
+        }
+        $appUrl = env('APP_URL'); 
+        return redirect($appUrl);              
     }
 
     public function blockUser (Request $request)
