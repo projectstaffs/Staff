@@ -34,7 +34,10 @@ class NurseTypeOfWorkController extends Controller
     public function store(Request $request)
     {
         $nurseTypeOfWork = new NurseTypeOfWork([
-            'title' => $request->title
+            'title' => [
+               'en' => $request->en,
+               'ua' => $request->ua
+            ],
         ]);
         $nurseTypeOfWork->save();   
         
@@ -64,7 +67,10 @@ class NurseTypeOfWorkController extends Controller
     public function update(Request $request, string $id)
     {
         $nurseTypeOfWork = NurseTypeOfWork::find($id);
-        $nurseTypeOfWork->title = $request['title'];
+        $nurseTypeOfWork->title = [
+               'en' => $request->title['en'],
+               'ua' => $request->title['ua']
+            ];
         $nurseTypeOfWork->save();
 
         Cache::put('nursetypeofworks', NurseTypeOfWork::all());

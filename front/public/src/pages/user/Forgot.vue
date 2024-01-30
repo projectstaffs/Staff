@@ -1,12 +1,38 @@
 <template>
-    <div class="login_title"> Восстановление пароля </div>    
-    <form @submit.prevent="forgot" class="login_form">        
-        <input v-model="user.email" required class="login_form_item" type="email" placeholder="email">
-        <button type="submit" class="login_form_btn">Восстановить пароль</button>
-        <div @click.prevent="remember" class="user_btn">Вспомнил пароль.</div> 
-    </form>    
-    
-    <div class="register_error">{{ User.forgot_error }}</div>
+    <div class="block">
+        <div class="block_back"></div>
+        <div class="block_content">
+            <div class="container">
+                <div class="staff_title">{{ $t('auth.title_pass') }}</div>
+                <div class="login_text">{{ $t('auth.text') }}</div>
+            </div>
+            <div class="login_inner forgot_inner">
+                <div class="container">
+                    <div class="login_content">
+                        <form @submit.prevent="forgot" class="login_form forgot_form">
+                            <div class="login_start">
+                                <div class="login_form_text">{{ $t('register.item4') }}</div>
+                                <input v-model="user.email" required class="login_form_item" type="email"
+                                    :placeholder="$t('register.item4_holder')">
+                            </div>
+
+                            <div v-if="User.forgot_error" class="login_middle">
+                                <ul>
+                                    <li>{{ $t('auth.error_pass') }}</li>
+                                </ul>
+                            </div>
+
+                            <div class="login_end">
+                                <button type="submit" class="btn">{{ $t('auth.btn_pass') }}</button>
+                                <div @click.prevent="remember" class="login_forgot"><span>{{ $t('auth.btn_pass2') }}</span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -22,17 +48,37 @@ export default {
         const User = useUserStore();
         return { User };
     },
-    methods: {        
+    methods: {
         forgot() {
-            this.User.FORGOT_PASSWORD(this.user);            
+            //console.log(this.user);
+            this.User.FORGOT_PASSWORD(this.user);
         },
         remember() {
-            this.$router.push({name: "Login"})
+            this.$router.push({ name: "Login" })
         },
     },
     mounted() {
-        this.User.GET_TOKEN();
         this.User.forgot_error = '';
-    },    
+    },
 }
 </script>
+
+<style>
+.forgot_inner {
+    min-height: 300px;
+}
+
+.forgot_form {
+    min-height: 400px;
+}
+
+@media (max-width: 576px) {
+    .forgot_inner {
+        min-height: 200px;
+    }
+
+    .forgot_form {
+        min-height: 300px;
+    }
+}
+</style>

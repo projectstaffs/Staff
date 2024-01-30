@@ -1,0 +1,57 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Form Keeper Type Work API
+paths:
+  /forms/keepertypeworks:
+    post:
+      summary: Add keeper type works for a form
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  form_id:
+                    type: string
+                    description: Form ID
+                  keepertypework_id:
+                    type: string
+                    description: Keeper type work ID
+              required:
+                - form_id
+                - keepertypework_id
+              example:
+                - form_id: "1"
+                  keepertypework_id: "2"
+                - form_id: "1"
+                  keepertypework_id: "3"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                message: "Keeper type works successfully added"
+                count: 2
+
+  /forms/keepertypeworks/{id}:
+    delete:
+      summary: Remove keeper type works by form ID
+      parameters:
+        - name: id
+          in: path
+          description: Form ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                message: "Keeper type works successfully removed"

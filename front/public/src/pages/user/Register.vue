@@ -1,172 +1,170 @@
 <template>
-    <div class="login_title"> Регистрация для исполнителя </div>
-    <form @submit.prevent="register" class="login_form">
-        <div>Какую работу Вы ищите?:</div>
-        <div> <input type="checkbox" v-model="user.is_babysitting"> <span>по уходу за детьми</span> </div>
-        <div> <input type="checkbox" v-model="user.is_nurse"> <span>по уходу за престарелыми</span> </div>
-        <div> <input type="checkbox" v-model="user.is_housekeeper"> <span>по ведению домашнего хозяйства</span> </div>        
-        
-        <div>Укажите свое имя:</div>
-        <input v-model="user.name" required class="login_form_item" type="text" placeholder="имя">
-        <div>Укажите свое отчество:</div>
-        <input v-model="user.patronymic" required class="login_form_item" type="text" placeholder="отчество">
-        <div>Укажите свою фамилию:</div>
-        <input v-model="user.surname" required class="login_form_item" type="text" placeholder="фамилия">
-        <div>Укажите свой телефон:</div>
-        <div> +380 <input v-model="user.phone" required class="login_form_item" type="tel" placeholder="телефон"> </div>
-        <div>Укажите свой дополнительный телефон:</div>
-        <div> +380 <input v-model="user.additional_phone" required class="login_form_item" type="tel" placeholder="телефон"> </div>
-        <div>Укажите свой email:</div>
-        <input v-model="user.email" required class="login_form_item" type="email" placeholder="email">        
-        <div>Укажите свой пол:</div>
-        <select v-model="user.gender" class="category_form_title">
-            <option v-for="option in gender" :value="option.value">
-                {{ option.value }}                
-            </option>
-        </select>
-        <div>Укажите дату своего рождения:</div>
-        <input v-model="user.age" required class="login_form_item" type="date" placeholder="возраст">
-        <div>Право работать на территории Украины?:</div>
-        <select v-model="user.right_work" class="category_form_title">
-            <option v-for="option in work" :value="option.value">
-                {{ option.value }}                
-            </option>
-        </select>
-        <div>Наличие водительского удостоверения?:</div>
-        <select v-model="user.drive" class="category_form_title">
-            <option v-for="option in work" :value="option.value">
-                {{ option.value }}                
-            </option>
-        </select>
-        <div>Согласны ли вы работать в ночное время?:</div>
-        <select v-model="user.night_work" class="category_form_title">
-            <option v-for="option in work" :value="option.value">
-                {{ option.value }}                
-            </option>
-        </select>
-        <div>Готовы ли вы работать в доме с домашними животными?:</div>
-        <select v-model="user.animal_work" class="category_form_title">
-            <option v-for="option in work" :value="option.value">
-                {{ option.value }}                
-            </option>
-        </select>
-        <div>Умеете ли вы плавать?:</div>
-        <select v-model="user.swimming" class="category_form_title">
-            <option v-for="option in work" :value="option.value">
-                {{ option.value }}                
-            </option>
-        </select>
-        <div>Напишите немного о себе:</div>        
-        <textarea v-model="user.about" required class="login_form_item" placeholder="about"></textarea>
-
-        <div>Укажите страну проживания:</div>
-        <select v-model="user.country" class="category_form_title">
-            <option v-for="option in Store.countrys" :value="option.id">
-                {{ option.title }}                
-            </option>
-        </select>
-        <div>Укажите свой город:</div>
-        <select v-model="user.city" class="category_form_title">
-            <option v-for="option in Store.citys" :value="option.id">
-                {{ option.title }}                
-            </option>
-        </select>
-        <div>Укажите гражданство(страна):</div>
-        <select v-model="user.citizen" class="category_form_title">
-            <option v-for="option in Store.countrys" :value="option.id">
-                {{ option.title }}                
-            </option>
-        </select>
-        <div>Наличие справки из полиции об отсутствии судимости:</div>
-        <select v-model="user.criminal" class="category_form_title">
-            <option v-for="option in Store.criminals" :value="option.id">
-                {{ option.title }}                
-            </option>
-        </select>
-        <div>Согласны ли вы на переезд:</div>
-        <select v-model="user.moving" class="category_form_title">
-            <option v-for="option in Store.movings" :value="option.id">
-                {{ option.title }}                
-            </option>
-        </select>
-        <div>Укажите отношение к курению:</div>
-        <select v-model="user.smoking" class="category_form_title">
-            <option v-for="option in Store.smokings" :value="option.id">
-                {{ option.title }}                
-            </option>
-        </select>
-        <div>Укажите отношение к алкоголю:</div>
-        <select v-model="user.alcohol" class="category_form_title">
-            <option v-for="option in Store.alcohols" :value="option.id">
-                {{ option.title }}                
-            </option>
-        </select>
-        <div>Укажите семейное положение:</div>
-        <select v-model="user.status" class="category_form_title">
-            <option v-for="option in Store.statuss" :value="option.id">
-                {{ option.title }}                
-            </option>
-        </select>
-        <div>Укажите свою религию:</div>
-        <select v-model="user.religion" class="category_form_title">
-            <option v-for="option in Store.religions" :value="option.id">
-                {{ option.title }}                
-            </option>
-        </select>
-        <div>Укажите свой пароль:</div>
-        <input v-model="user.password" required class="login_form_item" type="password" placeholder="password">
-        <div>Подтвердите свой пароль:</div>
-        <input v-model="user.password_confirmation" required class="login_form_item" type="password" placeholder="confirm password">
-        <button type="submit" class="login_form_btn">register</button>
-    </form>
-
-    <div class="register_error" v-for="item in User.register_error" :key="item">
-        {{ item[0] }}
+    <div class="block">
+        <div class="block_back"></div>
+        <div class="block_content">
+            <div class="container">
+                <div class="staff_title">{{ $t('register.title') }}</div>
+                <div class="login_text">{{ $t('register.text') }}</div>
+            </div>
+            <div class="login_inner register_fix_inner">
+                <div class="container">
+                    <div class="login_content">
+                        <form @submit.prevent="register" class="login_form register_fix_form">
+                            <div class="login_start">
+                                <div class="login_form_text">{{ $t('register.item1') }}</div>
+                                <input v-model="name.ua" required class="login_form_item" type="text"
+                                    :placeholder="$t('register.item1_holder')">
+                                <div class="login_form_text">{{ $t('register.item1_en') }}</div>
+                                <input v-model="name.en" required class="login_form_item" type="text"
+                                    :placeholder="$t('register.item1_holder_en')">
+                                <div class="login_form_text">{{ $t('register.item2') }}</div>
+                                <input v-model="surname.ua" required class="login_form_item" type="text"
+                                    :placeholder="$t('register.item2_holder')">
+                                <div class="login_form_text">{{ $t('register.item2_en') }}</div>
+                                <input v-model="surname.en" required class="login_form_item" type="text"
+                                    :placeholder="$t('register.item2_holder_en')">
+                                <div class="login_form_text">{{ $t('register.item3') }}</div>
+                                <div class="register_phone">
+                                    <div class="login_form_item login_form_phone auth_arrow">
+                                        <div class="login_form_dropdown">
+                                            <img :src="selectedOption.icon" alt="" class="login_form_dropdown-icon">
+                                            {{ selectedOption.title }}
+                                        </div>
+                                        <ul class="login_form_dropdown-list">
+                                            <li v-for="option in Credential.credentials" :key="option.id"
+                                                @click.prevent="selectOption(option)">
+                                                <img :src="option.icon" alt="" class="login_form_dropdown-icon">
+                                                {{ option.title }}
+                                            </li>
+                                        </ul>
+                                    </div> &nbsp;&nbsp; <input v-model="user.phone" required class="login_form_item"
+                                        type="tel" :placeholder="$t('register.item3_holder')">
+                                </div>
+                                <div class="login_form_text">{{ $t('register.item4') }}</div>
+                                <input v-model="user.email" required class="login_form_item" type="email"
+                                    :placeholder="$t('register.item4_holder')">
+                                <div class="login_form_text">{{ $t('register.item9') }}</div>
+                                <select v-model="user.gender" class="login_form_item auth_arrow">
+                                    <option v-for="option in gender" :value="option.value">
+                                        {{ option.value[locale] }}
+                                    </option>
+                                </select>
+                                <div class="login_form_text">{{ $t('register.item10') }}</div>
+                                <input v-model="user.age" required class="login_form_item" type="date">
+                                <div class="login_form_text">{{ $t('register.item11') }}</div>
+                                <select v-model="user.animal_work" class="login_form_item auth_arrow">
+                                    <option v-for="option in work" :value="option.value">
+                                        {{ option.value[locale] }}
+                                    </option>
+                                </select>
+                                <div class="login_form_text">{{ $t('register.item12') }}</div>
+                                <textarea v-model="about.ua" required class="login_form_item register_textarea"
+                                    :placeholder="$t('register.item12_holder')"></textarea>
+                                <div class="login_form_text">{{ $t('register.item12_en') }}</div>
+                                <textarea v-model="about.en" required class="login_form_item register_textarea"
+                                    :placeholder="$t('register.item12_holder_en')"></textarea>
+                                <div class="login_form_text">{{ $t('register.item6') }}</div>
+                                <select v-model="user.city" class="login_form_item auth_arrow">
+                                    <option v-for="option in Store.citys" :value="option.id">
+                                        {{ option.title[locale] }}
+                                    </option>
+                                </select>
+                                <div class="login_form_text">{{ $t('register.item7') }}</div>
+                                <input v-model="user.password" required class="login_form_item" type="password"
+                                    :placeholder="$t('register.item7_holder')">
+                                <div class="login_form_text">{{ $t('register.item8') }}</div>
+                                <input v-model="user.password_confirmation" required class="login_form_item" type="password"
+                                    :placeholder="$t('register.item8_holder')">
+                            </div>
+                            <div v-if="User.register_error" class="login_middle">
+                                <ul v-for="item in User.register_error" :key="item">
+                                    <li>{{ item[0][locale] }}</li>
+                                </ul>
+                            </div>
+                            <div class="login_end">
+                                <button type="submit" class="btn">{{ $t('register.button') }}</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
+import { useI18n } from 'vue-i18n';
 import { useUserStore } from '../../stores/user';
 import { useDataStore } from '../../stores/variables';
+import { useCredentialStore } from '../../stores/credential';
 export default {
     name: "Register",
     data() {
         return {
-            user: {},            
+            user: {},
+            name: {},
+            surname: {},
+            about: {},
             gender: [
-                { value: 'Мужчина' },
-                { value: 'Женщина' }
+                { value: { en: "Man", ua: "Чоловік" } },
+                { value: { en: "Woman", ua: "Жінка" } }
             ],
             work: [
-                { value: 'Да' },
-                { value: 'Нет' }
+                { value: { en: "Yes", ua: "Так" } },
+                { value: { en: "No", ua: "Ні" } }
             ],
+            selectedOption: {},
         }
     },
     setup() {
         const User = useUserStore();
         const Store = useDataStore();
-        return { User, Store };
-    }, 
-    methods: {        
-        register() {
-            this.user.role = "Исполнитель"; 
-            this.user.confirmed = true;                                
-            this.User.CREATE_USER(this.user);                                    
-        }
+        const Credential = useCredentialStore();
+        const { t, locale } = useI18n({ useScope: 'global' });
+        return { t, locale, User, Store, Credential };
     },
-    mounted() {      
-        this.user.is_babysitting = false; this.user.is_nurse = false; this.user.is_housekeeper = false;
-        this.User.GET_TOKEN();
-        this.Store.GET_COUNTRYS(); 
-        this.Store.GET_CITYS(); 
-        this.Store.GET_CRIMINALS();
-        this.Store.GET_MOVINGS();
-        this.Store.GET_SMOKINGS();    
-        this.Store.GET_ALCOHOLS(); 
-        this.Store.GET_STATUSS(); 
-        this.Store.GET_RELIGIONS(); 
-        this.User.register_error = null;        
-    },    
+    methods: {
+        register() {
+            this.user.name = this.name;
+            this.user.surname = this.surname;
+            this.user.about = this.about;
+            this.user.role = "Исполнитель";
+            this.user.country = 5;
+            this.user.confirmed = true;
+            this.user.phone_code = this.selectedOption.id;
+
+            this.User.CREATE_USER(this.user);
+        },
+        selectOption(option) {
+            this.selectedOption = option;
+            //console.log(this.selectedOption.id);
+        },
+    },
+    mounted() {
+        //this.Store.GET_COUNTRYS();
+        this.Store.GET_CITYS();
+        this.Credential.GET_CREDENTIALS();
+        this.User.register_error = null;
+    },
 }
 </script>
+
+<style>
+.register_fix_inner {
+    min-height: 1500px;
+}
+
+.register_fix_form {
+    min-height: 1600px;
+}
+
+@media (max-width: 576px) {
+    .register_fix_inner {
+        min-height: 1450px;
+    }
+
+    .register_fix_form {
+        min-height: 1550px;
+    }
+}
+</style>

@@ -5,44 +5,34 @@ import router from "../router";
 export const useForm_HousekeeperStore = defineStore('form_housekeeper', {    
     state: () => {
         return {                        
-            keeper: {},
-            keeper_options: {},                      
+            keeper: null,
+            keeper_options: {},
+            errors: null                      
         }
     },
     actions: {  
         DELETE_KEEPER(data){                                
             api.post('api/auth/keeper/' + data[0], {_method: 'DELETE'})
                 .then((res) => {
-                    this.GET_KEEPER(data[0]);
+                    //this.GET_KEEPER(data[0]);
                     api.post('api/auth/keeperdutie/' + data[1], {_method: 'DELETE'})
-                    api.post('api/auth/keeperjoboption/' + data[1], {_method: 'DELETE'})
                     api.post('api/auth/keeperpreference/' + data[1], {_method: 'DELETE'})
                     api.post('api/auth/keepertypework/' + data[1], {_method: 'DELETE'})
+                    router.push({name: "CreateKeeper"});
                 })
                 .catch(error => { console.log(error); })
         },
         CHANGE_KEEPER(data){
             api.put('api/auth/keeper/' + data[0].id, data[0])      
                 .then((res) => {                
-                    this.GET_KEEPER(data[0].user_id);                
+                    //this.GET_KEEPER(data[0].user_id);                
                     api.post('api/auth/keeperdutie/' + data[0].id, {_method: 'DELETE'})
-                    api.post('api/auth/keeperjoboption/' + data[0].id, {_method: 'DELETE'})
                     api.post('api/auth/keeperpreference/' + data[0].id, {_method: 'DELETE'})
                     api.post('api/auth/keepertypework/' + data[0].id, {_method: 'DELETE'})        
                     
-                    let joboption = {};
-                    let result_joboption = [];
-                    data[1].forEach((element) => {                               
-                        joboption.form_id = data[0].id;
-                        joboption.keeperjoboption_id = element;
-                        result_joboption.push(joboption);
-                        joboption = {};                                                               
-                    })                  
-                    this.CREATE_FORMKEEPERJOBOPTION([result_joboption, result_joboption.length]);
-    
                     let preference = {};
                     let result_preference = [];
-                    data[2].forEach((element) => {                               
+                    data[1].forEach((element) => {                               
                         preference.form_id = data[0].id;
                         preference.keeperpreference_id = element;
                         result_preference.push(preference);
@@ -52,7 +42,7 @@ export const useForm_HousekeeperStore = defineStore('form_housekeeper', {
     
                     let keeperdutie = {};
                     let result_keeperdutie = [];
-                    data[3].forEach((element) => {                               
+                    data[2].forEach((element) => {                               
                         keeperdutie.form_id = data[0].id;
                         keeperdutie.keeperdutie_id = element;
                         result_keeperdutie.push(keeperdutie);
@@ -62,7 +52,7 @@ export const useForm_HousekeeperStore = defineStore('form_housekeeper', {
     
                     let keepertypework = {};
                     let result_keepertypework = [];
-                    data[4].forEach((element) => {                               
+                    data[3].forEach((element) => {                               
                         keepertypework.form_id = data[0].id;
                         keepertypework.keepertypework_id = element;
                         result_keepertypework.push(keepertypework);
@@ -71,24 +61,19 @@ export const useForm_HousekeeperStore = defineStore('form_housekeeper', {
                     this.CREATE_FORMKEEPERTYPEWORK([result_keepertypework, result_keepertypework.length]);                    
                     router.push({name: "Housekeeper"});
                 })
-                .catch(error => { console.log(error); })
+                .catch(error => { 
+                    this.errors = error.response.data.errors;                    
+                    for (const key in this.errors) {
+                        this.errors[key][0] = JSON.parse(this.errors[key][0]);
+                    } 
+                })
         },
         CREATE_KEEPER(data){                           
             api.post('api/auth/keeper', data[0])
-                .then((res) => {
-                    let joboption = {};
-                    let result_joboption = [];
-                    data[1].forEach((element) => {                               
-                        joboption.form_id = res.data.id;
-                        joboption.keeperjoboption_id = element;
-                        result_joboption.push(joboption);
-                        joboption = {};                                                               
-                    })                  
-                    this.CREATE_FORMKEEPERJOBOPTION([result_joboption, result_joboption.length]);
-    
+                .then((res) => {    
                     let preference = {};
                     let result_preference = [];
-                    data[2].forEach((element) => {                               
+                    data[1].forEach((element) => {                               
                         preference.form_id = res.data.id;
                         preference.keeperpreference_id = element;
                         result_preference.push(preference);
@@ -98,7 +83,7 @@ export const useForm_HousekeeperStore = defineStore('form_housekeeper', {
     
                     let keeperdutie = {};
                     let result_keeperdutie = [];
-                    data[3].forEach((element) => {                               
+                    data[2].forEach((element) => {                               
                         keeperdutie.form_id = res.data.id;
                         keeperdutie.keeperdutie_id = element;
                         result_keeperdutie.push(keeperdutie);
@@ -108,7 +93,7 @@ export const useForm_HousekeeperStore = defineStore('form_housekeeper', {
     
                     let keepertypework = {};
                     let result_keepertypework = [];
-                    data[4].forEach((element) => {                               
+                    data[3].forEach((element) => {                               
                         keepertypework.form_id = res.data.id;
                         keepertypework.keepertypework_id = element;
                         result_keepertypework.push(keepertypework);
@@ -116,37 +101,34 @@ export const useForm_HousekeeperStore = defineStore('form_housekeeper', {
                     })                  
                     this.CREATE_FORMKEEPERTYPEWORK([result_keepertypework, result_keepertypework.length]);
     
-                    this.GET_KEEPER(data[0].user_id);
+                    router.push({name: "Housekeeper"});
                 })
-                .catch(error => { console.log(error); })
+                .catch(error => { 
+                    this.errors = error.response.data.errors;                    
+                    for (const key in this.errors) {
+                        this.errors[key][0] = JSON.parse(this.errors[key][0]);
+                    } 
+                })
         },
         GET_KEEPER(data){ 
             api.get('api/auth/keeper', {params: {data}})
-                .then((res) => {                                                                                 
-                    this.keeper = res.data.data;
-                    let temp = [];
-                    for (let i = 0; i < res.data.data.Typeworks.length; i++) {            
-                        temp.push(res.data.data.Typeworks[i].id);
+                .then((res) => { 
+                    if(res.data !== null) {
+                        this.keeper = res.data.data;
+                        let temp = [];
+                        for (let i = 0; i < res.data.data.Typeworks.length; i++) {            
+                            temp.push(res.data.data.Typeworks[i].id);
+                        }
+                        this.keeper_options.anketatypeworks = temp; temp = [];
+                        for (let i = 0; i < res.data.data.Duties.length; i++) {            
+                            temp.push(res.data.data.Duties[i].id);
+                        }
+                        this.keeper_options.anketaduties = temp; temp = [];
+                        for (let i = 0; i < res.data.data.Preferences.length; i++) {            
+                            temp.push(res.data.data.Preferences[i].id);
+                        } 
+                        this.keeper_options.anketarpreferences = temp; temp = [];
                     }
-                    this.keeper_options.anketatypeworks = temp; temp = [];
-                    for (let i = 0; i < res.data.data.Joboptions.length; i++) {            
-                        temp.push(res.data.data.Joboptions[i].id);
-                    }
-                    this.keeper_options.anketajoboptions = temp; temp = [];        
-                    for (let i = 0; i < res.data.data.Duties.length; i++) {            
-                        temp.push(res.data.data.Duties[i].id);
-                    }
-                    this.keeper_options.anketaduties = temp; temp = [];
-                    for (let i = 0; i < res.data.data.Preferences.length; i++) {            
-                        temp.push(res.data.data.Preferences[i].id);
-                    } 
-                    this.keeper_options.anketarpreferences = temp; temp = [];
-                })
-                .catch(error => { console.log(error); })
-        },    
-        CREATE_FORMKEEPERJOBOPTION(data){            
-            api.post('api/auth/keeperjoboption', data)
-                .then((res) => {
                 })
                 .catch(error => { console.log(error); })
         },

@@ -1,11 +1,27 @@
 <template>
-    <div @click.prevent="back()" class="category_change_btn">Назад</div>
-    <div class="category_title">Изменение вида работы для сиделки:</div>
-    <form @submit.prevent="changeNursetypeofwork" class="category_form">
-        <div>Введите новое название вида работы:</div>
-        <input class="category_form_title" v-model="Store.nursetypeofwork.title" type="text" required placeholder="Напишите что-нибудь">                
-        <button class="category_form_btn" type="submit">Изменить вида работы</button>
-    </form>
+    <button @click.prevent="back()" class="btn btn-block btn-info btn-sm data_btn">Назад</button>
+    <div class="card card-warning">
+        <div class="card-header">
+            <h3 class="card-title">Зміна виду роботи для доглядальниці:</h3>
+        </div>
+        <form @submit.prevent="changeNursetypeofwork">
+            <div class="card-body">
+                <div class="form-group">
+                    <label>Введіть вид роботи українською мовою:</label>
+                    <input v-model="Store.nursetypeofwork.title.ua" type="text" class="form-control" required
+                        placeholder="вид роботи українською мовою">
+                </div>
+                <div class="form-group">
+                    <label>Введіть вид роботи англійською мовою:</label>
+                    <input v-model="Store.nursetypeofwork.title.en" type="text" class="form-control" required
+                        placeholder="вид роботи англійською мовою">
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-warning">Змінити вид роботи</button>
+            </div>
+        </form>
+    </div>
 </template>
 
 <script>
@@ -15,14 +31,14 @@ export default {
     setup() {
         const Store = useDataStore();
         return { Store };
-    }, 
+    },
     methods: {
         back() {
-            this.$router.push({name: "Nursetypeofwork"})
+            this.$router.push({ name: "Nursetypeofwork" })
         },
-        changeNursetypeofwork() {            
+        changeNursetypeofwork() {
             this.Store.CHANGE_NURSETYPEOFWORK(this.Store.nursetypeofwork);
-            this.$router.push({name: "Nursetypeofwork"})
+            this.$router.push({ name: "Nursetypeofwork" })
         }
     },
 }

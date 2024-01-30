@@ -1,11 +1,27 @@
 <template>
-    <div @click.prevent="back()" class="category_change_btn">Назад</div>
-    <div class="category_title">Изменение возрастную групу:</div>
-    <form @submit.prevent="changeAgegroup" class="category_form">
-        <div>Введите новое название возрастной групы:</div>
-        <input class="category_form_title" v-model="Store.agegroup.title" type="text" required placeholder="Напишите что-нибудь">                
-        <button class="category_form_btn" type="submit">Изменить возрастную групу</button>
-    </form>
+    <button @click.prevent="back()" class="btn btn-block btn-info btn-sm data_btn">Назад</button>
+    <div class="card card-warning">
+        <div class="card-header">
+            <h3 class="card-title">Зміна вікової групи:</h3>
+        </div>
+        <form @submit.prevent="changeAgegroup">
+            <div class="card-body">
+                <div class="form-group">
+                    <label>Введіть вікову групу українською мовою:</label>
+                    <input v-model="Store.agegroup.title.ua" type="text" class="form-control" required
+                        placeholder="вікова група українською мовою">
+                </div>
+                <div class="form-group">
+                    <label>Введіть вікову групу англійською мовою:</label>
+                    <input v-model="Store.agegroup.title.en" type="text" class="form-control" required
+                        placeholder="вікова група англійською мовою">
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-warning">Змінити вікову групу</button>
+            </div>
+        </form>
+    </div>
 </template>
 
 <script>
@@ -13,16 +29,16 @@ import { useDataStore } from '../../stores/variables'
 export default {
     name: 'Change-agegroup',
     setup() {
-        const Store = useDataStore();        
+        const Store = useDataStore();
         return { Store };
     },
     methods: {
         back() {
-            this.$router.push({name: "Agegroup"})
+            this.$router.push({ name: "Agegroup" })
         },
-        changeAgegroup() {            
+        changeAgegroup() {
             this.Store.CHANGE_AGEGROUP(this.Store.agegroup);
-            this.$router.push({name: "Agegroup"})
+            this.$router.push({ name: "Agegroup" })
         }
     },
 }

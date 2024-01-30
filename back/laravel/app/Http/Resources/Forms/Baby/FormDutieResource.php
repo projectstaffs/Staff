@@ -22,7 +22,7 @@ class FormDutieResource extends JsonResource
             if($item->id == $this->dutie_id) {
                 return [
                     'id' => $this->dutie_id,
-                    'title' => $item->title            
+                    'title' => $item            
                 ];                
             }                           
         }

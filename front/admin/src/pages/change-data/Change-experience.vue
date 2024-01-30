@@ -1,11 +1,27 @@
 <template>
-    <div @click.prevent="back()" class="category_change_btn">Назад</div>
-    <div class="category_title">Изменение опыта работы:</div>
-    <form @submit.prevent="changeExperience" class="category_form">
-        <div>Введите новое название опыта работы:</div>
-        <input class="category_form_title" v-model="Store.experience.title" type="text" required placeholder="Напишите что-нибудь">                
-        <button class="category_form_btn" type="submit">Изменить опыт работы</button>
-    </form>
+    <button @click.prevent="back()" class="btn btn-block btn-info btn-sm data_btn">Назад</button>
+    <div class="card card-warning">
+        <div class="card-header">
+            <h3 class="card-title">Зміна досвіду роботи:</h3>
+        </div>
+        <form @submit.prevent="changeExperience">
+            <div class="card-body">
+                <div class="form-group">
+                    <label>Введіть досвід роботи українською мовою:</label>
+                    <input v-model="Store.experience.title.ua" type="text" class="form-control" required
+                        placeholder="досвід роботи українською мовою">
+                </div>
+                <div class="form-group">
+                    <label>Введіть досвід роботи англійською мовою:</label>
+                    <input v-model="Store.experience.title.en" type="text" class="form-control" required
+                        placeholder="досвід роботи англійською мовою">
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-warning">Змінити досвід роботи</button>
+            </div>
+        </form>
+    </div>
 </template>
 
 <script>
@@ -18,11 +34,11 @@ export default {
     },
     methods: {
         back() {
-            this.$router.push({name: "Experience"})
+            this.$router.push({ name: "Experience" })
         },
-        changeExperience() {            
+        changeExperience() {
             this.Store.CHANGE_EXPERIENCE(this.Store.experience);
-            this.$router.push({name: "Experience"})
+            this.$router.push({ name: "Experience" })
         }
     },
 }

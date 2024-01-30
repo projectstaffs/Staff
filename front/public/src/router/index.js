@@ -10,6 +10,108 @@ const router = createRouter({
             component: () => import('../pages/user/Home.vue')
         },
         {
+            path: '/about',
+            name: 'About', 
+            meta: {layout: 'User'},     
+            component: () => import('../pages/staff/About.vue')
+        },
+        {
+            path: '/contacts',
+            name: 'Contacts', 
+            meta: {layout: 'User'},     
+            component: () => import('../pages/staff/Contacts.vue')
+        },
+        {
+            path: '/privacy',
+            name: 'Privacy', 
+            meta: {layout: 'User'},     
+            component: () => import('../pages/staff/Privacy.vue')
+        },
+        {
+            path: '/contract',
+            name: 'Contract', 
+            meta: {layout: 'User'},     
+            component: () => import('../pages/staff/Contract.vue')
+        },
+        {
+            path: '/servicepackages',
+            name: 'ServicePackages', 
+            meta: {layout: 'User'},     
+            component: () => import('../pages/staff/client/ServicePackages.vue')
+        },
+        {
+            path: '/service',
+            name: 'Service', 
+            meta: {layout: 'User'},     
+            component: () => import('../pages/staff/client/Service.vue')
+        },
+        {
+            path: '/study',
+            name: 'Study', 
+            meta: {layout: 'User'},     
+            component: () => import('../pages/staff/worker/Study.vue')
+        },
+        {
+            path: '/popup',
+            name: 'Popup', 
+            meta: {layout: 'User'},     
+            component: () => import('../pages/staff/Popup.vue')
+        },
+        {
+            path: '/popupmail',
+            name: 'PopupMail', 
+            meta: {layout: 'User'},     
+            component: () => import('../pages/staff/PopupMail.vue')
+        },
+        {
+            path: '/popupblock',
+            name: 'PopupBlock', 
+            meta: {layout: 'User'},     
+            component: () => import('../pages/staff/PopupBlock.vue')
+        },
+        {
+            path: '/training',
+            name: 'Training', 
+            meta: {layout: 'User'},     
+            component: () => import('../pages/staff/worker/Training.vue')
+        },
+        {
+            path: '/seekers',
+            name: 'Seekers', 
+            meta: {layout: 'User'},     
+            component: () => import('../pages/staff/worker/Seekers.vue')
+        },
+        {
+            path: '/сonditions',
+            name: 'Сonditions', 
+            meta: {layout: 'User'},     
+            component: () => import('../pages/staff/worker/Сonditions.vue')
+        },
+        {
+            path: '/interview',
+            name: 'Interview', 
+            meta: {layout: 'User'},     
+            component: () => import('../pages/staff/worker/Interview.vue')
+        },
+        {
+            path: '/information',
+            name: 'Information', 
+            meta: {layout: 'User'},     
+            component: () => import('../pages/staff/Information.vue')
+        },
+        {
+            path: '/homestaff',
+            name: 'HomeStaff', 
+            meta: {layout: 'User'},     
+            component: () => import('../pages/staff/client/HomeStaff.vue')
+        },
+        {
+            path: '/businessstaff',
+            name: 'BusinessStaff', 
+            meta: {layout: 'User'},     
+            component: () => import('../pages/staff/client/BusinessStaff.vue')
+        },
+        {
             name: 'ClientBabyAll',
             path: '/c_baby',
             meta: {layout: 'User'},            
@@ -94,12 +196,6 @@ const router = createRouter({
             component: () =>import('../pages/user/Forgot.vue')
         },
         {
-            name: 'Register-menu',
-            path: '/register_menu', 
-            meta: {layout: 'User'},           
-            component: () =>import('../pages/user/Register-menu.vue')
-        },
-        {
             name: 'Register',
             path: '/register', 
             meta: {layout: 'User'},           
@@ -117,13 +213,7 @@ const router = createRouter({
             path: '/account',
             meta: {layout: 'Cabinet'},
             component: () =>import('../pages/cabinet/Account.vue')
-        },
-        {
-            name: 'Mailbox',
-            path: '/mailbox',
-            meta: {layout: 'Cabinet'},
-            component: () =>import('../pages/cabinet/Mailbox.vue')
-        },
+        },        
         {
             name: 'Myphoto',
             path: '/myphoto',
@@ -137,40 +227,16 @@ const router = createRouter({
             component: () =>import('../pages/cabinet/Edit.vue')
         },
         {
-            name: 'Vacancies',
-            path: '/vacancies',
-            meta: {layout: 'Cabinet'},
-            component: () =>import('../pages/cabinet/Vacancies.vue')
-        },
-        {
-            name: 'Credentials',
-            path: '/credentials',
-            meta: {layout: 'Cabinet'},
-            component: () =>import('../pages/cabinet/Credentials.vue')
-        },
-        {
-            name: 'Change-credential',
-            path: '/change-credential',
-            meta: {layout: 'Cabinet'},
-            component: () =>import('../pages/cabinet/Change-credential.vue')
-        },
-        {
-            name: 'Sent',
-            path: '/sent',
-            meta: {layout: 'Cabinet'},
-            component: () =>import('../pages/cabinet/Sent.vue')
-        },
-        {
-            name: 'Incoming',
-            path: '/incoming',
-            meta: {layout: 'Cabinet'},
-            component: () =>import('../pages/cabinet/Incoming.vue')
-        },
-        {
             name: 'Babysitting',
             path: '/babysitting',
             meta: {layout: 'Cabinet'},
             component: () =>import('../pages/cabinet/forms/Babysitting.vue')
+        },
+        {
+            name: 'CreateBabysitting',
+            path: '/createbabysitting',
+            meta: {layout: 'Cabinet'},
+            component: () =>import('../pages/cabinet/forms/CreateBabysitting.vue')
         },
         {
             name: 'Change-babysitting',
@@ -185,6 +251,12 @@ const router = createRouter({
             component: () =>import('../pages/cabinet/forms/Housekeeper.vue')
         },
         {
+            name: 'CreateKeeper',
+            path: '/createkeeper',
+            meta: {layout: 'Cabinet'},
+            component: () =>import('../pages/cabinet/forms/CreateKeeper.vue')
+        },
+        {
             name: 'Change-housekeeper',
             path: '/change-housekeeper',
             meta: {layout: 'Cabinet'},
@@ -195,6 +267,12 @@ const router = createRouter({
             path: '/nurse',
             meta: {layout: 'Cabinet'},
             component: () =>import('../pages/cabinet/forms/Nurse.vue')
+        },
+        {
+            name: 'CreateNurse',
+            path: '/createnurse',
+            meta: {layout: 'Cabinet'},
+            component: () =>import('../pages/cabinet/forms/CreateNurse.vue')
         },
         {
             name: 'Change-nurse',
@@ -209,6 +287,12 @@ const router = createRouter({
             component: () =>import('../pages/cabinet/client/Client_baby.vue')
         },
         {
+            name: 'CreateClientBaby',
+            path: '/createclientbaby',
+            meta: {layout: 'Cabinet'},
+            component: () =>import('../pages/cabinet/client/CreateClientBaby.vue')
+        },
+        {
             name: 'Change-client_baby',
             path: '/change-client_baby',
             meta: {layout: 'Cabinet'},
@@ -221,6 +305,12 @@ const router = createRouter({
             component: () =>import('../pages/cabinet/client/Client_nurse.vue')
         },
         {
+            name: 'CreateClientNurse',
+            path: '/createclientnurse',
+            meta: {layout: 'Cabinet'},
+            component: () =>import('../pages/cabinet/client/CreateClientNurse.vue')
+        },
+        {
             name: 'Change-client_nurse',
             path: '/change-client_nurse',
             meta: {layout: 'Cabinet'},
@@ -231,6 +321,12 @@ const router = createRouter({
             path: '/client_keeper',
             meta: {layout: 'Cabinet'},
             component: () =>import('../pages/cabinet/client/Client_keeper.vue')
+        },
+        {
+            name: 'CreateClientKeeper',
+            path: '/createclientkeeper',
+            meta: {layout: 'Cabinet'},
+            component: () =>import('../pages/cabinet/client/CreateClientKeeper.vue')
         },
         {
             name: 'Change-client_keeper',
@@ -247,24 +343,104 @@ const router = createRouter({
     ]
 })
 
-router.beforeEach((to, from, next) => {    
+router.beforeEach((to, from, next) => { 
+    if((to.name === 'Forgot' || to.name === 'Login' || to.name === 'Register'|| to.name === 'Register-menu' || to.name === 'Register-employer') && localStorage.access_token){
+        return next({
+            name: 'Home'
+        })
+    } 
+
     if(!localStorage.access_token){
-        if(to.name === 'Forgot' || to.name === 'Login' || to.name === 'Register' || to.name === 'Register-menu' || to.name === 'Register-employer' || to.name === 'Home'){
+        if(to.name === 'Forgot' || to.name === 'Login' || to.name === 'Register' || to.name === 'Register-employer' || 
+            to.name === 'Home' || to.name === 'About' || to.name === 'Contacts' || to.name === 'Privacy' || to.name === 'Contract' || to.name === 'Service' || 
+            to.name === 'ServicePackages' || to.name === 'Popup' || to.name === 'PopupMail' || to.name === 'PopupBlock' || to.name === 'Seekers' || 
+            to.name === 'Сonditions' || to.name === 'Interview' || to.name === 'Information' || to.name === 'HomeStaff' || to.name === 'BusinessStaff'){
             return next()
         } else {
             return next({
                 name: 'Login'
             })
         }
-    }    
-
-    if((to.name === 'Forgot' || to.name === 'Login' || to.name === 'Register'|| to.name === 'Register-menu' || to.name === 'Register-employer') && localStorage.access_token){
-        return next({
-            name: 'Home'
-        })
-    }    
+    } 
+     
+    if(localStorage.access_token && (localStorage.userVerify === 'null')) {
+        if(to.name === 'Forgot' || to.name === 'Login' || to.name === 'Register' || to.name === 'Register-employer' || 
+            to.name === 'Home' || to.name === 'About' || to.name === 'Contacts' || to.name === 'Privacy' || to.name === 'Contract' || to.name === 'Service' || 
+            to.name === 'ServicePackages' || to.name === 'Popup' || to.name === 'PopupMail' || to.name === 'PopupBlock' || to.name === 'Seekers' || 
+            to.name === 'Сonditions' || to.name === 'Interview' || to.name === 'Information' || to.name === 'HomeStaff' || to.name === 'BusinessStaff'){
+            return next()
+        } else {
+            return next({
+                name: 'PopupMail'
+            })
+        }
+    } 
+    
+    if((localStorage.access_token) && ((localStorage.userConfirmed === '0') || (localStorage.userConfirmed === 'false'))) {
+        if(to.name === 'Forgot' || to.name === 'Login' || to.name === 'Register' || to.name === 'Register-employer' || 
+            to.name === 'Home' || to.name === 'About' || to.name === 'Contacts' || to.name === 'Privacy' || to.name === 'Contract' || to.name === 'Service' || 
+            to.name === 'ServicePackages' || to.name === 'Popup' || to.name === 'PopupMail' || to.name === 'PopupBlock' || to.name === 'Seekers' || 
+            to.name === 'Сonditions' || to.name === 'Interview' || to.name === 'Information' || to.name === 'HomeStaff' || to.name === 'BusinessStaff'){
+            return next()
+        } else {
+            return next({
+                name: 'PopupBlock'
+            })
+        }
+    }
 
     next();
 });
 
 export default router
+
+/* 
+{
+    name: 'EditClient',
+    path: '/editclient',
+    meta: {layout: 'Cabinet'},
+    component: () =>import('../pages/cabinet/EditClient.vue')
+},
+{
+    name: 'Register-menu',
+    path: '/register_menu', 
+    meta: {layout: 'User'},           
+    component: () =>import('../pages/user/Register-menu.vue')
+},
+{
+    name: 'Mailbox',
+    path: '/mailbox',
+    meta: {layout: 'Cabinet'},
+    component: () =>import('../pages/cabinet/Mailbox.vue')
+},
+{
+    name: 'Sent',
+    path: '/sent',
+    meta: {layout: 'Cabinet'},
+    component: () =>import('../pages/cabinet/Sent.vue')
+},
+{
+    name: 'Incoming',
+    path: '/incoming',
+    meta: {layout: 'Cabinet'},
+    component: () =>import('../pages/cabinet/Incoming.vue')
+},
+{
+    name: 'Vacancies', // Отзывы
+    path: '/vacancies',
+    meta: {layout: 'Cabinet'},
+    component: () =>import('../pages/cabinet/Vacancies.vue')
+},
+{
+    name: 'Credentials', // Рекомендации
+    path: '/credentials',
+    meta: {layout: 'Cabinet'},
+    component: () =>import('../pages/cabinet/Credentials.vue')
+},
+{
+    name: 'Change-credential',
+    path: '/change-credential',
+    meta: {layout: 'Cabinet'},
+    component: () =>import('../pages/cabinet/Change-credential.vue')
+},
+*/

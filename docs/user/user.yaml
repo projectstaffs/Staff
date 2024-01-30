@@ -1,0 +1,170 @@
+openapi: 3.0.0
+info:
+  title: User API
+  version: 1.0.0
+tags:
+  - name: users
+    description: Endpoints related to user management
+paths:
+  /users:
+    get:
+      summary: Get a list of users
+      tags:
+        - users
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  name:
+                    en: "User 1"
+                    ua: "Користувач 1"
+                  email: "user1@example.com"
+                  role: "user"
+                  confirmed: true
+                  surname:
+                    en: "Surname 1"
+                    ua: "Прізвище 1"
+                  phone: "+123456789"
+                  phone_code: "+1"
+                  gender:
+                    en: "Male"
+                    ua: "Чоловіча"
+                  age: 30
+                  animal_work:
+                    en: "Yes"
+                    ua: "Так"
+                  about:
+                    en: "About User 1"
+                    ua: "Про Користувача 1"
+                  country: "Country 1"
+                  city: "City 1"
+                - id: 2
+                  name:
+                    en: "User 2"
+                    ua: "Користувач 2"
+                  email: "user2@example.com"
+                  role: "admin"
+                  confirmed: true
+                  surname:
+                    en: "Surname 2"
+                    ua: "Прізвище 2"
+                  phone: "+987654321"
+                  phone_code: "+1"
+                  gender:
+                    en: "Female"
+                    ua: "Жіноча"
+                  age: 25
+                  animal_work:
+                    en: "No"
+                    ua: "Ні"
+                  about:
+                    en: "About User 2"
+                    ua: "Про Користувача 2"
+                  country: "Country 2"
+                  city: "City 2"
+        '401':
+          description: Unauthorized
+
+    post:
+      summary: Create a new user
+      tags:
+        - users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              name:
+                en: "New User"
+                ua: "Новий Користувач"
+              email: "newuser@example.com"
+              password: "newuserpassword"
+              role: "user"
+              confirmed: false
+              surname:
+                en: "New Surname"
+                ua: "Нове Прізвище"
+              phone: "+987654321"
+              phone_code: "+1"
+              gender:
+                en: "Other"
+                ua: "Інше"
+              age: 28
+              animal_work:
+                en: "Yes"
+                ua: "Так"
+              about:
+                en: "About New User"
+                ua: "Про Нового Користувача"
+              country: "Country 3"
+              city: "City 3"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                access_token: "example_token"
+                user:
+                  id: 3
+                  name:
+                    en: "New User"
+                    ua: "Новий Користувач"
+                  email: "newuser@example.com"
+                  role: "user"
+                  confirmed: false
+                  surname:
+                    en: "New Surname"
+                    ua: "Нове Прізвище"
+                  phone: "+987654321"
+                  phone_code: "+1"
+                  gender:
+                    en: "Other"
+                    ua: "Інше"
+                  age: 28
+                  animal_work:
+                    en: "Yes"
+                    ua: "Так"
+                  about:
+                    en: "About New User"
+                    ua: "Про Нового Користувача"
+                  country: "Country 3"
+                  city: "City 3"
+        '401':
+          description: Unauthorized
+
+  /users/{id}:
+    get:
+      summary: Get a user by ID
+      tags:
+        - users
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                id: 1
+                name:
+                  en: "User 1"
+                  ua: "Користувач 1"
+                email: "user1@example.com"
+                role: "user"
+                confirmed: true
+                surname:
+                  en: "Surname 1"
+                  ua: "Прізвище 1"
+                phone: "+123456789"
+                phone_code: "+1"
+                gender:
+                  en: "Male"
+                  ua: "Чоловік"

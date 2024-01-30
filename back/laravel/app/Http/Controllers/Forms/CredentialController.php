@@ -6,26 +6,17 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use App\Models\Forms\Credential;
-use App\Http\Requests\Worker\CredentialRequest;
 
 class CredentialController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
         if(!Cache::has('credentials')) { Cache::put('credentials', Credential::all()); }
         $Credentials = Cache::get('credentials');
-        $credentials = array();
-        foreach ($Credentials as $item) {
-            if($item->user_id == $request["data"]) {
-                array_push($credentials, $item);
-            }                           
-        }
-
-        if($credentials) { return $credentials; }
-        else { return null; }
+        return $Credentials;
     }
 
     /**
@@ -39,14 +30,11 @@ class CredentialController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CredentialRequest $request)
+    public function store(Request $request)
     {
         $credential = new Credential([
-            'full_name' => $request->full_name,
-            'phone' => $request->phone,
-            'email' => $request->email,
-            'content' => $request->content,
-            'user_id' => $request->user_id,
+            'title' => $request->title,
+            'icon' => $request->icon,
         ]);                
         $credential->save(); 
         
@@ -76,10 +64,8 @@ class CredentialController extends Controller
     public function update(CredentialRequest $request, string $id)
     {
         $credential = Credential::find($id);
-        $credential->full_name = $request['full_name'];
-        $credential->phone = $request['phone'];
-        $credential->email = $request['email'];
-        $credential->content = $request['content'];
+        $credential->title = $request['title'];
+        $credential->icon = $request['icon'];
         $credential->save();
 
         Cache::put('credentials', Credential::all());

@@ -1,0 +1,55 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: User Languages API
+paths:
+  /forms/userlanguages:
+    post:
+      summary: Add user languages
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  user_id:
+                    type: string
+                    description: User ID
+                  language_id:
+                    type: string
+                    description: Language ID
+                required:
+                  - user_id
+                  - language_id
+              example:
+                - user_id: "1"
+                  language_id: "2"
+                - user_id: "1"
+                  language_id: "3"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: 2
+
+  /forms/userlanguages/{id}:
+    delete:
+      summary: Remove user languages by user ID
+      parameters:
+        - name: id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                message: "User languages successfully removed"

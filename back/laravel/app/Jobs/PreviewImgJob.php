@@ -34,10 +34,10 @@ class PreviewImgJob implements ShouldQueue
     public function handle(): void
     {
         $imageContent = Storage::disk('minio')->get($this->path);
-        
+    
         $imagine = new Imagine();
         $image = $imagine->load($imageContent);
-        $image->resize(new Box(100, 100));
+        $image->resize(new Box(250, 250));
         $updatedImageData = $image->get('jpg'); // Указываем формат 'jpeg', или другой подходящий формат
 
         Storage::disk('minio')->put($this->previewName, $updatedImageData);

@@ -1,110 +1,88 @@
-<template>    
-    <div @click.prevent="back()" class="category_change_btn">Назад</div>
-    <div class="anketa">
-        <div v-if="Views.clientBabyitemUser.image" class="anketaitem_img"> <img :src="Views.clientBabyitemUser.image" alt="photo"> </div>
-        <div class="anketa_content">
-            <div class="anketa_content_name">
-                {{ Views.clientBabyitem.title }} 
-            </div>
-            <div class="anketa_content_age">
-                <b>Имя работодателя:</b> {{ Views.clientBabyitemUser.name }} {{ Views.clientBabyitemUser.patronymic }} {{ Views.clientBabyitemUser.surname }}
-            </div>
-            <div class="anketa_content_typeworks">
-                <b>Место работы: </b> {{ Views.clientBabyitemUser.city }}                    
-            </div>
-            <div class="anketa_content_phone">
-                <b>Телефон:</b> {{ Views.clientBabyitemUser.phone_number }}
-            </div>
-            <div class="anketa_content_phone">
-                <b>Электронная почта:</b> {{ Views.clientBabyitemUser.email }}
-            </div>
+<template>
+    <div class="block">
+        <div class="block_back"></div>
+        <div class="block_content">
+            <div class="container">
+                <div class="staff_title"> {{ $t('c_keeper.view_title') }} </div>
+                <button @click.prevent="back" class="btn btn_search">{{ $t('search.item4') }}</button>
+                <div class="anketa">
+                    <div class="anketa_block">
+                        <div class="anketa_inner">
+                            <div v-if="Views.clientBabyitemUser.name" class="anketa_text">
+                                {{ Views.clientBabyitemUser.name[locale] }}
+                                {{ Views.clientBabyitemUser.surname[locale] }}
+                            </div>
+                            <div v-if="Views.clientBabyitemUser.city_title" class="anketa_text">
+                                {{ $t('cabinet.city') }} {{ Views.clientBabyitemUser.city_title.title[locale] }}
+                            </div>
+                            <div class="anketa_item anketa_fix">{{ $t('baby_anketa.item4') }}</div>
+                            <div class="anketa_text">{{ Views.clientBabyitemUser.phone_number }}</div>
+                        </div>
+                        <div class="cabinet_box">
+                            <img v-if="Views.clientBabyitemUser.image" class="cabinet_img"
+                                :src="Views.clientBabyitemUser.image" alt="">
+                            <div v-else class="cabinet_noimg">{{ $t('cabinet.no_img') }}</div>
+                        </div>
+                    </div>
 
-            <h2 class="anketa_title client">Отправить сообщение работодателю</h2>
-            <div class="anketa_msg_title">Кому: {{ Views.clientBabyitemUser.name }}</div>
-            <form @submit.prevent="sentMessage" class="login_form">                
-                <div>Укажите тему сообщения:</div>
-                <input v-model="User.user.title" required class="login_form_item" type="text" placeholder="тема">
-                <div>Напишите текст сообщения:</div>        
-                <textarea v-model="User.user.content" required class="login_form_item" placeholder="about"></textarea>        
-                <button type="submit" class="login_form_btn">Отправить сообщение</button>
-            </form>
+                    <div class="anketa_item">{{ $t('c_baby.item3') }}</div>
+                    <div class="anketa_text" v-if="Views.clientBabyitem.title_about">{{
+                        Views.clientBabyitem.title_about[locale] }}</div>
+                    <div class="anketa_item"> {{ $t('baby_anketa.item14') }} </div>
+                    <div v-if="Views.clientBabyitem.childrencount" class="anketa_text"> {{
+                        Views.clientBabyitem.childrencount.title[locale] }} </div>
 
-            <div class="register_error" v-for="item in User.global_error" :key="item"> {{ item[0] }} </div>
-            <div class="msg_success">{{ Message.success }}</div>
+                    <div class="anketa_item">{{ $t('baby_anketa.item9') }}</div>
+                    <span v-if="Views.clientBabyitem.Agegroups" class="anketa_text"
+                        v-for="(item, index) in Views.clientBabyitem.Agegroups" :key="index">
+                        {{ item.title.title[locale] }}
+                        {{ index < Views.clientBabyitem.Agegroups.length - 1 ? ', ' : '' }} </span>
 
-            <h2 class="anketa_title">Описание работы</h2>
-            <p class="anketa_client_about">{{ Views.clientBabyitem.title_about }}</p>
-            
-            <div class="anketa_content_phone">
-                <b>Количество детей: </b> {{ Views.clientBabyitem.childrencount }}
+                            <div class="anketa_item anketa_fix">{{ $t('baby_anketa.item13') }}</div>
+                            <div v-if="Views.clientBabyitem.monthpay" class="anketa_text">
+                                {{ Views.clientBabyitem.monthpay.title[locale] }}
+                            </div>
+                            <div class="anketa_item">{{ $t('baby_anketa.item15') }}</div>
+                            <div v-if="Views.clientBabyitem.workperiod" class="anketa_text">
+                                {{ Views.clientBabyitem.workperiod.title[locale] }}
+                            </div>
+                            <div class="anketa_item">{{ $t('baby_anketa.item16') }}</div>
+                            <span v-if="Views.clientBabyitem.Duties" class="anketa_text"
+                                v-for="(item, index) in Views.clientBabyitem.Duties" :key="index">
+                                {{ item.title.title[locale] }}
+                                {{ index < Views.clientBabyitem.Duties.length - 1 ? ', ' : '' }} </span>
+                </div>
+
+                <div class="view_fixmargin">
+                    <div @click.prevent="join" class="btn">{{ $t('c_keeper.view_join') }}</div>
+                </div>
             </div>
-            <div class="anketa_content_phone">
-                <b>Возраст детей: </b> <span v-for="age in Views.clientBabyitem.Agegroups" :key="age.id"> {{ age.title }},&nbsp; </span>
-            </div>
-            
-            <div class="anketa_inform">
-                <div class="anketa_inform_item">
-                    <b>Занятость:</b> <br> 
-                    <span v-for="work in Views.clientBabyitem.Joboptions" :key="work.id"> {{ work.title }},&nbsp; </span>
-                    {{ Views.clientBabyitem.employment }}
-                </div>
-                <div class="anketa_inform_item">
-                    <b>Заработная плата:</b> <br> 
-                    {{ Views.clientBabyitem.monthpay }}
-                </div>
-                <div class="anketa_inform_item">
-                    <b>Работа на срок:</b> <br> 
-                    {{ Views.clientBabyitem.workperiod }}
-                </div>
-                <div class="anketa_inform_item">
-                    <b>Наличие водительского удостоверения:</b> <br> {{ Views.clientBabyitem.drive }}
-                </div>
-                <div class="anketa_inform_item">
-                    <b>Готовность выполнять следующие обязанности:</b> <br> 
-                    <span v-for="work in Views.clientBabyitem.Duties" :key="work.id"> {{ work.title }},&nbsp; </span>
-                </div>                
-            </div>            
         </div>
     </div>
 </template>
 
 <script>
+import { useI18n } from 'vue-i18n';
 import { useViewsStore } from '../../../stores/views';
 import { useUserStore } from '../../../stores/user';
-import { useMessageStore } from '../../../stores/message';
 export default {
     name: 'ClientBabyItem',
     setup() {
         const Views = useViewsStore();
         const User = useUserStore();
-        const Message = useMessageStore();
-        return { Views, User, Message };
+        const { t, locale } = useI18n({ useScope: 'global' });
+        return { Views, User, t, locale };
     },
     methods: {
-        back() {
-            this.$router.push({name: "ClientBabyAll"})
-        },
-        sentMessage() {
-            this.Message.success = '';
-            this.User.global_error = null;
-            this.User.user.reading = 0
-            this.User.user.sender = this.User.user.id
-            this.User.user.recipient = this.Views.clientBabyitemUser.id;
-            this.User.user.time = new Date().toLocaleTimeString('en-US', {
-                hour12: false, hour: 'numeric', minute: 'numeric'
-            });
-            
-            this.Message.CREATE_MESSAGE_USER(this.User.user);
-            this.User.user.title = ''; this.User.user.content = '';           
-        },
+        back() { this.$router.push({ name: "ClientBabyAll" }) },
+        join() { this.$router.push({ name: "Popup" }); }
     },
     mounted() {
-        this.User.GET_TOKEN();
         this.Views.GET_CLIENTBABY_ITEM();
         this.User.GET_USER();
-        this.User.global_error = null;
-        this.Message.success = '';
-        let watch = {}; watch.user_id = localStorage.userID; watch.anketa_id = this.Views.clientBabyitem.id;
+        let watch = {};
+        watch.user_id = localStorage.userID;
+        watch.anketa_id = this.Views.clientBabyitem.id;
         this.Views.ADD_CLIENTBABY(watch);
     },
 }

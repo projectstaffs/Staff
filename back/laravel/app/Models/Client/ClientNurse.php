@@ -4,9 +4,12 @@ namespace App\Models\Client;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
 
 class ClientNurse extends Model
 {
-    use HasFactory;
-    protected $fillable = ['user_id', 'confirmed', 'title', 'title_about', 'workperiod_id', 'employment_id', 'drive', 'agents', 'hourpay_id', 'monthpay_id',];
+    use HasFactory; use HasTranslations;
+
+    protected $fillable = ['user_id', 'confirmed', 'title_about', 'workperiod_id', 'hourpay_id', 'monthpay_id',];
+    public $translatable = [ 'title_about' ];
 }

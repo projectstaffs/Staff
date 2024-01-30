@@ -34,7 +34,10 @@ class ChildrenController extends Controller
     public function store(Request $request)
     {
         $children = new Children([
-            'title' => $request->title
+            'title' => [
+               'en' => $request->en,
+               'ua' => $request->ua
+            ],
         ]);
         $children->save();  
         
@@ -64,7 +67,10 @@ class ChildrenController extends Controller
     public function update(Request $request, string $id)
     {
         $children = Children::find($id);
-        $children->title = $request['title'];
+        $children->title = [
+               'en' => $request->title['en'],
+               'ua' => $request->title['ua']
+            ];
         $children->save();
 
         Cache::put('childrens', Children::all());

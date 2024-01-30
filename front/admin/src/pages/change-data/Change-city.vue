@@ -1,11 +1,27 @@
 <template>
-    <div @click.prevent="back()" class="category_change_btn">Назад</div>
-    <div class="category_title">Изменение город:</div>
-    <form @submit.prevent="changeCity" class="category_form">
-        <div>Введите новое название города:</div>
-        <input class="category_form_title" v-model="Store.city.title" type="text" required placeholder="Напишите что-нибудь">                
-        <button class="category_form_btn" type="submit">Изменить город</button>
-    </form>
+    <button @click.prevent="back()" class="btn btn-block btn-info btn-sm data_btn">Назад</button>
+    <div class="card card-warning">
+        <div class="card-header">
+            <h3 class="card-title">Зміна міста проживання:</h3>
+        </div>
+        <form @submit.prevent="changeCity">
+            <div class="card-body">
+                <div class="form-group">
+                    <label>Введіть місто проживання українською мовою:</label>
+                    <input v-model="Store.city.title.ua" type="text" class="form-control" required
+                        placeholder="місто проживання українською мовою">
+                </div>
+                <div class="form-group">
+                    <label>Введіть місто проживання англійською мовою:</label>
+                    <input v-model="Store.city.title.en" type="text" class="form-control" required
+                        placeholder="місто проживання англійською мовою">
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-warning">Змінити місто проживання</button>
+            </div>
+        </form>
+    </div>
 </template>
 
 <script>
@@ -15,15 +31,15 @@ export default {
     setup() {
         const Store = useDataStore();
         return { Store };
-    }, 
-    methods: {        
+    },
+    methods: {
         back() {
-            this.$router.push({name: "City"})
+            this.$router.push({ name: "City" })
         },
-        changeCity() {            
+        changeCity() {
             this.Store.CHANGE_CITY(this.Store.city);
-            this.$router.push({name: "City"})
+            this.$router.push({ name: "City" })
         }
-    },    
+    },
 }
 </script>

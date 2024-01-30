@@ -22,7 +22,7 @@ class KeeperpreferenceResource extends JsonResource
             if($item->id == $this->keeperpreference_id) {
                 return [
                     'id' => $this->keeperpreference_id,
-                    'title' => $item->title            
+                    'title' => $item            
                 ];                
             }                           
         }

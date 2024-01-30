@@ -1,11 +1,27 @@
 <template>
-    <div @click.prevent="back()" class="category_change_btn">Назад</div>
-    <div class="category_title">Изменение обязаность домработницы:</div>
-    <form @submit.prevent="changeHousekeeperdutie" class="category_form">
-        <div>Введите новую обязаность домработницы:</div>
-        <input class="category_form_title" v-model="Store.housekeeperdutie.title" type="text" required placeholder="Напишите что-нибудь">                
-        <button class="category_form_btn" type="submit">Изменить обязаность домработницы</button>
-    </form>
+    <button @click.prevent="back()" class="btn btn-block btn-info btn-sm data_btn">Назад</button>
+    <div class="card card-warning">
+        <div class="card-header">
+            <h3 class="card-title">Зміна обов'язків для домробітниці:</h3>
+        </div>
+        <form @submit.prevent="changeHousekeeperdutie">
+            <div class="card-body">
+                <div class="form-group">
+                    <label>Введіть обов'язок для домробітниці українською мовою:</label>
+                    <input v-model="Store.housekeeperdutie.title.ua" type="text" class="form-control" required
+                        placeholder="обов'язок для домробітниці українською мовою">
+                </div>
+                <div class="form-group">
+                    <label>Введіть обов'язок для домробітниці англійською мовою:</label>
+                    <input v-model="Store.housekeeperdutie.title.en" type="text" class="form-control" required
+                        placeholder="обов'язок для домробітниці англійською мовою">
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-warning">Змінити обов'язок для домробітниці</button>
+            </div>
+        </form>
+    </div>
 </template>
 
 <script>
@@ -18,11 +34,11 @@ export default {
     },
     methods: {
         back() {
-            this.$router.push({name: "Housekeeperdutie"})
+            this.$router.push({ name: "Housekeeperdutie" })
         },
-        changeHousekeeperdutie() {            
+        changeHousekeeperdutie() {
             this.Store.CHANGE_HOUSEKEEPERDUTIE(this.Store.housekeeperdutie);
-            this.$router.push({name: "Housekeeperdutie"})
+            this.$router.push({ name: "Housekeeperdutie" })
         }
     },
 }

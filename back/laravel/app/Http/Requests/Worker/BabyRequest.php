@@ -24,32 +24,25 @@ class BabyRequest extends FormRequest
         return [
             'user_id' => 'required|numeric',
             'confirmed' => 'required|boolean',
-            'baby_exp' => 'required|string',
+            'baby_exp' => 'required',
             'experience_id' => 'required|numeric',
-            'recommendation_id' => 'required|numeric',
-            'education_about' => 'required|string',
             'workperiod_id' => 'required|numeric',
-            'childrencount_id' => 'required|numeric',            
-            'employment_id' => 'required|numeric',
-            'children_invalid' => 'required|string',
+            'childrencount_id' => 'required|numeric',
+            'children_invalid' => 'required',
             'hourpay_id' => 'required|numeric',
             'monthpay_id' => 'required|numeric',
-            'additional' => 'nullable',
         ];
     }
 
     public function messages() {
         return [
-            'baby_exp.required' => 'Опишите Ваш опыт работы с детьми.',
-            'education_about.required' => 'Подробно опишите полученноое Вами образование.',
-            'experience_id.required' => 'Укажите свой опыт работы с детьми.',
-            'recommendation_id.required' => 'Укажите количество рекомендаций.',
-            'workperiod_id.required' => 'Укажите период работы.',
-            'childrencount_id.required' => 'Укажите количество детей.',
-            'employment_id.required' => 'Укажите занятость.',
-            'children_invalid.required' => 'Укажите готовность работать с детьми-инвалидами.',
-            'hourpay_id.required' => 'Укажите ожидаемую почасовую оплату.',
-            'monthpay_id.required' => 'Укажите ожидаемую помесячную оплату.'
+            'baby_exp.required' => '{"en":"Describe your experience of working with children.","ua":"Опишіть Ваш досвід роботи з дітьми."}',
+            'experience_id.required' => '{"en":"Please describe your experience working with children.","ua":"Вкажіть свій досвід роботи з дітьми."}',
+            'workperiod_id.required' => '{"en":"Enter the period of work.","ua":"Вкажіть період роботи."}',
+            'childrencount_id.required' => '{"en":"Enter the number of children.","ua":"Вкажіть кількість дітей."}',
+            'children_invalid.required' => '{"en":"Indicate your willingness to work with children with disabilities.","ua":"Вкажіть готовність працювати з дітьми-інвалідами."}',
+            'hourpay_id.required' => '{"en":"Indicate the expected hourly rate.","ua":"Вкажіть очікувану погодинну оплату."}',
+            'monthpay_id.required' => '{"en":"Indicate the expected monthly payment.","ua":"Вкажіть очікувану помісячну оплату."}'
         ];
     }
 }

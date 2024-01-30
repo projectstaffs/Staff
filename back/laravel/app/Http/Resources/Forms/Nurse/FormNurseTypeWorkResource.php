@@ -22,7 +22,7 @@ class FormNursetypeworkResource extends JsonResource
             if($item->id == $this->nursetypework_id) {
                 return [
                     'id' => $this->nursetypework_id,
-                    'title' => $item->title            
+                    'title' => $item            
                 ];                
             }                           
         }

@@ -1,11 +1,28 @@
 <template>
-    <div @click.prevent="back()" class="category_change_btn">Назад</div>
-    <div class="category_title">Изменение количества детей для работы:</div>
-    <form @submit.prevent="changeChildren" class="category_form">
-        <div>Введите новое количества детей:</div>
-        <input class="category_form_title" v-model="Store.children.title" type="text" required placeholder="Напишите что-нибудь">                
-        <button class="category_form_btn" type="submit">Изменить количество детей</button>
-    </form>
+    <button @click.prevent="back()" class="btn btn-block btn-info btn-sm data_btn">Назад</button>
+
+    <div class="card card-warning">
+        <div class="card-header">
+            <h3 class="card-title">Зміна кількості дітей для роботи:</h3>
+        </div>
+        <form @submit.prevent="changeChildren">
+            <div class="card-body">
+                <div class="form-group">
+                    <label>Введіть кількість дітей українською мовою:</label>
+                    <input v-model="Store.children.title.ua" type="text" class="form-control" required
+                        placeholder="кількість дітей українською мовою">
+                </div>
+                <div class="form-group">
+                    <label>Введіть кількість дітей англійською мовою:</label>
+                    <input v-model="Store.children.title.en" type="text" class="form-control" required
+                        placeholder="кількість дітей англійською мовою">
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-warning">Змінити кількість дітей</button>
+            </div>
+        </form>
+    </div>
 </template>
 
 <script>
@@ -18,11 +35,12 @@ export default {
     },
     methods: {
         back() {
-            this.$router.push({name: "Children"})
+            this.$router.push({ name: "Children" })
         },
-        changeChildren() {            
+        changeChildren() {
+            //console.log(this.Store.children);
             this.Store.CHANGE_CHILDREN(this.Store.children);
-            this.$router.push({name: "Children"})
+            this.$router.push({ name: "Children" })
         }
     },
 }

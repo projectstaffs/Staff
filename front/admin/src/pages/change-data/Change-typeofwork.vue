@@ -1,11 +1,27 @@
 <template>
-    <div @click.prevent="back()" class="category_change_btn">Назад</div>
-    <div class="category_title">Изменение вида работы для няни:</div>
-    <form @submit.prevent="changeTypeofwork" class="category_form">
-        <div>Введите новое название вида работы:</div>
-        <input class="category_form_title" v-model="Store.typeofwork.title" type="text" required placeholder="Напишите что-нибудь">                
-        <button class="category_form_btn" type="submit">Изменить вид работы</button>
-    </form>
+    <button @click.prevent="back()" class="btn btn-block btn-info btn-sm data_btn">Назад</button>
+    <div class="card card-warning">
+        <div class="card-header">
+            <h3 class="card-title">Зміна виду роботи для няні:</h3>
+        </div>
+        <form @submit.prevent="changeTypeofwork">
+            <div class="card-body">
+                <div class="form-group">
+                    <label>Введіть вид роботи українською мовою:</label>
+                    <input v-model="Store.typeofwork.title.ua" type="text" class="form-control" required
+                        placeholder="вид роботи українською мовою">
+                </div>
+                <div class="form-group">
+                    <label>Введіть вид роботи англійською мовою:</label>
+                    <input v-model="Store.typeofwork.title.en" type="text" class="form-control" required
+                        placeholder="вид роботи англійською мовою">
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-warning">Змінити вид роботи</button>
+            </div>
+        </form>
+    </div>
 </template>
 
 <script>
@@ -18,11 +34,11 @@ export default {
     },
     methods: {
         back() {
-            this.$router.push({name: "Typeofwork"})
+            this.$router.push({ name: "Typeofwork" })
         },
-        changeTypeofwork() {            
+        changeTypeofwork() {
             this.Store.CHANGE_TYPEOFWORK(this.Store.typeofwork);
-            this.$router.push({name: "Typeofwork"})
+            this.$router.push({ name: "Typeofwork" })
         }
     },
 }

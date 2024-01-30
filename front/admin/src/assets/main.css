@@ -1,113 +1,15 @@
-/*@import './base.css';*/
-
-html, body {
-    margin: 0;
-    height: 100%;
-}
-#app {
-    height: 100%;
-}
-.dz-success-mark, .dz-error-mark {
-    display: none;
-}
-ul {
-    margin: 0;
-}
-
-.user_btn {
-    display: inline-block;
-    margin: 0 20px;
-    cursor: pointer;    
-}
-.user_btn:hover {
-    color: green;
-}
-
-.admin {
-    height: calc(100% - 18px);    
-    display: flex;                
-}
-.admin_sidebar {    
-    width: 25%;     
-    background-color: lightblue;
-    overflow-y: auto;        
-}
-.admin_sidebar_title {    
-    text-align: center;
-    border-bottom: 1px solid rebeccapurple;
-    padding: 15px 0;
-    margin-bottom: 15px;    
-}
-.admin_sidebar_item {
-    margin: 5px;
-    padding: 5px;
-    background-color: khaki;
-    cursor: pointer;
-}
-.admin_main {
-    width: 75%;
-    overflow-y: auto;    
-}
-.admin_main_title {
-    font-size: 25px;
-    border-bottom: 1px solid greenyellow;
-    padding: 10px 0;
+.data_title {
     text-align: center;
 }
-
-.category_title {
-    text-align: center;
-    font-size: 20px;
-    margin-bottom: 15px;
-}
-.category_form {    
-    margin: 0 auto;
-    padding: 5px;
-    border: 1px solid burlywood;
-    border-radius: 10px;
-    width: 50%;
-}
-.category_form_title {
-    display: block;
-    margin: 5px 0;
-    width: calc(100% - 10px);
-}
-.category_form_btn {
-    display: block;
-    margin: 0 auto;            
-    cursor: pointer;    
-}
-.category_item {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-right: 20px;
-}
-.category_change_btn {
-    cursor: pointer;
-    color: aqua;
-}
-.red {
-    color: red;
+.data_btn {
+    width: 100px;
+    margin-bottom: 20px;
 }
 
-.login_title {
-    text-align: center;
-    font-size: 25px;
-}
-.login_form {
-    display: flex;
-    flex-direction: column;    
-    width: 400px;
-    margin: 0 auto;
-    padding: 5px;
-    border: 2px solid lightskyblue;
-    border-radius: 5px;
-}
-.login_form_item {    
+.user_fix {
     margin-bottom: 5px;
 }
-.login_form_btn {
-    cursor: pointer;
-}
 
+.p_fix {
+    margin: 0 10px;
+}

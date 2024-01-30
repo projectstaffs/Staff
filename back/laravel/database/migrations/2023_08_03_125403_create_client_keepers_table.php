@@ -15,14 +15,10 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->boolean('confirmed');
-            $table->string('title');
             $table->text('title_about');
             $table->integer('workperiod_id');
-            $table->integer('employment_id');
             $table->integer('hourpay_id');
             $table->integer('monthpay_id');
-            $table->string('drive');
-            $table->string('agents');
             $table->timestamps();
         });
     }

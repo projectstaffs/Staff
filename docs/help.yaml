@@ -1,0 +1,169 @@
+openapi: 3.0.0
+info:
+  title: Help API
+  version: 1.0.0
+tags:
+  - name: help
+    description: Endpoints related to user help and administration
+paths:
+  /admin:
+    get:
+      summary: Get admin user ID
+      tags:
+        - help
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: 1
+        '401':
+          description: Unauthorized
+
+  /messages_in:
+    post:
+      summary: Get messages for a specific recipient
+      tags:
+        - help
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: integer
+                  description: Recipient user ID
+              required:
+                - data
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  sender: 2
+                  recipient: 1
+                  content: "Example message 1"
+                - id: 2
+                  sender: 3
+                  recipient: 1
+                  content: "Example message 2"
+        '401':
+          description: Unauthorized
+
+  /forgot_password:
+    post:
+      summary: Reset user password
+      tags:
+        - help
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  description: User's email for password reset
+                lang:
+                  type: string
+                  description: User's preferred language
+              required:
+                - email
+                - lang
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: "Пароль успешно изменен."        
+        '401':
+          description: User not found
+
+  /test_mail:
+    post:
+      summary: Test mail functionality
+      tags:
+        - help
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  description: User's email for testing mail functionality
+              required:
+                - email
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: "Mail sent successfully."
+        '401':
+          description: Unauthorized
+
+  /block_user:
+    post:
+      summary: Block user
+      tags:
+        - help
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  description: User ID to be blocked
+              required:
+                - id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: "User successfully blocked."
+        '401':
+          description: Unauthorized
+        '404':
+          description: User not found
+
+  /restore_user:
+    post:
+      summary: Restore user
+      tags:
+        - help
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id2:
+                  type: integer
+                  description: User ID to be restored
+              required:
+                - id2
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: "User successfully restored."
+        '401':
+          description: Unauthorized
+        '404':
+          description: User not found

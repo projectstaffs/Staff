@@ -1,152 +1,343 @@
 <template>
-    <div class="admin">
-        <div class="admin_sidebar">   
-            <div class="admin_sidebar_title">Главная</div>      
-            <div @click.prevent="message" class="admin_sidebar_item">Почтовый ящик</div>
-            <div @click.prevent="review" class="admin_sidebar_item">Отзывы</div>
-            <div @click.prevent="users" class="admin_sidebar_item">Пользователи</div> 
-            <div @click.prevent="children" class="admin_sidebar_item">Количество детей</div>      
-            <div @click.prevent="languages" class="admin_sidebar_item">Родной язык</div>
-            <div @click.prevent="alcohol" class="admin_sidebar_item">Отношение к алкоголю</div> 
-            <div @click.prevent="agegroup" class="admin_sidebar_item">Возрастные групы</div> 
-            <div @click.prevent="babysittingdutie" class="admin_sidebar_item">Обязаности для няни</div>
-            <div @click.prevent="city" class="admin_sidebar_item">Родной город</div>
-            <div @click.prevent="country" class="admin_sidebar_item">Страна проживания</div> 
-            <div @click.prevent="criminal" class="admin_sidebar_item">Информация о несудимости</div>
-            <div @click.prevent="diagnose" class="admin_sidebar_item">Диагнозы</div> 
-            <div @click.prevent="education" class="admin_sidebar_item">Образование</div>
-            <div @click.prevent="employment" class="admin_sidebar_item">Занятость</div>
-            <div @click.prevent="experience" class="admin_sidebar_item">Опыт работы</div>
-            <div @click.prevent="hourlypayment" class="admin_sidebar_item">Почасовая оплата</div>
-            <div @click.prevent="housekeeperdutie" class="admin_sidebar_item">Обязаности домработницы</div>
-            <div @click.prevent="housekeeperpreference" class="admin_sidebar_item">Предпочтения для домработницы</div>
-            <div @click.prevent="housekeepertypeofwork" class="admin_sidebar_item">Вид работы для домработницы</div>
-            <div @click.prevent="joboption" class="admin_sidebar_item">Варианты работы</div>
-            <div @click.prevent="monthlypayment" class="admin_sidebar_item">Помесячная оплата</div>
-            <div @click.prevent="moving" class="admin_sidebar_item">Варианты переезда</div>  
-            <div @click.prevent="nursedutie" class="admin_sidebar_item">Обязаности сиделки</div>
-            <div @click.prevent="nursetypeofwork" class="admin_sidebar_item">Вид работы для сиделки</div> 
-            <div @click.prevent="nursingskill" class="admin_sidebar_item">Умения для сиделки</div> 
-            <div @click.prevent="recommendation" class="admin_sidebar_item">Рекомендации</div> 
-            <div @click.prevent="religion" class="admin_sidebar_item">Религии</div>
-            <div @click.prevent="schedule" class="admin_sidebar_item">График работы</div> 
-            <div @click.prevent="smoking" class="admin_sidebar_item">Отношение к курению</div>
-            <div @click.prevent="status" class="admin_sidebar_item">Семейное положение</div>
-            <div @click.prevent="typeofwork" class="admin_sidebar_item">Вид работы для няни</div> 
-            <div @click.prevent="worklocation" class="admin_sidebar_item">Местоположение работы для сиделки</div>
-            <div @click.prevent="workperiod" class="admin_sidebar_item">Периоды работы</div>                        
+    <div class="wrapper">
+        <div class="preloader flex-column justify-content-center align-items-center">
+            <img class="animation__shake" src="../../assets/js/dist1/img/AdminLTELogo.png" alt="AdminLTELogo" height="60"
+                width="60">
         </div>
-        <div class="admin_main">
-            <div class="admin_main_title">Админ-панель</div>            
-            <router-view/>
+
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ml-auto">
+                <li @click.prevent="logout" class="nav-item d-none d-sm-inline-block">
+                    <a href="#" class="nav-link">Вихід</a>
+                </li>
+            </ul>
+        </nav>
+
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <a href="#" class="brand-link">
+                <span class="brand-text font-weight-light">Адмін-панель</span>
+            </a>
+
+            <div class="sidebar">
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-users"></i>
+                                <p>
+                                    Користувачі
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a @click.prevent="users" href="#" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Роботодавці</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a @click.prevent="usersWorker" href="#" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Шукачі роботи</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-edit"></i>
+                                <p>
+                                    Вакансії для шукачів роботи
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a @click.prevent="clientBaby" href="#" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Няні</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a @click.prevent="clientNurse" href="#" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Доглядальниці</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a @click.prevent="clientKeeper" href="#" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Домробітниці</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-edit"></i>
+                                <p>
+                                    Анкети робітників
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a @click.prevent="baby" href="#" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Няні</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a @click.prevent="nurse" href="#" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Доглядальниці</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a @click.prevent="keeper" href="#" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Домробітниці</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-table"></i>
+                                <p>
+                                    Дані для заповнення анкет
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a @click.prevent="children" href="pages/tables/simple.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Кількість дітей</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a @click.prevent="languages" href="pages/tables/data.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Рідна мова</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a @click.prevent="agegroup" href="pages/tables/jsgrid.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Вікові групи</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a @click.prevent="city" href="pages/tables/data.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Місто</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a @click.prevent="diagnose" href="pages/tables/data.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Діагнози</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a @click.prevent="education" href="pages/tables/data.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Освіта</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a @click.prevent="experience" href="pages/tables/data.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Досвід роботи</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a @click.prevent="monthlypayment" href="pages/tables/data.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Щомісячна оплата</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a @click.prevent="hourlypayment" href="pages/tables/data.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Погодинна оплата</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a @click.prevent="babysittingdutie" href="pages/tables/data.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Обов'язки для няні</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a @click.prevent="nursedutie" href="pages/tables/data.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Обов'язки для доглядальниці</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a @click.prevent="housekeeperdutie" href="pages/tables/data.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Обов'язки для домробітниці</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a @click.prevent="typeofwork" href="pages/tables/data.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Види робіт для няні</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a @click.prevent="nursetypeofwork" href="pages/tables/data.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Види робіт для доглядальниці</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a @click.prevent="housekeepertypeofwork" href="pages/tables/data.html"
+                                        class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Види робіт для домробітниці</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a @click.prevent="housekeeperpreference" href="pages/tables/data.html"
+                                        class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Вподобання для домробітниці</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a @click.prevent="workperiod" href="pages/tables/data.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Періоди роботи</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+
+        <div class="content-wrapper">
+            <div class="content-header">
+                <div class="container-fluid">
+                    <router-view />
+                </div>
+            </div>
         </div>
-    </div>  
+
+        <footer class="main-footer">
+            <strong>&copy; 2023 <a :href="User.url"> HouseHub Agency</a>.</strong>
+            Всі права захищені.
+            <div class="float-right d-none d-sm-inline-block">
+                <b>Версія</b> 1.1.0
+            </div>
+        </footer>
+    </div>
 </template>
 
 <script>
+import { useUserStore } from '../../stores/user';
 export default {
     name: "Menu",
-    methods: {  
-        review() {
-            this.$router.push({name: "Reviews"})
-        },      
-        message() {
-            this.$router.push({name: "Messages"})
-        },         
+    setup() {
+        const User = useUserStore();
+        return { User };
+    },
+    methods: {
+        logout() {
+            this.User.LOGOUT_USER();
+        },
         users() {
-            this.$router.push({name: "Users"})
+            this.$router.push({ name: "Users" })
+        },
+        usersWorker() {
+            this.$router.push({ name: "UsersWorker" })
+        },
+        baby() {
+            this.$router.push({ name: "BabyAll" })
+        },
+        nurse() {
+            this.$router.push({ name: "NurseAll" })
+        },
+        keeper() {
+            this.$router.push({ name: "KeeperAll" })
+        },
+        clientBaby() {
+            this.$router.push({ name: "ClientBabyAll" })
+        },
+        clientNurse() {
+            this.$router.push({ name: "ClientNurseAll" })
+        },
+        clientKeeper() {
+            this.$router.push({ name: "ClientKeeperAll" })
         },
         children() {
-            this.$router.push({name: "Children"})
+            this.$router.push({ name: "Children" })
         },
         languages() {
-            this.$router.push({name: "Languages"})
-        },
-        alcohol() {
-            this.$router.push({name: "Alcohol"})
+            this.$router.push({ name: "Languages" })
         },
         agegroup() {
-            this.$router.push({name: "Agegroup"})
+            this.$router.push({ name: "Agegroup" })
         },
         babysittingdutie() {
-            this.$router.push({name: "Babysittingdutie"})
+            this.$router.push({ name: "Babysittingdutie" })
         },
         city() {
-            this.$router.push({name: "City"})
-        },
-        country() {
-            this.$router.push({name: "Country"})
-        },
-        criminal() {
-            this.$router.push({name: "Criminal"})
+            this.$router.push({ name: "City" })
         },
         diagnose() {
-            this.$router.push({name: "Diagnose"})
+            this.$router.push({ name: "Diagnose" })
         },
         education() {
-            this.$router.push({name: "Education"})
-        },
-        employment() {
-            this.$router.push({name: "Employment"})
+            this.$router.push({ name: "Education" })
         },
         experience() {
-            this.$router.push({name: "Experience"})
+            this.$router.push({ name: "Experience" })
         },
         hourlypayment() {
-            this.$router.push({name: "Hourlypayment"})
+            this.$router.push({ name: "Hourlypayment" })
         },
         housekeeperdutie() {
-            this.$router.push({name: "Housekeeperdutie"})
+            this.$router.push({ name: "Housekeeperdutie" })
         },
         housekeeperpreference() {
-            this.$router.push({name: "Housekeeperpreference"})
+            this.$router.push({ name: "Housekeeperpreference" })
         },
         housekeepertypeofwork() {
-            this.$router.push({name: "Housekeepertypeofwork"})
-        },
-        joboption() {
-            this.$router.push({name: "Joboption"})
+            this.$router.push({ name: "Housekeepertypeofwork" })
         },
         monthlypayment() {
-            this.$router.push({name: "Monthlypayment"})
-        },
-        moving() {
-            this.$router.push({name: "Moving"})
+            this.$router.push({ name: "Monthlypayment" })
         },
         nursedutie() {
-            this.$router.push({name: "Nursedutie"})
+            this.$router.push({ name: "Nursedutie" })
         },
         nursetypeofwork() {
-            this.$router.push({name: "Nursetypeofwork"})
-        },
-        nursingskill() {
-            this.$router.push({name: "Nursingskill"})
-        },
-        recommendation() {
-            this.$router.push({name: "Recommendation"})
-        },
-        religion() {
-            this.$router.push({name: "Religion"})
-        },
-        schedule() {
-            this.$router.push({name: "Schedule"})
-        },
-        smoking() {
-            this.$router.push({name: "Smoking"})
-        },
-        status() {
-            this.$router.push({name: "Status"})
+            this.$router.push({ name: "Nursetypeofwork" })
         },
         typeofwork() {
-            this.$router.push({name: "Typeofwork"})
-        },
-        worklocation() {
-            this.$router.push({name: "Worklocation"})
+            this.$router.push({ name: "Typeofwork" })
         },
         workperiod() {
-            this.$router.push({name: "Workperiod"})
+            this.$router.push({ name: "Workperiod" })
         },
-    }
+    },
+    mounted() {
+        this.User.GET_TOKEN();
+    },
 }
 </script>
 

@@ -1,0 +1,191 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Keeper API
+paths:
+  /forms/keepers:
+    get:
+      summary: Get keeper details by user ID
+      parameters:
+        - name: data
+          in: query
+          description: User ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                user_id: "1"
+                keeper_exp:
+                  en: "English experience"
+                  ua: "Український досвід"
+                experience_id: "2"
+                workperiod_id: "3"
+                hourpay_id: "4"
+                monthpay_id: "5"
+                confirmed: true
+
+    post:
+      summary: Add keeper details
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                  description: User ID
+                keeper_exp:
+                  type: object
+                  properties:
+                    en:
+                      type: string
+                      description: Experience in English
+                    ua:
+                      type: string
+                      description: Experience in Ukrainian
+                  required:
+                    - en
+                    - ua
+                experience_id:
+                  type: string
+                  description: Experience ID
+                workperiod_id:
+                  type: string
+                  description: Work period ID
+                hourpay_id:
+                  type: string
+                  description: Hourly pay ID
+                monthpay_id:
+                  type: string
+                  description: Monthly pay ID
+                confirmed:
+                  type: boolean
+                  description: Confirmation status
+              required:
+                - user_id
+                - keeper_exp
+                - experience_id
+                - workperiod_id
+                - hourpay_id
+                - monthpay_id
+                - confirmed
+              example:
+                user_id: "1"
+                keeper_exp:
+                  en: "English experience"
+                  ua: "Український досвід"
+                experience_id: "2"
+                workperiod_id: "3"
+                hourpay_id: "4"
+                monthpay_id: "5"
+                confirmed: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                user_id: "1"
+                keeper_exp:
+                  en: "English experience"
+                  ua: "Український досвід"
+                experience_id: "2"
+                workperiod_id: "3"
+                hourpay_id: "4"
+                monthpay_id: "5"
+                confirmed: true
+
+  /forms/keepers/{id}:
+    put:
+      summary: Update keeper details by user ID
+      parameters:
+        - name: id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                keeper_exp:
+                  type: object
+                  properties:
+                    en:
+                      type: string
+                      description: Experience in English
+                    ua:
+                      type: string
+                      description: Experience in Ukrainian
+                  required:
+                    - en
+                    - ua
+                experience_id:
+                  type: string
+                  description: Experience ID
+                workperiod_id:
+                  type: string
+                  description: Work period ID
+                hourpay_id:
+                  type: string
+                  description: Hourly pay ID
+                monthpay_id:
+                  type: string
+                  description: Monthly pay ID
+              required:
+                - keeper_exp
+                - experience_id
+                - workperiod_id
+                - hourpay_id
+                - monthpay_id
+              example:
+                keeper_exp:
+                  en: "Updated English experience"
+                  ua: "Оновлений український досвід"
+                experience_id: "6"
+                workperiod_id: "7"
+                hourpay_id: "8"
+                monthpay_id: "9"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                user_id: "1"
+                keeper_exp:
+                  en: "Updated English experience"
+                  ua: "Оновлений український досвід"
+                experience_id: "6"
+                workperiod_id: "7"
+                hourpay_id: "8"
+                monthpay_id: "9"
+                confirmed: true
+
+    delete:
+      summary: Remove keeper details by user ID
+      parameters:
+        - name: id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                message: "Keeper details successfully removed"

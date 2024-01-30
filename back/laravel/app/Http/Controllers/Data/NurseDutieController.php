@@ -34,7 +34,10 @@ class NurseDutieController extends Controller
     public function store(Request $request)
     {
         $nurseDutie = new NurseDutie([
-            'title' => $request->title
+            'title' => [
+               'en' => $request->en,
+               'ua' => $request->ua
+            ],
         ]);
         $nurseDutie->save(); 
         
@@ -64,7 +67,10 @@ class NurseDutieController extends Controller
     public function update(Request $request, string $id)
     {
         $nurseDutie = NurseDutie::find($id);
-        $nurseDutie->title = $request['title'];
+        $nurseDutie->title = [
+               'en' => $request->title['en'],
+               'ua' => $request->title['ua']
+            ];
         $nurseDutie->save();
 
         Cache::put('nurseduties', NurseDutie::all());

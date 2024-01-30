@@ -34,7 +34,10 @@ class TypeOfWorkController extends Controller
     public function store(Request $request)
     {
         $typeOfWork = new TypeOfWork([
-            'title' => $request->title
+            'title' => [
+               'en' => $request->en,
+               'ua' => $request->ua
+            ],
         ]);
         $typeOfWork->save(); 
         
@@ -64,7 +67,10 @@ class TypeOfWorkController extends Controller
     public function update(Request $request, string $id)
     {
         $typeOfWork = TypeOfWork::find($id);
-        $typeOfWork->title = $request['title'];
+        $typeOfWork->title = [
+               'en' => $request->title['en'],
+               'ua' => $request->title['ua']
+            ];
         $typeOfWork->save();
 
         Cache::put('typeofworks', TypeOfWork::all());

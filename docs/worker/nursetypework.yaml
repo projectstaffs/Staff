@@ -1,0 +1,56 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Form Nurse Type Work API
+paths:
+  /forms/formnursetypeworks:
+    post:
+      summary: Add nurse type work details to a form
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  form_id:
+                    type: string
+                    description: Form ID
+                  nursetypework_id:
+                    type: string
+                    description: Nurse Type Work ID
+              required:
+                - form_id
+                - nursetypework_id
+              example:
+                - form_id: "1"
+                  nursetypework_id: "2"
+                - form_id: "1"
+                  nursetypework_id: "3"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                message: "Nurse type work details successfully added"
+
+  /forms/formnursetypeworks/{id}:
+    delete:
+      summary: Remove nurse type work details from a form by ID
+      parameters:
+        - name: id
+          in: path
+          description: Form ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                message: "Nurse type work details successfully removed"

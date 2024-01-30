@@ -1,5 +1,6 @@
 import axios from "axios";
 import router from "../router";
+import { useUserStore } from '../stores/user';
 
 const api = axios.create();
 
@@ -12,7 +13,8 @@ api.interceptors.request.use(function(config){
 
 api.interceptors.response.use({}, error => {
     if(error.response.data.message === 'Token has expired'){
-        return axios.post('http://localhost/api/auth/refresh', {}, {
+        const User = useUserStore();
+        return axios.post(User.url + 'api/auth/refresh', {}, {
             headers: {
                 'authorization' : `Bearer ${localStorage.access_token}`
             }
@@ -20,7 +22,7 @@ api.interceptors.response.use({}, error => {
             console.log('Токен успешно восстановлен.')
             localStorage.access_token = res.data.access_token;
             error.config.headers.authorization = `Bearer ${res.data.access_token}`;
-
+            window.location.reload(true);
             return api.request(error.config);
         })
     }

@@ -34,7 +34,10 @@ class HousekeeperTypeOfWorkController extends Controller
     public function store(Request $request)
     {
         $housekeeperTypeOfWork = new HouseKeeperTypeOfWork([
-            'title' => $request->title
+            'title' => [
+               'en' => $request->en,
+               'ua' => $request->ua
+            ],
         ]);
         $housekeeperTypeOfWork->save(); 
         
@@ -64,7 +67,10 @@ class HousekeeperTypeOfWorkController extends Controller
     public function update(Request $request, string $id)
     {
         $housekeeperTypeOfWork = HouseKeeperTypeOfWork::find($id);
-        $housekeeperTypeOfWork->title = $request['title'];
+        $housekeeperTypeOfWork->title = [
+               'en' => $request->title['en'],
+               'ua' => $request->title['ua']
+            ];
         $housekeeperTypeOfWork->save();
         
         Cache::put('housekeepertypeofworks', HouseKeeperTypeOfWork::all());

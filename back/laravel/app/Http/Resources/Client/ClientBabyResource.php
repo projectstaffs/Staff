@@ -8,14 +8,11 @@ use Illuminate\Support\Facades\Cache;
 
 use App\Models\Client\ClientAgeGroup;
 use App\Http\Resources\Client\ClientAgeGroupResource;
-use App\Models\Client\ClientJobOption;
-use App\Http\Resources\Client\ClientJobOptionResource;
 use App\Models\Client\ClientDutie;
 use App\Http\Resources\Client\ClientDutieResource;
 
 use App\Models\Data\Children;
 use App\Models\Data\WorkPeriod;
-use App\Models\Data\Employment;
 use App\Models\Data\MonthlyPayment;
 use App\Models\Data\HourlyPayment;
 
@@ -37,15 +34,6 @@ class ClientBabyResource extends JsonResource
             }                           
         }
 
-        if(!Cache::has('client_joboptions')) { Cache::put('client_joboptions', ClientJobOption::all()); }
-        $Client_joboption = Cache::get('client_joboptions');
-        $joboption = array();
-        foreach ($Client_joboption as $item) {
-            if($item->form_id == $this->id) {
-                array_push($joboption, $item);
-            }                           
-        }
-
         if(!Cache::has('client_duties')) { Cache::put('client_duties', ClientDutie::all()); }
         $Client_dutie = Cache::get('client_duties');
         $dutie = array();
@@ -60,7 +48,7 @@ class ClientBabyResource extends JsonResource
         $children = '';
         foreach ($Children as $item) {
             if($item->id == $this->childrencount_id) {
-                $children = $item->title;                
+                $children = $item;                
                 break;
             }                           
         }
@@ -70,17 +58,7 @@ class ClientBabyResource extends JsonResource
         $workPeriod = '';
         foreach ($WorkPeriod as $item) {
             if($item->id == $this->workperiod_id) {
-                $workPeriod = $item->title;                
-                break;
-            }                           
-        }
-
-        if(!Cache::has('employments')) { Cache::put('employments', Employment::all()); }
-        $Employment = Cache::get('employments');
-        $employment = '';
-        foreach ($Employment as $item) {
-            if($item->id == $this->employment_id) {
-                $employment = $item->title;                
+                $workPeriod = $item;                
                 break;
             }                           
         }
@@ -90,7 +68,7 @@ class ClientBabyResource extends JsonResource
         $hourpay = '';
         foreach ($HourlyPayment as $item) {
             if($item->id == $this->hourpay_id) {
-                $hourpay = $item->title;                
+                $hourpay = $item;                
                 break;
             }                           
         }
@@ -100,7 +78,7 @@ class ClientBabyResource extends JsonResource
         $monthpay = '';
         foreach ($MonthlyPayment as $item) {
             if($item->id == $this->monthpay_id) {
-                $monthpay = $item->title;                
+                $monthpay = $item;                
                 break;
             }                           
         }
@@ -109,22 +87,16 @@ class ClientBabyResource extends JsonResource
             'id' => $this->id,
             'user_id' => $this->user_id,
             'confirmed' => $this->confirmed,
-            'title' => $this->title,
-            'title_about' => $this->title_about,
+            'title_about' => $this->getTranslations('title_about'),
             'workperiod' => $workPeriod,
-            'employment' => $employment,
             'childrencount' => $children,
-            'drive' => $this->drive,
-            'agents' => $this->agents,
             'hourpay' => $hourpay,
             'monthpay' => $monthpay,
 
             'Agegroups' => ClientAgeGroupResource::collection($agegroup),            
-            'Joboptions' => ClientJobOptionResource::collection($joboption),
             'Duties' => ClientDutieResource::collection($dutie),
             
-            'workperiod_id' => $this->workperiod_id,
-            'employment_id' => $this->employment_id,
+            'workperiod_id' => $this->workperiod_id,            
             'childrencount_id' => $this->childrencount_id,
             'hourpay_id' => $this->hourpay_id,
             'monthpay_id' => $this->monthpay_id,            

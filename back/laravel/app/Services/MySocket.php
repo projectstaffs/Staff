@@ -20,4 +20,14 @@ class MySocket
     {
         $this->emitter->emit('sendMessage', $user_id);
     }
+
+    function sendBlock($user_id)
+    {
+        $this->emitter->emit('sendBlock', $user_id);
+    }
+
+    function sendRestore($user_id)
+    {
+        $this->emitter->emit('sendRestore', $user_id);
+    }
 }

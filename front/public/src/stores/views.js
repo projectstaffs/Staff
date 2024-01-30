@@ -20,7 +20,13 @@ export const useViewsStore = defineStore('views', {
         GET_CLIENTBABY(){   
             api.get('api/auth/c_baby')
                 .then(res => {
-                    this.clientBaby = res.data.data;
+                    let result = [];
+                    res.data.data.forEach((item) => {
+                        if(item.confirmed === 1) {
+                            result.push(item);
+                        }
+                    });
+                    this.clientBaby = result;
                 })
                 .catch(error => { console.log(error); })
         },
@@ -34,12 +40,11 @@ export const useViewsStore = defineStore('views', {
                     let result = [];
                     res.data.data.forEach((item) => { 
                         let count = 0;
-                        if(item.User.city_id === data.city) { count++; } 
-                        if(item.employment_id === data.employment) { count++; }
-                        item.Joboptions.forEach((el) => {
-                            if(el.id === data.joboption) {count++;}
+                        if(item.User.city === data.city) { count++; }                        
+                        item.Duties.forEach((el) => {
+                            if(el.id === data.typeofwork) {count++;}
                         })                             
-                        if(count === 3) { result.push(item); }                                                               
+                        if(count === 2) { result.push(item); }                                                               
                     })        
                     this.clientBaby = result;
                     this.currentCBPage = 1;
@@ -49,7 +54,7 @@ export const useViewsStore = defineStore('views', {
         ADD_CLIENTBABY(data){   
             api.post('api/auth/w_c_baby', data)
                 .then(res => {                                    
-                    console.log(res.data);
+                    //console.log(res.data);
                 })
                 .catch(error => { console.log(error); })
         },
@@ -75,8 +80,14 @@ export const useViewsStore = defineStore('views', {
 
         GET_CLIENTNURSE(){   
             api.get('api/auth/c_nurse')
-                .then(res => {                                    
-                    this.clientNurse = res.data.data;
+                .then(res => { 
+                    let result = [];
+                    res.data.data.forEach((item) => {
+                        if(item.confirmed === 1) {
+                            result.push(item);
+                        }
+                    });                                   
+                    this.clientNurse = result;
                 })
                 .catch(error => { console.log(error); })
         },
@@ -90,12 +101,11 @@ export const useViewsStore = defineStore('views', {
                     let result = [];
                     res.data.data.forEach((item) => { 
                         let count = 0;
-                        if(item.User.city_id === data.city) { count++; } 
-                        if(item.employment_id === data.employment) { count++; }
-                        item.Joboptions.forEach((el) => {
-                            if(el.id === data.joboption) {count++;}
+                        if(item.User.city === data.city) { count++; }                        
+                        item.Duties.forEach((el) => {
+                            if(el.id === data.typeofwork) {count++;}
                         })                             
-                        if(count === 3) { result.push(item); }                                                               
+                        if(count === 2) { result.push(item); }                                                               
                     })        
                     this.clientNurse = result;
                     this.currentCNPage = 1;
@@ -105,7 +115,7 @@ export const useViewsStore = defineStore('views', {
         ADD_CLIENTNURSE(data){   
             api.post('api/auth/w_c_nurse', data)
                 .then(res => {                                    
-                    console.log(res.data);
+                    //console.log(res.data);
                 })
                 .catch(error => { console.log(error); })
         },
@@ -131,8 +141,14 @@ export const useViewsStore = defineStore('views', {
         
         GET_CLIENTKEEPER(){   
             api.get('api/auth/c_keeper')
-                .then(res => {                                    
-                    this.clientKeeper = res.data.data;
+                .then(res => {   
+                    let result = [];
+                    res.data.data.forEach((item) => {
+                        if(item.confirmed === 1) {
+                            result.push(item);
+                        }
+                    });                                 
+                    this.clientKeeper = result;
                 })
                 .catch(error => { console.log(error); })
         },
@@ -146,12 +162,11 @@ export const useViewsStore = defineStore('views', {
                     let result = [];
                     res.data.data.forEach((item) => { 
                         let count = 0;
-                        if(item.User.city_id === data.city) { count++; } 
-                        if(item.employment_id === data.employment) { count++; }
-                        item.Joboptions.forEach((el) => {
-                            if(el.id === data.joboption) {count++;}
+                        if(item.User.city === data.city) { count++; } 
+                        item.Duties.forEach((el) => {
+                            if(el.id === data.typeofwork) {count++;}
                         })                             
-                        if(count === 3) { result.push(item); }                                                               
+                        if(count === 2) { result.push(item); }                                                               
                     })        
                     this.clientKeeper = result;
                     this.currentCKPage = 1;
@@ -161,7 +176,7 @@ export const useViewsStore = defineStore('views', {
         ADD_CLIENTKEEPER(data){   
             api.post('api/auth/w_c_keeper', data)
                 .then(res => {                                    
-                    console.log(res.data);
+                    //console.log(res.data);
                 })
                 .catch(error => { console.log(error); })
         },
@@ -187,8 +202,14 @@ export const useViewsStore = defineStore('views', {
 
         GET_WORKERBABY(){   
             api.get('api/auth/w_baby')
-                .then(res => {                                    
-                    this.workerBaby = res.data.data;
+                .then(res => {
+                    let result = [];
+                    res.data.data.forEach((item) => {
+                        if(item.confirmed === 1) {
+                            result.push(item);
+                        }
+                    });
+                    this.workerBaby = result;
                 })
                 .catch(error => { console.log(error); })
         },
@@ -196,18 +217,17 @@ export const useViewsStore = defineStore('views', {
             this.workerBabyitem = JSON.parse(localStorage.workerBabyitem);
             this.workerBabyitemUser = JSON.parse(localStorage.workerBabyitemUser);
         },
-        SEARCH_WORKERBABY(data){            
+        SEARCH_WORKERBABY(data){           
             api.get('api/auth/w_baby')
                 .then(res => {
                     let result = [];
                     res.data.data.forEach((item) => { 
                         let count = 0;
-                        if(item.User.city_id === data.city) { count++; } 
-                        if(item.employment_id === data.employment) { count++; }
+                        if(item.User.city === data.city) { count++; }
                         item.Typeworks.forEach((el) => {
                             if(el.id === data.typeofwork) {count++;}
-                        })                             
-                        if(count === 3) { result.push(item); }                                                               
+                        })                           
+                        if(count === 2) { result.push(item); }                                                               
                     })        
                     this.workerBaby = result;
                     this.currentWBPage = 1;
@@ -217,7 +237,7 @@ export const useViewsStore = defineStore('views', {
         ADD_WORKERBABY(data){   
             api.post('api/auth/w_w_baby', data)
                 .then(res => {                                    
-                    console.log(res.data);
+                    //console.log(res.data);
                 })
                 .catch(error => { console.log(error); })
         },
@@ -237,14 +257,19 @@ export const useViewsStore = defineStore('views', {
                         })
                         .catch(error => { console.log(error); })
                 })
-                .catch(error => { console.log(error); })   
-                
-        },
+                .catch(error => { console.log(error); })
+            },
 
         GET_WORKERNURSE(){   
             api.get('api/auth/w_nurse')
-                .then(res => {                                    
-                    this.workerNurse = res.data.data;
+                .then(res => {  
+                    let result = [];
+                    res.data.data.forEach((item) => {
+                        if(item.confirmed === 1) {
+                            result.push(item);
+                        }
+                    });                                  
+                    this.workerNurse = result;
                 })
                 .catch(error => { console.log(error); })
         },
@@ -258,12 +283,11 @@ export const useViewsStore = defineStore('views', {
                     let result = [];
                     res.data.data.forEach((item) => { 
                         let count = 0;
-                        if(item.User.city_id === data.city) { count++; } 
-                        if(item.employment_id === data.employment) { count++; }
+                        if(item.User.city === data.city) { count++; }
                         item.Typeworks.forEach((el) => {
                             if(el.id === data.typeofwork) {count++;}
                         })                             
-                        if(count === 3) { result.push(item); }                                                               
+                        if(count === 2) { result.push(item); }                                                               
                     })        
                     this.workerNurse = result;
                     this.currentWNPage = 1;
@@ -273,7 +297,7 @@ export const useViewsStore = defineStore('views', {
         ADD_WORKERNURSE(data){   
             api.post('api/auth/w_w_nurse', data)
                 .then(res => {                                    
-                    console.log(res.data);
+                    //console.log(res.data);
                 })
                 .catch(error => { console.log(error); })
         },
@@ -299,8 +323,14 @@ export const useViewsStore = defineStore('views', {
 
         GET_WORKERKEEPER(){   
             api.get('api/auth/w_keeper')
-                .then(res => {                                    
-                    this.workerKeeper = res.data.data;
+                .then(res => {            
+                    let result = [];
+                    res.data.data.forEach((item) => {
+                        if(item.confirmed === 1) {
+                            result.push(item);
+                        }
+                    });                        
+                    this.workerKeeper = result;
                 })
                 .catch(error => { console.log(error); })
         },
@@ -314,12 +344,11 @@ export const useViewsStore = defineStore('views', {
                     let result = [];
                     res.data.data.forEach((item) => { 
                         let count = 0;
-                        if(item.User.city_id === data.city) { count++; } 
-                        if(item.employment_id === data.employment) { count++; }
+                        if(item.User.city === data.city) { count++; }                        
                         item.Typeworks.forEach((el) => {
                             if(el.id === data.typeofwork) {count++;}
                         })                             
-                        if(count === 3) { result.push(item); }                                                               
+                        if(count === 2) { result.push(item); }                                                               
                     })        
                     this.workerKeeper = result;
                     this.currentWKPage = 1;
@@ -329,7 +358,7 @@ export const useViewsStore = defineStore('views', {
         ADD_WORKERKEEPER(data){   
             api.post('api/auth/w_w_keeper', data)
                 .then(res => {                                    
-                    console.log(res.data);
+                    //console.log(res.data);
                 })
                 .catch(error => { console.log(error); })
         },
@@ -349,8 +378,7 @@ export const useViewsStore = defineStore('views', {
                         })
                         .catch(error => { console.log(error); })
                 })
-                .catch(error => { console.log(error); })   
-                
+                .catch(error => { console.log(error); })
         },
     }
 })

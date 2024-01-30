@@ -28,7 +28,7 @@ class NurseController extends Controller
 
         //$nurse = Nurse::where('user_id', $request["data"])->first();
         if($nurse) { return new NurseResource($nurse);}
-        else { return null; }        
+        else { return 'null'; }        
     }
 
     /**
@@ -46,15 +46,14 @@ class NurseController extends Controller
     {
         $nurse = new Nurse([
             'user_id' => $request->user_id,
-            'nurse_exp' => $request->nurse_exp,
+            'nurse_exp' => [
+               'en' => $request->nurse_exp['en'],
+               'ua' => $request->nurse_exp['ua']
+            ],
             'experience_id' => $request->experience_id,
-            'recommendation_id' => $request->recommendation_id,
-            'education_about' => $request->education_about,
-            'workperiod_id' => $request->workperiod_id,
-            'employment_id' => $request->employment_id,            
+            'workperiod_id' => $request->workperiod_id,            
             'hourpay_id' => $request->hourpay_id,
             'monthpay_id' => $request->monthpay_id,
-            'additional' => $request->additional,
             'confirmed' => $request->confirmed,
         ]);                
         $nurse->save();
@@ -85,15 +84,14 @@ class NurseController extends Controller
     public function update(NurseRequest $request, string $id)
     {
         $nurse = Nurse::find($id);       
-        $nurse->nurse_exp = $request['nurse_exp'];
+        $nurse->nurse_exp = [
+               'en' => $request->nurse_exp['en'],
+               'ua' => $request->nurse_exp['ua']
+            ];
         $nurse->experience_id = $request['experience_id'];
-        $nurse->recommendation_id = $request['recommendation_id'];
-        $nurse->education_about = $request['education_about'];
-        $nurse->workperiod_id = $request['workperiod_id'];
-        $nurse->employment_id = $request['employment_id'];        
+        $nurse->workperiod_id = $request['workperiod_id'];        
         $nurse->hourpay_id = $request['hourpay_id'];
         $nurse->monthpay_id = $request['monthpay_id'];
-        $nurse->additional = $request['additional'];
         $nurse->save(); 
 
         Cache::put('nurses', Nurse::all());

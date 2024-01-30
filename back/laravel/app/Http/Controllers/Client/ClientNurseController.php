@@ -27,7 +27,7 @@ class ClientNurseController extends Controller
         }
 
         if($client_nurse) { return new ClientNurseResource($client_nurse); }
-        else { return null; }
+        else { return 'null'; }
     }
 
     /**
@@ -46,12 +46,11 @@ class ClientNurseController extends Controller
         $nurse = new ClientNurse([
             'user_id' => $request->user_id,
             'confirmed' => $request->confirmed,
-            'title' => $request->title,
-            'title_about' => $request->title_about,                        
+            'title_about' => [
+               'en' => $request->title_about['en'],
+               'ua' => $request->title_about['ua']
+            ],                        
             'workperiod_id' => $request->workperiod_id,
-            'employment_id' => $request->employment_id,
-            'drive' => $request->drive,
-            'agents' => $request->agents,
             'hourpay_id' => $request->hourpay_id,
             'monthpay_id' => $request->monthpay_id
         ]);                
@@ -82,13 +81,12 @@ class ClientNurseController extends Controller
      */
     public function update(NurseRequest $request, string $id)
     {
-        $nurse = ClientNurse::find($id);       
-        $nurse->title = $request['title'];
-        $nurse->title_about = $request['title_about'];        
+        $nurse = ClientNurse::find($id);
+        $nurse->title_about = [
+               'en' => $request->title_about['en'],
+               'ua' => $request->title_about['ua']
+            ];        
         $nurse->workperiod_id = $request['workperiod_id'];
-        $nurse->employment_id = $request['employment_id'];
-        $nurse->drive = $request['drive'];
-        $nurse->agents = $request['agents'];
         $nurse->hourpay_id = $request['hourpay_id'];
         $nurse->monthpay_id = $request['monthpay_id'];
         $nurse->save(); 

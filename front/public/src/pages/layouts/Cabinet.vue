@@ -1,59 +1,194 @@
-<template>      
-    <div class="cabinet">        
-        <div class="cabinet_sidebar">
-            <div class="cabinet_sidebar_title">{{ User.user.name }}</div>
-            <div @click.prevent="account" class="admin_sidebar_item">Учетная запись</div>
-            <div @click.prevent="mailbox" class="admin_sidebar_item">Почтовый ящик</div> 
-            <div @click.prevent="vacancies" class="admin_sidebar_item">Отзывы</div>
-            <div v-if="User.user.role === 'Исполнитель'" @click.prevent="credentials" class="admin_sidebar_item">Мои рекомендации</div>
-            <div @click.prevent="edit" class="admin_sidebar_item">Редактировать профиль</div>
-            <div @click.prevent="myphoto" class="admin_sidebar_item">Моя фотография</div>
-            <div @click.prevent="logout" class="admin_sidebar_item">Выйти</div>
+<template>
+    <div class="block">
+        <div class="block_back"></div>
+        <div class="block_content">
+            <div class="container">
+                <div class="staff_title">{{ $t('cabinet.title') }}</div>
+                <div class="cabinet">
+                    <div class="cabinet_sidebar">
+                        <div class="cabinet_box">
+                            <img v-if="User.photo" class="cabinet_img" :src="User.photo" alt="">
+                            <div v-else class="cabinet_noimg">{{ $t('cabinet.no_img') }}</div>
+                        </div>
+                        <div class="sidebar_items">
+                            <div @click.prevent="account" class="sidebar_item">{{ $t('cabinet.item1') }}</div>
+                            <div @click.prevent="edit" class="sidebar_item">{{ $t('cabinet.item2') }}</div>
+                            <div @click.prevent="myphoto" class="sidebar_item">{{ $t('cabinet.item3') }}</div>
+                            <div @click.prevent="babysitter" class="sidebar_item">
+                                <span v-if="User.user.role === 'Исполнитель'">{{ $t('cabinet.item4') }}</span>
+                                <span v-else>{{ $t('c_baby.title') }}</span>
+                            </div>
+                            <div @click.prevent="nurse" class="sidebar_item">
+                                <span v-if="User.user.role === 'Исполнитель'">{{ $t('cabinet.item5') }}</span>
+                                <span v-else>{{ $t('c_nurse.title') }}</span>
+                            </div>
+                            <div @click.prevent="keeper" class="sidebar_item">
+                                <span v-if="User.user.role === 'Исполнитель'">{{ $t('cabinet.item6') }}</span>
+                                <span v-else>{{ $t('c_keeper.title') }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cabinet_main">
+                        <router-view />
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="cabinet_main">
-            <div @click.prevent="back()" class="category_change_btn">Назад</div>
-            <router-view/>        
-        </div>                
     </div>
 </template>
 
 <script>
 import { useUserStore } from '../../stores/user';
+import { useForm_BabyStore } from '../../stores/form_baby';
+import { useForm_NurseStore } from '../../stores/form_nurse';
+import { useForm_HousekeeperStore } from '../../stores/form_housekeeper';
+import { useClient_BabyStore } from '../../stores/client_baby';
+import { useClient_NurseStore } from '../../stores/client_nurse';
+import { useClient_KeeperStore } from '../../stores/client_keeper';
+import { useSocketStore } from '../../stores/socket';
 export default {
-    name: "Cabinet", 
+    name: "Cabinet",
     setup() {
-        const User = useUserStore();        
-        return { User };
-    },       
-    methods: {        
-        back() {
-            this.$router.push({name: "Home"})
-        },
-        account() {
-            this.$router.push({name: "Account"})
-        },
-        mailbox() {
-            this.$router.push({name: "Mailbox"})
-        }, 
-        myphoto() {
-            this.$router.push({name: "Myphoto"})
-        },
+        const Baby = useForm_BabyStore();
+        const Nurse = useForm_NurseStore();
+        const Keeper = useForm_HousekeeperStore();
+        const ClientBaby = useClient_BabyStore();
+        const ClientNurse = useClient_NurseStore();
+        const ClientKeeper = useClient_KeeperStore();
+        const User = useUserStore();
+        const Socket = useSocketStore();
+        return { User, Socket, Baby, Nurse, Keeper, ClientBaby, ClientNurse, ClientKeeper };
+    },
+    methods: {
+        account() { this.$router.push({ name: "Account" }) },
+        myphoto() { this.$router.push({ name: "Myphoto" }) },
         edit() {
-            this.$router.push({name: "Edit"})
+            this.$router.push({ name: "Edit" })
         },
-        vacancies() {
-            this.$router.push({name: "Vacancies"})
+        babysitter() {
+            if (this.User.user.role === 'Исполнитель') {
+                if (this.Baby.baby) { this.$router.push({ name: "Babysitting" }) }
+                else { this.$router.push({ name: "CreateBabysitting" }) }
+            }
+            else {
+                if (this.ClientBaby.baby) { this.$router.push({ name: "Client_baby" }) }
+                else { this.$router.push({ name: "CreateClientBaby" }) }
+            }
         },
-        credentials() {
-            this.$router.push({name: "Credentials"})
+        nurse() {
+            if (this.User.user.role === 'Исполнитель') {
+                if (this.Nurse.nurse) { this.$router.push({ name: "Nurse" }) }
+                else { this.$router.push({ name: "CreateNurse" }) }
+            }
+            else {
+                if (this.ClientNurse.nurse) { this.$router.push({ name: "Client_nurse" }) }
+                else { this.$router.push({ name: "CreateClientNurse" }) }
+            }
         },
-        logout() {
-            this.User.LOGOUT_USER();
-        },       
-    }, 
+        keeper() {
+            if (this.User.user.role === 'Исполнитель') {
+                if (this.Keeper.keeper) { this.$router.push({ name: "Housekeeper" }) }
+                else { this.$router.push({ name: "CreateKeeper" }) }
+            }
+            else {
+                if (this.ClientKeeper.keeper) { this.$router.push({ name: "Client_keeper" }) }
+                else { this.$router.push({ name: "CreateClientKeeper" }) }
+            }
+        },
+    },
     mounted() {
         this.User.GET_USER();
-    },       
+        this.User.GET_PHOTO();
+        this.User.GET_TOKEN();
+        this.Socket.connect();
+
+        this.Baby.GET_BABY(localStorage.userID);
+        this.Nurse.GET_NURSE(localStorage.userID);
+        this.Keeper.GET_KEEPER(localStorage.userID);
+        this.ClientBaby.GET_BABY(localStorage.userID);
+        this.ClientNurse.GET_NURSE(localStorage.userID);
+        this.ClientKeeper.GET_KEEPER(localStorage.userID);
+    },
 }
 </script>
+
+<style>
+.cabinet {
+    width: 100%;
+    display: flex;
+    margin-top: 48px;
+    border-top: 1px solid #8E8E8E;
+    padding-top: 32px;
+}
+
+.cabinet_sidebar {
+    width: 307px;
+    padding-right: 37px;
+    border-right: 1px solid #8E8E8E;
+}
+
+.sidebar_item {
+    cursor: pointer;
+    transition: color 0.3s, background 0.3s;
+    width: 250px;
+    font-size: 16px;
+    margin: 10px 0px;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+
+.sidebar_item:hover {
+    color: #FFF0D2;
+    background: #5C4538;
+}
+
+.cabinet_main {
+    padding: 0 64px;
+    flex: 1;
+}
+
+@media (max-width: 992px) {
+    .cabinet {
+        margin-top: 24px;
+        padding-top: 16px;
+    }
+
+    .cabinet_main {
+        padding: 0 16px;
+    }
+
+    .cabinet_sidebar {
+        width: auto;
+        padding-right: 32px;
+    }
+}
+
+@media (max-width: 767px) {
+    .cabinet {
+        flex-direction: column;
+    }
+
+    .cabinet_sidebar {
+        padding-right: 0;
+        border-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .sidebar_items {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .sidebar_item {
+        width: auto;
+        margin: 5px;
+        padding: 0 5px;
+    }
+
+    .cabinet_main {
+        border-left: 1px solid #8E8E8E;
+    }
+}
+</style>
 

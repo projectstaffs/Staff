@@ -34,7 +34,10 @@ class HousekeeperPreferenceController extends Controller
     public function store(Request $request)
     {
         $housekeeperPreference = new HouseKeeperPreference([
-            'title' => $request->title
+            'title' => [
+               'en' => $request->en,
+               'ua' => $request->ua
+            ],
         ]);
         $housekeeperPreference->save();   
         
@@ -64,7 +67,10 @@ class HousekeeperPreferenceController extends Controller
     public function update(Request $request, string $id)
     {
         $housekeeperPreference = HouseKeeperPreference::find($id);
-        $housekeeperPreference->title = $request['title'];
+        $housekeeperPreference->title = [
+               'en' => $request->title['en'],
+               'ua' => $request->title['ua']
+            ];
         $housekeeperPreference->save();
 
         Cache::put('housekeeperpreferences', HouseKeeperPreference::all());

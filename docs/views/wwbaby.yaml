@@ -1,0 +1,83 @@
+openapi: 3.0.0
+info:
+  title: Watch Worker Baby API
+  version: 1.0.0
+tags:
+  - name: watchWorkerBaby
+    description: Endpoints related to watching worker baby profiles
+paths:
+  /watchworkerbabies:
+    get:
+      summary: Get watched worker baby profiles for a user
+      tags:
+        - watchWorkerBaby
+      parameters:
+        - in: query
+          name: data
+          required: true
+          schema:
+            type: string
+          description: User ID
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: 
+                - user_id: 1
+                  anketa_id: 400
+                - user_id: 1
+                  anketa_id: 401
+    post:
+      summary: Add a worker baby profile to watchlist
+      tags:
+        - watchWorkerBaby
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                  description: User ID
+                anketa_id:
+                  type: integer
+                  description: Worker Baby profile ID
+              required:
+                - user_id
+                - anketa_id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: "Worker Baby profile added to watchlist."
+        '400':
+          description: Bad request
+        '404':
+          description: Worker Baby profile not found
+        '409':
+          description: Worker Baby profile already in watchlist
+
+  /watchworkerbabies/{id}:
+    delete:
+      summary: Remove a worker baby profile from watchlist
+      tags:
+        - watchWorkerBaby
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: WatchWorkerBaby ID
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: "Worker Baby profile removed from watchlist."
+        '404':
+          description: WatchWorkerBaby ID not found

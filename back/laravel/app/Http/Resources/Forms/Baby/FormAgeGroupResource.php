@@ -22,7 +22,7 @@ class FormAgegroupResource extends JsonResource
             if($item->id == $this->agegroup_id) {
                 return [
                     'id' => $this->agegroup_id,
-                    'title' => $item->title            
+                    'title' => $item            
                 ];                
             }                           
         }

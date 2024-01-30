@@ -22,17 +22,7 @@ class UserController extends Controller
         if(!Cache::has('users')) { Cache::put('users', User::all()); }
         $Users = Cache::get('users');
 
-        return $Users;
-        /*$users = array();
-        $count = 0;
-        foreach ($Users as $item) {
-            if($item->role == "Администратор") {
-                //array_push($users, $item);
-                unset($Users[$count]);
-                // возможно $count--;               
-            }
-            $count++;                           
-        }*/
+        return UserResource::collection($Users);
     }
 
     /**
@@ -51,19 +41,39 @@ class UserController extends Controller
         $request->password = Hash::make($request->password);        
         
         $user = new User([
-            'name' => $request->name,
+            'name' => [
+               'en' => $request->name['en'],
+               'ua' => $request->name['ua']
+            ],
             'email' => $request->email,            
-            'password' => $request->password,
-            
-            'role' => $request->role, 'confirmed' => $request->confirmed, 'surname' => $request->surname, 'patronymic' => $request->patronymic, 'phone' => $request->phone, 'additional_phone' => $request->additional_phone, 'gender' => $request->gender, 'age' => $request->age, 'right_work' => $request->right_work, 'drive' => $request->drive, 'night_work' => $request->night_work, 'animal_work' => $request->animal_work, 'swimming' => $request->swimming, 'about' => $request->about, 'is_babysitting' => $request->is_babysitting, 'is_nurse' => $request->is_nurse, 'is_housekeeper' => $request->is_housekeeper,          
-            'smoking' => $request->smoking, 'country' => $request->country, 'citizen' => $request->citizen, 'criminal' => $request->criminal, 'moving' => $request->moving, 'alcohol' => $request->alcohol, 'status' => $request->status, 'religion' => $request->religion, 'city' => $request->city,            
+            'password' => $request->password,            
+            'role' => $request->role, 'confirmed' => $request->confirmed, 
+            'surname' => [
+               'en' => $request->surname['en'],
+               'ua' => $request->surname['ua']
+            ], 
+            'phone' => $request->phone, 'phone_code' => $request->phone_code, 
+            'gender' => [
+               'en' => $request->gender['en'],
+               'ua' => $request->gender['ua']
+            ],
+            'age' => $request->age,
+            'animal_work' => [
+               'en' => $request->animal_work['en'],
+               'ua' => $request->animal_work['ua']            
+            ], 
+            'about' => [
+               'en' => $request->about['en'],
+               'ua' => $request->about['ua']
+            ],                      
+            'country' => $request->country, 'city' => $request->city            
         ]);                
         $user->save();
         $token = auth()->tokenById($user->id);
         
         $temp = new UserResource($user);
         Cache::put('users', User::all()); 
-        UserGreetingJob::dispatch($user->name, $user->email, $temp_password);       
+        UserGreetingJob::dispatch($user->email, $request->lang);       
         return response(['access_token' => $token, 'user' => $temp]);        
     }
 
@@ -91,37 +101,36 @@ class UserController extends Controller
         $request['password'] = Hash::make($request['password']);
         $user = User::find($id);      
         
-        $user->name = $request['name'];
+        $user->name = [
+               'en' => $request->name['en'],
+               'ua' => $request->name['ua']
+            ];
         $user->email = $request['email'];            
         $user->password = $request['password'];
             
         $user->role = $request['role']; 
         $user->confirmed = $request['confirmed']; 
-        $user->surname = $request['surname']; 
-        $user->patronymic = $request['patronymic']; 
-        $user->phone = $request['phone']; 
-        $user->additional_phone = $request['additional_phone']; 
-        $user->gender = $request['gender'];
+        $user->surname = [
+               'en' => $request->surname['en'],
+               'ua' => $request->surname['ua']
+            ];
+        $user->phone = $request['phone']; $user->phone_code = $request['phone_code'];
+        $user->gender = [
+               'en' => $request->gender['en'],
+               'ua' => $request->gender['ua']
+            ];        
         $user->age = $request['age']; 
-        $user->right_work = $request['right_work']; 
-        $user->drive = $request['drive']; 
-        $user->night_work = $request['night_work']; 
-        $user->animal_work = $request['animal_work']; 
-        $user->swimming = $request['swimming'];
-        $user->about = $request['about']; 
-        $user->is_babysitting = $request['is_babysitting']; 
-        $user->is_nurse = $request['is_nurse']; 
-        $user->is_housekeeper = $request['is_housekeeper'];         
+        $user->animal_work = [
+               'en' => $request->animal_work['en'],
+               'ua' => $request->animal_work['ua']            
+            ];
+        $user->about = [
+               'en' => $request->about['en'],
+               'ua' => $request->about['ua']
+            ];        
         
-        $user->smoking = $request['smoking_id']; 
-        $user->country = $request['country_id']; 
-        $user->citizen = $request['citizen_id']; 
-        $user->criminal = $request['criminal_id']; 
-        $user->moving = $request['moving_id']; 
-        $user->alcohol = $request['alcohol_id']; 
-        $user->status = $request['status_id']; 
-        $user->religion = $request['religion_id']; 
-        $user->city = $request['city_id'];       
+        //$user->country = $request['country'];         
+        $user->city = $request['city'];       
 
         $user->save();
         $temp = new UserResource($user);

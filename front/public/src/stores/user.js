@@ -9,16 +9,19 @@ export const useUserStore = defineStore('user', {
             user: {},
             users: {}, 
             token: '',
+            photo: '',
             login_error: '',
             forgot_error: '',
-            register_error: null,
-            global_error: null                     
+            register_error: null,                    
         }
     },
     actions: {  
         GET_TOKEN(){
             this.token = localStorage.access_token;
-        },      
+        }, 
+        GET_PHOTO(){
+            this.photo = localStorage.user_image;
+        },     
         GET_ADMINID(){            
             api.get('api/auth/admin')
                 .then((res) => {                
@@ -29,8 +32,9 @@ export const useUserStore = defineStore('user', {
         CREATE_PHOTO(data){            
             api.post('api/auth/photo', data)
                 .then((res) => {   
-                    //console.log(res);                                
-                    localStorage.user_image = res.data.url;
+                    //console.log(res); 
+                    this.photo = res.data.url;                               
+                    localStorage.user_image = res.data.preview_url;
                     router.push({name: "Account"});                 
                 })
                 .catch(error => { console.log(error); })
@@ -48,14 +52,16 @@ export const useUserStore = defineStore('user', {
                     localStorage.removeItem('access_token');
                     localStorage.removeItem('user');                
                     localStorage.removeItem('user_image');
-                    localStorage.removeItem('admin_id');
+                    localStorage.removeItem('userConfirmed');
                     localStorage.removeItem('userID');
+                    localStorage.removeItem('lang');
                     localStorage.removeItem('clientBabyitem'); localStorage.removeItem('clientBabyitemUser'); 
                     localStorage.removeItem('clientNurseitem'); localStorage.removeItem('clientNurseitemUser');
                     localStorage.removeItem('clientKeeperitem'); localStorage.removeItem('clientKeeperitemUser');
                     localStorage.removeItem('workerBabyitem'); localStorage.removeItem('workerBabyitemUser');
                     localStorage.removeItem('workerNurseitem'); localStorage.removeItem('workerNurseitemUser');
-                    localStorage.removeItem('workerKeeperitem'); localStorage.removeItem('workerKeeperitemUser');                  
+                    localStorage.removeItem('workerKeeperitem'); localStorage.removeItem('workerKeeperitemUser');
+                    localStorage.removeItem('userVerify');                   
                     
                     this.user = {}; 
                     this.token = '';                   
@@ -66,7 +72,31 @@ export const useUserStore = defineStore('user', {
         GET_USER(){                                     
             this.user = JSON.parse(localStorage.user);
         },
-        FORGOT_PASSWORD(data){                                      
+        GET_USER_SOCKET(){                                     
+            this.user = JSON.parse(localStorage.user);
+            this.user.verify = "2023-12-15";
+            localStorage.user = JSON.stringify(this.user);
+            localStorage.userVerify = "2023-12-15";
+            window.location.reload(true);
+        },
+        BLOCK_USER_SOCKET(){                                     
+            this.user = JSON.parse(localStorage.user);
+            this.user.confirmed = 0;
+            localStorage.user = JSON.stringify(this.user);
+            localStorage.userConfirmed = 0;
+            window.location.reload(true);
+        },
+        RESTORE_USER_SOCKET(){                                     
+            this.user = JSON.parse(localStorage.user);
+            this.user.confirmed = 1;
+            localStorage.user = JSON.stringify(this.user);
+            localStorage.userConfirmed = 1;
+            window.location.reload(true);
+        },
+        FORGOT_PASSWORD(data){ 
+            if(localStorage.lang && (localStorage.lang == 'en')) {
+                data.lang = 'en'; 
+            } else { data.lang = 'ua'; }                                     
             axios.post('api/forgot_password', data)
                 .then((res) => { 
                     this.forgot_error = '';
@@ -84,10 +114,12 @@ export const useUserStore = defineStore('user', {
                     localStorage.access_token = res.data[0].original.access_token;
                     localStorage.user = JSON.stringify(res.data[1].original);               
                     localStorage.user_image = res.data[1].original.image;
+                    localStorage.userConfirmed = res.data[1].original.confirmed;
                     localStorage.userID = res.data[1].original.id;
+                    localStorage.userVerify = res.data[1].original.verify;
 
                     this.token = res.data[0].original.access_token;
-                    this.user = res.data[1].original;
+                    this.user = res.data[1].original;                    
                     router.push({name: "Home"});                    
                 })
                 .catch(error => { 
@@ -111,25 +143,38 @@ export const useUserStore = defineStore('user', {
                     router.push({name: "Account"});                   
                 })
                 .catch(error => { 
-                    //console.log(error);
-                    this.register_error = error.response.data.errors; 
+                    if(error) {
+                        this.register_error = error.response.data.errors;
+                        for (const key in this.register_error) {
+                            this.register_error[key][0] = JSON.parse(this.register_error[key][0]);
+                        }
+                    } 
                 })
         },
-        CREATE_USER(data){                                    
+        CREATE_USER(data){
+            if(localStorage.lang && (localStorage.lang == 'en')) {
+                data.lang = 'en'; 
+            } else { data.lang = 'ua'; }                                  
             axios.post('api/user', data)
                 .then((res) => { 
                     this.register_error = null;               
                     localStorage.access_token = res.data.access_token;
                     localStorage.user = JSON.stringify(res.data.user);
                     localStorage.userID = res.data.user.id;
+                    localStorage.userConfirmed = res.data.user.confirmed;
+                    localStorage.userVerify = res.data.user.verify;
 
                     this.token = res.data.access_token;
                     this.user = res.data.user;                    
-                    router.push({name: "Home"});                   
+                    router.push({name: "PopupMail"});                   
                 })
-                .catch(error => { 
-                    //console.log(error);
-                    this.register_error = error.response.data.errors;  
+                .catch(error => {
+                    if(error) {
+                        this.register_error = error.response.data.errors;
+                        for (const key in this.register_error) {
+                            this.register_error[key][0] = JSON.parse(this.register_error[key][0]);
+                        }
+                    }                      
                 })
         },        
     },

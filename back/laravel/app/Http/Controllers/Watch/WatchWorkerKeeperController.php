@@ -51,7 +51,7 @@ class WatchWorkerKeeperController extends Controller
             }                          
         }
         $count = count($myWatch);
-        if($count == 4) {
+        if($count == 10) {
             $elem = WatchWorkerKeeper::find($myWatch[0]->id);
             $elem->delete();
         }

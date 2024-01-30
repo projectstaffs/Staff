@@ -16,13 +16,9 @@ return new class extends Migration
             $table->integer('user_id');
             $table->text('nurse_exp');            
             $table->integer('experience_id');            
-            $table->integer('recommendation_id');            
-            $table->text('education_about');            
-            $table->integer('workperiod_id');
-            $table->integer('employment_id');            
+            $table->integer('workperiod_id');            
             $table->integer('hourpay_id');
             $table->integer('monthpay_id');
-            $table->text('additional')->nullable();
             $table->boolean('confirmed');
             $table->timestamps();
         });

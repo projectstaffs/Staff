@@ -34,7 +34,10 @@ class HourlyPaymentController extends Controller
     public function store(Request $request)
     {
         $hourlyPayment = new HourlyPayment([
-            'title' => $request->title
+            'title' => [
+               'en' => $request->en,
+               'ua' => $request->ua
+            ],
         ]);
         $hourlyPayment->save();  
         
@@ -64,7 +67,10 @@ class HourlyPaymentController extends Controller
     public function update(Request $request, string $id)
     {
         $hourlyPayment = HourlyPayment::find($id);
-        $hourlyPayment->title = $request['title'];
+        $hourlyPayment->title = [
+               'en' => $request->title['en'],
+               'ua' => $request->title['ua']
+            ];
         $hourlyPayment->save();
 
         Cache::put('hourlypayments', HourlyPayment::all());

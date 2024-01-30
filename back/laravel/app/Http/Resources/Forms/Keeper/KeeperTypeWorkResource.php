@@ -22,7 +22,7 @@ class KeepertypeworkResource extends JsonResource
             if($item->id == $this->keepertypework_id) {
                 return [
                     'id' => $this->keepertypework_id,
-                    'title' => $item->title            
+                    'title' => $item            
                 ];                
             }                           
         }

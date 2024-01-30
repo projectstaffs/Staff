@@ -1,0 +1,57 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Form Keeper Duties API
+paths:
+  /forms/keeperduties:
+    post:
+      summary: Add keeper duties for a form
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  form_id:
+                    type: string
+                    description: Form ID
+                  keeperdutie_id:
+                    type: string
+                    description: Keeper duty ID
+              required:
+                - form_id
+                - keeperdutie_id
+              example:
+                - form_id: "1"
+                  keeperdutie_id: "2"
+                - form_id: "1"
+                  keeperdutie_id: "3"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                message: "Keeper duties successfully added"
+                count: 2
+
+  /forms/keeperduties/{id}:
+    delete:
+      summary: Remove keeper duties by form ID
+      parameters:
+        - name: id
+          in: path
+          description: Form ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                message: "Keeper duties successfully removed"

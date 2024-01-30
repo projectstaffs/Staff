@@ -6,13 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Cache;
 
-use App\Models\Client\ClientKeeperJobOption;
-use App\Http\Resources\Client\ClientKeeperJobOptionResource;
 use App\Models\Client\ClientKeeperDutie;
 use App\Http\Resources\Client\ClientKeeperDutieResource;
 
 use App\Models\Data\WorkPeriod;
-use App\Models\Data\Employment;
 use App\Models\Data\MonthlyPayment;
 use App\Models\Data\HourlyPayment;
 
@@ -24,16 +21,7 @@ class ClientKeeperResource extends JsonResource
      * @return array<string, mixed>
      */
     public function toArray(Request $request): array
-    {        
-        if(!Cache::has('client_keeperjoboptions')) { Cache::put('client_keeperjoboptions', ClientKeeperJobOption::all()); }
-        $Client_keeperjoboption = Cache::get('client_keeperjoboptions');
-        $joboption = array();
-        foreach ($Client_keeperjoboption as $item) {
-            if($item->form_id == $this->id) {
-                array_push($joboption, $item);
-            }                           
-        }
-
+    {
         if(!Cache::has('client_keeperduties')) { Cache::put('client_keeperduties', ClientKeeperDutie::all()); }
         $Client_keeperdutie = Cache::get('client_keeperduties');
         $dutie = array();
@@ -48,17 +36,7 @@ class ClientKeeperResource extends JsonResource
         $workPeriod = '';
         foreach ($WorkPeriod as $item) {
             if($item->id == $this->workperiod_id) {
-                $workPeriod = $item->title;                
-                break;
-            }                           
-        }
-
-        if(!Cache::has('employments')) { Cache::put('employments', Employment::all()); }
-        $Employment = Cache::get('employments');
-        $employment = '';
-        foreach ($Employment as $item) {
-            if($item->id == $this->employment_id) {
-                $employment = $item->title;                
+                $workPeriod = $item;                
                 break;
             }                           
         }
@@ -68,7 +46,7 @@ class ClientKeeperResource extends JsonResource
         $hourpay = '';
         foreach ($HourlyPayment as $item) {
             if($item->id == $this->hourpay_id) {
-                $hourpay = $item->title;                
+                $hourpay = $item;                
                 break;
             }                           
         }
@@ -78,7 +56,7 @@ class ClientKeeperResource extends JsonResource
         $monthpay = '';
         foreach ($MonthlyPayment as $item) {
             if($item->id == $this->monthpay_id) {
-                $monthpay = $item->title;                
+                $monthpay = $item;                
                 break;
             }                           
         }
@@ -87,21 +65,14 @@ class ClientKeeperResource extends JsonResource
             'id' => $this->id,
             'user_id' => $this->user_id,
             'confirmed' => $this->confirmed,
-            'title' => $this->title,
-            'title_about' => $this->title_about,            
+            'title_about' => $this->getTranslations('title_about'),            
             'workperiod' => $workPeriod,
-            'employment' => $employment,
-            'drive' => $this->drive,
-            'agents' => $this->agents,
             'hourpay' => $hourpay,
-            'monthpay' => $monthpay,
+            'monthpay' => $monthpay,            
             
-            'Joboptions' => ClientKeeperJobOptionResource::collection($joboption),
             'Duties' => ClientKeeperDutieResource::collection($dutie),
             
             'workperiod_id' => $this->workperiod_id,
-            'employment_id' => $this->employment_id,
-            'childrencount_id' => $this->childrencount_id,
             'hourpay_id' => $this->hourpay_id,
             'monthpay_id' => $this->monthpay_id,            
         ];

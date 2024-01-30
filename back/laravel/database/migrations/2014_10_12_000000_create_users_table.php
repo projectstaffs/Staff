@@ -20,24 +20,17 @@ return new class extends Migration
             $table->rememberToken();
 
             $table->string('role');
-            $table->boolean('confirmed')->nullable();
+            $table->boolean('confirmed');
 
-            $table->string('surname')->nullable();
-            $table->string('patronymic')->nullable();            
-            $table->integer('phone')->nullable();
-            $table->integer('additional_phone')->nullable();
-            $table->string('gender')->nullable();
-            $table->date('age')->nullable();
-            $table->string('right_work')->nullable();
-            $table->string('drive')->nullable();
-            $table->string('night_work')->nullable();
-            $table->string('animal_work')->nullable();
-            $table->string('swimming')->nullable();
-            $table->text('about')->nullable();
-            $table->boolean('is_babysitting')->nullable();
-            $table->boolean('is_nurse')->nullable();
-            $table->boolean('is_housekeeper')->nullable();
-
+            $table->string('surname');            
+            $table->integer('phone');
+            $table->string('phone_code');
+            $table->string('gender');
+            $table->date('age');
+            $table->string('animal_work');
+            $table->text('about');
+            $table->integer('country');
+            $table->integer('city');
             $table->timestamps();
         });
     }

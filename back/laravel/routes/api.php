@@ -5,33 +5,26 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\User\UserBlockController;
+use App\Http\Controllers\User\UserRestoreController;
 
 use App\Http\Controllers\Data\LanguageController;
 use App\Http\Controllers\Data\AgeGroupController;
-use App\Http\Controllers\Data\AlcoholController;
 use App\Http\Controllers\Data\BabysittingDutieController;
 use App\Http\Controllers\Data\CityController;
 use App\Http\Controllers\Data\CountryController;
-use App\Http\Controllers\Data\CriminalController;
 use App\Http\Controllers\Data\DiagnoseController;
 use App\Http\Controllers\Data\EducationController;
-use App\Http\Controllers\Data\EmploymentController;
 use App\Http\Controllers\Data\ExperienceController;
 use App\Http\Controllers\Data\HourlyPaymentController;
 use App\Http\Controllers\Data\HouseKeeperDutieController;
 use App\Http\Controllers\Data\HouseKeeperPreferenceController;
 use App\Http\Controllers\Data\HouseKeeperTypeOfWorkController;
-use App\Http\Controllers\Data\JobOptionController;
 use App\Http\Controllers\Data\MonthlyPaymentController;
-use App\Http\Controllers\Data\MovingController;
 use App\Http\Controllers\Data\NurseDutieController;
 use App\Http\Controllers\Data\NurseTypeOfWorkController;
 use App\Http\Controllers\Data\NursingSkillController;
-use App\Http\Controllers\Data\RecommendationController;
-use App\Http\Controllers\Data\ReligionController;
 use App\Http\Controllers\Data\ScheduleController;
-use App\Http\Controllers\Data\SmokingController;
-use App\Http\Controllers\Data\StatusController;
 use App\Http\Controllers\Data\TypeOfWorkController;
 use App\Http\Controllers\Data\WorkLocationController;
 use App\Http\Controllers\Data\WorkPeriodController;
@@ -47,7 +40,6 @@ use App\Http\Controllers\ViewsController;
 use App\Http\Controllers\Forms\FormAgeGroupController;
 use App\Http\Controllers\Forms\FormDutieController;
 use App\Http\Controllers\Forms\FormEducationController;
-use App\Http\Controllers\Forms\FormJobOptionController;
 use App\Http\Controllers\Forms\FormTypeWorkController;
 use App\Http\Controllers\Forms\BabyController;
 
@@ -58,26 +50,21 @@ use App\Http\Controllers\Forms\FormNurseSkillController;
 use App\Http\Controllers\Forms\FormNurseTypeWorkController;
 use App\Http\Controllers\Forms\FormNurseWorkLocationController;
 use App\Http\Controllers\Forms\FormNurseEducationController;
-use App\Http\Controllers\Forms\FormNurseJobOptionController;
 
 use App\Http\Controllers\Forms\KeeperController;
 use App\Http\Controllers\Forms\KeeperDutieController;
-use App\Http\Controllers\Forms\KeeperJobOptionController;
 use App\Http\Controllers\Forms\KeeperPreferenceController;
 use App\Http\Controllers\Forms\KeeperTypeWorkController;
 
 use App\Http\Controllers\Client\ClientBabyController;
 use App\Http\Controllers\Client\ClientBabyAgeGroupController;
 use App\Http\Controllers\Client\ClientBabyDutieController;
-use App\Http\Controllers\Client\ClientBabyJobOptionController;
 
 use App\Http\Controllers\Client\ClientNurseController;
 use App\Http\Controllers\Client\ClientNurseDutieController;
-use App\Http\Controllers\Client\ClientNurseJobOptionController;
 
 use App\Http\Controllers\Client\ClientKeeperController;
 use App\Http\Controllers\Client\ClientKeeperDutieController;
-use App\Http\Controllers\Client\ClientKeeperJobOptionController;
 
 use App\Http\Controllers\Watch\WatchWorkerBabyController;
 use App\Http\Controllers\Watch\WatchWorkerNurseController;
@@ -123,7 +110,7 @@ function ($router) {
         Route::get('/message_in', [HelpController::class, 'getMessage_in']);
         Route::resource('/message', MessageController::class); //message out
         Route::resource('/review', ReviewController::class);
-        Route::resource('/credential', CredentialController::class);
+        
         Route::resource('/photo', ImageController::class);
         Route::resource('/language', LanguageController::class);
         Route::resource('/children', ChildrenController::class);
@@ -131,18 +118,15 @@ function ($router) {
         Route::resource('/babysittingdutie', BabysittingDutieController::class);        
         Route::resource('/diagnose', DiagnoseController::class);
         Route::resource('/education', EducationController::class);
-        Route::resource('/employment', EmploymentController::class);
         Route::resource('/experience', ExperienceController::class);
         Route::resource('/hourlypayment', HourlyPaymentController::class);
         Route::resource('/housekeeperdutie', HouseKeeperDutieController::class);
         Route::resource('/housekeeperpreference', HouseKeeperPreferenceController::class);
         Route::resource('/housekeepertypeofwork', HouseKeeperTypeOfWorkController::class);
-        Route::resource('/joboption', JobOptionController::class);
         Route::resource('/monthlypayment', MonthlyPaymentController::class);        
         Route::resource('/nursedutie', NurseDutieController::class);
         Route::resource('/nursetypeofwork', NurseTypeOfWorkController::class);
-        Route::resource('/nursingskill', NursingSkillController::class);
-        Route::resource('/recommendation', RecommendationController::class);        
+        Route::resource('/nursingskill', NursingSkillController::class);        
         Route::resource('/schedule', ScheduleController::class);        
         Route::resource('/typeofwork', TypeOfWorkController::class);
         Route::resource('/worklocation', WorkLocationController::class);
@@ -152,7 +136,6 @@ function ($router) {
         Route::resource('/formagegroup', FormAgeGroupController::class);
         Route::resource('/formdutie', FormDutieController::class);
         Route::resource('/formeducation', FormEducationController::class);
-        Route::resource('/formjoboption', FormJobOptionController::class);
         Route::resource('/formtypework', FormTypeWorkController::class);
         Route::resource('/baby', BabyController::class); 
         
@@ -163,39 +146,47 @@ function ($router) {
         Route::resource('/formnursetypework', FormNurseTypeWorkController::class);
         Route::resource('/formnurseworklocation', FormNurseWorkLocationController::class);
         Route::resource('/formnurseeducation', FormNurseEducationController::class);
-        Route::resource('/formnursejoboption', FormNurseJobOptionController::class);
 
         Route::resource('/keeper', KeeperController::class);
         Route::resource('/keeperdutie', KeeperDutieController::class);
-        Route::resource('/keeperjoboption', KeeperJobOptionController::class);
         Route::resource('/keeperpreference', KeeperPreferenceController::class);
         Route::resource('/keepertypework', KeeperTypeWorkController::class);
 
         Route::resource('/clientagegroup', ClientBabyAgeGroupController::class);
-        Route::resource('/clientjoboption', ClientBabyJobOptionController::class);
         Route::resource('/clientdutie', ClientBabyDutieController::class);
         Route::resource('/clientbaby', ClientBabyController::class);
 
-        Route::resource('/clientnursejoboption', ClientNurseJobOptionController::class);
         Route::resource('/clientnursedutie', ClientNurseDutieController::class);
         Route::resource('/clientnurse', ClientNurseController::class);
 
-        Route::resource('/clientkeeperjoboption', ClientKeeperJobOptionController::class);
         Route::resource('/clientkeeperdutie', ClientKeeperDutieController::class);
         Route::resource('/clientkeeper', ClientKeeperController::class);
+
+        Route::post('/blockuser', [HelpController::class, 'blockUser']);
+        Route::post('/restoreuser', [HelpController::class, 'restoreUser']);
+
+        Route::post('/blockbaby', [UserBlockController::class, 'blockBaby']);
+        Route::post('/blocknurse', [UserBlockController::class, 'blockNurse']);
+        Route::post('/blockkeeper', [UserBlockController::class, 'blockKeeper']);
+        Route::post('/blockclientbaby', [UserBlockController::class, 'blockClientBaby']);
+        Route::post('/blockclientnurse', [UserBlockController::class, 'blockClientNurse']);
+        Route::post('/blockclientkeeper', [UserBlockController::class, 'blockClientKeeper']);
+
+        Route::post('/restorebaby', [UserRestoreController::class, 'restoreBaby']);
+        Route::post('/restorenurse', [UserRestoreController::class, 'restoreNurse']);
+        Route::post('/restorekeeper', [UserRestoreController::class, 'restoreKeeper']);
+        Route::post('/restoreclientbaby', [UserRestoreController::class, 'restoreClientBaby']);
+        Route::post('/restoreclientnurse', [UserRestoreController::class, 'restoreClientNurse']);
+        Route::post('/restoreclientkeeper', [UserRestoreController::class, 'restoreClientKeeper']);
     });    
 });
 
 Route::resource('/user', UserController::class);
 Route::resource('/country', CountryController::class);
 Route::resource('/city', CityController::class);
-Route::resource('/criminal', CriminalController::class);
-Route::resource('/moving', MovingController::class);
-Route::resource('/smoking', SmokingController::class);
-Route::resource('/alcohol', AlcoholController::class);
-Route::resource('/status', StatusController::class);
-Route::resource('/religion', ReligionController::class);
+Route::resource('/credential', CredentialController::class);
 
 Route::post('/forgot_password', [HelpController::class, 'forgotPassword']);
-//Route::get('/redis', [HelpController::class, 'redisAll']);
-//Route::get('/minio', [HelpController::class, 'minio']);
+Route::post('/changelang', [HelpController::class, 'changeLang']);
+
+Route::post('/test', [HelpController::class, 'testMail']);

@@ -34,11 +34,14 @@ class BabysittingDutieController extends Controller
     public function store(Request $request)
     {
         $babysittingDutie = new BabysittingDutie([
-            'title' => $request->title
+            'title' => [
+               'en' => $request->en,
+               'ua' => $request->ua
+            ],
         ]);
-        $babysittingDutie->save();  
+        $babysittingDutie->save();         
         
-        Cache::get('babysittingduties');
+        Cache::put('babysittingduties', BabysittingDutie::all());
         return response()->json('The babysittingDutie successfully added');
     }
 
@@ -64,10 +67,13 @@ class BabysittingDutieController extends Controller
     public function update(Request $request, string $id)
     {
         $babysittingDutie = BabysittingDutie::find($id);
-        $babysittingDutie->title = $request['title'];
+        $babysittingDutie->title = [
+               'en' => $request->title['en'],
+               'ua' => $request->title['ua']
+            ];
         $babysittingDutie->save();
 
-        Cache::get('babysittingduties');
+        Cache::put('babysittingduties', BabysittingDutie::all());
         return response()->json(["The babysittingDutie successfully updated"]);
     }
 
@@ -79,7 +85,7 @@ class BabysittingDutieController extends Controller
         $babysittingDutie = BabysittingDutie::find($id);
         $babysittingDutie->delete();        
 
-        Cache::get('babysittingduties');
+        Cache::put('babysittingduties', BabysittingDutie::all());
         return response()->json('The babysittingDutie successfully deleted');
     }
 }

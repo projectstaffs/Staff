@@ -1,0 +1,83 @@
+openapi: 3.0.0
+info:
+  title: Watch Worker Keeper API
+  version: 1.0.0
+tags:
+  - name: watchWorkerKeeper
+    description: Endpoints related to watching worker keeper profiles
+paths:
+  /watchworkerkeepers:
+    get:
+      summary: Get watched worker keeper profiles for a user
+      tags:
+        - watchWorkerKeeper
+      parameters:
+        - in: query
+          name: data
+          required: true
+          schema:
+            type: string
+          description: User ID
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: 
+                - user_id: 1
+                  anketa_id: 500
+                - user_id: 1
+                  anketa_id: 501
+    post:
+      summary: Add a worker keeper profile to watchlist
+      tags:
+        - watchWorkerKeeper
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                  description: User ID
+                anketa_id:
+                  type: integer
+                  description: Worker Keeper profile ID
+              required:
+                - user_id
+                - anketa_id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: "Worker Keeper profile added to watchlist."
+        '400':
+          description: Bad request
+        '404':
+          description: Worker Keeper profile not found
+        '409':
+          description: Worker Keeper profile already in watchlist
+
+  /watchworkerkeepers/{id}:
+    delete:
+      summary: Remove a worker keeper profile from watchlist
+      tags:
+        - watchWorkerKeeper
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: WatchWorkerKeeper ID
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: "Worker Keeper profile removed from watchlist."
+        '404':
+          description: WatchWorkerKeeper ID not found

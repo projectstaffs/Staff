@@ -21,19 +21,19 @@ api.interceptors.response.use({}, error => {
             console.log('Токен успешно восстановлен.')
             localStorage.access_token = res.data.access_token;
             error.config.headers.authorization = `Bearer ${res.data.access_token}`;
-
+            window.location.reload(true);
             return api.request(error.config);
         })
     }
 
     if(error.response.status === 500) {
-        console.log(error.response.data.errors);
+        console.log(error.response);
         throw error;
     }
 
     if(error.response.status === 422) {
-        const User = useUserStore();
-        User.global_error = error.response.data.errors;
+        //const User = useUserStore();
+        //User.global_error = error.response.data.errors;
         throw error;
     }
 

@@ -1,0 +1,120 @@
+/* block */
+.block {
+    background: #FFF0D2;
+    padding: 120px 0px;
+    position: relative;
+    flex: 1;
+}
+
+.block_back {
+    width: 100%;
+    height: 393px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: linear-gradient(180deg, #AE9B83 0%, rgba(255, 240, 210, 0.50) 95.67%);
+}
+
+.block_content {
+    position: relative;
+    padding-top: 80px;
+    border-top: 1px solid rgba(0, 0, 0, 0.20);
+}
+
+.container {
+    padding: 0 30px;
+    max-width: 100%;
+    width: 1168px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.search_block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.search_block_btns {
+    width: 250px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.search_block .btn:hover {
+    color: #FFF0D2;
+    background: #5C4538;
+}
+
+.search {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search .login_form_item {
+    width: 250px;
+    height: 30px;
+    padding: 2px 40px 2px 10px;
+    margin: 0px 15px 0px 0px;
+}
+
+.search .auth_arrow {    
+    appearance: none;
+    background: none;
+    background-image: url('../img/down_arrow.svg');
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 1em;
+}
+
+@media (max-width: 992px) {
+    .block {
+        padding: 90px 0 45px;
+    }
+
+    .block_content {
+        padding-top: 40px;
+    }
+
+    .search_block {
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+
+    .search_block_btns {
+        order: 2;
+    }
+
+    .search {
+        order: 1;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 767px) {
+    .search {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .search .login_form_item {
+        margin-bottom: 10px;
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding: 0 10px;
+    }
+
+    .block {
+        padding-bottom: 20px;
+    }
+
+    .block_content {
+        padding-top: 20px;
+    }
+}

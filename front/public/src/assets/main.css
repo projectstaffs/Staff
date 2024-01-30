@@ -1,5 +1,15 @@
-@import './normalize.css';
-@import './anketa.css';
+@import './css/normalize.css';
+@import './css/components.css';
+@import './css/login.css';
+@import './css/block.css';
+@import './css/staff.css';
+@import './css/service.css';
+@import './css/point.css';
+@import './css/anketa.css';
+@import './css/view.css';
+@import './css/popup.css';
+@import './css/window.css';
+
 
 /* Шрифты */
 @font-face {
@@ -50,136 +60,32 @@
     font-style: normal;
 }
 
-/* Старые стили */
-
-html, body {
-    margin: 0;
-    height: 100%;
-}
-#app {
-    height: 100%;
-}
-.dz-success-mark, .dz-error-mark {
-    display: none;
-}
-ul, p {
-    margin: 0;
+* {
+    box-sizing: border-box;
 }
 
-.register_error {
-    text-align: center;
-}
-.language_item {
-    display: inline-block;
-}
-
-.user_btn {
-    display: inline-block;
-    margin: 0 20px;
-    cursor: pointer;    
-}
-.user_btn:hover {
-    color: green;
+body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 150%;
+    color: #1E1510;
 }
 
-.category_title {
-    text-align: center;
-    font-size: 20px;
-    margin-bottom: 15px;
-}
-.category_form {
-    margin: 0 auto;
-    padding: 5px;
-    border: 1px solid burlywood;
-    border-radius: 10px;
-    width: 50%;
-}
-.category_form_title {
-    display: block;
-    margin: 5px 0;
-    width: calc(100% - 10px);
-}
-.category_form_btn {
-    cursor: pointer;    
-}
-.category_item {
+.content {
+    min-height: 100vh;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-right: 20px;
-}
-.category_change_btn {
-    cursor: pointer;
-    color: aqua;
-}
-.red {
-    color: red;
+    flex-direction: column;
 }
 
-.cabinet {
-    height: calc(100% - 18px);    
+.content_inner {    
     display: flex;
-}
-.cabinet_sidebar {    
-    width: 20%;    
-    background-color: lightgoldenrodyellow;
-    overflow-y: auto;        
-}
-.cabinet_sidebar_title {
-    font-size: 25px;    
-    text-align: center;
-    background-color: lightgreen;
-    border-bottom: 1px solid rebeccapurple;
-    padding: 10px 0;
-    margin-bottom: 15px;    
+    flex-direction: column;
+    flex: 1 1 auto;
 }
 
-.cabinet_main {
-    width: 80%;
-    overflow-y: auto;
-}
-.admin_sidebar_item {
-    margin: 5px;
-    padding: 5px;
-    background-color: khaki;
-    cursor: pointer;
+.no_scroll {
+    overflow: hidden;
 }
 
-.login_title {
-    text-align: center;
-    font-size: 25px;
-}
-.login_form {
-    display: flex;
-    flex-direction: column;    
-    width: 400px;
-    margin: 0 auto;
-    padding: 5px;
-    border: 2px solid lightskyblue;
-    border-radius: 5px;
-}
-.login_form_item {    
-    margin-bottom: 5px;
-}
-.login_form_btn {
-    cursor: pointer;
-}
-
-.pagination {
-    display: flex;
-    justify-content: space-between;
-    width: 150px;
-    margin: 0 auto;    
-}
-
-.pagination_btn {
-    cursor: pointer;
-}
-
-.search_block {
-    width: 700px;
-    margin: 20px 20px 20px auto; 
-    
-    display: flex;
-    justify-content: space-between;
-}
+/* 1200px 992px 767px 576px */

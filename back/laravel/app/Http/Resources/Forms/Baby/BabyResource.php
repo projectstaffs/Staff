@@ -15,17 +15,13 @@ use App\Models\Forms\FormEducation;
 use App\Http\Resources\Forms\Baby\FormEducationResource;
 use App\Models\Forms\FormTypeWork;
 use App\Http\Resources\Forms\Baby\FormTypeWorkResource;
-use App\Models\Forms\FormJobOption;
-use App\Http\Resources\Forms\Baby\FormJobOptionResource;
 use App\Models\Forms\FormDutie;
 use App\Http\Resources\Forms\Baby\FormDutieResource;
 
 use App\Models\Data\Children;
 use App\Models\Data\WorkPeriod;
-use App\Models\Data\Employment;
 use App\Models\Data\MonthlyPayment;
 use App\Models\Data\HourlyPayment;
-use App\Models\Data\Recommendation;
 use App\Models\Data\Experience;
 
 class BabyResource extends JsonResource
@@ -37,15 +33,6 @@ class BabyResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        if(!Cache::has('babies')) { Cache::put('babies', Baby::all()); }
-        $Baby = Cache::get('babies');
-        $additional = '';
-        foreach ($Baby as $item) {
-            if($item->user_id == $this->user_id) {
-                $additional = $item->additional;
-            }                           
-        }
-
         if(!Cache::has('userlanguages')) { Cache::put('userlanguages', UserLanguages::all()); }
         $Userlanguages = Cache::get('userlanguages');
         $lang = array();
@@ -82,15 +69,6 @@ class BabyResource extends JsonResource
             }                           
         }
 
-        if(!Cache::has('formjoboptions')) { Cache::put('formjoboptions', FormJobOption::all()); }
-        $FormJoboption = Cache::get('formjoboptions');
-        $joboption = array();
-        foreach ($FormJoboption as $item) {
-            if($item->form_id == $this->id) {
-                array_push($joboption, $item);
-            }                           
-        }
-
         if(!Cache::has('formduties')) { Cache::put('formduties', FormDutie::all()); }
         $FormDutie = Cache::get('formduties');
         $dutie = array();
@@ -105,7 +83,7 @@ class BabyResource extends JsonResource
         $children = '';
         foreach ($Children as $item) {
             if($item->id == $this->childrencount_id) {
-                $children = $item->title;                
+                $children = $item;                
                 break;
             }                           
         }
@@ -115,17 +93,7 @@ class BabyResource extends JsonResource
         $workPeriod = '';
         foreach ($WorkPeriod as $item) {
             if($item->id == $this->workperiod_id) {
-                $workPeriod = $item->title;                
-                break;
-            }                           
-        }
-
-        if(!Cache::has('employments')) { Cache::put('employments', Employment::all()); }
-        $Employment = Cache::get('employments');
-        $employment = '';
-        foreach ($Employment as $item) {
-            if($item->id == $this->employment_id) {
-                $employment = $item->title;                
+                $workPeriod = $item;                
                 break;
             }                           
         }
@@ -135,7 +103,7 @@ class BabyResource extends JsonResource
         $hourpay = '';
         foreach ($HourlyPayment as $item) {
             if($item->id == $this->hourpay_id) {
-                $hourpay = $item->title;                
+                $hourpay = $item;                
                 break;
             }                           
         }
@@ -145,17 +113,7 @@ class BabyResource extends JsonResource
         $monthpay = '';
         foreach ($MonthlyPayment as $item) {
             if($item->id == $this->monthpay_id) {
-                $monthpay = $item->title;                
-                break;
-            }                           
-        }
-
-        if(!Cache::has('recommendations')) { Cache::put('recommendations', Recommendation::all()); }
-        $Recommendation = Cache::get('recommendations');
-        $recommendation = '';
-        foreach ($Recommendation as $item) {
-            if($item->id == $this->recommendation_id) {
-                $recommendation = $item->title;                
+                $monthpay = $item;                
                 break;
             }                           
         }
@@ -165,7 +123,7 @@ class BabyResource extends JsonResource
         $experience = '';
         foreach ($Experience as $item) {
             if($item->id == $this->experience_id) {
-                $experience = $item->title;                
+                $experience = $item;                
                 break;
             }                           
         }
@@ -173,30 +131,23 @@ class BabyResource extends JsonResource
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,
-            'baby_exp' => $this->baby_exp,
+            'baby_exp' => $this->getTranslations('baby_exp'),
             'experience' => $experience,
-            'recommendation' => $recommendation,            
-            'education_about' => $this->education_about,
             'workperiod' => $workPeriod,
-            'employment' => $employment,
             'childrencount' => $children,
-            'children_invalid' => $this->children_invalid,
+            'children_invalid' => $this->getTranslations('children_invalid'),
             'hourpay' => $hourpay,
-            'monthpay' => $monthpay,
-            'additional' => $additional,        
+            'monthpay' => $monthpay,        
             'confirmed' => $this->confirmed,
 
             'Languages' => UserLanguagesResource::collection($lang),
             'Agegroups' => FormAgeGroupResource::collection($agegroup),
             'Educations' => FormEducationResource::collection($education),
             'Typeworks' => FormTypeWorkResource::collection($typework),
-            'Joboptions' => FormJobOptionResource::collection($joboption),
             'Duties' => FormDutieResource::collection($dutie),
             
             'experience_id' => $this->experience_id,
-            'recommendation_id' => $this->recommendation_id,
             'workperiod_id' => $this->workperiod_id,
-            'employment_id' => $this->employment_id,
             'childrencount_id' => $this->childrencount_id,
             'hourpay_id' => $this->hourpay_id,
             'monthpay_id' => $this->monthpay_id,            

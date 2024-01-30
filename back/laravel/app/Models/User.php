@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Translatable\HasTranslations;
 
 class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
+    use HasTranslations;
 
     /**
      * The attributes that are mass assignable.
@@ -19,9 +21,10 @@ class User extends Authenticatable implements JWTSubject
      * @var array<int, string>
      */
     protected $fillable = [ 'name', 'email', 'password', 
-        'role', 'confirmed', 'surname', 'patronymic', 'phone', 'additional_phone', 'gender', 'age', 'right_work', 'drive', 'night_work', 'animal_work', 'swimming', 'about', 'is_babysitting', 'is_nurse', 'is_housekeeper', 
-        'country', 'city', 'citizen', 'criminal', 'moving', 'smoking', 'alcohol', 'status', 'religion'
-    ];        
+        'role', 'confirmed', 'surname', 'phone', 'phone_code', 'gender', 
+        'age', 'animal_work', 'about', 'country', 'city'
+    ]; 
+    public $translatable = [ 'name', 'surname', 'about', 'gender', 'animal_work' ];       
 
     /**
      * The attributes that should be hidden for serialization.

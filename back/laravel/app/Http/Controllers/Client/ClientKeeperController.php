@@ -28,7 +28,7 @@ class ClientKeeperController extends Controller
 
         //$keeper = Client_keeper::where('user_id', $request["data"])->first();
         if($client_keeper) { return new ClientKeeperResource($client_keeper); }
-        else { return null; }
+        else { return 'null'; }
     }
 
     /**
@@ -47,12 +47,11 @@ class ClientKeeperController extends Controller
         $keeper = new ClientKeeper([
             'user_id' => $request->user_id,
             'confirmed' => $request->confirmed,
-            'title' => $request->title,
-            'title_about' => $request->title_about,                        
+            'title_about' => [
+               'en' => $request->title_about['en'],
+               'ua' => $request->title_about['ua']
+            ],                        
             'workperiod_id' => $request->workperiod_id,
-            'employment_id' => $request->employment_id,
-            'drive' => $request->drive,
-            'agents' => $request->agents,
             'hourpay_id' => $request->hourpay_id,
             'monthpay_id' => $request->monthpay_id
         ]);                
@@ -83,13 +82,12 @@ class ClientKeeperController extends Controller
      */
     public function update(KeeperRequest $request, string $id)
     {
-        $keeper = ClientKeeper::find($id);       
-        $keeper->title = $request['title'];
-        $keeper->title_about = $request['title_about'];        
+        $keeper = ClientKeeper::find($id);
+        $keeper->title_about = [
+               'en' => $request->title_about['en'],
+               'ua' => $request->title_about['ua']
+            ];        
         $keeper->workperiod_id = $request['workperiod_id'];
-        $keeper->employment_id = $request['employment_id'];
-        $keeper->drive = $request['drive'];
-        $keeper->agents = $request['agents'];
         $keeper->hourpay_id = $request['hourpay_id'];
         $keeper->monthpay_id = $request['monthpay_id'];
         $keeper->save(); 

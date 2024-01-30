@@ -1,0 +1,191 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Nurse API
+paths:
+  /forms/nurses:
+    get:
+      summary: Get nurse information by user ID
+      parameters:
+        - name: data
+          in: query
+          description: User ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                user_id: "1"
+                nurse_exp:
+                  en: "English experience"
+                  ua: "Український досвід"
+                experience_id: "2"
+                workperiod_id: "3"
+                hourpay_id: "4"
+                monthpay_id: "5"
+                confirmed: true
+
+    post:
+      summary: Add a new nurse profile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                  description: User ID
+                nurse_exp:
+                  type: object
+                  properties:
+                    en:
+                      type: string
+                      description: English experience
+                    ua:
+                      type: string
+                      description: Український досвід
+                  required:
+                    - en
+                    - ua
+                experience_id:
+                  type: string
+                  description: Experience ID
+                workperiod_id:
+                  type: string
+                  description: Work period ID
+                hourpay_id:
+                  type: string
+                  description: Hourly pay ID
+                monthpay_id:
+                  type: string
+                  description: Monthly pay ID
+                confirmed:
+                  type: boolean
+                  description: Confirmation status
+              required:
+                - user_id
+                - nurse_exp
+                - experience_id
+                - workperiod_id
+                - hourpay_id
+                - monthpay_id
+                - confirmed
+              example:
+                user_id: "1"
+                nurse_exp:
+                  en: "English experience"
+                  ua: "Український досвід"
+                experience_id: "2"
+                workperiod_id: "3"
+                hourpay_id: "4"
+                monthpay_id: "5"
+                confirmed: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                user_id: "1"
+                nurse_exp:
+                  en: "English experience"
+                  ua: "Український досвід"
+                experience_id: "2"
+                workperiod_id: "3"
+                hourpay_id: "4"
+                monthpay_id: "5"
+                confirmed: true
+
+  /forms/nurses/{id}:
+    put:
+      summary: Update nurse profile by user ID
+      parameters:
+        - name: id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nurse_exp:
+                  type: object
+                  properties:
+                    en:
+                      type: string
+                      description: English experience
+                    ua:
+                      type: string
+                      description: Український досвід
+                  required:
+                    - en
+                    - ua
+                experience_id:
+                  type: string
+                  description: Experience ID
+                workperiod_id:
+                  type: string
+                  description: Work period ID
+                hourpay_id:
+                  type: string
+                  description: Hourly pay ID
+                monthpay_id:
+                  type: string
+                  description: Monthly pay ID
+              required:
+                - nurse_exp
+                - experience_id
+                - workperiod_id
+                - hourpay_id
+                - monthpay_id
+              example:
+                nurse_exp:
+                  en: "Updated English experience"
+                  ua: "Оновлений український досвід"
+                experience_id: "2"
+                workperiod_id: "3"
+                hourpay_id: "4"
+                monthpay_id: "5"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                user_id: "1"
+                nurse_exp:
+                  en: "Updated English experience"
+                  ua: "Оновлений український досвід"
+                experience_id: "2"
+                workperiod_id: "3"
+                hourpay_id: "4"
+                monthpay_id: "5"
+                confirmed: true
+
+    delete:
+      summary: Remove nurse profile by user ID
+      parameters:
+        - name: id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                message: "Nurse profile successfully removed"
