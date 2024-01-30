@@ -1,0 +1,128 @@
+version: '3'
+services:
+
+    front.admin:
+        build: ./front/admin
+        image: prostaff.azurecr.io/front.admin:latest
+        volumes:
+            - ./front/admin:/usr/src/app
+        command: sh -c " npm install && npm start "
+        networks:
+            - diplom
+        environment:
+            - NAME=front.admin
+
+    db.mysql.main:
+        build: ./test/mysql
+        image: prostaff.azurecr.io/db.mysql.main:latest
+        volumes:
+            - './volumes/db/mysql/main:/var/lib/mysql'
+        networks:
+            - diplom
+
+    storage.minio:
+        build: ./storages/minio
+        image: prostaff.azurecr.io/storage.minio:latest
+        ports:
+            - "9000:9000"
+            - "9009:9009"
+        volumes:
+            - ./volumes/storages/minio:/data        
+        networks:
+            - diplom
+
+    laravel.jobs:
+        build:
+            context: ./back/laravel
+            dockerfile: Dockerfile
+        image: prostaff.azurecr.io/laravel.jobs:latest
+        volumes:
+            - './back/laravel:/var/www/html'
+        command: sh -c "/var/www/html/artisan queue:work"
+        networks:
+            - diplom
+        environment:
+            - NAME=jobs.laravel
+        depends_on:
+            - laravel.api
+
+    front.docs:
+        build: ./test/swag
+        image: prostaff.azurecr.io/front.docs:latest
+        volumes:
+            - ./docs:/usr/share/nginx/html/docs
+        ports:
+            - "8080:8080"
+        networks:
+            - diplom
+        env_file:
+            -   ./docs/doc.env
+
+    redis.socket:
+        build: ./test/red_soc
+        image: prostaff.azurecr.io/redis.socket:latest
+        volumes:
+            - './volumes/db/redis/sockets:/data'
+        networks:
+            - diplom 
+
+    socket.jonny:
+        build: ./socket/socket_instance
+        image: prostaff.azurecr.io/socket.jonny:latest
+        volumes:
+            - ./socket/socket_instance:/usr/src/app
+        command: sh -c " npm install && npm start "
+        networks:
+            - diplom
+        depends_on:
+            - redis.socket
+        environment:
+            - SERVER_NAME=socket.jonny
+
+    front.public:
+        build: ./front/public
+        image: prostaff.azurecr.io/front.public:latest
+        volumes:
+            - ./front/public:/usr/src/app
+        command: sh -c " npm install && npm start "
+        networks:
+            - diplom
+        environment:
+            - NAME=front.public
+
+    laravel.api:
+        build:
+            context: ./back/laravel
+            dockerfile: la.Dockerfile
+        image: prostaff.azurecr.io/laravel.api:latest
+        volumes:
+            - './back/laravel:/var/www/html'
+        command: sh -c "composer install && /var/www/html/artisan serve --host=0.0.0.0"
+        networks:
+            - diplom
+        environment:
+            - NAME=laravel.api       
+
+    nginx:
+        build: ./test/nginx
+        image: prostaff.azurecr.io/nginx:latest
+        volumes:
+            - ./nginx.conf:/etc/nginx/nginx.conf:ro
+        networks:
+            - diplom
+        ports:
+            - "80:80"     
+
+    redis.laravel:
+        build: ./test/red_lar
+        image: prostaff.azurecr.io/redis.laravel:latest
+        volumes:
+            - './volumes/db/redis/laravel:/data'
+        ports:
+            - "6379:6379"
+        networks:
+            - diplom   
+                   
+networks:
+    diplom:
+        driver: bridge 
