@@ -114,7 +114,6 @@ services:
             - diplom
         ports:
             - "80:80"
-            - "443:443"
 
     redis.laravel:
         image: prostaff.azurecr.io/redis.laravel:latest
