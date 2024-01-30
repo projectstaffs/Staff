@@ -12,7 +12,7 @@ export const useUserStore = defineStore('user', {
             users_worker: {},
             token: '',
             currentCPage: 1, currentWPage: 1,
-            url: 'http://192.168.0.101/'                 
+            url: 'https://househub.pp.ua/'                 
         }
     },
     actions: {  
