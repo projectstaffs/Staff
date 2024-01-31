@@ -46,9 +46,9 @@ class ImageController extends Controller
                 $res = Image::create([
                     'user_id' => $request['user_id'],
                     'path' => $path,
-                    'url' => url('https://househub.pp.ua/storage/' . $path),
+                    'url' => url($appUrl . '/storage/' . $path),
                     'preview_path' => $previewName,
-                    'preview_url' => url('https://househub.pp.ua/storage/' . $previewName)                    
+                    'preview_url' => url($appUrl . '/storage/' . $previewName)                    
                 ]);                
             }
             Cache::put('images', Image::all());
