@@ -9,4 +9,4 @@ RUN mkdir -p /data
 WORKDIR /data
 
 # команда для запуска Minio сервера
-CMD ["minio", "server", "--console-address", ":443", "/data"]
+CMD ["minio", "server", "--console-address", ":9009", "/data"]
