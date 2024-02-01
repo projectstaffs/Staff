@@ -25,7 +25,8 @@ services:
     storage.minio:
         image: prostaff.azurecr.io/storage.minio
         ports:
-            - "443:9000"
+            - "9000:9000"
+            - "9009:9009"
         volumes:
             - ./volumes/storages/minio:/data
             - ./certbot/conf/live/househub.pp.ua/fullchain.pem:/etc/ssl/certs/public.crt
