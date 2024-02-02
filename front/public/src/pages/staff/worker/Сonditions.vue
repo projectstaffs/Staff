@@ -45,7 +45,10 @@
                 <div class="container">
                     <div class="conditions_bottom_inner">
                         <div class="conditions_bottom_picture">
-                            <img class="conditions_img" src="../../../assets/img/condition.jpg" alt="">
+                            <picture>
+                                <source srcset="../../../assets/img/condition.webp" type="image/webp">
+                                <img class="conditions_img" src="../../../assets/img/condition.jpg" alt="">
+                            </picture>
                         </div>
                         <div class="conditions_bottom_start">
                             <div class="conditions_bottom_title">{{ $t('conditions.bottom_title') }}</div>
