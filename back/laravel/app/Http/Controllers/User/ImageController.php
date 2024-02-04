@@ -34,7 +34,7 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        $appUrl = env('APP_URL');
+        $appUrl = env('APP_REAL_DOMAIN');
         $res = null;
         if($request['images']) {            
             foreach ($request['images'] as $image) {
