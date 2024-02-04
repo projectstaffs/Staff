@@ -72,7 +72,7 @@ class HelpController extends Controller
             $socket->sendMessage($user->id);
             Cache::put('users', User::all());            
         }
-        $appUrl = env('APP_URL'); 
+        $appUrl = env('APP_REAL_DOMAIN'); 
         return redirect($appUrl);              
     }
 
