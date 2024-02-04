@@ -29,8 +29,8 @@ services:
             - "9009:9009"
         volumes:
             - ./volumes/storages/minio:/data
-            - ./minio/certs/public.crt:/etc/ssl/certs/public.crt
-            - ./minio/certs/private.key:/etc/ssl/certs/private.key
+   #         - ./minio/certs/public.crt:/etc/ssl/certs/public.crt
+   #         - ./minio/certs/private.key:/etc/ssl/certs/private.key
         networks:
             - diplom
         env_file:
