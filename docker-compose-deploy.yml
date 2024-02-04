@@ -23,14 +23,14 @@ services:
             - .env
 
     storage.minio:
-        image: prostaff.azurecr.io/storage.minio
+        image: projectstaff/storage.minio
         ports:
             - "9000:9000"
             - "9009:9009"
         volumes:
             - ./volumes/storages/minio:/data
-   #         - ./minio/certs/public.crt:/etc/ssl/certs/public.crt
-   #         - ./minio/certs/private.key:/etc/ssl/certs/private.key
+            - ./minio/certs/public.crt:/etc/ssl/certs/public.crt
+            - ./minio/certs/private.key:/etc/ssl/certs/private.key
         networks:
             - diplom
         env_file:
