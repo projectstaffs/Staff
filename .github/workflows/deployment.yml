@@ -79,6 +79,7 @@ jobs:
           MINIO_PASSWORD=$(echo ${{ secrets.MINIO_PASSWORD }})
           MINIO_BUCKET=$(echo ${{ secrets.MINIO_BUCKET }})
           MINIO_REGION=$(echo ${{ secrets.MINIO_REGION }})
+          APP_REAL_DOMAIN=$(echo ${{ secrets.APP_REAL_DOMAIN }})
 
 
       - 
@@ -148,6 +149,7 @@ jobs:
           MINIO_PASSWORD: ${{ steps.retrieve-secrets.outputs.MINIO_PASSWORD }}
           MINIO_BUCKET: ${{ steps.retrieve-secrets.outputs.MINIO_BUCKET }}
           MINIO_REGION: ${{ steps.retrieve-secrets.outputs.MINIO_REGION }}
+          APP_REAL_DOMAIN: ${{ steps.retrieve-secrets.outputs.APP_REAL_DOMAIN }}
         run: |
           docker-compose -f docker-compose-ACR.yml build --no-cache
           docker-compose -f docker-compose-ACR.yml push
