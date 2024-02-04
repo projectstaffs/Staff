@@ -23,7 +23,7 @@ services:
             - .env
 
     storage.minio:
-        image: prostaff.azurecr.io/storage.minio
+        image: projectstaff/storage.minio
         ports:
             - "9000:9000"
             - "9009:9009"
