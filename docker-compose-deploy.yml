@@ -29,8 +29,8 @@ services:
             - "9009:9009"
         volumes:
             - ./volumes/storages/minio:/data
-  #          - ./certbot/conf/live/househub.pp.ua/fullchain.pem:/etc/ssl/certs/public.crt
-  #          - ./certbot/conf/live/househub.pp.ua/privkey.pem:/etc/ssl/certs/private.key
+            - ./certbot/conf/live/househub.pp.ua/fullchain.pem:/etc/ssl/certs/public.crt
+            - ./certbot/conf/live/househub.pp.ua/privkey.pem:/etc/ssl/certs/private.key
         networks:
             - diplom
         env_file:
