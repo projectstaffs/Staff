@@ -163,6 +163,6 @@ jobs:
             sudo su
             cd Staff
             docker login -u ${{ secrets.ACR_USERNAME }} -p ${{ secrets.ACR_PASSWORD }} ${{ secrets.ACR_URL }}
-            docker-compose -f docker-compose-deploy.yml down redis.laravel redis.socket db.mysql.main storage.minio front.admin front.public laravel.api laravel.jobs front.docs socket.jonny nginx
+            docker-compose -f docker-compose-deploy.yml down
             git pull
             docker-compose -f docker-compose-deploy.yml up -d redis.laravel redis.socket db.mysql.main storage.minio front.admin front.public laravel.api laravel.jobs front.docs socket.jonny nginx
