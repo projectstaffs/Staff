@@ -39,16 +39,16 @@ class ImageController extends Controller
         if($request['images']) {            
             foreach ($request['images'] as $image) {
                 $name = md5(Carbon::now() . '_' . $image->getClientOriginalName()) . '.' . $image->getClientOriginalExtension();                
-                $previewName = 'images/prev_' . $name;
+                $previewName = '/images/prev_' . $name;
                 $path = Storage::disk('minio')->putFileAs('/images', $image, $name);
                 PreviewImgJob::dispatch($path, $previewName);
 
                 $res = Image::create([
                     'user_id' => $request['user_id'],
                     'path' => $path,
-                    'url' => url($appUrl . '/storage' . $path),
+                    'url' => url($appUrl . '/storage/' . $path),
                     'preview_path' => $previewName,
-                    'preview_url' => url($appUrl . '/storage' . $previewName)                    
+                    'preview_url' => url($appUrl . '/storage/' . $previewName)                    
                 ]);                
             }
             Cache::put('images', Image::all());
