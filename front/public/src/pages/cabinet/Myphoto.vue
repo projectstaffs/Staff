@@ -65,6 +65,8 @@ export default {
             url: "/api/photo",
             autoProcessQueue: false,
             addRemoveLinks: true,
+            //chunking: true,
+            //chunkSize: 1000000
             //maxFiles: 1
         });
         this.image_error = '';
