@@ -46,9 +46,9 @@ class ImageController extends Controller
                 $res = Image::create([
                     'user_id' => $request['user_id'],
                     'path' => $path,
-                    'url' => url($appUrl . ':9000/storage/' . $path), //если используется https нужно удалить :9000 
+                    'url' => url($appUrl . '/storage/' . $path),
                     'preview_path' => $previewName,
-                    'preview_url' => url($appUrl . ':9000/storage/' . $previewName)                    
+                    'preview_url' => url($appUrl . '/storage/' . $previewName)                    
                 ]);                
             }
             Cache::put('images', Image::all());
