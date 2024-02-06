@@ -42,7 +42,7 @@ export default {
             if (files.length === 1) {
                 this.image_error = '';
                 files.forEach(file => {
-                    if (file.size < 3000000) {
+                    if (file.size < 3072000) {
                         data.append('images[]', file);
                         this.dropzone.removeFile(file);
                     } else { this.image_error = this.img_error1; }
