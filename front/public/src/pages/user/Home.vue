@@ -172,7 +172,8 @@
                     <div class="main_point_business_title"> {{ $t('main.end_business_title') }} </div>
                     <div class="main_point_business_subtitle"> {{ $t('main.end_business_subtitle') }} </div>
                     <div class="main_point_business_text"> {{ $t('main.end_business_text') }} </div>
-                    <div class="btn" @click.prevent="study"> <img src="../../assets/img/main/arrow.svg" alt=""> </div>
+                    <div class="btn" @click.prevent="study"> <img class="main_point_business_end_img"
+                            src="../../assets/img/main/arrow.svg" alt=""> </div>
                 </div>
             </div>
             <div class="main_point_business business_pos_fix">
@@ -180,7 +181,8 @@
                     <div class="main_point_business_title"> {{ $t('main.end_staff_title') }} </div>
                     <div class="main_point_business_subtitle"> {{ $t('main.end_staff_subtitle') }} </div>
                     <div class="main_point_business_text"> {{ $t('main.end_staff_text') }} </div>
-                    <div class="btn" @click.prevent="training"> <img src="../../assets/img/main/arrow.svg" alt=""> </div>
+                    <div class="btn" @click.prevent="training"> <img class="main_point_business_end_img"
+                            src="../../assets/img/main/arrow.svg" alt=""> </div>
                 </div>
                 <div class="main_point_business_start business_start_fix">
                     <div class="main_point_staff_img"></div>
@@ -211,7 +213,7 @@ export default {
 .main_top {
     min-height: 400px;
     height: 100vh;
-    background: #5C4538 url(../../assets/img/main/video.jpg) no-repeat center;
+    background: url(../../assets/img/main/video.webp) no-repeat center, url(../../assets/img/main/video.jpg) no-repeat center;
     background-size: cover;
     color: #FFF0D2;
     position: relative;
@@ -233,14 +235,6 @@ export default {
     flex-direction: column;
     justify-content: center;
     position: relative;
-}
-
-.main_top_title {
-    font-family: Playfair Display;
-    font-size: 64px;
-    font-weight: 700;
-    line-height: 120%;
-    margin-bottom: 16px;
 }
 
 .main_top_subtitle {
@@ -332,6 +326,8 @@ export default {
 
 .main_info_arrow,
 .main_info_svg {
+    width: 25px;
+    height: 24px;
     margin-left: 10px;
 }
 
@@ -449,11 +445,11 @@ export default {
 }
 
 .main_point_business_img {
-    background: url(../../assets/img/main/for_business.png) no-repeat center;
+    background: url(../../assets/img/main/for_business.webp) no-repeat center, url(../../assets/img/main/for_business.png) no-repeat center;
 }
 
 .main_point_staff_img {
-    background: url(../../assets/img/main/for_staff.png) no-repeat center;
+    background: url(../../assets/img/main/for_staff.webp) no-repeat center, url(../../assets/img/main/for_staff.png) no-repeat center;
 }
 
 .main_point_business_end {
@@ -476,6 +472,11 @@ export default {
     background: #1E1510;
 }
 
+.main_point_business_end_img {
+    width: 25px;
+    height: 24px;
+}
+
 .main_point_business_title {
     font-size: 32px;
     font-weight: 500;
@@ -495,6 +496,8 @@ export default {
 }
 
 /* media */
+
+
 @media (max-width: 1200px) {
     .main_info_bottom {
         height: 850px;
@@ -532,6 +535,10 @@ export default {
 @media (max-width: 1125px) {
     .staff_item_hide {
         display: none;
+    }
+
+    .main_top_title {
+        height: auto;
     }
 }
 

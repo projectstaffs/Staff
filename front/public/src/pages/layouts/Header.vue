@@ -32,7 +32,7 @@
                         <div v-if="!User.token" @click.prevent="login" class="btn">{{ $t('header.login') }}</div>
                         <div v-if="User.token" @click.prevent="logout" class="btn inactive">{{ $t('header.logout') }}</div>
                     </div>
-                    <button class="header_burger_btn" type="button" data-window="window_menu">
+                    <button class="header_burger_btn" type="button" aria-label="burger" data-window="window_menu">
                         <span class="header_burger_box">
                             <span class="header_burger_inner"></span>
                         </span>

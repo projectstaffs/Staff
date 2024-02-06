@@ -229,7 +229,7 @@ export default {
 .contacts_bottom_start_img {
     width: 100%;
     height: 100%;
-    background: url(../../assets/img/contacts/house.jpg) no-repeat center;
+    background: url(../../assets/img/contacts/house.webp) no-repeat center, url(../../assets/img/contacts/house.jpg) no-repeat center;
     border-radius: 10px;
 }
 
