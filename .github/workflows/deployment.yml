@@ -1,0 +1,171 @@
+name: Build and Push to Deploy
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+   
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - 
+        name: Checkout code
+        uses: actions/checkout@v3
+
+      - 
+        name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v2
+          
+      - 
+        name: Retrieve GitHub Secrets
+        id: retrieve-secrets
+        run: |
+          TZ=$(echo ${{ secrets.TZ }})  
+          APP_NAME=$(echo ${{ secrets.APP_NAME }})
+          APP_ENV=$(echo ${{ secrets.APP_ENV }})
+          APP_KEY=$(echo ${{ secrets.APP_KEY }})
+          APP_DEBUG=$(echo ${{ secrets.APP_DEBUG }})
+          APP_URL=$(echo ${{ secrets.APP_URL }})
+          JWT_SECRET=$(echo ${{ secrets.JWT_SECRET }})
+          LOG_CHANNEL=$(echo ${{ secrets.LOG_CHANNEL }})
+          LOG_DEPRECATIONS_CHANNEL=$(echo ${{ secrets.LOG_DEPRECATIONS_CHANNEL }})
+          LOG_LEVEL=$(echo ${{ secrets.LOG_LEVEL }})
+          MYSQL_ROOT_PASSWORD=$(echo ${{ secrets.MYSQL_ROOT_PASSWORD }})
+          MYSQL_ROOT_HOST=$(echo ${{ secrets.MYSQL_ROOT_HOST }})
+          MYSQL_DATABASE=$(echo ${{ secrets.MYSQL_DATABASE }})
+          MYSQL_USER=$(echo ${{ secrets.MYSQL_USER }})
+          MYSQL_PASSWORD=$(echo ${{ secrets.MYSQL_PASSWORD }})
+          DB_CONNECTION=$(echo ${{ secrets.DB_CONNECTION }})
+          DB_HOST=$(echo ${{ secrets.DB_HOST }})
+          DB_PORT=$(echo ${{ secrets.DB_PORT }})
+          DB_DATABASE=$(echo ${{ secrets.DB_DATABASE }})
+          DB_USERNAME=$(echo ${{ secrets.DB_USERNAME }})
+          DB_PASSWORD=$(echo ${{ secrets.DB_PASSWORD }})
+          BROADCAST_DRIVER=$(echo ${{ secrets.BROADCAST_DRIVER }})
+          CACHE_DRIVER=$(echo ${{ secrets.CACHE_DRIVER }})
+          FILESYSTEM_DISK=$(echo ${{ secrets.FILESYSTEM_DISK }})
+          QUEUE_CONNECTION=$(echo ${{ secrets.QUEUE_CONNECTION }})
+          SESSION_DRIVER=$(echo ${{ secrets.SESSION_DRIVER }})
+          SESSION_LIFETIME=$(echo ${{ secrets.SESSION_LIFETIME }})
+          MEMCACHED_HOST=$(echo ${{ secrets.MEMCACHED_HOST }})
+          REDIS_HOST=$(echo ${{ secrets.REDIS_HOST }})
+          REDIS_PASSWORD=$(echo ${{ secrets.REDIS_PASSWORD }})
+          REDIS_PORT=$(echo ${{ secrets.REDIS_PORT }})
+          REDIS_PREFIX=$(echo ${{ secrets.REDIS_PREFIX }})
+          REDIS_SOCKET_HOST=$(echo ${{ secrets.REDIS_SOCKET_HOST }})
+          REDIS_SOCKET_PORT=$(echo ${{ secrets.REDIS_SOCKET_PORT }})
+          MAIL_MAILER=$(echo ${{ secrets.MAIL_MAILER }})
+          MAIL_HOST=$(echo ${{ secrets.MAIL_HOST }})
+          MAIL_PORT=$(echo ${{ secrets.MAIL_PORT }})
+          MAIL_USERNAME=$(echo ${{ secrets.MAIL_USERNAME }})
+          MAIL_PASSWORD=$(echo ${{ secrets.MAIL_PASSWORD }})
+          MAIL_ENCRYPTION=$(echo ${{ secrets.MAIL_ENCRYPTION }})
+          MAIL_FROM_ADDRESS=$(echo ${{ secrets.MAIL_FROM_ADDRESS }})
+          MAIL_FROM_NAME=$(echo ${{ secrets.MAIL_FROM_NAME }})
+          VITE_PUSHER_APP_KEY=$(echo ${{ secrets.VITE_PUSHER_APP_KEY }})
+          VITE_PUSHER_HOST=$(echo ${{ secrets.VITE_PUSHER_HOST }})
+          VITE_PUSHER_PORT=$(echo ${{ secrets.VITE_PUSHER_PORT }})
+          VITE_PUSHER_SCHEME=$(echo ${{ secrets.VITE_PUSHER_SCHEME }})
+          VITE_PUSHER_APP_CLUSTER=$(echo ${{ secrets.VITE_PUSHER_APP_CLUSTER }})
+          MINIO_ROOT_USER=$(echo ${{ secrets.MINIO_ROOT_USER }})
+          MINIO_ROOT_PASSWORD=$(echo ${{ secrets.MINIO_ROOT_PASSWORD }})
+          MINIO_ENDPOINT=$(echo ${{ secrets.MINIO_ENDPOINT }})
+          MINIO_ACCESS_KEY=$(echo ${{ secrets.MINIO_ACCESS_KEY }})
+          MINIO_SECRET_KEY=$(echo ${{ secrets.MINIO_SECRET_KEY }})
+          MINIO_USER=$(echo ${{ secrets.MINIO_USER }})
+          MINIO_PASSWORD=$(echo ${{ secrets.MINIO_PASSWORD }})
+          MINIO_BUCKET=$(echo ${{ secrets.MINIO_BUCKET }})
+          MINIO_REGION=$(echo ${{ secrets.MINIO_REGION }})
+          APP_REAL_DOMAIN=$(echo ${{ secrets.APP_REAL_DOMAIN }})
+
+
+      - 
+        name: Login to ACR with OpenID Connect
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.ACR_URL }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      - 
+        name: Build and Push Microservice Images
+        env:
+          TZ: ${{ steps.retrieve-secrets.outputs.TZ }}
+          APP_NAME: ${{ steps.retrieve-secrets.outputs.APP_NAME }}
+          APP_ENV: ${{ steps.retrieve-secrets.outputs.APP_ENV }}
+          APP_KEY: ${{ steps.retrieve-secrets.outputs.APP_KEY }}
+          APP_DEBUG: ${{ steps.retrieve-secrets.outputs.APP_DEBUG }}
+          APP_URL: ${{ steps.retrieve-secrets.outputs.APP_URL }}
+          JWT_SECRET: ${{ steps.retrieve-secrets.outputs.JWT_SECRET }}
+          LOG_CHANNEL: ${{ steps.retrieve-secrets.outputs.LOG_CHANNEL }}
+          LOG_DEPRECATIONS_CHANNEL: ${{ steps.retrieve-secrets.outputs.LOG_DEPRECATIONS_CHANNEL }}
+          LOG_LEVEL: ${{ steps.retrieve-secrets.outputs.LOG_LEVEL }}
+          MYSQL_ROOT_PASSWORD: ${{ steps.retrieve-secrets.outputs.MYSQL_ROOT_PASSWORD }}
+          MYSQL_ROOT_HOST: ${{ steps.retrieve-secrets.outputs.MYSQL_ROOT_HOST }}
+          MYSQL_DATABASE: ${{ steps.retrieve-secrets.outputs.MYSQL_DATABASE }}
+          MYSQL_USER: ${{ steps.retrieve-secrets.outputs.MYSQL_USER }}
+          MYSQL_PASSWORD: ${{ steps.retrieve-secrets.outputs.MYSQL_PASSWORD }}
+          DB_CONNECTION: ${{ steps.retrieve-secrets.outputs.DB_CONNECTION }}
+          DB_HOST: ${{ steps.retrieve-secrets.outputs.DB_HOST }}
+          DB_PORT: ${{ steps.retrieve-secrets.outputs.DB_PORT }}
+          DB_DATABASE: ${{ steps.retrieve-secrets.outputs.DB_DATABASE }}
+          DB_USERNAME: ${{ steps.retrieve-secrets.outputs.DB_USERNAME }}
+          DB_PASSWORD: ${{ steps.retrieve-secrets.outputs.DB_PASSWORD }}
+          BROADCAST_DRIVER: ${{ steps.retrieve-secrets.outputs.BROADCAST_DRIVER }}
+          CACHE_DRIVER: ${{ steps.retrieve-secrets.outputs.CACHE_DRIVER }}
+          FILESYSTEM_DISK: ${{ steps.retrieve-secrets.outputs.FILESYSTEM_DISK }}
+          QUEUE_CONNECTION: ${{ steps.retrieve-secrets.outputs.QUEUE_CONNECTION }}
+          SESSION_DRIVER: ${{ steps.retrieve-secrets.outputs.SESSION_DRIVER }}
+          SESSION_LIFETIME: ${{ steps.retrieve-secrets.outputs.SESSION_LIFETIME }}
+          MEMCACHED_HOST: ${{ steps.retrieve-secrets.outputs.MEMCACHED_HOST }}
+          REDIS_HOST: ${{ steps.retrieve-secrets.outputs.REDIS_HOST }}
+          REDIS_PASSWORD: ${{ steps.retrieve-secrets.outputs.REDIS_PASSWORD }}
+          REDIS_PORT: ${{ steps.retrieve-secrets.outputs.REDIS_PORT }}
+          REDIS_PREFIX: ${{ steps.retrieve-secrets.outputs.REDIS_PREFIX }}
+          REDIS_SOCKET_HOST: ${{ steps.retrieve-secrets.outputs.REDIS_SOCKET_HOST }}
+          REDIS_SOCKET_PORT: ${{ steps.retrieve-secrets.outputs.REDIS_SOCKET_PORT }}
+          MAIL_MAILER: ${{ steps.retrieve-secrets.outputs.MAIL_MAILER }}
+          MAIL_HOST: ${{ steps.retrieve-secrets.outputs.MAIL_HOST }}
+          MAIL_PORT: ${{ steps.retrieve-secrets.outputs.MAIL_PORT }}
+          MAIL_USERNAME: ${{ steps.retrieve-secrets.outputs.MAIL_USERNAME }}
+          MAIL_PASSWORD: ${{ steps.retrieve-secrets.outputs.MAIL_PASSWORD }}
+          MAIL_ENCRYPTION: ${{ steps.retrieve-secrets.outputs.MAIL_ENCRYPTION }}
+          MAIL_FROM_ADDRESS: ${{ steps.retrieve-secrets.outputs.MAIL_FROM_ADDRESS }}
+          MAIL_FROM_NAME: ${{ steps.retrieve-secrets.outputs.MAIL_FROM_NAME }}
+          VITE_PUSHER_APP_KEY: ${{ steps.retrieve-secrets.outputs.VITE_PUSHER_APP_KEY }}
+          VITE_PUSHER_HOST: ${{ steps.retrieve-secrets.outputs.VITE_PUSHER_HOST }}
+          VITE_PUSHER_PORT: ${{ steps.retrieve-secrets.outputs.VITE_PUSHER_PORT }}
+          VITE_PUSHER_SCHEME: ${{ steps.retrieve-secrets.outputs.VITE_PUSHER_SCHEME }}
+          VITE_PUSHER_APP_CLUSTER: ${{ steps.retrieve-secrets.outputs.VITE_PUSHER_APP_CLUSTER }}
+          MINIO_ROOT_USER: ${{ steps.retrieve-secrets.outputs.MINIO_ROOT_USER }}
+          MINIO_ROOT_PASSWORD: ${{ steps.retrieve-secrets.outputs.MINIO_ROOT_PASSWORD }}
+          MINIO_ENDPOINT: ${{ steps.retrieve-secrets.outputs.MINIO_ENDPOINT }}
+          MINIO_ACCESS_KEY: ${{ steps.retrieve-secrets.outputs.MINIO_ACCESS_KEY }}
+          MINIO_SECRET_KEY: ${{ steps.retrieve-secrets.outputs.MINIO_SECRET_KEY }}
+          MINIO_USER: ${{ steps.retrieve-secrets.outputs.MINIO_USER }}
+          MINIO_PASSWORD: ${{ steps.retrieve-secrets.outputs.MINIO_PASSWORD }}
+          MINIO_BUCKET: ${{ steps.retrieve-secrets.outputs.MINIO_BUCKET }}
+          MINIO_REGION: ${{ steps.retrieve-secrets.outputs.MINIO_REGION }}
+          APP_REAL_DOMAIN: ${{ steps.retrieve-secrets.outputs.APP_REAL_DOMAIN }}
+        run: |
+          docker-compose -f docker-compose-ACR.yml build --no-cache
+          docker-compose -f docker-compose-ACR.yml push
+
+#      - 
+#        name: Deploy to VM
+#        uses: appleboy/ssh-action@master
+#        with:
+#          host: ${{ secrets.SSH_HOST }}
+#          username: ${{ secrets.SSH_USER }}
+#          key: ${{ secrets.SSH_KEY }}
+#          script: |
+#            sudo su
+#            cd Staff
+#            docker login -u ${{ secrets.ACR_USERNAME }} -p ${{ secrets.ACR_PASSWORD }} ${{ secrets.ACR_URL }}
+#            docker-compose -f docker-compose-deploy.yml down
+#            docker image prune -a
+#            git pull
+#            docker-compose -f docker-compose-deploy.yml up -d redis.laravel redis.socket db.mysql.main storage.minio front.admin front.public laravel.api laravel.jobs front.docs socket.jonny nginx

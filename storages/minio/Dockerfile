@@ -1,20 +1,12 @@
-FROM docker.io/alexnik2411/minio:8.4.3
+FROM minio/minio:latest
 
+EXPOSE 9000
+EXPOSE 9009
+EXPOSE 443
 
-# Установка утилиты mc Мы удалили
-#RUN curl -LO https://dl.min.io/client/mc/release/linux-amd64/mc && \
-#    chmod +x mc && \
-#    mv mc /usr/bin/mc
-
-
-# скопировать файл настройки хранилища
-COPY ./app-init.sh /tmp/app-init.sh
-
-# резрешить его выполнение
-RUN chmod +x /tmp/app-init.sh
-
-# запустить скрипт при сборке контейнера
-RUN /tmp/app-init.sh
+# Create app directory
+RUN mkdir -p /data
+WORKDIR /data
 
 # команда для запуска Minio сервера
-#CMD ["minio", "server", "/data"]
+CMD ["minio", "server", "--console-address", ":443", "/data"]

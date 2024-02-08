@@ -19,7 +19,6 @@ RUN pecl install redis && docker-php-ext-enable redis
 RUN pecl install imagick && docker-php-ext-enable imagick
 #RUN docker-php-ext-install pdo pdo_mysql gd imagick
 
-# Create app directory
 RUN mkdir -p /var/www/html
 
 WORKDIR /var/www/html
@@ -31,4 +30,4 @@ RUN composer install
 # Открываем порт для доступа к приложению
 EXPOSE 8000
 
-CMD ["/var/www/html/artisan", "queue:work"]
+CMD ["/var/www/html/artisan", "serve", "--host=0.0.0.0"]
