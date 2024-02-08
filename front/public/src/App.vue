@@ -29,7 +29,7 @@ export default {
             var footer = document.querySelector('.footer');
             setTimeout(() => {
                 footer.classList.add('footer_show');
-            }, 2000);
+            }, 1000);
 
             var closestAttr = function (item, attr) {
                 var node = item;
