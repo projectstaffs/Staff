@@ -85,7 +85,7 @@ services:
     front.public:
         image: prostaff.azurecr.io/front.public:latest
         volumes:
-            - ./front/public/dist:/usr/src/app
+            - ./front/public:/usr/src/app
         command: sh -c " npm install && npm start "
         networks:
             - diplom
