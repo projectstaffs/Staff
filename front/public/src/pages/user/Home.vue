@@ -1,5 +1,5 @@
 <template>
-    <section class="main_top">
+    <section :style="video" class="main_top">
         <video class="main_video" autoplay muted loop>
             <!--<source src="../../assets/video.mp4" type="video/mp4"> -->
         </video>
@@ -166,7 +166,7 @@
         <div class="container">
             <div class="main_point_business">
                 <div class="main_point_business_start">
-                    <div class="main_point_business_img"></div>
+                    <div :style="forBusiness" class="main_point_business_img"></div>
                 </div>
                 <div class="main_point_business_end">
                     <div class="main_point_business_title"> {{ $t('main.end_business_title') }} </div>
@@ -185,7 +185,7 @@
                             src="../../assets/img/main/arrow.svg" alt=""> </div>
                 </div>
                 <div class="main_point_business_start business_start_fix">
-                    <div class="main_point_staff_img"></div>
+                    <div :style="forStaff" class="main_point_staff_img"></div>
                 </div>
             </div>
             <div class="staff_title main_point_border"> {{ $t('main.footer_title') }} </div>
@@ -196,6 +196,16 @@
 <script>
 export default {
     name: "Home",
+    data() {
+        return {
+            video: {},
+            forStaff: {},
+            forBusiness: {}
+        }
+    },
+    mounted() {
+        this.checkWebPSupport();
+    },
     methods: {
         homeStaff() { this.$router.push({ name: "HomeStaff" }) },
         businessStaff() { this.$router.push({ name: "BusinessStaff" }) },
@@ -204,7 +214,25 @@ export default {
         nurse() { this.$router.push({ name: "NurseAll" }) },
         keeper() { this.$router.push({ name: "KeeperAll" }) },
         study() { this.$router.push({ name: "Study" }) },
-        training() { this.$router.push({ name: "Training" }) }
+        training() { this.$router.push({ name: "Training" }) },
+        checkWebPSupport() {
+            const elem = document.createElement('canvas');
+            if (!!(elem.getContext && elem.getContext('2d'))) {
+                this.video = {
+                    background: 'url(src/assets/img/main/video.webp) no-repeat center',
+                    backgroundSize: 'cover'
+                };
+                this.forStaff = { background: 'url(src/assets/img/main/for_staff.webp) no-repeat center' };
+                this.forBusiness = { background: 'url(src/assets/img/main/for_business.webp) no-repeat center' }
+            } else {
+                this.video = {
+                    background: 'url(src/assets/img/main/video.jpg) no-repeat center',
+                    backgroundSize: 'cover'
+                };
+                this.forStaff = { background: 'url(src/assets/img/main/for_staff.png) no-repeat center' };
+                this.forBusiness = { background: 'url(src/assets/img/main/for_business.png) no-repeat center' }
+            }
+        }
     },
 }
 </script>
@@ -213,8 +241,6 @@ export default {
 .main_top {
     min-height: 400px;
     height: 100vh;
-    background: url(../../assets/img/main/video.webp) no-repeat center, url(../../assets/img/main/video.jpg) no-repeat center;
-    background-size: cover;
     color: #FFF0D2;
     position: relative;
 }
@@ -442,14 +468,6 @@ export default {
     border-radius: 5px 0px 0px 5px;
     border: 1px solid #FFF0D2;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-
-.main_point_business_img {
-    background: url(../../assets/img/main/for_business.webp) no-repeat center, url(../../assets/img/main/for_business.png) no-repeat center;
-}
-
-.main_point_staff_img {
-    background: url(../../assets/img/main/for_staff.webp) no-repeat center, url(../../assets/img/main/for_staff.png) no-repeat center;
 }
 
 .main_point_business_end {
