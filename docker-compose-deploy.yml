@@ -51,7 +51,7 @@ services:
             - ./back/laravel/.env
 
     front.docs:
-        image: prostaff.azurecr.io/front.docs:latest
+        image: projectstaff/front.docs:latest
         volumes:
             - ./docs:/usr/share/nginx/html/docs
         ports:
