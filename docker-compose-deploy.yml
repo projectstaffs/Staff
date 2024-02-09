@@ -51,7 +51,7 @@ services:
             - ./back/laravel/.env
 
     front.docs:
-        image: projectstaff/front.docs:latest
+        image: swaggerapi/swagger-ui
         volumes:
             - ./docs:/usr/share/nginx/html/docs
         ports:
