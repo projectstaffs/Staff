@@ -13,7 +13,7 @@
         "title": "User account",
         "no_img": "Upload your photo",
         "img_save": "Download photo",
-        "img_text": "Upload your photo in jpeg, jpg or png formats. The file size should not exceed 3 mb. And be at least 250x250 pixels",
+        "img_text": "Upload your photo in jpeg, jpg or png formats. The file size should not exceed 2 mb. And be at least 250x250 pixels",
         "item1": "My profile",
         "item2": "Edit profile",
         "item3": "My photo",
