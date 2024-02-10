@@ -83,7 +83,7 @@ services:
             - .env
 
     front.public:
-        image: projectstaff/front.public:latest
+        image: prostaff.azurecr.io/front.public:latest
         volumes:
             - ./front/public:/usr/src/app
         command: sh -c " npm install && npm start "
