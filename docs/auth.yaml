@@ -3,7 +3,7 @@ info:
   title: Authentication API
   version: 1.0.0
 servers:
-  - url: http://househub.pp.ua/api
+  - url: http://20.84.104.75/api
 tags:
   - name: auth
     description: Endpoints related to user authentication
