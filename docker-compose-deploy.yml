@@ -83,9 +83,9 @@ services:
             - .env
 
     front.public:
-        image: prostaff.azurecr.io/front.public:latest
+        image: projectstaff/front.public:latest
         volumes:
-            - ./front/public:/usr/src/app/dist
+            - ./front/public:/usr/src/app
         command: sh -c " npm install && npm start "
         networks:
             - diplom
