@@ -3,7 +3,7 @@ info:
   title: Authentication API
   version: 1.0.0
 servers:
-  - url: http://laravel.api:8000/
+  - url: https://househub.pp.ua/docs/
 tags:
   - name: auth
     description: Endpoints related to user authentication
