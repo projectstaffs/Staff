@@ -3,7 +3,7 @@ info:
   title: Authentication API
   version: 1.0.0
 servers:
-  - url: http://localhost/api
+  - url: http://laravel.api:8000/
 tags:
   - name: auth
     description: Endpoints related to user authentication
