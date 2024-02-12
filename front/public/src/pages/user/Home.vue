@@ -1,5 +1,5 @@
 <template>
-    <section class="main_top">
+    <section :style="video" class="main_top">
         <video class="main_video" autoplay muted loop>
             <!--<source src="../../assets/video.mp4" type="video/mp4"> -->
         </video>
@@ -166,13 +166,14 @@
         <div class="container">
             <div class="main_point_business">
                 <div class="main_point_business_start">
-                    <div class="main_point_business_img"></div>
+                    <div :style="forBusiness" class="main_point_business_img"></div>
                 </div>
                 <div class="main_point_business_end">
                     <div class="main_point_business_title"> {{ $t('main.end_business_title') }} </div>
                     <div class="main_point_business_subtitle"> {{ $t('main.end_business_subtitle') }} </div>
                     <div class="main_point_business_text"> {{ $t('main.end_business_text') }} </div>
-                    <div class="btn" @click.prevent="study"> <img src="../../assets/img/main/arrow.svg" alt=""> </div>
+                    <div class="btn" @click.prevent="study"> <img class="main_point_business_end_img"
+                            src="../../assets/img/main/arrow.svg" alt=""> </div>
                 </div>
             </div>
             <div class="main_point_business business_pos_fix">
@@ -180,10 +181,11 @@
                     <div class="main_point_business_title"> {{ $t('main.end_staff_title') }} </div>
                     <div class="main_point_business_subtitle"> {{ $t('main.end_staff_subtitle') }} </div>
                     <div class="main_point_business_text"> {{ $t('main.end_staff_text') }} </div>
-                    <div class="btn" @click.prevent="training"> <img src="../../assets/img/main/arrow.svg" alt=""> </div>
+                    <div class="btn" @click.prevent="training"> <img class="main_point_business_end_img"
+                            src="../../assets/img/main/arrow.svg" alt=""> </div>
                 </div>
                 <div class="main_point_business_start business_start_fix">
-                    <div class="main_point_staff_img"></div>
+                    <div :style="forStaff" class="main_point_staff_img"></div>
                 </div>
             </div>
             <div class="staff_title main_point_border"> {{ $t('main.footer_title') }} </div>
@@ -194,6 +196,16 @@
 <script>
 export default {
     name: "Home",
+    data() {
+        return {
+            video: {},
+            forStaff: {},
+            forBusiness: {}
+        }
+    },
+    mounted() {
+        this.checkWebPSupport();
+    },
     methods: {
         homeStaff() { this.$router.push({ name: "HomeStaff" }) },
         businessStaff() { this.$router.push({ name: "BusinessStaff" }) },
@@ -202,7 +214,25 @@ export default {
         nurse() { this.$router.push({ name: "NurseAll" }) },
         keeper() { this.$router.push({ name: "KeeperAll" }) },
         study() { this.$router.push({ name: "Study" }) },
-        training() { this.$router.push({ name: "Training" }) }
+        training() { this.$router.push({ name: "Training" }) },
+        checkWebPSupport() {
+            const elem = document.createElement('canvas');
+            if (!!(elem.getContext && elem.getContext('2d'))) {
+                this.video = {
+                    background: 'url(src/assets/img/main/video.webp) no-repeat center',
+                    backgroundSize: 'cover'
+                };
+                this.forStaff = { background: 'url(src/assets/img/main/for_staff.webp) no-repeat center' };
+                this.forBusiness = { background: 'url(src/assets/img/main/for_business.webp) no-repeat center' }
+            } else {
+                this.video = {
+                    background: 'url(src/assets/img/main/video.jpg) no-repeat center',
+                    backgroundSize: 'cover'
+                };
+                this.forStaff = { background: 'url(src/assets/img/main/for_staff.png) no-repeat center' };
+                this.forBusiness = { background: 'url(src/assets/img/main/for_business.png) no-repeat center' }
+            }
+        }
     },
 }
 </script>
@@ -211,8 +241,6 @@ export default {
 .main_top {
     min-height: 400px;
     height: 100vh;
-    background: #5C4538 url(../../assets/img/main/video.jpg) no-repeat center;
-    background-size: cover;
     color: #FFF0D2;
     position: relative;
 }
@@ -233,14 +261,6 @@ export default {
     flex-direction: column;
     justify-content: center;
     position: relative;
-}
-
-.main_top_title {
-    font-family: Playfair Display;
-    font-size: 64px;
-    font-weight: 700;
-    line-height: 120%;
-    margin-bottom: 16px;
 }
 
 .main_top_subtitle {
@@ -332,6 +352,8 @@ export default {
 
 .main_info_arrow,
 .main_info_svg {
+    width: 25px;
+    height: 24px;
     margin-left: 10px;
 }
 
@@ -448,14 +470,6 @@ export default {
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.main_point_business_img {
-    background: url(../../assets/img/main/for_business.png) no-repeat center;
-}
-
-.main_point_staff_img {
-    background: url(../../assets/img/main/for_staff.png) no-repeat center;
-}
-
 .main_point_business_end {
     width: 376px;
     position: relative;
@@ -474,6 +488,11 @@ export default {
 
 .main_point_business_end .btn:hover {
     background: #1E1510;
+}
+
+.main_point_business_end_img {
+    width: 25px;
+    height: 24px;
 }
 
 .main_point_business_title {
@@ -495,6 +514,8 @@ export default {
 }
 
 /* media */
+
+
 @media (max-width: 1200px) {
     .main_info_bottom {
         height: 850px;
@@ -532,6 +553,10 @@ export default {
 @media (max-width: 1125px) {
     .staff_item_hide {
         display: none;
+    }
+
+    .main_top_title {
+        height: auto;
     }
 }
 

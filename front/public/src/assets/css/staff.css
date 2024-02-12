@@ -51,6 +51,11 @@
     font-weight: 800;
 }
 
+.staff_img {
+    width: 262px;
+    height: 262px;
+}
+
 @media (max-width: 1125px) {
     .staff_item {
         margin-left: 10px;

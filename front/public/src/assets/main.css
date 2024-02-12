@@ -13,6 +13,14 @@
 
 /* Шрифты */
 @font-face {
+    font-family: Playfair Display;
+    font-display: swap;
+    src: url("./fonts/PlayfairDisplay-Bold.woff2") format("woff2"), url("./fonts/PlayfairDisplay-Bold.woff") format("woff");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
     font-family: Roboto;
     font-display: swap;
     src: url("./fonts/Roboto-Regular.woff2") format("woff2"), url("./fonts/Roboto-Regular.woff") format("woff");
@@ -47,14 +55,6 @@
 @font-face {
     font-family: Playfair Display;
     font-display: swap;
-    src: url("./fonts/PlayfairDisplay-Bold.woff2") format("woff2"), url("./fonts/PlayfairDisplay-Bold.woff") format("woff");
-    font-weight: 700;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: Playfair Display;
-    font-display: swap;
     src: url("./fonts/PlayfairDisplay-ExtraBold.woff2") format("woff2"), url("./fonts/PlayfairDisplay-ExtraBold.woff") format("woff");
     font-weight: 800;
     font-style: normal;
@@ -70,6 +70,16 @@ body {
     font-size: 18px;
     line-height: 150%;
     color: #1E1510;
+}
+
+.main_top_title {
+    height: 77px;
+    width: 100%;    
+    font-size: 64px;
+    font-weight: 700;
+    font-family: 'Playfair Display';
+    line-height: 120%;
+    margin-bottom: 16px;
 }
 
 .content {

@@ -97,6 +97,10 @@ export default {
     font-size: 14px;
 }
 
+.study_middle_end .btn:hover {
+    background: #817c7a;
+}
+
 .study_start_start,
 .study_middle_end,
 .study_end_start {
@@ -140,7 +144,7 @@ export default {
 .study_end_end {
     width: 100%;
     height: 100%;
-    background: url(../../../assets/img/study/study3.jpg) no-repeat center;
+    background: url(../../../assets/img/study/study3.webp) no-repeat center, url(../../../assets/img/study/study3.jpg) no-repeat center;
     border-radius: 20px;
 }
 
@@ -157,7 +161,7 @@ export default {
 .study_middle_start {
     width: 100%;
     height: 100%;
-    background: url(../../../assets/img/study/study2.jpg) no-repeat center;
+    background: url(../../../assets/img/study/study2.webp) no-repeat center, url(../../../assets/img/study/study2.jpg) no-repeat center;
     border-radius: 20px;
 }
 
@@ -174,7 +178,7 @@ export default {
 .study_start_end {
     width: 100%;
     height: 100%;
-    background: url(../../../assets/img/study/study1.jpg) no-repeat center;
+    background: url(../../../assets/img/study/study1.webp) no-repeat center, url(../../../assets/img/study/study1.jpg) no-repeat center;
     border-radius: 20px;
     overflow: hidden;
 }

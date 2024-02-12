@@ -34,7 +34,7 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        $appUrl = env('APP_URL');
+        $appUrl = env('APP_REAL_DOMAIN');
         $res = null;
         if($request['images']) {            
             foreach ($request['images'] as $image) {
@@ -46,9 +46,9 @@ class ImageController extends Controller
                 $res = Image::create([
                     'user_id' => $request['user_id'],
                     'path' => $path,
-                    'url' => url($appUrl . ':9000/storage/' . $path),
+                    'url' => url($appUrl . '/storage/' . $path),
                     'preview_path' => $previewName,
-                    'preview_url' => url($appUrl . ':9000/storage/' . $previewName)                    
+                    'preview_url' => url($appUrl . '/storage/' . $previewName)                    
                 ]);                
             }
             Cache::put('images', Image::all());

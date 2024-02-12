@@ -26,6 +26,11 @@ export default {
         allScripts() {
             var body = document.querySelector('body');
 
+            var footer = document.querySelector('.footer');
+            setTimeout(() => {
+                footer.classList.add('footer_show');
+            }, 1000);
+
             var closestAttr = function (item, attr) {
                 var node = item;
                 while (node) {

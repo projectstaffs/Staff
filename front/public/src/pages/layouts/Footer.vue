@@ -7,14 +7,14 @@
                 </div>
                 <div class="footer_top_middle"> {{ $t('footer.text') }} </div>
                 <div class="footer_top_end">
-                    <a href="#" class="footer_top_link"><img src="../../assets/img/footer/socials/linkedin.svg" alt=""
-                            class="footer_top_item"></a>
-                    <a href="#" class="footer_top_link"><img src="../../assets/img/footer/socials/instagram.svg" alt=""
-                            class="footer_top_item"></a>
-                    <a href="#" class="footer_top_link"><img src="../../assets/img/footer/socials/youtube.svg" alt=""
-                            class="footer_top_item"></a>
-                    <a href="#" class="footer_top_link"><img src="../../assets/img/footer/socials/facebook.svg" alt=""
-                            class="footer_top_item"></a>
+                    <a href="#" class="footer_top_link" aria-label="linkedin"><img
+                            src="../../assets/img/footer/socials/linkedin.svg" alt="" class="footer_top_item"></a>
+                    <a href="#" class="footer_top_link" aria-label="instagram"><img
+                            src="../../assets/img/footer/socials/instagram.svg" alt="" class="footer_top_item"></a>
+                    <a href="#" class="footer_top_link" aria-label="youtube"><img
+                            src="../../assets/img/footer/socials/youtube.svg" alt="" class="footer_top_item"></a>
+                    <a href="#" class="footer_top_link" aria-label="facebook"><img
+                            src="../../assets/img/footer/socials/facebook.svg" alt="" class="footer_top_item"></a>
                 </div>
             </div>
             <div class="footer_bottom">
@@ -53,8 +53,15 @@ export default {
 
 <style>
 .footer {
-    padding: 80px 24px;
+    width: 100%;
     background: var(--bgbg-brown, #1E1510);
+    height: 0px;
+    overflow: hidden;
+}
+
+.footer.footer_show {
+    height: 389px;
+    padding: 80px 24px;
 }
 
 .footer_top {
@@ -86,6 +93,8 @@ export default {
 }
 
 .footer_top_item {
+    width: 32px;
+    height: 32px;
     cursor: pointer;
     transition: scale 0.3s;
 }
@@ -114,8 +123,6 @@ export default {
 .footer_bottom_item:hover {
     color: #FFF0D2;
 }
-
-@media (max-width: 1200px) {}
 
 @media (max-width: 992px) {
     .footer {
