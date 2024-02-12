@@ -154,18 +154,18 @@ jobs:
           docker-compose -f docker-compose-ACR.yml build --no-cache
           docker-compose -f docker-compose-ACR.yml push
 
-#      - 
-#        name: Deploy to VM
-#        uses: appleboy/ssh-action@master
-#        with:
-#          host: ${{ secrets.SSH_HOST }}
-#          username: ${{ secrets.SSH_USER }}
-#          key: ${{ secrets.SSH_KEY }}
-#          script: |
-#            sudo su
-#            cd Staff
-#            docker login -u ${{ secrets.ACR_USERNAME }} -p ${{ secrets.ACR_PASSWORD }} ${{ secrets.ACR_URL }}
-#            docker-compose -f docker-compose-deploy.yml down
-#            docker image prune -a
-#            git pull
-#            docker-compose -f docker-compose-deploy.yml up -d redis.laravel redis.socket db.mysql.main storage.minio front.admin front.public laravel.api laravel.jobs front.docs socket.jonny nginx
+      - 
+        name: Deploy to VM
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            sudo su
+            cd Staff
+            docker login -u ${{ secrets.ACR_USERNAME }} -p ${{ secrets.ACR_PASSWORD }} ${{ secrets.ACR_URL }}
+            docker-compose -f docker-compose-deploy.yml down
+            docker image prune -a
+            git pull
+            docker-compose -f docker-compose-deploy.yml up -d redis.laravel redis.socket db.mysql.main storage.minio front.admin front.public laravel.api laravel.jobs front.docs socket.jonny nginx
