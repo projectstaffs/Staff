@@ -55,12 +55,12 @@ export default {
 .footer {
     width: 100%;
     background: var(--bgbg-brown, #1E1510);
-    height: 0;
+    height: 0px;
     overflow: hidden;
 }
 
 .footer.footer_show {
-    height: auto;
+    height: 389px;
     padding: 80px 24px;
 }
 
